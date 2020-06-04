@@ -1,0 +1,516 @@
+@charset "UTF-8";
+
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+
+p{
+	height: 10px;
+	width: 500px;
+}
+
+
+
+ol,ul{
+	list-style: none;
+}
+
+strong{
+	font-weight: 500;
+}
+
+body{
+	line-height: 1.2;
+	color :#666;
+	font-weight: 300;
+	font-size: 13px;
+}
+
+select{
+	line-height: 27px;
+	height: 29px;
+	padding: 3px 5px;
+	border: 1px solid #b4b3aa;
+}
+
+option{
+	font-weight: normal;
+	display: block;
+	white-space: pre;
+	min-height: 1.2em;
+	padding: 0 2px 1px;
+}
+
+button{
+	cursor:pointer;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+
+
+
+.container{
+	width: 100%;
+	background-color: #fdfcf0;
+}
+
+.c_nav{
+	width: 100%;
+	background-color: #f1f0e5;
+	border-bottom: 1px solid #cacac0;
+}
+
+.nav_linemap{
+	position: relative;
+	width: 980px;
+	height: 28px;
+	margin: 0 auto;
+/* 	border: 1px solid green; */
+}
+
+.nav_linemap li:first-child{
+	margin-left: 0px;
+	padding-left: 0px;
+	background: none;
+}
+
+.nav_linemap li{
+	float: left;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 30px;
+	margin-left: 12px;
+	padding-left: 20px;
+	background: url("../../images/login/ico_arrow.png") no-repeat 0 9px;
+}
+
+.last{
+	text-decoration: underline;
+	color: #222;
+}
+
+
+.contents{
+	position: relative;
+	width: 980px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	padding-bottom: 50px;
+/* 	border: 2px solid red; */
+}
+
+.movie-chart{
+	
+}
+
+/*  sector contents header  */
+.sect-movie-title{
+	position: relative;
+	height: 51px;
+	margin-top: 30px;
+	border-bottom: 3px solid #241d1e;
+}
+
+.sect-movie-title > h3 {
+	display: inline-block;
+	position: relative;
+	height: inherit;
+	margin: 0;
+	background-image: none;
+	color: #222;
+	font-weight: bold;
+	font-size: 36px;
+	text-align: left;
+	vertical-align: middle;
+/* 	background: url("../../images/movie/movieList/bg_h3_line.jpg") repeat-x 0 50%; */
+/* 	line-height: 41px; */
+}
+
+.submenu{
+	position: absolute;
+	top: 18px;
+	right: 0;
+}
+
+.submenu > ul {
+	overflow: hidden;
+}
+
+.submenu > ul > li:first-child{
+	margin-left: 0;
+}
+
+.submenu > ul > li {
+	float: left;
+	margin-left: 15px;
+}
+
+.submenu > ul > li.on > a, .submenu > ul > li > a:hover{
+	background: url("../../images/movie/movieList/ico_arrow07.png") no-repeat 0 3px;
+	color: #e40000;
+}
+
+.submenu > ul > li > a{
+	display: inline-block;
+	padding-left: 13px;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+/* sector contents sort */
+.sect-sorting{
+	position: relative;
+	margin-top: 20px;
+	text-align: right;
+}
+
+.sect-sorting > select{
+	padding: 3px 5px;
+	vertical-align: bottom;
+}
+
+.sect-sorting > select option{
+	height: 23px;
+	line-height: 23px;
+}
+
+.round.gray{
+	border: 2px solid #7b7b7b;
+	color: #7b7b7b;
+}
+
+.round{
+	line-height: 25px;
+	font-weight: 500;
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	position: relative;
+}
+
+.round > * {
+	padding: 0 5px 0;
+	display: inline-block;
+	position: relative;
+}
+
+
+
+
+
+/* sector contents movieChart */
+.sect-movie-chart{
+	position: relative;
+	overflow: hidden;
+	margin-top: 30px;
+}
+
+.sect-movie-chart > ol:first-child{
+	margin-top: 0;
+}
+
+.sect-movie-chart > ol:first-child .rank{
+	background: #e71a0f;
+}
+
+.sect-movie-chart > ol {
+	margin-top:30px;
+	margin-left: -64px;
+	border-bottom: 3px solid #241d12;
+	padding-top: 0; 
+	height: 455px;
+	
+}
+
+.sect-movie-chart > ol > li {
+	float: left;
+	width: 197px;
+	margin-left: 64px;
+	padding-bottom: 30px;
+}
+
+.box-image{
+	position: relative;
+	width: 197px;
+	min-height: 272px;
+	margin-bottom: 10px;
+}
+
+.rank{
+	background: #333333;
+	display: block;
+	height: 28px;
+	margin-bottom: 4px;
+	border: 6px solid #000000;
+	color: #ffffff;
+	font-size: 19px;
+	text-align: center;
+	line-height: 28px;
+}
+
+.box-image a{
+	display: block;
+}
+
+.thumb-image{
+	border: 6px solid #000000;
+	display: block;
+	position: relative;
+}
+
+.thumb-image > img {
+	height: 260px;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.icon-grade.grade-12{
+	background-position: -51px 0;
+}
+
+.icon-grade{
+	display: block;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 21px;
+	height: 21px;
+	background: url("../../images/movie/movieList/sprite_icon.png");
+	font: 0/0 a;
+}
+
+.screentype{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 29px;
+	padding-top: 27px;
+	background: url("../../images/movie/movieList/bg_poster-gradation.png") 0 0 repeat-x;
+	text-align: center;
+	display: block;
+}
+
+
+
+
+.box-contents{
+	height: 93px;
+}
+
+.box-contents > a{
+	display: block;
+}
+
+.title{
+	display: block;
+	color: #333333;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 15px;
+	width: 90%;
+}
+
+.score{
+	margin-top: 7px;
+	font-size: 11px;
+}
+
+.percent{
+	vertical-align: middle; 	
+}
+
+.percent > span {
+	display: inline-block;
+	margin-left: 10px;
+	color: #333333;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.egg-gage{
+	margin-top: -10px;
+	margin-left: 2px;
+	padding-left: 6px;
+	background: url("../../images/movie/movieList/bg_writeinfo.gif") 0 12px no-repeat;
+	vertical-align: middle;
+	display: inline-block;
+	width: auto !important;
+	line-height: 1;
+}
+
+.egg.great{
+	width: 16px;
+	background-position: -41px -47px;
+}
+
+.egg{
+	display: inline-block;
+	margin-right: 2px;
+	width: 18px;
+	height: 26px;
+	background: url("../../images/movie/movieList/sprite_egg.png") 0 -47px no-repeat;
+	vertical-align: middle;
+}
+
+.percent{
+	display: inline-block;
+	margin-top: 8px;
+	font-size: 12px;
+	color: #000000;
+}
+
+.text-info{
+	margin-top: 3px;
+	height: 13px;
+	color: #666666;
+	font-weight: 500;
+	font-size: 12px;
+	white-space: nowrap;
+	display: block;
+}
+
+.text-info > strong {
+	font-size: 11px;
+}
+
+.like{
+	display: block;
+	margin-top: 10px;
+	margin-right: 3px;
+	text-align: center;
+	
+}
+
+.link-reservation{
+	float:right;
+	width: 57px;
+	height: 25px;
+	display: inline-block;
+	background: url("../../images/movie/movieList/sprite_btn.png") -96px 0px no-repeat;
+	font: 0/0 a;
+	vertical-align: top;
+	zoom:1;
+}
+
+
+
+
+.chart-ad{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 189px;
+	height: 414px;
+	padding: 2px;
+	border: 3px solid #070707;
+	background: #212120;
+}
+
+.box-com{
+	padding: 13px 14px 12px;
+	border: 1px solid #070707;
+	background: #222221;
+}
+
+.chart-ad-desc{
+	width: 160px;
+	margin: 0 auto;
+	padding: 16px 0 0 0;
+}
+
+.chart-ad-desc dt{
+	margin-bottom: 7px;
+	font-size: 0;
+}
+
+.chart-ad-desc img{
+	margin: 0;
+	padding: 0;
+	vertical-align: bottom;
+}
+
+.chart-ad-desc span{
+	color: #fdfcf0;
+}
+
+.chart-ad-desc dt span{
+	font-weight: bold;
+	font-size: 15px;
+	letter-spacing: -1px;
+	padding-left: 5px;
+}
+
+.chart-ad-desc dd{
+	border-top: 3px solid #fdfcf0;
+	border-bottom: 3px solid #fdfcf0;
+	letter-spacing: -1px;
+}
+
+.chart-ad-desc dd span{
+	font-size: 14px;
+	line-height: 28px;
+	height: 28px;
+	letter-spacing: -1px;
+}
+
+dl:after, ul:after, li:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+
+
+.btn-more{
+	float: right;
+	margin-top: 10px;
+	
+	font-size: 13px;
+	font-weight:bold;
+	color:#333333;
+	height:20px;
+	line-height: 20px;
+	
+	cursor: pointer;
+	
+}
+
+
+.link-more{
+	display: inline-block;
+	width: 20px;
+    height: 19px;
+    vertical-align:middle;
+    background: url(../../images/sprite_btn.png) -50px -62px no-repeat;
+    font: 0/0 a;
+    zoom: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

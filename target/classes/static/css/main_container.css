@@ -1,0 +1,354 @@
+@charset "UTF-8";
+
+
+h3{
+	height: 41px;
+	margin : 30px 0 15px;
+/* 	border: 1px solid black; */
+	
+	background: url("../images/container/movie/bg_h3_line.jpg") repeat-x 0 50%;
+	line-height: 41px;
+	text-align: center;
+}
+
+.container {
+	width: 100%;
+	padding-bottom: 39px;
+	background-color: #fdfcf0;
+/* 	border: 1px solid red; */
+}
+
+.container_bg{
+	background: url("../images/container/bg_c_bricks.png") repeat-x 0 29px;
+	background-position: 0 0;
+}
+
+
+.contents {
+	width: 980px;
+	height: 1608px;
+	padding-bottom: 50px;
+	margin: 0 auto;
+	position: relative;
+/* 	border: 1px solid black; */
+}
+
+
+/* ---------------------------------------------------------------------container_slider */
+.section_slider {
+	height: 450px;
+	width:100%;
+	overflow: hidden;
+	background-color: white;
+/* 	border: 1px solid black; */
+
+	position:relative;
+}
+
+.section_slider:before{
+	left: 0;
+	background: url("../images/container/slider/bg_bricks_before.png") no-repeat 0 0;
+	position: absolute;
+	top: 0;
+	z-index: 10;
+	content: '';
+	width: 14px;
+	height: 450px;
+}
+
+.section_slider:after{
+	right: 0;
+	background: url("../images/container/slider/bg_bricks_after.png") no-repeat 0 0;
+	position: absolute;
+	top: 0;
+	z-index: 10;
+	content: '';
+	width: 14px;
+	height: 450px;
+}
+
+.slide{
+	height:100%;
+	overflow:hidden;
+	position: relative;
+}
+
+.slide ul{
+	position:relative;
+	height:100%;
+}
+.slide li{
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	opacity:0;
+	animation-name: fade;
+	animation-duration: 12s;
+	animation-iteration-count:infinite;
+	animation-fill-mode:forward;
+}
+
+.slide li:nth-child(1){animation-delay:0s}
+.slide li:nth-child(2){animation-delay:3s}
+.slide li:nth-child(3){animation-delay:6s}
+.slide li:nth-child(4){animation-delay:9s}
+/* 100 / 8 = 12.5 */
+
+
+@keyframes fade {
+	0% {opacity:0;}
+	5% {opacity:1;}
+	25% {opacity:1;}
+	30% {opacity:0;}
+	100% {opacity:0;}
+ }
+
+.slide input{
+	display:none;
+}
+.slide .bullet{
+	position:absolute;
+	bottom:20px;
+	left:0;
+	right:0;
+	text-align:center;
+	z-index:10;
+}
+
+.slide .bullet label{
+	width:10px;
+	height:10px;
+	border-radius:10px;
+	border:1px solid #666;
+	display:inline-block;
+	background:#666;
+	font-size:0;
+	transition:0.5s;
+	cursor:pointer;
+}
+
+
+
+
+#pos1:checked ~ ul li:nth-child(1){animation-delay:0s}
+#pos2:checked ~ ul li:nth-child(2){animation-delay:3s}
+#pos3:checked ~ ul li:nth-child(3){animation-delay:6s}
+#pos4:checked ~ ul li:nth-child(4){animation-delay:9s}
+
+#pos1:checked ~ ul li:nth-child(1),
+#pos2:checked ~ ul li:nth-child(2),
+#pos3:checked ~ ul li:nth-child(3),
+#pos4:checked ~ ul li:nth-child(4)
+{
+	opacity:1;
+}
+
+
+
+#pos1:checked ~ .bullet label:nth-child(1), 
+#pos2:checked ~ .bullet label:nth-child(2), 
+#pos3:checked ~ .bullet label:nth-child(3), 
+#pos4:checked ~ .bullet label:nth-child(4)
+{
+	background: #e71a0f; 
+	border:1px solid #e71a0f;
+} 
+
+
+
+
+
+/* ---------------------------------------------------------------------container_movie_section */
+h3 > img{
+	padding: 0 10px;
+	background-color: white;
+}
+
+.section_movie {
+	height: 388px;
+/* 	border: 1px solid black; */
+}
+
+.section_L{
+	float: left;
+	width: 733px;
+	height: 388px;
+	padding-right: 5px;
+	box-sizing: border-box;
+/* 	border: 1px solid black; */
+}
+
+.section_L > div{
+	width: 100%;
+	height:100%;
+	background-color: black;
+}
+
+.section_R{
+	float: right;
+	width: 240px;
+	height: 388px;
+/* 	border: 1px solid black; */
+}
+
+/* ---------------------------------------------------------------------container_event */
+.tab_menu {
+	height: 39px;
+	text-align:center;	
+	
+/* 	border: 1px solid black; */
+}
+.tab_menu li:first-child{
+	padding-left: 20px;
+	background: url("../images/sprite_corner.png") 0 -20px no-repeat;
+}
+
+.tab_menu li:first-child a:before{
+	content:'';
+	display: inline-block;
+	width: 25px;
+	height: 39px;
+	padding-right: 5px;
+	background: url("../images/container/event/ico_finger.png") 0 50% no-repeat;
+	vertical-align: top;
+}
+
+.tab_menu li{
+	display: inline-block;
+	margin-left: -7px;
+/* 	border: 1px solid black; */
+}
+
+.tab_menu li a{
+	display: inline-block;
+	position: relative;
+	height: 39px;
+	background: #e71a0f url("../images/container/event/bg_tebmenu-line.gif") 0 12px no-repeat;
+	padding: 0 15px;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 500;
+	font-weight:bold;
+	text-align: center;
+	line-height: 39px;
+	text-decoration: none;	
+}
+
+.last{
+	padding-right: 19px;
+	background: url("../images/container/event/ribon_right.png") right 0 no-repeat;
+}
+
+.section_event {
+	height: 233px;
+	margin-bottom:30px;
+	border-bottom: 3px solid #241d1e;
+/* 	border: 1px solid black; */
+}
+.section_event ul{
+	margin-top: 16px;
+}
+.section_event ul li:first-child{
+	margin-left: 0px;
+}
+
+.section_event ul li{
+	display:inline-block;
+	float: left;
+	margin-left: 6.6px;
+}
+
+.section_event li a{
+/* 	text-decoration: none; */
+}
+/* ---------------------------------------------------------------------container_banner */
+.section_banner {
+	height: 273px;
+/* 	border: 1px solid black; */
+}
+.banner_1, .banner_3{
+	float: left;
+}
+
+
+.banner_1 > .box_over{
+	width: 228px;
+	height: 261px;
+	
+	padding: 3px;
+	border: 3px solid #241d1e;
+}
+
+.banner_2 {
+	float: left;
+	width: 486px;
+	height: 273px;
+	margin: 0 7px;
+	box-sizing:border-box;
+}
+.banner_3 > .box_over{
+	width: 228px;
+	height: 261px;
+	padding: 3px;
+	
+	border: 3px solid #241d1e;
+}
+
+.banner_1 > .box_over > .box_inner{
+	width: 226px;
+	height: 259px;
+	border: 1px solid #241d1e;
+	text-align: center;
+}
+
+.banner_3 > .box_over > .box_inner{
+	width: 226px;
+	height: 259px;
+	border: 1px solid #241d1e;
+	text-align: center;
+}
+
+
+
+
+
+/* ---------------------------------------------------------------------container_notice */
+
+.section_notice {
+	height: 35px;
+	position: relative;
+	margin-top:10px;
+	border-bottom: 1px solid #222;
+	line-height:35px;
+/* 	border: 1px solid black; */
+}
+
+.section_notice h3{
+	height: 35px;
+	margin: 0 5px 0 0;
+	padding: 0 0 0 26px;
+	background: url("../images/container/notice/ico_notice.png") no-repeat 1px 50%;
+	color: #333;
+	font-size: 15px;
+	line-height: 35px;
+	float: left;
+}
+
+.notice_list_content{
+	height: 35px;
+	color: #333;
+	font-size: 13px;
+	line-height: 35px;
+	float: left;
+	font-weight: lighter;
+}
+.notice_list_date{
+	height: 35px;
+	color: #333;
+	font-size: 13px;
+	line-height: 35px;
+	float: right;
+	font-weight: lighter;
+}
