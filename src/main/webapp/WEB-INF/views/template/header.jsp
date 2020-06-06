@@ -15,7 +15,7 @@
 						<li><a class="mycgv" href="${pageContext.request.contextPath}/member/memberMypage"><span>MyCGV</span></a></li>
 						<li><a class="vip_lounge" href="#"><span>VIPLOUNGE</span></a></li>
 						<li><a class="club_service" href="#"><span>Club서비스</span></a></li>
-						<li><a class="customer" href="${pageContext.request.contextPath}/bbs/boardList"><span>고객센터</span></a></li>
+						<li><a class="customer" href="${pageContext.request.contextPath}/bbs/bbsList"><span>고객센터</span></a></li>
 						<li><a class="english_ticketing" href="#"><span>ENGLISHTICKETING</span></a></li>
 					</ul>
 				</c:if>
@@ -23,10 +23,10 @@
 					<ul class="gnb">
 						<li><a class="login" href="${pageContext.request.contextPath}/member/memberLogin"><span>로그인</span></a></li>
 						<li><a class="join" href="${pageContext.request.contextPath}/member/memberTerms"><span>회원가입</span></a></li>
-						<li><a class="mycgv" href="${pageContext.request.contextPath}/member/memberLoginCheck"><span>MyCGV</span></a></li>
+						<li><a class="mycgv" href="${pageContext.request.contextPath}/member/memberMypage"><span>MyCGV</span></a></li>
 						<li><a class="vip_lounge" href="#"><span>VIPLOUNGE</span></a></li>
 						<li><a class="club_service" href="#"><span>Club서비스</span></a></li>
-						<li><a class="customer" href="${pageContext.request.contextPath}/bbs/boardList"><span>고객센터</span></a></li>
+						<li><a class="customer" href="${pageContext.request.contextPath}/bbs/bbsList"><span>고객센터</span></a></li>
 					<li><a class="english_ticketing" href="#"><span>ENGLISHTICKETING</span></a></li>
 				</ul>
 				</c:if>		

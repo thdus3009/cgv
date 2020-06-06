@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../resources/css/bbsList.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsList.css" rel="stylesheet" type="text/css">
 
-<link href="../resources/css/bbsLayout.css" rel="stylesheet" type="text/css">
-<link href="../resources/css/layout.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -28,7 +28,7 @@
 				<ul>
 					<li>
 						<a href="../">
-							<img alt="go to Home" src="../resources/images/login/btn_home.png">					
+							<img alt="go to Home" src="../images/login/btn_home.png">					
 						</a>
 					</li>
 					<li>
@@ -51,7 +51,7 @@
 							<ul>
 								<li><a href="">고객센터 메인<i></i></a></li>
 								<li><a href="">자주찾는 질문<i></i></a></li>
-								<li class="on"><a href="./boardList">공지/뉴스<i></i></a></li>
+								<li class="on"><a href="./bbsList">공지/뉴스<i></i></a></li>
 								<li><a href="">이메일 문의<i></i></a></li>
 								<li><a href="">분실문 문의<i></i></a></li>
 								<li><a href="">단체/대관 문의<i></i></a></li>
@@ -62,12 +62,12 @@
 						<div class="ad_area">
 							<div class="ad_panner_1">
 								<a href="">
-									<img alt="" src="../resources/images/bbsList/200313_160x300.jpg">
+									<img alt="" src="../images/bbsList/200313_160x300.jpg">
 								</a>
 							</div>
 							<div class="ad_panner_2">
 								<a href="">
-									<img alt="" src="../resources/images/bbsList/0325_160x35.png">
+									<img alt="" src="../images/bbsList/0325_160x35.png">
 								</a>
 							</div>
 						</div>
@@ -137,13 +137,13 @@
 								<tbody id="list_body">
 									<c:forEach var="list" items="${bbsList}" >
 										<tr class="first">
-											<td>${list.no}</td>
+											<td>${list.num}</td>
 											<td class="txt">
-												<a href="./boardSelect?no=${list.no}">${list.title }</a>
+												<a href="./boardSelect?no=${list.num}">${list.title}</a>
 											</td>
-											<td>${list.id}</td>
-											<td>${list.hiredate }</td>
-											<td class="num">${list.count}</td>
+											<td>${list.writer}</td>
+											<td>${list.hireDate}</td>
+											<td class="num">${list.hit}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -173,7 +173,7 @@
 								<button id="btn-end" type="button" class="btn_page end">끝</button>
 							</c:if>
 							
-							<a href="../member/loginCheck"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
+							<a href="./bbsWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 							
 						</div>
 					</div>

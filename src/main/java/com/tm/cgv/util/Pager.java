@@ -7,7 +7,8 @@ public class Pager {
 	
 	private long curBlock;
 	private long perBlock = 5L;
-	
+
+	private long totalCount;
 	private long totalPage;
 	private long totalBlock;
 	
@@ -27,7 +28,7 @@ public class Pager {
 	}
 	
 	public void makeBlock(long totalCount) {
-		
+		this.totalCount = totalCount;
 		totalPage = totalCount/ this.perPage;
 		if(totalCount % this.perPage != 0) {
 			totalPage++;
@@ -131,6 +132,14 @@ public class Pager {
 	}
 	public void setKind(String kind) {
 		this.kind = kind;
+	}
+
+	public long getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(long totalCount) {
+		this.totalCount = totalCount;
 	}
 	
 	
