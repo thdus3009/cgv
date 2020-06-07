@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,12 @@ public class BbsController {
 
 	@Autowired
 	private BbsService bbsService;
+	
+	
+	@ModelAttribute("board")
+	public String getBoard() throws Exception{
+		return "bbs";
+	}
 	
 	//List
 	@GetMapping("bbsList")
@@ -80,7 +87,49 @@ public class BbsController {
 	}
 	
 	//update
+	@GetMapping("bbsUpdate")
+	public ModelAndView bbsUpdate(BbsVO bbsVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		bbsVO =  (BbsVO)bbsService.boardSelect(bbsVO);
+		mv.addObject("bbsVO", bbsVO);
+		mv.addObject("path", "Update");
+		mv.setViewName("board/boardUpdate");
+		return mv;
+	}
+	
+	@PostMapping("bbsUpdate")
+	public ModelAndView bbsUpdate(BbsVO bbsVO, MultipartFile[] files) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = bbsService.boardUpdate(bbsVO, files);
+		
+		String msg = "수정 실패";
+		if(result > 0) {
+			msg = "수정 되었습니다.";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("path","./bbsSelect?num="+bbsVO.getNum());
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
 	
 	//delete
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

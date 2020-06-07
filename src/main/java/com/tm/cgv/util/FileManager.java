@@ -33,4 +33,20 @@ public class FileManager {
 		
 		return fileName;
 	}
+	
+	
+	// fileDelete
+	public int deleteFile(String fileName, File dest)throws Exception{
+		File file = new File(dest, fileName);
+		boolean check=false;
+		int result=0;
+		if(file.exists()) {
+			check = file.delete();
+		}
+		if(check) {
+			result=1;
+		}
+		
+		return result;
+	}
 }

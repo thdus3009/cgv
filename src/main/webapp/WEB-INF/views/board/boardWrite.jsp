@@ -8,7 +8,7 @@
 <link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-<link href="../css/bbsWrite.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsForm.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -145,7 +145,7 @@
 									
 								</div>
 								<div class="btn_s">
-									<a href="./bbs/bbsList" class="round gray">
+									<a href="./bbsList" class="round gray">
 										<span>취소</span>
 									</a>
 									<button id="btn" type="submit" class="round inred"><span>등록하기</span></button>
@@ -168,7 +168,7 @@
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
 
-<script type="text/javascript" src="../resources/js/bbsWrite.js"></script>
+<script type="text/javascript" src="../js/bbsWrite.js"></script>
 
 
 </body>

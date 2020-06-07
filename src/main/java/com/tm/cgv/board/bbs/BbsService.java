@@ -48,8 +48,6 @@ public class BbsService implements BoardService {
 		File dest = filePathGenerator.getUseClassPathResource("upload/bbs");
 		int result = bbsRepository.boardInsert(boardVO);
 		
-		
-		
 		for (MultipartFile f : files) {
 			if(f.getSize() > 0) {
 				String fileName = fileManager.saveTransfer(f, dest);
@@ -62,14 +60,30 @@ public class BbsService implements BoardService {
 				result = bbsFileRepository.fileInsert(bbsFileVO);
 			}
 		}
-		
 		return result;
-		
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return bbsRepository.boardUpdate(boardVO);
+	public int boardUpdate(BoardVO boardVO, MultipartFile[] files) throws Exception {
+		File dest = filePathGenerator.getUseClassPathResource("upload/bbs");
+		int result = bbsRepository.boardUpdate(boardVO);
+		
+		if(files != null) {
+			System.out.println("UpdateIN");
+			for (MultipartFile f : files) {
+				if(f.getSize() > 0) {
+					String fileName = fileManager.saveTransfer(f, dest);
+					BbsFileVO bbsFileVO = new BbsFileVO();
+
+					bbsFileVO.setNum(boardVO.getNum());
+					bbsFileVO.setFileName(fileName);
+					bbsFileVO.setOriName(f.getOriginalFilename());
+
+					result = bbsFileRepository.fileInsert(bbsFileVO);
+				}
+			}
+		}
+		return result;
 	}
 
 	@Override

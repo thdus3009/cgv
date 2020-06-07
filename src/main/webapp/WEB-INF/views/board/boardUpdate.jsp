@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../resources/css/bbsLayout.css" rel="stylesheet" type="text/css">
-<link href="../resources/css/layout.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-<link href="../resources/css/bbsWrite.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsForm.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -27,7 +27,7 @@
 				<ul>
 					<li>
 						<a href="../">
-							<img alt="go to Home" src="../resources/images/login/btn_home.png">					
+							<img alt="go to Home" src="../images/login/btn_home.png">					
 						</a>
 					</li>
 					<li>
@@ -50,7 +50,7 @@
 							<ul>
 								<li><a href="">고객센터 메인<i></i></a></li>
 								<li><a href="">자주찾는 질문<i></i></a></li>
-								<li><a href="/bbs/boardList">공지/뉴스<i></i></a></li>
+								<li><a href="/bbs/bbsList">공지/뉴스<i></i></a></li>
 								<li class="on"><a href="#">이메일 문의<i></i></a></li>
 								<li><a href="">분실문 문의<i></i></a></li>
 								<li><a href="">단체/대관 문의<i></i></a></li>
@@ -61,12 +61,12 @@
 						<div class="ad_area">
 							<div class="ad_panner_1">
 								<a href="">
-									<img alt="" src="../resources/images/bbsList/200313_160x300.jpg">
+									<img alt="" src="../images/bbsList/200313_160x300.jpg">
 								</a>
 							</div>
 							<div class="ad_panner_2">
 								<a href="">
-									<img alt="" src="../resources/images/bbsList/0325_160x35.png">
+									<img alt="" src="../images/bbsList/0325_160x35.png">
 								</a>
 							</div>
 						</div>
@@ -83,74 +83,7 @@
 						</div>
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-						<form action="./boardUpdate" method="post">
-							<fieldset>
-								<input type="hidden" value="${bbsDTO.no}" name="no">
-								<div class="tbl_write">
-									<p class="tbl_info">
-										체크(<em><img alt="" src="../resources/images/bbsWrite/ico_redstar.png"> </em>)된 항목은 필수 입력 사항입니다.
-									</p>
-									<table class="tbl_bbs_write">
-										<colgroup>
-											<col style="width: 100px;">
-											<col style="width: 320px;">
-										</colgroup>
-										<tbody>
-											<tr>
-												<th scope="row"><label>아이디</label></th>
-												<td colspan="3"><strong>${memberDTO.id}</strong></td>
-<!-- 												<th scope="row"><label>아이디 <img alt="" src="../resources/images/bbsWrite/ico_redstar.png"></label></th> -->
-<!-- 												<td colspan="3"> -->
-<!-- 													<strong>고태민</strong>  -->
-<%-- 													<input id="userID" name="id" type="text" class="in01 check" style="width: 235px;" value="${memberDTO.id}"> --%>
-<!-- 												</td> -->
-											</tr>
-											<tr>
-												<th scope="row">휴대전화</th>
-												<td><strong>${memberDTO.phone}</strong></td>
-												<th scope="row">이메일</th>
-												<td><span>${memberDTO.email}</span></td>
-											</tr>
-											<tr>
-												<th scope="row">
-													<label>제목 <img alt="" src="../resources/images/bbsWrite/ico_redstar.png"> </label>
-												</th>
-												<td colspan="3">
-													<input id="title" name="title" type="text" class="in01 check" style="width: 672px;" value="${bbsDTO.title}">
-												</td>
-											</tr>
-											<tr>
-												<th scope="row">
-													<label>내용 <img alt="" src="../resources/images/bbsWrite/ico_redstar.png"> </label>
-												</th>
-												<td colspan="3">
-													<textarea id="textarea_l" name="contents" rows="5" cols="70" class="textarea check" placeholder="※문의 내용 및 첨부파일 내에 개인정보(신용카드번호, 계좌번호, 주민번호 등)가 포함되지 않도록 유의하시기 바랍니다.">${bbsDTO.contents}</textarea>
-													<p class="byte_info">
-														<span id="s_byte">0</span>/5000BYTE
-														<span>(<span id="s_length">0</span>/2500자)</span>
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row">
-													<label>첨부파일</label>
-												</th>
-												<td colspan="3">
-<!-- 													<input type="file" size="51" value=""> -->
-													<p>${fileInfoDTO.oriName}<i id="" title="" class="remove fileDelete" style="font-weight: bold">x</i></p>
-												</td>
-											</tr>
-										</tbody>
-									
-									</table>
-									
-								</div>
-								<div class="btn_s">
-									<a href="./boardList" class="round gray"><span>취소</span></a>
-									<button id="btn" type="submit" class="round inred"><span>수정하기</span></button>
-								</div>
-							</fieldset>
-						</form>
+						<c:import url="../template/boardForm.jsp"></c:import>
 						
 					</div>
 				
@@ -167,7 +100,7 @@
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
 
-<script type="text/javascript" src="../resources/js/bbsUpdate.js"></script>
+<script type="text/javascript" src="../js/bbsUpdate.js"></script>
 
 
 </body>

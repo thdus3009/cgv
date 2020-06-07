@@ -139,7 +139,13 @@ input[type='text'] {
 
 
 
+.remove{
+	cursor: pointer;
+}
 
+.remove:hover {
+	color: red;
+}
 
 
 

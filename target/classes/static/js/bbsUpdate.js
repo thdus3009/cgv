@@ -61,3 +61,55 @@ btn.addEventListener("click", function(e) {
 		e.preventDefault();
 	}
 });
+
+
+
+
+$("#btn-remove").click(function() {
+	var fileName = $(this).data("title");
+	var num = $(this).data("num");
+	//console.log(fileName);
+	//	console.log(num);
+	
+	$.get("../bbsFile/fileDelete?fileName="+fileName+"&num="+num,function(result){
+		console.log("r: "+result);
+		
+		if(result > 0){
+			alert("파일이 삭제 되었습니다.");
+			$("#btn-remove").parent().remove();
+			$("#fileInput").append('<input type="file" name=files">');
+		}
+	});
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
