@@ -37,6 +37,22 @@ public class BbsController {
 	}
 	
 	//select
+	@GetMapping("bbsSelect")
+	public ModelAndView bbsSelect(BbsVO bbsVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		bbsVO = (BbsVO)bbsService.boardSelect(bbsVO);
+		if(bbsVO != null) {
+			mv.addObject("bbsVO", bbsVO);
+			mv.setViewName("board/boardSelect");
+		}else {
+			mv.addObject("msg", "오류!!");
+			mv.addObject("path", "./bbsList");
+			mv.setViewName("common/result");
+		}
+		
+		return mv;
+	}
 	
 	//insert
 	@GetMapping("bbsWrite")

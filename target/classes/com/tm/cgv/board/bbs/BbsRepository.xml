@@ -6,10 +6,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.board.bbs.BbsRepository">
 
-	<insert id="boardInsert" parameterType="BbsVO">
-		insert into bbs values(0,#{title},#{writer},#{contents},sysdate(),0)
-	</insert>
+	<resultMap type="BbsVO" id="BbsFileJoin">
+		<id column="num" property="num"></id>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="hireDate" property="hireDate"/>
+		<result column="hit" property="hit"/>
+		
+		<association property="bbsFileVO" javaType="BbsFileVO">
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
+	</resultMap>
 
+	<insert id="boardInsert" parameterType="BbsVO" keyProperty="num" useGeneratedKeys="true">
+		insert into bbs values(#{num},#{title},#{writer},#{contents},sysdate(),0)
+	</insert>
 
 	<select id="boardList" parameterType="Pager" resultType="BbsVO">
 		select * from bbs where 
@@ -45,4 +58,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		like concat('%',#{search},'%') 
 	</select>
 	
+	<select id="boardSelect" parameterType="BbsVO" resultMap="BbsFileJoin">
+		select B.*,F.fileName,F.oriName from 
+		bbs as B
+		left join
+		bbsFile as F
+		on B.num = F.num
+		where B.num = #{num}
+	</select>
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

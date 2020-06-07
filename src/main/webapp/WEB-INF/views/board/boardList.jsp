@@ -86,15 +86,13 @@
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail search_area-->
 						<div class="search_area">
-							<form action="./boardList">
+							<form action="./bbsList">
 								<select style="width: 100px;" name="kind">
-									<option selected="selected" value="sTitle">제목</option>
-									<option value="sContents">내용</option>
+									<option selected="selected" value="title">제목</option>
+									<option value="contents">내용</option>
 								</select>
-								
-									<input type="text" name="search" placeholder="검색어를 입력해 주세요" style="width: 185px;">
-									<button type="button" class="round inblack"><span>검색하기</span></button>
-								
+								<input type="text" name="search" placeholder="검색어를 입력해 주세요" style="width: 185px;">
+								<button type="submit" class="round inblack"><span>검색하기</span></button>
 							</form>	
 						</div>
 					
@@ -102,7 +100,7 @@
 						<div class="wrap_tab">
 							<ul class="tab_menu_round">
 								<li>
-									<a class="lo" href="./boardList">전체</a>
+									<a class="lo" href="./bbsList">전체</a>
 								</li>
 							</ul>
 							
@@ -139,7 +137,7 @@
 										<tr class="first">
 											<td>${list.num}</td>
 											<td class="txt">
-												<a href="./boardSelect?no=${list.num}">${list.title}</a>
+												<a href="./bbsSelect?num=${list.num}">${list.title}</a>
 											</td>
 											<td>${list.writer}</td>
 											<td>${list.hireDate}</td>
@@ -163,7 +161,7 @@
 <!-- 							<li class="on"><a href="#">1</a></li> -->
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 				
-									<li><a href="./boardList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+									<li><a href="./bbsList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 				
 								</c:forEach>
 				
@@ -194,19 +192,19 @@
 <script type="text/javascript">
 
 	$("#btn-next").click(function() {
-		location.href='./boardList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}';
+		location.href='./bbsList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}';
 	});
 	
 	$("#btn-pre").click(function() {
-		location.href='./boardList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}';
+		location.href='./bbsList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}';
 	});
 	
 	$("#btn-first").click(function() {
-		location.href='./boardList?curPage=1&kind=${pager.kind}&search=${pager.search}';
+		location.href='./bbsList?curPage=1&kind=${pager.kind}&search=${pager.search}';
 	});
 	
 	$("#btn-end").click(function() {
-		location.href='./boardList?curPage=${pager.totalPage}&kind=${pager.kind}&search=${pager.search}';
+		location.href='./bbsList?curPage=${pager.totalPage}&kind=${pager.kind}&search=${pager.search}';
 	});
 
 </script>

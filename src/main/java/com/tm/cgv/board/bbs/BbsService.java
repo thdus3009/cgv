@@ -45,9 +45,10 @@ public class BbsService implements BoardService {
 	//Insert
 	@Override
 	public int boardInsert(BoardVO boardVO, MultipartFile[] files) throws Exception {
-		
 		File dest = filePathGenerator.getUseClassPathResource("upload/bbs");
 		int result = bbsRepository.boardInsert(boardVO);
+		
+		
 		
 		for (MultipartFile f : files) {
 			if(f.getSize() > 0) {

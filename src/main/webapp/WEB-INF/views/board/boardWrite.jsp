@@ -86,7 +86,6 @@
 						<form action="./bbsWrite" method="post" enctype="multipart/form-data">
 							<fieldset>
 								<input type="hidden" value="${sessionScope.memberVO.id}" name="writer">
-								<input type="hidden" value="${sessionScope.memberVO.num}" name="num">
 								<div class="tbl_write">
 									<p class="tbl_info">
 										체크(<em><img alt="" src="../images/bbsWrite/ico_redstar.png"> </em>)된 항목은 필수 입력 사항입니다.

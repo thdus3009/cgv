@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 
-<link href="../resources/css/bbsLayout.css" rel="stylesheet" type="text/css">
-<link href="../resources/css/layout.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-<link href="../resources/css/bbsSelect.css" rel="stylesheet" type="text/css">
+<link href="../css/bbsSelect.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -29,7 +29,7 @@
 				<ul>
 					<li>
 						<a href="../">
-							<img alt="go to Home" src="../resources/images/login/btn_home.png">					
+							<img alt="go to Home" src="../images/login/btn_home.png">					
 						</a>
 					</li>
 					<li>
@@ -52,7 +52,7 @@
 							<ul>
 								<li><a href="">고객센터 메인<i></i></a></li>
 								<li><a href="">자주찾는 질문<i></i></a></li>
-								<li class="on"><a href="/bbs/boardList">공지/뉴스<i></i></a></li>
+								<li class="on"><a href="./bbsList">공지/뉴스<i></i></a></li>
 								<li><a href="">이메일 문의<i></i></a></li>
 								<li><a href="">분실문 문의<i></i></a></li>
 								<li><a href="">단체/대관 문의<i></i></a></li>
@@ -63,12 +63,12 @@
 						<div class="ad_area">
 							<div class="ad_panner_1">
 								<a href="">
-									<img alt="" src="../resources/images/bbsList/200313_160x300.jpg">
+									<img alt="" src="../images/bbsList/200313_160x300.jpg">
 								</a>
 							</div>
 							<div class="ad_panner_2">
 								<a href="">
-									<img alt="" src="../resources/images/bbsList/0325_160x35.png">
+									<img alt="" src="../images/bbsList/0325_160x35.png">
 								</a>
 							</div>
 						</div>
@@ -85,15 +85,16 @@
 						</div>
 							<div class="tbl_write">
 								<div class="tbl_info">
-									<p class="tbl_info_left">[극장] ${bbsDTO.title}</p>
-									<p class="tbl_info_right">등록자 ${bbsDTO.id} 등록일 ${bbsDTO.hiredate} 조회수 ${bbsDTO.count}</p>
+									<p class="tbl_info_left">[극장] ${bbsVO.title}</p>
+									<p class="tbl_info_right">등록자 ${bbsVO.writer} 등록일 ${bbsVO.hireDate} 조회수 ${bbsVO.hit}</p>
 								</div>
 								<div class="bbs_file">
 										첨부파일 : 
-										<div class="file" > ${fileInfoDTO.oriName}</div>
+										<div class="file" > ${bbsVO.bbsFileVO.oriName}</div>
+										<input type="hidden" name="fileName" value="${bbsVO.bbsFileVO.fileName}">
 								</div>
 								<div class="bbs_contents">
-										${bbsDTO.contents}
+										${bbsVO.contents}
 										
 										
 								</div>
@@ -101,9 +102,9 @@
 								<div class="bbs_btn">
 									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
 									
-									<c:if test="${bbsDTO.id eq memberDTO.id }">
+									<c:if test="${bbsVO.writer eq memberVO.id }">
 										<button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button>
-										<a href="./boardUpdate?no=${bbsDTO.no}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
+										<a href="./bbsUpdate?num=${bbsVO.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
 									</c:if>
 									
 								</div>
@@ -126,13 +127,13 @@
 
 <script type="text/javascript">
 	$("#btn-list").click(function() {
-		location.href="./boardList";
+		location.href="./bbsList";
 	});
 	
 	$("#btn-delete").click(function() {
 		var check = confirm("정말 삭제하시겠습니까?");
 		if(check){
-			location.href="boardDelete?no=${bbsDTO.no}";
+			location.href="bbsDelete?num=${bbsVO.num}";
 		}
 	})
 
