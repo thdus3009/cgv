@@ -74,6 +74,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update bbs set title=#{title}, contents=#{contents},hireDate=sysdate() where num=#{num}
 	</update>
 	
+	<delete id="boardDelete" parameterType="BbsVO">
+		delete from bbs where num=#{num}
+	</delete>
+	
 	
 	
 	

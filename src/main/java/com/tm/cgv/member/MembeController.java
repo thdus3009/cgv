@@ -81,8 +81,6 @@ public class MembeController {
 		}
 		response.addCookie(cookie);
 		
-		
-		
 		memberVO = memberService.memberLogin(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
@@ -100,9 +98,7 @@ public class MembeController {
 	@GetMapping("memberLogout")
 	public String memberLogout(HttpSession session) throws Exception{
 		session.invalidate();
-		
 		return "redirect:../";
-		
 	}
 	
 	//loginCheck(GET)

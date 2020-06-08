@@ -87,8 +87,15 @@ public class BbsService implements BoardService {
 	}
 
 	@Override
-	public int boardDelete(BoardVO boardVO) throws Exception {
-		return bbsRepository.boardDelete(boardVO);
+	public int boardDelete(BoardVO boardVO,String fileName) throws Exception {
+		
+		File dest = filePathGenerator.getUserResourceLoader("/upload/bbs");
+		int result = fileManager.deleteFile(fileName, dest);
+		
+		if(result > 0) {
+			result = bbsRepository.boardDelete(boardVO);
+		}
+		return result;
 	}
 
 }

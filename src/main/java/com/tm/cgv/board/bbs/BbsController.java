@@ -43,7 +43,6 @@ public class BbsController {
 			
 			mv.setViewName("board/boardList");
 		}
-		
 		return mv;
 	}
 	
@@ -120,6 +119,20 @@ public class BbsController {
 	}
 	
 	//delete
+	@GetMapping("bbsDelete")
+	public ModelAndView bbsDelete(BbsVO bbsVO,String fileName) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = bbsService.boardDelete(bbsVO,fileName);
+		if(result > 0) {
+			mv.addObject("msg", "등록된 글을 삭제했습니다.");
+			mv.addObject("path", "./bbsList");
+		}
+		
+		mv.setViewName("common/result");
+		
+		return mv;
+	}
 	
 	
 	

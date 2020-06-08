@@ -91,7 +91,7 @@
 								<div class="bbs_file">
 										첨부파일 : 
 										<div id="fileDown" class="file" data-title="${bbsVO.bbsFileVO.fileNum}"> ${bbsVO.bbsFileVO.oriName}</div>
-										<input type="hidden" name="fileName" value="${bbsVO.bbsFileVO.fileName}">
+										<input type="hidden" id="fileName" value="${bbsVO.bbsFileVO.fileName}">
 								</div>
 								<div class="bbs_contents">
 										${bbsVO.contents}
@@ -128,10 +128,6 @@
 <script type="text/javascript">
 	$("#fileDown").click(function(){
 		var fileNum = $("#fileDown").data("title");
-		console.log(fileNum)
-// 		$.get("./fileDown?fileNum="+fileNum,function(result){
-// 			console.log("result: "+result);
-// 		});
 		location.href="./fileDown?fileNum="+fileNum;
 	});
 
@@ -142,8 +138,10 @@
 	
 	$("#btn-delete").click(function() {
 		var check = confirm("정말 삭제하시겠습니까?");
+		var fileName = $("#fileName").val();
+
 		if(check){
-			location.href="bbsDelete?num=${bbsVO.num}";
+			location.href="bbsDelete?num=${bbsVO.num}&fileName="+fileName;
 		}
 	})
 

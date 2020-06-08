@@ -37,9 +37,6 @@ public class BbsFileService implements FileService{
 	
 	@Override
 	public FileVO fileDown(FileVO fileVO) throws Exception{
-		
-		
-		
 		return bbsFileRepository.fileDown(fileVO);
 	}
 	
