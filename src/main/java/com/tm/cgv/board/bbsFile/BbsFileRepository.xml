@@ -14,4 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from bbsFile where num=#{num}
 	</delete>
 	
+	<select id="fileDown" parameterType="BbsFileVO">
+		select * from bbsFile where fileNum=#{fileNum}
+	</select>
+	
 </mapper>

@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.board.BoardVO;
+import com.tm.cgv.board.bbsFile.BbsFileService;
+import com.tm.cgv.board.bbsFile.BbsFileVO;
+import com.tm.cgv.file.FileVO;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -20,7 +23,8 @@ public class BbsController {
 
 	@Autowired
 	private BbsService bbsService;
-	
+	@Autowired
+	private BbsFileService bbsFileService;
 	
 	@ModelAttribute("board")
 	public String getBoard() throws Exception{
@@ -117,6 +121,19 @@ public class BbsController {
 	
 	//delete
 	
+	
+	
+	//fileDown
+	@GetMapping("fileDown")
+	public ModelAndView fileDown(BbsFileVO bbsFileVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		FileVO fileVO = bbsFileService.fileDown(bbsFileVO);
+		mv.addObject("fileVO", fileVO);
+		mv.addObject("path", "upload/bbs/");
+		
+		return mv;
+	}
 }
 
 

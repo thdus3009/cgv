@@ -90,7 +90,7 @@
 								</div>
 								<div class="bbs_file">
 										첨부파일 : 
-										<div class="file" > ${bbsVO.bbsFileVO.oriName}</div>
+										<div id="fileDown" class="file" > ${bbsVO.bbsFileVO.oriName}</div>
 										<input type="hidden" name="fileName" value="${bbsVO.bbsFileVO.fileName}">
 								</div>
 								<div class="bbs_contents">
@@ -126,6 +126,12 @@
 
 
 <script type="text/javascript">
+	$("#fileDowb").click(function(){
+		
+		
+	});
+
+
 	$("#btn-list").click(function() {
 		location.href="./bbsList";
 	});
