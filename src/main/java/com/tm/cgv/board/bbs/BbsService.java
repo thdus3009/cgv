@@ -27,6 +27,13 @@ public class BbsService implements BoardService {
 	@Autowired
 	private BbsFileRepository bbsFileRepository;
 
+	
+	//hitUpdate
+	public int hitUpdate(BbsVO bbsVO) throws Exception{
+		return bbsRepository.hitUpdate(bbsVO);
+	}
+	
+	
 	//List
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
@@ -39,8 +46,6 @@ public class BbsService implements BoardService {
 	//Select
 	@Override
 	public BoardVO boardSelect(BoardVO boardVO) throws Exception {
-		int result = bbsRepository.hitUpdate(boardVO);
-		
 		return bbsRepository.boardSelect(boardVO);
 	}
 
