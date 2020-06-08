@@ -51,16 +51,16 @@
 						<fieldset>
 							<p>아이디 비밀번호를 입력하신 후, 로그인 버튼을 클릭해 주세요.</p>
 							<div class="login_input">
-								<input type="text" name="id" value="${cookie.cookieId.value}">
+								<input type="text" name="id" value="${cookie.cId.value}">
 								<input type="password" name="pwd">
 							</div>
 							<button type="submit"><span>로그인</span></button>
 							<div class="save_id">
-								<c:if test="${cookie.cookieId.value eq ''}">
-									<input type="checkbox" name="remember" value="remember" >
+								<c:if test="${cookie.cId.value eq ''}">
+									<input type="checkbox" name="remember">
 								</c:if>
-								<c:if test="${cookie.cookieId.value ne ''}">
-									<input type="checkbox" name="remember" value="remember" checked="checked" >
+								<c:if test="${cookie.cId.value ne ''}">
+									<input type="checkbox" name="remember" checked="checked" >
 								</c:if>
 								
 								<label>아이디 저장</label>

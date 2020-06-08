@@ -1,12 +1,18 @@
 package com.tm.cgv.member;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,19 +66,29 @@ public class MembeController {
 	
 	//login(GET/POST)
 	@GetMapping("memberLogin")
-	public String memberLogin() throws Exception{
+	public String memberLogin(@CookieValue(value = "cId",required = false)String cId) throws Exception{
 		return "member/memberLogin";
 	}
 	@PostMapping("memberLogin")
-	public ModelAndView memberLogin(MemberVO memberVO,HttpSession session) throws Exception{
+	public ModelAndView memberLogin(MemberVO memberVO,HttpSession session,@RequestParam(required = false) boolean remember,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		Cookie cookie = new Cookie("cId", "");
+		if(remember) {
+			cookie.setValue(memberVO.getId());
+		}else {
+			cookie.setValue("");
+		}
+		response.addCookie(cookie);
+		
+		
 		
 		memberVO = memberService.memberLogin(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
 			mv.setViewName("redirect:../");
 		}else {
-			mv.addObject("msg","로그인 실패");
+			mv.addObject("msg","아이디 또는 패스워드가 틀립니다.");
 			mv.addObject("path", "./memberLogin");
 			mv.setViewName("common/result");
 		}
