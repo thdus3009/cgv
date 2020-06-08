@@ -90,7 +90,7 @@
 								</div>
 								<div class="bbs_file">
 										첨부파일 : 
-										<div id="fileDown" class="file" > ${bbsVO.bbsFileVO.oriName}</div>
+										<div id="fileDown" class="file" data-title="${bbsVO.bbsFileVO.fileNum}"> ${bbsVO.bbsFileVO.oriName}</div>
 										<input type="hidden" name="fileName" value="${bbsVO.bbsFileVO.fileName}">
 								</div>
 								<div class="bbs_contents">
@@ -126,9 +126,13 @@
 
 
 <script type="text/javascript">
-	$("#fileDowb").click(function(){
-		
-		
+	$("#fileDown").click(function(){
+		var fileNum = $("#fileDown").data("title");
+		console.log(fileNum)
+// 		$.get("./fileDown?fileNum="+fileNum,function(result){
+// 			console.log("result: "+result);
+// 		});
+		location.href="./fileDown?fileNum="+fileNum;
 	});
 
 

@@ -27,12 +27,17 @@ public class FileDown extends AbstractView{
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//저장경로를 받아와야 함(저장 경로 확인)
 		
+		System.out.println("renderIN");
+		
 		String path = "classpath:static/";
 		path = path + (String)model.get("path");
 		FileVO fileVO = (FileVO)model.get("fileVO");
 		
+		System.out.println("path1 : "+path);
+		
 		
 		path = path + fileVO.getFileName();
+		System.out.println("path2 : "+path);
 		File file = resourceLoader.getResource(path).getFile();
 		
 		

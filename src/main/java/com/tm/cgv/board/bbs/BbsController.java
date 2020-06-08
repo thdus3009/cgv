@@ -132,6 +132,8 @@ public class BbsController {
 		mv.addObject("fileVO", fileVO);
 		mv.addObject("path", "upload/bbs/");
 		
+		mv.setViewName("fileDown");
+		
 		return mv;
 	}
 }

@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="hit" property="hit"/>
 		
 		<association property="bbsFileVO" javaType="BbsFileVO">
+			<id column="fileNum" property="fileNum"/>
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
 		</association>
@@ -55,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="boardSelect" parameterType="BbsVO" resultMap="BbsFileJoin">
-		select B.*,F.fileName,F.oriName from 
+		select B.*,F.fileNum,F.fileName,F.oriName from 
 		bbs as B
 		left join
 		bbsFile as F
