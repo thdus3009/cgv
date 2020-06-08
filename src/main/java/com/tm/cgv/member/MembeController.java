@@ -4,9 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,13 +99,60 @@ public class MembeController {
 		return "redirect:../";
 	}
 	
-	//loginCheck(GET)
-	
-	
 	//myPage(GET)
 	@GetMapping("memberMypage")
 	public void memberMypage() throws Exception{
 		
 	}
 	
+	
+	//memberUpdate
+	@GetMapping("memberUpdate")
+	public ModelAndView memberUpdate(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		memberVO = memberService.memberSelect(memberVO);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("member/memberUpdate");
+		
+		return mv;
+	}
+	@PostMapping("memberUpdate")
+	public ModelAndView memberUpdate2(MemberVO memberVO,String year,String month,String day) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		memberVO.setBirth(year+"/"+month+"/"+day);
+		int result = memberService.memberUpdate(memberVO);
+		if(result > 0) {
+			mv.addObject("msg", "수정 완료");
+			mv.addObject("path", "./memberMypage");
+			
+			mv.setViewName("common/result");
+		}
+		
+		return mv;
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

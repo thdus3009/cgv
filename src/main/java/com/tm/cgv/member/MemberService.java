@@ -21,4 +21,12 @@ public class MemberService {
 		return memberRepository.memberJoin(memberVO);
 	}
 	
+	public MemberVO memberSelect(MemberVO memberVO) throws Exception{
+		return memberRepository.memberSelect(memberVO);
+	}
+	
+	public int memberUpdate(MemberVO memberVO) throws Exception{
+		return memberRepository.memberUpdate(memberVO);
+	}
+	
 }

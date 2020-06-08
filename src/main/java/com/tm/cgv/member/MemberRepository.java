@@ -10,4 +10,8 @@ public interface MemberRepository {
 	
 	public MemberVO memberIdCheck(String id) throws Exception;
 	
+	public MemberVO memberSelect(MemberVO memberVO) throws Exception;
+	
+	public int memberUpdate(MemberVO memberVO) throws Exception;
+	
 }
