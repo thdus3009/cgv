@@ -39,6 +39,8 @@ public class BbsService implements BoardService {
 	//Select
 	@Override
 	public BoardVO boardSelect(BoardVO boardVO) throws Exception {
+		int result = bbsRepository.hitUpdate(boardVO);
+		
 		return bbsRepository.boardSelect(boardVO);
 	}
 

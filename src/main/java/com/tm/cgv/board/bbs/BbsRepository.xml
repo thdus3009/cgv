@@ -64,6 +64,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where B.num = #{num}
 	</select>
 	
+	<update id="hitUpdate" parameterType="BbsVO">
+		update bbs set hit = hit+1 where num=#{num}
+	</update>
+	
 	
 	<insert id="boardInsert" parameterType="BbsVO" keyProperty="num" useGeneratedKeys="true">
 		insert into bbs values(#{num},#{title},#{writer},#{contents},sysdate(),0)
