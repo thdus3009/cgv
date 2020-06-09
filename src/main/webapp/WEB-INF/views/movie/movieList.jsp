@@ -146,7 +146,7 @@
 </div>
 
 
-<script type="text/javascript" src="./js/movie/movieList.js"></script>
+<script type="text/javascript" src="../js/movie/movieList.js"></script>
 
 	
 

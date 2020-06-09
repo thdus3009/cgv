@@ -14,4 +14,6 @@ public interface MemberRepository {
 	
 	public int memberUpdate(MemberVO memberVO) throws Exception;
 	
+	public int memberDelete(MemberVO memberVO) throws Exception;
+	
 }

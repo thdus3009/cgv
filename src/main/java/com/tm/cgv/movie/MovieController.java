@@ -29,7 +29,6 @@ public class MovieController {
 			mv.setViewName("movie/ajax/movieListMore");
 		}
 		return mv;
-		
 	}
 	
 	@GetMapping("movieList")

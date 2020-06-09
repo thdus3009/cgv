@@ -21,6 +21,13 @@ public class MembeController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	@GetMapping("naverLogin")
+	public String naverLogin() throws Exception{
+		return "member/naverLogin";
+	}
+	
+	
 	//memberIdCheck(POST)
 	@PostMapping("memberIdCheck")
 	@ResponseBody
@@ -118,12 +125,16 @@ public class MembeController {
 		return mv;
 	}
 	@PostMapping("memberUpdate")
-	public ModelAndView memberUpdate2(MemberVO memberVO,String year,String month,String day) throws Exception{
+	public ModelAndView memberUpdate2(MemberVO memberVO,String year,String month,String day,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		memberVO.setBirth(year+"/"+month+"/"+day);
 		int result = memberService.memberUpdate(memberVO);
 		if(result > 0) {
+			memberVO = memberService.memberSelect(memberVO);
+			
+			session.setAttribute("memberVO", memberVO);
+		
 			mv.addObject("msg", "수정 완료");
 			mv.addObject("path", "./memberMypage");
 			
@@ -133,7 +144,22 @@ public class MembeController {
 		return mv;
 	}
 	
-	
+	@GetMapping("memberDelete")
+	public ModelAndView memberDelete(MemberVO memberVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = memberService.memberDelete(memberVO);
+		if(result > 0) {
+			session.invalidate();
+			
+			mv.addObject("msg", "회원 탈퇴 되었습니다.");
+			mv.addObject("path", "../");
+			
+			mv.setViewName("common/result");
+		}
+		
+		return mv;
+	}
 	
 }
 

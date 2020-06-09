@@ -10,6 +10,9 @@ public class MemberVO {
 	private String phone;
 	private String email;
 	
+	private String deleteAt;
+	private String fileName;
+	private String oriName;
 	
 	public int getNum() {
 		return num;
@@ -52,6 +55,24 @@ public class MemberVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getDeleteAt() {
+		return deleteAt;
+	}
+	public void setDeleteAt(String deleteAt) {
+		this.deleteAt = deleteAt;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
 	}
 	
 	

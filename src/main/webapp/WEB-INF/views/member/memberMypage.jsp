@@ -116,20 +116,18 @@
 								<ul>
 									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
 									<li><a href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보 수정<i></i></a></li>
-									<li><a href="">회원 탈퇴<i></i></a></li>
+									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
 									<li><a href="">예매 영화 관리<i></i></a></li>
 								</ul>
 
 							</div>
 							<div class="ad_area">
 								<div class="ad_panner_1">
-									<a href=""> <img alt=""
-										src="../images/bbsList/200313_160x300.jpg">
+									<a href=""> <img alt="" src="../images/bbsList/200313_160x300.jpg">
 									</a>
 								</div>
 								<div class="ad_panner_2">
-									<a href=""> <img alt=""
-										src="../images/bbsList/0325_160x35.png">
+									<a href=""> <img alt="" src="../images/bbsList/0325_160x35.png">
 									</a>
 								</div>
 							</div>
@@ -150,6 +148,18 @@
 		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
+
+<script type="text/javascript">
+	$("#memberDelete").click(function(){
+		var check = confirm("회원 탈퇴하시겠습니까?");
+
+		if(check){
+			location.href="./memberDelete?id=${memberVO.id}";
+		}
+	});
+
+</script>
+
 
 
 </body>

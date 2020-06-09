@@ -18,8 +18,8 @@ public class MovieService {
 	}
 	
 	public List<MovieVO> movieListMore(Pager pager) throws Exception{
-		long count = movieDAO.movieNumCount();
-		pager.setLastRow(count);
+		Integer count = (int)movieDAO.movieNumCount();
+		pager.setPerPage(count);
 		
 		return movieDAO.movieList(pager);
 	}

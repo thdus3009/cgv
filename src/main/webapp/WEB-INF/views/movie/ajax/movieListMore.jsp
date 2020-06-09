@@ -13,7 +13,7 @@
 			<div class="box-image">
 				<a href="">
 					<span class="thumb-image">
-						<img alt="이미지" src="../resources/images/movie/movieList/filmCover/${list.imageName}">
+						<img alt="이미지" src="../images/movie/movieList/filmCover/${list.imageName}">
 						<span class="icon-grade grade-12">청소년 관람불가</span>
 					</span>
 				</a>

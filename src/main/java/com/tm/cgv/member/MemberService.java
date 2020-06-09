@@ -29,4 +29,8 @@ public class MemberService {
 		return memberRepository.memberUpdate(memberVO);
 	}
 	
+	public int memberDelete(MemberVO memberVO) throws Exception{
+		return memberRepository.memberDelete(memberVO);
+	}
+	
 }

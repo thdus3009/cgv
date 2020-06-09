@@ -3,7 +3,7 @@ package com.tm.cgv.util;
 public class Pager {
 
 	private Long curPage;
-	private Integer perPage=10;
+	private Integer perPage;
 	
 	private long curBlock;
 	private long perBlock = 5L;
@@ -62,12 +62,14 @@ public class Pager {
 		this.curPage = curPage;
 	}
 	public Integer getPerPage() {
-		if(this.perPage == null ||this.curPage == 0) {
+		if(this.perPage == null || this.perPage == 0) {
 			this.perPage=10;
 		}
 		return perPage;
 	}
 	public void setPerPage(Integer perPage) {
+		System.out.println("aaaa: "+perPage);
+		
 		this.perPage = perPage;
 	}
 	public long getCurBlock() {
