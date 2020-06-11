@@ -134,13 +134,17 @@ public class MembeController {
     	System.out.println("여기는 callback");
     	
 	    OAuth2AccessToken oauthToken;
-	    oauthToken = naverLoginBO.getAccessToken(session, code, state);
+	    System.out.println("0");
+	    System.out.println("code: "+code);
+	    System.out.println("state: "+state);
+	    System.out.println("session : "+session);
 	    
+	    oauthToken = naverLoginBO.getAccessToken(session, code, state);
+	    System.out.println("1");
 	    //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
-	    System.out.println("apiResult : "+apiResult);
+	    System.out.println("2apiResult : "+apiResult);
 	    
-	    if(apiResult != null) {
 	    	//2. String형식인 apiResult를 json형태로 바꿈
 	    	JSONParser parser = new JSONParser();
 	    	Object obj = parser.parse(apiResult);
@@ -150,10 +154,8 @@ public class MembeController {
 	    	JSONObject response_obj = (JSONObject)jsonObj.get("response");
 	    	//response의 nickname값 파싱
 	    	String nickname = (String)response_obj.get("id");
-	    	System.out.println(nickname);
+	    	System.out.println("aaaaaaa:Id::"+nickname);
 
-
-	    }
 	    
 	    mv.addObject("result", apiResult);
 	    mv.setViewName("member/naverLogin");
