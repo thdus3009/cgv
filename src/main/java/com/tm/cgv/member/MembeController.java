@@ -99,12 +99,12 @@ public class MembeController {
 	public ModelAndView memberLogin(MemberVO memberVO,HttpSession session,@RequestParam(required = false) boolean remember,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		//naver
+		//naver 주소 생성
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		System.out.println("네이버:" + naverAuthUrl);
 		mv.addObject("url", naverAuthUrl);
 		
-		
+		//쿠키값 저장
 		Cookie cookie = new Cookie("cId", "");
 		if(remember) {
 			cookie.setValue(memberVO.getId());
@@ -113,6 +113,7 @@ public class MembeController {
 		}
 		response.addCookie(cookie);
 		
+		//
 		memberVO = memberService.memberLogin(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
@@ -153,8 +154,14 @@ public class MembeController {
 	    	//Top레벨 단계 _response 파싱
 	    	JSONObject response_obj = (JSONObject)jsonObj.get("response");
 	    	//response의 nickname값 파싱
-	    	String nickname = (String)response_obj.get("id");
-	    	System.out.println("aaaaaaa:Id::"+nickname);
+	    	String id = (String)response_obj.get("id");
+	    	String email = (String)response_obj.get("email");
+	    	String name = (String)response_obj.get("name");
+	    	
+	    	System.out.println("aaaaaaa:Id::"+id);
+	    	System.out.println("aaaaaaa:Email::"+email);
+	    	System.out.println("aaaaaaa:name::"+name);
+	    	
 
 	    
 	    mv.addObject("result", apiResult);
