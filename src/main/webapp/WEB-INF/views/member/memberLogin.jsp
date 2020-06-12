@@ -58,6 +58,7 @@
 								<input type="password" name="pwd">
 							</div>
 							<button type="submit"><span>로그인</span></button>
+							
 							<div class="save_id">
 								<c:if test="${cookie.cId.value eq ''}">
 									<input type="checkbox" name="remember">
@@ -65,14 +66,19 @@
 								<c:if test="${cookie.cId.value ne ''}">
 									<input type="checkbox" name="remember" checked="checked" >
 								</c:if>
-								
 								<label>아이디 저장</label>
 							</div>
 							<div class="login_option">
 								<a href="#">아이디 찾기</a>
 								<a href="#">비밀번호 찾기</a>
 							</div>
+							<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+						 	<!-- 네이버 로그인 창으로 이동 -->
+							<div id="naver_id_login" style="position: absolute; top: 200px; left: 163px;">
+								<a href="${url}"><img width="160" src="${pageContext.request.contextPath}/images/login/nairo2.PNG"/></a>
+							</div>
 						</fieldset>
+						
 					</form>
 				</div>
 				
@@ -93,13 +99,7 @@
 					</div>
 				</div>
 				
-				<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-			 	<!-- 네이버 로그인 창으로 이동 -->
-				<div id="naver_id_login" style="text-align:center">
-					<a href="${url}">
-						<img width="223" src="${pageContext.request.contextPath}/resources/img/naver_Bn_Green.PNG"/>
-					</a>
-				</div>
+				
 
 			</div>
 		</div>

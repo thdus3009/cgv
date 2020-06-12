@@ -132,19 +132,12 @@ public class MembeController {
     @RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
     	ModelAndView mv = new ModelAndView();
-    	System.out.println("여기는 callback");
     	
 	    OAuth2AccessToken oauthToken;
-	    System.out.println("0");
-	    System.out.println("code: "+code);
-	    System.out.println("state: "+state);
-	    System.out.println("session : "+session);
 	    
 	    oauthToken = naverLoginBO.getAccessToken(session, code, state);
-	    System.out.println("1");
 	    //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
-	    System.out.println("2apiResult : "+apiResult);
 	    
 	    	//2. String형식인 apiResult를 json형태로 바꿈
 	    	JSONParser parser = new JSONParser();
@@ -158,14 +151,33 @@ public class MembeController {
 	    	String email = (String)response_obj.get("email");
 	    	String name = (String)response_obj.get("name");
 	    	
-	    	System.out.println("aaaaaaa:Id::"+id);
-	    	System.out.println("aaaaaaa:Email::"+email);
-	    	System.out.println("aaaaaaa:name::"+name);
+	    	//1. ID존재 여부체크(id,email,name) 
+	    	//2. 존재시 로그인후 메인페이지로 
+	    	//3. 없을시 자동 회원가입 진행(부족한 회원정보는 나중에 추가 = 또는 알리메시지로 추가기입페이지로 이동)
 	    	
-
-	    
-	    mv.addObject("result", apiResult);
-	    mv.setViewName("member/naverLogin");
+	    	//1.
+	    	MemberVO memberVO = new MemberVO();
+	    	memberVO.setId(id);
+	    	memberVO.setName(name);
+	    	memberVO.setEmail(email);
+	    	
+	    	MemberVO memberExistsVO = memberService.naverMemberCheck(memberVO);
+	    	if(memberExistsVO != null) {
+	    		//네이버로 로그인 session값 부여후 메인페이지로 이동
+	    		session.setAttribute("memberVO", memberExistsVO);
+	    	}else {
+	    		//json으로 받아온 값으로 회원가입 자동 실행
+	    		int result = memberService.memberJoin(memberVO);
+	    		if(result > 0) {
+	    			memberVO = memberService.naverMemberCheck(memberVO);
+	    			session.setAttribute("memberVO", memberVO);
+	    		}
+	    	}
+	    	
+	    	
+	    	
+	    //mv.addObject("result", apiResult);
+	    mv.setViewName("redirect:../");
 	    /* 네이버 로그인 성공 페이지 View 호출 */
 	    return mv;
     }
