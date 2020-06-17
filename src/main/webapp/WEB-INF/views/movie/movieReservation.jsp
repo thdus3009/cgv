@@ -126,31 +126,30 @@
 									<div class="theater-list nano has-scrollbar has-scrollbar-y">
 										<div class="theater-area-list">
 											<ul>
-												<li class="selected">
-													<a href="#">
-														<span class="name">서울</span>
-														<span class="count">(30)</span>
-													</a>
-													<div class="area_theater_list nano has-scrollbar has-scrollbar-y">
-														<ul class="content scroll-y">
-														<c:forEach begin="1" end="10">
-															<li class="" data-theater="강남">
-																<a href="#">
-																	강남<span class="sreader"></span>
-																</a>
-															</li>
-															<li class="" data-theater="홍대">
-																<a href="#">
-																	홍대<span class="sreader"></span>
-																</a>
-															</li>
-														</c:forEach>
-														</ul>
-														<div class="pane pane-y">
-															<div class="slider slider-y"></div>
+												<c:forEach var="cinemaVO" items="${cinemaLocalList}">
+													<li class="selected">
+														<a href="#">
+															<span class="name">${cinemaVO.local}</span>
+															<span class="count">(30)</span>
+														</a>
+														<div class="area_theater_list nano has-scrollbar has-scrollbar-y">
+															<ul class="content scroll-y">
+															<c:forEach var="cinema" items="${cinemaList}">
+																<li class="" data-theater="${cinema.name}">
+																	<a href="#">
+																		${cinema.name}<span class="sreader"></span>
+																	</a>
+																</li>
+															</c:forEach>
+															</ul>
+															<div class="pane pane-y">
+																<div class="slider slider-y"></div>
+															</div>
 														</div>
-													</div>
-												</li>
+													</li>
+												</c:forEach>
+												
+												<!-- 
 												<c:forEach begin="1" end="10">
 													<li>
 													<a href="#">
@@ -159,6 +158,7 @@
 													</a>
 												</li>
 												</c:forEach>
+												 -->
 												
 											</ul>
 											<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">

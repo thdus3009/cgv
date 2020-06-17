@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.cinema.CinemaService;
+import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -16,6 +18,8 @@ public class MovieController {
 	
 	@Autowired
 	public MovieService movieService;
+	@Autowired
+	public CinemaService cinemaService;
 	
 	
 	@GetMapping("movieListMore")
@@ -44,17 +48,20 @@ public class MovieController {
 	}
 	
 	@GetMapping("movieReservation")
-	public ModelAndView movieReservation(MovieVO movieDTO) throws Exception{
+	public ModelAndView movieReservation(MovieVO movieDTO,CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//초기 영화목록 호출
 		List<MovieVO> list = movieService.movieListAll(movieDTO);
 		
 		//초기 극장리스트 호출 
-		
+		List<CinemaVO> cinemaLocalList = cinemaService.cinemaLocalList();
+		List<CinemaVO> cinemaList = cinemaService.cinemaList(cinemaVO);
 		//초기 날짜 리스트 호출
 		
 		mv.addObject("list", list);
+		mv.addObject("cinemaLocalList", cinemaLocalList);
+		mv.addObject("cinemaList", cinemaList);
 		mv.setViewName("movie/movieReservation");
 		
 		return mv;
