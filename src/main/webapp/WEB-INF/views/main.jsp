@@ -123,6 +123,11 @@ span{
 					</div>					
 				</div>
 			</div>
+			
+			<div class="test"><!-- soyeon test -->
+				<button type="button" class="btn btn-danger btn-xs" id="popupBtn" >test</button>
+			</div>
+			
 		</div>
 	</div>
 	
@@ -136,6 +141,25 @@ span{
 	<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 	<c:import url="template/sidebar.jsp"></c:import>
 </div>
+
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+	    var formObj = $("form[role='form']");
+
+
+	    $('#popupBtn').on("click", function() { //여기서 부터 시작
+
+	        var make_date = $("#make_date").val(); //화면의 파라미터 가져오기
+
+		  	window.open("/review/reviewPopup?make_date="+make_date,"_blank","toolbar=yes,menubar=yes,width=700,height=500").focus();
+	
+		    });
+	
+		});
+
+	</script>
 
 </body>
 </html>
