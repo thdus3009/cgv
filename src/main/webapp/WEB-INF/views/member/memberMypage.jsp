@@ -52,6 +52,7 @@
 						<div class="box-contents">
 							<div class="person-info1">
 								<strong>${memberVO.name } 님</strong> <em>(${memberVO.id })</em>
+								<button id="go_edit_page" type="button" title="새창열림">정보수정</button>
 							</div>
 							<div class="person-info2">
 								<p>전화번호 : ${memberVO.phone }</p>
@@ -118,6 +119,7 @@
 									<li><a href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보 수정<i></i></a></li>
 									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
 									<li><a href="">예매 영화 관리<i></i></a></li>
+									<li><a href="">내가 본 영화</a></li>
 								</ul>
 
 							</div>
@@ -150,12 +152,22 @@
 	</div>
 
 <script type="text/javascript">
+
+	//회원 탈퇴 알림창
 	$("#memberDelete").click(function(){
 		var check = confirm("회원 탈퇴하시겠습니까?");
 
 		if(check){
 			location.href="./memberDelete?id=${memberVO.id}";
 		}
+	});
+
+	//정보 수정 팝업창
+	$("#go_edit_page").click(function(){
+		window.open( 
+				"memberPopUpEdit.jsp", 
+				"마이페이지 - 정보수정", 
+				"width = 520, height = 620, top=100, left 200, locations = no");
 	});
 
 </script>
