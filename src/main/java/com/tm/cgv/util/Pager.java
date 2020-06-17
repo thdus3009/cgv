@@ -1,5 +1,6 @@
 package com.tm.cgv.util;
 
+
 public class Pager {
 
 	private Long curPage;

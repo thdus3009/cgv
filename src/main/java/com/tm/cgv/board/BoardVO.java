@@ -3,10 +3,11 @@ package com.tm.cgv.board;
 public class BoardVO {
 	private int num;
 	private String title;
-	private String writer;
+	private String writer;	//id, Filename
 	private String contents;
 	private String hireDate;
 	private int hit;
+	
 	public int getNum() {
 		return num;
 	}
