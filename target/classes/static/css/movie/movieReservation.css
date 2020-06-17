@@ -474,6 +474,14 @@ body{
 	width: 154px;
 }
 
+#ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li.selected{
+	background-color: #333;
+    width: 112px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #000;
+}
+
 #ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li{
 	clear: both;
     overflow: hidden;
@@ -482,6 +490,16 @@ body{
     height: 35px;
     line-height: 35px;
     margin-bottom: 1px;
+}
+
+#ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li.selected a{
+	border: 1px solid #5c5c5c;
+    height: 29px;
+    line-height: 29px;
+    margin: 1px;
+    color: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li a{
@@ -655,11 +673,11 @@ body{
     line-height: 416px;
     text-align: center;
     color: #666;
-/*     display: none; */
+    display: none;
 }
 
 #ticket .step1 .section-time .col-body .time-list{
-	display: none;
+/* 	display: none; */
 	float: left;
     width: 316px;
     height: 88%;

@@ -10,16 +10,31 @@ $(function() {
 			$(this).addClass("selected");
 		});
 		
-		
+		//영화 이미지, 제목, 연령제한
 		$("#movie-list-content li").click(function() {
 			$("#movie-list-content li").removeClass("selected");
 			$(this).addClass("selected");
+			
+			$("#select_title").text($(this).data("title"));
+			$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+			$("#select_ageLimit").text($(this).data("age_limit"));
+
 			
 			
 			$(".movie_poster img").css("display","inline");
 			$(".movie_title").css("display","block");
 			
 			$(".movie .placeholder").css("display","none");
+		});
+		
+		//극장
+		$(".area_theater_list li").click(function(){
+			$(".area_theater_list li").removeClass("selected");
+			$(this).addClass("selected");
+			
+			
+			$(".row.name").css("display","block");
+			$(".info.theater .placeholder").css("display","none");
 		});
 		
 		

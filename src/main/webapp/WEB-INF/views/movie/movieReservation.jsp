@@ -89,8 +89,8 @@
 									<div class="movie-list nano">
 										<ul id="movie-list-content" class="content scroll-y" style="right: -21px;">
 											<c:forEach var="list" items="${list}">
-												<li class="rating-${list.ageLimit}">
-													<a href="#" title="제목" alt="제목">
+												<li class="rating-${list.ageLimit}" data-age_limit="${list.ageLimit}" data-title="${list.title}" data-image="${list.imageName }">
+													<a href="#" title="제목" >
 														<span class="icon">&nbsp;</span>
 														<span class="text">${list.title}</span>
 														<span class="sreader"></span>
@@ -133,11 +133,15 @@
 													</a>
 													<div class="area_theater_list nano has-scrollbar has-scrollbar-y">
 														<ul class="content scroll-y">
-														<c:forEach begin="1" end="13">
-															<li>
+														<c:forEach begin="1" end="10">
+															<li class="" data-theater="강남">
 																<a href="#">
-																	강남
-																	<span class="sreader"></span>
+																	강남<span class="sreader"></span>
+																</a>
+															</li>
+															<li class="" data-theater="홍대">
+																<a href="#">
+																	홍대<span class="sreader"></span>
 																</a>
 															</li>
 														</c:forEach>
@@ -233,7 +237,10 @@
 									<span class="morning">조조</span>
 									<span class="night">심야</span>
 								</div>
+								<!-- 영화,극장,날짜선택 안했을때 -->
 								<div class="placeholder">영화, 극장, 날짜를 선택해주세요.</div>
+								
+								<!-- 영화,극장,날짜선택 되었을때 -->
 								<div class="time-list nano has-scrollbar">
 									<div class="content scroll-y" tabindex="-1" style="right: -21px;">
 										<div class="theater">
@@ -298,18 +305,18 @@
 				<div class="tnb step1">
 					<div class="info movie">
 						<span class="movie_poster">
-							<img src="" alt="포스터" style="display: none;"> 			<!-- display: inline; -->
+							<img id="select_image" src="" alt="포스터" style="display: none;"> 			<!-- display: inline; -->
 						</span>
 						<div class="row movie_title colspan2" style="display: none;">		 <!-- style="display: block;" -->
 							<span class="data letter-spacing-min ellipsis-line2">
-								<a href="#" target="_blank" title="어벤져스-엔드게임">어벤져스</a>
+								<a id="select_title" href="#" target="_blank" title=""></a>
 							</span>
 						</div>
 						<div class="row movie_type" style="display: none;"> 						<!-- style="display: block;" -->
 							<span class="data ellipsis-line1" title="2D">2D(히어로즈 기획전)</span>
 						</div>
 						<div class="row movie_rating" style="display: none;"> 					<!-- style="display: block;" -->
-							<span class="data" title="12세 관람가">12세 관람가</span>
+							<span id="select_ageLimit" class="data" title="12세 관람가">12세 관람가</span>
 						</div>
 						<div class="placeholder" title="영화선택"></div> <!-- style="display: none;" -->
 					</div>
