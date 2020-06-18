@@ -48,6 +48,7 @@ public class ReviewController {
 		String con = reviewVO.getContents();
 		System.out.println(con);
 		
+		
 		mv.setViewName("redirect:../");
 		return mv;
 	}
