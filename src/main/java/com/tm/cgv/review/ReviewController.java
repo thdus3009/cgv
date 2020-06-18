@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberService;
 
@@ -36,8 +37,8 @@ public class ReviewController {
 	//레이어 팝업 : class="layer-wrap" 검색하기
 	
 	@GetMapping("reviewPopup")
-	public void review_Write(Model model, @RequestParam(value="make_date", defaultValue="") String make_date)throws Exception {
-		model.addAttribute("make_date", make_date);
+	public void reviewPopup()throws Exception {
+		
 	}
 	
 	//review update (영화해당 상세페이지)

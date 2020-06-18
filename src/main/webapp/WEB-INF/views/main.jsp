@@ -126,6 +126,7 @@ span{
 			
 			<div class="test"><!-- soyeon test -->
 				<button type="button" class="btn btn-danger btn-xs" id="popupBtn" >test</button>
+				<a href="javascript:popupOpen();">열려라 팝업</a>
 			</div>
 			
 		</div>
@@ -144,20 +145,17 @@ span{
 
 
 	<script type="text/javascript">
-	$(document).ready(function() {
-
-	    var formObj = $("form[role='form']");
-
 
 	    $('#popupBtn').on("click", function() { //여기서 부터 시작
 
-	        var make_date = $("#make_date").val(); //화면의 파라미터 가져오기
-
-		  	window.open("/review/reviewPopup?make_date="+make_date,"_blank","toolbar=yes,menubar=yes,width=700,height=500").focus();
-	
-		    });
+		  	window.open("reviewPopup.html", "reviewPopup" ,"toolbar=yes,menubar=yes,width=700,height=500");
 	
 		});
+
+		function popupOpen(){
+			window.open("review/reviewPopup","","width=900,height=400,")
+			}
+
 
 	</script>
 
