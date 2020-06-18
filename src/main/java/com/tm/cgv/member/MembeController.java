@@ -107,7 +107,7 @@ public class MembeController {
 		//쿠키값 저장
 		Cookie cookie = new Cookie("cId", "");
 		if(remember) {
-			cookie.setValue(memberVO.getId());
+			cookie.setValue(memberVO.getUid());
 		}else {
 			cookie.setValue("");
 		}
@@ -157,7 +157,7 @@ public class MembeController {
 	    	
 	    	//1.
 	    	MemberVO memberVO = new MemberVO();
-	    	memberVO.setId(id);
+	    	memberVO.setUid(id);
 	    	memberVO.setName(name);
 	    	memberVO.setEmail(email);
 	    	

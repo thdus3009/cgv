@@ -3,16 +3,19 @@ package com.tm.cgv.member;
 public class MemberVO {
 
 	private int num;
-	private String id;
+	private String uid;
 	private String pwd;
 	private String name;
 	private String birth;
 	private String phone;
 	private String email;
+	private int gender;
+	private int age; 
+	private String nick;
 	
 	private String deleteAt;
 	private String fileName;
-	private String oriName;
+	
 	
 	public int getNum() {
 		return num;
@@ -20,11 +23,11 @@ public class MemberVO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getId() {
-		return id;
+	public String getUid() {
+		return uid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 	public String getPwd() {
 		return pwd;
@@ -56,6 +59,25 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public String getDeleteAt() {
 		return deleteAt;
 	}
@@ -68,12 +90,7 @@ public class MemberVO {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public String getOriName() {
-		return oriName;
-	}
-	public void setOriName(String oriName) {
-		this.oriName = oriName;
-	}
+
 	
 	
 	

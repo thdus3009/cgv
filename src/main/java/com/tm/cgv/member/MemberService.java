@@ -11,7 +11,7 @@ public class MemberService {
 	
 	public MemberVO naverMemberCheck(MemberVO memberVO) throws Exception{
 		
-		System.out.println(memberVO.getId());
+		System.out.println(memberVO.getUid());
 		System.out.println(memberVO.getName());
 		System.out.println(memberVO.getEmail());
 		
