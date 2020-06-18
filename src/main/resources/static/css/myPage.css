@@ -90,6 +90,11 @@
 	margin-top: 4px;
 	margin-bottom: 9px;
 }
+ 
+
+.box-image{
+	background-image: url("images/myPage/default_profile.gif");
+}
 
 
 

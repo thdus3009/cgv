@@ -20,7 +20,7 @@ public class MemberService {
 	
 	
 	
-	public MemberVO memberLogin(MemberVO memberVO) throws Exception{
+	public MemberVO memberLogin(MemberVO memberVO) throws Exception{	
 		return memberRepository.memberLogin(memberVO);
 	}
 	

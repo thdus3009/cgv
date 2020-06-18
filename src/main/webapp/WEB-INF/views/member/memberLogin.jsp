@@ -54,7 +54,7 @@
 						<fieldset>
 							<p>아이디 비밀번호를 입력하신 후, 로그인 버튼을 클릭해 주세요.</p>
 							<div class="login_input">
-								<input type="text" name="id" value="${cookie.cId.value}">
+								<input type="text" name="uid" value="${cookie.cId.value}">
 								<input type="password" name="pwd">
 							</div>
 							<button type="submit"><span>로그인</span></button>

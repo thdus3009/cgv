@@ -23,7 +23,7 @@ import com.tm.cgv.naverLogin.NaverLoginBO;
 
 @Controller
 @RequestMapping("/member/**")
-public class MembeController {
+public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
@@ -115,6 +115,7 @@ public class MembeController {
 		
 		//
 		memberVO = memberService.memberLogin(memberVO);
+		
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
 			mv.setViewName("redirect:../");
