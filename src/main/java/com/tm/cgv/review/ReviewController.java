@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,6 +40,16 @@ public class ReviewController {
 	@GetMapping("reviewPopup")
 	public void reviewPopup()throws Exception {
 		
+	}
+	
+	//review write
+	@PostMapping("review_Write")
+	public ModelAndView review_Write(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+		String con = reviewVO.getContents();
+		System.out.println(con);
+		
+		mv.setViewName("redirect:../");
+		return mv;
 	}
 	
 	//review update (영화해당 상세페이지)

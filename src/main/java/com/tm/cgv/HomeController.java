@@ -8,7 +8,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home() throws Exception{
-		return "main";
+		return "test";
 	}
 	
 }

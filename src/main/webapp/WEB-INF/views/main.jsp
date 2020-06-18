@@ -124,11 +124,6 @@ span{
 				</div>
 			</div>
 			
-			<div class="test"><!-- soyeon test -->
-				<button type="button" class="btn btn-danger btn-xs" id="popupBtn" >test</button>
-				<a href="javascript:popupOpen();">열려라 팝업</a>
-			</div>
-			
 		</div>
 	</div>
 	
@@ -148,7 +143,7 @@ span{
 
 	    $('#popupBtn').on("click", function() { //여기서 부터 시작
 
-		  	window.open("reviewPopup.html", "reviewPopup" ,"toolbar=yes,menubar=yes,width=700,height=500");
+		  	window.open("reviewPopup.html", "reviewPopup" ,"toolbar=yes,menubar=yes,width=500,height=450");
 	
 		});
 
