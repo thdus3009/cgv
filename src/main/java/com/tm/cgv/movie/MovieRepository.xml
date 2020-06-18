@@ -7,11 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.movie.MovieRepository">
  	
  	<select id="movieNumCount" resultType="Long">
- 		select count(num) from movieinfo
+ 		select count(num) from movieInfo
  	</select>
  
  	<select id="movieList" parameterType="Pager" resultType="MovieVO">
- 		select * from movieinfo order by
+ 		select * from movieInfo order by
 		<choose>
 			<when test="kind == 'date'">
 				openDate desc, rate desc
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="movieListAll" parameterType="MovieVO" resultType="MovieVO">
- 		select * from movieinfo ORDER by 
+ 		select * from movieInfo ORDER by 
  			<choose>
  				<when test="kind == 'title'">
  					title asc

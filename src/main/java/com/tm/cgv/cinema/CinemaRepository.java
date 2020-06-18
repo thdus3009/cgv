@@ -13,4 +13,6 @@ public interface CinemaRepository {
 	//지역별 극장 조회
 	public List<CinemaVO> cinemaList(CinemaVO cinemaVO) throws Exception;
 	
+	public int cinemaWrite() throws Exception;
+	
 }

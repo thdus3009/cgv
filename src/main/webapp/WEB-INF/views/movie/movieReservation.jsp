@@ -90,7 +90,7 @@
 										<ul id="movie-list-content" class="content scroll-y" style="right: -21px;">
 											<c:forEach var="list" items="${list}">
 												<li class="rating-${list.ageLimit}" data-age_limit="${list.ageLimit}" data-title="${list.title}" data-image="${list.imageName }">
-													<a href="#" title="제목" >
+													<a title="제목" >
 														<span class="icon">&nbsp;</span>
 														<span class="text">${list.title}</span>
 														<span class="sreader"></span>
@@ -108,7 +108,7 @@
 							</div>
 						</div>
 						
-						<!-- 극장선택 -->
+				<!-- 극장선택 -->
 						<div class="section section-theater">
 							<div class="col-head">
 								<h3 class="sreader">극장</h3>
@@ -127,43 +127,20 @@
 										<div class="theater-area-list">
 											<ul>
 												<c:forEach var="cinemaVO" items="${cinemaLocalList}">
-													<li class="selected">
-														<a href="#">
+													<li class="" data-local="${cinemaVO.local}">
+														<a >
 															<span class="name">${cinemaVO.local}</span>
 															<span class="count">(30)</span>
 														</a>
-														<div class="area_theater_list nano has-scrollbar has-scrollbar-y">
-															<ul class="content scroll-y">
-															<c:forEach var="cinema" items="${cinemaList}">
-																<li class="" data-theater="${cinema.name}">
-																	<a href="#">
-																		${cinema.name}<span class="sreader"></span>
-																	</a>
-																</li>
-															</c:forEach>
-															</ul>
-															<div class="pane pane-y">
-																<div class="slider slider-y"></div>
-															</div>
-														</div>
+														
 													</li>
 												</c:forEach>
-												
-												<!-- 
-												<c:forEach begin="1" end="10">
-													<li>
-													<a href="#">
-														<span class="name">경기</span>
-														<span class="count">(44)</span>
-													</a>
-												</li>
-												</c:forEach>
-												 -->
-												
 											</ul>
 											<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
 												<div class="slider slider-y" style="height: 50px; top: 0px;"></div>
 											</div>
+										</div>
+										<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 										</div>
 									</div>
 									
@@ -178,46 +155,27 @@
 							<div class="col-body" style="height: 560px;">
 								<div class="date-list nano has-scrollbar has-scrollbar-y" id="date_list">
 									<ul class="content scroll-y" tabindex="-1" style="right: -21px;">
-										<li class="month dimmed">
-											<span class="year">2020</span>
-											<span class="month">5</span>
+										<li class="month dimmed ">
+											<span class="year">${calendarList[0].year}</span>
+											<span class="month" data-month="">${calendarList[0].month}</span>
 										</li>
 										
-										<c:forEach begin="1" end="5">
-											<li data-index="0" class="day dimmed">
+										<c:forEach var="calendarVO" items="${calendarList}" varStatus="i">
+											<c:if test="${calendarVO.date eq 1}">
+												<li class="month dimmed">
+													<span class="year">${calendarVO.year}</span>
+													<span class="month" data-month="${calendarVO.month}">${calendarVO.month}</span>
+												</li>
+											</c:if>
+																						
+											<li data-index="0" class="day" data-week="${calendarVO.week}" data-date="${calendarVO.date}" data-month="${calendarVO.month}" data-year="${calendarVO.year}">
 												<a href="#">
-													<span class="dayweek">월</span>
-													<span class="day">4</span>
-													<span class="sreader">선택불가</span>
-												</a>
-											</li>
-											<li data-index="0" class="day">
-												<a href="#">
-													<span class="dayweek">화</span>
-													<span class="day">5</span>
+													<span class="dayweek">${calendarVO.week}</span>
+													<span class="day">${calendarVO.date}</span>
 													<span class="sreader"></span>
 												</a>
-											</li><li data-index="0" class="day">
-												<a href="#">
-													<span class="dayweek">월</span>
-													<span class="day">4</span>
-													<span class="sreader">선택불가</span>
-												</a>
 											</li>
-											<li data-index="0" class="day day-sat">
-												<a href="#">
-													<span class="dayweek">토</span>
-													<span class="day">4</span>
-													<span class="sreader">선택불가</span>
-												</a>
-											</li>
-											<li data-index="0"  class="day day-sun">
-												<a href="#">
-													<span class="dayweek">일</span>
-													<span class="day">4</span>
-													<span class="sreader">선택불가</span>
-												</a>
-											</li>
+											
 										</c:forEach>
 										
 									</ul>
@@ -326,15 +284,15 @@
 					<div class="info theater">
 						<div class="row name" style="display: none;"> <!-- style="display: block;" -->
 							<span class="header">극장</span>
-							<span class="data letter-spacing-min ellipsis-line1"><a href="#" target="_blank" title="CGV 구로">CGV 구로 &gt; </a></span>
+							<span class="data letter-spacing-min ellipsis-line1"><a id="select_cinema" href="#" target="_blank" title=""> </a></span>
 						</div>
 						<div class="row date" style="display: none;" > <!-- style="display: block;" -->
  							<span class="header">일시</span>
-							<span class="data" title="2020.5.5(화) 20:00">2020.5.5(화) 20:00</span>
+							<span id="select_day" class="data" title=""></span>
 						</div>
 						<div class="row screen" style="display: none;"> <!-- style="display: block;" -->
 							<span class="header">상영관</span>
-							<span class="data" title="8관[COMFORT SEAT](Laser) 8층">8관[COMFORT SEAT](Laser) 8층</span>
+							<span class="data" title="8관  8층">8관 8층</span>
 						</div>
 						<div class="row number" style="display: none;"> <!-- style="display: block;" -->
 							<span class="header">인원</span>

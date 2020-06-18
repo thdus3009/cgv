@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.util.MakeCalendarVO;
+import com.tm.cgv.util.MakeCalendar;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -17,9 +19,11 @@ import com.tm.cgv.util.Pager;
 public class MovieController {
 	
 	@Autowired
-	public MovieService movieService;
+	private MovieService movieService;
 	@Autowired
-	public CinemaService cinemaService;
+	private CinemaService cinemaService;
+	@Autowired
+	private MakeCalendar makeCalendar;
 	
 	
 	@GetMapping("movieListMore")
@@ -58,10 +62,17 @@ public class MovieController {
 		List<CinemaVO> cinemaLocalList = cinemaService.cinemaLocalList();
 		List<CinemaVO> cinemaList = cinemaService.cinemaList(cinemaVO);
 		//초기 날짜 리스트 호출
+		List<MakeCalendarVO> calendarList = makeCalendar.makeCalendar();
+		
+//		for (MakeCalendarVO vo : calendarList) {
+//			System.out.println(vo.getMonth() +" "+ vo.getDate() + " " + vo.getWeek());
+//		}
+		
 		
 		mv.addObject("list", list);
 		mv.addObject("cinemaLocalList", cinemaLocalList);
 		mv.addObject("cinemaList", cinemaList);
+		mv.addObject("calendarList", calendarList);
 		mv.setViewName("movie/movieReservation");
 		
 		return mv;

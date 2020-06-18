@@ -1018,4 +1018,54 @@ body{
 	color: #fff;
 }
 
+#ticket .section-date .col-body .date-list ul li.day.selected{
+	background-color: #333;
+    width: 60px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #000;
+}
+
+#ticket .section-date .col-body .date-list ul li.day.selected a{
+	border: 1px solid #5c5c5c;
+    height: 29px;
+    line-height: 29px;
+    margin: 1px;
+    padding-left: 6px;
+    padding-right: 5px;
+    color: #fff;
+}
+
+#ticket .section-date .col-body .date-list ul li.day.selected a span.dayweek{
+	color: #fff;
+}
+
+#ticket .section-date .col-body .date-list ul li.day.selected a span.day{
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
