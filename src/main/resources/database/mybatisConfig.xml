@@ -18,7 +18,9 @@
  		
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>
  		
+ 		
  		<typeAlias type="com.tm.cgv.theater.TheaterVO" alias="TheaterVO"/>
+ 		
  		
  	</typeAliases>
  </configuration>
