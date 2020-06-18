@@ -37,9 +37,10 @@ public class ReviewController {
 	
 	//레이어 팝업 : class="layer-wrap" 검색하기
 	
+	//마이페이지에서 review페이지로 이동
 	@GetMapping("reviewPopup")
-	public void reviewPopup()throws Exception {
-		
+	public String reviewPopup()throws Exception {
+		return "member/memberReview";
 	}
 	
 	//review write
@@ -49,7 +50,7 @@ public class ReviewController {
 		System.out.println(con);
 		
 		
-		mv.setViewName("redirect:../");
+		mv.setViewName("redirect:../reviewPopup");
 		return mv;
 	}
 	
