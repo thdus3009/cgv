@@ -193,11 +193,9 @@
 		if(con){
 			var n = $("#btn_delete").val();
 			$.post("./cinemaDelete",{num:n},function(data){
-				
-			
-				 	location.href='./cinemaList';
-				
-				
+				if(data>0){
+			 		location.href='./cinemaList';
+				}
 			})
 
 		}else{

@@ -9,10 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cinema
 	</select>
 	
+	
 	<insert id="cinemaInsert" parameterType="CinemaVO">
 		insert into cinema (name, local, address, tel, totalTheater, trafficInfo, parkingInfo, intro)
 		values (#{name}, #{local}, #{address}, #{tel}, #{totalTheater}, #{trafficInfo}, #{parkingInfo}, #{intro})
 	</insert>
+
 
 	<select id="cinemaSelect" parameterType="CinemaVO" resultType="CinemaVO">
 		select * from cinema where num=#{num}
@@ -24,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update cinema set address=#{address}, tel=#{tel}, totalTheater=#{totalTheater}, totalSeat=#{totalSeat},
 		trafficInfo=#{trafficInfo}, parkingInfo=#{parkingInfo}, intro=#{intro} where num=#{num}
 	</update>
+	
 	
 	<delete id="cinemaDelete" parameterType="Integer">
 		delete from cinema where num=#{num}

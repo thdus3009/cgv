@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -19,6 +20,7 @@ public class CinemaController {
 	private CinemaService cinemaService;
 	
 	
+	//List
 	@GetMapping("cinemaList")
 	public ModelAndView cinemaList(ModelAndView mv) throws Exception {
 		List<CinemaVO> ar = cinemaService.cinemaList();
@@ -28,6 +30,7 @@ public class CinemaController {
 	}
 	
 	
+	//Insert
 	@GetMapping("cinemaInsert")
 	public ModelAndView cinemaInsert(ModelAndView mv) throws Exception{
 		mv.addObject("board", "cinema");
@@ -37,6 +40,7 @@ public class CinemaController {
 	}
 	
 	
+	//Insert
 	@PostMapping("cinemaInsert")
 	public ModelAndView cinemaInsert(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 		
@@ -51,7 +55,7 @@ public class CinemaController {
 	}
 	
 	
-	
+	//Update
 	@GetMapping("cinemaUpdate")
 	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 
@@ -65,6 +69,7 @@ public class CinemaController {
 	}
 	
 	
+	//Update
 	@PostMapping("cinemaUpdate")
 	public ModelAndView cinemaUpdate(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -91,14 +96,15 @@ public class CinemaController {
 	}
 	
 	
-	
+	//Delete
 	@PostMapping("cinemaDelete")
-	public ModelAndView cinemaDelete(int num, ModelAndView mv) throws Exception {
+	@ResponseBody
+	public int cinemaDelete(int num, ModelAndView mv) throws Exception {
 		
 		int result = cinemaService.cinemaDelete(num);
-		mv.setViewName("redirect:./cinemaList");
+		//mv.setViewName("redirect:./cinemaList");
 		
-		return mv;
+		return result;
 	}
 	
 	
