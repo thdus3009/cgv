@@ -1,5 +1,7 @@
 package com.tm.cgv.review;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberService;
+import com.tm.cgv.util.Pager;
 
 @Controller
 @RequestMapping("/review/**")
@@ -38,10 +41,23 @@ public class ReviewController {
 	//레이어 팝업 : class="layer-wrap" 검색하기
 	
 	//마이페이지에서 review페이지로 이동
-	@GetMapping("reviewPopup")
-	public String reviewPopup()throws Exception {
+	@GetMapping("reviewList")
+	public String reviewList(Pager pager)throws Exception {
+		System.out.println("a");
+		reviewService.reviewList(pager);
 		return "member/memberReview";
 	}
+	
+	//예매정보 리스트로 출력 
+	@GetMapping("getList")
+	public void getList(Pager pager, Model model) throws Exception{
+		System.out.println("b");
+		List<TestVO> ar = reviewService.reviewList(pager);
+		model.addAttribute("list", ar);
+	}
+	
+	
+	
 	
 	//review write
 	@PostMapping("review_Write")
@@ -50,7 +66,7 @@ public class ReviewController {
 		System.out.println(con);
 		
 		
-		mv.setViewName("redirect:../reviewPopup");
+		mv.setViewName("redirect:../reviewList");
 		return mv;
 	}
 	

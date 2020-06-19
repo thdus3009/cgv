@@ -3,8 +3,8 @@ package com.tm.cgv.util;
 
 public class Pager {
 
-	private Long curPage;
-	private Integer perPage;
+	private Long curPage; //현재페이지
+	private Integer perPage; //출력할 갯수
 	
 	private long curBlock;
 	private long perBlock = 5L;
@@ -24,8 +24,8 @@ public class Pager {
 	
 	
 	public void makeRow() {
-		this.startRow = (this.getCurPage()-1)*this.getPerPage();
-		this.lastRow = this.getCurPage() * this.getPerPage();
+		this.startRow = (this.getCurPage()-1)*this.getPerPage(); //0 10 20
+		this.lastRow = this.getCurPage() * this.getPerPage(); //10 20 30
 	}
 	
 	public void makeBlock(long totalCount) {

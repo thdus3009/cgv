@@ -21,6 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -123,9 +124,22 @@
 			</div>
 		</div>
 
-	</div>
+	
+		
+		<!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
 
+		<table id="result">
+		<tr style="background-color: pink;">
+		<th>id</th>
+		<th>pw</th>
+		</tr>
+		
+		</table>
 
+		<button id="more">더보기</button>
+		
+		
+	</div>	
 		<!-- 푸터 -------------------------------------------------------------------------------------->
 		<c:import url="../template/footer.jsp"></c:import>
 
@@ -134,6 +148,45 @@
 </div>
 
 <!-- 스크립트 -->
+	<script type="text/javascript">/* review write */
+ 	$("#popupBtn").click(function(){
+		$.ajax({
+
+			type:"POST",
+			url:"./review_Write",
+			data:{
+				contents:$('#mContents').val()
+				},
+			success:function(){
+				alert("dd")
+				}
+
+			})		
+
+		}); 
+	 
+	</script>
+
+	<script type="text/javascript">/* ajax paging */
+	var count=1;	
+	
+	function getList(curPage){//처음 창을 열면 curPage가 안떠있다가("getList?curPage=" 이 형태) 더보기를 누르면 count++된 정보가 curPage에 들어가게 된다.
+		//ajax
+		$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
+			$('#result').append(result);
+		});
+	}
+	
+	getList(count);
+	/* ------------------- */
+	$("#more").click(function(){
+		count++;
+		getList(count);
+	});
+	
+	
+	</script>
+
 	<script type="text/javascript">//1.글자수 초과 제한(280byte) 2.글자수 최소 제한(10글자이상)
 
 	function CheckByte(obj){//obj=this
