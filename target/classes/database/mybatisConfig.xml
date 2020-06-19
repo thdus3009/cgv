@@ -13,11 +13,14 @@
  		<typeAlias type="com.tm.cgv.member.MemberVO" alias="MemberVO"/>
  		<typeAlias type="com.tm.cgv.movie.MovieVO" alias="MovieVO"/>
  		<typeAlias type="com.tm.cgv.board.bbs.BbsVO" alias="BbsVO"/>
+ 		
  		<typeAlias type="com.tm.cgv.cinema.CinemaVO" alias="CinemaVO"/>
+ 		<typeAlias type="com.tm.cgv.reserveCheck.ReserveCheckVO" alias="ReserveCheckVO"/>
+ 		<typeAlias type="com.tm.cgv.movieTime.MovieTimeVO" alias="MovieTimeVO"/>
+ 		<typeAlias type="com.tm.cgv.theater.TheaterVO" alias="TheaterVO"/>
  		
  		
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
- 		
  		
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>
  	</typeAliases>

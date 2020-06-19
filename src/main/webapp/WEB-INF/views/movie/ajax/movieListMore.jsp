@@ -13,7 +13,7 @@
 			<div class="box-image">
 				<a href="">
 					<span class="thumb-image">
-						<img alt="이미지" src="../images/movie/movieList/filmCover/${list.imageName}">
+<%-- 						<img alt="이미지" src="../images/movie/movieList/filmCover/${list.imageName}"> --%>
 						<span class="icon-grade grade-${list.ageLimit }">${list.ageLimit }</span>
 					</span>
 				</a>

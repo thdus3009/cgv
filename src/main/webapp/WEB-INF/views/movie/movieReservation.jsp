@@ -89,7 +89,7 @@
 									<div class="movie-list nano">
 										<ul id="movie-list-content" class="content scroll-y" style="right: -21px;">
 											<c:forEach var="list" items="${list}">
-												<li class="rating-${list.ageLimit}" data-age_limit="${list.ageLimit}" data-title="${list.title}" data-image="${list.imageName }">
+												<li class="rating-${list.ageLimit}" data-index="0" data-age_limit="${list.ageLimit}" data-title="${list.title}">
 													<a title="제목" >
 														<span class="icon">&nbsp;</span>
 														<span class="text">${list.title}</span>
@@ -127,7 +127,7 @@
 										<div class="theater-area-list">
 											<ul>
 												<c:forEach var="cinemaVO" items="${cinemaLocalList}">
-													<li class="" data-local="${cinemaVO.local}">
+													<li class="" data-index="0" data-local="${cinemaVO.local}">
 														<a >
 															<span class="name">${cinemaVO.local}</span>
 															<span class="count">(30)</span>
@@ -168,7 +168,7 @@
 												</li>
 											</c:if>
 																						
-											<li data-index="0" class="day" data-week="${calendarVO.week}" data-date="${calendarVO.date}" data-month="${calendarVO.month}" data-year="${calendarVO.year}">
+											<li data-index="0" class="day" data-index="0" data-week="${calendarVO.week}" data-date="${calendarVO.date}" data-month="${calendarVO.month}" data-year="${calendarVO.year}">
 												<a href="#">
 													<span class="dayweek">${calendarVO.week}</span>
 													<span class="day">${calendarVO.date}</span>

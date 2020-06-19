@@ -474,6 +474,12 @@ body{
 	width: 154px;
 }
 
+
+#ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li.dimmed{
+	opacity: 0.25;
+}
+
+
 #ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li.selected{
 	background-color: #333;
     width: 112px;
@@ -1006,6 +1012,11 @@ body{
     line-height: 33px;
     border: 1px solid #000;
 }
+
+#ticket .section-movie .col-body .movie-select .movie-list > ul > li.dimmed > a{
+	opacity: 0.25;
+}
+
 
 #ticket .section-movie .col-body .movie-select .movie-list > ul > li.selected a{
 	border: 1px solid #5c5c5c;
