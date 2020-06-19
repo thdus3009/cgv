@@ -126,22 +126,137 @@
 									<div class="theater-list nano has-scrollbar has-scrollbar-y">
 										<div class="theater-area-list">
 											<ul>
-												<c:forEach var="cinemaVO" items="${cinemaLocalList}">
-													<li class="" data-index="0" data-local="${cinemaVO.local}">
-														<a >
-															<span class="name">${cinemaVO.local}</span>
-															<span class="count">(30)</span>
-														</a>
-														
-													</li>
-												</c:forEach>
+												<li class="selected" data-index="0" data-local="서울">
+													<a>
+														<span class="name">서울</span>
+														<span class="count">(30)</span>
+													</a>
+													
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>
+													</div>		
+												</li>
+												<li class="" data-index="0" data-local="경기">
+													<a>
+														<span class="name">경기</span>
+														<span class="count">(46)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="인천">
+													<a>
+														<span class="name">인천</span>
+														<span class="count">(9)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="강원">
+													<a>
+														<span class="name">강원</span>
+														<span class="count">(4)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="대전/충청">
+													<a>
+														<span class="name">대전/충청</span>
+														<span class="count">(19)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="대구">
+													<a>
+														<span class="name">대구</span>
+														<span class="count">(9)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="부산/울산">
+													<a>
+														<span class="name">부산/울산</span>
+														<span class="count">(14)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="경상">
+													<a>
+														<span class="name">경상</span>
+														<span class="count">(15)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="광주/전라/제주">
+													<a>
+														<span class="name">광주/전라/제주</span>
+														<span class="count">(22)</span>
+													</a>
+													
+<!-- 												for문(지역에 맞는 극장값 삽입) -->
+													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
+															
+													</div>		
+<!-- 												endfor												 -->
+												</li>
+												<li class="" data-index="0" data-local="">
+													<a>
+														<span class="name"></span>
+														<span class="count">&nbsp;</span>
+													</a>
+												</li>
+												<li class="" data-index="0" data-local="">
+													<a>
+														<span class="name"></span>
+														<span class="count">&nbsp;</span>
+													</a>
+												</li>
 											</ul>
 											<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
 												<div class="slider slider-y" style="height: 50px; top: 0px;"></div>
 											</div>
 										</div>
-										<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-										</div>
+
 									</div>
 									
 								</div>
@@ -321,6 +436,44 @@
 	</div>
 
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
+
+<script type="text/javascript">
+
+    var list = [];
+    
+    <c:forEach items="${cinemaList}" var="vo">
+       var cinemaVO = {
+             local: `${vo.local}`,
+             name: `${vo.name}`
+       };
+       
+       list.push(cinemaVO);   
+       
+    </c:forEach>
+
+// 	console.log("size: "+list.length);
+// 	console.log("a : "+list[0].name);
+	
+	for(i=0;i<list.length;i++){
+// 		console.log(list[i].name+" "+list[i].local);
+		$(".theater-area-list > ul > li").each(function(){
+
+// 			console.log("읽어온값 : "+i+" "+ list[i].local);
+// 			console.log("폼 값 : "+$(this).data("local"));
+			
+			if(list[i].local == $(this).data("local")){
+// 				console.log(list[i].name+" "+list[i].local);
+				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a>'+list[i].name+'<span class="sreader"></span></a></li>');
+			}
+			
+// 			console.log("==================================");
+			
+		});
+	}
+	
+	
+
+</script>
 
 
 

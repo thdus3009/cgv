@@ -60,7 +60,7 @@ public class MovieController {
 		
 		//초기 극장리스트 호출 
 		List<CinemaVO> cinemaLocalList = cinemaService.cinemaLocalList();
-		List<CinemaVO> cinemaList = cinemaService.cinemaList(cinemaVO);
+		List<CinemaVO> cinemaList = cinemaService.cinemaList();
 		//초기 날짜 리스트 호출
 		List<MakeCalendarVO> calendarList = makeCalendar.makeCalendar();
 		

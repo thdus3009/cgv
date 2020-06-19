@@ -106,16 +106,19 @@ $(function() {
 			$(".theater-area-list > ul > li").removeClass("selected");
 			$(this).addClass("selected");
 			
-//			console.log($(this).data("local"));
-			var local = $(this).data("local")
-			
-			$.get("../cinema/localCinemaSearch?local="+local,function(result){
-				//console.log(result);
-				$("#cinema_ajax").html(result);
-			});
-		
-			
+			console.log($(this).data("local"));
+//			var local = $(this).data("local")
+//			
+//			$.get("../cinema/localCinemaSearch?local="+local,function(result){
+//				//console.log(result);
+//				$("#cinema_ajax").html(result);
+//			});
+//		
+//			
 		});
+		
+		
+		
 		
 		
 	 	//극장 선택

@@ -20,7 +20,7 @@ public class CinemaController {
 	public ModelAndView loalSearch(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		List<CinemaVO> cinemaList = cinemaService.cinemaList(cinemaVO);
+		List<CinemaVO> cinemaList = cinemaService.cinemaList();
 		
 		mv.addObject("cinemaList", cinemaList);
 		mv.setViewName("movie/ajax/cinemaList");

@@ -10,15 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select local from cinema group by local
 	</select>
 	
-	<select id="cinemaList" parameterType="CinemaVO" resultType="CinemaVO">
-		select * from cinema where local=#{local}
+	<select id="cinemaList" resultType="CinemaVO">
+		select local, name from cinema order by local;
 	</select>
 	
 	
-	
-	
-	<insert id="cinemaWrite">
-		insert into cinema values(0,'홍대','서울','홍대서울','02-385-5584',8,1560,'교통정보','주차정보','영화관정보')
-	</insert>
-	
+
 </mapper>
