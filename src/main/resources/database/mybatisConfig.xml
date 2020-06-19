@@ -17,5 +17,7 @@
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
  		
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>
+ 		
+ 		<typeAlias type="com.tm.cgv.movieImage.MovieImageVO" alias="MovieImageVO"/>
  	</typeAliases>
  </configuration>

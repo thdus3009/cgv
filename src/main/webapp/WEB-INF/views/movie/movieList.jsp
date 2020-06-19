@@ -75,13 +75,14 @@
 						<li>
 							<!-- 윗 부분 -->
 							<div class="box-image">
+							 <!--  
 								<strong class="rank">No.${i.index+1}</strong> 
 								<a href=""> 
 									<span class="thumb-image"> 
-										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.imageName}">
+										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVO.fileName}">
 										<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 									</span>
-								</a> 
+								</a> -->
 								<span class="screentype"></span>
 							</div> <!-- 아래 부분 -->
 							<div class="box-contents">
@@ -105,6 +106,7 @@
 						<c:if test="${i.index == 2}">
 							</ol><ol>
 						</c:if>
+						
 					</c:forEach>
 					</ol>
 					

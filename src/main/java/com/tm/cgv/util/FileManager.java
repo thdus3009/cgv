@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileManager {
-
+	//filsaver
 	public String saveTransfer(MultipartFile file,File dest) throws Exception{
 		String fileName ="";
 

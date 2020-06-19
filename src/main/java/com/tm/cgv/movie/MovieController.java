@@ -44,11 +44,11 @@ public class MovieController {
 	}
 	
 	@GetMapping("movieReservation")
-	public ModelAndView movieReservation(MovieVO movieDTO) throws Exception{
+	public ModelAndView movieReservation(MovieVO movieVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//초기 영화목록 호출
-		List<MovieVO> list = movieService.movieListAll(movieDTO);
+		List<MovieVO> list = movieService.movieListAll(movieVO);
 		
 		//초기 극장리스트 호출 
 		
@@ -61,10 +61,10 @@ public class MovieController {
 	}
 	
 	@GetMapping("movieListSort")
-	public ModelAndView movieListSort(MovieVO movieDTO) throws Exception{
+	public ModelAndView movieListSort(MovieVO movieVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		List<MovieVO> list = movieService.movieListAll(movieDTO);
+		List<MovieVO> list = movieService.movieListAll(movieVO);
 		
 		mv.addObject("list", list);
 		mv.setViewName("movie/ajax/movieListSort");
