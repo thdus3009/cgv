@@ -19,7 +19,7 @@ import com.tm.cgv.board.BoardVO;
 import com.tm.cgv.board.bbsFile.BbsFileService;
 import com.tm.cgv.board.bbsFile.BbsFileVO;
 import com.tm.cgv.file.FileVO;
-import com.tm.cgv.member.MemberVO;
+import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -56,10 +56,10 @@ public class BbsController {
 	public ModelAndView bbsSelect(BbsVO bbsVO,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberBasicVO memberVO = (MemberBasicVO)request.getSession().getAttribute("memberVO");
 		String id = "";
 		if(memberVO != null) {
-			id = memberVO.getId(); 
+			id = memberVO.getUid(); 
 		}
 		
 		String key = "bbs_"+bbsVO.getNum()+id;

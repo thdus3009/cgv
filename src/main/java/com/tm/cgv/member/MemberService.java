@@ -1,47 +1,40 @@
 package com.tm.cgv.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-@Service
-public class MemberService {
+public class MemberService implements UserDetailsService{
 
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	public MemberVO naverMemberCheck(MemberVO memberVO) throws Exception{
+	public MemberBasicVO read(MemberBasicVO memberVO) throws Exception {
 		
-		System.out.println(memberVO.getId());
-		System.out.println(memberVO.getName());
-		System.out.println(memberVO.getEmail());
+		System.out.println(memberVO.toString());
 		
-		return memberRepository.naverMemberCheck(memberVO);
+		return memberVO;
 	}
-	
-	
-	
-	public MemberVO memberLogin(MemberVO memberVO) throws Exception{
-		return memberRepository.memberLogin(memberVO);
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		System.out.println("Load User By UserName : " + username);
+		
+		// username = uid
+		MemberBasicVO vo = new MemberBasicVO();
+		vo.setUid(username);
+		
+		try {
+			vo = memberRepository.read(vo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			// 로그 찍기
+		}
+		
+		System.out.println("queried by member mapper: "+vo);
+		return vo==null?null:new MemberVO(vo);
 	}
-	
-	public MemberVO memberIdCheck(String id) throws Exception{
-		return memberRepository.memberIdCheck(id);
-	}
-	
-	public int memberJoin(MemberVO memberVO) throws Exception{
-		return memberRepository.memberJoin(memberVO);
-	}
-	
-	public MemberVO memberSelect(MemberVO memberVO) throws Exception{
-		return memberRepository.memberSelect(memberVO);
-	}
-	
-	public int memberUpdate(MemberVO memberVO) throws Exception{
-		return memberRepository.memberUpdate(memberVO);
-	}
-	
-	public int memberDelete(MemberVO memberVO) throws Exception{
-		return memberRepository.memberDelete(memberVO);
-	}
-	
 }
