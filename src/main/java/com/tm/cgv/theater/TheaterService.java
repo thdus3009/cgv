@@ -24,5 +24,16 @@ public class TheaterService {
 		return theaterRepository.cinemaList();
 	}
 	
+	public TheaterVO theaterSelect(int num) throws Exception{
+		return theaterRepository.theaterSelect(num);
+	}
 	
+	public int theaterUpdate(TheaterVO  theaterVO) throws Exception{
+		return theaterRepository.theaterUpdate(theaterVO);
+	}
+	
+	public int theaterDelete(int num) throws Exception{
+		System.out.println("service : " + num);
+		return theaterRepository.theaterDelete(num);
+	}
 }

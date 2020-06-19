@@ -17,6 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cinemaList" resultType="com.tm.cgv.theater.CinemaVO">
 		select num,name from cinema
 	</select>
-
+	
+	<select id="theaterSelect" resultType="TheaterVO">
+		select * from theater where num=#{num}
+	</select>
+	
+	<update id="theaterUpdate" parameterType="TheaterVO">
+		update theater set name=#{name}, seatCount=#{seatCount}, filmType=#{filmType} where num=#{num}
+	</update>
+	
+	<delete id="theaterDelete" parameterType="Integer">
+		delete from theater where num=#{num}
+	</delete>
 
 </mapper>

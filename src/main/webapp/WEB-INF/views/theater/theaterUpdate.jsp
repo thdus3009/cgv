@@ -79,42 +79,45 @@
 					<div class="col_detail">
 					
 						<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
-						<div class="customer_top">
-							<h2 class="tit">공지/뉴스</h2>
-							<p class="stit">CGV의 주요한 이슈 및 여러가지 소식들을 확인하실 수 있습니다.</p>
-						</div>
-							<div class="tbl_write">
-								<div class="tbl_info">
-									<p class="tbl_info_left">[극장] ${bbsVO.title}</p>
-									<p class="tbl_info_right">등록자 ${bbsVO.writer} 등록일 ${bbsVO.hireDate} 조회수 ${bbsVO.hit}</p>
-								</div>
-								<div class="bbs_file">
-										첨부파일 : 
-										<div id="fileDown" class="file" data-title="${bbsVO.bbsFileVO.fileNum}"> ${bbsVO.bbsFileVO.oriName}</div>
-										<input type="hidden" id="fileName" value="${bbsVO.bbsFileVO.fileName}">
-								</div>
-								<div class="bbs_contents">
-										${bbsVO.contents}
-										
-										
-								</div>
-								
-								<div class="bbs_btn">
-									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
-									
-									<c:if test="${bbsVO.writer eq memberVO.id }">
-										<button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button>
-										<a href="./bbsUpdate?num=${bbsVO.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
-									</c:if>
-									
-								</div>
-							</div>
-							
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+						<div class="container">
+
+<div class="container_inner">
+<h2 align="center">상영관 정보 업데이트</h2>
+<br>
+<form action="./${board}${path}" id="frm" method="post" enctype="multipart/form-data">
+  	 
+  	 <div class="form-group">
+      <label for="num">NUM:</label>
+      <input type="text" class="form-control" id="num" placeholder="Enter num" name="num" value="${vo.num}">
+    </div>
+  	
+     <div class="form-group">
+      <label for="name">상영관이름:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" value="${vo.name}">
+    </div>
+    
+    <div class="form-group">
+      <label for="seatCount">상영관 좌석수:</label>
+      <input type="text" class="form-control" id="seatCount" placeholder="Enter seatCount" name="seatCount" value="${vo.seatCount}">
+    </div>
+    
+       
+    <div class="form-group">
+      <label for="filmType">filmType(2D/3D):</label>
+      <input type="text" class="form-control" id="filmType" placeholder="Enter filmType" name="filmType" value="${vo.filmType}">
+    </div>
+    
+     
+      
+   <!-- button 으로 해야 post 넘어감 -->
+    <button type="submit" class="btn btn-default">update</button> 
+    <button type="button" class="btn btn-default" id="delete">delete</button> 
+    <!-- <input type="button" id="delete" value="delete"> -->
+   
+</form>
+
+</div> 
+</div>
 	
 	
 	<!-- 푸터 -------------------------------------------------------------------------------------->
@@ -124,7 +127,27 @@
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
 
+<script type="text/javascript">
 
+
+	$("#delete").click(function(){
+		var result = window.confirm("삭제하시겠습니까?");
+		if(result){
+
+			var  n = $("#num").val();
+			console.log(n);
+			$.post("./theaterDelete",{num:n},function(data){ //data는  컨트롤러에서 리턴으로 받아온 result값이 들어가는 것
+				//data가 있으면 그래 있네 그럼 리다이렉트 쳐줄께 하는 것
+				alert(data);
+				location.href="./theaterList";
+				})
+			}else{
+				alert("error");
+			}
+	
+		
+		});
+</script>
 
 </body>
 </html>

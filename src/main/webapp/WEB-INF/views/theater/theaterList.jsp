@@ -136,7 +136,7 @@
 										<tr class="first">
 											<td>${vo.num}</td>
 											<td class="txt">
-												<a href="./theaterSelect?num=${vo.num}">${vo.name}</a>
+												<a href="./theaterUpdate?num=${vo.num}">${vo.name}</a>
 											</td>
 											<td>${vo.seatCount}</td>
 											<td>${vo.filmType}</td>

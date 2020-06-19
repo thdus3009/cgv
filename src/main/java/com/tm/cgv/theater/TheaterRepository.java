@@ -12,6 +12,13 @@ public interface TheaterRepository {
 	public int theaterWrite(TheaterVO theaterVO) throws Exception;
 	
 	public List<CinemaVO> cinemaList() throws Exception;
+	
+	public TheaterVO theaterSelect(int num) throws Exception;
+	
+	public int theaterUpdate(TheaterVO theaterVO) throws  Exception;
+	
+	public int theaterDelete(int num) throws Exception;
+	
 
 
 }

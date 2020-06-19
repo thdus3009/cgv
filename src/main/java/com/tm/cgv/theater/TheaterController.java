@@ -3,11 +3,13 @@ package com.tm.cgv.theater;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,11 +54,50 @@ public class TheaterController {
 		System.out.println(theaterVO.getName()+"name");
 		
 		if(result>0) {
-			mv.setViewName("redirect:theaterList");
+			mv.setViewName("redirect:./theaterList");
 		}else {
 			System.out.println("등록 실패");
 		}
 		
 		return mv;
+	}
+	
+	@GetMapping("theaterUpdate")
+	public ModelAndView theaterUpdate(TheaterVO theaterVO, ModelAndView mv,int num) throws Exception{
+		TheaterVO theaterVO2=theaterService.theaterSelect(num);
+		System.out.println(theaterVO2.getNum()+"num 널이니?");
+		mv.addObject("vo",theaterVO2);
+		mv.addObject("path","Update");
+		mv.setViewName("theater/theaterUpdate");
+		return mv;
+	}
+	
+	@PostMapping("theaterUpdate")
+	public ModelAndView theaterUpdate2(TheaterVO theaterVO,ModelAndView mv)throws Exception{
+
+		int result = theaterService.theaterUpdate(theaterVO);
+			
+		if(result>0) {
+			mv.setViewName("redirect:./theaterList");
+		}else {
+			System.out.println("실패");
+			//mv.setViewName("redirect:./theaterUpdate?num="+theaterVO.getNum());
+		}
+		
+		
+		return mv;
+	}
+	
+	@PostMapping("theaterDelete")
+	@ResponseBody
+	public int theaterDelete(int num,ModelAndView mv) throws Exception{
+		System.out.println("삭제 : " + num);
+
+		int result =theaterService.theaterDelete(num);
+	
+		//mv.addObject("path","Delete");
+		//mv.setViewName("redirect:./theaterList"); //jsp에서 list로 보내주니까 필요가 없다.
+		System.out.println(result+"dd");
+		return result;
 	}
 }
