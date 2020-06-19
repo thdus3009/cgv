@@ -52,7 +52,7 @@
 					<!-- All기능 동작 -->
 					<div class="con">	
 						<div class="content_check">
-							<input type="checkbox" id="all" >
+							<input type="checkbox" id="all" class="all" >
 						</div>
 						<div class="content_title">
 							<h3 id="h_all" style="text-decoration: underline;">이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),프로모션 안내 메일 수신(선택)에 모두 동의합니다.</h3>
@@ -65,7 +65,7 @@
 					
 					<div class="con">
 						<div class="content_check">
-							<input type="checkbox" class="ch1 terms_ch">
+							<input type="checkbox" class="ch1 terms_ch checkbox">
 						</div>
 						<div class="content_title">
 							<h3 title="0">네이버 이용약관 동의</h3>
@@ -81,7 +81,7 @@
 					
 					<div class="con">	
 						<div class="content_check">
-							<input type="checkbox" class="ch1 terms_ch">
+							<input type="checkbox" class="ch1 terms_ch checkbox">
 						</div>
 						<div class="content_title">
 							<h3 title="1">개인정보 수집 및 이용에 대한 안내</h3>
@@ -97,7 +97,7 @@
 					
 					<div class="con">	
 						<div class="content_check">
-							<input type="checkbox" class="ch1">
+							<input type="checkbox" class="ch1 checkbox">
 						</div>
 						<div class="content_title">
 							<h3 title="2">위치정보 이용약관 동의</h3>
@@ -132,8 +132,9 @@
 	<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
-	
-<script type="text/javascript" src="../js/terms.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>		
+<script type="text/javascript" src="../js/member/memberTerms.js"></script>
 
 </body>
 </html>

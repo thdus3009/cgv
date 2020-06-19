@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div>
+	<form action=""></form>
 		<h3>기대되는 영화</h3>
 		<em>n건</em>
 		<div>
@@ -38,5 +39,32 @@
 			<a href="">무비차트</a>
 		</div>
 	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        //기대되는 영화 삭제
+        $(".movie-del").click(function() {
+			$.ajax({
+					url:"",
+					type:"",
+					data:"",
+					success:function(){
+                         alert("'기대되는 영화'에서 삭제되었습니다.");
+                         $(this).parent().remove();
+					},
+					error:function(){
+						alert("삭제 실패.");
+					}
+				});
+        });
+
+        //영화 정렬
+        $(".go").click(function () {
+            console.log();
+        });
+
+    </script>
+    
 </body>
 </html>
