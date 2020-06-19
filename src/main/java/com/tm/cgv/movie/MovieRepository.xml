@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.movie.MovieRepository">
  	
  	<select id="movieNumCount" resultType="Long">
- 		select count(mNum) from movieinfo
+ 		select count(num) from movieinfo
  	</select>
  
  	<select id="movieList" parameterType="Pager" resultType="MovieVO">
