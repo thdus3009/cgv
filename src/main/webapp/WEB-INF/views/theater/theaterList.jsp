@@ -15,23 +15,24 @@
 	<c:import url="../template/adminSidebar.jsp"></c:import>
 
 	<!-- 상단바 -->
-	<div>
+	<div class="top-bar">
 		<h1>영화관 리스트</h1>
-		<span>영화관 등록</span>
+		<a href="">영화관 등록</a>
 		<!-- 검색 -->
-		<form action="" method="get">
-			<select>
+		<form action="" method="get" class="search-form">
+			<select class="select">
 				<option>극장명</option>
 				<option>지역명</option>
 				<option>주소</option>
 				<option>전화번호</option>
 			</select>
-			<button type="submit">검색</button>
+			<input type="text" class="serach-text">
+			<button type="submit" class="search">검색</button>
 		</form>
 	</div>
 
 	<!-- 리스트 -->
-	<table>
+	<table class="theaterList-bar">
 		<tr>
 			<td>극장명</td>
 			<td>지역명</td>
@@ -39,16 +40,19 @@
 			<td>전화번호</td>
 			<td>극장설명</td>
 		</tr>
-		<!-- 반복 -->
-		<c:forEach items="" var="vo">
-			<tr>
-				<td><a href="">극장명</a></td>
-				<td>지역명</td>
-				<td>주소</td>
-				<td>전화번호</td>
-				<td>극장설명</td>
-			</tr>
-		</c:forEach>
+	</table>
+
+	<!-- 반복 -->
+	<table>
+	<c:forEach items="" var="vo">
+		<tr>
+			<td><a href="">극장명</a></td>
+			<td>지역명</td>
+			<td>주소</td>
+			<td>전화번호</td>
+			<td>극장설명</td>
+		</tr>
+	</c:forEach>
 	</table>
 
 	<!-- 페이저 -->

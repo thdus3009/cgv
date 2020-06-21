@@ -15,12 +15,13 @@
 	<div class="side-bar">
 		<c:import url="../template/adminSidebar.jsp"></c:import>
 	</div>
-
+	
 	<div class="top-bar">
 		<h1>회원 목록</h1>
 		<a href="#">회원 등록</a>
-		<form action="">
-			<em>항목</em> <select>
+		<form action="" method="POST" class="search-form">
+			<em>항목</em> 
+			<select class="select">
 				<option value="">num</option>
 				<option value="">uid</option>
 				<option value="">pwd</option>
@@ -32,13 +33,14 @@
 				<option value="">age</option>
 				<option value="">nick</option>
 				<option value="">enabled</option>
-			</select> <input type="text">
-			<button type="submit">검색</button>
+			</select> 
+			<input type="text" class="serach-text">
+			<button type="submit" class="search">검색</button>
 		</form>
 	</div>
 
 	<!-- 멤버 목록 -->
-	<table class="memberList">
+	<table class="memberList-bar">
 		<tr>
 			<td>num</td>
 			<td>uid</td>
@@ -52,23 +54,23 @@
 			<td>nick</td>
 			<td>enabled</td>
 		</tr>
+	</table>
 
-		<!-- 반복 -->
-		<c:forEach items="" var="vo">
-			<tr>
-				<td>num</td>
-				<td>uid</td>
-				<td>pwd</td>
-				<td><a href="">name</a></td>
-				<td>birth</td>
-				<td>phone</td>
-				<td>email</td>
-				<td>gender</td>
-				<td>age</td>
-				<td>nick</td>
-				<td>enabled</td>
-			</tr>
-		</c:forEach>
+	<!-- 반복 -->
+	<table>
+		<tr>
+			<td>num</td>
+			<td>uid</td>
+			<td>pwd</td>
+			<td>name</td>
+			<td>birth</td>
+			<td>phone</td>
+			<td>email</td>
+			<td>gender</td>
+			<td>age</td>
+			<td>nick</td>
+			<td>enabled</td>
+		</tr>
 	</table>
 
 	<!-- 페이저 -->
