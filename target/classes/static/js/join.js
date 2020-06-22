@@ -1,312 +1,246 @@
+
 /**
  * 
  */
-		
-			var userID = document.getElementById("userID");
-			var userPWD = document.getElementById("userPWD"); 
-			var userPWD2 = document.getElementById("userPWD2"); 
-			var name = document.getElementById("name"); 
-			var email = document.getElementById("email"); 
-			var phone = document.getElementById("phone"); 
-			
-			var ch_year = document.getElementById("ch_year");
-			var ch_month = document.getElementById("ch_month");
-			var ch_date = document.getElementById("ch_date");
-			var birthc = document.getElementById("birthc");
-		
-			var ch = document.getElementsByClassName("ch");
-			var s1 = document.getElementById("s1");	//아이디
-			var s1_1 = document.getElementById("s1_1");	//아이디
-			var s2 = document.getElementById("s2");	//비번
-			var s3 = document.getElementById("s3");	//비번2
-			var s4 = document.getElementById("s4");	//이름
-			var s5 = document.getElementById("s5");	//이메일
-			var s5_0 = document.getElementById("s5_0");	//이메일
+		var frm = document.getElementById("frm");
 
-			var s6 = document.getElementById("s6");	//폰
-
-			var s8 = document.getElementById("s8");	//성별
-			var s9 = document.getElementById("s9");	//생년
-			
-			var frm = document.getElementById("frm");
-			
-			
-			/* ...................중복확인 시작........................ */
-			/* 버튼형 아이디 중복확인 */
-			var mIdResult=false;
-			function overlap_id() {
-				
-				if(userID.value.length<6){
-				//6글자가 넘지않는경우(alert)	
-					alert("6자이상 입력해주세요.")
-					
-				}else{
-				
-					$.ajax({
-				     type:"POST",
-				     url:"./memberIdCheck",
-				     data:{
-				            id:$('#userID').val()
-				     },
-				     success:function(data){
-				    	 data=data.trim();//공백이 들어있을 수 있기때문에 trim 해준다.
-				    	 
-							if(data==0){//한글은 깨질수있기때문에 숫자가 영어로 넘겨준다.
-								//사용가능한경우(alert, 사용가능한 아이디입니다.(innerHTML))	
-								alert("사용가능한 아이디입니다.")
-								s1_1.innerHTML="사용가능한 아이디입니다.";
-								s1_1.style.color="skyblue";
-								mIdResult=true;
-							}else{
-								//중복되는경우(alert, 이미 등록된 아이디입니다.(innerHTML))
-								alert("이미 등록된 아이디입니다.")
-								s1_1.innerHTML="이미 등록된 아이디입니다.";
-								s1_1.style.color="red";	
-							}
-				   	 },
-					 error:function(){
-							alert("에러발생");
-					 }
-					})
-				
-				
-				}	
-			}
-			
-
-			userID.addEventListener("keyup",function(){
-				//s1.innerHTML="6글자 이상 입력하세요";
-				if(userID.value.length>=6){
-					s1.innerHTML="6자 이상 입력하였습니다.";
-					s1.style.color="skyblue";
-					
-				}else{
-					s1.innerHTML="6자 이상 입력하세요.";
-					s1.style.color="RED";
-					
-				}
-			});
-			
-			userID.addEventListener("blur",function(){
-				if(userID.value==""){
-					s1.innerHTML = "필수 정보입니다."
-					s1.style.color="RED";
-				}
-			});
-			
-			
-			/* innerhtml 이메일 중복확인 */
-			var mEmailResult=false;
-			email.addEventListener("keyup",function(){
-				var regEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-				if(regEmail.test(mEmail.value)){//test > true, false //진행순서를 잘 보아야한다.
-					//중복되는 경우
-					
-					//사용가능한 경우
-					
-					$.ajax({
-				     type:"POST",
-				     url:"./memberEmailCheck",
-				     data:{
-				            email:$('#email').val()
-				     },
-				     success:function(data){
-				    	 data=data.trim();//공백이 들어있을 수 있기때문에 trim 해준다.
-				    	 
-							if(data==1){//한글은 깨질수있기때문에 숫자가 영어로 넘겨준다.
-								//사용가능한경우
-								s5.innerHTML="사용가능한 이메일 입니다.";
-								s5.style.color="skyblue";	
-								mEmailResult=true;
-							}else{
-								//중복되는경우
-								s5.innerHTML="이미 등록된 이메일입니다.";
-								s5.style.color="red";	
-								mEmailResult=false;
-							}
-				   	 },
-					 error:function(){
-							alert("에러발생");
-					 }
-					})
-				}else{
-				//email 잘못된 이메일 형식인 경우
-					s5.innerHTML="올바른 이메일 형식이 아닙니다.";
-					s5.style.color="red";	mEmailResult=false;
-				}
-			});
-			
-			
-			/* innerhtml 비밀번호 확인 */
-			var mPwResult=false;
-			
-			userPWD.addEventListener("change",function(){//비밀번호의 값이 변경되었을 때
-				//alert("음음") 	//질문 : 첫번째 입력하고 나갔을 때.. 떠도 상관 없음!
-				userPWD2.value="";
-				mPwResult=false;	//
-				s3.innerHTML="비밀번호가 일치하지 않습니다.";
-				s3.style.color="RED";
-				s3.setAttribute("class","fail");
-			});
-			
-			userPWD.addEventListener("blur",function(){
-				if(userPWD.value.length>=6){
-					s2.innerHTML="사용 가능한 비밀번호입니다.";
-					s2.style.color="skyblue";
-					mPwResult=true;
-				}else if(userPWD.value.length<6 && userPWD.value.length>=1){
-					s2.innerHTML="비밀번호를 6글자 이상 다시 입력해주세요.";
-					s2.style.color="RED";
-					mPwResult=false;
-				}else if(userPWD.value==""){
-					s2.innerHTML = "필수 정보입니다."
-					s2.style.color="RED";
-					userPWD2.value="";
-					//s3.innerHTML = "비밀번호가 일치하지 않습니다.";
-				}
-			 
-			});
-			
-			
-			/* innerhtml 2차비밀번호 확인 */
-			var mPw2Result=false;
-			userPWD2.addEventListener("blur",function(){
-				if(userPWD2.value==userPWD.value && userPWD2.value.length>=1){
-					s3.innerHTML="비밀번호가 일치합니다.";
-					s3.style.color="skyblue";
-					s3.setAttribute("class","success");
-					mPw2Result=true;
-				}else if(mPw2.value!=mPw.value){
-					s3.innerHTML="비밀번호가 일치하지 않습니다.";
-					s3.style.color="RED";
-					mPw2.value="";
-					s3.setAttribute("class","fail");
-					mPw2Result=false;
-				}else if(mPw2.value==""){
-					s3.innerHTML = "필수 정보입니다."
-					s3.style.color="RED";
-				}
-			});
-			
-			
-			
-			
-			/* 이름 */
-			name.addEventListener("blur",function(){
-				if(name.value==""){
-					s4.innerHTML = "필수 정보입니다."
-					s4.style.color="RED";
-				}else{
-					s4.innerHTML = ""
-				}
-			});
-			
-			/* 이메일 */
-			email.addEventListener("blur",function(){
-				if(email.value==""){
-					s5_0.innerHTML = "필수 정보입니다."
-					s5_0.style.color="RED";
-				}else{
-					s5_0.innerHTML = ""
-				}
-			});
-			
-			/* 폰 */
- 			phone.addEventListener("blur",function(){
-				if(phone.value==""){
-					s6.innerHTML = "필수 정보입니다.";
-					s6.style.color="RED";
-				}else{
-					s6.innerHTML = ""
-				}
-			}); 
-			
-			
-	/* -------------------------------------------------------------*/
- 			
- 			
-// 			월 옵션 생성
- 			var month_arr = '<option class="opt" selected="selected">월</option>';
- 			for(i=1;i<=12;i++){
- 				month_arr += '<option class="opt" value='+ i +'>'+i+'</option>';
- 			}
- 			ch_month.innerHTML = month_arr;
- 			var opt = document.getElementsByClassName("opt");
- 		
- 			var year_flag = false;
- 			var month_flag = false;
- 			var date_flag = false;
- 			
- 			birthc.style.color = "red";
- 			
- 			for(i=0;i<opt.length;i++){
- 				if(opt[i].selected){
- 					if(opt[i].innerText == "월"){
- 						month_flag = false;
- 			
- 			
-/* -------------------------------------------------------------*/			
- 			
- 			
-		var sex = document.getElementsByClassName("sex");
- 		
-			for(i=0; i<sex.length; i++){
-				if(sex[i].value==null){
-				sex[i].value=="";
-			}
-		} 
+		var userID = document.getElementById("userID");
+		var idc = document.getElementById("idc");
 		
+		var pwd1 = document.getElementById("userPWD");
+		var pwd1c = document.getElementById("pwd1c");
 		
-	
-			/* 가입전 필수정보 입력확인 */
-			//넘어가기 전에 확인하려면 input타입의 submit을 button으로 바꿔서 실행해본다
+		var pwd2 = document.getElementById("userPWD2");
+		var pwd2c = document.getElementById("pwd2c");
+		
+		var ch_year = document.getElementById("ch_year");
+		var ch_month = document.getElementById("ch_month");
+		var ch_date = document.getElementById("ch_date");
+		var birthc = document.getElementById("birthc");
+		
+		var check = document.getElementsByClassName("check");
 		var btn = document.getElementById("btn");
-	
-		var check=true;
-		btn.addEventListener("click",function(e){
-				for(i=0; i<ch.length; i++){
-					if(ch[i].value==""/*==0*/){
-						check=false;
-						console.log(ch[i]+"브레이크");
-						break;
-					}
-				}
+		
+		var idcheck = false;
+		var pwdcheck = false;
+		
+		
+		
+		
+		
+//		아이디 기입 조건 설명 출력
+		userID.addEventListener("focus",function(){
+			idc.innerText = '아이디는 6글자 이상입니다.';
 			
-				//if가 true일때만 실행
-				if(mIdResult && mPwResult && mPw2Result && mEmailResult && mEmailNumResult && check){
-					console.log("가입성공");
+		});
+		
+//		아이디 조건 체크
+		userID.addEventListener("keyup",function(){
+			if(userID.value.length < 6){
+				idc.innerText = '아이디는 6글자 이상입니다.';
+				idc.style.color = "red";
+				idcheck = false;
+			}else{
+				
+					idc.innerText = '사용가능한 아이디입니다.';
+					idc.style.color = "green";
+					idcheck = true;
+			}
+			
+		});
+		
+//		패스워드 조건 설명 출력
+		pwd1.addEventListener("focus",function(){
+			pwd1c.innerText = '패스워드는는 6글자 이상입니다.';
+			
+		});
+		
+//		패스워드 조건 체크
+		pwd1.addEventListener("blur",function(){
+			if(pwd1.value.length != 0){
+				
+				if(pwd1.value.length >= 6 ){
+					pwd1c.innerText = '사용 가능한 패스워드 입니다.';
+					pwd1c.style.color = "green";
 				}else{
-					alert("중복확인 및 필수요소들을 입력해주세요");
-					e.preventDefault();//form안의 전송 막기
-					console.log(mIdResult);
-					console.log(mPwResult);
-					console.log(mPw2Result);
-					console.log(mEmailResult);
-					console.log(mEmailNumResult);
-					console.log(check);
+					pwd1c.innerText = '사용 불가능한 패스워드 입니다.';
+					pwd1c.style.color = "red";
+				}
+			}
+			
+			
+		});
+		
+		
+		pwd1.addEventListener("change",function(){
+			pwd2.value = "";
+			pwd2c.innerText="";
+			pwdcheck = false;
+		});
+		
+//		1차 패스워드 2차 패스워드 대조
+		pwd2.addEventListener("blur",function(){
+			if(pwd2.value.length != 0){
+				if(pwd1.value == pwd2.value){
+					pwd2c.innerText = '패스워드가 일치합니다.';
+					pwd2c.style.color = "green";
+					pwdcheck = true;
+				}else{
 					
-					if(mIdResult==false){
-						s1_1.innerHTML = "아이디 중복확인을 눌러주세요";
-						s1_1.style.color="RED";
-						
-					}else if(mEmailNumResult==false){
-						alert("이메일 인증번호를 다시확인해주세요.");
+					pwd2c.innerText = '패스워드가 불일치합니다.';
+					pwd2c.style.color = "red";
+					pwd2.value="";
+					pwdcheck = false;
+				}
+			}
+			
+			
+		});
+		
+		
+//		폼 태그의 빈칸 여부 체크
+		btn.addEventListener("click",function(e){
+			var flag = true;
+			var blankArr = [];
+//			console.log(spaceArr);
+			
+			for(i=0;i<check.length;i++){
+//				console.log(i +"value : "+ check[i].value);
+//				console.log(i +"length : "+ check[i].value.length);
+				if(check[i].value.length == 0){
+					flag = false;
+					blankArr.push(check[i]);
+				}
+			}
+//			console.log(spaceArr);
+//			console.log(spaceArr[0].id);
+			if(blankArr.length != 0){
+				var blank_go = document.getElementById(blankArr[0].id);
+			}
+			
+			
+//			console.log(blank_go);
+			
+			console.log("flag:"+flag);
+			console.log("idch:"+idcheck);
+			console.log("pwdch:"+pwdcheck);
+			
+			if(flag && idcheck && pwdcheck){
+				alert("회원가입 성공");
+			}else{
+				e.preventDefault();
+				alert("미기입한 항목이 존재합니다.")
+				blank_go.focus();
+				
+			}
+			
+		});
+
+		
+//		월 옵션 생성
+		var month_arr = '<option class="opt" selected="selected">월</option>';
+		for(i=1;i<=12;i++){
+			month_arr += '<option class="opt" value='+ i +'>'+i+'</option>';
+		}
+		ch_month.innerHTML = month_arr;
+		var opt = document.getElementsByClassName("opt");
+	
+		var year_flag = false;
+		var month_flag = false;
+		var date_flag = false;
+		
+		birthc.style.color = "red";
+		
+		for(i=0;i<opt.length;i++){
+			if(opt[i].selected){
+				if(opt[i].innerText == "월"){
+					month_flag = false;
+				}else{
+					month_flag = true;
+				}
+				break;
+			}
+		}
+		
+		
+		
+		ch_year.addEventListener("blur",function(){
+			var num = ch_year.value*1;
+			
+			if(ch_year.value.length < 4){
+				birthc.innerText = "year :태어난 년도 4자리를 정확히 입력하세요."
+			}else{
+				console.log(num);
+				if(isNaN(num)){
+					birthc.innerText = 'year :정확한 년도를 입력해주세요.';
+				}else{
+					year_flag = true;
+					if(!month_flag){
+						birthc.innerText = "year :태어난 월을 선택하세요."
+					}else{
+						if(!date_flag){
+							birthc.innerText = "year :태어난 일(날짜) 2자리를 정확하게 입력하세요."
+						}else{
+							birthc.innerText = "";
+						}
 					}
-					
-					
+				}
+			}
+		});
+		
+		ch_month.addEventListener("click",function(){
+			if(year_flag){
+				for(i=0;i<opt.length;i++){
+					if(opt[i].selected){
+						if(opt[i].innerText == "월"){
+							month_flag = false;
+						}else{
+							month_flag = true;
+						}
+					}
+				}
+				if(!date_flag){
+					birthc.innerText = "month: 태어난 일(날짜) 2자리를 정확하게 입력하세요.";
+				}else{
+					birthc.innerText = "";
 				}
 				
+			}else{
+				birthc.innerText = "month :태어난 년도 4자리를 정확히 입력하세요.";
+			}
+		});
+		
+		ch_date.addEventListener("blur",function(){
 			
-			}); 
+			console.log(year_flag);
+			console.log(month_flag);
 			
 			
-/* 			$("#test").click(function() {
-				
-			}); */
+			if(ch_date.value.length != 2){
+				console.log("pont1");
+				if(year_flag){
+					console.log("pont2");
+					if(month_flag){
+						console.log("pont3");
+						
+					}else{
+						birthc.innerText = "date : 태어난 월을 선택하세요."
+					}
+				}else{
+					birthc.innerText = "date : 태어난 년도 4자리를 정확히 입력하세요.";
+				}
+			}else{
+				console.log("elseselsef");
+				date_flag = true;
+				birthc.innerText = "";
+			}
 			
+			
+		});
 		
 		
 		
+	
 		
 		
 		
