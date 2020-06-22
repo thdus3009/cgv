@@ -27,6 +27,8 @@
 		<form action="" method="post" class="banner-form">
 	
 		</form>
+		<button>취소</button>
+		<button>등록하기</button>
 	</div>
 
 	<!-- 푸터 -->

@@ -168,7 +168,7 @@
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
 
-<script type="text/javascript" src="../js/bbsWrite.js"></script>
+<script type="text/javascript" src="../js/bbs/bbsWrite.js"></script>
 
 
 </body>

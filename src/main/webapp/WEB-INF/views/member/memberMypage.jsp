@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 
