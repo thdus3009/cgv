@@ -16,6 +16,7 @@ public class MemberVO {
 	private int age; 
 	private String nick;
 	private String fileName;
+	private int enabled;
 	
 	
 	
