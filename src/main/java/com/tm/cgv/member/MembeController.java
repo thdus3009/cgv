@@ -245,6 +245,15 @@ public class MembeController {
 		return mv;
 	}
 	
+	
+	
+	//시험용
+	//myPage(GET)
+		@GetMapping("memberAdminPage")
+		public void memberAdminPage() throws Exception{
+			
+		}
+	
 }
 
 
