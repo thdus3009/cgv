@@ -1,10 +1,10 @@
-package com.tm.cgv.member;
+package com.tm.cgv.user;
 
 import lombok.Data;
 
 @Data
-public class AuthVO {
-	
+public class Auth2VO {
+
 	private String username;
 	private String auth;
 }
