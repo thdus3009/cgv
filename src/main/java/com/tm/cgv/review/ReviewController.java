@@ -1,6 +1,9 @@
 package com.tm.cgv.review;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberService;
+import com.tm.cgv.member.MemberVO;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -41,23 +45,56 @@ public class ReviewController {
 	//레이어 팝업 : class="layer-wrap" 검색하기
 	
 	//마이페이지에서 review페이지로 이동
+	
+//	  @GetMapping("reviewList") 
+//	  public String reviewList()throws Exception { 
+//		
+//		return "member/memberReview"; 
+//	  }
+	 
+	
 	@GetMapping("reviewList")
-	public String reviewList(Pager pager)throws Exception {
-		System.out.println("a");
-		reviewService.reviewList(pager);
-		return "member/memberReview";
+	public  ModelAndView reviewList(ModelAndView mv, HttpSession session, Pager pager)throws Exception {
+		
+		//아직 회원가입, 로그인 쪽 안되니까 session은 나중에 적용하기
+		//MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		//String id = memberVO.getId();  
+		
+		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
+		
+		//여기서 pager 넘겨주기(12개씩 끊어서 출력)
+		List<Long> order_num = reviewService.reviewList(uid);
+		
+		
+		  //List는 인터페이스+부모형태라서, 자식형태이고 유틸타입인 ArrayList를 선언해주어야 한다.
+		  List<ReviewVO> ar = new ArrayList<ReviewVO>();
+		  
+		  for(int i=0; i<order_num.size();i++) {
+			 
+			  Long m =  order_num.get(i); //order_numd의 i번 인덱스에있는 정보조회
+			  //m = 주문번호를 하나씩 가져오는 것
+			  //System.out.println("m cont: "+m);
+			 
+			 ReviewVO reviewVO =  reviewService.reviewList2(m, pager); 
+			 ar.add(reviewVO);
+
+		  }
+
+		 mv.addObject("list",ar);
+		 mv.setViewName("member/memberReview");
+
+		
+		return mv;
 	}
+	
 	
 	//예매정보 리스트로 출력 
 	@GetMapping("getList")
 	public void getList(Pager pager, Model model) throws Exception{
-		System.out.println("b");
-		List<TestVO> ar = reviewService.reviewList(pager);
+		List<TestVO> ar = reviewService.getList(pager);
 		model.addAttribute("list", ar);
 	}
-	
-	
-	
+
 	
 	//review write
 	@PostMapping("review_Write")
@@ -66,8 +103,9 @@ public class ReviewController {
 		System.out.println(con);
 		
 		
-		mv.setViewName("redirect:../reviewList");
+
 		return mv;
+	
 	}
 	
 	//review update (영화해당 상세페이지)

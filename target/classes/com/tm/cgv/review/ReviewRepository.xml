@@ -6,8 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.review.ReviewRepository">
 
-	<select id="reviewList" parameterType="Pager" resultType="TestVO">
+	<select id="reviewList" parameterType="String" resultType="Long">
+		select num from reservation where uid=#{uid} and deleteAt is null 
+		order by num desc
+	</select>
+	
+	<select id="reviewList2" parameterType="Long" resultType="ReviewVO">
+		select num from reservation where uid=#{uid} and deleteAt is null 
+		order by num desc
+	</select>
+	
+	
+	<!-- m(Long타입)과 페이지(Pager) 2개 필요 -->
+	<select id="getList" parameterType="Pager" resultType="TestVO">
 		select * from test limit #{startRow},#{perPage}
 	</select>
-
+	
 </mapper>

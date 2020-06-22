@@ -4,13 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="../css/bbsLayout.css" rel="stylesheet"
-	type="text/css">
-<link href="../css/layout.css" rel="stylesheet"
-	type="text/css">
+<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-<link href="../css/myPage.css" rel="stylesheet"
-	type="text/css">
+<link href="../css/myPage.css" rel="stylesheet" type="text/css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -85,6 +82,32 @@
 		</div>
 		
 		
+	<!-- ---------------------------------------------------------------------------------- -->
+	
+	
+	<c:forEach items="${list}" var="vo"> <!-- PayInfoVO에서 받아온 정보 : "vo" -->
+						
+				<div class="listp">-  ${vo.payDate} </div>	
+					<div class="list_p">
+						<a href="../pay/paySelect?order_num=${vo.order_num}"  style="color: black; text-decoration: none;">
+						<div class="list_p_name" style="font-weight: bold; font-size: large;">${vo.productVOs['0'].p_name} 외 ${vo.count}건 <span class="list_p_name2"><img alt="" src="${pageContext.request.contextPath}/resources/images/rrr.PNG"></span></div>
+						</a>
+						<div class="list_p_content">
+							<div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/resources/uploadproduct/${vo.productFileVOs['0'].fileName}" width="67px" height="79px"> </div>
+							<div class="list_p_contents1">
+								<div class="list_p_contents2"><span style="font-size: small;">주문번호</span> &ensp; <span style="font-weight: bold;">${vo.order_num}</span></div>
+								<div class="list_p_contents2"><span style="font-size: small;">결제금액</span> &ensp; <span style="font-weight: bold;">${vo.total_price}원</span></div>
+								<div class="list_p_contents2"><span style="font-size: small;">주문상태</span> &ensp; <span style="font-weight: bold;">결제완료</span></div>
+							</div>
+						</div>
+					</div>
+						 		
+	 </c:forEach>
+		
+	<!-- ---------------------------------------------------------------------------------- -->
+	
+	<!-- Modal -->
+		
 	<div class="container"> <!-- Write, Update -->
 		<h2>Modal Example</h2>
 		<!-- Button to Open the Modal -->
@@ -102,14 +125,14 @@
 						<div class="modal-header" style="background-color: #333;">
 							<h4 class="modal-title"
 								style="color: #F2F0E5; font-size: X-large;">평점작성</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button id="exit" type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 
 						<!-- Modal body -->
 						<div class="modal-body">
 							<!-- 나중에 여기에 session으로 정보불러와서 같이 보내기 -->
 							<textarea id="mContents" name="contents" rows="5" cols="70" onkeyup="CheckByte(this)"
-								placeholder="운영원칙에 어긋나는 게시물로 판단되는 글은 제재 조치를 받을 수 있습니다."
+								placeholder="운영원칙에 어긋나는 게시물로 판단되는 글은 제재 조치를 받을 수 있습니다." 
 								style="font-size: small;"></textarea>
 						</div>
 
@@ -117,7 +140,7 @@
 						<div class="modal-footer">
 							<span id="bytes" style="color: black;">0</span>/280(byte)
 							&emsp;
-							<button type="submit" class="btn btn-danger" id="popupBtn">확인</button>
+							<input type="button" class="btn btn-danger" id="popupBtn" value="확인">
 						</div>
 					</form>
 				</div>
@@ -149,7 +172,8 @@
 
 <!-- 스크립트 -->
 	<script type="text/javascript">/* review write */
- 	$("#popupBtn").click(function(){
+	/* 글자수 10글자 이상일 때 바로 넘길 수 있게 코드를 그쪽으로 옮김 */
+ 	$("#popupBtn11111").click(function(){
 		$.ajax({
 
 			type:"POST",
@@ -167,117 +191,12 @@
 	 
 	</script>
 
-	<script type="text/javascript">/* ajax paging */
-	var count=1;	
-	
-	function getList(curPage){//처음 창을 열면 curPage가 안떠있다가("getList?curPage=" 이 형태) 더보기를 누르면 count++된 정보가 curPage에 들어가게 된다.
-		//ajax
-		$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
-			$('#result').append(result);
-		});
-	}
-	
-	getList(count);
-	/* ------------------- */
-	$("#more").click(function(){
-		count++;
-		getList(count);
-	});
-	
-	
-	</script>
+	<script type="text/javascript" src="../js/review/reviewMore.js"></script>
 
-	<script type="text/javascript">//1.글자수 초과 제한(280byte) 2.글자수 최소 제한(10글자이상)
+	<script type="text/javascript" src="../js/review/checkByte.js"></script>
 
-	function CheckByte(obj){//obj=this
+	<script type="text/javascript" src="../js/review/reviewSubmit.js"></script>
 
-		    var maxByte = 280; //최대 입력 바이트 수
-		    var str = obj.value;
-		    var str_len = str.length;
-		 
-		    var rbyte = 0;
-		    var rlen = 0;
-		    var one_char = "";
-		    var str2 = "";
-		 
-		    for (var i = 0; i < str_len; i++) {
-		        one_char = str.charAt(i);
-		 
-		        if (escape(one_char).length > 4) { //escape : 유니코드 형식으로 인코딩 //한글의 유니코드 길이는 6 (가 = %uAC00)
-		            rbyte += 2; //한글2Byte
-		        } else {
-		            rbyte++; //영문 등 나머지 1Byte
-		        }
-		 
-		        if (rbyte <= maxByte) {
-		            rlen = i + 1; //return할 문자열 갯수
-		        }
-		    }
-		 
-		    if (rbyte > maxByte) {
-		        alert("한글 " + (maxByte / 2) + "자 / 영문 " + maxByte + "자를 초과 입력할 수 없습니다.");
-		        document.getElementById('bytes').innerText = 280;
-		        
-		        str2 = str.substr(0, rlen); //문자열 자르기
-		        obj.value = str2;
-		        fnChkByte(obj, maxByte);
-		    } else {
-		        document.getElementById('bytes').innerText = rbyte;
-
-		    }
-
-		}
-	
-	 /* $("#mContents").keyup(function(){
-			bytesHandler(this);
-		 })
-		 
-		function getTextLength(str) {
-		var len = 0;
-		
-		for (var i = 0; i < str.length; i++) {
-		if (escape(str.charAt(i)).length == 6) {
-				len++;
-			}
-			len++;
-		}
-		return len;
-		}
-		
-		function bytesHandler(obj){
-		//텍스트길이를 bytes클래스에 담기
-		var text = $(obj).val();
-		$('.bytes').text(getTextLength(text));
-
-		//280bytes를 넘으면 alert창띄우기
-		var text2 = getTextLength(text);
-		if(text2>280){
-			alert("입력가능한 글자수를 초과하였습니다.");
-			//문자열 자르기
-			
-			}
-		}  */
-		 
-	</script>
-
-	<script type="text/javascript"> //
-	/* 만약 글자 수를 일정이상 채우지 않으면 팝업창o & 클릭x */
-	
-	 $("#popupBtn").click(function(e){
-
-		var mContents = document.getElementById("mContents");
-		 
-		if(mContents.value.length>=10){
-			alert("작성완료");				
-			
-		}else{
-			alert("문자를 포함하여 10자 이상(공백 제외) 작성하셔야 등록됩니다.");
-			e.preventDefault();
-		}
-	
-		 })
-	
-	</script>
 
 </body>
 </html>
