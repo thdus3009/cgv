@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>theaterEnroll - 영화관 등록</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theater/theaterManage.css" type="text/css">
 </head>
 <body>
 

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/member/memberMyMovie.css">
 </head>
 <body>
     <div class="col-aside" title="프로필&메뉴">
@@ -17,13 +18,13 @@
 			</div>
 		</div>
 		<div class="box-round-wgray">
-			<a href="" class="movie-col">
+			<a href="./memberMyMovieExpect" class="movie-col">
 				<em>숫자</em>
 				<strong>기대되는 영화</strong>
 			</a>
 		</div>
 		<div class="box-round-wgray">
-			<a href="" class="movie-col">
+			<a href="./memberMyMovieWatch" class="movie-col">
 				<em>숫자</em>
 				<strong>내가 본 영화</strong>
 			</a>
@@ -53,7 +54,7 @@
 			<div class="tit">
 				<h3>내가 본 영화</h3>
 				<p>
-					<em>1건</em>
+					<em>n건</em>
 				</p>
 			</div>
 			<div class="sect-sorting">

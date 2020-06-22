@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 관리</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/member/memberList.css" type="text/css">
 </head>
 <body>
 	<!-- header -->

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/member/memberManage.css" type="text/css">
 </head>
 <body>
 
@@ -30,36 +31,36 @@
 				</div>
 			</li>
 			<li>
-				<p class="what">uid</p>
-				<input type="text" class="input-text">
+				<p class="what">아이디uid</p>
+				<input type="text" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">pwd</p>
-				<input type="text" class="input-text">
+				<input type="text" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">name</p>
-				<input type="text" class="input-text">
+				<input type="text" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">nick</p>
-				<input type="text" class="input-text">
+				<input type="text" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">phone</p>
-				<input type="text" class="input-text">
+				<input type="text" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">email</p>
-				<input type="text" class="input-text">
+				<input type="text" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">age</p>
-				<input type="number" class="input-text">
+				<input type="number" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">birth</p>
-				<input type="date" class="input-text">
+				<input type="date" class="input-text" value="">
 			</li>
 			<li>
 				<p class="what">gender</p>

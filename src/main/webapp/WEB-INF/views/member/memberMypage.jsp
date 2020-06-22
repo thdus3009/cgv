@@ -6,13 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../css/bbsLayout.css" rel="stylesheet"
-	type="text/css">
-<link href="../css/layout.css" rel="stylesheet"
-	type="text/css">
-
-<link href="../css/myPage.css" rel="stylesheet"
-	type="text/css">
+<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" rel="stylesheet" type="text/css">
+<link href="../css/myPage.css" rel="stylesheet" type="text/css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -119,7 +115,7 @@
 									<li><a href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보 수정<i></i></a></li>
 									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
 									<li><a href="">예매 영화 관리<i></i></a></li>
-									<li><a href="">내가 본 영화</a></li>
+									<li><a href="./memberMyMovie?id=${sessionScope.memberVO.id}">내가 본 영화</a></li>
 								</ul>
 
 							</div>
@@ -165,10 +161,10 @@
 	//정보 수정 팝업창
 	$("#go_edit_page").click(function(){
 		window.open( 
-				"memberPopUpEdit.jsp", 
-				"마이페이지 - 정보수정", 
-				"width = 520, height = 620, top=100, left 200, locations = no");
-	});
+			"memberPopUpEdit.jsp", 
+			"마이페이지 - 정보수정", 
+			"width = 700, height = 565, top=100, left 200, locations = no");
+		});
 
 </script>
 

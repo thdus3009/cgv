@@ -74,22 +74,9 @@
             });
         });
 		
-	//프로필 이미지 삭제 - db에서 사용자의 프로필 사진 삭제
+	//프로필 이미지 삭제 - 기본이미지로 변경
 	$(".btn-del").click(function() {
-		if (confirm('설정된 프로필 이미지를 삭제하시겠습니까?')) {
-			$("#user_image").attr('src','default_profile.gif');
-			//ajax로 삭제 보내기
-			$.ajax({
-                url:'./memberIdCheck',
-                type:'get',
-                data:{ id:id },
-                success: function(data) {
-                },
-                error: function() {
-						alert("연결 실패");
-				}
-            });
-		}
+		$("#user_image").attr('src','default_profile.gif');
 	});
 
 	//프로필 첨부파일 크기제한
@@ -115,6 +102,7 @@
 				}
             });
         });
+	}
 
 	//취소 - 창닫기
 	$(".cancle").click(function() {
@@ -123,7 +111,6 @@
 	$("#btn_closele").click(function() {
 		window.close();
 	});
-}
 
 </script>
 

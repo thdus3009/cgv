@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>영화관 리스트</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theater/theaterList.css" type="text/css">
 </head>
 <body>
 	<!-- 헤더 -->
@@ -56,7 +57,21 @@
 	</table>
 
 	<!-- 페이저 -->
-	<div></div>
+	<div class="pager">
+		<ul class="pagination">
+			<c:if test="${pager.curBlock>1}">
+				<li><a href="#" class="custompager" title="${pager.startNum-1}">이전</a></li>
+			</c:if>
+
+			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+				<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+			</c:forEach>
+
+			<c:if test="${pager.curBlock<pager.totalBlock}">
+				<li><a href="#" class="custompager" title="${pager.lastNum+1}">다음</a></li>
+			</c:if>
+		</ul>
+	</div>
 
 	<!-- 푸터 -->
 	<c:import url="../template/footer.jsp"></c:import>

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>내가 본 영화</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/member/memberMyMovieWatch.css" type="text/css">
 </head>
 <body>
 	<div class="contentsBox">
@@ -36,35 +38,55 @@
 					<!-- li 반복 -->
 					<li class="movie-info">
 						<div>
-							<a href="" class="movie-poster">
-								<img alt="영화 포스터" src="test2.jpg">
-								<span></span>
+							<a href="" class="movie-poster"> <img alt="영화 포스터"
+								src="test2.jpg"> <span></span>
 							</a>
 						</div>
 						<div class="reserve-info">
-							<a href="" class="movie-name">
-								<strong>영화제목</strong>
+							<a href="" class="movie-name"> <strong>영화제목</strong>
 							</a>
 							<p class="movie-eng-name">영문제목</p>
 							<p class="movie-rev">상영날짜 상영시간</p>
 							<p class="movie-rev">상영 위치 / 관람객수</p>
 							<!-- 관람평을 작성했을 경우 -->
-							<a href="" class="movie-rev">
-								<img>
-								좋았어요
-								별로였어요
+							<a href="" class="movie-rev"> <img> 좋았어요 별로였어요
 							</a>
 							<!-- 관람평을 작성하지 않았을 경우 -->
 							<a id="modal-review" class="movie-rev">이 영화를 평가해주세요</a>
-						</div>
-						<img alt="해당영화 삭제버튼" src="" class="movie-del">
+						</div> <img alt="해당영화 삭제버튼" src="" class="movie-del">
 					</li>
 				</ul>
 			</div>
 			<!-- 내가 본 영화가 없을 경우 -->
 			<div style="display: none;">
-				<p>내가 본 영화가 없습니다.<br>현재 상영중인 영화를 예매해 보세요</p>
+				<p>
+					내가 본 영화가 없습니다.<br>현재 상영중인 영화를 예매해 보세요
+				</p>
 				<a href="">무비차트</a>
+			</div>
+			
+			<!-- 페이저 -->
+			<div class="paging">
+
+				<c:if test="${pager.curBlock gt 1}">
+					<button id="btn-first" type="button" class="btn_page first">처음</button>
+					<button id="btn-pre" type="button" class="btn_page pre">이전</button>
+				</c:if>
+
+				<ul>
+					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+
+						<li><a
+							href="./bbsList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+
+					</c:forEach>
+				</ul>
+
+				<c:if test="${pager.curBlock lt pager.totalBlock}">
+					<button id="btn-next" type="button" class="btn_page next">다음</button>
+					<button id="btn-end" type="button" class="btn_page end">끝</button>
+				</c:if>
+
 			</div>
 		</div>
 
@@ -78,7 +100,8 @@
 			<div class="modal-content">
 
 				<!-- Modal Header -->
-				<form id="form" name="form" method="post" action="./review/review_Write">
+				<form id="form" name="form" method="post"
+					action="./review/review_Write">
 					<div class="modal-header">
 						<h1 class="modal-title">평점작성</h1>
 						<span id="btn_close">닫기</span>
@@ -89,23 +112,16 @@
 						<div class="modal-body">
 							<strong>영화제목</strong>
 							<div class="likeornot">
-								<span class="like">
-									<img src="sprite_egg.png" alt="">
-									<label>
-										<input type="radio" name="liked" checked="checked">
-										<span>좋았어요~^^</span>
-									</label>
+								<span class="like"> <img src="sprite_egg.png" alt="">
+									<label> <input type="radio" name="liked"
+										checked="checked"> <span>좋았어요~^^</span>
+								</label>
 									<div class="profile">
-										<img src="" alt="프로필 사진">
-										<em>실관람객</em>
-										<span>닉네임</span>
-									</div>
-									<span class="notlike">
-										<label>
-											<input type="radio" name="liked">
-											<span>흠~ 좀 별로였어요;;;</span>
-										</label>
-									</span>
+										<img src="" alt="프로필 사진"> <em>실관람객</em> <span>닉네임</span>
+									</div> <span class="notlike"> <label> <input
+											type="radio" name="liked"> <span>흠~ 좀 별로였어요;;;</span>
+									</label>
+								</span>
 								</span>
 							</div>
 							<!-- 나중에 여기에 session으로 정보불러와서 같이 보내기 -->
@@ -120,9 +136,8 @@
 						<!-- Modal footer -->
 						<div class="modal-footer">
 							<span>
-								<button type="submit" class="review-done">작성완료!</button>
-								<strong id="counter">0</strong>
-								/280(byte)
+								<button type="submit" class="review-done">작성완료!</button> <strong
+								id="counter">0</strong> /280(byte)
 							</span>
 						</div>
 					</div>
@@ -138,7 +153,8 @@
 			<div class="point-modal-content">
 
 				<!-- Modal Header -->
-				<form id="form" name="form" method="post" action="./review/review_Write">
+				<form id="form" name="form" method="post"
+					action="./review/review_Write">
 					<div class="modal-header">
 						<h4 class="modal-title">관람 포인트 선택</h4>
 						<span id="btn_point_close">닫기</span>
@@ -149,53 +165,22 @@
 						<h1>이 영화의 관람 포인트를 선택해주세요!</h1>
 						<p>중복선택이 가능합니다.</p>
 						<div class="movie-point1">
-							<strong>매력 포인트</strong>
-							<label>
-								<input type="checkbox">
+							<strong>매력 포인트</strong> <label> <input type="checkbox">
 								감독연출
-							</label>
-							<label>
-								<input type="checkbox">
-								스토리
-							</label>
-							<label>
-								<input type="checkbox">
-								영상미
-							</label>
-							<label>
-								<input type="checkbox">
-								배우연기
-							</label>
-							<label>
-								<input type="checkbox">
-								OST
+							</label> <label> <input type="checkbox"> 스토리
+							</label> <label> <input type="checkbox"> 영상미
+							</label> <label> <input type="checkbox"> 배우연기
+							</label> <label> <input type="checkbox"> OST
 							</label>
 						</div>
 						<div class="movie-point2">
-							<strong>감정 포인트</strong>
-							<label>
-								<input type="checkbox">
+							<strong>감정 포인트</strong> <label> <input type="checkbox">
 								몰입감
-							</label>
-							<label>
-								<input type="checkbox">
-								감동
-							</label>
-							<label>
-								<input type="checkbox">
-								감독연출
-							</label>
-							<label>
-								<input type="checkbox">
-								스트레스 해소
-							</label>
-							<label>
-								<input type="checkbox">
-								유쾌함
-							</label>
-							<label>
-								<input type="checkbox">
-								공감
+							</label> <label> <input type="checkbox"> 감동
+							</label> <label> <input type="checkbox"> 감독연출
+							</label> <label> <input type="checkbox"> 스트레스 해소
+							</label> <label> <input type="checkbox"> 유쾌함
+							</label> <label> <input type="checkbox"> 공감
 							</label>
 						</div>
 
@@ -209,7 +194,8 @@
 		</div>
 	</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/member/memberMyMovieWatch.js"></script>
 
 </body>
