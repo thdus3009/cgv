@@ -13,13 +13,21 @@
 <body>
 
 	<div class="root">
+		<!-- 헤더 -->
 		<c:import url="../template/header.jsp"></c:import>
 
-		<h1>영화 상세정보 페이지</h1>
+		<!-- 콘텐츠 -->
+		<div>
+			<h3>영화 상세</h3>
+		
+		</div>
+		
 
 
+		<!-- 푸터 -->
 		<c:import url="../template/footer.jsp"></c:import>
 
+		<!-- 사이드바 -->
 		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
 
