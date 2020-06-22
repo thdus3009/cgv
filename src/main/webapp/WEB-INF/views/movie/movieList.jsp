@@ -66,7 +66,7 @@
 					</button>
 				</div>
 				
-				
+				<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 				
 <!-- 			리스트 출력부분 -->
 				<div class="sect-movie-chart">
@@ -75,14 +75,14 @@
 						<li>
 							<!-- 윗 부분 -->
 							<div class="box-image">
-							 <!--  
+							 
 								<strong class="rank">No.${i.index+1}</strong> 
 								<a href=""> 
 									<span class="thumb-image"> 
-										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVO.fileName}">
+										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVOs.fileName}">
 										<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 									</span>
-								</a> -->
+								</a>
 								<span class="screentype"></span>
 							</div> <!-- 아래 부분 -->
 							<div class="box-contents">
@@ -107,7 +107,11 @@
 							</ol><ol>
 						</c:if>
 						
-					</c:forEach>
+						
+						
+						
+						</c:forEach>
+					
 					</ol>
 					
 					<div class="sect-movie-chart" id="list-more"></div>

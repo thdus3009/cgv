@@ -5,8 +5,82 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tm.cgv.movieInfo.MovieInfoRepository">
-
-	<select id="movieInfoList" resultType="MovieInfoVO"></select>
-
-
-</mapper>
+ 	
+ 	<resultMap type="MovieInfoVO" id="listResult">
+ 		<id column="num" property="num"/>
+ 		<result column="title" property="title"/>
+ 		<result column="titleEng" property="titleEng"/>
+ 		<result column="runtime" property="runtime"/>
+ 		<result column="director" property="director"/>
+ 		<result column="actor" property="actor"/>
+ 		<result column="ganre" property="ganre"/>
+ 		<result column="ageLimit" property="ageLimit"/>
+ 		<result column="country" property="country"/>
+ 		<result column="openDate" property="openDate"/>
+ 		<result column="contents" property="contents"/>
+ 		<result column="visitor" property="visitor"/>
+ 		<result column="rate" property="rate"/>
+ 		<result column="errRate" property="errRate"/>
+ 		<result column="createAt" property="createAt"/>
+ 		
+ 		
+ 		<association property="movieImageVOs" javaType="MovieImageVO">
+ 			<id column="num" property="num"/>
+ 			<result column="movieNum" property="movieNum"/>
+ 			<result column="fileName" property="fileName"/>
+ 			<result column="originName" property="originName"/>
+ 			
+ 		</association>
+ 	</resultMap>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<select id="movieNumCount" resultType="Long">
+ 		select count(num) from movieInfo
+ 	</select>
+ 
+ 	<select id="movieList" parameterType="Pager" resultMap="listResult">
+ 		select MM.* , MK.fileName,MK.originName,MK.movieNum from
+ 		(select * from
+ 		(select P.*, @rownum:=@rownum +1 as R from 
+ 		(select * from movieInfo order by
+		<choose>
+			<when test="kind == 'date'">
+				openDate desc, rate desc
+			</when>
+			<when test="kind == 'title'">
+				title asc
+			</when>
+			<otherwise>
+				rate desc
+			</otherwise>
+		</choose>
+		limit #{startRow},#{perPage}) as P)as PP ) as MM
+		left join movieImage as MK
+		on(MM.num = MK.movieNum)
+		
+ 			
+ 	</select>
+ 	
+ 	<select id="movieListAll" parameterType="MovieInfoVO" resultType="MovieInfoVO">
+ 		select * from movieInfo ORDER by 
+ 			<choose>
+ 				<when test="kind == 'title'">
+ 					title asc
+ 				</when>
+ 				<otherwise>
+ 					rate desc
+ 				</otherwise>
+ 			</choose>
+ 	 	</select>
+ 	 	
+ 	 	
+ 	 <insert id="movieWrite" parameterType="MovieInfoVO" useGeneratedKeys="true" keyProperty="num"> 
+ 	 	insert into movieInfo (num,title,titleEng,runtime,director,actor,ganre,ageLimit,country,openDate,contents,createAt)
+ 	 	values(#{num},#{title},#{titleEng},#{runtime},#{director},#{actor},#{ganre},#{ageLimit},#{country},#{openDate},#{contents},#{createAt})
+ 	 </insert>
+ 
+ </mapper>

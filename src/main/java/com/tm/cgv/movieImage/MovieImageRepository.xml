@@ -6,12 +6,12 @@
   
 <mapper namespace="com.tm.cgv.movieImage.MovieImageRepository">
 
-	<select id="movieImageList" parameterType="Integer" resultType="MovieImageVO" >
+	<select id="movieImageList" parameterType="MovieImageVO" resultType="MovieImageVO" >
 		select * from movieImage where movieNum=#{movieNum}
 	</select>
 
-	<insert id="movieImageInsert" parameterType="MovieImageVO">
-		insert into movieImage values (#{moiveNum},#{fileName},#{originName})
+	<insert id="movieImageInsert" parameterType="MovieImageVO" useGeneratedKeys="true" keyProperty="num">
+		insert into movieImage(num,movieNum,fileName,originName) values (#{num},#{movieNum},#{fileName},#{originName})
 	</insert>
 	
 	<select id="movieImageSelect" parameterType="MovieImageVO" resultType="MovieImageVO">
