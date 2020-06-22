@@ -88,7 +88,8 @@ public class MemberController {
 		mv.addObject("msg", "회원가입 실패");
 		mv.addObject("path", "../");
 		if(result > 0) {
-			mv.addObject("msg", "회원가입 성공");
+		mv.addObject("msg", "회원가입 성공");
+		mv.addObject("path", "../");
 		}
 		mv.setViewName("common/result");
 		

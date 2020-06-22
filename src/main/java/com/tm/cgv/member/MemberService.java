@@ -24,8 +24,8 @@ public class MemberService {
 		return memberRepository.memberLogin(memberVO);
 	}
 	
-	public MemberVO memberIdCheck(String id) throws Exception{
-		return memberRepository.memberIdCheck(id);
+	public MemberVO memberIdCheck(String uid) throws Exception{
+		return memberRepository.memberIdCheck(uid);
 	}
 	
 	public int memberJoin(MemberVO memberVO) throws Exception{

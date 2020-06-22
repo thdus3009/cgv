@@ -50,7 +50,7 @@
 						<fieldset>
 							<div class="login_input">
 								<h2>아이디</h2>
-								<input id="userID" class="id check" type="text" style="display: inline-block;" name="id">
+								<input id="userID" class="id check" type="text" style="display: inline-block;" name="uid">
 								<button id="idCheck" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;">중복체크</button>
 								<p id="idc"></p>
 								
