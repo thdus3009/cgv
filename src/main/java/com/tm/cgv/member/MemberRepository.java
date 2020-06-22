@@ -11,6 +11,7 @@ public interface MemberRepository {
 	public int memberJoin(MemberVO memberVO) throws Exception;
 	
 	public MemberVO memberIdCheck(String uid) throws Exception;
+	
 	public MemberVO memberEmailCheck(String email) throws Exception;
 	
 	public MemberVO memberSelect(MemberVO memberVO) throws Exception;
