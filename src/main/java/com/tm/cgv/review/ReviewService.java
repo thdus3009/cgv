@@ -1,5 +1,6 @@
 package com.tm.cgv.review;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,10 @@ public class ReviewService {
 	}
 	
 	public ReviewVO reviewList2(Long m, Pager pager)throws Exception { //m은 "조건문을 넣은 reservation의 num"에 해당
-		
-		return reviewRepository.reviewList2(m, pager);
+		HashMap<String, Object> pa = new HashMap<String, Object>(); //HashMap<String, Object> //<key,value>
+		pa.put("num", m);
+		pa.put("pager", pager);
+	
+		return reviewRepository.reviewList2(pa);
 	}
 }

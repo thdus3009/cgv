@@ -6,14 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.review.ReviewRepository">
 
+	<!-- 해당 조건의 num 받아오기 -->
 	<select id="reviewList" parameterType="String" resultType="Long">
 		select num from reservation where uid=#{uid} and deleteAt is null 
 		order by num desc
 	</select>
 	
-	<select id="reviewList2" parameterType="Long" resultType="ReviewVO">
-		select num from reservation where uid=#{uid} and deleteAt is null 
-		order by num desc
+	<!-- 받아온 num으로 join하여 정보출력 -->
+	<select id="reviewList2" parameterType="java.util.Map" resultType="ReviewVO">
+		
 	</select>
 	
 	
