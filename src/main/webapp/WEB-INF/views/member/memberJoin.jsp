@@ -71,9 +71,11 @@
 								
 								<h2>생년월일</h2>
 								<div class="ymd">
-									<input id="ch_year" class="text year check" type="text" placeholder="년(4자리)" maxlength="4" name="year">
-									<select id="ch_month" class="month check" name="month"></select>
-									<input id="ch_date" class="text day check" type="text" placeholder="일" maxlength="2" name="day">
+								<input id="ch_year" class="text year check" type="text" placeholder="년(4자리)" maxlength="4" name="year">
+								<select id="ch_month" class="month check" name="month">
+																		
+								</select>
+								<input id="ch_date" class="text day check" type="text" placeholder="일" maxlength="2" name="day">
 								</div>
 								<p id="s9"></p>
 								
