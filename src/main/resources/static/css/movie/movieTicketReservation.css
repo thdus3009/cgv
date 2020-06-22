@@ -1,0 +1,236 @@
+body{
+    margin: 0;
+    padding: 0;
+	color: #333;
+    font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.contents{
+    position: relative;
+    margin: 0 auto;
+    width: 996px;
+    z-index: 1;
+}
+
+.reset{
+    background-position: 0 -120px;
+    float: right;
+    width: 113px;
+    display: block;
+    margin-left: 5px;
+    width: 81px;
+    height: 30px;
+    overflow: hidden;
+    background-image: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/top_buttons.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+
+
+
+/*상단바*/
+
+.col-head{
+    position: relative;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    background-color: #333333;
+}
+
+.col-head > a{
+    display: block;
+    position: absolute;
+    height: 20px;
+    line-height: 20px;
+    top: 7px;
+    right: 16px;
+    padding-right: 20px;
+    color: #e6e6e6;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+/*인원 선택칸*/
+
+.person-screen{
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid #d4d3c9;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    background-color: #fdfcf0;
+}
+
+.num-person{
+    margin-left: 15px;
+    padding-right: 50px;
+    border-right: 1px solid #d4d3c9;
+    display: inline-block;
+}
+
+.person-num{
+    display: flex;
+    list-style: none;
+    width: auto;
+    height: 22px;
+    line-height: 22px;
+}
+
+.person-num > span{
+    float: left;
+    width: 55px;
+    height: 22px;
+    line-height: 22px;
+    color: #666;
+    letter-spacing: -0.1em;
+}
+
+.person-num > li{
+    border: 1px solid #d6d3ce;
+    background-color: #f2f0e5;
+    color: #333;
+    display: block;
+    font-family: Verdana;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px;
+}
+
+.screen-select{
+    position: relative;
+    height: 100%;
+    letter-spacing: -1px;
+    width: auto;
+    margin: 0 0 0 20px;
+}
+
+.screen-select > span{
+    display: block;
+    width: 96px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #745447;
+    background-color: #926f60;
+    border-radius: 3px;
+}
+
+.date{
+    display: inline-block;
+    line-height: 1.2em;
+    margin-top: 12px;
+    color: #5a5a5a;
+}
+
+
+
+
+
+/*영화좌석 선택칸*/
+
+.content-box{
+    display: flex;
+    background-color: #fdfcf0;
+}
+
+.content{
+    margin-left: 20px;
+    width: 826px;
+    height: 365px;
+    position: relative;
+}
+
+.legend{
+    top: 20px;
+    right: 28px;
+    width: auto;
+    height: 100%;
+    width: 110px;
+}
+
+.legend > button{
+    display: block;
+    width: 96px;
+    height: 35px;
+    margin: 25px 0;
+}
+
+.legend-box{
+    margin-left: 5px;
+    line-height: 15px;
+    margin-bottom: 15px;
+}
+
+.legend-box > span{
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+
+
+/*티켓 정보 하단바*/
+
+.ticket_tnb{
+	position: relative;
+	width: 100%;
+	min-width: 996px;
+	height: 128px;
+    background-color: #1d1d1c;
+    padding: 10px;
+    display: flex;
+}
+
+.btn-left{
+    width: 106px;
+    height: 128px;
+    margin-right: 24px;
+    
+}
+
+.btn-right{
+    width: 106px;
+    height: 128px;
+    margin-right: 24px;
+}
+
+.box{
+    width: 210px;
+    height: 128px;
+    padding-right: 2px;
+    position: relative;
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.movie-info {
+    display: flex;
+}
+
+.movie-info > img{
+    float: left;
+    width: 94px;
+    height: 128px;
+    line-height: 108px;
+    margin-right: 11px;
+    overflow: hidden;
+}
+
+.movieinfo > span{
+    display: block;
+    width: 120px;
+    max-height: 40px;
+}
+
+@charset "UTF-8";
