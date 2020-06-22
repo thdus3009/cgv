@@ -45,14 +45,27 @@ public class MemberController {
 	//memberIdCheck(POST)
 	@PostMapping("memberIdCheck")
 	@ResponseBody
-	public int memberIdCheck(String id) throws Exception{
-		MemberVO memberVO = memberService.memberIdCheck(id);
+	public int memberIdCheck(String uid) throws Exception{
+		MemberVO memberVO = memberService.memberIdCheck(uid);
 		int result = 0;
 		if(memberVO != null) {
 			result = 1;
 		}
 		return result;
 	}
+	//memberEmailCheck(POST)
+	@PostMapping("memberEmailCheck")
+	@ResponseBody
+	public int memberEmailCheck(String email) throws Exception{
+		MemberVO memberVO = memberService.memberIdCheck(email);
+		int result = 0;
+		if(memberVO != null) {
+			result = 1;
+		}
+		return result;
+	}	
+	
+	
 	
 	//terms(GET)
 	@GetMapping("memberTerms")
