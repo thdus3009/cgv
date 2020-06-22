@@ -679,11 +679,11 @@ body{
     line-height: 416px;
     text-align: center;
     color: #666;
-    display: none;
+/*     display: none; */
 }
 
 #ticket .step1 .section-time .col-body .time-list{
-/* 	display: none; */
+	display: none;
 	float: left;
     width: 316px;
     height: 88%;
@@ -748,6 +748,23 @@ body{
     width: 103px;
     height: 25px;
 }
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.selected a span.time{
+	background-image: none;
+    border-color: #000;
+    background-color: #333;
+}
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.selected a span.time span{
+	border: 1px solid #5c5c5c;
+    margin: 1px;
+    line-height: 19px;
+}
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.selected a span.time{
+	color: #fff;
+}
+
 
 #ticket .step1 .section-time .col-body .time-list .theater ul li a span.time{
 	width: 49px;

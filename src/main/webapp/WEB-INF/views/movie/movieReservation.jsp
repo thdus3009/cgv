@@ -8,6 +8,10 @@
 <link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/movieReservation.css" rel="stylesheet" type="text/css">
 
+<!-- payment -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
@@ -89,7 +93,7 @@
 									<div class="movie-list nano">
 										<ul id="movie-list-content" class="content scroll-y" style="right: -21px;">
 											<c:forEach var="list" items="${list}">
-												<li class="rating-${list.ageLimit}" data-index="0" data-age_limit="${list.ageLimit}" data-title="${list.title}">
+												<li class="rating-${list.ageLimit}" data-index="${list.num}" data-age_limit="${list.ageLimit}" data-title="${list.title}">
 													<a title="제목" >
 														<span class="icon">&nbsp;</span>
 														<span class="text">${list.title}</span>
@@ -148,96 +152,128 @@
 														<span class="name">경기</span>
 														<span class="count">(46)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>	
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="인천">
 													<a>
 														<span class="name">인천</span>
 														<span class="count">(9)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="강원">
 													<a>
 														<span class="name">강원</span>
 														<span class="count">(4)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="대전/충청">
 													<a>
 														<span class="name">대전/충청</span>
 														<span class="count">(19)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>	
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="대구">
 													<a>
 														<span class="name">대구</span>
 														<span class="count">(9)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>	
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="부산/울산">
 													<a>
 														<span class="name">부산/울산</span>
 														<span class="count">(14)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>	
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="경상">
 													<a>
 														<span class="name">경상</span>
 														<span class="count">(15)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>	
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="광주/전라/제주">
 													<a>
 														<span class="name">광주/전라/제주</span>
 														<span class="count">(22)</span>
 													</a>
-													
-<!-- 												for문(지역에 맞는 극장값 삽입) -->
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
-															
+														<ul class="content scroll-y" >
+																
+																<!-- 여기에 극장값 추가 li append -->
+																
+														</ul>
+														<div class="pane pane-y">
+															<div class="slider slider-y"></div>
+														</div>	
 													</div>		
-<!-- 												endfor												 -->
 												</li>
 												<li class="" data-index="0" data-local="">
 													<a>
@@ -316,48 +352,9 @@
 								<!-- 영화,극장,날짜선택 되었을때 -->
 								<div class="time-list nano has-scrollbar">
 									<div class="content scroll-y" tabindex="-1" style="right: -21px;">
-										<div class="theater">
-											<span class="title">
-												<span class="name">2D</span>
-												<span class="floor">2관 3층</span>
-												<span class="seatcount">(총153석)</span>
-											</span>
-											<ul>
-												<li>
-													<a class="button" href="#" title="">
-														<span class="time"><span>12:00</span></span>
-														<span class="count">92석</span>
-														<span class="sreader mod"> 선택불가</span>
-													</a>
-												</li>
-												<li class="disabled">
-													<a class="button" href="#" title="">
-														<span class="time"><span>12:00</span></span>
-														<span class="count">예매종료</span>
-														<span class="sreader mod"> 선택불가</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="theater">
-											<span class="title">
-												<span class="name">2D</span>
-												<span class="floor">2관 3층</span>
-												<span class="seatcount">(총153석)</span>
-											</span>
-											<ul>
-												<c:forEach begin="1" end="5">
-													<li>
-													<a class="button" href="#" title="">
-														<span class="time"><span>12:00</span></span>
-														<span class="count">92석</span>
-														<span class="sreader mod"> 선택불가</span>
-													</a>
-												</li>
-												</c:forEach>
-												
-											</ul>
-										</div>
+									
+										<!-- js로 추가 -->
+										
 									</div>
 								</div>
 							</div>
@@ -369,6 +366,16 @@
 		
 		</div>
 		
+		
+		<form action="" id="data-from">
+			<input type="hidden" id="movieNum" name="movieNum" value="">
+			<input type="hidden" id="movieTimeNum" name="movieTimeNum" value="">
+			<input type="hidden" id="cineaName" name="cineaName" value="">
+			<input type="hidden" id="theaterName" name="theaterName" value="">
+			<input type="hidden" id="filmType" name="filmType" value="">
+			
+			<input type="hidden" id="sDate" value="">
+		</form>
 		
 		
 		
@@ -386,7 +393,7 @@
 							</span>
 						</div>
 						<div class="row movie_type" style="display: none;"> 						<!-- style="display: block;" -->
-							<span class="data ellipsis-line1" title="2D">2D(히어로즈 기획전)</span>
+							<span id="select_movieType" class="data ellipsis-line1" title="2D"></span>
 						</div>
 						<div class="row movie_rating" style="display: none;"> 					<!-- style="display: block;" -->
 							<span id="select_ageLimit" class="data" title="12세 관람가">12세 관람가</span>
@@ -407,7 +414,7 @@
 						</div>
 						<div class="row screen" style="display: none;"> <!-- style="display: block;" -->
 							<span class="header">상영관</span>
-							<span class="data" title="8관  8층">8관 8층</span>
+							<span id="select_theater" class="data" title=""></span>
 						</div>
 						<div class="row number" style="display: none;"> <!-- style="display: block;" -->
 							<span class="header">인원</span>
@@ -421,7 +428,7 @@
 							<span class="path-step3" title="결제">&nbsp;</span>
 						</div>
 					</div>
-					<a class="btn-right on" id="tnb_step_btn_right" href="#" title="좌석선택"></a>
+					<a class="btn-right" id="tnb_step_btn_right" title="좌석선택"></a>
 				</div>
 			</div>
 		</div>
@@ -470,8 +477,9 @@
 			
 		});
 	}
-	
-	
+
+
+
 
 </script>
 
