@@ -15,11 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="memberIdCheck" parameterType="String" resultType="MemberVO">
-		select id from member where uid=#{uid} 
-	</select>
-	
-	<select id="memberEmailCheck" parameterType="String" resultType="MemberVO">
-		select email from member where email=#{email} 
+		select id from member where uid=#{uid} and deleteAt is null
 	</select>
 	
 	<select id="memberSelect" parameterType="MemberVO" resultType="MemberVO">

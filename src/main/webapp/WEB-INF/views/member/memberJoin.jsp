@@ -52,22 +52,20 @@
 								<h2>아이디</h2>
 								<input id="userID" class="id check" type="text" style="display: inline-block;" name="uid">
 								<button id="idCheck" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;">중복체크</button>
-								<p id="s1"></p>
-								<p id="s1_1"></p>
+								<p id="idc"></p>
 								
 								<h2>비밀번호</h2>
 								<input id="userPWD" class="check" type="password">
-								<p id="s2"></p>
+								<p id="pwd1c"></p>
 								
 								<h2>비밀번호 재확인</h2>
 								<input id="userPWD2" class="check" type="password" style="display: inline-block;" name="pwd">
 <!-- 								<button type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;">확인</button> -->
-								<p id="s3"></p>
+								<p id="pwd2c"></p>	
 									
 									
 								<h2>이름</h2>
 								<input id="name" class="text check" type="text" name="name">
-								<p id="s4"></p>
 								
 								<h2>생년월일</h2>
 								<div class="ymd">
@@ -75,30 +73,25 @@
 									<select id="ch_month" class="month check" name="month"></select>
 									<input id="ch_date" class="text day check" type="text" placeholder="일" maxlength="2" name="day">
 								</div>
-								<p id="s9"></p>
+								<p id="birthc"></p>	
 								
 								<h2>성별</h2>
-								<div class="group_radio" id="mSex" >	
-									<input type="radio" name="sex" label="성별" value="man" class="sex">
-									<span class="text_position">남자&ensp;</span>
-											
-									<input type="radio" name="sex" label="성별" value="woman" class="sex">
-									<span class="text_position">여자&ensp;</span>
-	
-									<input type="radio" name="sex" label="성별" value="nochoice" class="sex" checked="checked">
-									<span class="text_position">선택안함</span>
-								</div>
-								<p id="s8"></p>
+		
+								<input type="radio" name="sex" label="성별" value="man" class="sex">
+								<span class="text_position">남자&ensp;</span>
+										
+								<input type="radio" name="sex" label="성별" value="woman" class="sex">
+								<span class="text_position">여자&ensp;</span>
+
+								<input type="radio" name="sex" label="성별" value="nochoice" class="sex" checked="checked">
+								<span class="text_position">선택안함</span>
 
 								
 								<h2>전화번호</h2>
 								<input id="phone" class="text check" type="text" placeholder="' - ' 없이 입력해 주세요" maxlength="11" name="phone">
-								<p id="s6"></p>
 								
 								<h2>이메일</h2>
 								<input id="email" class="check" type="email" placeholder="선택입력" name="email">
-								<p id="s5"></p>
-								<p id="s5_0"></p>
 							</div>
 						
 						</fieldset>

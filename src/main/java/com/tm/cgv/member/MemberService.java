@@ -24,12 +24,8 @@ public class MemberService {
 		return memberRepository.memberLogin(memberVO);
 	}
 	
-	public MemberVO memberIdCheck(String uid) throws Exception{
-		return memberRepository.memberIdCheck(uid);
-	}
-	
-	public MemberVO memberEmailCheck(String email) throws Exception{
-		return memberRepository.memberIdCheck(email);
+	public MemberVO memberIdCheck(String id) throws Exception{
+		return memberRepository.memberIdCheck(id);
 	}
 	
 	public int memberJoin(MemberVO memberVO) throws Exception{
