@@ -23,7 +23,7 @@ body{
 
 .container{
 	width: 100%;
-	height: 1100px;
+	height: 950px;
 	
 }
 
@@ -112,7 +112,7 @@ body{
 	border-bottom: 2px solid #898987;
 	padding: 70px 0 0 295px;
 	padding-top: 20px;
-	height: 830px;
+	height: 750px;
 	
 /* 	border: 1px solid black; */
 }

@@ -50,7 +50,7 @@
 						<fieldset>
 							<div class="login_input">
 								<h2>아이디</h2>
-								<input id="userID" class="id check" type="text" style="display: inline-block;" name="uid">
+								<input id="userID" class="id check" type="text" style="display: inline-block;" name="id">
 								<button id="idCheck" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;">중복체크</button>
 								<p id="s1"></p>
 								<p id="s1_1"></p>
@@ -72,11 +72,13 @@
 								<h2>생년월일</h2>
 								<div class="ymd">
 									<input id="ch_year" class="text year check" type="text" placeholder="년(4자리)" maxlength="4" name="year">
-									<select id="ch_month" class="month check" name="month"></select>
+									<select id="ch_month" class="month check" name="month">
+										
+									</select>
 									<input id="ch_date" class="text day check" type="text" placeholder="일" maxlength="2" name="day">
 								</div>
 								<p id="s9"></p>
-								
+			
 								<h2>성별</h2>
 								<div class="group_radio" id="mSex" >	
 									<input type="radio" name="sex" label="성별" value="man" class="sex">
@@ -90,7 +92,7 @@
 								</div>
 								<p id="s8"></p>
 
-								
+
 								<h2>전화번호</h2>
 								<input id="phone" class="text check" type="text" placeholder="' - ' 없이 입력해 주세요" maxlength="11" name="phone">
 								<p id="s6"></p>
