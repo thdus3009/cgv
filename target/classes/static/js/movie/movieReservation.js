@@ -144,7 +144,7 @@ $(function() {
 				$(this).addClass("selected");
 	//			console.log($(this).data("theater"))
 				theater = $(this).data("theater");
-				$("#cineaName").val(theater);
+				$("#cinemaName").val(theater);
 				
 				
 				$("#select_cinema").text($(this).data("theater"));
@@ -382,12 +382,14 @@ $(function() {
 			for(i=0;i<result.length;i++){
 //				console.log(result[i].movieTimeVOs[0].screenTime)				
 				
+				var fType = "";
+				
 				if(result[i].theaterVOs[0].filmType === 1){
-					result[i].theaterVOs[0].filmType = '3D';
+					fType = '3D';
 				}else if(result[i].theaterVOs[0].filmType === 2){
-					result[i].theaterVOs[0].filmType = '4D';
+					fType = '4D';
 				}else{
-					result[i].theaterVOs[0].filmType = '2D';
+					fType = '2D';
 				}
 				
 				
@@ -401,7 +403,7 @@ $(function() {
 				
 				var query = '<div class="theater" data-name="'+ result[i].theaterVOs[0].filmType +'" data-floor="'+ result[i].theaterVOs[0].name +'">'
 					+'<span class="title">'
-					+'<span class="name">'+ result[i].theaterVOs[0].filmType +'</span>'
+					+'<span class="name">'+ fType +'</span>'
 					+'<span class="floor">'+ result[i].theaterVOs[0].name +'</span>'
 					+'<span class="seatcount">(총'+ result[i].theaterVOs[0].seatCount +'석)</span>'
 					+'</span>'
@@ -468,8 +470,12 @@ $(function() {
 			console.log($(this).parent().parent().data("name"));
 			console.log($(this).parent().parent().data("floor"));
 			
+			
+			//theater
 			$("#select_theater").text($(this).parent().parent().data("floor"));
 			$("#theaterName").val($(this).parent().parent().data("floor"));
+			
+			//filmType
 			$("#select_movieType").text($(this).parent().parent().data("name"));
 			$("#filmType").val($(this).parent().parent().data("name"));
 			
@@ -485,10 +491,10 @@ $(function() {
 		//좌석예매페이지로 이동
 		$("#tnb_step_btn_right").click(function(){
 			if($(this).hasClass("on") == true){
-				//$("#data-from).submit();
+				$("#data-from").submit();
 				alert("전송전송");
 				
-				payment();
+				//payment();
 			}else{
 				alert("선택해주세요");
 			}

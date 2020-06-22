@@ -367,10 +367,10 @@
 		</div>
 		
 		
-		<form action="" id="data-from">
+		<form action="../reservation/seatReservation" id="data-from">
 			<input type="hidden" id="movieNum" name="movieNum" value="">
 			<input type="hidden" id="movieTimeNum" name="movieTimeNum" value="">
-			<input type="hidden" id="cineaName" name="cineaName" value="">
+			<input type="hidden" id="cinemaName" name="cinemaName" value="">
 			<input type="hidden" id="theaterName" name="theaterName" value="">
 			<input type="hidden" id="filmType" name="filmType" value="">
 			
