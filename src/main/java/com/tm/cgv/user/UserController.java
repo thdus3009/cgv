@@ -41,18 +41,12 @@ public class UserController {
     }
 
     // 로그아웃 결과 페이지
-    @GetMapping("logout")
+    @GetMapping("logoutResult")
     public String dispLogout(HttpSession session) {
     	
     	System.out.println("logout controll");
     	
-    	UserBasicVO userVO = (UserBasicVO)session.getAttribute("userVO"); 
-    	if(userVO != null)
-    		System.out.println(userVO.toString());
-    	else
-    		System.out.println("userVO null");
-    	
-        return "user/logout";
+        return "user/logoutResult";
     }
 
     // 접근 거부 페이지

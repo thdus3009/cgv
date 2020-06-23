@@ -48,7 +48,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		// session에 값 저장
 		HttpSession session = request.getSession();
-		session.setAttribute("userVO", userVO.getUserVO());
+		session.setAttribute("userVO", userVO);
 
 		// 쿠키 주기? 아니면 Default로 주는게 있댔나? J 뭐시기, 확인 ㄱ
 		
