@@ -47,5 +47,9 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+
+	<classpathentry kind="lib" path="C:/Users/sist220/Desktop/new/json-simple/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist220/Desktop/new/lombok.jar"/>
+
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

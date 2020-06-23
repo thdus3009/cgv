@@ -59,7 +59,7 @@ public class BbsController {
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
 		String id = "";
 		if(memberVO != null) {
-			id = memberVO.getId(); 
+			id = memberVO.getUid(); 
 		}
 		
 		String key = "bbs_"+bbsVO.getNum()+id;

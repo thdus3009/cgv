@@ -44,14 +44,14 @@
 				<div class="sect-common">
 				<div class="mycgv-info-wrap">
 					<div class="sect-person-info">
-						<div class="box-image">
+						<div class="box-image" id="box-image">
 							<span class="thumb-image"> 
 							<img alt="" src="../images/myPage/default_profile.gif"> <span class="profile-mask"></span>
 							</span>
 						</div>
 						<div class="box-contents">
 							<div class="person-info1">
-								<strong>${memberVO.name } 님</strong> <em>(${memberVO.id })</em>
+								<strong>${memberVO.name } 님</strong> <em>(${memberVO.uid })</em>
 							</div>
 							<div class="person-info2">
 								<p>전화번호 : ${memberVO.phone }</p>
