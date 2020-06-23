@@ -131,7 +131,7 @@ public class MovieInfoController {
 	public ModelAndView movieUpdate(ModelAndView mv,MultipartFile files,String videolink,MovieInfoVO movieInfoVO) throws Exception{
 		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
 		if(result>0) {
-			mv.setViewName("redirect:movieList");
+			mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		}else {
 			System.out.println("실패");
 		}

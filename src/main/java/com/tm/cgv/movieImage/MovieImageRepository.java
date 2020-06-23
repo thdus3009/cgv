@@ -14,5 +14,7 @@ public interface MovieImageRepository {
 	
 	public MovieImageVO movieImageSelect(MovieImageVO movieImageVO) throws Exception;
 	
+	public int movieImageDelete(MovieImageVO movieImageVO) throws Exception;
+	
 	
 }

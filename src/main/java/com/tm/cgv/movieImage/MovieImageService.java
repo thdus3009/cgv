@@ -19,10 +19,30 @@ public class MovieImageService {
 	
 	@Autowired
 	private MovieImageRepository movieImageRepository;
+	@Autowired
+	private FileManager fileManager;
+	@Autowired
+	private FilePathGenerator filePathGenerator;
+	
+	@Value("${board.movieInfo.filePath}")
+	private String filePath;
 
 	
 	public List<MovieImageVO> movieImageList(int movieNum)throws Exception{
 		return movieImageRepository.movieImageList(movieNum);
+	}
+	
+	//업로드된 대표사진 지우기
+	public int movieImageDelete(MovieImageVO movieImageVO)throws Exception{
+		File dest = filePathGenerator.getUseClassPathResource(filePath);
+		
+		int result = fileManager.deleteFile(movieImageVO.getFileName(),dest);
+		
+		if(result>0) {
+			result = movieImageRepository.movieImageDelete(movieImageVO);
+			
+		}
+		return result;
 	}
 	
 	//contents에서 사진을 넣었을 때 사용

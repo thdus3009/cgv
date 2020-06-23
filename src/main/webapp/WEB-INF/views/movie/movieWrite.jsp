@@ -18,6 +18,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -94,6 +98,9 @@
 								
 								<div class="tbl_write">
 																
+									<input type="text" value="${vo.movieImageVOs.num}" id="num1" >
+									
+									<input type="text" value="${vo.movieImageVOs.fileName}" id="fileName"> 
 									
 									<table class="tbl_bbs_write">
 										<colgroup>
@@ -101,59 +108,57 @@
 											<col style="width: 320px;">
 										</colgroup>
 										<tbody>
+										
+										
 											 <div class="form-group">
 										      <label for="files">타이틀 이미지:</label>
 										      <input type="file" class="form-control files" id="files" placeholder="타이틀 이미지 선택" name="files" >
 										    </div>
 										    
 										    <c:if test="${path  eq 'Update'}">
-										    <div class="form-group">
-											    <c:forEach  items="${vo.movieImageVOs}" var="ImageVO">
-												      	<p>${ImageVO.originName}<i id="${ImageVO.fileNum}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
-												  </c:forEach>
-											  </div>
+												<p>${vo.movieImageVOs.originName}<i id="${vo.num}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
 										    </c:if>
 										    
 										    
 										     <div class="form-group">
 										      <label for="videolink">예고 영상:</label>
-										      <input type="text" class="form-control videolink" id="videolink" placeholder="예고편 영상 링크" name="videolink" >
+										      <input type="text" class="form-control videolink" id="videolink" placeholder="예고편 영상 링크" name="videolink" value="${vo.movieVideoVOs.videolink }" >
 										    </div>
 											 <div class="form-group">
 											    <label for="title">Title:</label>
-											    <input type="text" class="form-control" id="title" name="title" >
+											    <input type="text" class="form-control" id="title" name="title" value="${vo.title }">
 											  </div>
 											   <div class="form-group">
 											    <label for="titleEng">TitleEng:</label>
-											    <input type="text" class="form-control" id="titleEng" name="titleEng" >
+											    <input type="text" class="form-control" id="titleEng" name="titleEng"  value="${vo.titleEng }">
 											  </div>
 											   <div class="form-group">
 											    <label for="runtime">runtime:</label>
-											    <input type="text" class="form-control" id="runtime" name="runtime" >
+											    <input type="text" class="form-control" id="runtime" name="runtime" value="${vo.runtime }">
 											  </div>
 											   <div class="form-group">
 											    <label for="director">감독:</label>
-											    <input type="text" class="form-control" id="director" name="director" >
+											    <input type="text" class="form-control" id="director" name="director" value="${vo.director }">
 											  </div>
 											  <div class="form-group">
 											    <label for="actor">출연 배우:</label>
-											    <input type="text" class="form-control" id="actor" name="actor" >
+											    <input type="text" class="form-control" id="actor" name="actor" value="${vo.actor }">
 											  </div>
 											  <div class="form-group">
 											    <label for="ganre">장르:</label>
-											    <input type="text" class="form-control" id="ganre" name="ganre" >
+											    <input type="text" class="form-control" id="ganre" name="ganre" value="${vo.ganre }">
 											  </div>
 											  <div class="form-group">
 											    <label for="ageLimit">연령제한:</label>
-											    <input type="text" class="form-control" id="ageLimit" name="ageLimit" >
+											    <input type="text" class="form-control" id="ageLimit" name="ageLimit" value="${vo.ageLimit }" >
 											  </div>
 											   <div class="form-group">
 											    <label for="country">국가:</label>
-											    <input type="text" class="form-control" id="country" name="country" >
+											    <input type="text" class="form-control" id="country" name="country" value="${vo.country }">
 											  </div>
 											   <div class="form-group">
 											    <label for="openDate">개봉일:</label>
-											    <input type="date" class="form-control" id="openDate" name="openDate" >
+											    <input type="date" class="form-control" id="openDate" name="openDate" value="${vo.openDate }">
 											  </div>
 											  
 											  <c:set var="now" value="<%=new java.util.Date()%>" />
@@ -169,7 +174,7 @@
 											  
 											  <div class="form-group">
 											    <label for="contents">Contents:</label>
-											    <textarea rows="" cols="" class="form-control" id="contents" name="contents" ></textarea>
+											    <textarea rows="" cols="" class="form-control" id="contents" name="contents" >${vo.contents }</textarea>
 											 
 											  </div>
 											  
@@ -203,7 +208,33 @@
 </div>
 
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+<script type="text/javascript">
+	count = 1;
+	$(".fileDelete").click(function(){
+		var check = confirm("삭제하시겠습니까?");
+		if(check){
+			var s = $("#num1").val();
+			var fileName=$("#fileName").val();
+			
+			console.log(s);
+			console.log(fileName);
 
+			$.post("../movieImage/movieImageDelete",{num:s,fileName:fileName},function(data){
+				console.log(data+"dd");
+				
+				if(data>0){
+					$(".fileDelete").parent().remove();
+					
+
+					}
+				});
+
+			}
+
+		});
+
+
+</script>
 
 
 </body>

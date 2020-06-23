@@ -17,5 +17,9 @@
 	<select id="movieImageSelect" parameterType="MovieImageVO" resultType="MovieImageVO">
 		select * from movieImage where num=#{num}
 	</select>
+	
+	<delete id="movieImageDelete" parameterType="MovieImageVO">
+		delete from movieImage where num=#{num}
+	</delete>
 
 </mapper>

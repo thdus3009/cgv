@@ -100,6 +100,7 @@ public class MovieInfoService {
 		if(files.getSize()>0) {
 			String fileName = fileManager.saveTransfer(files, file);//파일, 경로
 			MovieImageVO movieImageVO = new MovieImageVO();
+			
 			movieImageVO.setMovieNum(movieInfoVO.getNum());
 			movieImageVO.setFileName(fileName);
 			movieImageVO.setOriginName(files.getOriginalFilename());
