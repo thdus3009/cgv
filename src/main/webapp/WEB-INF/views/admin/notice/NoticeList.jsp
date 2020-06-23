@@ -39,7 +39,7 @@
 			</div>
 
 
-			<div class="contents" style="background-color: #fdfcf0;">
+			<div class="contents">
 				<div>
 					<div class="col_content">
 
