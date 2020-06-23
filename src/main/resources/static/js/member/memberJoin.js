@@ -29,8 +29,9 @@
 		
 //		아이디 기입 조건 설명 출력
 		userID.addEventListener("focus",function(){
-			idc.innerText = '아이디는 6글자 이상입니다.';
-			
+			if (userID.value.length < 6) {
+				idc.innerText = '아이디는 6글자 이상입니다.';
+			}
 		});
 		
 //		아이디 조건 체크
@@ -50,11 +51,29 @@
 		
 //		패스워드 조건 설명 출력
 		pwd1.addEventListener("focus",function(){
-			pwd1c.innerText = '패스워드는는 6글자 이상입니다.';
+			if (pwd1.value.length < 6) {
+				pwd1c.innerText = '패스워드는 6글자 이상입니다.';
+			}
 			
 		});
 		
 //		패스워드 조건 체크
+		pwd1.addEventListener("blur",function(){
+			if(pwd1.value.length != 0){
+				
+				if(pwd1.value.length >= 6 ){
+					pwd1c.innerText = '사용 가능한 패스워드 입니다.';
+					pwd1c.style.color = "green";
+				}else{
+					pwd1c.innerText = '사용 불가능한 패스워드 입니다.';
+					pwd1c.style.color = "red";
+				}
+			}
+			
+			
+		});
+		
+//		전화번호 조건 체크
 		pwd1.addEventListener("blur",function(){
 			if(pwd1.value.length != 0){
 				
