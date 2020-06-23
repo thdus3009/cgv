@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.noticeList {
+	position: relative;
+	width: 980px;
+	margin: 0 auto;
+}
+
+.admin-li {
+	background-color: #e71a0f;
+	color: #fdfcf0;
+}
+
+.noticeList-ul{
+}
+
+.noticeList-box{
+	
+}
