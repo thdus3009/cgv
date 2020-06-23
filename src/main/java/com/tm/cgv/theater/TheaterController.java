@@ -3,7 +3,6 @@ package com.tm.cgv.theater;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.tm.cgv.cinema.CinemaVO;
 
 @Controller
 @RequestMapping("/theater/**/")
@@ -23,6 +24,8 @@ public class TheaterController {
 		return "theater";
 	}
 	
+	
+	//List
 	@GetMapping("theaterList")
 	public ModelAndView theaterList(ModelAndView mv)throws Exception{
 			
@@ -33,28 +36,50 @@ public class TheaterController {
 			return mv;
 	}
 	
-	@GetMapping("theaterWrite")
-	public ModelAndView theaterWrite(ModelAndView mv , TheaterVO theaterVO) throws Exception{
-		List<CinemaVO> ar =theaterService.cinemaList(); //시네마 list 가지고 오기
-		mv.addObject("list2",ar);
+	//Insert
+	@GetMapping("theaterInsert")
+	public ModelAndView theaterInsert(ModelAndView mv, TheaterVO theaterVO) throws Exception{
+		List<CinemaVO> ar = theaterService.cinemaList();//시네마 list 가지고 오기
+		
+		
+		mv.addObject("cine", ar);
+		mv.addObject("path", "Insert");
 		mv.setViewName("theater/theaterWrite");
 		
 		return mv;
 	}
 	
-	@PostMapping("theaterWrite")
-	public ModelAndView theaterWrite2(ModelAndView mv,TheaterVO theaterVO) throws Exception{	
+	
+	//Insert
+	@PostMapping("theaterInsert")
+	public ModelAndView theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade) throws Exception{	
+		ModelAndView mv = new ModelAndView();
 		
-		System.out.println(theaterVO.getCinemaNum()+" : 1cN");
-		System.out.println(theaterVO.getName()+" : 1name");
+
+		System.out.println(theaterVO.getCinemaNum());
+		System.out.println(theaterVO.getName());
+		System.out.println(theaterVO.getFilmType());
+		System.out.println(theaterVO.getSeatCount());
 		
-		int result = theaterService.theaterWrite(theaterVO);
+		System.out.println(row.length);
+		System.out.println(col.length);
+		System.out.println(grade.length);
 		
-		System.out.println(theaterVO.getCinemaNum()+"cN");
-		System.out.println(theaterVO.getName()+"name");
+		System.out.println(row[0]);
+		System.out.println(row[1]);
+		System.out.println(row[2]);
+		System.out.println(row[3]);
+		System.out.println(row[4]);
+
+		//theaterVO 하나 삽입 후 
+		//삽입 성공한 theaterVO의 theaterNum을 가져와서
+		
+		//theaterNum  col  row  grade  >> 여러개삽입
+		
+		int result = theaterService.theaterInsert(theaterVO, row, col, grade);
 		
 		if(result>0) {
-			mv.setViewName("redirect:./theaterList");
+			//mv.setViewName("redirect:./theaterList");
 		}else {
 			System.out.println("등록 실패");
 		}
@@ -62,8 +87,12 @@ public class TheaterController {
 		return mv;
 	}
 	
+
+	
+	
+	//Update
 	@GetMapping("theaterUpdate")
-	public ModelAndView theaterUpdate(TheaterVO theaterVO, ModelAndView mv,int num) throws Exception{
+	public ModelAndView theaterUpdate(TheaterVO theaterVO, ModelAndView mv, int num) throws Exception{
 		TheaterVO theaterVO2=theaterService.theaterSelect(num);
 		System.out.println(theaterVO2.getNum()+"num 널이니?");
 		mv.addObject("vo",theaterVO2);
@@ -72,8 +101,10 @@ public class TheaterController {
 		return mv;
 	}
 	
+	
+	//Update
 	@PostMapping("theaterUpdate")
-	public ModelAndView theaterUpdate2(TheaterVO theaterVO,ModelAndView mv)throws Exception{
+	public ModelAndView theaterUpdate2(TheaterVO theaterVO, ModelAndView mv)throws Exception{
 
 		int result = theaterService.theaterUpdate(theaterVO);
 			
@@ -88,6 +119,10 @@ public class TheaterController {
 		return mv;
 	}
 	
+	
+	
+	
+	//Delete
 	@PostMapping("theaterDelete")
 	@ResponseBody
 	public int theaterDelete(int num,ModelAndView mv) throws Exception{

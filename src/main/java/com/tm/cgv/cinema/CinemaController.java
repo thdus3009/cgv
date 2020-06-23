@@ -45,6 +45,7 @@ public class CinemaController {
 	public ModelAndView cinemaInsert(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 		
 		int result = cinemaService.cinemaInsert(cinemaVO);
+		
 		if(result > 0) {
 			mv.setViewName("redirect:./cinemaList");
 		}else {
@@ -60,6 +61,7 @@ public class CinemaController {
 	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 
 		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
 		mv.addObject("vo", cinemaVO);
 		mv.addObject("board", "cinema");
 		mv.addObject("path", "Update");

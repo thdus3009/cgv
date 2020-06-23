@@ -7,7 +7,7 @@ public class SeatVO {
 	private int num;
 	private int theaterNum;
 	private String row;
-	private String col;
+	private int col;
 	private int grade;
 	
 }

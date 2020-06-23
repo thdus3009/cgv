@@ -43,7 +43,7 @@ public class SeatService {
 			
 			seatVO.setTheaterNum(3);
 			seatVO.setRow(row);
-			seatVO.setCol(col);
+			seatVO.setCol(Integer.parseInt(col));
 			seatVO.setGrade(Integer.parseInt(grade));
 			seatRepository.seatInsert(seatVO);
 			

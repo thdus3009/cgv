@@ -139,7 +139,12 @@
 												<a href="./theaterUpdate?num=${vo.num}">${vo.name}</a>
 											</td>
 											<td>${vo.seatCount}</td>
-											<td>${vo.filmType}</td>
+											<td>
+											<c:if test="${vo.filmType eq 0}">2D</c:if>
+											<c:if test="${vo.filmType eq 1}">3D</c:if>
+											<c:if test="${vo.filmType eq 2}">4D</c:if>
+											<%-- ${vo.filmType} --%>
+											</td>
 											
 										</tr>
 									</c:forEach>
@@ -147,7 +152,7 @@
 							</table>
 							
 						</div>
-						<a href="./${board}Write" class="btn btn-danger">Write</a>
+						<a href="./${board}Insert" class="btn btn-danger">Write</a>
 						<!----------------------------------------------------------------------------------------------------- contents detail paging
 						<div class="paging">
 							
