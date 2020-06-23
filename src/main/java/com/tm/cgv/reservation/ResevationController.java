@@ -34,7 +34,7 @@ public class ResevationController {
 	@PostMapping("/seatReservation")
 	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println("INN");
 		System.out.println("영화번호 : "+reservationVO.getMovieNum());
 		System.out.println("영화시간 번호 : "+reservationVO.getMovieTimeNum());
 		System.out.println("극장명 : "+reservationVO.getCinemaName());
