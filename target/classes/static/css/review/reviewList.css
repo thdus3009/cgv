@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+.mypage_contents3 {
+				width:1050px;
+				margin:0 auto;
+				height:100%;
+				overflow:hidden;
+				/*  background-color: skyblue;  */
+				padding: 30px 180px 200px 210px;
+
+
+}
+
+.line_p {
+	height : 100%; 
+	width: 100%; 
+	border-top: 2px solid #5f0080; 
+	background-color: white; 
+	padding : 30px 10px;
+}
+
+.listp {
+	font-weight: bold;
+	color: #808080;
+}
+.list_p {
+	height : 170px;
+	width : 100%;
+	background-color: white; 
+	border: 1px solid #cccccc; 
+	margin: 10px 0 0;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+
+.list_p_name {
+	padding: 20px 0 13px;
+}
+.list_p_name2 {
+	float: right;
+}
+
+
+.list_p_content {
+	padding: 10px;
+	border-top: 1px solid #cccccc; 
+	height: 60%;
+	width: 100%;
+	
+}
+
+.list_p_photo {
+	float: left;
+}
+.list_p_contents1 {
+	float: right;
+	width:85%;
+	height:100%;
+}
+.list_p_contents2 {
+	width:100%;
+	height:33%;	
+}	
+
+
+
+.purchase_page {
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 60px;
+}
+
+.c {
+	height:35px;
+	width :70px;
+	font-size : small;
+	background-color: #5f0080;
+	border: 1px solid #5f0080; 
+	border-radius:3px;
+	text-decoration:none;
+	color: white;
+	
+}

@@ -8,7 +8,7 @@ import lombok.Data;
 public class ReviewVO extends BoardVO {
 	
 	private int like;	//좋아요 수
-	private int mNum;	//영화번호
+	private int movieNum;	//영화번호
 	private int mId;	//아이디
 	private String fileName;	//이미지
 	
@@ -20,6 +20,11 @@ public class ReviewVO extends BoardVO {
 
 	private String cinemaName; //영화관
 	private String theaterName; //상영관
+	
+	private int movieTimeNum;
+	private String screenDate; 
+	private String screenTime;
+	
 	
 // <BoardVO>	
 //	private int num;

@@ -52,18 +52,27 @@ public class ReviewController {
 //		return "member/memberReview"; 
 //	  }
 	 
-	
 	@GetMapping("reviewList")
-	public  ModelAndView reviewList(ModelAndView mv, HttpSession session, Pager pager)throws Exception {
+	public ModelAndView reviewList(ModelAndView mv)throws Exception {
 		
+		 mv.setViewName("member/memberReview");
+
+		return mv;
+	}
+	
+
+	
+	//예매정보 리스트로 출력 
+	@GetMapping("getList")
+	public  void getList(HttpSession session, Pager pager, Model model) throws Exception{
 		//아직 회원가입, 로그인 쪽 안되니까 session은 나중에 적용하기
 		//MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		//String id = memberVO.getId();  
 		
 		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
 		
-		//여기서 pager 넘겨주기(12개씩 끊어서 출력)
-		List<Long> order_num = reviewService.reviewList(uid);
+		//예매번호 list
+		List<Long> order_num = reviewService.reviewList(uid, pager);//10개씩 끊어서 가져와야 하니까 List로 받아준다.
 		
 		
 		  //List는 인터페이스+부모형태라서, 자식형태이고 유틸타입인 ArrayList를 선언해주어야 한다.
@@ -75,24 +84,21 @@ public class ReviewController {
 			  //m = 주문번호를 하나씩 가져오는 것
 			  //System.out.println("m cont: "+m);
 			 
-			 ReviewVO reviewVO =  reviewService.reviewList2(m, pager); 
+			 ReviewVO reviewVO =  reviewService.reviewList2(m); 
+			 //System.out.println("??:"+ reviewVO.getNum());
+			 reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
+			 
 			 ar.add(reviewVO);
 
 		  }
 
-		 mv.addObject("list",ar);
-		 mv.setViewName("member/memberReview");
-
+		 model.addAttribute("list",ar);
 		
-		return mv;
-	}
-	
-	
-	//예매정보 리스트로 출력 
-	@GetMapping("getList")
-	public void getList(Pager pager, Model model) throws Exception{
-		List<TestVO> ar = reviewService.getList(pager);
-		model.addAttribute("list", ar);
+		
+		
+		
+//		List<TestVO> ar = reviewService.getList(pager);
+//		model.addAttribute("list", ar);
 	}
 
 	

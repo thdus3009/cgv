@@ -6,8 +6,10 @@
 <head>
 <link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
-
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
+
+<link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
+
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -82,37 +84,12 @@
 		</div>
 		
 		
-	<!-- ---------------------------------------------------------------------------------- -->
-	
-	
-	<c:forEach items="${list}" var="vo"> <!-- PayInfoVO에서 받아온 정보 : "vo" -->
-						
-				<div class="listp">-  ${vo.payDate} </div>	
-					<div class="list_p">
-						<a href="../pay/paySelect?order_num=${vo.order_num}"  style="color: black; text-decoration: none;">
-						<div class="list_p_name" style="font-weight: bold; font-size: large;">${vo.productVOs['0'].p_name} 외 ${vo.count}건 <span class="list_p_name2"><img alt="" src="${pageContext.request.contextPath}/resources/images/rrr.PNG"></span></div>
-						</a>
-						<div class="list_p_content">
-							<div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/resources/uploadproduct/${vo.productFileVOs['0'].fileName}" width="67px" height="79px"> </div>
-							<div class="list_p_contents1">
-								<div class="list_p_contents2"><span style="font-size: small;">주문번호</span> &ensp; <span style="font-weight: bold;">${vo.order_num}</span></div>
-								<div class="list_p_contents2"><span style="font-size: small;">결제금액</span> &ensp; <span style="font-weight: bold;">${vo.total_price}원</span></div>
-								<div class="list_p_contents2"><span style="font-size: small;">주문상태</span> &ensp; <span style="font-weight: bold;">결제완료</span></div>
-							</div>
-						</div>
-					</div>
-						 		
-	 </c:forEach>
-		
-	<!-- ---------------------------------------------------------------------------------- -->
+
 	
 	<!-- Modal -->
 		
 	<div class="container"> <!-- Write, Update -->
-		<h2>Modal Example</h2>
-		<!-- Button to Open the Modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#myModal">Open modal</button>
+		<h4>내가 본 영화</h4><br>
 
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
@@ -147,17 +124,12 @@
 			</div>
 		</div>
 
-	
-		
+
 		<!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
 
-		<table id="result">
-		<tr style="background-color: pink;">
-		<th>id</th>
-		<th>pw</th>
-		</tr>
-		
-		</table>
+		<div id="result">
+
+		</div>
 
 		<button id="more">더보기</button>
 		

@@ -10,9 +10,9 @@ import com.tm.cgv.util.Pager;
 @Mapper
 public interface ReviewRepository {
 
-	public List<TestVO> getList(Pager pager);
+	//public List<TestVO> getList(Pager pager);
 	
-	public List<Long> reviewList(String uid);
+	public List<Long> reviewList(HashMap<String, Object> pa);
 	
-	public ReviewVO reviewList2(HashMap<String, Object> pa);
+	public ReviewVO reviewList2(Long m);
 }
