@@ -11,7 +11,7 @@
 
   </appender>
 
-  
+  <!-- err4log 사용법 찾아보기 -->
 
   <logger name="jdbc" level="OFF"/>
 

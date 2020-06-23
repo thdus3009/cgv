@@ -27,30 +27,4 @@ public class HomeController {
 //		
 //		model.addAttribute("msg", "access denied");
 //	}
-//	
-	@GetMapping("/customLogin")
-	public ModelAndView loginInput(String err, String logout) throws Exception{
-		
-		System.out.println("err : "+err);
-		System.out.println("logout : "+logout);
-		
-		ModelAndView mv = new ModelAndView();
-		
-		if(err != null) {
-			mv.addObject("error", "Login Error");
-		}
-		
-		if(logout != null) {
-			mv.addObject("logout", "Logout");
-		}
-		
-		mv.setViewName("sample/customLogin");
-		return mv;
-	}
-	
-	@GetMapping("/customLogout")
-	public void logoutGet() {
-		
-		System.out.println("custom logout");
-	}
 }

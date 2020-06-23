@@ -13,8 +13,8 @@
  		<typeAlias type="com.tm.cgv.user.Auth2VO" alias="Auth2VO"/>
  		<typeAlias type="com.tm.cgv.user.UserBasicVO" alias="UserBasicVO"/>
  		
- 		<!-- <typeAlias type="com.tm.cgv.member.AuthVO" alias="AuthVO"/>
- 		<typeAlias type="com.tm.cgv.member.MemberVO" alias="MemberVO"/> -->
+ 		<typeAlias type="com.tm.cgv.member.AuthVO" alias="AuthVO"/>
+ 		<typeAlias type="com.tm.cgv.member.MemberBasicVO" alias="MemberBasicVO"/>
  		<typeAlias type="com.tm.cgv.movie.MovieVO" alias="MovieVO"/>
  		<typeAlias type="com.tm.cgv.board.bbs.BbsVO" alias="BbsVO"/>
  		

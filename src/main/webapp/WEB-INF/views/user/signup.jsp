@@ -10,7 +10,7 @@
 	<h1>회원 가입</h1>
     <hr>
 
-    <form action="./signup" method="post">
+    <form action="/member/signup" method="post">
     	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     	
         <input type="text" name="username" placeholder="아이디 입력해주세요">

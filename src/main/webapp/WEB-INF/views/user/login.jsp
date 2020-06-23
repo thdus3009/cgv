@@ -10,7 +10,7 @@
 	<h1>로그인</h1>
     <hr>
 
-    <form action="/user/login" method="post">
+    <form action="/member/login" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
         <input type="text" name="username" placeholder="아이디 입력해주세요">

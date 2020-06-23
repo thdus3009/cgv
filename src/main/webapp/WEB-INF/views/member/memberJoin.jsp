@@ -63,7 +63,6 @@
 <!-- 								<button type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;">확인</button> -->
 								<p id="pwd2c"></p>	
 									
-									
 								<h2>이름</h2>
 								<input id="name" class="text check" type="text" name="name">
 								
@@ -77,6 +76,7 @@
 								</div>
 								<p id="birthc"></p>	
 								
+								<!-- 인증버튼을 하나 만들어주자 -->
 								<h2>전화번호</h2>
 								<input id="phone" class="text check" type="text" placeholder="' - ' 없이 입력해 주세요" maxlength="11" name="phone">
 								

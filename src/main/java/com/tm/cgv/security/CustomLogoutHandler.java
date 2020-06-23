@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Component;
 
-import com.tm.cgv.user.UserVO;
+import com.tm.cgv.member.MemberVO;
 
 @Component
 public class CustomLogoutHandler implements LogoutHandler{
@@ -21,11 +21,11 @@ public class CustomLogoutHandler implements LogoutHandler{
 		
 		HttpSession session = request.getSession();
 		
-		UserVO userVO = (UserVO)session.getAttribute("userVO"); 
-    	if(userVO != null)
-    		System.out.println(userVO.toString());
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO"); 
+    	if(memberVO != null)
+    		System.out.println(memberVO.toString());
     	else
-    		System.out.println("userVO null");
+    		System.out.println("memberVO null");
 	}
 
 }
