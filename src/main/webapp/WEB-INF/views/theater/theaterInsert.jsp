@@ -52,7 +52,7 @@
 			<div class="movie-chart">
 <!-- 			헤더 제목부분+ 차트종류(서브) -->
 				<div class="sect-movie-title">
-					<h3>SeatInsert</h3>
+					<h3>${board}${path}</h3>
 					<div class="submenu">
 						<ul>
 							<li class="on"><a href="">무비 차트</a></li>
@@ -78,14 +78,42 @@
 <!-- 			리스트 출력부분 -->
 				<div class="sect-movie-chart">
 
-		<form action="${board}${path}" method="post" enctype="multipart/form-data">
+		<form id="frm" action="${board}${path}" method="post" enctype="multipart/form-data">
 				<c:if test="${path eq 'Update'}">
 					<input type="hidden" name="num" id="num" value="${vo.num}">
 				</c:if>
 
 			  <div class="form-group">
-			   	 <label for="name">TheaterNum:</label>
-			   	 <input type="text" class="form-control" id="name" name="name" value="${vo.theaterNum}">
+
+			     <label for="cinemaNum">CinemaNum:</label>
+			   	 <select class="cinemaNum" name="cinemaNum">
+			   	 	<!-- <option value="2d">2D</option>
+			   	 	<option value="3d">3D</option> -->
+			   	 	<c:forEach items="${cine}" var="cnt">
+			   	 		<option value="${cnt.num}">${cnt.num} / ${cnt.name}</option>
+			   	 	</c:forEach>
+			   	 </select>
+			  
+			  	 <br>
+			  	 <br>
+			  	 <label for="name">Name:</label>
+			   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
+			  
+			  
+			  	 <br>
+			   	 <label for="filmType">FilmType:</label>
+			   	 <select class="filmType" name="filmType">
+			   	 	<option value="0">2D</option>
+			   	 	<option value="1">3D</option>
+			   	 	<option value="2">4D</option>
+			   	 </select>
+			   
+			   	 
+			   	 <br>
+			   	 <br>
+			   	 <br>
+			   	 <br>
+			   	 <br>
 			   	 <select class="seat_row" id="seat_row">
 			   	 	<option value="1">A</option>
 			   	 	<option value="2">B</option>
@@ -146,7 +174,7 @@
 							<div class="label">A</div>
 							<div class="seat_group">
 								<div class="seat">
-									<a href="#" onclick="">
+									<a href="" onclick="">
 										<span class="no">1</span>
 									</a>
 								</div>
@@ -156,8 +184,17 @@
 				</div>
 			  
 
+ 				 <label for="seatCount">SeatCount:</label>
+			   	 <input type="text" class="form-control" id="seatCount" name="seatCount" value="${vo.seatCount}">
 
-			  <button type="button" id="btn_insert" class="btn btn-default">Submit</button>
+
+   				 <br>
+			   	 <br>
+			   	 <br>
+			   	 <br>
+			   	 <br>
+
+			  <input type="button" id="btn_insert" class="btn btn-default" value="submit">
 
 		</form>
 		  <c:if test="${path eq 'Update'}">
@@ -199,6 +236,7 @@
 	// 2 : 테두리 빨강
 	// 3 : 테두리 초록
 	
+	var seatCount = 0;
 	
 	var seatColor = 1;
 	
@@ -209,6 +247,8 @@
 	var list = [];
 
 	var listLength = 0;
+
+
 	
 	function makeVo(row, col, grade){
 		var vo = {
@@ -216,17 +256,13 @@
 			"col":col,
 			"grade":1
 		}
-		//list.push(JSON.stringify(vo));
-		
+
 		list.push(vo);
 	}
 	
-/* 	var vo = {
-		"row":0,
-		"col":0,
-		"grade":1
-	} */
 
+
+	
 	
 	//col select하면 row와 col의 값을 읽고
 	//숫자만큼의  .seats .seat_row  / .seats .seat_row .seat_group .seat 생성
@@ -235,11 +271,16 @@
 	function changeSelect(){
 		$("#seats_list").empty();
 		//list = [];
-		
+
+			
 		var row = $("#seat_row").val();
 		var col = $("#seat_col").val();
 		console.log("생성한 row : " +row);
 		console.log("생성한 col : " +col);
+
+		seatCount = row * col;
+		$("#seatCount").val(seatCount);
+		
 		//1 2 3 4 5 6 7 8 
 		//1 -> 65  
 		for(i=0; i<row; i++){
@@ -258,14 +299,20 @@
 	
 					//list.push(vo);
 					
-					$("#r"+i).append('<div class="seat"><a href="#" onclick="checkSeat('+ch+j+')"  name="'+ch+j+'" id="'+ch+j+'"><span class="no">'+j+'</span></a></div>')	
-		
+					$("#r"+i).append('<div class="seat"><span class="sb" onclick="checkSeat('+ch+j+')"  name="'+ch+j+'" id="'+ch+j+'"><span class="no">'+j+'</span></span></div>')	
+
+					
 				}
 			$("#seats_list").append('</div></div>');				
 			listLength = list.length;
 		}
 		
 	}
+
+
+
+
+
 	
 	
 	function checkSeat(name){
@@ -292,6 +339,12 @@
 				$(name).attr("name","");
 				$(name).find("span").css('border','2px solid #ed8c00');
 				$(name).css('background','#666')
+
+
+				seatCount += 1;
+				$("#seatCount").val(seatCount);
+
+				
 			}else{
 				$(name).find("span").css('border','0');
 				$(name).css('background-color','black');
@@ -307,6 +360,11 @@
 
 				
 				grade=0;
+
+
+				seatCount -= 1;
+				$("#seatCount").val(seatCount);
+				
 			}
 			
 			break;
@@ -400,8 +458,16 @@
 		list.splice(0,cnt);
 
 		
+		for(i=0; i<list.length; i++){
+			var r = '<input type="hidden" name="row" value="'+list[i].row+'">';
+			r = r + '<input type="hidden" name="col" value="'+list[i].col+'">';
+			r = r + '<input type="hidden" name="grade" value="'+list[i].grade+'">';
+			$("#frm").append(r);
+		}
+
+		$("#frm").submit();
  
-		list = JSON.stringify(list);
+		/* list = JSON.stringify(list);
 
 		$.ajaxSettings.traditional = true;
 		$.ajax({ 
@@ -413,19 +479,15 @@
 			 		alert("전송 성공");
 				}
 			} 
-		});
+		}); */
 
-/* 		
-		$.post("./seatInsert",{list:list},function(data){
-		
-		})
- */
 
 		
 	});
 
 
-	console.log("test : " + list.length);
+
+	
 	
 	
 </script>

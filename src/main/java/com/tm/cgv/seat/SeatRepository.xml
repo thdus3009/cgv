@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="con.tm.cgv.seat.SeatRepository">
-<!-- 	<insert id="seatInsert">
-		insert into (theaterNum, row, col, grade)
+<mapper namespace="com.tm.cgv.seat.SeatRepository">
+ 	<insert id="seatInsert" parameterType="SeatVO">
+		insert into seat (theaterNum, `row`, col, grade)
 		values(#{theaterNum},#{row},#{col},#{grade})
-	</insert> -->
+	</insert>
 </mapper>

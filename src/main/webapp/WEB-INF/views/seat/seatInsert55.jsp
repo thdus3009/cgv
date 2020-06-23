@@ -208,7 +208,6 @@
 
 	var list = [];
 
-	var listLength = 0;
 	
 	function makeVo(row, col, grade){
 		var vo = {
@@ -216,8 +215,6 @@
 			"col":col,
 			"grade":1
 		}
-		//list.push(JSON.stringify(vo));
-		
 		list.push(vo);
 	}
 	
@@ -262,49 +259,61 @@
 		
 				}
 			$("#seats_list").append('</div></div>');				
-			listLength = list.length;
+		
 		}
+
+		console.log($("#A1").attr("class"));
+
+		console.log(list.length);
+		console.log(list[0]);
+		console.log(list[1]);
+		console.log(list[2]);
+		console.log(list[3]);
+		console.log(list[4]);
+		console.log(list[5]);
+		console.log(list[6]);
+		console.log(list[7]);
+		console.log(list[8]);
+		console.log(list[9]);
+		console.log(list[10]);
+		
+		console.log("--------------------------")
 		
 	}
 	
 	
 	function checkSeat(name){
 		
+		//seat 번호 가져오기 //A5, C18
+ 		name = $(name).attr('name'); 
+		console.log(name);
+		console.log(typeof name);
 
-		var grade=1; 
-		var ck = $(name).attr("name");
-		console.log("ck : " + ck);
-
-		var rw = ck.substring(0,1);
-		var cl = ck.substring(1,2); 
-		console.log("rw : " + rw);
+		//파싱해서 row와 col로 나누기
+		var rw = name.substring(0,1);
+		var cl = name.substring(1,2); 
+		console.log("rw : " +rw);
 		console.log("cl : " + cl);
 
 		
+		var grade=1; 
+
+		var ck = $(name).attr("name");
+
 		
 		switch(seatColor) {
 
 		//좌석 삭제
 		case 0:
 			
-			
+			//클릭시 name값에 'del' 삽입
 			if(ck=='del'){
-				$(name).attr("name","");
-				$(name).find("span").css('border','2px solid #ed8c00');
-				$(name).css('background','#666')
+				$(name).attr("name","h");
+				$(name).css('background-color','orange');
 			}else{
-				$(name).find("span").css('border','0');
 				$(name).css('background-color','black');
-				// vo.grade=0; (k k 0)
 				//vo의 row가 A, col이 B인 것을 찾아 grade 값 바꾸기
 				$(name).attr("name","del");
-				for(i=0; i<listLength; i++){
-					if(list[i].row == rw && list[i].col == cl){
-						list[i].grade = 0;
-						console.log("-----------:"+list[i].grade);
-					}
-				}
-
 				
 				grade=0;
 			}
@@ -318,12 +327,7 @@
 			if(ck!='del'){
 			$(name).find("span").css('border','2px solid #ed8c00');
 			$(name).css('background','#666')
-				for(i=0; i<listLength; i++){
-					if(list[i].row == rw && list[i].col == cl){
-						list[i].grade = 1;
-						console.log("-----------:"+list[i].grade);
-					}
-				}
+			grade=1;
 			}
 			
 			
@@ -338,12 +342,7 @@
 			$(name).find("span").css('border','2px solid #01c73c');
 			$(name).css('background','#666')
 			
-				for(i=0; i<listLength; i++){
-					if(list[i].row == rw && list[i].col == cl){
-						list[i].grade = 2;
-						console.log("-----------:"+list[i].grade);
-					}
-				}
+			grade=2;
 			}
 			
 			break;
@@ -352,15 +351,10 @@
 		case 3:
 			// 테두리 색 맞게 바꾸기
 			// vo.grade = 3
-			if(ck!='del'){
 			$(name).find("span").css('border','2px solid #f71708');
 			$(name).css('background','#666')
-				for(i=0; i<listLength; i++){
-					if(list[i].row == rw && list[i].col == cl){
-						list[i].grade = 3;
-					}
-				}
-			}
+			grade=3;
+			
 			
 			break;
 		}
@@ -379,53 +373,40 @@
 
 
 
+
+	
+
 	$("#btn_insert").click(function(){
 	
-		
-		list.sort(function(a,b) {
+		var row = $("#seat_row").val();
+		var col = $("#seat_col").val();
+		for(i=0; i<row; i++){
+			var ch = String.fromCharCode(i+65);
+			//console.log(typeof ch);
+				for(j=1; j<=col; j++){
+					var sId = ch+j;
+					console.log($(sId).attr("class"));
 
-			return a["grade"] - b["grade"];
-		});
+					if(!$(sId).attr("class")=="col"){
+						console.log(sId);
+						list.push(sId);
+					}
 
-		var cnt = 0; 
-		
-		for(i=0; i<listLength; i++){
-			if(list[i].grade=="0"){
-				cnt = cnt+1;
-			}
-
-			console.log(list[i]);
-		}
-		console.log(cnt);
-		list.splice(0,cnt);
-
-		
- 
-		list = JSON.stringify(list);
-
-		$.ajaxSettings.traditional = true;
-		$.ajax({ 
-			url : "./seatInsert", 
-			type : "POST", 
-			data : {"list":list},
-			success : function(data) { 
-				if(data>0){
-			 		alert("전송 성공");
 				}
-			} 
-		});
+		}
 
-/* 		
-		$.post("./seatInsert",{list:list},function(data){
+
+
 		
+		$.post("./seatInsert",{list:list},function(data){
+			if(data>0){
+		 		alert("전송 성공");
+			}
 		})
- */
+
 
 		
 	});
-
-
-	console.log("test : " + list.length);
 	
 	
 </script>

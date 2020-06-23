@@ -49,29 +49,30 @@
 	margin-right:3px;
 	width:16px;
 	height:15px;
-	background-color: orange;
+	background-color: #666;
 }
 
 
-.seats .seat_row .seat_group .seat a {
+.seats .seat_row .seat_group .seat .sb {
 	display:block;
+	position:relative;
 	height:100%;
 	cursor:pointer;
 	text-decoration:none;
 	text-align:center;
 	color:#fff;
+	cursor:pointer;
 }
 
 
-.seats .row .seat_group	.seat a .no {
+.no {
 	display:block;
-	width:15px;
-	height:15px;
-	line-height:15px;
+	height:100%;
 	overflow:hidden;
 	text-align:center;
-	font-size:10pxl
-	background-color: #333;
+	vertical-align:middle;
+	font-size:10px;
+	border:2px solid #ed8c00;
 	background-image: 0;
 }
 
