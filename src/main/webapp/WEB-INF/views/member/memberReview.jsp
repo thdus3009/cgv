@@ -29,6 +29,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+
 <div class="root">
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
@@ -43,12 +45,10 @@
 					</ul>
 				</div>
 			</div>
-			
-
-					
-
-				</div>
-			</div>
+		</div>
+	</div>
+	
+	
 				<div>
 					<div class="col_content">
 						<!----------------- contents aside -->
@@ -90,7 +90,10 @@
 		
 	<div class="container"> <!-- Write, Update -->
 		<h4>내가 본 영화</h4><br>
-
+		
+		<button type="button" id="btn2" data-toggle="modal" data-target="#myModal2" style="display: none;"></button>
+	
+	
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
 			<div class="modal-dialog">
@@ -124,6 +127,48 @@
 			</div>
 		</div>
 
+
+		<!-- The Modal2 -->
+		<div class="modal" id="myModal2">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<form id="form" name="form" method="post"
+						action="./review/review_Write">
+						<div class="modal-header" style="background-color: #333;">
+							<h4 class="modal-title"
+								style="color: #F2F0E5; font-size: X-large;">관람 포인트 선택</h4>
+							<button id="exit" type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+						<!-- Modal body -->
+						<div class="modal-body">
+							<div style="width: 100%; height: 100px; text-align: center; padding-top: 20px;"><span style="font-size: large; color: #333333">이 영화의 관람포인트를 선택해 주세요!</span><br>
+							<span style="color: red;">중복선택</span>이 가능합니다.</div>
+							
+							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">매력 포인트</div>
+								<div style="font-weight: lighter;">
+								<input type="checkbox" value="감독연출" class="charmPoint"> 감독연출
+								<input type="checkbox" value="스토리" class="charmPoint"> 스토리 
+								<input type="checkbox" value="영상미" class="charmPoint"> 영상미
+								<br>
+								<input type="checkbox" value="배우연기" class="charmPoint"> 배우연기
+								<input type="checkbox" value="OST" class="charmPoint"> OST &ensp; 
+								
+								</div>
+							</div>
+						</div>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<input type="button" class="btn btn-danger" id="popupBtn" value="확인">
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
 
 		<!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
 

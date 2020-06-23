@@ -12,7 +12,14 @@
 		
 		
 		if(mContents.value.length>=10){
-			alert("작성완료");	
+			
+			if(confirm("관람평이 등록되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
+				document.getElementById("btn2").click();
+			}else{
+				alert("아니오");
+			}
+			
+			
 	
 			$.ajax({
 
