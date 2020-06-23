@@ -471,7 +471,10 @@ body{
     background-position: 0 0;
 }
 
-
+#ticket .section-seat .theater .seats .row .seat.preSelect a .no{
+	background-color: #ad1712;
+    background-position: 0 0;
+}
 
 /* 좌석 설명 */
 

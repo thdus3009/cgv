@@ -124,13 +124,25 @@
 															<c:forEach begin="1" end="10" var="i">
 																<!--blocked(선택불가)  reserved(이미 예매)  -->
 																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
-																<div class="seat " style="left:${48+(i*16)}px"> 
-																	<a href="#">
-																		<span class="no">${i}</span>
-																		<span class="sreader"></span>
-																		<span class="sreader mod"></span>
-																	</a>
-																</div>
+																
+																<c:if test="${i % 3 eq 0}">
+																	<div class="seat reserved" style="left:${48+(i*16)}px"> 
+																		<a href="#" onclick="return false;"> 
+																			<span class="no">${i}</span>
+																			<span class="sreader"></span>
+																			<span class="sreader mod"></span>
+																		</a>
+																	</div>
+																</c:if>
+																<c:if test="${i % 3 ne 0}">
+																	<div class="seat" style="left:${48+(i*16)}px"> 
+																		<a href="#" onclick="return false;">
+																			<span class="no">${i}</span>
+																			<span class="sreader"></span>
+																			<span class="sreader mod"></span>
+																		</a>
+																	</div>
+																</c:if>
 															</c:forEach>
 															
 														</div>
