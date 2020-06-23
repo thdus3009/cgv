@@ -63,22 +63,21 @@
 							</div>
 						</div>
 
-						<!-- 내용 -->
 						<div class="col_detail">
 							<!-- 영화 정보 -->
 							<!-- 기존 정보 불러오기 -->
-							<form action="">
-								<h1>영화 등록</h1>
-								<ul>
-									<li>포스터 <input type="file"></li>
-									<li>제목 <input type="text"></li>
-									<li>영문제목 <input type="text"></li>
-									<li>상영시간(분) <input type="text"></li>
-									<li>감독 <input type="text"></li>
-									<li>배우(,) <input type="text"></li>
-									<li>장르 <input type="text"></li>
-									<li>연령대 
-										<select>
+							<h1 class="top-bar">영화 등록</h1>
+							<form action="" class="movie-info">
+								<ul class="">
+									<li><span class="what">포스터</span><input type="file"></li>
+									<li><span class="what">제목</span><input class="input-text" type="text"></li>
+									<li><span class="what">영문제목</span><input class="input-text" type="text"></li>
+									<li><span class="what">상영시간(분)</span><input class="input-text" type="text"></li>
+									<li><span class="what">감독</span><input class="input-text" type="text"></li>
+									<li><span class="what">배우(,)</span><input class="input-text" type="text"></li>
+									<li><span class="what">장르</span><input class="input-text" type="text"></li>
+									<li><span class="what">연령대</span> 
+										<select class="input-select">
 											<option>전체관람가</option>
 											<option>12세이상관람가</option>
 											<option>15세이상관람가</option>
@@ -86,13 +85,15 @@
 											<option>미정</option>
 										</select>
 									</li>
-									<li>국가 <input type="text"></li>
-									<li>개봉일 <input type="date"></li>
-									<li>줄거리<textarea rows="" cols=""></textarea>
+									<li><span class="what">국가</span><input class="input-text" type="text"></li>
+									<li><span class="what">개봉일</span><input class="input-text" type="date"></li>
+									<li><span class="what">줄거리</span><textarea class="input-textarea"></textarea>
 									</li>
 								</ul>
-								<button type="button" onClick="location.href='./movieList'">취소</button>
-								<button type="submit">등록</button>
+								<div class="button-bar">
+									<button class="cancle" type="button" onClick="location.href='./movieList'">취소</button>
+									<button class="del" type="submit">등록</button>
+								</div>
 							</form>
 						</div>
 

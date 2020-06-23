@@ -79,3 +79,32 @@ table{
     border-top: 1px solid #b8b6aa;
     border-bottom: 1px solid #b8b6aa;
 }
+
+/*페이저*/
+
+.pager{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.pagination {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+
+.pagination > li{
+    padding: 0 8px;
+    color: #333333;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+li > a{
+    color: inherit;
+    text-decoration: none;
+}
+
