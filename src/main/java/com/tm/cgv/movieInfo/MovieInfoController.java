@@ -106,5 +106,36 @@ public class MovieInfoController {
 		
 		return mv;
 	}
-
+	
+	@GetMapping("movieSelect")
+	public ModelAndView movieSelect(MovieInfoVO movieInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		movieInfoVO=movieInfoService.movieSelect(movieInfoVO);
+		mv.addObject("vo",movieInfoVO);
+		mv.addObject("path","Select");
+		mv.setViewName("movie/movieSelect");
+		return mv;
+	}
+	
+	@GetMapping("movieUpdate")
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO)throws Exception{
+		movieInfoVO = movieInfoService.movieSelect(movieInfoVO);
+		
+		mv.addObject("vo",movieInfoVO);
+		mv.addObject("path","Update");
+		mv.setViewName("movie/movieWrite");
+		return mv;
+	}
+	
+	@PostMapping("movieUpdate")
+	public ModelAndView movieUpdate(ModelAndView mv,MultipartFile files,String videolink,MovieInfoVO movieInfoVO) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
+		if(result>0) {
+			mv.setViewName("redirect:movieList");
+		}else {
+			System.out.println("실패");
+		}
+		return mv;
+	}
+	
 }

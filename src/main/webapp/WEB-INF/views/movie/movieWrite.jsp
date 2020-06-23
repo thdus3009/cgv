@@ -84,12 +84,12 @@
 					
 						<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
 						<div class="customer_top">
-							<h2 class="tit">영화 등록</h2>
+							<h2 class="tit">Movie${path} </h2>
 							<p class="stit">CGV이용과 관련된 사항에 대하여서 작성가능합니다.</p>
 						</div>
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-						<form action="./movieWrite" method="post" enctype="multipart/form-data">
+						<form action="./${board}${path}" method="post" enctype="multipart/form-data">
 							<fieldset>
 								
 								<div class="tbl_write">
@@ -105,6 +105,16 @@
 										      <label for="files">타이틀 이미지:</label>
 										      <input type="file" class="form-control files" id="files" placeholder="타이틀 이미지 선택" name="files" >
 										    </div>
+										    
+										    <c:if test="${path  eq 'Update'}">
+										    <div class="form-group">
+											    <c:forEach  items="${vo.movieImageVOs}" var="ImageVO">
+												      	<p>${ImageVO.originName}<i id="${ImageVO.fileNum}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
+												  </c:forEach>
+											  </div>
+										    </c:if>
+										    
+										    
 										     <div class="form-group">
 										      <label for="videolink">예고 영상:</label>
 										      <input type="text" class="form-control videolink" id="videolink" placeholder="예고편 영상 링크" name="videolink" >
@@ -149,12 +159,14 @@
 											  <c:set var="now" value="<%=new java.util.Date()%>" />
 											<c:set var="sysYear"><fmt:formatDate value="${now}" pattern="yyyy" /></c:set> 
 											<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"  var="i" />
-								
-								
-											  <div class="form-group">
-											    <label for="createAt">생성일:</label> 
-											    <input type="date" class="form-control" id="createAt" name="createAt" value="${i}" readonly="readonly" >
-											  </div>
+											
+											  <c:if test="${path eq 'Write' }" >
+												  <div class="form-group">
+												    <label for="createAt">생성일:</label> 
+												    <input type="date" class="form-control" id="createAt" name="createAt" value="${i}" readonly="readonly" >
+												  </div>
+											  </c:if>
+											  
 											  <div class="form-group">
 											    <label for="contents">Contents:</label>
 											    <textarea rows="" cols="" class="form-control" id="contents" name="contents" ></textarea>

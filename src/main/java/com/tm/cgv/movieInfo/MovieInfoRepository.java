@@ -17,6 +17,10 @@ public interface MovieInfoRepository {
 	public List<MovieInfoVO> movieListAll(MovieInfoVO movieVO) throws Exception;
 	
 	public long movieWrite(MovieInfoVO movieInfoVO) throws Exception;
+	
+	public MovieInfoVO movieSelect (MovieInfoVO movieInfoVO) throws Exception;
+	
+	public long movieUpdate(MovieInfoVO movieInfoVO) throws Exception;
 
 
 }

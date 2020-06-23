@@ -86,7 +86,7 @@
 								<span class="screentype"></span>
 							</div> <!-- 아래 부분 -->
 							<div class="box-contents">
-								<a href="#"><strong class="title">${list.title}</strong> </a>
+								<a href="./movieSelect?num=${list.num}"><strong class="title">${list.title}</strong> </a>
 								<div class="score">
 									<strong class="percent">예매율<span>${list.rate}%</span></strong>
 									<div class="egg-gage small">

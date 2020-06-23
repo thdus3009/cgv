@@ -59,7 +59,7 @@ public class MovieInfoService {
 	
 	public long movieWrite(MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
 		
-		File file = filePathGenerator.getUseClassPathResource(filePath);//upload/movie 경로
+		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
 		//테이블에 넣어
 		
 		long result = movieInfoRepository.movieWrite(movieInfoVO);
@@ -84,6 +84,38 @@ public class MovieInfoService {
 		}
 		
 		return result;
+	}
+	
+	public MovieInfoVO movieSelect(MovieInfoVO movieInfoVO) throws Exception{
+		
+		return movieInfoRepository.movieSelect(movieInfoVO);
+		
+	}
+	
+	public long movieUpdate(MovieInfoVO movieInfoVO,MultipartFile files, String videolink)throws Exception{
+		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
+		
+		long result = movieInfoRepository.movieUpdate(movieInfoVO);
+		
+		if(files.getSize()>0) {
+			String fileName = fileManager.saveTransfer(files, file);//파일, 경로
+			MovieImageVO movieImageVO = new MovieImageVO();
+			movieImageVO.setMovieNum(movieInfoVO.getNum());
+			movieImageVO.setFileName(fileName);
+			movieImageVO.setOriginName(files.getOriginalFilename());
+			//movieImage테이블에 삽입
+			result = movieImageRepository.movieImageInsert(movieImageVO);
+		}
+		if(videolink!=null) {
+			MovieVideoVO movieVideoVO = new MovieVideoVO();
+			movieVideoVO.setMovieNum(movieInfoVO.getNum());
+			movieVideoVO.setVideolink(videolink);
+			
+			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
+		}
+		
+		return result;
+		
 	}
 	
 }
