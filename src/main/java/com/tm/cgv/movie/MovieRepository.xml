@@ -6,6 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.movie.MovieRepository">
  	
+ 	
+ 	<select id="movieSelectOne" parameterType="Integer" resultType="MovieVO">
+ 		select * from movieInfo where num = #{num}
+ 	</select>
+ 	
  	<select id="movieNumCount" resultType="Long">
  		select count(num) from movieInfo
  	</select>

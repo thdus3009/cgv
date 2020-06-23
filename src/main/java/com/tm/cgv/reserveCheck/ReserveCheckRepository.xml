@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="theaterNum" property="theaterNum"/>
 			<result column="screenDate" property="screenDate"/>
 			<result column="screenTime" property="screenTime"/>
+			<result column="remainSeat" property="remainSeat"/>
 		</collection>
 		
 		<collection property="theaterVOs" javaType="List" ofType="TheaterVO">
@@ -43,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select * from 
 		(select num as mNum,title from movieInfo) M
 		join
-		(select num as tNum, movieNum, theaterNum,screenDate,screenTime  from movieTime) T
+		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat  from movieTime) T
 		on(M.mNum = T.movieNum)) A
 		join
 		(select num as sNum,cinemaNum,name,seatCount,filmType from theater) C

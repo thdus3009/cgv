@@ -15,5 +15,7 @@ public interface MovieRepository {
 	public List<MovieVO> movieList(Pager pager) throws Exception;
 	
 	public List<MovieVO> movieListAll(MovieVO movieDTO) throws Exception;
+	
+	public MovieVO movieSelectOne(int num) throws Exception;
 
 }

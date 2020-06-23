@@ -9,4 +9,5 @@ public class MovieTimeVO {
 	private int theaterNum;
 	private String screenDate;
 	private String screenTime;
+	private int remainSeat;
 }

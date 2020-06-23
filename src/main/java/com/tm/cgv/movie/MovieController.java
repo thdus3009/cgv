@@ -69,6 +69,10 @@ public class MovieController {
 //		}
 		
 		
+//		for (CinemaVO vo : cinemaList) {
+//			System.out.println(vo.getLocal());
+//		}
+		
 		mv.addObject("list", list);
 		mv.addObject("cinemaLocalList", cinemaLocalList);
 		mv.addObject("cinemaList", cinemaList);

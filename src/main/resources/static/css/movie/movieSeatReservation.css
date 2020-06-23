@@ -436,9 +436,45 @@ body{
     background-position: -1000px 0;
 }
 
+#ticket .section-seat .theater .seats .row .seat.rating_economy a .no{
+	width: 11px;
+    height: 11px;
+    line-height: 11px;
+    border: solid 2px #ed8c00;
+}
+
+#ticket .section-seat .theater .seats .row .seat.rating_comfort a .no{
+	width: 11px;
+    height: 11px;
+    line-height: 11px;
+    border: solid 2px #01c73c;
+}
+
+#ticket .section-seat .theater .seats .row .seat.rating_prime a .no{
+	width: 11px;
+    height: 11px;
+    line-height: 11px;
+    border: solid 2px #f71708;
+}
+
+
+
+#ticket .section-seat .theater .seats .row .seat.rating_prime a .no{
+	width: 11px;
+    height: 11px;
+    line-height: 11px;
+    border: solid 2px #f71708;
+}
+
+#ticket .section-seat .theater .seats .row .seat.selected a .no{
+	background-color: #ad1712;
+    background-position: 0 0;
+}
+
 
 
 /* 좌석 설명 */
+
 #ticket .section-seat .theater_minimap .legend{
 	position: absolute;
     top: 20px;

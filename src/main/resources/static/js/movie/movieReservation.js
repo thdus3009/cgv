@@ -396,12 +396,13 @@ $(function() {
 				var li = '<li data-time="'+ result[i].movieTimeVOs[0].screenTime +'" data-index="'+ result[i].movieTimeVOs[0].num +'">'
 					+'<a class="button" href="#" title="">'
 					+'<span class="time"><span>'+ result[i].movieTimeVOs[0].screenTime +'</span></span>'
-					+'<span class="count">92석</span>'
+					+'<span class="count">'+ result[i].movieTimeVOs[0].remainSeat +'석</span>'
 					+'<span class="sreader mod"> 선택불가</span>'
 					+'</a>'
 					+'</li>'
 				
-				var query = '<div class="theater" data-name="'+ result[i].theaterVOs[0].filmType +'" data-floor="'+ result[i].theaterVOs[0].name +'">'
+				var query = '<div class="theater" data-name="'+ result[i].theaterVOs[0].filmType +'" data-floor="'+ result[i].theaterVOs[0].name 
+					+'" data-seatcount="'+ result[i].theaterVOs[0].seatCount +'">'
 					+'<span class="title">'
 					+'<span class="name">'+ fType +'</span>'
 					+'<span class="floor">'+ result[i].theaterVOs[0].name +'</span>'
@@ -467,8 +468,12 @@ $(function() {
 			var select_time= $("#sDate").val() +" "+$(this).data("time");
 			$("#select_day").text(select_time);
 			
-			console.log($(this).parent().parent().data("name"));
-			console.log($(this).parent().parent().data("floor"));
+//			console.log($(this).parent().parent().data("name"));
+//			console.log($(this).parent().parent().data("floor"));
+//			console.log($(this).parent().parent().data("seatcount"));
+			
+			//seatCount
+			$("#seatCount").val($(this).parent().parent().data("seatcount"));
 			
 			
 			//theater

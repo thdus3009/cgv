@@ -367,12 +367,14 @@
 		</div>
 		
 		
-		<form action="../reservation/seatReservation" id="data-from">
+		<form action="../reservation/seatReservation" id="data-from" method="post">
 			<input type="hidden" id="movieNum" name="movieNum" value="">
 			<input type="hidden" id="movieTimeNum" name="movieTimeNum" value="">
 			<input type="hidden" id="cinemaName" name="cinemaName" value="">
 			<input type="hidden" id="theaterName" name="theaterName" value="">
 			<input type="hidden" id="filmType" name="filmType" value="">
+			
+			<input type="hidden" id="seatCount" name="seatCount" value="">
 			
 			<input type="hidden" id="sDate" value="">
 		</form>
@@ -443,19 +445,16 @@
 	</div>
 
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
-
 <script type="text/javascript">
-
     var list = [];
     
     <c:forEach items="${cinemaList}" var="vo">
        var cinemaVO = {
-             local: `${vo.local}`,
-             name: `${vo.name}`
+             name: `${vo.name}`,
+             local:	`${vo.local}`
        };
        
        list.push(cinemaVO);   
-       
     </c:forEach>
 
 // 	console.log("size: "+list.length);
@@ -469,7 +468,7 @@
 // 			console.log("폼 값 : "+$(this).data("local"));
 			
 			if(list[i].local == $(this).data("local")){
-// 				console.log(list[i].name+" "+list[i].local);
+				console.log(list[i].name+" "+list[i].local);
 				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a>'+list[i].name+'<span class="sreader"></span></a></li>');
 			}
 			

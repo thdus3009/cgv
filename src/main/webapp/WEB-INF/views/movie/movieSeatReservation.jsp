@@ -57,27 +57,27 @@
 								<div class="section section-numberofpeople">
 									<div class="col-body">
 										<div class="numberofpeople-select">
-											<div class="group adult" style="display: block;">
+											<div class="group adult common" style="display: block;">
 												<span class="title">일반</span>
 												<ul class="person-num">
 													<c:forEach begin="0" end="8" var="i">
-														<li><a href="#">${i}</a></li>	
+														<li data-index="${i}"><a href="#">${i}</a></li>	
 													</c:forEach>
 												</ul>
 											</div>
-											<div class="group adult" style="display: block;">
+											<div class="group adult teenager" style="display: block;">
 												<span class="title">청소년</span>
 												<ul class="person-num">
 													<c:forEach begin="0" end="8" var="i">
-														<li><a href="#">${i}</a></li>	
+														<li data-index="${i}"><a href="#">${i}</a></li>	
 													</c:forEach>
 												</ul>
 											</div>
-											<div class="group adult" style="display: block;">
+											<div class="group adult preference" style="display: block;">
 												<span class="title">우대</span>
 												<ul class="person-num">
 													<c:forEach begin="0" end="8" var="i">
-														<li><a href="#">${i}</a></li>	
+														<li data-index="${i}"><a href="#">${i}</a></li>	
 													</c:forEach>
 												</ul>
 											</div>
@@ -92,19 +92,19 @@
 								<div class="section section-screen-select">
 									<div id="user-select-info">
 										<p class="theater-info">
-											<span class="site">CGV 홍대</span>
-											<span class="screen">1관</span>
+											<span class="site">CGV ${reservationVO.cinemaName}</span>
+											<span class="screen">${reservationVO.theaterName}</span>
 											<span class="seatNum">
 												남은좌석
-												<b class="restNum">86</b>
+												<b class="restNum">${movieTimeVO.remainSeat}</b>
 												/
-												<b class="totalNum">153</b>	
+												<b class="totalNum">${seatCount}</b>	
 											</span>
 										</p>
 										<p class="playYMD-info">
-											<b>2020.06.23</b>
+											<b>${movieTimeVO.screenDate}</b>
 											<b class="exe">(화)</b>
-											<b>11:00 ~ 13:01</b>
+											<b>${movieTimeVO.screenTime} ~ ${endTime}</b>
 										</p>
 									</div>
 								</div>
@@ -122,7 +122,9 @@
 													<div class="seat_group">
 														<div class="group"> 
 															<c:forEach begin="1" end="10" var="i">
-																<div class="seat" style="left:${48+(i*16)}px"> <!--blocked  reserved -->
+																<!--blocked(선택불가)  reserved(이미 예매)  -->
+																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+																<div class="seat " style="left:${48+(i*16)}px"> 
 																	<a href="#">
 																		<span class="no">${i}</span>
 																		<span class="sreader"></span>
@@ -189,11 +191,15 @@
 						</span>
 						<div class="row movie_title colspan2" style="display: block;">		 <!-- style="display: block;" -->
 							<span class="data letter-spacing-min ellipsis-line2">
-								<a id="select_title" href="#" target="_blank" title="">라라랜드</a>
+								<a id="select_title" href="#" target="_blank" title="">${movieVO.title}</a>
 							</span>
 						</div>
 						<div class="row movie_type" style="display: block;"> 						<!-- style="display: block;" -->
-							<span id="select_movieType" class="data ellipsis-line1" title="2D">2D</span>
+							<span id="select_movieType" class="data ellipsis-line1" title="">
+								<c:if test="${reservationVO.filmType == 0}">2D</c:if>
+								<c:if test="${reservationVO.filmType == 1}">3D</c:if>
+								<c:if test="${reservationVO.filmType == 2}">4D</c:if>
+							</span>
 						</div>
 						<div class="row movie_rating" style="display: none;"> 					<!-- style="display: block;" -->
 							<span id="select_ageLimit" class="data" title="12세 관람가">12세 관람가</span>
@@ -204,15 +210,15 @@
 					<div class="info theater">
 						<div class="row name" style="display: block;"> <!-- style="display: block;" -->
 							<span class="header">극장</span>
-							<span class="data letter-spacing-min ellipsis-line1"><a id="select_cinema" href="#" target="_blank" title="">CGV>홍대</a></span>
+							<span class="data letter-spacing-min ellipsis-line1"><a id="select_cinema" href="#" target="_blank" title="">CGV>${reservationVO.cinemaName}</a></span>
 						</div>
 						<div class="row date" style="display: block;" > <!-- style="display: block;" -->
  							<span class="header">일시</span>
-							<span id="select_day" class="data" title="">2020.06.20(수) 11:30</span>
+							<span id="select_day" class="data" title="">${movieTimeVO.screenDate}(수) ${movieTimeVO.screenTime}</span>
 						</div>
 						<div class="row screen" style="display: block;"> <!-- style="display: block;" -->
 							<span class="header">상영관</span>
-							<span id="select_theater" class="data" title="">1관</span>
+							<span id="select_theater" class="data" title="">${reservationVO.theaterName}</span>
 						</div>
 						<div class="row number" style="display: none;"> <!-- style="display: block;" -->
 							<span class="header">인원</span>
@@ -281,6 +287,7 @@
 		
 	</div>
 	
+	<script type="text/javascript" src="/js/movie/movieSeatReservation.js"></script>
 	
 	
 </body>

@@ -11,25 +11,28 @@ import com.tm.cgv.util.Pager;
 public class MovieService {
 
 	@Autowired
-	private MovieRepository movieDAO;
+	private MovieRepository movieRepository;
 	
 	public List<MovieVO> movieListAll(MovieVO movieDTO) throws Exception{
-		return movieDAO.movieListAll(movieDTO);
+		return movieRepository.movieListAll(movieDTO);
 	}
 	
 	public List<MovieVO> movieListMore(Pager pager) throws Exception{
-		Integer count = (int)movieDAO.movieNumCount();
+		Integer count = (int)movieRepository.movieNumCount();
 		pager.setPerPage(count);
 		
-		return movieDAO.movieList(pager);
+		return movieRepository.movieList(pager);
 	}
 	
 	public List<MovieVO> movieList(Pager pager) throws Exception{
-		
 		pager.setPerPage(7);
 		pager.makeRow();
 		
-		return movieDAO.movieList(pager);
+		return movieRepository.movieList(pager);
+	}
+	
+	public MovieVO movieSelectOne(int num ) throws Exception{
+		return movieRepository.movieSelectOne(num);
 	}
 	
 }
