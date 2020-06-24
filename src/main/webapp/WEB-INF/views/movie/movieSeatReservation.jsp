@@ -61,7 +61,7 @@
 												<span class="title">일반</span>
 												<ul class="person-num">
 													<c:forEach begin="0" end="8" var="i">
-														<li data-index="${i}"><a href="#">${i}</a></li>	
+														<li data-index="${i}"><a href="#" onclick="return false;">${i}</a></li>	
 													</c:forEach>
 												</ul>
 											</div>
@@ -69,7 +69,7 @@
 												<span class="title">청소년</span>
 												<ul class="person-num">
 													<c:forEach begin="0" end="8" var="i">
-														<li data-index="${i}"><a href="#">${i}</a></li>	
+														<li data-index="${i}"><a href="#" onclick="return false;">${i}</a></li>	
 													</c:forEach>
 												</ul>
 											</div>
@@ -77,7 +77,7 @@
 												<span class="title">우대</span>
 												<ul class="person-num">
 													<c:forEach begin="0" end="8" var="i">
-														<li data-index="${i}"><a href="#">${i}</a></li>	
+														<li data-index="${i}"><a href="#" onclick="return false;">${i}</a></li>	
 													</c:forEach>
 												</ul>
 											</div>
