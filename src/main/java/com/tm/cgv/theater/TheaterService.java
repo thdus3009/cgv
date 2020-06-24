@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.seat.SeatRepository;
+import com.tm.cgv.seat.SeatSpaceVO;
 import com.tm.cgv.seat.SeatVO;
 
 @Service
@@ -34,7 +35,7 @@ public class TheaterService {
 	
 	//Insert
 	@Transactional
-	public int theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade) throws Exception{
+	public int theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{
 		//theaterVO Insert 하고 오기
 		int result = theaterRepository.theaterInsert(theaterVO);
 		int result2 = 0;
@@ -51,7 +52,35 @@ public class TheaterService {
 				seatVO.setRow(row[i]);
 				seatVO.setCol(Integer.parseInt(col[i]));
 				seatVO.setGrade(Integer.parseInt(grade[i]));
-				seatRepository.seatInsert(seatVO);
+				result2 = seatRepository.seatInsert(seatVO);
+			}
+		}
+		
+		if(result2>0) {
+			//seatSpaceVO Insert 하기
+			//SeatNum 필요
+			int theaterNum = seatRepository.theaterSelect();
+			SeatSpaceVO seatSpaceVO = new SeatSpaceVO();
+			
+			//row 넣기
+			if(row_space!=null && row_space.length>0) {
+				for(int i=0; i<row_space.length; i++) {
+					//다녀오기
+					seatSpaceVO.setTheaterNum(theaterNum);
+					seatSpaceVO.setRowOrCol(0);
+					seatSpaceVO.setIndex(Integer.parseInt(row_space[i]));
+					seatRepository.seatSpaceInsert(seatSpaceVO);
+				}
+			}
+			
+			if(col_space!=null && col_space.length>0) {
+				for(int i=0; i<col_space.length; i++) {
+					//다녀오기
+					seatSpaceVO.setTheaterNum(theaterNum);
+					seatSpaceVO.setRowOrCol(1);
+					seatSpaceVO.setIndex(Integer.parseInt(col_space[i]));
+					seatRepository.seatSpaceInsert(seatSpaceVO);
+				}
 			}
 		}
 		

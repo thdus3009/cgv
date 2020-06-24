@@ -52,34 +52,44 @@ public class TheaterController {
 	
 	//Insert
 	@PostMapping("theaterInsert")
-	public ModelAndView theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade) throws Exception{	
+	public ModelAndView theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		
 
-		System.out.println(theaterVO.getCinemaNum());
-		System.out.println(theaterVO.getName());
-		System.out.println(theaterVO.getFilmType());
-		System.out.println(theaterVO.getSeatCount());
+//		System.out.println(theaterVO.getCinemaNum());
+//		System.out.println(theaterVO.getName());
+//		System.out.println(theaterVO.getFilmType());
+//		System.out.println(theaterVO.getSeatCount());
+//		
+//		System.out.println(row.length);
+//		System.out.println(col.length);
+//		System.out.println(grade.length);
+//		
+//		System.out.println(row[0]);
+//		System.out.println(row[1]);
+//		System.out.println(row[2]);
+//		System.out.println(row[3]);
+//		System.out.println(row[4]);
+//		
+//		for(int i=0; i<row_space.length; i++) {
+//			System.out.println("row_space : " + row_space[i]);
+//		}
+//		
+//		for(int j=0; j<col_space.length; j++) {
+//			System.out.println("col_space : " + col_space[j]);
+//		}
+//		
 		
-		System.out.println(row.length);
-		System.out.println(col.length);
-		System.out.println(grade.length);
-		
-		System.out.println(row[0]);
-		System.out.println(row[1]);
-		System.out.println(row[2]);
-		System.out.println(row[3]);
-		System.out.println(row[4]);
 
 		//theaterVO 하나 삽입 후 
 		//삽입 성공한 theaterVO의 theaterNum을 가져와서
 		
 		//theaterNum  col  row  grade  >> 여러개삽입
 		
-		int result = theaterService.theaterInsert(theaterVO, row, col, grade);
+		int result = theaterService.theaterInsert(theaterVO, row, col, grade, row_space, col_space);
 		
 		if(result>0) {
-			//mv.setViewName("redirect:./theaterList");
+			mv.setViewName("redirect:./theaterList");
 		}else {
 			System.out.println("등록 실패");
 		}

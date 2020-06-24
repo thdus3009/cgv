@@ -7,4 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into seat (theaterNum, `row`, col, grade)
 		values(#{theaterNum},#{row},#{col},#{grade})
 	</insert>
+	
+	<select id="theaterSelect" resultType="Integer">
+		select max(num) from theater;
+	</select>
+	
+	<insert id="seatSpaceInsert" parameterType="SeatSpaceVO">
+		insert into seatSpace values (0, #{theaterNum}, #{rowOrCol}, #{index})
+	</insert>
 </mapper>

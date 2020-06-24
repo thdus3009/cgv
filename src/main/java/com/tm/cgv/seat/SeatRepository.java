@@ -5,5 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SeatRepository {
 
-	public void seatInsert(SeatVO seatVO) throws Exception;
+	public int seatInsert(SeatVO seatVO) throws Exception;
+	
+	public int theaterSelect() throws Exception;
+	
+	public void seatSpaceInsert(SeatSpaceVO SeatSpaceVO) throws Exception;
 }

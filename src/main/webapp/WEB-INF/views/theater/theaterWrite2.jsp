@@ -167,7 +167,7 @@
 			   	 </div>
 			  </div>
 			  
-				<br>
+
 				<div class="contents">
 					<div class="seats" id="seats_list">
 						<!-- <div class="seat_row">
@@ -248,6 +248,8 @@
 
 	var listLength = 0;
 
+
+	
 	function makeVo(row, col, grade){
 		var vo = {
 			"row":row,
@@ -257,17 +259,7 @@
 
 		list.push(vo);
 	}
-
 	
-
-	
-	var rowList = [];
-	var colList = [];
-	
-	function spaceVO(){
-		var l = [space, num]
-		spaceList.push(vo);
-	}
 
 
 	
@@ -295,12 +287,8 @@
 			var ch = String.fromCharCode(i+65);
 	
 			console.log("ch : " + ch);
-			 src="../images/login/btn_home.png">	
 			
-			$("#seats_list").append('<div class="seat_row r'+(i+1)+'"><div class="bo ">'
-					+'<span class="row_minus" onclick="rowMinus('+i+')"><img src="../images/theater/minus.png"></span>'
-					+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="../images/theater/plus.png"></span>'
-					+'<div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
+			$("#seats_list").append('<div class="seat_row"><div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
 				for(j=1; j<=col; j++){
 
 					// row, col 에 값넣기
@@ -311,17 +299,11 @@
 	
 					//list.push(vo);
 					
-					$("#r"+i).append('<div class="seat c'+j+'"><span class="sb" onclick="checkSeat('+ch+j+')"  name="'+ch+j+'" id="'+ch+j+'"><span class="no">'+j+'</span></span></div>')	
-					if(i<1 && j<col){
-					$("#r"+i).find(".c"+j).append('<span class="col_minus" onclick="colMinus('+j+')"><img src="../images/theater/minus.png"></span>'+
-					'<span class="col_plus" onclick="colPlus('+j+')"><img src="../images/theater/plus.png"></span>');
-					}	//첫번째 로우라면 c1 위에 버튼 만들기
+					$("#r"+i).append('<div class="seat"><span class="sb" onclick="checkSeat('+ch+j+')"  name="'+ch+j+'" id="'+ch+j+'"><span class="no">'+j+'</span></span></div>')	
 
-
-					
 					
 				}
-			$("#seats_list").append('</div></div>');		/* <p style="display:none">dd</p> */
+			$("#seats_list").append('</div></div>');				
 			listLength = list.length;
 		}
 		
@@ -483,20 +465,21 @@
 			$("#frm").append(r);
 		}
 
-
-		for(y=0; y<rowList.length; y++){
-			var r = '<input type="hidden" name="row_space" value="'+rowList[y]+'">';
-			$("#frm").append(r);
-		}
-
-		for(z=0; z<colList.length; z++){
-			var r = '<input type="hidden" name="col_space" value="'+colList[z]+'">';
-			$("#frm").append(r);
-		}
-		
-
 		$("#frm").submit();
  
+		/* list = JSON.stringify(list);
+
+		$.ajaxSettings.traditional = true;
+		$.ajax({ 
+			url : "./seatInsert", 
+			type : "POST", 
+			data : {"list":list},
+			success : function(data) { 
+				if(data>0){
+			 		alert("전송 성공");
+				}
+			} 
+		}); */
 
 
 		
@@ -504,56 +487,7 @@
 
 
 
-
-	function rowPlus(i){
-		alert(i);
-		var c = '.r'+(i+1);	//r1
-		alert(c);
-		$(c).after('<p class="row_space rs'+(i+1)+'"></p>');
-		rowList.push(i+1);
-		console.log(rowList);
-		//
-
-
-		
-	}
-
-
-	function rowMinus(i){
-		//p태그 지우기
-		//List에서 i 제거하기
-		console.log(i + ">.<");
-		
-		$(".rs"+(i+1)).remove();
-
-		for(l=0; l<rowList.length; l++){
-			if(rowList[l]=(i+1)){
-				rowList.splice(l,1);
-				console.log(rowList);
-				break;
-			}
-		}
-		
-	}
-
-
-	function colPlus(j){
-		$(".c"+j).after('<span class="col_space cs'+j+'">　</span>')
-		colList.push(j);
-		console.log(colList);
-	}
-
-	function colMinus(j){
-		console.log(j);
-		$(".cs"+j).remove();
-		for(l=0; l<colList.length; l++){
-			if(colList[l]=j){
-				colList.splice(l,1);
-				console.log(colList);
-				break;
-			}
-		}
-	}
+	
 	
 	
 </script>
