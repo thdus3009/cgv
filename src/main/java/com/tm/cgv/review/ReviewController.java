@@ -51,7 +51,8 @@ public class ReviewController {
 //		
 //		return "member/memberReview"; 
 //	  }
-	 
+
+	
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(ModelAndView mv)throws Exception {
 		

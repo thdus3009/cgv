@@ -21,12 +21,10 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -139,7 +137,7 @@
 						<div class="modal-header" style="background-color: #333;">
 							<h4 class="modal-title"
 								style="color: #F2F0E5; font-size: X-large;">관람 포인트 선택</h4>
-							<button id="exit" type="button" class="close" data-dismiss="modal">&times;</button>
+							<button id="exit2" type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 
 						<!-- Modal body -->
@@ -149,20 +147,32 @@
 							
 							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">매력 포인트</div>
 								<div style="font-weight: lighter;">
-								<input type="checkbox" value="감독연출" class="charmPoint"> 감독연출
-								<input type="checkbox" value="스토리" class="charmPoint"> 스토리 
+								<input type="checkbox" value="감독연출" class="charmPoint"> 감독연출 &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="스토리" class="charmPoint"> 스토리 &emsp; &emsp; &emsp; &emsp;
 								<input type="checkbox" value="영상미" class="charmPoint"> 영상미
 								<br>
-								<input type="checkbox" value="배우연기" class="charmPoint"> 배우연기
-								<input type="checkbox" value="OST" class="charmPoint"> OST &ensp; 
-								
+								<input type="checkbox" value="배우연기" class="charmPoint"> 배우연기 &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="OST" class="charmPoint"> OST
+								<br><br>
+								</div>
+							</div>
+							
+							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">감정 포인트</div>
+								<div style="font-weight: lighter;">
+								<input type="checkbox" value="몰입감" class="emotionPoint"> 몰입감 &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="감동" class="emotionPoint"> 감동 &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="스트레스 해소" class="emotionPoint"> 스트레스 해소
+								<br>
+								<input type="checkbox" value="즐거움" class="emotionPoint"> 즐거움 &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="공감" class="emotionPoint"> 공감
+								<br><br>
 								</div>
 							</div>
 						</div>
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
-							<input type="button" class="btn btn-danger" id="popupBtn" value="확인">
+							<input type="button" class="btn btn-danger" id="popupBtn2" value="확인">
 						</div>
 						
 					</form>

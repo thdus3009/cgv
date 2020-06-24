@@ -45,6 +45,14 @@
 		}
 	
 		 });
+	 
+	 
+	 $("#popupBtn2").click(function(e){
+		 
+		 alert("누름");
+		 $("#exit2").click();
+	 
+	 });
 
 		//닫기버튼 누르면 내용초기화 & 글자 바이트 초기화
 	$("#exit").click(function(){
@@ -52,3 +60,8 @@
 		document.getElementById('bytes').innerText =0;
 		
 		});
+	
+	$("#exit2").click(function(){
+		$(".charmPoint").prop("checked", false);
+		$(".emotionPoint").prop("checked", false);
+		});	
