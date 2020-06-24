@@ -4,8 +4,10 @@
 
 $("#btn-more").click(function() {
 		var kind = $("#select").val();
+		var startRow = $("#startRow").val();
+		console.log(startRow);
 		
-		$.get("./movieListMore?startRow=8&kind="+kind,function(result){
+		$.get("./movieListMore?startRow="+(startRow)+7+"&kind="+kind,function(result){
 
 			console.log("result"+result);
 			$("#list-more").html(result);
@@ -20,7 +22,16 @@ $("#btn-more").click(function() {
 		var kind = $("#select").val();
 		location.href = "./movieList?kind="+kind;
 	});
-
+	
+	$("#btn_search").click(function() {
+		var search=$("#search").val();
+		console.log(search);
+		location.href = "./movieList?search="+search;
+		//$.get("./movieListSearch?search="+search,function(result){
+		//	console.log(result);
+		});
+		
+	
 	
 	
 	

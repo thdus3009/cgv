@@ -10,7 +10,7 @@ import com.tm.cgv.util.Pager;
 public interface MovieInfoRepository {
 	
 	
-	public long movieNumCount() throws Exception;
+	public long movieNumCount(Pager pager) throws Exception;
 	
 	public List<MovieInfoVO> movieList(Pager pager) throws Exception;
 	

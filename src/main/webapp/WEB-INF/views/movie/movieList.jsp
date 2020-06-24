@@ -67,6 +67,7 @@
 				</div>
 				
 				<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
+				<input type="hidden" value="${pager.startRow}" id="startRow">
 				
 <!-- 			리스트 출력부분 -->
 				<div class="sect-movie-chart">

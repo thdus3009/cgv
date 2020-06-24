@@ -34,6 +34,7 @@ public class MovieInfoController {
 		if(list != null) {
 			
 			mv.addObject("list", list);
+			mv.addObject("pager",pager);
 			mv.setViewName("movie/ajax/movieListMore");
 		}
 		return mv;
@@ -82,6 +83,9 @@ public class MovieInfoController {
 		
 		return mv;
 	}
+	
+	
+	
 	
 	@GetMapping("movieWrite")
 	public ModelAndView movieWrite(ModelAndView mv)throws Exception{
