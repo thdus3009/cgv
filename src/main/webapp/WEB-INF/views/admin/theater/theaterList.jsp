@@ -8,10 +8,8 @@
 <meta charset="UTF-8">
 <link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
-<link href="../css/Admin/AdminNoticeList.css" rel="stylesheet"
-	type="text/css">
-<link href="../css/member/memberMyPage.css" rel="stylesheet"
-	type="text/css">
+<link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
+<link href="../css/admin/theater/theaterList.css" rel="stylesheet" type="text/css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -74,7 +72,6 @@
 							<!-- 상단바 -->
 							<div class="top-bar">
 								<h1>영화관 리스트</h1>
-								<a href="">영화관 등록</a>
 								<!-- 검색 -->
 								<form action="" method="get" class="search-form">
 									<select class="select">
@@ -83,7 +80,8 @@
 										<option>주소</option>
 										<option>전화번호</option>
 									</select> <input type="text" class="serach-text">
-									<button type="submit" class="search">검색</button>
+									<button type="submit" class="search-btn">검색</button>
+									<a href="" class="theaterAdd-btn">영화관 등록</a>
 								</form>
 							</div>
 
@@ -96,12 +94,9 @@
 									<td>전화번호</td>
 									<td>극장설명</td>
 								</tr>
-							</table>
-
-							<!-- 반복 -->
-							<table>
+								<!-- 반복 -->
 								<c:forEach items="" var="vo">
-									<tr>
+									<tr class="theaterList-c">
 										<td><a href="">극장명</a></td>
 										<td>지역명</td>
 										<td>주소</td>

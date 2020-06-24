@@ -10,6 +10,7 @@
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 <link href="../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
 <link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
+<link href="../css/admin/movie/movieAdd.css" rel="stylesheet" type="text/css">
 
 <title>MovieMod</title>
 </head>
@@ -69,7 +70,7 @@
 							<!-- 기존 정보 불러오기 -->
 							<h1 class="top-bar">영화 등록</h1>
 							<form action="" class="movie-info">
-								<ul class="">
+								<ul class="movieinfo-ul">
 									<li><span class="what">포스터</span><input type="file"></li>
 									<li><span class="what">제목</span><input class="input-text" type="text"></li>
 									<li><span class="what">영문제목</span><input class="input-text" type="text"></li>
@@ -93,7 +94,7 @@
 								</ul>
 								<div class="button-bar">
 									<button class="cancle" type="button" onClick="location.href='./movieList'">취소</button>
-									<button class="del" type="submit">등록</button>
+									<button class="del" type="submit">등록하기</button>
 								</div>
 							</form>
 						</div>

@@ -10,9 +10,11 @@
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 <link href="../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
 <link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
-<link href="../css/admin/movie/movieMod.css" rel="stylesheet" type="text/css">
+<link href="../css/admin/theater/theaterAddMod.css" rel="stylesheet" type="text/css">
 
-<title>MovieMod</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<title>영화관등록</title>
 </head>
 <body>
 	<div class="root">
@@ -47,7 +49,7 @@
 									<li><a href="">회원 관리<i></i></a></li>
 									<li><a href="">영화관 관리<i></i></a></li>
 									<li><a href="">상영관 관리<i></i></a></li>
-									<li><a href="">☞ 공지사항 관리</a></li>
+									<li><a href="">공지사항 관리</a></li>
 								</ul>
 							</div>
 							<div class="ad_area">
@@ -64,36 +66,44 @@
 							</div>
 						</div>
 
+						<!-- 내용 -->
 						<div class="col_detail">
-							<!-- 영화 정보 -->
-							<!-- 기존 정보 불러오기 -->
-							<h1 class="top-bar">영화 등록</h1>
-							<form action="" class="movie-info">
-								<ul class="movieinfo-ul">
-									<li><span class="what">포스터</span><input type="file"></li>
-									<li><span class="what">제목</span><input class="input-text" type="text"></li>
-									<li><span class="what">영문제목</span><input class="input-text" type="text"></li>
-									<li><span class="what">상영시간(분)</span><input class="input-text" type="text"></li>
-									<li><span class="what">감독</span><input class="input-text" type="text"></li>
-									<li><span class="what">배우(,)</span><input class="input-text" type="text"></li>
-									<li><span class="what">장르</span><input class="input-text" type="text"></li>
-									<li><span class="what">연령대</span> 
-										<select class="input-select">
-											<option>전체관람가</option>
-											<option>12세이상관람가</option>
-											<option>15세이상관람가</option>
-											<option>청소년관람불가</option>
-											<option>미정</option>
-										</select>
+							<form action="" method="post" class="theater-info">
+								<ul class="theater-info-ul">
+									<li>
+										<p class="what">극장사진</p> 
+										<div>
+											<img src="" alt="" class="theater-pic"> 
+											<span class="del-pic">X</span> 
+										</div>
+										<input type="file">
 									</li>
-									<li><span class="what">국가</span><input class="input-text" type="text"></li>
-									<li><span class="what">개봉일</span><input class="input-text" type="date"></li>
-									<li><span class="what">줄거리</span><textarea class="input-textarea"></textarea>
+									<li>
+										<p class="what">극장명</p> <input type="text" class="input-text">
+									</li>
+									<li>
+										<p class="what">지역명</p> <input type="text" class="input-text">
+									</li>
+									<li>
+										<p class="what">주소</p> <input type="text" class="input-text">
+									</li>
+									<li>
+										<p class="what">전화번호</p> <input type="tel" class="input-text">
+									</li>
+									<li>
+										<p class="what">극장설명</p> <textarea class="input-textarea"></textarea>
+									</li>
+									<li>
+										<p class="what">오시는길</p> <textarea class="input-textarea"></textarea>
+									</li>
+									<li>
+										<p class="what">주차안내</p> <textarea class="input-textarea"></textarea>
 									</li>
 								</ul>
 								<div class="button-bar">
-									<button class="cancle" type="button" onClick="location.href='./movieList'">취소</button>
-									<button class="del" type="submit">등록</button>
+									<button type="button" class="cancle">취소</button>
+									<button type="submit" class="mod">수정</button>
+									<button type="submit" class="del">삭제</button>
 								</div>
 							</form>
 						</div>
@@ -103,15 +113,28 @@
 			</div>
 		</div>
 
+
 		<!-- 푸터 -->
 		<c:import url="../template/footer.jsp"></c:import>
-
 	</div>
 
 
 	<!-- 스크립트 -->
 	<script type="text/javascript">
-		/* 유효성 검사 */
+		//버튼 누를때마다 input추가
+		$(".banner-add")
+				.click(
+						function() {
+							var $banner = $('<div id="banner-label"><input type="file"><span class="del">삭제</span></div>');
+							$(".banner-form").append($banner);
+						});
+
+		//배너 추가 라벨 삭제
+		$(function() {
+			$(".banner-form").on("click", "span", function() {
+				$(this).parent().remove();
+			});
+		});
 	</script>
 </body>
 </html>

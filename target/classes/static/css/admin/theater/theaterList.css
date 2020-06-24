@@ -3,7 +3,9 @@ body{
 }
 
 .top-bar {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .top-bar > h1{
@@ -11,19 +13,22 @@ body{
     margin: 0;
     background-image: none;
     color: #222;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 17px;
     line-height: 34px;
     text-align: left;
 }
 
-.top-bar > a{
+.theaterAdd-btn{
     font-style: normal;
     text-decoration: none;
-    border: 2px solid #e71a0f;
     background-color: #e71a0f;
-    color: #ffffff;
-    border-radius: 5%;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+    padding-top: 7px;
 }
 
 .search-form{
@@ -52,15 +57,16 @@ body{
     color: #585858;
 }
 
-.search{
+.search-btn{
     border: 2px solid #7b7b7b;
-    color: #7b7b7b;
-    height: 30px;
+    background-color: #7b7b7b;
+    color: #fff;
+    height: 28.5px;
     font-weight: 500;
     text-align: center;
     vertical-align: middle;
-    background-color: transparent;
-    border-radius: 5%;
+    padding: 0 5px;
+    margin-bottom: 1px;   
 }
 
 
@@ -74,8 +80,45 @@ table{
     border-bottom: 1px solid #b8b6aa;
 }
 
-.memberList-bar{
+.theaterList-bar{
     background-color: #e2e2e0;
     border-top: 1px solid #b8b6aa;
     border-bottom: 1px solid #b8b6aa;
+    padding: 0;
 }
+
+.theaterList-c{
+	background-color: #fff;
+}
+
+tr> td{
+	padding: 5px;
+}
+
+/*페이저*/
+
+.pager{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.pagination {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pagination > li{
+    padding: 0 8px;
+    color: #333333;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+li > a{
+    color: inherit;
+    text-decoration: none;
+}
+

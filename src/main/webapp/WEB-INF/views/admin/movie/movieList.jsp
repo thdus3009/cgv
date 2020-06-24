@@ -8,12 +8,11 @@
 <meta charset="UTF-8">
 <link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
-<link href="../css/Admin/AdminNoticeList.css" rel="stylesheet"
-	type="text/css">
-<link href="../css/member/memberMyPage.css" rel="stylesheet"
-	type="text/css">
+<link href="../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
+<link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
+<link href="../css/admin/movie/movieList.css" rel="stylesheet" type="text/css">
 
-<title>MovieList</title>
+<title>영화 목록 - MovieList</title>
 </head>
 <body>
 	<div class="root">
@@ -71,26 +70,41 @@
 							<!-- 영화 정보 -->
 							<div class="top-bar">
 								<h1>영화 목록</h1>
-								<a href="#">영화 등록</a>
 								<form action="" method="POST" class="search-form">
 									<em>항목</em> 
 									<select class="select">
 										<!-- 검색 옵션 -->
-										<option>title</option>
-										<option>titleEng</option>
-										<option>director</option>
-										<option>actor</option>
-										<option>genre</option>
-										<option>ageLimit</option>
-										<option>country</option>
+										<option>제목</option>
+										<option>영문제목</option>
+										<option>감독</option>
+										<option>배우</option>
+										<option>장르</option>
+										<option>상영연령가</option>
+										<option>국가</option>
 									</select> 
 									<input type="text" class="serach-text">
-									<button type="submit" class="search">검색</button>
+									<button type="submit" class="search-btn">검색</button>
+									<a href="#" class="movieAdd-btn">영화 등록</a>
 								</form>
 							</div>
 							<!-- 영화 목록 -->
 							<table class="memberList-bar">
 								<tr>
+									<td>제목</td>
+									<td>영문제목</td>
+									<td>상영시간</td>
+									<td>감독</td>
+									<td>배우</td>
+									<td>장르</td>
+									<td>상영연령가</td>
+									<td>국가</td>
+									<td>개봉일</td>
+									<td>관람객수</td>
+									<td>평점</td>
+								</tr>
+								<!-- 반복 -->
+								<!-- 누르면 상세 페이지로 이동 -->
+								<tr class="movieList-c">
 									<td>title</td>
 									<td>titleEng</td>
 									<td>runtime</td>
@@ -106,21 +120,6 @@
 							</table>
 
 							<!-- 반복 -->
-							<table>
-								<tr>
-									<td>title</td>
-									<td>titleEng</td>
-									<td>runtime</td>
-									<td>director</td>
-									<td>actor</td>
-									<td>genre</td>
-									<td>ageLimit</td>
-									<td>country</td>
-									<td>openDate</td>
-									<td>visitor</td>
-									<td>rate</td>
-								</tr>
-							</table>
 
 							<!-- 페이저 -->
 							<div class="pager">

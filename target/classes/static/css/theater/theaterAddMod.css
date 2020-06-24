@@ -6,22 +6,19 @@ body{
 
 .top-bar {
     font-size: 17px;
-    padding: 7.25px 5px;
+    padding: 5px;
     border-bottom: 1px solid #b4b3aa;
 }
 
 /*멤버 정보*/
-.member-info{
-    margin-bottom: 10px;
-}
 
-.member-info > ul{
+.theater-info > ul{
     padding: 0;
     margin: 0;
     list-style: none;
 }
 
-.memberinfo-ul > li{
+li{
     position: relative;
     display: flex;
     border-bottom: 1px solid #dfded7;
@@ -39,7 +36,6 @@ body{
     position: absolute;
     left: 195px;
     z-index: 10;
-    cursor: pointer;
 }
 
 .con{
@@ -47,7 +43,6 @@ body{
 }
 
 .what{
-	padding-top: 4px;
     margin: 0;
     font-size: 15px;
     width: 100px;
@@ -56,52 +51,32 @@ body{
 
 .input-text{
     line-height: 27px;
-    height: 26px;
+    height: 27px;
     width: 150px;
     padding: 0 5px;
     border: 1px solid #b4b3aa;
     color: #585858;
 }
 
-.label{
-    width: 80px;
-    padding: 4px 0 0 0;
+.input-select{
+    line-height: 27px;
+    height: 30px;
+    width: 162px;
+    padding: 0 5px;
+    border: 1px solid #b4b3aa;
+    color: #585858;
 }
 
-.label > input{
-    margin: 0 8px;
+.input-textarea{
+    line-height: 25px;
+    height: 50px;
+    width: 300px;
+    padding: 0 5px;
+    border: 1px solid #b4b3aa;
+    color: #585858;
+    resize: none;
 }
 
-/*예매내역 목록*/
-
-table{
-    font-size: 13px;
-    line-height: 1.2;
-    color: #666;
-    font-weight: 300;
-    border-bottom: 1px solid #b8b6aa;
-}
-
-.memberList-bar{
-    background-color: #e2e2e0;
-    border-top: 1px solid #b8b6aa;
-    border-bottom: 1px solid #b8b6aa;
-    margin-top: 10px;
-    padding: 0;
-}
-
-.reservationList > em{
-	font-style: normal;
-	font-size: 17px;
-}
-
-.memberList-c{
-	background-color: #fff;
-}
-
-tr> td{
-	padding: 5px;
-}
 
 /*버튼*/
 
@@ -109,7 +84,6 @@ tr> td{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 15px 0;
 }
 
 .cancle{
@@ -117,12 +91,17 @@ tr> td{
     border: 2px solid #000;
     color: #ffffff;
     line-height: 21px;
-    margin: 0 5px;
-    border-bottom-left-radius: 5%;
-    border-bottom-right-radius: 5%;
-    border-top-left-radius: 5%;
-    border-top-right-radius: 5%;
-    padding: 5px;
+    border-radius: 5%;
+    margin: 10px 5px;
+}
+
+.mod{
+    background: rgb(158, 158, 158);
+    border: 2px solid rgb(158, 158, 158);
+    color: #ffffff;
+    line-height: 21px;
+    border-radius: 5%;
+    margin: 10px 5px;
 }
 
 .del{
@@ -132,5 +111,4 @@ tr> td{
     line-height: 21px;
     border-radius: 5%;
     margin: 0 5px;
-    padding: 5px;
 }
