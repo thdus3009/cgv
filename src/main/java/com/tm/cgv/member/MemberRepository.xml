@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.member.MemberRepository">
 
-	<resultMap type="MemberBasicVO" id="memberMap">
+	<resultMap type="MemberBasicVO" id="MemberMap">
 		<id property="username" column="username"/>
 		<result property="password" column="password"/>
 		<result property="name" column="name"/>
@@ -25,12 +25,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</collection>
 	</resultMap>
 
-	<select id="read" parameterType="MemberBasicVO" resultMap="memberMap">
+	<select id="read" parameterType="MemberBasicVO" resultMap="MemberMap">
 		SELECT * FROM 
 		(SELECT * FROM member WHERE username = #{username}) M
 		LEFT OUTER JOIN 
 		(SELECT * FROM auth) A
 		ON(M.username = A.username);
+	</select>
+	
+	<select id="phoneCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
+		SELECT * FROM member WHERE phone = #{phone}
 	</select>
 	
 	<insert id="insert" parameterType="MemberBasicVO">

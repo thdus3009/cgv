@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService implements UserDetailsService {
     
 	@Autowired
-	private MemberRepository userRepository;
+	private MemberRepository memberRepository;
 
     public Long joinMember(MemberBasicVO memberBasicVO) throws Exception{
         // 비밀번호 암호화
@@ -27,7 +27,7 @@ public class MemberService implements UserDetailsService {
         memberBasicVO.setPassword(passwordEncoder.encode(memberBasicVO.getPassword()));
 
         // db에 저장
-        long result = userRepository.insert(memberBasicVO);
+        long result = memberRepository.insert(memberBasicVO);
         System.out.println(result);
 
         return result;
@@ -41,7 +41,7 @@ public class MemberService implements UserDetailsService {
     	
     	MemberBasicVO memberBasicVO = null;
 		try {
-			memberBasicVO = userRepository.read(username);
+			memberBasicVO = memberRepository.read(username);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}       
@@ -60,4 +60,10 @@ public class MemberService implements UserDetailsService {
         
         return user;
     }
+    
+    // 이미 등록된 phone 번호인지 Check
+ 	public MemberBasicVO phoneCheck(MemberBasicVO memberBasicVO) throws Exception {
+ 		
+ 		return memberRepository.phoneCheck(memberBasicVO);
+ 	};
 }

@@ -76,9 +76,16 @@
 								</div>
 								<p id="birthc"></p>	
 								
-								<!-- 인증버튼을 하나 만들어주자 -->
 								<h2>전화번호</h2>
-								<input id="phone" class="text check" type="text" placeholder="' - ' 없이 입력해 주세요" maxlength="11" name="phone">
+								<!-- id명 phone / phoneAuth 입력 유효성 검사 필요(전부 숫자만 입력되도록) -->
+								<input id="phone" class="text" type="text" style="display: inline-block;" placeholder="' - ' 없이 입력해 주세요" maxlength="11" name="phone">
+								<button id="phoneBtn" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px; margin-bottom: 0px; margin-right: 200px;">인증번호 발송</button>
+								<input id="phoneAuth" class="text" type="text" style="display: none;" placeholder="인증번호를 입력해주세요" maxlength="6">
+								<button id="phoneAuthBtn" type="button" style="display: none;">인증번호 확인</button>
+								
+								<h2>성별</h2>
+								<input id="gender" class="check" type="radio" name="gender" value="남자">남자
+								<input id="gender" class="check" type="radio" name="gender" value="여자">여자
 								
 								<h2>이메일</h2>
 								<input id="email" class="check" type="email" placeholder="선택입력" name="email">
@@ -106,6 +113,7 @@
 <script type="text/javascript" src="../js/join.js"></script>
 
 <script type="text/javascript">
+	// ID 중복 체크
 	$("#idCheck").click(function() {
 		var id = $("#userID").val();
 		
@@ -122,6 +130,54 @@
 		});
 	});
 
+	// 전화번호 입력시 유효성(숫자만 들어가도록) 검사
+	// 신우에게 throw
+	
+	// 전화번호 인증 준비
+	$("#phoneBtn").click(function() {
+
+		// 번호 입력이 안되었을 때, focus 시키고 return
+		var phone = $("#phone").val();
+		if(phone == "")
+			return;
+
+		// 전화번호 패턴이 아니라면 (010으로 시작하지 않는다던지) alert띄우고 return
+		// /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g; // 일반 / 휴대 전화번호 정규식
+		var regPattern = /(^01.{1}|[0-9]{3})([0-9]{3}|[0-9]{4})([0-9]{4})/g;
+		if(!regPattern.test(phone)) {
+			alert("잘못된 전화번호 형식입니다");
+			return;
+		}
+		
+		// ajax로 서버에 전화번호 전송 (select 해서 이미 인증된 핸드폰 번호가 있다면, 해당 id ****로 보여주자)
+		$.get(
+			"/member/phoneAuth",
+			{ phone: phone }, 
+			function(data) { 
+
+				console.log("data : "+data);
+				// data = 입력한 전화번호, 또는 ""
+				if(data != "none") {
+
+					alert("이미 등록된 전화번호입니다");
+					location.href = "/member/showId?phone="+phone;
+				} else {
+
+					// 인증입력칸 및 인증확인 버튼 생성
+					alert("인증번호를 발송했습니다");
+					$("#phoneAuth").attr("style","display: inline-block;");
+					$("#phoneAuthBtn").attr("style","display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;");
+
+					// 전화번호 인증 로직?
+				}
+			});
+	});
+
+	// 전화번호 인증
+	$("#phoneAuthBtn").click(function() {
+
+		
+	});
 </script>
 
 </body>
