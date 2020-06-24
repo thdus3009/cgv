@@ -5,6 +5,9 @@
 
 /* 만약 글자 수(10자)를 일정이상 채우지 않으면 팝업창o & 클릭x 
 	/ 10자 이상이면 ajax로 내용 넘겨주고 수동으로 값비우고 닫아주기 */
+
+	
+
 	
 	 $("#popupBtn").click(function(e){
 
@@ -81,7 +84,11 @@
 	 
 	 
 //	 ------------------------------------------------------------------------------
-	 	 
+	 var g_num = 0;
+	 var g_mContents = ""; 
+	 var g_charmPoint = 0;
+	 var g_emotionPoint = 0;
+	 
 	 $("#popupBtn2").click(function(e){
 		 //null값
 		 var charmPoint = getCharmPoint();
@@ -124,7 +131,7 @@
 	 
 //	 ------------------------------------------------------------------------------
 	 
-	 
+/* 
 		//닫기버튼 누르면 내용초기화 & 글자 바이트 초기화
 	$("#exit").click(function(){
 		document.getElementById("mContents").value ="";
@@ -137,5 +144,8 @@
 		$(".emotionPoint").prop("checked", false);
 		});	
 
-	
+*/
+	 
+
+
 	

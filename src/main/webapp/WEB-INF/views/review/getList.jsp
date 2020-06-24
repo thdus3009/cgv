@@ -15,10 +15,12 @@
 					<div class="list_p_contents2"><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명</span></div>
 					</div>
 					<div class="list_p_contents2">
-						<!-- Button to Open the Modal -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#myModal">Open modal</button>
 					
+						<!-- Modal 1 Button-->
+						<button type="button" id="btn1" class="btn btn-primary" data-toggle="modal"data-target="#myModal" data-num="${vo.num}">Open modal</button>
+						
+						<!-- Modal 2 Button-->
+						<button type="button" id="btn2" data-toggle="modal" data-target="#myModal2" style="display: none;"></button>
 					</div>
 					
 				</div>

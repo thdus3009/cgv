@@ -5,13 +5,24 @@ import com.tm.cgv.board.BoardVO;
 import lombok.Data;
 
 @Data
-public class ReviewVO extends BoardVO {
+public class ReviewVO {
+//review (reviewWrite)
+	private int num;
+	private int reservationNum;
+	private String contents;
+	private int like;
+	private int egg;
+	private int charmPoint;
+	private int emotionPoint;
 	
-	private int like;	//좋아요 수
+// --------------------------------------------	
+//reservation (reviewList)	
+
 	private int movieNum;	//영화번호
-	private int mId;	//아이디
-	private String fileName;	//이미지
+	private int mId;		//아이디
+	private String fileName;//이미지
 	
+	//인원수
 	private int common;
 	private int teenager;
 	private int preference;
@@ -21,18 +32,13 @@ public class ReviewVO extends BoardVO {
 	private String cinemaName; //영화관
 	private String theaterName; //상영관
 	
+	
+//movieInfo
+	private String title;
+//movieTime
 	private int movieTimeNum;
 	private String screenDate; 
 	private String screenTime;
-	
-	private String charmPoint;
-	private String emotionPoint;
-	
-// <BoardVO>	
-//	private int num;
-//	private String title;
-//	private String writer;	//id, Filename
-//	private String contents;
-//	private String hireDate;
-//	private int hit;
+
+
 }

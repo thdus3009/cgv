@@ -88,10 +88,7 @@
 		
 	<div class="container"> <!-- Write, Update -->
 		<h4>내가 본 영화</h4><br>
-		
-		<button type="button" id="btn2" data-toggle="modal" data-target="#myModal2" style="display: none;"></button>
-	
-	
+
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
 			<div class="modal-dialog">
