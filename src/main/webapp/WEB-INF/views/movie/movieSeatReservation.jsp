@@ -117,38 +117,114 @@
 										</div>
 										<div class="seats" style="width: 272px; height: 192px;">
 											<c:forEach begin="0" end="11" var="t">
-												<div class="row" style="top:${t+(t*16)}px;">
-													<div class="label">A</div>
-													<div class="seat_group">
-														<div class="group"> 
-															<c:forEach begin="1" end="10" var="i">
-																<!--blocked(선택불가)  reserved(이미 예매)  -->
-																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+											
+												<c:if test="${t eq 1}">
+													<div class="row" style="top:${t+(t*16)}px;">
+														<div class="label">${t+1}</div>
+														<div class="seat_group" data-seat-group="">
+															<div class="group"> 
+																<c:forEach begin="1" end="10" var="i">
+																	<!--blocked(선택불가)  reserved(이미 예매)  -->
+																	<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+																	
+																	<c:if test="${i % 4 eq 0}">
+																		<div class="seat reserved" style="left:${48+(i*16)}px"> 
+																			<a href="#" onclick="return false;"> 
+																				<span class="no">${i}</span>
+																				<span class="sreader"></span>
+																				<span class="sreader mod"></span>
+																			</a>
+																		</div>
+																	</c:if>
+																	<c:if test="${i % 4 ne 0}">
+																		<div class="seat rating_economy" data-grade="1" style="left:${48+(i*16)}px"> 
+																			<a href="#" onclick="return false;">
+																				<span class="no">${i}</span>
+																				<span class="sreader"></span>
+																				<span class="sreader mod"></span>
+																			</a>
+																		</div>
+																	</c:if>
+																</c:forEach>
 																
-																<c:if test="${i % 3 eq 0}">
-																	<div class="seat reserved" style="left:${48+(i*16)}px"> 
-																		<a href="#" onclick="return false;"> 
-																			<span class="no">${i}</span>
-																			<span class="sreader"></span>
-																			<span class="sreader mod"></span>
-																		</a>
-																	</div>
-																</c:if>
-																<c:if test="${i % 3 ne 0}">
-																	<div class="seat" style="left:${48+(i*16)}px"> 
-																		<a href="#" onclick="return false;">
-																			<span class="no">${i}</span>
-																			<span class="sreader"></span>
-																			<span class="sreader mod"></span>
-																		</a>
-																	</div>
-																</c:if>
-															</c:forEach>
-															
+															</div>
 														</div>
 													</div>
-												</div>
-												<br>
+													<br>
+												
+												</c:if>
+												<c:if test="${t eq 4}">
+													<div class="row" style="top:${t+(t*16)}px;">
+														<div class="label">${t+1}</div>
+														<div class="seat_group" data-seat-group="">
+															<div class="group"> 
+																<c:forEach begin="1" end="10" var="i">
+																	<!--blocked(선택불가)  reserved(이미 예매)  -->
+																	<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+																	
+																	<c:if test="${i % 4 eq 0}">
+																		<div class="seat reserved" style="left:${48+(i*16)}px"> 
+																			<a href="#" onclick="return false;"> 
+																				<span class="no">${i}</span>
+																				<span class="sreader"></span>
+																				<span class="sreader mod"></span>
+																			</a>
+																		</div>
+																	</c:if>
+																	<c:if test="${i % 4 ne 0}">
+																		<div class="seat rating_comfort" data-grade="2" style="left:${48+(i*16)}px"> 
+																			<a href="#" onclick="return false;">
+																				<span class="no">${i}</span>
+																				<span class="sreader"></span>
+																				<span class="sreader mod"></span>
+																			</a>
+																		</div>
+																	</c:if>
+																</c:forEach>
+																
+															</div>
+														</div>
+													</div>
+													<br>
+												
+												</c:if>
+												<c:if test="${t ne 1 and t ne 4}">
+													<div class="row" style="top:${t+(t*16)}px;">
+														<div class="label">${t+1}</div>
+														<div class="seat_group" data-seat-group="">
+															<div class="group"> 
+																<c:forEach begin="1" end="10" var="i">
+																	<!--blocked(선택불가)  reserved(이미 예매)  -->
+																	<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+																	
+																	<c:if test="${i % 4 eq 0}">
+																		<div class="seat reserved" style="left:${48+(i*16)}px"> 
+																			<a href="#" onclick="return false;"> 
+																				<span class="no">${i}</span>
+																				<span class="sreader"></span>
+																				<span class="sreader mod"></span>
+																			</a>
+																		</div>
+																	</c:if>
+																	<c:if test="${i % 4 ne 0}">
+																		<div class="seat rating_prime" data-grade="3" style="left:${48+(i*16)}px"> 
+																			<a href="#" onclick="return false;">
+																				<span class="no">${i}</span>
+																				<span class="sreader"></span>
+																				<span class="sreader mod"></span>
+																			</a>
+																		</div>
+																	</c:if>
+																</c:forEach>
+																
+															</div>
+														</div>
+													</div>
+													<br>
+												
+												</c:if>
+											
+												
 											</c:forEach>
 											
 										</div>
@@ -243,18 +319,18 @@
 					<div class="info seat">
 						<div class="row seat_name" style="height: 20px;">
 							<span class="header">좌석명</span>
-							<span class="data" title="Prime석">Prime석</span>
+							<span id="select_seat_grade" class="data" title=""></span>
 						</div>
 						<div class="row seat_no colspan3">
 							<span class="header">좌석번호</span>
-							<span class="data ellipsis-line3" title="G10,G11">G10,G11</span>
+							<span id="select_Seat" class="data ellipsis-line3" title=""></span>
 						</div>
 						<div class="placeholder" title="좌석선택" style="display: none;"></div>
 					</div>
 					
 					
 					<div class="info payment-ticket" style="width: 155px;">
-						<div class="row payment-adult" style="display: block;">
+						<div class="row payment-adult" style="display: none;">
 							<span class="header">일반</span>
 							<span class="data"><span class="price">20,000 원</span></span>
 						</div>
@@ -262,15 +338,11 @@
 							<span class="header">청소년</span>
 							<span class="data"><span class="price">0 원</span></span>
 						</div>
-						<div class="row payment-child" style="display: none;">
-							<span class="header">어린이</span>
-							<span class="data"><span class="price">0 원</span></span>
-						</div>						
 						<div class="row payment-special" style="display: none;">
 							<span class="header">우대</span>
 							<span class="data"><span class="price">0 원</span></span>
 						</div>
-						<div class="row payment-final" style="display: block;">
+						<div class="row payment-final" style="display: none;">
 							<span class="header">총금액</span>
 							<span class="data"><span class="price">20,000</span><span class="won">원</span></span>
 						<span id="priceMapInfoIco" style="position: absolute; right: -17px; margin-top: 3px; cursor: pointer;"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/ico_circle_14.png" height="14" width="14" alt="mappingIco"></span><div id="priceMappingContainer" style="display: none; position: absolute; right: -80px; z-index: 100; width: 150px; height: auto; padding: 10px; background: rgb(51, 51, 51); bottom: 115px;"><span class="typeNm" style="display:inline-block; width:40px;">일반</span> : PRIME X 2<br></div></div>
