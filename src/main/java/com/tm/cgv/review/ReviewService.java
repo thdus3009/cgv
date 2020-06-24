@@ -1,5 +1,6 @@
 package com.tm.cgv.review;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class ReviewService {
 	
 	public List<Long> reviewList(String uid, Pager pager)throws Exception {
 		pager.makeRow();
-		
 		HashMap<String, Object> pa = new HashMap<String, Object>(); //HashMap<String, Object> //<key,value>
 		pa.put("uid", uid);
 		pa.put("pager", pager);

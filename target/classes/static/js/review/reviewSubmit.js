@@ -20,7 +20,6 @@
 			}
 			
 			
-	
 			$.ajax({
 
 				type:"POST",
@@ -33,7 +32,7 @@
 					}
 
 				})
-
+			
 			//팝업창 닫히고 내용 초기화(mContents, data-dismiss="modal")
 			$("#exit").click();
 
@@ -46,14 +45,86 @@
 	
 		 });
 	 
+//	 ------------------------------------------------------------------------------
 	 
-	 $("#popupBtn2").click(function(e){
+	 //charmpoint
+	 function getCharmPoint() {
 		 
-		 alert("누름");
-		 $("#exit2").click();
+		var charmPoint = 0;
+		 
+		var values = document.getElementsByClassName("charmPoint");
+		 
+		for(var i=0; i<values.length; i++) {
+			if(values[i].checked){
+					
+			charmPoint += values[i].dataset.charm * 1;
+			}					
+		}
+		
+		return charmPoint;
+	 }
+	 
+	 //emotionpoint
+	 function getEmotionPoint() {
+		 
+			var emotionPoint = 0;
+			 
+			var values = document.getElementsByClassName("emotionPoint");
+			 
+			for(var i=0; i<values.length; i++) {
+				if(values[i].checked){
+				emotionPoint += values[i].dataset.emotion * 1;
+				}					
+			}
+			return emotionPoint;
+		 }
+	 
+	 
+//	 ------------------------------------------------------------------------------
+	 	 
+	 $("#popupBtn2").click(function(e){
+		 //null값
+		 var charmPoint = getCharmPoint();
+		 var emotionPoint = getEmotionPoint();
+		 
+		if(charmPoint!=null && emotionPoint!=null){
+		
+			if(charmPoint==0){
+				alert("매력포인트를 1개 이상 선택해주세요.")
+				
+			} else{
+				if(emotionPoint==0){
+					alert("감정포인트를 1개 이상 선택해주세요.")
+					
+				}else {
+					
+					$.ajax({
+
+						type:"POST",
+						url:"./review_Write",
+						data:{
+							charmPoint: charmPoint,
+							emotionPoint: emotionPoint
+						},
+						success:function(data){
+							alert("dd")
+						}
+					})
+					
+					 $("#exit2").click();
+					
+					
+				}
+				
+			}
+			
+		}
 	 
 	 });
-
+	 
+//	 ------------------------------------------------------------------------------
+	 
+	 
 		//닫기버튼 누르면 내용초기화 & 글자 바이트 초기화
 	$("#exit").click(function(){
 		document.getElementById("mContents").value ="";
@@ -65,3 +136,6 @@
 		$(".charmPoint").prop("checked", false);
 		$(".emotionPoint").prop("checked", false);
 		});	
+
+	
+	

@@ -25,6 +25,8 @@ public class ReviewVO extends BoardVO {
 	private String screenDate; 
 	private String screenTime;
 	
+	private String charmPoint;
+	private String emotionPoint;
 	
 // <BoardVO>	
 //	private int num;

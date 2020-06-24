@@ -86,9 +86,12 @@ public class ReviewController {
 			  //System.out.println("m cont: "+m);
 			 
 			 ReviewVO reviewVO =  reviewService.reviewList2(m); 
-			 //System.out.println("??:"+ reviewVO.getNum());
-			 reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
 			 
+			//System.out.println("??:"+ reviewVO.getNum());
+
+			
+			reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
+			
 			 ar.add(reviewVO);
 
 		  }
@@ -105,11 +108,12 @@ public class ReviewController {
 	
 	//review write
 	@PostMapping("review_Write")
-	public ModelAndView review_Write(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+	public ModelAndView review_Write(ReviewVO reviewVO, ModelAndView mv, String charmPoint, String emotionPoint)throws Exception {
 		String con = reviewVO.getContents();
-		System.out.println(con);
-		
-		
+		//정보를 따로따로 가져와서 vo로 합쳐 적용하기(contents, reservationNum, charmPoint, emotionPoint)
+		System.out.println("contents:"+con);
+		System.out.println("charm:"+charmPoint);
+		System.out.println("emotion:"+emotionPoint);
 
 		return mv;
 	

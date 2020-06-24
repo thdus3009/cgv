@@ -147,24 +147,24 @@
 							
 							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">매력 포인트</div>
 								<div style="font-weight: lighter;">
-								<input type="checkbox" value="감독연출" class="charmPoint"> 감독연출 &emsp; &emsp; &emsp; &emsp;
-								<input type="checkbox" value="스토리" class="charmPoint"> 스토리 &emsp; &emsp; &emsp; &emsp;
-								<input type="checkbox" value="영상미" class="charmPoint"> 영상미
+								<input type="checkbox" value="감독연출" class="charmPoint" data-charm="1"> 감독연출 &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="스토리" class="charmPoint" data-charm="2"> 스토리 &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="영상미" class="charmPoint" data-charm="4"> 영상미
 								<br>
-								<input type="checkbox" value="배우연기" class="charmPoint"> 배우연기 &emsp; &emsp; &emsp; &emsp;
-								<input type="checkbox" value="OST" class="charmPoint"> OST
+								<input type="checkbox" value="배우연기" class="charmPoint" data-charm="8"> 배우연기 &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="OST" class="charmPoint" data-charm="16"> OST
 								<br><br>
 								</div>
 							</div>
 							
 							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">감정 포인트</div>
 								<div style="font-weight: lighter;">
-								<input type="checkbox" value="몰입감" class="emotionPoint"> 몰입감 &emsp; &emsp; &emsp; &emsp; &ensp;
-								<input type="checkbox" value="감동" class="emotionPoint"> 감동 &emsp; &emsp; &emsp; &emsp; &ensp;
-								<input type="checkbox" value="스트레스 해소" class="emotionPoint"> 스트레스 해소
+								<input type="checkbox" value="몰입감" class="emotionPoint" data-emotion="1"> 몰입감 &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="감동" class="emotionPoint" data-emotion="2"> 감동 &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="스트레스 해소" class="emotionPoint" data-emotion="4"> 스트레스 해소
 								<br>
-								<input type="checkbox" value="즐거움" class="emotionPoint"> 즐거움 &emsp; &emsp; &emsp; &emsp; &ensp;
-								<input type="checkbox" value="공감" class="emotionPoint"> 공감
+								<input type="checkbox" value="즐거움" class="emotionPoint" data-emotion="8"> 즐거움 &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="공감" class="emotionPoint" data-emotion="16"> 공감
 								<br><br>
 								</div>
 							</div>
@@ -198,25 +198,17 @@
 </div>
 
 <!-- 스크립트 -->
-	<script type="text/javascript">/* review write */
-	/* 글자수 10글자 이상일 때 바로 넘길 수 있게 코드를 그쪽으로 옮김 */
- 	$("#popupBtn11111").click(function(){
-		$.ajax({
+	<script type="text/javascript">
 
-			type:"POST",
-			url:"./review_Write",
-			data:{
-				contents:$('#mContents').val()
-				},
-			success:function(){
-				alert("dd")
-				}
-
-			})		
-
-		}); 
+		for(var i=0; i<values.length; i++) {
+			if(values[i].checked){
+				alert(values[i].value);
+			}					
+		}
 	 
 	</script>
+	
+	
 
 	<script type="text/javascript" src="../js/review/reviewMore.js"></script>
 
