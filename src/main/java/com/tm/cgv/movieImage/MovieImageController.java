@@ -17,7 +17,7 @@ public class MovieImageController {
 	@ResponseBody
 	public int movieImageDelete(MovieImageVO movieImageVO)throws Exception{
 		int result = movieImageService.movieImageDelete(movieImageVO);//null
-		
+		System.out.println(result+"result controller");
 		return result;
 	}
 	

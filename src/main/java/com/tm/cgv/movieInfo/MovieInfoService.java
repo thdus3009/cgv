@@ -50,9 +50,10 @@ public class MovieInfoService {
 	}
 	
 	public List<MovieInfoVO> movieList(Pager pager) throws Exception{
+		pager.makeRow();
 		
 		pager.setPerPage(7);
-		pager.makeRow();
+		
 		
 		return movieInfoRepository.movieList(pager);
 	}
@@ -97,15 +98,21 @@ public class MovieInfoService {
 		
 		long result = movieInfoRepository.movieUpdate(movieInfoVO);
 		
-		if(files.getSize()>0) {
-			String fileName = fileManager.saveTransfer(files, file);//파일, 경로
-			MovieImageVO movieImageVO = new MovieImageVO();
-			
-			movieImageVO.setMovieNum(movieInfoVO.getNum());
-			movieImageVO.setFileName(fileName);
-			movieImageVO.setOriginName(files.getOriginalFilename());
-			//movieImage테이블에 삽입
-			result = movieImageRepository.movieImageInsert(movieImageVO);
+		System.out.println("qqq?????" + movieInfoVO.getNum());
+		
+		if(files !=null) {
+			System.out.println("updateIn");
+			if(files.getSize()>0) {
+				String fileName = fileManager.saveTransfer(files, file);//파일, 경로
+				MovieImageVO movieImageVO = new MovieImageVO();
+				System.out.println(movieInfoVO.getNum()+"?????");
+				
+				movieImageVO.setMovieNum(movieInfoVO.getNum());
+				movieImageVO.setFileName(fileName);
+				movieImageVO.setOriginName(files.getOriginalFilename());
+				//movieImage테이블에 삽입
+				result = movieImageRepository.movieImageInsert(movieImageVO);
+			}
 		}
 		if(videolink!=null) {
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
@@ -117,6 +124,11 @@ public class MovieInfoService {
 		
 		return result;
 		
+	}
+	
+	public long movieDelete(MovieInfoVO movieInfoVO)throws Exception{
+		long result= movieInfoRepository.movieDelete(movieInfoVO);
+		return result;
 	}
 	
 }

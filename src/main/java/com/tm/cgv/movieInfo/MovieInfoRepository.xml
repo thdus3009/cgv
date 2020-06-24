@@ -96,6 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{startRow},#{perPage}) as P)as PP ) as MM
 		left join movieImage as MK
 		on(MM.num = MK.movieNum)
+		where deleteAt is null;
+		
 		
  			
  	</select>
@@ -128,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join
 		(select num as videoNum,movieNum,videolink  from movieVideo) MV
 		on(A.num = MV.movieNum)
-		where A.num=#{num};
+		where A.num=#{num} and deleteAt is null;
  	 </select>
  	 
  	<update id="movieUpdate" parameterType="MovieInfoVO">
@@ -136,8 +138,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		country=#{country},openDate=#{openDate},contents=#{contents} where num=#{num}
  	</update>
  	
- 	<delete id="movieDelete" parameterType="MovieInfoVO">
- 		
- 	</delete>
+ 	<update id="movieDelete" parameterType="MovieInfoVO">
+ 		update movieInfo set deleteAt=now() where num=#{num}
+ 	</update>
  
  </mapper>

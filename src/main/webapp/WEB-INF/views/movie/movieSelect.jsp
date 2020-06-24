@@ -92,6 +92,7 @@
 						<form action="./${board}${path}" method="post" enctype="multipart/form-data">
 							<fieldset>
 								
+								<input type="text" value="${vo.num}" name="num">
 								<div class="tbl_write">
 																
 									
@@ -166,7 +167,7 @@
 									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
 									
 									<c:if test="${bbsVO.writer eq memberVO.id }">
-										<button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button>
+										<a href="./${board}Delete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
 										<a href="./${board}Update?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
 									</c:if>
 									

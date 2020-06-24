@@ -40,7 +40,7 @@ public class MovieImageService {
 		
 		if(result>0) {
 			result = movieImageRepository.movieImageDelete(movieImageVO);
-			
+			System.out.println(result+"result service");
 		}
 		return result;
 	}

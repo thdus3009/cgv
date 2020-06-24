@@ -98,8 +98,8 @@
 								
 								<div class="tbl_write">
 																
-									<input type="text" value="${vo.movieImageVOs.num}" id="num1" >
-									
+									<input type="text" value="${vo.movieImageVOs.num}" id="num1" > <!-- imgaeVO의 AI인 num -->
+									<input type="text" value="${vo.num}" name="num">
 									<input type="text" value="${vo.movieImageVOs.fileName}" id="fileName"> 
 									
 									<table class="tbl_bbs_write">
@@ -108,7 +108,7 @@
 											<col style="width: 320px;">
 										</colgroup>
 										<tbody>
-										
+											
 										
 											 <div class="form-group">
 										      <label for="files">타이틀 이미지:</label>
@@ -216,11 +216,11 @@
 			var s = $("#num1").val();
 			var fileName=$("#fileName").val();
 			
-			console.log(s);
-			console.log(fileName);
+			console.log(s);//o
+			console.log(fileName);//o
 
 			$.post("../movieImage/movieImageDelete",{num:s,fileName:fileName},function(data){
-				console.log(data+"dd");
+				console.log(data+"dd");//null
 				
 				if(data>0){
 					$(".fileDelete").parent().remove();
