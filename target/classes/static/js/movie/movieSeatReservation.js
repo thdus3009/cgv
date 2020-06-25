@@ -27,11 +27,13 @@
 	var selectedSeatList = [];
 	var selectedSeatGrade = [];
 	
+	
 	$(".group.adult.common ul li:first").addClass("selected");
 	$(".group.adult.teenager ul li:first").addClass("selected");
 	$(".group.adult.preference ul li:first").addClass("selected");
 
 
+	//일반 인원 수 선택
 	$(".group.adult.common ul li").click(function(){
 //		console.log($(this).data("index"));
 		
@@ -45,12 +47,17 @@
 			
 			preCommon = commonCount;
 			amountCommon = commonCount;
+			
+			seatCountListMake("일반",commonCount);
 		}else{
 			commonCount = preCommon;
 		}
 		
+		seatCountListMake();
+		
 	});
 	
+	//청소년 인원 수 선택
 	$(".group.adult.teenager ul li").click(function(){
 //		console.log($(this).data("index"));
 		
@@ -63,12 +70,15 @@
 			$(this).addClass("selected");
 			preTeenager = teenagerCount;
 			amountTeenager = teenagerCount;
+			
+			seatCountListMake();
 		}else{
 			teenagerCount = preTeenager;
 		}
 		
 	});
 	
+	//우대 인원 수 선택
 	$(".group.adult.preference ul li").click(function(){
 //		console.log($(this).data("index"));
 		
@@ -82,10 +92,50 @@
 			$(this).addClass("selected");
 			prePreference = preferenceCount;
 			amountPreference = preferenceCount;
+			
+			seatCountListMake();
+			
 		}else{
 			preferenceCount = prePreference;
 		}
 	});
+	
+	
+	//각 선택시 리스트에 추가된 인원값 추가 (일반 1명 )식으로 저장
+	function seatCountListMake(){
+		
+		var seatCount = {
+				'common' : commonCount,
+				'teenager' : teenagerCount,
+				'special':preferenceCount
+		}
+		
+//		console.log(seatCount);
+//		console.log(seatCount['common']);
+//		console.log(seatCount['teenager']);
+//		console.log(seatCount['special']);
+		
+		var cNum = seatCount['common'];
+		var tNum = seatCount['teenager'];
+		var sNum = seatCount['special'];
+		
+		var list = [];
+		if(cNum > 0){
+			list.push("일반 "+ cNum+"명");
+		}
+		if(tNum > 0){
+			list.push("청소년 "+tNum+"명")
+		}
+		if(sNum > 0){
+			list.push("우대 "+sNum+"명")
+		}
+//		console.log(list.join(","));
+		$(".row.number .data").text(list.join(","));
+		
+		
+	}
+	
+	
 	
 	
 	function countCheck(){
@@ -353,6 +403,12 @@
 			
 		}
 		priceCount();
+		
+		//전좌석 선택 완료
+		if(totalCount == selectedCount){
+			
+		}
+		
 	});
 	
 	

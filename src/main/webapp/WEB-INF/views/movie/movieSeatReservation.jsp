@@ -308,7 +308,8 @@
 							<span class="header">상영관</span>
 							<span id="select_theater" class="data" title="">${reservationVO.theaterName}</span>
 						</div>
-						<div class="row number" style="display: none;"> <!-- style="display: block;" -->
+						
+						<div class="row number" style="display: block;"> <!-- style="display: block;" -->
 							<span class="header">인원</span>
 							<span class="data"></span>
 						</div>
