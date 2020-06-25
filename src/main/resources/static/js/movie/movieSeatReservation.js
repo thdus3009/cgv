@@ -631,14 +631,14 @@
 				eachGradePayment(3,1)
 			}
 			
-//			console.log("일반 : "+ amountCommon);
-//			console.log("청소 : "+ amountTeenager);
-//			console.log("우대 : "+ amountPreference);
+			console.log("일반 : "+ amountCommon);
+			console.log("청소 : "+ amountTeenager);
+			console.log("우대 : "+ amountPreference);
 			
-			
-//			console.log("일반 : "+ totalCommonPay);
-//			console.log("청소 : "+ totalTeenagerPay);
-//			console.log("우대 : "+ totalPreferencePay);
+			console.log("일반 : "+ totalCommonPay);
+			console.log("청소 : "+ totalTeenagerPay);
+			console.log("우대 : "+ totalPreferencePay);
+			console.log("---")
 			
 			//총 가격 출력
 			var totalPay = totalCommonPay + totalTeenagerPay + totalPreferencePay;

@@ -145,8 +145,16 @@
 	      bNum : 	`${vo.seatBookingVO.num}`,
 	      movieNum : 	`${vo.seatBookingVO.movieNum}`,
 	      reservationNum : 	`${vo.seatBookingVO.reservationNum}`
-	      
 	};
+
+	if(seatVO.grade == 1){
+		console.log("economy");
+	}else if(seatVO.grade == 2){
+		console.log("standard");
+	}else if(seatVO.grade == 3){
+		console.log("prome");
+	}
+
 	
 	list.push(seatVO);   
 	</c:forEach>
@@ -174,7 +182,7 @@
 
 
 
-	$(".seat").each(function(){
+	$(".seats .seat").each(function(){
 		var checkNum = $(this).data("row")+""+$(this).data("col");
 		console.log(checkNum);
 
