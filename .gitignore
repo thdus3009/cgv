@@ -26,3 +26,4 @@ target/**
 .factorypath
 .classpath
 src/main/resources/application-devInfo.properties
+src/main/resources/application-devInfo.properties
