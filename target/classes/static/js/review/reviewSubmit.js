@@ -11,7 +11,8 @@
 	 var g_mContents = ""; 
 	 var g_charmPoint = 0;
 	 var g_emotionPoint = 0;
-
+	 
+	 var g_title = "";
 	
 	 $("#submitBtn1").click(function(e){
 
@@ -186,8 +187,13 @@
 				$('#result').append(result);
 				
 				$(".popupBtn1").click(function(){
-					g_num=$(this).data("num");
+					g_num=$(this).data("num");//jquery
 					console.log(g_num);
+					
+					g_title=$(this).data("title");
+					console.log(g_title);
+					document.getElementById("title").innerHTML =g_title; //태그 사이에 넣을 값을 쓸때는 innerHTML (javaScript)
+					
 					document.getElementById("mContents").value ="";
 					document.getElementById('bytes').innerText =0;
 					

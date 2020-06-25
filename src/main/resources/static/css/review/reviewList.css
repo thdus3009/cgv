@@ -11,13 +11,6 @@
 
 }
 
-.line_p {
-	height : 100%; 
-	width: 100%; 
-	border-top: 2px solid #5f0080; 
-	background-color: white; 
-	padding : 30px 10px;
-}
 
 .listp {
 	font-weight: bold;
@@ -62,21 +55,11 @@
 
 
 
-
-.purchase_page {
-	text-align: center;
-	padding-top: 30px;
-	padding-bottom: 60px;
-}
-
-.c {
-	height:35px;
-	width :70px;
-	font-size : small;
-	background-color: #5f0080;
-	border: 1px solid #5f0080; 
-	border-radius:3px;
-	text-decoration:none;
-	color: white;
-	
+#title {
+	padding-bottom: 10px;
+	text-align: center; 
+	font-size: x-large; 
+	font-weight: bold;
+	color: #333;
+	border-bottom: 1px dashed #cccccc; 
 }

@@ -16,8 +16,16 @@
 					</div>
 					<div class="list_p_contents2">
 					
-						<!-- Modal 1 Button-->
-						<button type="button" class="btn btn-primary popupBtn1" data-toggle="modal"data-target="#myModal" data-num="${vo.num}">Open modal</button>
+						<!-- Modal 1 Button + 조건-->
+								<c:set var="name" value="홍길동" />
+
+								<c:if test="${name eq '홍길동'}">
+								    <button type="button" class="btn btn-primary popupBtn1" data-toggle="modal"data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>
+								</c:if>
+								<c:if test="${name ne '홍길동'}">
+								    <button type="button" class="btn btn-danger">리뷰쓴후</button>
+								</c:if>
+						
 						
 						<!-- Modal 2 Button-->
 						<button type="button" class="popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num="${vo.num}"></button>

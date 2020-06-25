@@ -105,7 +105,8 @@
 
 						<!-- Modal body -->
 						<div class="modal-body">
-							<div style="text-align: center;">영화제목</div><br>
+							<div id="title"></div>  <!-- reviewSubmit.js / reviewMore / $(".popupBtn1").click 참고 -->
+							<br> 
 							<div style="text-align: center;">
 							
 									<div class="group_radio" id="egg" >	
@@ -205,8 +206,10 @@
 		</div>
 
 		<button id="more">더보기</button>
-		
-		
+	
+
+
+
 	</div>	
 		<!-- 푸터 -------------------------------------------------------------------------------------->
 		<c:import url="../template/footer.jsp"></c:import>
