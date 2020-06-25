@@ -23,9 +23,6 @@ public class MemberController {
 	@Autowired
     private MemberService memberService;
 	
-	@Autowired
-	private SmsSender smsSender;
-	
     // 회원가입 페이지
     @GetMapping("join")
     public String join() {
@@ -83,19 +80,8 @@ public class MemberController {
     	MemberBasicVO findMemberBasicVO = memberService.phoneCheck(memberBasicVO);
     	if(findMemberBasicVO != null) {
     		result = findMemberBasicVO.getPhone();
-    		return result;
     	}
-    	
-    	// 인증번호 생성, 어디에 저장?
-    	GenerateAuthNumber authMaker = new GenerateAuthNumber();
-        String authCode = authMaker.excuteGenerate();
-    	
-    	// redis에 key : value (phone:authCode) 저장
-    	
-    	// 폰 번호가 없음 -> 인증 메시지 보내기
-    	String contents = "[CGV]인증번호는 "+authCode+" 입니다";
-    	smsSender.smsSend(memberBasicVO.getPhone(), contents);
-    	
+
     	return result;
     }
     

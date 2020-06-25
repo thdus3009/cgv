@@ -176,7 +176,19 @@
 	// 전화번호 인증
 	$("#phoneAuthBtn").click(function() {
 
+		// 인증번호를 안적었거나 6자리가 아니라면, alert 이후 내용 지우고 포커스
+		var authCode = $("#phoneAuth").val();
+		console.log($(authCode);
 		
+		if(authCode == "" && authCode.length != 6) {
+
+			alert("인증번호를 다시 입력해주세요");
+			$("#phoneAuth").val("");
+			$("#phoneAuth").focus();
+			return;
+		}
+
+		// ajax로 인증으로 번호 보내기 /member/phoneAuthConfirm
 	});
 </script>
 
