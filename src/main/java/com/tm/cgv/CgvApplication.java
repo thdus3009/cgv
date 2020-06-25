@@ -1,8 +1,10 @@
 package com.tm.cgv;
 
+import javax.annotation.Resource;
+import javax.annotation.Resources;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 @SpringBootApplication
 public class CgvApplication {

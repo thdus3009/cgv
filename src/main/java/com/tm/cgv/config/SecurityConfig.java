@@ -1,4 +1,4 @@
-package com.tm.cgv.security;
+package com.tm.cgv.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
@@ -17,6 +17,9 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.tm.cgv.member.MemberService;
+import com.tm.cgv.security.CustomLoginFailureHandler;
+import com.tm.cgv.security.CustomLoginSuccessHandler;
+import com.tm.cgv.security.CustomLogoutHandler;
 
 
 @Configuration
