@@ -20,6 +20,8 @@
  		<typeAlias type="com.tm.cgv.movieTime.MovieTimeVO" alias="MovieTimeVO"/>
  		<typeAlias type="com.tm.cgv.theater.TheaterVO" alias="TheaterVO"/>
  		<typeAlias type="com.tm.cgv.seat.SeatVO" alias="SeatVO"/>
+ 		<typeAlias type="com.tm.cgv.seatBooking.SeatBookingVO" alias="SeatBookingVO"/>
+ 		<typeAlias type="com.tm.cgv.seatSpace.SeatSpaceVO" alias="SeatSpaceVO"/>
  		
  		
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>

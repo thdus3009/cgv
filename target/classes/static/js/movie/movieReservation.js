@@ -512,7 +512,7 @@ $(function() {
 					},
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(result){
-						console.log(result);
+//						console.log(result);
 						$(".step.step1").css("display","none");
 						$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
 						$(".ticket_tnb .tnb_container .tnb").addClass("step2");
@@ -543,24 +543,21 @@ $(function() {
 					url : '../reservation/reservePayment',
 					type : 'post',
 					data : {
-						movieNum : $("#movieNum").val(),
-						movieTimeNum : $("#movieTimeNum").val(),
-						cinemaName : $("#cinemaName").val(),
-						theaterName : $("#theaterName").val(),
-						filmType : $("#filmType").val(),
-						seatCount : $("#seatCount").val()
+						
 					},
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(result){
-						console.log(result);
-						$(".step.step1").css("display","none");
-						$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
-						$(".ticket_tnb .tnb_container .tnb").addClass("step2");
-						$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
+//						console.log(result);
+						$(".step.step2").css("display","none");
+//						$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
+						
+//						$(".ticket_tnb .tnb_container .tnb").removeClass("step2");
+//						$(".ticket_tnb .tnb_container .tnb").addClass("step3");
+
 						
 						
-						$(".step.step2").css("display","block");
-						$(".step.step2").html(result);
+						$(".step.step3").css("display","block");
+						$(".step.step3").html(result);
 					}
 					
 				});

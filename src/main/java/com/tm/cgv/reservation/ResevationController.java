@@ -12,9 +12,10 @@ import com.tm.cgv.movie.MovieService;
 import com.tm.cgv.movie.MovieVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
-import com.tm.cgv.seat.SeatRepository;
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatSpace.SeatSpaceService;
+import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.util.TimeADD;
 
 @Controller
@@ -26,7 +27,9 @@ public class ResevationController {
 	@Autowired
 	private MovieTimeService movieTimeService;
 	@Autowired
-	private SeatService seatService; 
+	private SeatService seatService;
+	@Autowired
+	private SeatSpaceService seatSpaceService;
 	@Autowired
 	private TimeADD timeAdd;
 	
@@ -45,7 +48,22 @@ public class ResevationController {
 		
 		MovieVO movieVO = movieService.movieSelectOne(reservationVO.getMovieNum());
 		MovieTimeVO movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
-		List<SeatVO> seatList = seatService.seatSelectOne(movieTimeVO.getTheaterNum());
+		
+		//좌석 관련
+		SeatVO seatVO = new SeatVO();
+		seatVO.setTheaterNum(movieTimeVO.getTheaterNum());
+		seatVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
+		
+		int maxRow = seatService.rowCount(seatVO);
+		int maxCol = seatService.colCount(seatVO);
+		
+		//seatSapce 
+		SeatSpaceVO seatSpaceVO = new SeatSpaceVO();
+		seatSpaceVO.setTheaterNum(movieTimeVO.getTheaterNum());
+		List<SeatSpaceVO> seatSpaceList = seatSpaceService.seatSpaceSelect(seatSpaceVO);
+		
+		
+		List<SeatVO> seatList = seatService.seatSelectOne(seatVO);
 
 		int runningTime = Integer.parseInt(movieVO.getRuntime()); 
 		String startTime = movieTimeVO.getScreenTime();
@@ -53,10 +71,13 @@ public class ResevationController {
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
 		
 		
+		mv.addObject("maxRow", maxRow);
+		mv.addObject("maxCol", maxCol);
+		
 		mv.addObject("endTime", endTime);
 		mv.addObject("seatCount", seatCount);
 		
-		
+		mv.addObject("seatSpaceList", seatSpaceList);
 		mv.addObject("movieVO", movieVO);
 		mv.addObject("movieTimeVO", movieTimeVO);
 		mv.addObject("seatList", seatList);
@@ -66,4 +87,25 @@ public class ResevationController {
 		return mv;
 	}
 	
+	
+	
+	@PostMapping("reservePayment")
+	public ModelAndView reservePayment() throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		
+		mv.setViewName("movie/moviePayment");
+		
+		return mv;
+	}
+	
 }
+
+
+
+
+
+
+
+
+

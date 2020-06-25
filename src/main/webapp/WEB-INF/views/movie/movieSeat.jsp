@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="contents">
+			
+			
+
+			<div class="contents">
 					<div class="section section-seat three_line">   <!-- dimmed -->
 						<div class="col-head">
 						</div>	
@@ -68,114 +71,28 @@
 											<span class="text"></span>
 										</div>
 										<div class="seats" style="width: 272px; height: 192px;">
-											<c:forEach begin="0" end="11" var="t">
-											
-												<c:if test="${t eq 1}">
-													<div class="row" style="top:${t+(t*16)}px;">
-														<div class="label">${t+1}</div>
-														<div class="seat_group" data-seat-group="">
-															<div class="group"> 
-																<c:forEach begin="1" end="10" var="i">
-																	<!--blocked(선택불가)  reserved(이미 예매)  -->
-																	<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
-																	
-																	<c:if test="${i % 4 eq 0}">
-																		<div class="seat reserved" style="left:${48+(i*16)}px"> 
-																			<a href="#" onclick="return false;"> 
-																				<span class="no">${i}</span>
-																				<span class="sreader"></span>
-																				<span class="sreader mod"></span>
-																			</a>
-																		</div>
-																	</c:if>
-																	<c:if test="${i % 4 ne 0}">
-																		<div class="seat rating_economy" data-grade="1" style="left:${48+(i*16)}px"> 
-																			<a href="#" onclick="return false;">
-																				<span class="no">${i}</span>
-																				<span class="sreader"></span>
-																				<span class="sreader mod"></span>
-																			</a>
-																		</div>
-																	</c:if>
-																</c:forEach>
+											<c:forEach begin="0" end="${maxRow-1}" var="t">
+												<div class="row" style="top:${t+(t*16)}px;">
+													<div class="label">${t+1}</div>
+													<div class="seat_group" data-seat-group="">
+														<div class="group"> 
+															<c:forEach begin="1" end="${maxCol}" var="i" >
+																<!--blocked(선택불가)  reserved(이미 예매)  -->
+																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
 																
-															</div>
+																<div class="seat" style="left:${48+(i*16)}px" data-row="${t+1}" data-col="${i}"> 
+																	<a href="#" onclick="return false;"> 
+																		<span class="no">${i}</span>
+																		<span class="sreader"></span>
+																		<span class="sreader mod"></span>
+																	</a>
+																</div>
+															</c:forEach>
+																
 														</div>
 													</div>
-													<br>
-												
-												</c:if>
-												<c:if test="${t eq 4}">
-													<div class="row" style="top:${t+(t*16)}px;">
-														<div class="label">${t+1}</div>
-														<div class="seat_group" data-seat-group="">
-															<div class="group"> 
-																<c:forEach begin="1" end="10" var="i">
-																	<!--blocked(선택불가)  reserved(이미 예매)  -->
-																	<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
-																	
-																	<c:if test="${i % 4 eq 0}">
-																		<div class="seat reserved" style="left:${48+(i*16)}px"> 
-																			<a href="#" onclick="return false;"> 
-																				<span class="no">${i}</span>
-																				<span class="sreader"></span>
-																				<span class="sreader mod"></span>
-																			</a>
-																		</div>
-																	</c:if>
-																	<c:if test="${i % 4 ne 0}">
-																		<div class="seat rating_comfort" data-grade="2" style="left:${48+(i*16)}px"> 
-																			<a href="#" onclick="return false;">
-																				<span class="no">${i}</span>
-																				<span class="sreader"></span>
-																				<span class="sreader mod"></span>
-																			</a>
-																		</div>
-																	</c:if>
-																</c:forEach>
-																
-															</div>
-														</div>
-													</div>
-													<br>
-												
-												</c:if>
-												<c:if test="${t ne 1 and t ne 4}">
-													<div class="row" style="top:${t+(t*16)}px;">
-														<div class="label">${t+1}</div>
-														<div class="seat_group" data-seat-group="">
-															<div class="group"> 
-																<c:forEach begin="1" end="10" var="i">
-																	<!--blocked(선택불가)  reserved(이미 예매)  -->
-																	<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
-																	
-																	<c:if test="${i % 4 eq 0}">
-																		<div class="seat reserved" style="left:${48+(i*16)}px"> 
-																			<a href="#" onclick="return false;"> 
-																				<span class="no">${i}</span>
-																				<span class="sreader"></span>
-																				<span class="sreader mod"></span>
-																			</a>
-																		</div>
-																	</c:if>
-																	<c:if test="${i % 4 ne 0}">
-																		<div class="seat rating_prime" data-grade="3" style="left:${48+(i*16)}px"> 
-																			<a href="#" onclick="return false;">
-																				<span class="no">${i}</span>
-																				<span class="sreader"></span>
-																				<span class="sreader mod"></span>
-																			</a>
-																		</div>
-																	</c:if>
-																</c:forEach>
-																
-															</div>
-														</div>
-													</div>
-													<br>
-												
-												</c:if>
-											
+												</div>
+												<br>
 												
 											</c:forEach>
 											
@@ -209,4 +126,80 @@
 				</div>
 	
 	<script type="text/javascript" src="/js/movie/movieSeatReservation.js"></script>
+
+	
+	
+	
+<script type="text/javascript">
+
+	var list = [];
+
+
+	<c:forEach items="${seatList}" var="vo">
+	var seatVO = {
+	      num: `${vo.num}`,
+	      theaterNum:	`${vo.theaterNum}`,
+	      rowIdx :	`${vo.rowIdx}`,
+	      colIdx :	`${vo.colIdx}`,
+	      grade:	`${vo.grade}`,
+	      bNum : 	`${vo.seatBookingVO.num}`,
+	      movieNum : 	`${vo.seatBookingVO.movieNum}`,
+	      reservationNum : 	`${vo.seatBookingVO.reservationNum}`
+	      
+	};
+	
+	list.push(seatVO);   
+	</c:forEach>
+
+	console.log(list);
+
+
+// 	var str = 'ABCD';
+// 	console.log(str);
+// 	console.log(str.charCodeAt(0));
+// 	console.log(str.charCodeAt(0)-64);
+
+	var seatNumList = [];
+
+	for(i=0;i<list.length;i++){
+		var row = list[i].rowIdx;
+		row = row.charCodeAt(0)-64;
+		var col = list[i].colIdx;
+
+// 		console.log("seat["+i+"] : "+row+col);
+// 		console.log(row+col);
+		seatNumList.push(row+col);
+		
+	}
+
+
+
+	$(".seat").each(function(){
+		var checkNum = $(this).data("row")+""+$(this).data("col");
+		console.log(checkNum);
+
+// 		console.log(seatNumList.indexOf(checkNum));
+		if(seatNumList.indexOf(checkNum) == -1){
+			$(this).remove();
+		}
+		
+	
+	});
+	
+
+
+
+
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
