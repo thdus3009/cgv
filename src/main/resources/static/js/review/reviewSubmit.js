@@ -7,6 +7,7 @@
 	/ 10자 이상이면 ajax로 내용 넘겨주고 수동으로 값비우고 닫아주기 */
 
 	 var g_num = 0;
+	 var g_egg = 0;
 	 var g_mContents = ""; 
 	 var g_charmPoint = 0;
 	 var g_emotionPoint = 0;
@@ -16,30 +17,37 @@
 
 		var mContents = document.getElementById("mContents");
 		
-		
 		if(mContents.value.length>=10){
 			
 			if(confirm("관람평이 등록되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
-				document.getElementById("btn2").click();
+
+				var btn2List = document.getElementsByClassName('btn2');
+				
+				for(i=0; i<btn2List.length; i++){
+
+					if(btn2List[i].dataset.num == g_num){
+						console.log(btn2List[i].dataset.num);
+						btn2List[i].click();
+						break;
+					}
+				}
+				
 			}else{
 				alert("아니오");
 			}
 			
-			
-			$.ajax({
-
-				type:"POST",
-				url:"./review_Write",
-				data:{
-					contents:$('#mContents').val()
-					},
-				success:function(){
-					alert("dd")
-					}
-
-				})
-			
 			//팝업창 닫히고 내용 초기화(mContents, data-dismiss="modal")
+			g_mContents= mContents;
+			var eggList = document.getElementsByClassName("egg");
+			for(i=0; i<eggList.length; i++){
+				
+				if(eggList[i].checked == true){
+					g_egg = eggList[i].value;
+					
+					break;
+				}
+			}
+			
 			$("#exit").click();
 
 								
@@ -90,28 +98,33 @@
 
 	 
 	 $("#popupBtn2").click(function(e){
-		 //null값
-		 var charmPoint = getCharmPoint();
-		 var emotionPoint = getEmotionPoint();
+		 console.log("dddd");
 		 
-		if(charmPoint!=null && emotionPoint!=null){
+		 //null값
+		 g_charmPoint = getCharmPoint();
+		 g_emotionPoint = getEmotionPoint();
+		 
+		if(g_charmPoint!=null && g_emotionPoint!=null){
 		
-			if(charmPoint==0){
-				alert("매력포인트를 1개 이상 선택해주세요.")
-				
+			if(g_charmPoint==0){
+				alert("매력포인트를 1개 이상 선택해주세요.")	
 			} else{
-				if(emotionPoint==0){
+				if(g_emotionPoint==0){
 					alert("감정포인트를 1개 이상 선택해주세요.")
-					
 				}else {
+					
+					console.log(g_mContents.value);
 					
 					$.ajax({
 
 						type:"POST",
 						url:"./review_Write",
 						data:{
-							charmPoint: charmPoint,
-							emotionPoint: emotionPoint
+							num : g_num,
+							egg : g_egg,
+							contents : g_mContents.value,
+							charmPoint: g_charmPoint,
+							emotionPoint: g_emotionPoint
 						},
 						success:function(data){
 							alert("dd")
@@ -119,14 +132,9 @@
 					})
 					
 					 $("#exit2").click();
-					
-					
 				}
-				
 			}
-			
 		}
-	 
 	 });
 	 
 //	 ------------------------------------------------------------------------------
@@ -146,6 +154,40 @@
 
 */
 	 
-
-
+//	 ------------------------------------------------------------------------------
+	 //reviewMore
 	
+	 
+	 
+		var count=1;	
+		function getList(curPage){//처음 창을 열면 curPage가 안떠있다가("getList?curPage=" 이 형태) 더보기를 누르면 count++된 정보가 curPage에 들어가게 된다.
+			//ajax
+			$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
+				$('#result').append(result);
+				
+				$(".btn1").click(function(){
+					g_num=$(this).data("num");
+					console.log(g_num);
+					document.getElementById("mContents").value ="";
+					document.getElementById('bytes').innerText =0;
+					
+					//document.getElementById('popupBtn').dataset.num=$(this).data("num");
+					$('input:radio[name="egg"][value=1]').prop('checked', true);
+				});
+				
+				$(".btn2").click(function(){
+				
+					// init
+					$(".charmPoint").prop("checked", false);
+					$(".emotionPoint").prop("checked", false);
+				});
+				
+			});
+		}
+		
+		getList(count);
+		/* ------------------- */
+		$("#more").click(function(){
+			count++;
+			getList(count);
+		});

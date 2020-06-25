@@ -105,6 +105,23 @@
 
 						<!-- Modal body -->
 						<div class="modal-body">
+							<div style="text-align: center;">영화제목</div><br>
+							<div style="text-align: center;">
+							
+									<div class="group_radio" id="egg" >	
+										<label class="label_radio"> 
+											<input type="radio" name="egg" value=1 class="egg" checked="checked">
+											<span class="text_position">좋았어요~^^</span>
+										</label>
+										&ensp;&ensp;
+										<label class="label_radio">
+											<input type="radio" name="egg" value=0 class="egg">
+											<span class="text_position">흠~좀 별로였어요;;;</span>
+										</label>	
+									</div>
+							
+							</div><br>
+							
 							<!-- 나중에 여기에 session으로 정보불러와서 같이 보내기 -->
 							<textarea id="mContents" name="contents" rows="5" cols="70" onkeyup="CheckByte(this)"
 								placeholder="운영원칙에 어긋나는 게시물로 판단되는 글은 제재 조치를 받을 수 있습니다." 
@@ -205,9 +222,7 @@
 	 
 	</script>
 	
-	
 
-	<script type="text/javascript" src="../js/review/reviewMore.js"></script>
 
 	<script type="text/javascript" src="../js/review/checkByte.js"></script>
 

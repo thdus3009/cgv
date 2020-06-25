@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberService;
@@ -95,14 +96,19 @@ public class ReviewController {
 	
 	//review write
 	@PostMapping("review_Write")
-	public ModelAndView review_Write(ReviewVO reviewVO, ModelAndView mv, String charmPoint, String emotionPoint)throws Exception {
-		String con = reviewVO.getContents();
+	@ResponseBody
+	public int review_Write(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+		
+		
 		//정보를 따로따로 가져와서 vo로 합쳐 적용하기(contents, reservationNum, charmPoint, emotionPoint)
-		System.out.println("contents:"+con);
-		System.out.println("charm:"+charmPoint);
-		System.out.println("emotion:"+emotionPoint);
+		System.out.println("num:"+reviewVO.getNum());
+		System.out.println("contents:"+reviewVO.getContents());
+		System.out.println("egg:"+reviewVO.getEgg());
+		
+		System.out.println("charm:"+reviewVO.getCharmPoint());
+		System.out.println("emotion:"+reviewVO.getEmotionPoint());
 
-		return mv;
+		return 0;
 	
 	}
 	
