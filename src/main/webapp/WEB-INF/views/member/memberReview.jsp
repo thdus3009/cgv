@@ -140,7 +140,11 @@
 		</div>
 
 
+
+
+
 		<!-- The Modal2 -->
+		
 		<div class="modal" id="myModal2">
 			<div class="modal-dialog">
 				<div class="modal-content">

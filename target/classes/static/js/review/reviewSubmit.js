@@ -17,36 +17,57 @@
 
 		var mContents = document.getElementById("mContents");
 		
+		g_mContents= mContents;
+		var eggList = document.getElementsByClassName("egg");
+		for(i=0; i<eggList.length; i++){
+			
+			if(eggList[i].checked == true){
+				g_egg = eggList[i].value;
+				
+				break;
+			}
+		}
+		
 		if(mContents.value.length>=10){
 			
 			if(confirm("관람평이 등록되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
 
-				var btn2List = document.getElementsByClassName('popupBtn2');
+				var popupBtn2List = document.getElementsByClassName('popupBtn2');
 				
-				for(i=0; i<btn2List.length; i++){
+				for(i=0; i<popupBtn2List.length; i++){
 
-					if(btn2List[i].dataset.num == g_num){
-						console.log(btn2List[i].dataset.num);
-						btn2List[i].click();
+					if(popupBtn2List[i].dataset.num == g_num){
+						console.log(popupBtn2List[i].dataset.num);
+						//2번째 모달로 이동
+						//(i번째 2번째모달 이동버튼 클릭)
+						popupBtn2List[i].click();
 						break;
 					}
 				}
 				
 			}else{
-				alert("아니오");
+				//여기서는 reservationNum, contents, egg정보만을 넘겨준다.
+				
+				console.log("아니오");
+				
+				$.ajax({
+
+					type:"POST",
+					url:"./review_Write1",
+					data:{
+						reservationNum : g_num,
+						egg : g_egg,
+						contents : g_mContents.value,
+					},
+					success:function(data){
+						alert("리뷰가 등록되었습니다.")
+					}
+				})
+				
 			}
 			
 			//팝업창 닫히고 내용 초기화(mContents, data-dismiss="modal")
-			g_mContents= mContents;
-			var eggList = document.getElementsByClassName("egg");
-			for(i=0; i<eggList.length; i++){
-				
-				if(eggList[i].checked == true){
-					g_egg = eggList[i].value;
-					
-					break;
-				}
-			}
+
 			
 			$("#exit").click();
 
@@ -110,13 +131,14 @@
 				if(g_emotionPoint==0){
 					alert("감정포인트를 1개 이상 선택해주세요.")
 				}else {
+					//여기서는 reservationNum, contents, egg, emotionPoint, charmPoint 정보를 넘겨준다.
 					
 					console.log(g_mContents.value);
 					
 					$.ajax({
 
 						type:"POST",
-						url:"./review_Write",
+						url:"./review_Write2",
 						data:{
 							reservationNum : g_num,
 							egg : g_egg,
@@ -125,7 +147,7 @@
 							emotionPoint: g_emotionPoint
 						},
 						success:function(data){
-							alert("dd")
+							alert("리뷰가 등록되었습니다.")
 						}
 					})
 					

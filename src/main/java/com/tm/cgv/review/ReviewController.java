@@ -94,13 +94,29 @@ public class ReviewController {
 	}
 
 	
-	//review write
-	@PostMapping("review_Write")
+	//영화 관람포인트 선택x (modal2창 x)
+	@PostMapping("review_Write1")
 	@ResponseBody
-	public int review_Write(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+	public int review_Write1(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+		
+		int result=0;
+		result = reviewService.review_Write1(reviewVO);
+		
+		if(result>0) {
+			System.out.println("성공");
+		}
+		
+		return 0;
+	
+	}
+	
+	//영화 관람포인트 선택o (modal2창 o)
+	@PostMapping("review_Write2")
+	@ResponseBody
+	public int review_Write2(ReviewVO reviewVO, ModelAndView mv)throws Exception {
 
 		int result=0;
-		result = reviewService.review_Write(reviewVO);
+		result = reviewService.review_Write2(reviewVO);
 		
 		if(result>0) {
 			System.out.println("성공");

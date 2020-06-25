@@ -19,7 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		limit #{pager.startRow},#{pager.perPage}
 	</select>
 	
-	<insert id="review_Write" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
+	<insert id="review_Write1" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
+		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt) 
+		VALUES (#{reservationNum},#{contents},0,#{egg},0,0,now())
+	</insert> 
+	
+	<insert id="review_Write2" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
 		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt) 
 		VALUES (#{reservationNum},#{contents},0,#{egg},#{charmPoint},#{emotionPoint},now())
 	</insert> 

@@ -27,9 +27,14 @@ public class ReviewService {
 		
 	}
 	
-	public int review_Write(ReviewVO reviewVO)throws Exception {
+	public int review_Write1(ReviewVO reviewVO)throws Exception {
 		
-		return reviewRepository.review_Write(reviewVO);
+		return reviewRepository.review_Write1(reviewVO);
+	}
+	
+	public int review_Write2(ReviewVO reviewVO)throws Exception {
+		
+		return reviewRepository.review_Write2(reviewVO);
 	}
 
 }

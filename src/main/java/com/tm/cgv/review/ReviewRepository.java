@@ -14,5 +14,7 @@ public interface ReviewRepository {
 	
 	public List<ReviewVO> reviewList(HashMap<String, Object> pa);
 	
-	public int review_Write(ReviewVO reviewVO);
+	public int review_Write1(ReviewVO reviewVO);
+	
+	public int review_Write2(ReviewVO reviewVO);
 }
