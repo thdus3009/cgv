@@ -48,7 +48,8 @@
 			preCommon = commonCount;
 			amountCommon = commonCount;
 			
-			seatCountListMake("일반",commonCount);
+			seatCountListMake();
+			allSelectedCheck();
 		}else{
 			commonCount = preCommon;
 		}
@@ -72,6 +73,7 @@
 			amountTeenager = teenagerCount;
 			
 			seatCountListMake();
+			allSelectedCheck();
 		}else{
 			teenagerCount = preTeenager;
 		}
@@ -94,11 +96,23 @@
 			amountPreference = preferenceCount;
 			
 			seatCountListMake();
-			
+			allSelectedCheck();
 		}else{
 			preferenceCount = prePreference;
 		}
 	});
+	
+	
+	//전체 선택완료 했는지를 검사
+	function allSelectedCheck(){
+		
+		if(totalCount == selectedCount){
+			$(".tnb.step2 .btn-right").addClass("on");
+		}else{
+			$(".tnb.step2 .btn-right").removeClass("on");
+		}
+	}
+	
 	
 	
 	//각 선택시 리스트에 추가된 인원값 추가 (일반 1명 )식으로 저장
@@ -405,8 +419,18 @@
 		priceCount();
 		
 		//전좌석 선택 완료
-		if(totalCount == selectedCount){
-			
+		allSelectedCheck();
+		
+		//좌석 선택시 CSS display 변경
+		console.log(selectedCount);
+		if(selectedCount > 0){
+			$(".info.seat").css("display","block");
+			$(".info.payment-ticket").css("display","block");
+			$(".info.path").css("display","none");
+		}else{
+			$(".info.seat").css("display","none");
+			$(".info.payment-ticket").css("display","none");
+			$(".info.path").css("display","block");
 		}
 		
 	});
@@ -640,6 +664,8 @@
 	
 	
 	
+	
+
 	
 	
 	

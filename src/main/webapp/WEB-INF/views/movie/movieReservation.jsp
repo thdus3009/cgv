@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,6 +6,8 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/movieReservation.css" rel="stylesheet" type="text/css">
+
+<link href="${pageContext.request.contextPath}/css/movie/movieSeatReservation.css" rel="stylesheet" type="text/css">
 
 <!-- payment -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -62,7 +63,7 @@
 				
 				<!-- container selector -->
 				<div class="steps">
-					<div class="step step1">
+					<div class="step step1" style="height: 595px; display: block;">
 					
 						<!-- 영화선택 -->
 						<div class="section section-movie">
@@ -361,13 +362,26 @@
 						</div>
 						
 					</div>
+					
+					<div class="step step2" style="display: none;">
+					</div>
+					
+					<div class="step step3" style="display: none;">
+					</div>
+					
+					<div class="step step4" style="display: none;">
+					</div>
+					
+					
+					
+					
 				</div>			
 			</div>
 		
 		</div>
 		
-		
-		<form action="../reservation/seatReservation" id="data-from" method="post">
+		<!-- url : ../reservation/seatReservation -->
+		<form action="" id="data-from" method="post">
 			<input type="hidden" id="movieNum" name="movieNum" value="">
 			<input type="hidden" id="movieTimeNum" name="movieTimeNum" value="">
 			<input type="hidden" id="cinemaName" name="cinemaName" value="">
@@ -383,8 +397,10 @@
 		
 		<!-- 선택내용 출력,좌선선택 페이지로 이동버튼 출력부분 -->
 		<div class="ticket_tnb">
-			<div id="ticket_tnb" class="tnb_container ">
-				<div class="tnb step1">
+			<div id="ticket_tnb" class="tnb_container ">    
+				<div class="tnb step1">  
+					<a class="btn-left" href="#" onclick="return false;" title="영화선택" style="display: none;">이전단계로 이동</a>
+				
 					<div class="info movie">
 						<span class="movie_poster">
 							<img id="select_image" src="" alt="포스터" style="display: none;"> 			<!-- display: inline; -->
@@ -424,6 +440,42 @@
 						</div>
 						<div class="placeholder" title="극장선택" ></div> <!-- style="display: none;" -->
 					</div>
+					
+					
+					<div class="info seat" style="display: none;">
+						<div class="row seat_name" style="height: 20px;">
+							<span class="header">좌석명</span>
+							<span id="select_seat_grade" class="data" title=""></span>
+						</div>
+						<div class="row seat_no colspan3">
+							<span class="header">좌석번호</span>
+							<span id="select_Seat" class="data ellipsis-line3" title=""></span>
+						</div>
+						<div class="placeholder" title="좌석선택" style="display: none;"></div>
+					</div>
+					
+					
+					<div class="info payment-ticket" style="width: 155px; display: none;">
+						<div class="row payment-adult" style="display: none;">
+							<span class="header">일반</span>
+							<span class="data"><span class="price"></span></span>
+						</div>
+						<div class="row payment-youth" style="display: none;">
+							<span class="header">청소년</span>
+							<span class="data"><span class="price"></span></span>
+						</div>
+						<div class="row payment-special" style="display: none;">
+							<span class="header">우대</span>
+							<span class="data"><span class="price"></span></span>
+						</div>
+						<div class="row payment-final" style="display: none;">
+							<span class="header">총금액</span>
+							<span class="data"><span class="price"></span><span class="won">원</span></span>
+						<span id="priceMapInfoIco" style="position: absolute; right: -17px; margin-top: 3px; cursor: pointer;"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/ico_circle_14.png" height="14" width="14" alt="mappingIco"></span><div id="priceMappingContainer" style="display: none; position: absolute; right: -80px; z-index: 100; width: 150px; height: auto; padding: 10px; background: rgb(51, 51, 51); bottom: 115px;"><span class="typeNm" style="display:inline-block; width:40px;">일반</span> : PRIME X 2<br></div></div>
+					</div>
+					
+					
+					
 					<div class="info path">
 						<div class="row colspan4">
 							<span class="path-step2" title="좌석선택">&nbsp;</span>
@@ -437,14 +489,12 @@
 
 
 
-
-
-
 		<c:import url="../template/footer.jsp"></c:import>
 		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
 
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
+
 <script type="text/javascript">
     var list = [];
     

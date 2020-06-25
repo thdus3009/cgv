@@ -494,10 +494,37 @@ $(function() {
 		
 		
 		//좌석예매페이지로 이동
-		$("#tnb_step_btn_right").click(function(){
+		$(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 			if($(this).hasClass("on") == true){
-				$("#data-from").submit();
-				alert("전송전송");
+//				$("#data-from").submit();
+				//alert("전송전송");
+				
+				$.ajax({
+					url : '../reservation/seatReservation',
+					type : 'post',
+					data : {
+						movieNum : $("#movieNum").val(),
+						movieTimeNum : $("#movieTimeNum").val(),
+						cinemaName : $("#cinemaName").val(),
+						theaterName : $("#theaterName").val(),
+						filmType : $("#filmType").val(),
+						seatCount : $("#seatCount").val()
+					},
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					success : function(result){
+						console.log(result);
+						$(".step.step1").css("display","none");
+						$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
+						$(".ticket_tnb .tnb_container .tnb").addClass("step2");
+						$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
+						
+						
+						$(".step.step2").css("display","block");
+						$(".step.step2").html(result);
+					}
+					
+				});
+				
 				
 				//payment();
 			}else{
@@ -506,6 +533,47 @@ $(function() {
 			
 		});
 		
+		
+		//결제하기 페이지로 이동
+		$(".tnb_container").on("click",".tnb.step2 .btn-right",function(){
+			if($(this).hasClass("on")){
+				alert("payment");
+				//결제진행 - ajax()
+				$.ajax({
+					url : '../reservation/reservePayment',
+					type : 'post',
+					data : {
+						movieNum : $("#movieNum").val(),
+						movieTimeNum : $("#movieTimeNum").val(),
+						cinemaName : $("#cinemaName").val(),
+						theaterName : $("#theaterName").val(),
+						filmType : $("#filmType").val(),
+						seatCount : $("#seatCount").val()
+					},
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					success : function(result){
+						console.log(result);
+						$(".step.step1").css("display","none");
+						$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
+						$(".ticket_tnb .tnb_container .tnb").addClass("step2");
+						$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
+						
+						
+						$(".step.step2").css("display","block");
+						$(".step.step2").html(result);
+					}
+					
+				});
+				
+				
+			}else{
+				if(totalCount == 0){
+					alert("관람인원을 선택하여 주세요");
+				}else{
+					alert("관람인원과 선택좌석수가 동일하지 않습니다.");
+				}
+			}
+		});
 		
 		
 		function payment(){

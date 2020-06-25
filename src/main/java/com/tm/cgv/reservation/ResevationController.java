@@ -53,7 +53,6 @@ public class ResevationController {
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
 		
 		
-		
 		mv.addObject("endTime", endTime);
 		mv.addObject("seatCount", seatCount);
 		
@@ -63,7 +62,7 @@ public class ResevationController {
 		mv.addObject("seatList", seatList);
 		mv.addObject("reservationVO", reservationVO);
 		
-		mv.setViewName("movie/movieSeatReservation");
+		mv.setViewName("movie/movieSeat");
 		return mv;
 	}
 	

@@ -699,7 +699,14 @@ body{
 }
 
 
+.tnb.step2 .btn-right{
+	background-position: 0 -330px;
+}
 
+.tnb.step2 .btn-right.on{
+	background-position: -150px -330px;
+	cursor: pointer;
+}
 
 
 
