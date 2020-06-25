@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ReviewVO {
+	
 //review (reviewWrite)
 	private int num;
 	private int reservationNum;
@@ -31,11 +32,11 @@ public class ReviewVO {
 
 	private String cinemaName; //영화관
 	private String theaterName; //상영관
-	
-	
+
 //movieInfo
 	private String title;
-//movieTime
+
+	//movieTime
 	private int movieTimeNum;
 	private String screenDate; 
 	private String screenTime;

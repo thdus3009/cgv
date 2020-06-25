@@ -12,7 +12,7 @@ public interface ReviewRepository {
 
 	//public List<TestVO> getList(Pager pager);
 	
-	public List<Long> reviewList(HashMap<String, Object> pa);
+	public List<ReviewVO> reviewList(HashMap<String, Object> pa);
 	
 	public ReviewVO reviewList2(Long m);
 }

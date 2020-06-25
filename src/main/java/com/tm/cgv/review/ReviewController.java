@@ -72,37 +72,24 @@ public class ReviewController {
 		
 		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
 		
+		
 		//예매번호 list
-		List<Long> order_num = reviewService.reviewList(uid, pager);//10개씩 끊어서 가져와야 하니까 List로 받아준다.
+		List<ReviewVO> reviewList = reviewService.reviewList(uid, pager);//10개씩 끊어서 가져와야 하니까 List로 받아준다.
 		
+		//하나씩 받은 reviewVO를 다시 ArrayList로 보내기 (people때문에 이작업이 필요)
+		List<ReviewVO> ar = new ArrayList<ReviewVO>();
 		
-		  //List는 인터페이스+부모형태라서, 자식형태이고 유틸타입인 ArrayList를 선언해주어야 한다.
-		  List<ReviewVO> ar = new ArrayList<ReviewVO>();
+		//VO를 가지고 있는 List를 하나씩빼줄때 foreach문 사용
+		for(ReviewVO reviewVO : reviewList) {
 		  
-		  for(int i=0; i<order_num.size();i++) {
-			 
-			  Long m =  order_num.get(i); //order_numd의 i번 인덱스에있는 정보조회
-			  //m = 주문번호를 하나씩 가져오는 것
-			  //System.out.println("m cont: "+m);
-			 
-			 ReviewVO reviewVO =  reviewService.reviewList2(m); 
-			 
-			//System.out.println("??:"+ reviewVO.getNum());
-
-			
-			reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
-			
-			 ar.add(reviewVO);
-
+			  reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
+			  
+			  ar.add(reviewVO);
 		  }
-
-		 model.addAttribute("list",ar);
 		
 		
-		
-		
-//		List<TestVO> ar = reviewService.getList(pager);
-//		model.addAttribute("list", ar);
+		model.addAttribute("list",ar);
+		  
 	}
 
 	

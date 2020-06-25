@@ -24,11 +24,12 @@ public class ReviewService {
 //		
 //	};
 	
-	public List<Long> reviewList(String uid, Pager pager)throws Exception {
+	public List<ReviewVO> reviewList(String uid, Pager pager)throws Exception {
 		pager.makeRow();
 		HashMap<String, Object> pa = new HashMap<String, Object>(); //HashMap<String, Object> //<key,value>
 		pa.put("uid", uid);
 		pa.put("pager", pager);
+
 		return reviewRepository.reviewList(pa);
 		
 	}
