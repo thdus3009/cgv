@@ -17,10 +17,10 @@
 					<div class="list_p_contents2">
 					
 						<!-- Modal 1 Button-->
-						<button type="button" class="btn btn-primary btn1" data-toggle="modal"data-target="#myModal" data-num="${vo.num}">Open modal</button>
+						<button type="button" class="btn btn-primary popupBtn1" data-toggle="modal"data-target="#myModal" data-num="${vo.num}">Open modal</button>
 						
 						<!-- Modal 2 Button-->
-						<button type="button" class="btn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num="${vo.num}"></button>
+						<button type="button" class="popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num="${vo.num}"></button>
 					</div>
 					
 				</div>

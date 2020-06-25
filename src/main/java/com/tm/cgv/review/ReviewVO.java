@@ -11,7 +11,7 @@ public class ReviewVO {
 	private int num;
 	private int reservationNum;
 	private String contents;
-	private int like;
+	private int like1;
 	private int egg;
 	private int charmPoint;
 	private int emotionPoint;

@@ -15,14 +15,7 @@ public class ReviewService {
 
 	@Autowired
 	private ReviewRepository reviewRepository;
-	
-	//오버라이드는 상속할때만
-	
-//	public List<TestVO> getList(Pager pager)throws Exception {
-//		pager.makeRow();
-//		return reviewRepository.getList(pager);
-//		
-//	};
+
 	
 	public List<ReviewVO> reviewList(String uid, Pager pager)throws Exception {
 		pager.makeRow();
@@ -34,8 +27,9 @@ public class ReviewService {
 		
 	}
 	
-	public ReviewVO reviewList2(Long m)throws Exception { //m은 "조건문을 넣은 reservation의 num"에 해당
+	public int review_Write(ReviewVO reviewVO)throws Exception {
 		
-	return reviewRepository.reviewList2(m);
+		return reviewRepository.review_Write(reviewVO);
 	}
+
 }

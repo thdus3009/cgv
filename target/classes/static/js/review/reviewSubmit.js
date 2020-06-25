@@ -13,7 +13,7 @@
 	 var g_emotionPoint = 0;
 
 	
-	 $("#popupBtn").click(function(e){
+	 $("#submitBtn1").click(function(e){
 
 		var mContents = document.getElementById("mContents");
 		
@@ -21,7 +21,7 @@
 			
 			if(confirm("관람평이 등록되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
 
-				var btn2List = document.getElementsByClassName('btn2');
+				var btn2List = document.getElementsByClassName('popupBtn2');
 				
 				for(i=0; i<btn2List.length; i++){
 
@@ -97,9 +97,7 @@
 //	 ------------------------------------------------------------------------------
 
 	 
-	 $("#popupBtn2").click(function(e){
-		 console.log("dddd");
-		 
+	 $("#submitBtn2").click(function(e){
 		 //null값
 		 g_charmPoint = getCharmPoint();
 		 g_emotionPoint = getEmotionPoint();
@@ -120,7 +118,7 @@
 						type:"POST",
 						url:"./review_Write",
 						data:{
-							num : g_num,
+							reservationNum : g_num,
 							egg : g_egg,
 							contents : g_mContents.value,
 							charmPoint: g_charmPoint,
@@ -165,7 +163,7 @@
 			$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
 				$('#result').append(result);
 				
-				$(".btn1").click(function(){
+				$(".popupBtn1").click(function(){
 					g_num=$(this).data("num");
 					console.log(g_num);
 					document.getElementById("mContents").value ="";
@@ -175,7 +173,7 @@
 					$('input:radio[name="egg"][value=1]').prop('checked', true);
 				});
 				
-				$(".btn2").click(function(){
+				$(".popupBtn2").click(function(){
 				
 					// init
 					$(".charmPoint").prop("checked", false);

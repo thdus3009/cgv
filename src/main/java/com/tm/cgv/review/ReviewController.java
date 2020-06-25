@@ -98,16 +98,14 @@ public class ReviewController {
 	@PostMapping("review_Write")
 	@ResponseBody
 	public int review_Write(ReviewVO reviewVO, ModelAndView mv)throws Exception {
-		
-		
-		//정보를 따로따로 가져와서 vo로 합쳐 적용하기(contents, reservationNum, charmPoint, emotionPoint)
-		System.out.println("num:"+reviewVO.getNum());
-		System.out.println("contents:"+reviewVO.getContents());
-		System.out.println("egg:"+reviewVO.getEgg());
-		
-		System.out.println("charm:"+reviewVO.getCharmPoint());
-		System.out.println("emotion:"+reviewVO.getEmotionPoint());
 
+		int result=0;
+		result = reviewService.review_Write(reviewVO);
+		
+		if(result>0) {
+			System.out.println("성공");
+		}
+		
 		return 0;
 	
 	}

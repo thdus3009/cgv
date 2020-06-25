@@ -132,7 +132,7 @@
 						<div class="modal-footer">
 							<span id="bytes" style="color: black;">0</span>/280(byte)
 							&emsp;
-							<input type="button" class="btn btn-danger" id="popupBtn" value="확인">
+							<input type="button" class="btn btn-danger" id="submitBtn1" value="확인">
 						</div>
 					</form>
 				</div>
@@ -186,7 +186,7 @@
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
-							<input type="button" class="btn btn-danger" id="popupBtn2" value="확인">
+							<input type="button" class="btn btn-danger" id="submitBtn2" value="확인">
 						</div>
 						
 					</form>

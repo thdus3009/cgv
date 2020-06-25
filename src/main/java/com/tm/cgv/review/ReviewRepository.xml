@@ -6,9 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.review.ReviewRepository">
 
-
-
-
 	<!-- 해당 조건의 num 받아오기 -->
 	<select id="reviewList" parameterType="java.util.Map" resultType="ReviewVO">
 		select MRI.num, MRI.movieNum, MRI.title, MRI.fileName, MRI.theaterName, MRI.cinemaName, MRI.movieTimeNum, T.screenDate, T.screenTime, MRI.common, MRI.teenager, MRI.preference
@@ -21,6 +18,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(T.num = MRI.movieTimeNum) order by MRI.num desc 
 		limit #{pager.startRow},#{pager.perPage}
 	</select>
+	
+	<insert id="review_Write" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
+		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt) 
+		VALUES (#{reservationNum},#{contents},0,#{egg},#{charmPoint},#{emotionPoint},now())
+	</insert> 
 	
 	
 	
