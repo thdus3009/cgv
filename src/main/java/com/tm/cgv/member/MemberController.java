@@ -1,11 +1,7 @@
 package com.tm.cgv.member;
 
-import java.util.HashMap;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,16 +10,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.util.GenerateAuthNumber;
-
-import net.nurigo.java_sdk.Coolsms;
+import com.tm.cgv.util.SmsSender;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 @Controller
 @RequestMapping("/member/**")
+@EnableAsync
 public class MemberController {
 	
 	@Autowired
     private MemberService memberService;
-
+	
+	@Autowired
+	private SmsSender smsSender;
+	
     // 회원가입 페이지
     @GetMapping("join")
     public String join() {
@@ -77,27 +79,20 @@ public class MemberController {
     	
     	System.out.println(memberBasicVO.getPhone());
     	
+    	// 이미 등록된 번호가 있다면 해당 번호 반환
     	MemberBasicVO findMemberBasicVO = memberService.phoneCheck(memberBasicVO);
     	if(findMemberBasicVO != null) {
     		result = findMemberBasicVO.getPhone();
     		return result;
     	}
     	
-    	// 인증번호 생성
+    	// 인증번호 생성, 어디에 저장?
     	GenerateAuthNumber authMaker = new GenerateAuthNumber();
-        System.out.println(authMaker.excuteGenerate());
+        
+    	// 폰 번호가 없음 -> 인증 메시지 보내기
+    	String contents = "[CGV]인증번호는 "+authMaker.excuteGenerate()+" 입니다";
+    	smsSender.smsSend(memberBasicVO.getPhone(), contents);
     	
-    	// 폰 번호가 없음 -> 인증 로직 시작
-//    	String api_key = "NCS0IP83AGGRJ0UF";
-//		String api_secret = "K3V7BSTB2FI7AE5Z9MCJCHZYLZWJZPHE";
-//		Coolsms coolsms = new Coolsms(api_key, api_secret);
-//		
-//		HashMap<String, String> set = new HashMap<String, String>();
-//		set.put("to", "너의번호"); // 수신번호
-//		set.put("from", memberBasicVO.getPhone()); // 발신번호
-//		set.put("text", "[CGV] 인증번호는 "+""+" 입니다"); // 문자내용
-//		set.put("type", "sms"); // 문자 타입
-		
     	return result;
     }
     
@@ -112,43 +107,6 @@ public class MemberController {
     	mv.setViewName("member/memberShowId");
     	return mv;
     }
-    
-    // sms 보내기
-	@RequestMapping(value = "/sendSms.do")
-	public String sendSms(HttpServletRequest request) throws Exception {
-
-		String api_key = "NCS0IP83AGGRJ0UF";
-		String api_secret = "K3V7BSTB2FI7AE5Z9MCJCHZYLZWJZPHE";
-		Coolsms coolsms = new Coolsms(api_key, api_secret);
-
-		HashMap<String, String> set = new HashMap<String, String>();
-		set.put("to", "너의번호"); // 수신번호
-
-		set.put("from", (String) request.getParameter("from")); // 발신번호
-		set.put("text", (String) request.getParameter("text")); // 문자내용
-		set.put("type", "sms"); // 문자 타입
-
-		System.out.println(set);
-
-		JSONObject result = coolsms.send(set); // 보내기&전송결과받기
-
-		if ((boolean) result.get("status") == true) {
-			// 메시지 보내기 성공 및 전송결과 출력
-			System.out.println("성공");
-			System.out.println(result.get("group_id")); // 그룹아이디
-			System.out.println(result.get("result_code")); // 결과코드
-			System.out.println(result.get("result_message")); // 결과 메시지
-			System.out.println(result.get("success_count")); // 메시지아이디
-			System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
-		} else {
-			// 메시지 보내기 실패
-			System.out.println("실패");
-			System.out.println(result.get("code")); // REST API 에러코드
-			System.out.println(result.get("message")); // 에러메시지
-		}
-
-		return "redirect:main.do";
-	}
     
     // 접근 거부 페이지
     @GetMapping("denied")

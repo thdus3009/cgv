@@ -22,17 +22,21 @@
 	<dependencies>
 
 		<!-- for phone auth using sms -->
-		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<!-- twillo -->
 		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
+			<groupId>com.twilio.sdk</groupId>
+		    <artifactId>twilio</artifactId>
+		    <version>7.38.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.nurigo/javaSDK -->
+		<!-- httpclient -->
 		<dependency>
-		    <groupId>net.nurigo</groupId>
-		    <artifactId>javaSDK</artifactId>
-		    <version>2.2</version>
+			<groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		</dependency>
+		<!-- httpcore -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpcore</artifactId>
 		</dependency>
 		
 		<!-- for spring security -->
