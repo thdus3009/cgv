@@ -88,9 +88,12 @@ public class MemberController {
     	
     	// 인증번호 생성, 어디에 저장?
     	GenerateAuthNumber authMaker = new GenerateAuthNumber();
-        
+        String authCode = authMaker.excuteGenerate();
+    	
+    	// redis에 key : value (phone:authCode) 저장
+    	
     	// 폰 번호가 없음 -> 인증 메시지 보내기
-    	String contents = "[CGV]인증번호는 "+authMaker.excuteGenerate()+" 입니다";
+    	String contents = "[CGV]인증번호는 "+authCode+" 입니다";
     	smsSender.smsSend(memberBasicVO.getPhone(), contents);
     	
     	return result;

@@ -187,8 +187,8 @@ CREATE TABLE `movieTime` (
 CREATE TABLE `seat` (
   `num` int(11) NOT NULL AUTO_INCREMENT,
   `theaterNum` int(11) DEFAULT NULL,
-  `row` varchar(2) DEFAULT NULL,
-  `col` varchar(2) DEFAULT NULL,
+  `rowIdx` varchar(2) DEFAULT NULL,
+  `colIdx` int(11) DEFAULT NULL,
   `grade` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `SEAT_THEATERNUM_FK_idx` (`theaterNum`),
