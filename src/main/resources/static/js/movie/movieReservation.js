@@ -176,11 +176,11 @@ $(function() {
 						
 						
 						for(i=0;i<result.length;i++){
-							console.log(result[i].movieVOs[0].title+" "+result[i].movieTimeVOs[0].screenDate)// 영화제목 , 날짜
+							console.log(result[i].movieInfoVOs[0].title+" "+result[i].movieTimeVOs[0].screenDate)// 영화제목 , 날짜
 							
 							$("#movie-list-content li").each(function(){
 								//console.log("aaaaa : "+$(this).data("title"))
-								if($(this).data("title") == result[i].movieVOs[0].title){
+								if($(this).data("title") == result[i].movieInfoVOs[0].title){
 									$(this).removeClass("dimmed");
 								}
 								
@@ -301,12 +301,12 @@ $(function() {
 						$(".theater-list li").addClass("dimmed");
 						
 						for(i=0;i<result.length;i++){
-	//						console.log(result[i].movieVOs[0].title+" "+result[i].cinemaVOs[0].name);// 영화제목 , 극장명
+	//						console.log(result[i].movieInfoVOs[0].title+" "+result[i].cinemaVOs[0].name);// 영화제목 , 극장명
 							
 							//영화
 							$("#movie-list-content li").each(function(){
 								//console.log("aaaaa : "+$(this).data("title"))
-								if($(this).data("title") == result[i].movieVOs[0].title){
+								if($(this).data("title") == result[i].movieInfoVOs[0].title){
 									$(this).removeClass("dimmed");
 								}
 								

@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.cinema.CinemaRepository">
 
-	<select id="cinemaList" resultType="CinemaVO">
-		select * from cinema
-	</select>
+<!-- 	<select id="cinemaList" resultType="CinemaVO"> -->
+<!-- 		select * from cinema -->
+<!-- 	</select> -->
 	
 	
 	<insert id="cinemaInsert" parameterType="CinemaVO">
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="cinemaList" resultType="CinemaVO">
-		select local, name from cinema order by local;
+		select * from cinema order by local;
 	</select>
 	
 	

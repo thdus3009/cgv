@@ -13,11 +13,6 @@ public class CinemaService {
 	private CinemaRepository cinemaRepository;
 
 	
-	//List
-	public List<CinemaVO> cinemaList() throws Exception {
-		return cinemaRepository.cinemaList();
-	}
-	
 	
 	//Select
 	public CinemaVO cinemaSelect(CinemaVO cinemaVO) throws Exception {

@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.reserveCheck.ReserveCheckRepository">
 
 	<resultMap type="ReserveCheckVO" id="reserverCheckResult">
-		<collection property="movieVOs" javaType="List" ofType="MovieVO">
+		<collection property="movieInfoVOs" javaType="List" ofType="MovieInfoVO">
 			<result column="mNum" property="num"/>
 			<result column="title" property="title"/>
 		</collection>
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select * from 
 		(select num as mNum,title from movieInfo) M
 		join
-		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat  from movieTime) T
+		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat from movieTime) T
 		on(M.mNum = T.movieNum)) A
 		join
 		(select num as sNum,cinemaNum,name,seatCount,filmType from theater) C

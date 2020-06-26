@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tm.cgv.movie.MovieService;
-import com.tm.cgv.movie.MovieVO;
+import com.tm.cgv.movieInfo.MovieInfoService;
+import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatService;
@@ -23,7 +23,7 @@ import com.tm.cgv.util.TimeADD;
 public class ResevationController {
 
 	@Autowired
-	private MovieService movieService;
+	private MovieInfoService movieInfoService;
 	@Autowired
 	private MovieTimeService movieTimeService;
 	@Autowired
@@ -46,7 +46,7 @@ public class ResevationController {
 		System.out.println("총 좌석수 : "+seatCount);
 		
 		
-		MovieVO movieVO = movieService.movieSelectOne(reservationVO.getMovieNum());
+		MovieInfoVO movieVO = movieInfoService.movieSelectOne(reservationVO.getMovieNum());
 		MovieTimeVO movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
 		
 		//좌석 관련

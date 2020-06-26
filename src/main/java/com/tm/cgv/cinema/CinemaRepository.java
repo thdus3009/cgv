@@ -6,9 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CinemaRepository {
-
-	//List
-	public List<CinemaVO> cinemaList() throws Exception;
 	
 	//Insert
 	public int cinemaInsert(CinemaVO cinemaVO) throws Exception;

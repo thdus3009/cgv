@@ -38,6 +38,15 @@ public class MovieInfoService {
 	private String filePath;
 	
 	
+	
+	
+	public MovieInfoVO movieSelectOne(int num) throws Exception{
+		return movieInfoRepository.movieSelectOne(num);
+	}
+	
+	
+	
+	
 	public List<MovieInfoVO> movieListAll(MovieInfoVO movieVO) throws Exception{
 		return movieInfoRepository.movieListAll(movieVO);
 	}

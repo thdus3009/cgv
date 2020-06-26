@@ -98,8 +98,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select MM.* , MK.fileName,MK.originName,MK.movieNum from
  		(select * from
  		
- 		(select * from movieInfo where title like concat('%',#{search},'%') and
- 		deleteAt is null
+ 		(select * from movieInfo where title like concat('%',#{search},'%') 
+ 		and deleteAt is null
  		order by
 		<choose>
 			<when test="kind == 'date'">
@@ -125,7 +125,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="movieListAll" parameterType="MovieInfoVO" resultType="MovieInfoVO">
- 		select * from movieInfo ORDER by 
+ 		select * from movieInfo
+ 		where deleteAt is null
+ 		ORDER by 
  			<choose>
  				<when test="kind == 'title'">
  					title asc
@@ -134,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  					rate desc
  				</otherwise>
  			</choose>
- 			where deleteAt is null
+ 			
  	 	</select>
  	 	
  	 	
@@ -166,5 +168,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="movieDelete" parameterType="MovieInfoVO">
  		update movieInfo set deleteAt=now() where num=#{num}
  	</update>
+ 	
+ 	<select id="movieSelectOne" parameterType="Integer" resultType="MovieInfoVO">
+ 		select * from movieInfo where num = #{num}
+ 	</select>
+ 	
+ 	
+ 	
  
  </mapper>

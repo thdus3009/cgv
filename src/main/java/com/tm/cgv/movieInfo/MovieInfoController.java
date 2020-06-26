@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tm.cgv.movieImage.MovieImageService;
+import com.tm.cgv.cinema.CinemaService;
+import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.util.MakeCalendar;
+import com.tm.cgv.util.MakeCalendarVO;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -20,6 +23,10 @@ public class MovieInfoController {
 	
 	@Autowired
 	public MovieInfoService movieInfoService;
+	@Autowired
+	private CinemaService cinemaService;
+	@Autowired
+	private MakeCalendar makeCalendar;
 	
 	@ModelAttribute("board")
 	public String getBoard() {
@@ -70,17 +77,31 @@ public class MovieInfoController {
 	
 	
 	@GetMapping("movieReservation")
-	public ModelAndView movieReservation(MovieInfoVO movieInfoVO) throws Exception{
+	public ModelAndView movieReservation(MovieInfoVO movieVO,CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		//초기 영화목록 호출
-		List<MovieInfoVO> list = movieInfoService.movieListAll(movieInfoVO);
+		List<MovieInfoVO> list = movieInfoService.movieListAll(movieVO);
 		
 		//초기 극장리스트 호출 
-		
+		List<CinemaVO> cinemaLocalList = cinemaService.cinemaLocalList();
+		List<CinemaVO> cinemaList = cinemaService.cinemaList();
 		//초기 날짜 리스트 호출
+		List<MakeCalendarVO> calendarList = makeCalendar.makeCalendar();
+		
+//		for (MakeCalendarVO vo : calendarList) {
+//			System.out.println(vo.getMonth() +" "+ vo.getDate() + " " + vo.getWeek());
+//		}
+		
+		
+//		for (CinemaVO vo : cinemaList) {
+//			System.out.println(vo.getLocal());
+//		}
 		
 		mv.addObject("list", list);
+		mv.addObject("cinemaLocalList", cinemaLocalList);
+		mv.addObject("cinemaList", cinemaList);
+		mv.addObject("calendarList", calendarList);
 		mv.setViewName("movie/movieReservation");
 		
 		return mv;

@@ -23,6 +23,9 @@ public interface MovieInfoRepository {
 	public long movieUpdate(MovieInfoVO movieInfoVO) throws Exception;
 	
 	public long movieDelete(MovieInfoVO movieInfoVO) throws Exception;
+	
+	
+	public MovieInfoVO movieSelectOne(int num) throws Exception;
 
 
 }
