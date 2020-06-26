@@ -123,6 +123,7 @@ span{
 					</div>					
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	
@@ -136,6 +137,22 @@ span{
 	<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 	<c:import url="template/sidebar.jsp"></c:import>
 </div>
+
+
+	<script type="text/javascript">
+
+	    $('#popupBtn').on("click", function() { //여기서 부터 시작
+
+		  	window.open("reviewPopup.html", "reviewPopup" ,"toolbar=yes,menubar=yes,width=500,height=450");
+	
+		});
+
+		function popupOpen(){
+			window.open("review/reviewPopup","","width=900,height=400,")
+			}
+
+
+	</script>
 
 </body>
 </html>
