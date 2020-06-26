@@ -255,7 +255,7 @@
 			
 			/////////////////////////////////////////////////////////
 			
-		
+			//이벤트위임(부모영역의 이벤트를 자식으로 전달)
 			$("#result").on("click", ".popupOnlyRead",function(){
 				
 				g_num=$(this).data("num2");
@@ -275,6 +275,7 @@
 						$("#egg1").html(data.egg);
 						$("#contents").html(data.contents);
 						$("#createAt").html(data.createAt);	
+						
 						$("#sss"+g_num).click();
 						
 						}

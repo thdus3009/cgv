@@ -23,9 +23,9 @@
 								    <button type="button" class="btn btn-primary popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>							    
 								</c:if>
 								<c:if test="${not empty name}">
-									<!--  -->
+									<!-- ajax기능 실행 + modal기능 버튼 클릭(click이벤트) -->
 								    <button type="button" class="btn btn-danger popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">리뷰쓴후</button>
-									<!--  -->
+									<!-- modal기능 실행 -->
 								    <button type="button" class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">리뷰쓴후</button>
 								</c:if>
 							</div>

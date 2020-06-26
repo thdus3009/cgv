@@ -49,10 +49,18 @@
 }
 .list_p_contents1 {
 	float: right;
-	width:85%;
+	width:83%;
 	height:100%;
 }
 
+.list_p_photo11 {
+	float: left;
+}
+.list_p_contents11 {
+	float: right;
+	width:72%;
+	height:100%;
+}
 
 
 #title {
@@ -66,4 +74,10 @@
 
 .sss {
 	display:none;
+}
+
+#result {
+
+	width: 80%;
+	min-width: 1000px;
 }

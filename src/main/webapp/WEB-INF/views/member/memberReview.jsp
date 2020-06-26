@@ -219,18 +219,26 @@
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body">
+					<div class="modal-body" >
 
-						<div id="photo" class="list_p_photo">
+						<div id="photo" class="list_p_photo11">
 						<!-- reviewSubmit.js에서 ajax로 review_Select에서 json형태의 데이터값을 $("#read").html()형태로 가져온다. (아이디값이 read라서 이 div밑으로 값이 꾸려진다.)-->
 						</div>
 						
-						<div style="font-size: small;">
-							<div id="title1"></div>
-							<div id="uid"></div>
-							<div id="egg1"></div>
+						<div style="font-size: small;" class="list_p_contents11">
+							<div id="title1" style="font-size: large; font-weight: bold;"></div>
+							<div id="egg1"> <!-- c:set의 value값이 1,0(int값넣기) -->
+							<c:if test="">
+							
+							</c:if>
+							<c:if test="">
+							
+							</c:if>
+							</div>
 							<div id="contents"></div>
-							<div id="createAt"></div>
+							<br>
+							<span id="uid"></span> | 
+							<span id="createAt"></span> | 삭제
 						
 						</div>
 	
