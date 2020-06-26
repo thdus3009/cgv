@@ -15,6 +15,7 @@ public class ReviewVO {
 	private int egg;
 	private int charmPoint;
 	private int emotionPoint;
+	private String createAt;
 	
 // --------------------------------------------	
 //reservation (reviewList)	
@@ -33,7 +34,7 @@ public class ReviewVO {
 	private String cinemaName; //영화관
 	private String theaterName; //상영관
 
-//movieInfo
+	//movieInfo
 	private String title;
 
 	//movieTime

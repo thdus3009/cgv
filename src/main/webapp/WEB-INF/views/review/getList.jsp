@@ -17,12 +17,12 @@
 					<div class="list_p_contents2">
 					
 						<!-- Modal 1 Button + 조건-->
-								<c:set var="name" value="홍길동" />
+								<c:set var="name" value="${vo.createAt}" />
 
-								<c:if test="${name eq '홍길동'}">
+								<c:if test="${empty name}">
 								    <button type="button" class="btn btn-primary popupBtn1" data-toggle="modal"data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>
 								</c:if>
-								<c:if test="${name ne '홍길동'}">
+								<c:if test="${not empty name}">
 								    <button type="button" class="btn btn-danger">리뷰쓴후</button>
 								</c:if>
 						
