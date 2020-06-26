@@ -9,5 +9,4 @@ public interface SeatRepository {
 	
 	public int theaterSelect() throws Exception;
 	
-	public void seatSpaceInsert(SeatSpaceVO SeatSpaceVO) throws Exception;
 }

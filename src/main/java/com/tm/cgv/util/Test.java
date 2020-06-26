@@ -40,19 +40,5 @@ public class Test {
 	}
 	
 	
-//	<mapper namespace="">
-//		insert into (theaterNum, row, col, grade)
-//		values(#{theaterNum},#{row},#{col},#{grade})
-//	</mapper>
-	//{(1,1),(1,2),(1,3),(1,4)}
-	
-	for(int l=0, ㅣ<행의길이만큼; l++) {
-		for(int m=0; m<열의길이만큼; m++) {
-			set해서 db 다녀오기 
-		}
-	}
-	
-	//뿌려줄 때는... 최대 열만큼 일단 칸은 다 생성한 후 있는 번호만 display:block
-	
 
 }

@@ -1,4 +1,4 @@
-package com.tm.cgv.seat;
+package com.tm.cgv.seatSpace;
 
 import lombok.Data;
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatSpace.SeatSpaceVO;
 
 @Controller
 @RequestMapping("/theater/**/")
@@ -55,37 +57,6 @@ public class TheaterController {
 	public ModelAndView theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		
-
-//		System.out.println(theaterVO.getCinemaNum());
-//		System.out.println(theaterVO.getName());
-//		System.out.println(theaterVO.getFilmType());
-//		System.out.println(theaterVO.getSeatCount());
-//		
-//		System.out.println(row.length);
-//		System.out.println(col.length);
-//		System.out.println(grade.length);
-//		
-//		System.out.println(row[0]);
-//		System.out.println(row[1]);
-//		System.out.println(row[2]);
-//		System.out.println(row[3]);
-//		System.out.println(row[4]);
-//		
-//		for(int i=0; i<row_space.length; i++) {
-//			System.out.println("row_space : " + row_space[i]);
-//		}
-//		
-//		for(int j=0; j<col_space.length; j++) {
-//			System.out.println("col_space : " + col_space[j]);
-//		}
-//		
-		
-
-		//theaterVO 하나 삽입 후 
-		//삽입 성공한 theaterVO의 theaterNum을 가져와서
-		
-		//theaterNum  col  row  grade  >> 여러개삽입
-		
 		int result = theaterService.theaterInsert(theaterVO, row, col, grade, row_space, col_space);
 		
 		if(result>0) {
@@ -103,11 +74,13 @@ public class TheaterController {
 	//Update
 	@GetMapping("theaterUpdate")
 	public ModelAndView theaterUpdate(TheaterVO theaterVO, ModelAndView mv, int num) throws Exception{
-		TheaterVO theaterVO2=theaterService.theaterSelect(num);
-		System.out.println(theaterVO2.getNum()+"num 널이니?");
-		mv.addObject("vo",theaterVO2);
-		mv.addObject("path","Update");
-		mv.setViewName("theater/theaterUpdate");
+		System.out.println("Num : " + num);
+		List<SeatVO> seat = theaterService.theaterSeat(num);
+		List<SeatSpaceVO> space = theaterService.theaterSpace(num);
+		System.out.println(seat.size());
+		System.out.println(space.size());
+		
+
 		return mv;
 	}
 	
@@ -141,7 +114,7 @@ public class TheaterController {
 		int result =theaterService.theaterDelete(num);
 	
 		//mv.addObject("path","Delete");
-		//mv.setViewName("redirect:./theaterList"); //jsp에서 list로 보내주니까 필요가 없다.
+		//mv.setViewName("redirect:./theaterList"); //jsp에서 list로 보내주니까 필요가 없다
 		System.out.println(result+"dd");
 		return result;
 	}

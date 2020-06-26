@@ -6,8 +6,8 @@ import lombok.Data;
 public class SeatVO {
 	private int num;
 	private int theaterNum;
-	private String row;
-	private int col;
+	private String rowIdx;
+	private int colIdx;
 	private int grade;
 	
 }

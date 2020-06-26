@@ -8,8 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.seat.SeatRepository;
-import com.tm.cgv.seat.SeatSpaceVO;
 import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatSpace.SeatSpaceRepository;
+import com.tm.cgv.seatSpace.SeatSpaceVO;
 
 @Service
 public class TheaterService {
@@ -18,6 +19,9 @@ public class TheaterService {
 	
 	@Autowired
 	private SeatRepository seatRepository;
+	
+	@Autowired
+	private SeatSpaceRepository seatSpaceRepository;
 	
 	//List
 	public List<TheaterVO> theaterList()throws Exception{
@@ -49,8 +53,8 @@ public class TheaterService {
 			for(int i=0; i<row.length; i++) {
 				SeatVO seatVO = new SeatVO();
 				seatVO.setTheaterNum(theaterNum);
-				seatVO.setRow(row[i]);
-				seatVO.setCol(Integer.parseInt(col[i]));
+				seatVO.setRowIdx(row[i]);
+				seatVO.setColIdx(Integer.parseInt(col[i]));
 				seatVO.setGrade(Integer.parseInt(grade[i]));
 				result2 = seatRepository.seatInsert(seatVO);
 			}
@@ -69,7 +73,7 @@ public class TheaterService {
 					seatSpaceVO.setTheaterNum(theaterNum);
 					seatSpaceVO.setRowOrCol(0);
 					seatSpaceVO.setIndex(Integer.parseInt(row_space[i]));
-					seatRepository.seatSpaceInsert(seatSpaceVO);
+					seatSpaceRepository.seatSpaceInsert(seatSpaceVO);
 				}
 			}
 			
@@ -79,7 +83,7 @@ public class TheaterService {
 					seatSpaceVO.setTheaterNum(theaterNum);
 					seatSpaceVO.setRowOrCol(1);
 					seatSpaceVO.setIndex(Integer.parseInt(col_space[i]));
-					seatRepository.seatSpaceInsert(seatSpaceVO);
+					seatSpaceRepository.seatSpaceInsert(seatSpaceVO);
 				}
 			}
 		}
@@ -90,8 +94,12 @@ public class TheaterService {
 	
 
 	//Select
-	public TheaterVO theaterSelect(int num) throws Exception{
-		return theaterRepository.theaterSelect(num);
+	public List<SeatVO> theaterSeat(int num) throws Exception{
+		return theaterRepository.theaterSeat(num);
+	}
+	
+	public List<SeatSpaceVO> theaterSpace(int num) throws Exception{
+		return theaterRepository.theaterSpace(num);
 	}
 	
 	//Update

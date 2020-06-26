@@ -17,7 +17,7 @@
  		
  		<typeAlias type="com.tm.cgv.cinema.CinemaVO" alias="CinemaVO"/>
  		<typeAlias type="com.tm.cgv.seat.SeatVO" alias="SeatVO"/>
-		<typeAlias type="com.tm.cgv.seat.SeatSpaceVO" alias="SeatSpaceVO"/>
+		<typeAlias type="com.tm.cgv.seatSpace.SeatSpaceVO" alias="SeatSpaceVO"/>
  		
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
  		
