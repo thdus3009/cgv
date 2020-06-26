@@ -118,4 +118,11 @@ public class TheaterController {
 		System.out.println(result+"dd");
 		return result;
 	}
+	
+	@GetMapping("admin")
+	public String home() throws Exception{
+		return "admin/adminTemplate";
+	}
+	
+
 }

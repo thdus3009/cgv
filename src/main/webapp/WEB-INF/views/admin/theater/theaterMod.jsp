@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
-<link href="../css/layout.css" rel="stylesheet" type="text/css">
-<link href="../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
-<link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
+<link href="../../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="../../css/layout.css" rel="stylesheet" type="text/css">
+<link href="../../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
+<link href="../../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="../../css/admin/theater/theaterAddMod.css" rel="stylesheet" type="text/css">
 
 <title>영화관 리스트</title>
 </head>
@@ -19,7 +20,7 @@
 	<div class="root">
 
 		<!-- 헤더 -->
-		<c:import url="../template/header.jsp"></c:import>
+		<c:import url="../../template/header.jsp"></c:import>
 
 		<!-- 컨테이너 -->
 		<div class="container">
@@ -27,7 +28,7 @@
 				<div class="nav_linemap">
 					<ul>
 						<li><a href="../"> <img alt="go to Home"
-								src="../images/login/btn_home.png">
+								src="../../images/login/btn_home.png">
 						</a></li>
 						<li><a href="">MY CGV</a></li>
 						<li class="last">ADMIN HOME</li>
@@ -89,7 +90,7 @@
 
 
 	<!-- 푸터 -->
-	<c:import url="../template/footer.jsp"></c:import>
+	<c:import url="../../template/footer.jsp"></c:import>
 	</div>
 
 

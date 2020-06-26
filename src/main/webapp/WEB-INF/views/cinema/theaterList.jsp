@@ -11,6 +11,11 @@
 <link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
 <link href="../css/admin/theater/theaterList.css" rel="stylesheet" type="text/css">
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -95,13 +100,13 @@
 									<td>극장설명</td>
 								</tr>
 								<!-- 반복 -->
-								<c:forEach items="" var="vo">
+								<c:forEach items="list" var="vo">
 									<tr class="theaterList-c">
-										<td><a href="">극장명</a></td>
-										<td>지역명</td>
-										<td>주소</td>
-										<td>전화번호</td>
-										<td>극장설명</td>
+										<td><a href="">${vo.name}</a></td>
+										<td>${vo.local}</td>
+										<td>${vo.name}</td>
+										<td>${vo.address}</td>
+										<td>${vo.intro}</td>
 									</tr>
 								</c:forEach>
 							</table>
