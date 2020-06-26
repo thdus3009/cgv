@@ -6,19 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css">
-
 <link href="${pageContext.request.contextPath}/css/movie/movieList.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/css/theater/theaterInsert.css" rel="stylesheet" type="text/css">
-
-
+<link href="${pageContext.request.contextPath}/css/seat/seatInsert.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/js/theater/theaterInsert.js"></script>
 
 
 <title>Insert title here</title>
@@ -57,7 +52,7 @@
 			<div class="movie-chart">
 <!-- 			헤더 제목부분+ 차트종류(서브) -->
 				<div class="sect-movie-title">
-					<h3>${board}${path}</h3>
+					<h3>SeatInsert</h3>
 					<div class="submenu">
 						<ul>
 							<li class="on"><a href="">무비 차트</a></li>
@@ -83,42 +78,14 @@
 <!-- 			리스트 출력부분 -->
 				<div class="sect-movie-chart">
 
-		<form id="frm" action="${board}${path}" method="post" enctype="multipart/form-data">
+		<form action="${board}${path}" method="post" enctype="multipart/form-data">
 				<c:if test="${path eq 'Update'}">
 					<input type="hidden" name="num" id="num" value="${vo.num}">
 				</c:if>
 
 			  <div class="form-group">
-
-			     <label for="cinemaNum">CinemaNum:</label>
-			   	 <select class="cinemaNum" name="cinemaNum">
-			   	 	<!-- <option value="2d">2D</option>
-			   	 	<option value="3d">3D</option> -->
-			   	 	<c:forEach items="${cine}" var="cnt">
-			   	 		<option value="${cnt.num}">${cnt.num} / ${cnt.name}</option>
-			   	 	</c:forEach>
-			   	 </select>
-			  
-			  	 <br>
-			  	 <br>
-			  	 <label for="name">Name:</label>
-			   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
-			  
-			  
-			  	 <br>
-			   	 <label for="filmType">FilmType:</label>
-			   	 <select class="filmType" name="filmType">
-			   	 	<option value="0">2D</option>
-			   	 	<option value="1">3D</option>
-			   	 	<option value="2">4D</option>
-			   	 </select>
-			   
-			   	 
-			   	 <br>
-			   	 <br>
-			   	 <br>
-			   	 <br>
-			   	 <br>
+			   	 <label for="name">TheaterNum:</label>
+			   	 <input type="text" class="form-control" id="name" name="name" value="${vo.theaterNum}">
 			   	 <select class="seat_row" id="seat_row">
 			   	 	<option value="1">A</option>
 			   	 	<option value="2">B</option>
@@ -172,14 +139,14 @@
 			   	 </div>
 			  </div>
 			  
-				<br>
+
 				<div class="contents">
 					<div class="seats" id="seats_list">
 						<!-- <div class="seat_row">
 							<div class="label">A</div>
 							<div class="seat_group">
 								<div class="seat">
-									<a href="" onclick="">
+									<a href="#" onclick="">
 										<span class="no">1</span>
 									</a>
 								</div>
@@ -189,17 +156,8 @@
 				</div>
 			  
 
- 				 <label for="seatCount">SeatCount:</label>
-			   	 <input type="text" class="form-control" id="seatCount" name="seatCount" value="${vo.seatCount}">
 
-
-   				 <br>
-			   	 <br>
-			   	 <br>
-			   	 <br>
-			   	 <br>
-
-			  <input type="button" id="btn_insert" class="btn btn-default" value="submit">
+			  <button type="button" id="btn_insert" class="btn btn-default">Submit</button>
 
 		</form>
 		  <c:if test="${path eq 'Update'}">
@@ -233,9 +191,225 @@
 
 
 <script type="text/javascript" src="../js/movie/movieList.js"></script>
-<script type="text/javascript" src="../js/theater/theaterInsert.js"></script>
+
+<script type="text/javascript">
+
+	// 0 : 검은색(자리 없음)
+	// 1 : 테두리 노랑 = 주황
+	// 2 : 테두리 빨강
+	// 3 : 테두리 초록
+	
+	
+	var seatColor = 1;
+	
+	function changeGrade(grade){
+		seatColor = grade;
+	}
+
+	var list = [];
+
+	
+	function makeVo(row, col, grade){
+		var vo = {
+			"row":row,
+			"col":col,
+			"grade":1
+		}
+		list.push(vo);
+	}
+	
+/* 	var vo = {
+		"row":0,
+		"col":0,
+		"grade":1
+	} */
+
+	
+	//col select하면 row와 col의 값을 읽고
+	//숫자만큼의  .seats .seat_row  / .seats .seat_row .seat_group .seat 생성
+	//test부터
+
+	function changeSelect(){
+		$("#seats_list").empty();
+		//list = [];
+		
+		var row = $("#seat_row").val();
+		var col = $("#seat_col").val();
+		console.log("생성한 row : " +row);
+		console.log("생성한 col : " +col);
+		//1 2 3 4 5 6 7 8 
+		//1 -> 65  
+		for(i=0; i<row; i++){
+			var ch = String.fromCharCode(i+65);
+	
+			console.log("ch : " + ch);
+			
+			$("#seats_list").append('<div class="seat_row"><div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
+				for(j=1; j<=col; j++){
+
+					// row, col 에 값넣기
+					// vo.row = asd vo.set("row", 10)
+					// list.push(vo)
+					
+					makeVo(ch, j, 1);
+	
+					//list.push(vo);
+					
+					$("#r"+i).append('<div class="seat"><a href="#" onclick="checkSeat('+ch+j+')"  name="'+ch+j+'" id="'+ch+j+'"><span class="no">'+j+'</span></a></div>')	
+		
+				}
+			$("#seats_list").append('</div></div>');				
+		
+		}
+
+		console.log($("#A1").attr("class"));
+
+		console.log(list.length);
+		console.log(list[0]);
+		console.log(list[1]);
+		console.log(list[2]);
+		console.log(list[3]);
+		console.log(list[4]);
+		console.log(list[5]);
+		console.log(list[6]);
+		console.log(list[7]);
+		console.log(list[8]);
+		console.log(list[9]);
+		console.log(list[10]);
+		
+		console.log("--------------------------")
+		
+	}
+	
+	
+	function checkSeat(name){
+		
+		//seat 번호 가져오기 //A5, C18
+ 		name = $(name).attr('name'); 
+		console.log(name);
+		console.log(typeof name);
+
+		//파싱해서 row와 col로 나누기
+		var rw = name.substring(0,1);
+		var cl = name.substring(1,2); 
+		console.log("rw : " +rw);
+		console.log("cl : " + cl);
+
+		
+		var grade=1; 
+
+		var ck = $(name).attr("name");
+
+		
+		switch(seatColor) {
+
+		//좌석 삭제
+		case 0:
+			
+			//클릭시 name값에 'del' 삽입
+			if(ck=='del'){
+				$(name).attr("name","h");
+				$(name).css('background-color','orange');
+			}else{
+				$(name).css('background-color','black');
+				//vo의 row가 A, col이 B인 것을 찾아 grade 값 바꾸기
+				$(name).attr("name","del");
+				
+				grade=0;
+			}
+			
+			break;
+
+		//Economy
+		case 1:
+			// 테두리 색 맞게 바꾸기
+			// vo.grade = 1
+			if(ck!='del'){
+			$(name).find("span").css('border','2px solid #ed8c00');
+			$(name).css('background','#666')
+			grade=1;
+			}
+			
+			
+			
+			break;
+
+		//Standard
+		case 2:
+			// 테두리 색 맞게 바꾸기
+			// vo.grade = 2 
+			if(ck!='del'){
+			$(name).find("span").css('border','2px solid #01c73c');
+			$(name).css('background','#666')
+			
+			grade=2;
+			}
+			
+			break;
+
+		//Prime
+		case 3:
+			// 테두리 색 맞게 바꾸기
+			// vo.grade = 3
+			$(name).find("span").css('border','2px solid #f71708');
+			$(name).css('background','#666')
+			grade=3;
+			
+			
+			break;
+		}
+
+/* 		var index = list.findIndex(i => i.row==rw &&i.col==cl);
+		vo['row']=rw;
+		vo['col']=cl;
+		vo['grade']=grade;
+		list[index] = vo; */
+		
+		//바꾼 후 list 교체
+
+		
+	}
 
 
+
+
+
+	
+
+	$("#btn_insert").click(function(){
+	
+		var row = $("#seat_row").val();
+		var col = $("#seat_col").val();
+		for(i=0; i<row; i++){
+			var ch = String.fromCharCode(i+65);
+			//console.log(typeof ch);
+				for(j=1; j<=col; j++){
+					var sId = ch+j;
+					console.log($(sId).attr("class"));
+
+					if(!$(sId).attr("class")=="col"){
+						console.log(sId);
+						list.push(sId);
+					}
+
+				}
+		}
+
+
+
+		
+		$.post("./seatInsert",{list:list},function(data){
+			if(data>0){
+		 		alert("전송 성공");
+			}
+		})
+
+
+		
+	});
+	
+	
+</script>
 
 
 </body>
