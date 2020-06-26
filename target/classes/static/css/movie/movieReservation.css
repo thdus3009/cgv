@@ -942,7 +942,7 @@ body{
 }
 
 .tnb .info.theater{
-	width: 185px;
+	width: 184px;
 }
 
 .tnb .info .row:first-child{
@@ -1073,9 +1073,18 @@ body{
 }
 
 
+.tnb.step3 .btn-left{
+	background-position: 0 -110px;
+}
 
+.tnb.step3 .btn-right{
+	background-position: 0 -550px;
+    width: 220px;
+}
 
-
+.tnb.step3 .info.seat{
+	background: none;
+}
 
 
 

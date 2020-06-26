@@ -14,7 +14,7 @@
 			<h4>할인쿠폰</h4>
 			<a class="tpmh_btn"><span>펼치기</span></a>
 		</div>
-		<div class="tpm_body" style="display: block;">
+		<div class="tpm_body" style="display: none;">
 			<div class="guide_wrap">
 				<div class="guide">
 					<div class="guide_text">선택 불가능한 할인쿠폰 항목은 비활성화 처리됩니다.</div>
@@ -75,7 +75,7 @@
 					</div>
 					
 					
-					<div id="cjOneCoupon" class="form" style="display: block">
+					<div id="cjOneCoupon" class="form" style="display: none;">
 						<h5>CJ ONE 할인쿠폰</h5>
 						<div class="form_button">
 							<a class="gray" href="#"> 
@@ -137,7 +137,8 @@
 			<h4>포인트 및 기타결제 수단</h4>
 			<a class="tpmh_btn"><span>펼치기</span></a>
 		</div>
-		<div class="tpm_body" style="display: block;">
+		
+		<div class="tpm_body" style="display: none;">
 			<div class="guide_wrap">
 				<div class="guide">
 					<div class="guide_text">선택 불가능한 기타 포인트 항목은 비활성화 처리됩니다.</div>
@@ -200,7 +201,10 @@
 							</dl>
 						</div>
 					</div>
-					<div id="cgvGiftPrePay" class="form" style="display: block"> <!-- block -->
+					
+					
+					
+					<div id="cgvGiftPrePay" class="form" style="display: none;"> <!-- block -->
 						<h5>CGV 기프트카드</h5>
 						<div class="tpm_coupon_button">
 							<a class="brown" href="#"><span>등록하기</span></a>
@@ -285,7 +289,7 @@
 					
 					
 					<!-- 간편결제 -->
-					<div class="payment_select radio_group" id="smartPayCon" style="display: block; opacity: 1;">
+					<div class="payment_select radio_group" id="smartPayCon" style="display: none; opacity: 1;">
 						<span style="opacity: 1;">
 							<input type="radio" id="last_pay_radio4" name="last_pay_radio2" value="0">
 							<label for="last_pay_radio4">카카오페이</label>
@@ -313,7 +317,7 @@
 			<div class="payment_header">결제하실 금액</div>
 			<div class="payment_footer">
 				<div class="result">
-					<span class="num verdana" id="summary_total_amount">17,000</span><span class="won">원</span>
+					<span class="num verdana" id="summary_total_amount"></span><span class="won">원</span>
 				</div>
 			</div>
 		</div>
@@ -331,19 +335,16 @@
 		</div>
 		<div class="summary_box payment_box" id="tps_payment_box">
 			<div class="payment_header">결제내역</div>
-			<div class="payment_body" id="summary_payment_list"><dl><dt>카카오페이</dt><dd><span class="num">17,000</span><span class="won">원</span></dd></dl></div>
+			<div class="payment_body" id="summary_payment_list"><dl><dt>카카오페이</dt><dd><span class="num"></span><span class="won">원</span></dd></dl></div>
 			<div class="payment_footer">
 				<div class="label">
 					<span>남은 결제금액</span>
 				</div>
 				<div class="result">
-					<span class="num verdana" id="summary_payment_total">17,000</span><span class="won">원</span>
+					<span class="num verdana" id="summary_payment_total"></span><span class="won">원</span>
 				</div>
 			</div>
-			<div class="payment_footer" id="cjEmployeeDiscPayInfo" style="display: none;">
-				<div class="result"><span class="title" style="display: block; position: absolute;">임직원예상결제가</span><span class="amount">10,200</span><span class="won" style="top: 0px;">원</span>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	
@@ -352,5 +353,6 @@
 
 
 
+<script type="text/javascript" src="/js/movie/moviePayment.js"></script>
 
 

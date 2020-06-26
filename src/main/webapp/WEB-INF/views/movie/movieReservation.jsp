@@ -322,7 +322,7 @@
 											</c:if>
 																						
 											<li data-index="0" class="day" data-index="0" data-week="${calendarVO.week}" data-date="${calendarVO.date}" data-month="${calendarVO.month}" data-year="${calendarVO.year}">
-												<a href="#">
+												<a href="#" onclick="return false;">
 													<span class="dayweek">${calendarVO.week}</span>
 													<span class="day">${calendarVO.date}</span>
 													<span class="sreader"></span>
@@ -471,7 +471,7 @@
 						</div>
 						<div class="row payment-final" style="display: none;">
 							<span class="header">총금액</span>
-							<span class="data"><span class="price"></span><span class="won">원</span></span>
+							<span class="data"><span class="price" title=""></span><span class="won">원</span></span>
 						<span id="priceMapInfoIco" style="position: absolute; right: -17px; margin-top: 3px; cursor: pointer;"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/ico_circle_14.png" height="14" width="14" alt="mappingIco"></span><div id="priceMappingContainer" style="display: none; position: absolute; right: -80px; z-index: 100; width: 150px; height: auto; padding: 10px; background: rgb(51, 51, 51); bottom: 115px;"><span class="typeNm" style="display:inline-block; width:40px;">일반</span> : PRIME X 2<br></div></div>
 					</div>
 					
@@ -522,7 +522,7 @@
 			
 			if(list[i].local == $(this).data("local")){
 				console.log(list[i].name+" "+list[i].local);
-				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a>'+list[i].name+'<span class="sreader"></span></a></li>');
+				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
 			}
 			
 // 			console.log("==================================");

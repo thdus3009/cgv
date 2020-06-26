@@ -177,7 +177,6 @@
 		if(!$(this).hasClass("blocked") && !$(this).hasClass("reserved") && !$(this).hasClass("selected")){
 			var check1 = true;
 			var check2 = false;
-			
 			//2개 출력
 			if((totalCount - selectedCount) != 1){
 				if(!$(this).next().hasClass("blocked") && !$(this).next().hasClass("reserved") && !$(this).next().hasClass("selected")){
@@ -216,7 +215,6 @@
 					if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
 						if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
 							
-							console.log("aaaaaaaaaaaaaaaaaaaaaa")
 							$(this).prev().addClass("preSelect");
 						}
 					}
@@ -251,7 +249,7 @@
 					$(this).next().removeClass("selected");
 //					console.log("next : "+$(this).next().parent().parent().prev().text()+"-"+$(this).next().find(".no").text());
 //					console.log("index : "+selectedSeatList.indexOf($(this).next().parent().parent().prev().text()+"-"+$(this).next().find(".no").text()));
-					selectedSeatList.splice(selectedSeatList.indexOf($(this).next().parent().parent().prev().text()+"-"+$(this).next().find(".no").text()),1);
+					selectedSeatList.splice(selectedSeatList.indexOf($(this).next().parent().parent().prev().text()+""+$(this).next().find(".no").text()),1);
 					
 //					console.log("remove next() Grade : "+ $(this).data("grade"));
 //					console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
@@ -264,7 +262,7 @@
 					$(this).prev().removeClass("selected");
 //					console.log("prev : "+$(this).prev().parent().parent().prev().text()+"-"+$(this).prev().find(".no").text());
 //					console.log("index : "+selectedSeatList.indexOf($(this).prev().parent().parent().prev().text()+"-"+$(this).prev().find(".no").text()));
-					selectedSeatList.splice(selectedSeatList.indexOf($(this).prev().parent().parent().prev().text()+"-"+$(this).prev().find(".no").text()),1);
+					selectedSeatList.splice(selectedSeatList.indexOf($(this).prev().parent().parent().prev().text()+""+$(this).prev().find(".no").text()),1);
 
 //					console.log("remove prev() Grade : "+ $(this).data("grade"));
 //					console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
@@ -275,7 +273,7 @@
 				selectedCount = selectedCount - 2;
 //				console.log("this : "+$(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
 //				console.log("index : "+selectedSeatList.indexOf($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text()));
-				selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text()),1);
+				selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+""+$(this).find(".no").text()),1);
 				
 //				console.log("remove basic() Grade : "+ $(this).data("grade"));
 //				console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
@@ -311,7 +309,7 @@
 			//1명 자리일때 그냥 지움
 			$(this).removeClass("selected");
 			selectedCount = selectedCount - 1;
-			selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text()),1);
+			selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+""+$(this).find(".no").text()),1);
 //			console.log(selectedSeatList);
 			$("#select_Seat").text(selectedSeatList.join(","));
 			
@@ -413,8 +411,8 @@
 															$(this).addClass("selected");
 															
 															console.log("prev()");
-															console.log($(this).parent().parent().prev().text()+"-"+$(this).prev().find(".no").text());
-															console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
+															console.log($(this).parent().parent().prev().text()+""+$(this).prev().find(".no").text());
+															console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 															
 															var gradeType = $(this).data("grade");
 															
@@ -438,8 +436,8 @@
 													$(this).addClass("selected");
 													
 													console.log("prev()");
-													console.log($(this).parent().parent().prev().text()+"-"+$(this).prev().find(".no").text());
-													console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
+													console.log($(this).parent().parent().prev().text()+""+$(this).prev().find(".no").text());
+													console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 													
 													var gradeType = $(this).data("grade");
 													
@@ -462,16 +460,15 @@
 												console.log("행 : "+ $(this).parent().parent().prev().text());
 												
 												console.log("next()");
-												console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
-												console.log($(this).parent().parent().prev().text()+"-"+$(this).next().find(".no").text());
+												console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
+												console.log($(this).parent().parent().prev().text()+""+$(this).next().find(".no").text());
 												
 												var gradeType = $(this).data("grade");
 											}
 										}
 									}
-									if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
-										$(this).prev().addClass("preSelect");
-									}
+								
+								
 								}
 								
 							
@@ -505,7 +502,7 @@
 						
 //						console.log($(this).data("grade"));
 						console.log("normal()");
-						console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
+						console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 						
 						
 						//계산 - eachGradePayment(gradeType,num)
@@ -585,7 +582,7 @@
 		$(".seats .seat").each(function(){
 			if($(this).hasClass("selected")){
 				
-				selectedSeatList.push($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
+				selectedSeatList.push($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 				
 				selectedSeatGrade.push($(this).data("grade"));
 				//Economy Standard Prime
@@ -751,6 +748,7 @@
 			//총 가격 출력
 			var totalPay = totalCommonPay + totalTeenagerPay + totalPreferencePay;
 			$(".row.payment-final").css("display","block"); 
+			$(".payment-ticket .payment-final .data .price").attr("title",totalPay);
 			$(".payment-ticket .payment-final .data .price").text(addComma(totalPay));
 		}
 		
