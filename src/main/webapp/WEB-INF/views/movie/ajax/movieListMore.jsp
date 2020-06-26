@@ -11,16 +11,17 @@
 		<li>
 			<!-- 윗 부분 -->
 			<div class="box-image">
-				<a href="">
+				<a href="./movieSelect?num=${list.num}">
+				  
 					<span class="thumb-image">
-						<img alt="이미지" src="../images/movie/movieList/filmCover/${list.imageName}">
+						<img alt="이미지" src="../images/movie/movieList/filmCover/${list.movieImageVOs.fileName}">
 						<span class="icon-grade grade-${list.ageLimit }">${list.ageLimit }</span>
 					</span>
 				</a>
 				<span class="screentype"></span>
 			</div> <!-- 아래 부분 -->
 			<div class="box-contents">
-				<a href=""><strong class="title">${list.title}</strong> </a>
+				<a href="./movieSelect?num=${list.num}"><strong class="title">${list.title}</strong> </a>
 				<div class="score">
 					<strong class="percent">예매율<span>${list.rate}%</span></strong>
 					<div class="egg-gage small">

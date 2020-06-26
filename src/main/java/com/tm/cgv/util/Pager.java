@@ -39,7 +39,7 @@ public class Pager {
 		if(totalPage%this.getPerBlock()!=0) {
 			totalBlock++;
 		}
-		
+		//몇번째 블록인가
 		curBlock = this.curPage/this.perBlock;
 		if(this.curPage%this.perBlock != 0) {
 			curBlock++;
@@ -50,6 +50,8 @@ public class Pager {
 		if(totalPage <= this.lastNum) {
 			this.lastNum = totalPage;
 		}
+		
+		
 		
 	}
 	
@@ -64,7 +66,7 @@ public class Pager {
 	}
 	public Integer getPerPage() {
 		if(this.perPage == null || this.perPage == 0) {
-			this.perPage=10;
+			this.perPage=7;
 		}
 		return perPage;
 	}

@@ -45,8 +45,8 @@
 				</div>
 				<div class="search">
 					<fieldset>
-						<input type="text" placeholder="주디 3월25일 개봉">
-						<button class="btn-go-search">검색</button>
+						<input type="text" id="search">
+						<button class="btn-go-search" id="btn_search" name="search">검색</button>
 					</fieldset>
 				</div>
 				<div class="phototicket">

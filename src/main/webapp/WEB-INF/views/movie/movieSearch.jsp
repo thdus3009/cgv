@@ -45,35 +45,22 @@
 			<div class="movie-chart">
 <!-- 			헤더 제목부분+ 차트종류(서브) -->
 				<div class="sect-movie-title">
-					<h3>무비 차트</h3>
+					<h3>영화</h3>
 					<div class="submenu">
-						<ul>
-							<li class="on"><a href="">무비 차트</a></li>
-							<li><a href="">상영예정작</a></li>
-						</ul>
+						
 					</div>
 				</div>
 				
 <!-- 			정렬부분 -->
-				<div class="sect-sorting">
-					<select id="select" name="kind">
-						<option title="1" value="rate" selected="selected">예매율순</option>
-						<option title="2" value="date">최신순</option>
-						<option title="3" value="title">제목순</option>
-					</select>
-					<button id="btn-sort" type="button" class="round gray">
-						<span>GO</span>
-					</button>
-				</div>
 				
-				<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
+				
 				<input type="hidden" value="${pager.startRow}" id="startRow">
 				
 				
 <!-- 			리스트 출력부분 -->
-				<div class="sect-movie-chart" id="list_total">
+				<div class="sect-movie-chart">
 					<ol>
-					<c:forEach var="list" items="${list}" varStatus="i">
+					<c:forEach var="list" items="${searchList}" varStatus="i">
 						<li>
 							<!-- 윗 부분 -->
 							<div class="box-image">
@@ -115,7 +102,7 @@
 						</c:forEach>
 					
 					</ol>
-					
+					<!--  
 					<div class="sect-movie-chart" id="list-more"></div>
 					
 					
@@ -134,12 +121,34 @@
 								</dd>
 							</dl>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			
-			<div class="btn-more" id="btn-more">더보기
-				<i class="link-more"></i>
-			</div>
+				<!----------------------------------------------------------------------------------------------------- contents detail paging-->
+						<div class="paging">
+							
+							<c:if test="${pager.curBlock gt 1}">
+								<button id="btn-first" type="button" class="btn_page first"></button>
+								<button id="btn-pre" type="button" class="btn_page pre">이전</button>
+							</c:if>
+						
+							<ul>
+<!-- 							<li class="on"><a href="#">1</a></li> -->
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+				
+									<li><a href="./movieSearch?curPage=${i}&search=${pager.search}">${i}</a></li>
+				
+								</c:forEach>
+				
+							</ul>
+							<c:if test="${pager.curBlock lt pager.totalBlock}">
+								<button id="btn-next" type="button" class="btn_page next">다음</button>
+								<button id="btn-end" type="button" class="btn_page end">끝</button>
+							</c:if>
+							
+							
+							
+						</div>
 			
 			</div>
 			

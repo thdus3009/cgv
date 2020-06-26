@@ -4,11 +4,15 @@
 
 $("#btn-more").click(function() {
 		var kind = $("#select").val();
+		var startRow = $("#startRow").val();
+		var search=$("#search").val();
+		console.log(startRow);
 		
-		$.get("./movieListMore?startRow=8&kind="+kind,function(result){
+		$.get("./movieListMore?startRow="+(startRow)+7+"&kind="+kind,function(result){
 
 			console.log("result"+result);
 			$("#list-more").html(result);
+			
 			
 			$("#btn-more").css("visibility","hidden");
 		});
@@ -20,9 +24,29 @@ $("#btn-more").click(function() {
 		var kind = $("#select").val();
 		location.href = "./movieList?kind="+kind;
 	});
+	
+	$("#btn_search").click(function() {
+		var search=$("#search").val();
+		var kind =$("#select").val();
+		console.log(search);
+		location.href = "./movieSearch?search="+search;
+		
+		//$.get("./movieListSearch?search="+search,function(result){
+		//	console.log(result);
+		});
+		
+	
+		
+		var params = location.search.substr(location.search.indexOf("?") + 1);
+		params = params.split("=");
+		
+		for(var i=0;i<params.length;i++){
+			temp = params[0];
+		}
+		console.log(temp);
+		$("#param").attr("value",temp);
+		
 
-	
-	
 	
 	$(document).ready(function() {
 		//url로 들어오는 파라미터값 읽어들이기
@@ -37,6 +61,7 @@ $("#btn-more").click(function() {
 		    }
 		    return sval;
 		}
+		
 		
 		//읽어들인 파라미터값으로 selected값 변경
 		$("select option[value='"+getParam("kind") +"']").attr("selected", true);
