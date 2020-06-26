@@ -71,7 +71,7 @@
 						
 						<div class="score">
 							<strong class="rate">
-								"예매율&nbsp;"
+								예매율&nbsp;
 								<span>${vo.rate}</span>
 							</strong>
 						</div>
@@ -104,11 +104,11 @@
 						
 						
 						<span class="like">
-							<a class="link-count" href="">
+							<a class="link-count" href="" >
 								<i class="sprite_preegg btn_md default"></i>
-								"프리에그"
+								프리에그
 							</a>
-							<a class="link-reservation" href="">예매</a>
+							<a class="link-reservation" href="" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
 						</span>
 						
 					</div>
@@ -119,12 +119,12 @@
 					<div class="cols-content" id="menu">
 					<div class="col_detail">
 					
-					<ul class="tab-menu">
-						<li class="on">
+					<ul class="tab-menu" >
+						<li class="on" >
 							<a title="현재 선택됨" href="">주요정보</a>
 						</li>
 						<li>
-							<a href="">트레일러</a>
+							<a href="" >트레일러</a>
 						</li>
 						<li>
 							<a href="">스틸컷</a>
@@ -137,23 +137,23 @@
 						</li>
 					</ul>
 					
-					<div class="sect-story-movie">
+					<div class="sect-story-movie" style="margin-top: 40px;">
 						<strong>${vo.contents}</strong>
 					</div>
 					
-					<div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph sect-graph-emotion">
+					<div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph sect-graph-emotion" style="margin-top: 40px;">
 						<ul class="graph">
 							<li>
 								<strong>성별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								
+								그래프자리1
 								</div>
 							</li>
 							
 							<li>
 								<strong>연령별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								
+								그래프자리2
 								</div>
 							</li>
 						</ul>
@@ -161,7 +161,7 @@
 					
 					
 					<div class="movie-detail-ad">
-						<iframe src="" width="800" height="90"> </iframe>
+						<iframe src="" width="100%" height="90"> </iframe>
 					</div>
 					
 					<div id="ctl00_PlaceHolderContent_Section_Trailer" class="sect-trailer" >

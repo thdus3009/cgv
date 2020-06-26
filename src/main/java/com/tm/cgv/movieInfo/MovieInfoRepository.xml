@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		order by
 		<choose>
 			<when test="kind == 'date'">
-				openDate desc
+				openDate asc
 				
 			</when>
 			<when test="kind == 'title'">
