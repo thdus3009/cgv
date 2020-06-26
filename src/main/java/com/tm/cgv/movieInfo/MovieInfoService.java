@@ -67,6 +67,7 @@ public class MovieInfoService {
 		long result = movieInfoRepository.movieWrite(movieInfoVO);
 		
 		if(files.getSize()>0) {
+			
 			String fileName = fileManager.saveTransfer(files, file);//이미지 파일 저장
 			MovieImageVO movieImageVO = new MovieImageVO();
 			movieImageVO.setMovieNum(movieInfoVO.getNum());

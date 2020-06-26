@@ -11,10 +11,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../css/bbsLayout.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-<link href="../css/bbsForm.css" rel="stylesheet" type="text/css">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -27,7 +27,7 @@
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
 	
-	<div class="container">
+	<div class="container" >
 		<div class="c_nav">
 			<div class="nav_linemap">
 				<ul>
@@ -37,132 +37,263 @@
 						</a>
 					</li>
 					<li>
-						<a href="">고겍센터</a>
+						<a href="">영화</a>
 					</li>
 					<li class="last">
-						글쓰기
+						영화상세
 					</li>
 				</ul>
 			</div>
 		</div>
 		
 		<div class="contents">
-			<div>
-				
-				<div class="col_content">
-					<!----------------------------------------------------------------------------------------------------- contents aside -->
-					<div class="col_aside">
-						<div class="snb">
-							<ul>
-								<li><a href="">고객센터 메인<i></i></a></li>
-								<li><a href="">자주찾는 질문<i></i></a></li>
-								<li><a href="/bbs/boardList">공지/뉴스<i></i></a></li>
-								<li class="on"><a href="#">이메일 문의<i></i></a></li>
-								<li><a href="">분실문 문의<i></i></a></li>
-								<li><a href="">단체/대관 문의<i></i></a></li>
-								<li><a href="">대학로 옥탑 예약<i></i></a></li>
-							</ul>
-						
-						</div>
-						<div class="ad_area">
-							<div class="ad_panner_1">
-								<a href="">
-									<img alt="" src="../images/bbsList/200313_160x300.jpg">
-								</a>
-							</div>
-							<div class="ad_panner_2">
-								<a href="">
-									<img alt="" src="../images/bbsList/0325_160x35.png">
-								</a>
-							</div>
-						</div>
+			<div class="wrap-movie-detail" id="select_main">
+				<div class="tit-heading-wrap">
+					<h3>영화상세</h3>
+				</div>
+				<div class="sect-base-movie">
+					<div class="box-image"  >
+					<a href="">
+						<span class="thumb-image">
+							<img  class="box-image" alt="" src="../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
+							<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
+						</span>
+					</a>
 					</div>
-					
+					<div class="box-contents">
+						<div class="title">
+							<strong id="title">${vo.title}</strong>
+							<em class="round lightblue">
+								<span>"현재 상영중"</span>
+							</em>
+							<p>${vo.titleEng}</p>
+						</div>
+						
+						<div class="score">
+							<strong class="rate">
+								"예매율&nbsp;"
+								<span>${vo.rate}</span>
+							</strong>
+						</div>
+						
+						<div class="egg-gage-small">
+							<span class="egg great"></span>
+							<span class="percent">${vo.errRate}</span>
+						</div>
+						
+						<div class="spec">
+							<dl>
+								<dt>감독 :&nbsp;</dt>
+								<dd><a href="">${vo.director}</a></dd>
+								<dd></dd>
+								<dt>&nbsp;/ 배우 :&nbsp;</dt>
+								<dd class="on">
+									<a href="">${vo.actor}</a>
+								</dd>
+								<dt>장르 :&nbsp;${vo.ganre}</dt>
+								<dd></dd>
+								<dt>&nbsp;/ 기본 : &nbsp;</dt>
+								<dd class="">${vo.ageLimit} 이상,&nbsp;${vo.runtime},&nbsp;${vo.country}</dd>
+								<dt>개봉 : &nbsp;</dt>
+								<dd class="on">${vo.openDate}</dd>
+							</dl>
+						</div>
+						<span class="screentype">
+						
+						</span>
+						
+						
+						<span class="like">
+							<a class="link-count" href="">
+								<i class="sprite_preegg btn_md default"></i>
+								"프리에그"
+							</a>
+							<a class="link-reservation" href="">예매</a>
+						</span>
+						
+					</div>
+					</div>
+					<!--여기까지가 상영시간, 감독 등등 나오는 곳----------------------------------------------------------------------------------------------------->
+
 					<!----------------------------------------------------------------------------------------------------- contents detail -->
-					
+					<div class="cols-content" id="menu">
 					<div class="col_detail">
 					
-						<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
-						<div class="customer_top">
-							<h2 class="tit">Movie${path} </h2>
-							<p class="stit">CGV이용과 관련된 사항에 대하여서 작성가능합니다.</p>
+					<ul class="tab-menu">
+						<li class="on">
+							<a title="현재 선택됨" href="">주요정보</a>
+						</li>
+						<li>
+							<a href="">트레일러</a>
+						</li>
+						<li>
+							<a href="">스틸컷</a>
+						</li>
+						<li>
+							<a href="">평점/리뷰</a>
+						</li>
+						<li class="last">
+							<a href="">상영시간표</a>
+						</li>
+					</ul>
+					
+					<div class="sect-story-movie">
+						<strong>${vo.contents}</strong>
+					</div>
+					
+					<div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph sect-graph-emotion">
+						<ul class="graph">
+							<li>
+								<strong>성별 예매 분포</strong>
+								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
+								
+								</div>
+							</li>
+							
+							<li>
+								<strong>연령별 예매 분포</strong>
+								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
+								
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					
+					<div class="movie-detail-ad">
+						<iframe src="" width="800" height="90"> </iframe>
+					</div>
+					
+					<div id="ctl00_PlaceHolderContent_Section_Trailer" class="sect-trailer" >
+						<div class="heading">
+							<h4>트레일러</h4>
+							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count"></span>
+						</div>
+						<ul>
+							<li>
+							<div class="box-image">
+								<a href="">
+									<img alt="" src="">
+								</a>
+							</div>
+							<div class="box-contents">
+								<a href="">
+									<strong class="title">
+										<span class="ico-trailer hd">HD</span>
+										현장 조사 보고서 영상
+									</strong>
+								</a>
+								
+							</div>
+							</li>
+						</ul>
+					</div>
+					<!-- 여기까지가 트레일러 -->
+					<div id="ctl00_PlaceHolderContent_Section_Still_Cut">
+						<div class="heading">
+						<h4>스틸컷</h4>
 						</div>
 						
-						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-						<form action="./${board}${path}" method="post" enctype="multipart/form-data">
-							<fieldset>
-								
-								<input type="text" value="${vo.num}" name="num">
-								<div class="tbl_write">
-																
-									
-									<table class="tbl_bbs_write">
-										<colgroup>
-											<col style="width: 100px;">
-											<col style="width: 320px;">
-										</colgroup>
-										<tbody>
-											
-												 <div class="form-group">
-												 <img alt="" src="../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
-												 </div>
-												 
-												 
-												 
-										     <div class="form-group">
-										      <label for="videolink">예고 영상:</label>
-										      <input type="text" class="form-control videolink" id="videolink" name="videolink" value="${vo.movieVideoVOs.videolink}">
-										    </div>
-											 <div class="form-group">
-											    <label for="title">Title:</label>
-											    <input type="text" class="form-control" id="title" name="title" value="${vo.title}" >
-											  </div>
-											   <div class="form-group">
-											    <label for="titleEng">TitleEng:</label>
-											    <input type="text" class="form-control" id="titleEng" name="titleEng" value="${vo.titleEng}" >
-											  </div>
-											   <div class="form-group">
-											    <label for="runtime">runtime:</label>
-											    <input type="text" class="form-control" id="runtime" name="runtime" value="${vo.runtime}">
-											  </div>
-											   <div class="form-group">
-											    <label for="director">감독:</label>
-											    <input type="text" class="form-control" id="director" name="director" value="${vo.director}" >
-											  </div>
-											  <div class="form-group">
-											    <label for="actor">출연 배우:</label>
-											    <input type="text" class="form-control" id="actor" name="actor" value="${vo.actor}">
-											  </div>
-											  <div class="form-group">
-											    <label for="ganre">장르:</label>
-											    <input type="text" class="form-control" id="ganre" name="ganre" value="${vo.ganre}">
-											  </div>
-											  <div class="form-group">
-											    <label for="ageLimit">연령제한:</label>
-											    <input type="text" class="form-control" id="ageLimit" name="ageLimit" value="${vo.ageLimit}">
-											  </div>
-											   <div class="form-group">
-											    <label for="country">국가:</label>
-											    <input type="text" class="form-control" id="country" name="country" value="${vo.country}">
-											  </div>
-											   <div class="form-group">
-											    <label for="openDate">개봉일:</label>
-											    <input type="date" class="form-control" id="openDate" name="openDate" value="${vo.openDate}">
-											  </div>
-											  
-											 
-											  
-											  <div class="form-group">
-											    <label for="contents">Contents:</label>
-											    <textarea rows="" cols="" class="form-control" id="contents" name="contents" >${vo.contents}</textarea>
-											 
-											  </div>
-											
-										</tbody>
-									
-									</table>
-									
+						<div class="slider-wrap">
+						
+						</div>
+					</div>
+					<!-- 여기까지가 스틸컷 -->
+					<div class="sect-grade">
+						<div class="movie-grade">
+							<div class="egg_point">
+								<div class="title">
+									배우들의 연기가 메소드급인<br>
+									몰입하여 보게 되는 영화
 								</div>
+								<div class="rating">
+									<div class="box">
+										<span class="sprite_preegg big default"></span>
+										<span class="desc">Pre Egg</span>
+										<span class="rate">94%</span>
+										<span class="tooltip">사전기대지수</span>
+									</div>
+									<div class="box box_golden">
+										<span class="sprite_preegg big great"></span>
+										<span class="desc">Golden Egg</span>
+										<span class="rate">94%</span>
+										<span class="tooltip">실관람평지수</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="chart_total">
+								<div class="box">
+									<div class="title">매력 포인트</div>
+									<div class="radar-graph" id="chart2">
+									</div>
+								</div>
+								<div class="box">
+									<div class="title">감정 포인트</div>
+									<div class="radar-graph" id="chart3">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="real-rating">
+							<p class="title">관람일 포함 7일 이내 관람평을 남기시면 <strong>CJ ONE 20P</strong>가 적립됩니다.</p>
+							<p class="desc"><span><em>15,557</em>명의 실관람객이 평가해주셨습니다.</span></p>
+							<div class="wrap_btn">
+								<a class="link-gradewrite" href=""><span>평점작성</span></a>
+								<a class="link-reviewwrite" href=""><span>내 평점</span></a>
+							</div>
+						</div>
+						
+						<ul class="sort" id="sortTab">
+							<li class="sortTab on" data-order-type="0" id="test">
+								<a href="" title="현재선택">
+									최신순
+									<span class="arrow-down"></span>
+								</a>	
+							</li>
+							<li class="sortTab" data-order-type="3" >
+								<a href="">
+									추천순
+									<span class="arrow-down"></span>
+								</a>
+							</li>
+						</ul>
+						
+						<div class="wrap-persongrade">
+							<ul id="movie_point_list_container" class="point_col2">
+								<li class="liCommentFirst" data-spoilercnt="0" data-reportcnt="0">
+									<a href="" class="screen_spoiler">&nbsp;</a>
+									<div class="box-image">
+										<span class="thumb-image">
+											<img alt="사용자 프로필" src="">
+											<span class="profile-mask"></span>
+										</span>
+									</div>
+									<div class="box-contents">
+										<ul class="writerinfo">
+											<li class="writer-name">
+												<a href="">
+													<span class=" egg-icon good "></span>
+													dm**ud9235
+												</a>
+											</li>
+											<li class="writer-etc">
+												<span class="day">2020-06-23</span>
+											</li>
+										</ul>
+									</div>
+									<div class="box-comment">
+										<p>재밌어요 강추</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+						
+						
+						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
+						
 								<div class="bbs_btn">
 									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
 									
@@ -172,12 +303,11 @@
 									</c:if>
 									
 								</div>
-							</fieldset>
-						</form>
+							
 						
 					</div>
-				
 				</div>
+			
 			</div>
 		</div>
 	</div>

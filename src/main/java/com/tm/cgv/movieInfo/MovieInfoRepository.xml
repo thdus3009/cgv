@@ -74,20 +74,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	
  	<select id="movieNumCount" resultType="Long">
- 		select count(num) from movieInfo where deleteAt is null
- 	</select>
- 
- 	
- 
- 	<select id="movieList" parameterType="Pager" resultMap="listResult">
- 		select MM.* , MK.fileName,MK.originName,MK.movieNum from
- 		(select * from
- 		(select P.*, @rownum:=@rownum +1 as R from 
- 		(select * from movieInfo where title like '%'||#{search}||'%' 
- 		order by
-		<choose>
+ 		select count(num) from movieInfo where deleteAt is null 
+ 		and title like concat('%',#{search},'%') order by
+ 		<choose>
 			<when test="kind == 'date'">
-				openDate desc, rate desc 
+				openDate desc
 				
 			</when>
 			<when test="kind == 'title'">
@@ -99,10 +90,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				
 			</otherwise>
 		</choose>
-		limit #{startRow},#{perPage}) as P)as PP ) as MM
+ 	</select>
+ 
+ 	
+ 
+ 	<select id="movieList" parameterType="Pager" resultMap="listResult">
+ 		select MM.* , MK.fileName,MK.originName,MK.movieNum from
+ 		(select * from
+ 		
+ 		(select * from movieInfo where title like concat('%',#{search},'%') and
+ 		deleteAt is null
+ 		order by
+		<choose>
+			<when test="kind == 'date'">
+				openDate desc
+				
+			</when>
+			<when test="kind == 'title'">
+				title asc
+				
+			</when>
+			<otherwise>
+				rate desc
+				
+			</otherwise>
+		</choose>
+		limit #{startRow},#{perPage}) as PP ) as MM
 		left join movieImage as MK
 		on(MM.num = MK.movieNum)
-		where deleteAt is null;
+		
 		
 		
  			
@@ -118,6 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  					rate desc
  				</otherwise>
  			</choose>
+ 			where deleteAt is null
  	 	</select>
  	 	
  	 	

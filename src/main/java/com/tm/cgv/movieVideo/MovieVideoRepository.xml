@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.movieVideo.MovieVideoRepository">
 
 	<insert id="movieVideoInsert" parameterType="MovieVideoVO" useGeneratedKeys="true" keyProperty="num">
-		insert into movieVideo values(#{num},#{movieNum},#{videolink})
+		insert into movieVideo(num,movieNum,videolink) values(#{num},#{movieNum},#{videolink})
 	</insert>
 	
 	

@@ -47,6 +47,7 @@ public class MovieInfoController {
 		List<MovieInfoVO> list =  movieInfoService.movieList(pager);
 		
 		//System.out.println(list.get(2).getMovieImageVOs().getFileName()+"이거");
+		System.out.println();
 		
 		if(list != null) {
 			mv.addObject("list", list);
@@ -54,6 +55,19 @@ public class MovieInfoController {
 		}
 		return mv;
 	}
+	
+	
+	@GetMapping("movieSearch")
+	public ModelAndView movieSearch(Pager pager,ModelAndView mv)throws Exception{
+		List<MovieInfoVO> searchList = movieInfoService.movieList(pager);
+		if(searchList !=null) {
+			mv.addObject("searchList",searchList);
+			mv.setViewName("movie/movieSearch");
+		}
+		
+		return mv;
+	}
+	
 	
 	@GetMapping("movieReservation")
 	public ModelAndView movieReservation(MovieInfoVO movieInfoVO) throws Exception{
