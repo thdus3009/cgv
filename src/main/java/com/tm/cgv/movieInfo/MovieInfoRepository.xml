@@ -166,5 +166,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="movieDelete" parameterType="MovieInfoVO">
  		update movieInfo set deleteAt=now() where num=#{num}
  	</update>
+ 	
+ 	<select id=""></select>
+ 	
  
  </mapper>

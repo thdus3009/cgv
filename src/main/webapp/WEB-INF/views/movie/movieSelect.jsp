@@ -64,22 +64,40 @@
 						<div class="title">
 							<strong id="title">${vo.title}</strong>
 							<em class="round lightblue">
-								<span>"현재 상영중"</span>
+								<span>현재 상영중</span>
 							</em>
 							<p>${vo.titleEng}</p>
 						</div>
 						
-						<div class="score">
-							<strong class="rate">
+						<div class="score" >
+							<strong class="percent">
 								예매율&nbsp;
 								<span>${vo.rate}</span>
 							</strong>
+						
+						
+							<div class="egg-gage small" style="background: url('../images/movie/movieList/bg_writeinfo.gif') 0 12px no-repeat;">
+									<!--   <img alt="" src="../images/movie/movieList/sprite_egg.png">-->
+									
+									<!-- <div class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png')" ></div> -->
+									<c:if test="${vo.errRate lt 50 }">
+									<!-- 터진  계란  -->
+									<span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -47px"></span>
+									</c:if>
+									
+									<c:if test="${vo.errRate lt 70 && vo.errRate ge 50 }">
+									<!-- 왕관없는 계란  -->
+									<span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -18px -47px"></span>
+									</c:if>
+									
+									<c:if test="${vo.errRate ge 70 }">
+									<!-- 왕관있는 계란 -->
+									 <span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
+									</c:if>
+								<span class="percent">${vo.errRate}</span>
+							</div>
 						</div>
 						
-						<div class="egg-gage-small">
-							<span class="egg great"></span>
-							<span class="percent">${vo.errRate}</span>
-						</div>
 						
 						<div class="spec">
 							<dl>
@@ -93,7 +111,8 @@
 								<dt>장르 :&nbsp;${vo.ganre}</dt>
 								<dd></dd>
 								<dt>&nbsp;/ 기본 : &nbsp;</dt>
-								<dd class="">${vo.ageLimit} 이상,&nbsp;${vo.runtime},&nbsp;${vo.country}</dd>
+								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime},&nbsp;${vo.country}</dd>
+								<br>
 								<dt>개봉 : &nbsp;</dt>
 								<dd class="on">${vo.openDate}</dd>
 							</dl>
@@ -105,7 +124,7 @@
 						
 						<span class="like">
 							<a class="link-count" href="" >
-								<i class="sprite_preegg btn_md default"></i>
+								<i class="sprite_preegg1 btn_md default"></i>
 								프리에그
 							</a>
 							<a class="link-reservation" href="" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
@@ -116,10 +135,10 @@
 					<!--여기까지가 상영시간, 감독 등등 나오는 곳----------------------------------------------------------------------------------------------------->
 
 					<!----------------------------------------------------------------------------------------------------- contents detail -->
-					<div class="cols-content" id="menu">
+					<div class="cols-content" id="menu" >
 					<div class="col_detail">
 					
-					<ul class="tab-menu" >
+					<ul class="tab-menu" style="padding-top: 40px;" >
 						<li class="on" >
 							<a title="현재 선택됨" href="">주요정보</a>
 						</li>
@@ -137,7 +156,7 @@
 						</li>
 					</ul>
 					
-					<div class="sect-story-movie" style="margin-top: 40px;">
+					<div class="sect-story-movie" >
 						<strong>${vo.contents}</strong>
 					</div>
 					
@@ -161,26 +180,26 @@
 					
 					
 					<div class="movie-detail-ad">
-						<iframe src="" width="100%" height="90"> </iframe>
+						<iframe src="" width="100%" height="90px"> </iframe>
 					</div>
 					
 					<div id="ctl00_PlaceHolderContent_Section_Trailer" class="sect-trailer" >
 						<div class="heading">
 							<h4>트레일러</h4>
-							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count"></span>
+							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
 						</div>
 						<ul>
 							<li>
 							<div class="box-image">
-								<a href="">
-									<img alt="" src="">
+								<a href="${vo.movieVideoVOs.videolink }">
+									<img alt="메인예고편" src="../images/movie/movieList/filmCover/rr.JPG" class="box-image">
 								</a>
 							</div>
 							<div class="box-contents">
 								<a href="">
 									<strong class="title">
 										<span class="ico-trailer hd">HD</span>
-										현장 조사 보고서 영상
+										메인 예고편 영상
 									</strong>
 								</a>
 								
@@ -189,34 +208,44 @@
 						</ul>
 					</div>
 					<!-- 여기까지가 트레일러 -->
-					<div id="ctl00_PlaceHolderContent_Section_Still_Cut">
+					
+					<div id="ctl00_PlaceHolderContent_Section_Still_Cut" class="sect-stillcut">
 						<div class="heading">
-						<h4>스틸컷</h4>
+							<h4>스틸컷</h4>
+							<span class="count">
+								<strong id="stillcut_current">1</strong>
+								21건
+							</span>
 						</div>
 						
 						<div class="slider-wrap">
 						
 						</div>
-					</div>
+					</div> 
 					<!-- 여기까지가 스틸컷 -->
-					<div class="sect-grade">
-						<div class="movie-grade">
+					<div class="sect-grade" style="margin-top: 40px;">
+						<div class="movie_grade">
 							<div class="egg_point">
 								<div class="title">
 									배우들의 연기가 메소드급인<br>
 									몰입하여 보게 되는 영화
 								</div>
-								<div class="rating">
+								<div class="rating" id="rating">
 									<div class="box">
-										<span class="sprite_preegg big default"></span>
-										<span class="desc">Pre Egg</span>
-										<span class="rate">94%</span>
+									
+									<!-- pre egg -->
+									<!-- <div class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png')no-repeat -25px -20px;" ></div> -->
+										
+										 <span class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -4px -35px;"></span> 
+										
+										<span class="desc" >PreEgg</span>
+										<span class="percent">94%</span>
 										<span class="tooltip">사전기대지수</span>
 									</div>
 									<div class="box box_golden">
-										<span class="sprite_preegg big great"></span>
-										<span class="desc">Golden Egg</span>
-										<span class="rate">94%</span>
+										<span class="sprite_preegg big great" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -115px -135px;"></span>
+										<span class="desc">GoldenEgg</span>
+										<span class="percent">94%</span>
 										<span class="tooltip">실관람평지수</span>
 									</div>
 								</div>

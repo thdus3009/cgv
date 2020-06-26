@@ -116,6 +116,9 @@ public class MovieInfoService {
 				result = movieImageRepository.movieImageInsert(movieImageVO);
 			}
 		}
+		
+		System.out.println("링크값 : "+videolink);	
+		
 		if(videolink!=null) {
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
 			movieVideoVO.setMovieNum(movieInfoVO.getNum());
