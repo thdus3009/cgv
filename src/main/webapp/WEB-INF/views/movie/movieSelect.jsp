@@ -21,6 +21,7 @@
 </head>
 <body>
 
+
 <div class="root">
 	<!-- 헤더 -------------------------------------------------------------------------------------->
 	<c:import url="../template/header.jsp"></c:import>
@@ -321,6 +322,7 @@
 </div>
 
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+
 
 
 

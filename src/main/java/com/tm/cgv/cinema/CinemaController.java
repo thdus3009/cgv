@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
 @Controller
 @RequestMapping("/cinema/**")
+
+
 public class CinemaController {
 
 	@Autowired
 	private CinemaService cinemaService;
 	
+
 	
 	//List
 	@GetMapping("cinemaList")
@@ -112,4 +114,19 @@ public class CinemaController {
 	
 	
 	
+
+	//지역별 극장 조회
+	@GetMapping("localCinemaSearch")
+	public ModelAndView loalSearch(CinemaVO cinemaVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<CinemaVO> cinemaList = cinemaService.cinemaList();
+		
+		mv.addObject("cinemaList", cinemaList);
+		mv.setViewName("movie/ajax/cinemaList");
+		
+		return mv;
+	}
+	
+
 }

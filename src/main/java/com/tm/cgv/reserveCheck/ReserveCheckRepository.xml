@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.reserveCheck.ReserveCheckRepository">
+
+	<resultMap type="ReserveCheckVO" id="reserverCheckResult">
+		<collection property="movieVOs" javaType="List" ofType="MovieVO">
+			<result column="mNum" property="num"/>
+			<result column="title" property="title"/>
+		</collection>
+		
+		<collection property="movieTimeVOs" javaType="List" ofType="MovieTimeVO">
+			<result column="tNum" property="num"/>
+			<result column="movieNum" property="movieNum"/>
+			<result column="theaterNum" property="theaterNum"/>
+			<result column="screenDate" property="screenDate"/>
+			<result column="screenTime" property="screenTime"/>
+			<result column="remainSeat" property="remainSeat"/>
+		</collection>
+		
+		<collection property="theaterVOs" javaType="List" ofType="TheaterVO">
+			<result column="sNum" property="num"/>
+			<result column="cinemaNum" property="cinemaNum"/>
+			<result column="name" property="name"/>
+			<result column="seatCount" property="seatCount"/>
+			<result column="filmType" property="filmType"/>
+		</collection>
+		
+		<collection property="cinemaVOs" javaType="List" ofType="CinemaVO">
+			<result column="cNum" property="num"/>
+			<result column="cName" property="name"/>
+		</collection>
+	</resultMap>
+	
+
+
+	<select id="reservationCheckedSelect" parameterType="ReserveCheckVO" resultMap="reserverCheckResult">
+		select * from
+		(select * from 
+		(select * from 
+		(select * from 
+		(select num as mNum,title from movieInfo) M
+		join
+		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat  from movieTime) T
+		on(M.mNum = T.movieNum)) A
+		join
+		(select num as sNum,cinemaNum,name,seatCount,filmType from theater) C
+		on(C.sNum = A.theaterNum))B
+		join
+		(select num as cNum,name as cName from cinema) I
+		on(I.cNum = B.cinemaNum)) F
+		where F.title Like concat('%',#{title},'%') and F.cName Like concat('%',#{theater},'%') and F.screenDate Like concat('%',#{date},'%')
+	</select>
+ 	
+ 
+</mapper>

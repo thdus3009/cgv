@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/css/login.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/member/memberLogin.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>

@@ -1,0 +1,763 @@
+@charset "UTF-8";
+
+
+.ticket .ticket_payment_method{
+	float: left;
+    width: 744px;
+    min-height: 600px;
+}
+
+
+/* 할인 쿠폰 */
+.tpm_wrap{
+	width: 744px;
+    margin-top: 5px;
+    background-color: #f2f0e5;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+
+em{
+	    font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 포인트/상품권 */
+
+.ts3_titlebar{
+	width: 744px;
+    display: block;
+    position: relative;
+    height: 33px;
+    line-height: 33px;
+    background-color: #333;
+    color: #e0e0e0;
+    clear: both;
+    margin-bottom: 3px;
+}
+
+.ts3_titlebar.ts3_t1 .header{
+	display: block;
+    float: left;
+    font-size: 17px;
+    height: 100%;
+    margin-left: 16px;
+    font-weight: bold;
+    letter-spacing: 0!important;
+    text-indent: 0 !important;
+}
+
+.ts3_titlebar.ts3_t1 .header{
+	width: auto;
+}
+
+.ts3_titlebar .header{
+	display: block;
+    height: 100%;
+    margin-left: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    text-indent: -1000px;
+    overflow: hidden;
+}
+
+.ts3_titlebar{
+	width: 744px;
+    display: block;
+    position: relative;
+    height: 33px;
+    line-height: 33px;
+    background-color: #333;
+    color: #e0e0e0;
+    clear: both;
+    margin-bottom: 3px;
+}
+
+.ts3_titlebar a{
+	display: block;
+    position: absolute;
+    top: 0;
+    right: 16px;
+    padding-right: 20px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/step_refresh_btn.png) no-repeat 100% 50%;
+    color: #e6e6e6;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.tpm_wrap .tpm_header{
+	position: relative;
+    height: 43px;
+    line-height: 43px;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-indent: 14px;
+    box-shadow: inset 0 0 4px rgba(161, 160, 153, 0.1);
+    background-color: #dfded6;
+    cursor: pointer;
+}
+
+
+.tpm_wrap .tpm_header h4{
+	font-size: 15px;
+}
+
+.tpm_wrap .tpm_header a.tpmh_btn{
+	display: block;
+    width: 43px;
+    height: 43px;
+    position: absolute;
+    top: 0;
+    right: 4px;
+    overflow: hidden;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/step3_bullets.png) no-repeat 0 0;
+}
+
+.tpm_wrap .tpm_header a.tpmh_btn span{
+	display: block;
+    height: 100%;
+    line-height: 1.2em;
+    text-indent: -1000px;
+}
+
+.tpm_wrap .tpm_body{
+	display: block;
+    border: solid 2px #dfded6;
+}
+.tpm_wrap .tpm_body .guide_wrap{
+	height: 31px;
+    line-height: 31px;
+    color: #666666;
+    font-size: 12px;
+    background-color: #f9f8f3;
+}
+
+.tpm_wrap .tpm_body .guide_wrap .guide{
+	width: 460px
+	position: relative;
+    margin: 0 auto;
+}
+
+.tpm_wrap .tpm_body .guide_wrap .guide .guide_text{
+	font-weight: bold;
+    letter-spacing: -1px;
+    font-size: 12px;
+    text-align: center
+}
+
+.tpm_wrap .tpm_body .tpm_discount{
+	position: relative;
+    border-top: 1px solid #d7d6cf;
+    overflow: hidden;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/pattern_line.png) repeat-y 183px top;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_list{
+	float: left;
+    width: 183px;
+    border-right: 1px solid #d7d6cf;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_list li:first-child{
+	border-top: none;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_list li{
+	position: relative;
+    width: 100%;
+    height: 31px;
+    line-height: 31px;
+    border-top: 1px solid #d7d6cf;
+    background-color: #f2f0e5;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_list li div.dimmCon{
+	position: absolute;
+    width: 100%;
+    background: #fff;
+    opacity: .7;
+    display: none;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_list li a{
+	display: block;
+    height: 31px;
+    text-decoration: none;
+    padding-left: 14px;
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/step3_bullets.png) no-repeat 170px -171px;
+}
+.tpm_wrap .tpm_body .tpm_discount .discount_form{
+	float: right;
+    width: 556px;
+    min-height: 280px;
+    background-color: #f2f0e5;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form{
+	display: none;
+    position: relative;
+    padding: 19px 19px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form h5{
+	margin-bottom: 14px;
+    color: #306791;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    height: 14px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/step3_bullets.png) no-repeat 0 -259px;
+    text-indent: 11px
+}
+.tpm_wrap .discount_form .tpm_coupon_button{
+	position: absolute;
+    top: 11px;
+    right: 24px;
+}
+
+div.form_con{
+	padding: 10px;
+    padding-top: 5px;
+}
+
+div.form_con dt, div.form_con dd{
+	display: inline-block;
+    width: auto;
+    height: 22px;
+    line-height: 22px;
+}
+
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_guide{
+	margin-top: 51px;
+    border: 2px solid #d7d6cf;
+}
+
+div.form_con dt label.noneInput{
+	cursor: default !important;
+}
+
+div.form_con dt label{
+	margin-right: 5px;
+}
+div.form_con dd.amtValue{
+	color: #b15129;
+    font-weight: bold;
+    text-align: right;
+    min-width: 25px;
+    margin-left: 5px;
+    width: auto;
+}
+div.form_con dd span.hasPoint{
+	margin-right: 5px;
+}
+
+
+div.form_con dt.secondTit{
+	margin-left: 30px;
+}
+
+
+div.form_con dd input.textBox2{
+	border: 2px solid #acaba2;
+    background: #f2f0e5;
+    padding: 2px 10px 2px 0;
+    line-height: 15px;
+    text-align: right;
+    width: 90px;
+    margin: 0 4px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_guide dl{
+	overflow: hidden;
+    padding-top: 14px;
+    padding-bottom: 14px
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_guide dl dt{
+	clear: both;
+    float: left;
+    width: 59px;
+    padding-left: 22px;
+    line-height: 2em;
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_guide dl dd.split{
+	float: left;
+    width: 410px;
+    padding-left: 14px;
+    color: #666;
+    font-size: 12px;
+    line-height: 2em;
+	border-left: solid 1px #d7d6cf;
+}
+
+
+.tpm_wrap .tpm_body .tpm_discount .discount_list li.selected{
+	background-color: #fff;
+}
+.tpm_wrap .tpm_body .tpm_discount .discount_list li.selected a{
+	padding-left: 12px;
+    height: 27px;
+    line-height: 27px;
+    border: solid 2px #000;
+    background-position: 168px -200px;
+}
+
+.tpm_wrap .discount_form .tpm_coupon_button{
+	position: absolute;
+    top: 11px;
+    right: 24px;
+}
+.tpm_wrap .discount_form .tpm_coupon_button a.brown{
+	background-color: #926f60;
+    border: solid 1px #806052;
+}
+.tpm_wrap .discount_form .tpm_coupon_button a{
+	display: block;
+    float: left;
+    margin-left: 5px;
+    padding: 0 6px;
+    border-radius: 4px;
+    height: 21px;
+    line-height: 23px;
+    color: #fff;
+    font-size: 12px;
+}
+	
+.tpm_wrap .discount_form .tpm_coupon_button a{
+	display: block;
+    float: left;
+    margin-left: 5px;
+    padding: 0 6px;
+    border-radius: 4px;
+    height: 21px;
+    line-height: 23px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_button{
+	position: absolute;
+    top: 12px;
+    right: 35px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_button a.brown{
+	background-color: #926f60;
+    border: solid 1px #806052;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_button a{
+	display: block;
+    float: left;
+    margin-left: 5px;
+    padding: 0 6px;
+    border-radius: 4px;
+    height: 21px;
+    line-height: 23px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_button a.gray{
+	background-color: #82898e;
+    border: solid 1px #6a7176;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_header{
+	height: 18px;
+    border-bottom: solid 1px #c1c1c1;
+    color: #666666;
+    font-size: 11px;
+}
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_header .col{
+	float: left;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form_list .col1{
+	width: 197px;
+    padding-left: 15px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form_list .col2{
+	width: 135px;
+    text-align: center;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form_list .col3{
+	width: 130px;
+    text-align: center;
+
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_result{
+	clear: both;
+    padding: 12px 20px 0 20px;
+    text-align: right;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/pattern_line_dot.png) repeat-x top left;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_result .title{
+	color: #59656e;
+    font-size: 12px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_result .price{
+	padding-left: 35px;
+    color: #9b3d20;
+    font-size: 12px;
+    font-family: Verdana;
+    font-weight: bold;
+}
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_result .won{
+	color: #9b3d20;
+    font-size: 12px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_body{
+	width: 518px;
+    min-height: 150px;
+    padding: 5px 0;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_body .content{
+	padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_body .message{
+	display: block;
+    width: 100%;
+    text-align: center;
+    color: #666;
+    line-height: 150px
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 최종결제 수단 */
+#lastPayMethod .tpm_wrap{
+	margin-bottom: 0 !important;
+}
+
+.tpm_wrap.tpm_last_pay .tpm_body{
+	display: block;
+    margin: 0;
+    
+	
+	height: 250px;
+
+}
+
+.tpm_wrap .tpm_body{
+	display: block;
+    border: solid 2px #dfded6;
+}
+
+.tpm_wrap.tpm_last_pay .tpm_body > div{
+	background-color: #f2f0e5;
+}
+
+.tpm_wrap.tpm_last_pay .tpm_body .payment_select{
+	position: relative;
+    width: 709px;
+    line-height: 41px;
+    margin: 0 auto;
+    border-bottom: 2px solid #d7d6cf;
+}
+
+.tpm_wrap.tpm_last_pay .tpm_body .payment_select > span{
+	position: relative;
+}
+
+	
+input[type="checkbox"], input[type="radio"]{
+	vertical-align: middle;
+}
+
+
+.tpm_wrap.tpm_last_pay .tpm_body .payment_select label{
+	margin-left: 3px;
+    margin-right: 15px;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tpm_last_pay .payment_form, .tpm_last_pay .payment_form .payment_input{
+	position: relative;
+}
+
+
+.tpm_last_pay .payment_form .table_wrap{
+	padding: 15px;
+    width: auto;
+    padding-top: 0;
+}
+
+
+
+/* 결제 금액 창 */
+
+.ticket_payment_summary{
+	float: right;
+    width: 217px;
+/*     position: relative; */
+	position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.tps_wrap{
+	position: absolute;
+    top: 0px;
+}
+
+.tps_wrap .tps_body{
+	background-color: #fff;
+    padding-bottom: 15px;
+    padding-top: 19px;
+    box-shadow: 0px 2px 3px #CCC;
+    width: 216px;
+}
+
+.tps_wrap .tps_body .summary_box:first-child{
+	margin-top: 0px
+}
+.tps_wrap .tps_body .summary_box{
+	width: 187px;
+    margin: 0 auto;
+    border-radius: 4px;
+    background-color: #202020;
+    margin-top: 20px;
+    padding: 2px;
+}
+.tps_wrap .tps_body .summary_box.discount_box{
+	background-color: #242e35;
+}
+
+.tps_wrap .tps_body .summary_box{
+	width: 187px;
+    margin: 0 auto;
+    border-radius: 4px;
+    background-color: #202020;
+    margin-top: 20px;
+    padding: 2px;
+}
+
+
+
+/* 결제하실 금액 부분 */
+.tps_wrap .tps_body .summary_box.total_box .payment_header{
+	height: 32px;
+    line-height: 32px;
+    background-color: #fff;
+    font-size: 14px;
+}
+.tps_wrap .tps_body .summary_box .payment_header{
+	height: 27px;
+    line-height: 27px;
+    border-radius: 3px 3px 0 0;
+    background-color: #fff;
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-align: center;
+}
+.tps_wrap .tps_body .summary_box.total_box .payment_footer .result{
+	background-color: #474747;
+    color: #fff;
+    box-shadow: inset 0 0 10px #202020;	
+}
+.tps_wrap .tps_body .summary_box .payment_footer .result{
+	height: 40px;
+    line-height: 40px;
+    border-radius: 0 0 3px 3px;
+    padding: 0 7px;
+    text-align: right;
+    position: relative;
+}
+
+.tps_wrap .tps_body .summary_box .payment_footer .result .num{
+	ont-size: 20px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+
+.ticket .verdana{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.tps_wrap .tps_body .summary_box .payment_footer .result .won{
+	position: relative;
+    top: -2px;
+    margin-left: 2px;
+}
+
+/* 할인내역 부분 */
+
+.tps_wrap .tps_body .summary_box.discount_box .payment_header{
+	background-color: #d9e7eb;
+}
+.tps_wrap .tps_body .summary_box .payment_body{
+	    background-color: #f9f8f6;
+}
+
+.tps_wrap .tps_body .summary_box .payment_footer .label{
+	height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #333;
+    text-align: center;
+    border-top: solid 2px #242f35;
+    background-color: #f9f8f6;
+}
+
+
+.tps_wrap .tps_body .summary_box.discount_box .payment_footer .result{
+	background-color: #3c464f;
+    color: #89e5ff;
+    box-shadow: inset 0 0 10px #242e35;
+}
+
+/* 결제내역 부분 */
+
+.tps_wrap .tps_body .summary_box.payment_box .payment_header{
+	background-color: #f0ebd2;
+}
+
+.tps_wrap .tps_body .summary_box .payment_body dl{
+	list-style: none;
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 35px;
+    line-height: 35px;
+    border-top: 1px solid #dde2e3;
+    font-size: 12px;
+    letter-spacing: -1px;
+}
+
+.tps_wrap .tps_body .summary_box.payment_box .payment_body dt{
+	color: #443128;
+}
+
+.tps_wrap .tps_body .summary_box .payment_body dt{
+	position: relative;
+    top: 11px;
+    display: block;
+    width: 95px;
+    min-height: 14px;
+    max-height: 28px;
+    padding-left: 5px;
+    line-height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tps_wrap .tps_body .summary_box.payment_box .payment_body dd{
+	color: #333;
+    padding-right: 0px;
+    right: 7px;
+}
+
+.tps_wrap .tps_body .summary_box .payment_body dd{
+	display: block;
+    width: 60px;
+    padding-right: 25px;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    text-align: right;
+}
+
+.tps_wrap .tps_body .summary_box .payment_body dl .num{
+	letter-spacing: 0px;
+}
+
+.tps_wrap .tps_body .summary_box.payment_box .payment_body dd .won{
+	color: #666;
+}
+
+.tps_wrap .tps_body .summary_box.payment_box .payment_footer .result{
+	background-color: #443128;
+    color: #ffe56b;
+    box-shadow: inset 0 0 10px #2d1f19;
+}
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

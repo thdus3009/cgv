@@ -16,4 +16,15 @@ public class CinemaVO {
 	private String parkingInfo;
 	private String intro;
 	
+
+	public String getLocal() {
+		if(this.local == null || this.local.equals("")) {
+			this.local = "서울";
+		}
+		return local;
+	}
+
+	
+	
+
 }

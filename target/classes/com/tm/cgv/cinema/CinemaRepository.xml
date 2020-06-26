@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tm.cgv.cinema.CinemaRepository">
+
 	<select id="cinemaList" resultType="CinemaVO">
 		select * from cinema
 	</select>
@@ -32,4 +33,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from cinema where num=#{num}
 	</delete>
 	
+
+	
+	<select id="cinemaLocalList" resultType="CinemaVO">
+		select local from cinema group by local
+	</select>
+	
+	<select id="cinemaList" resultType="CinemaVO">
+		select local, name from cinema order by local;
+	</select>
+	
+	
+
+
 </mapper>

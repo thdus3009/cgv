@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #fdfcf0;
+}
+
+.top-bar {
+    font-size: 17px;
+    padding: 5px;
+    border-bottom: 1px solid #b4b3aa;
+}
+
+/*멤버 정보*/
+
+.member-info > ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+li{
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #dfded7;
+    padding: 15px 0 15px 10px;
+}
+
+.profile-pic{
+    border-radius: 50%;
+    width: 88px;
+    height: 88px;
+    margin-right: 20px;
+}
+
+.del-pic{
+    position: absolute;
+    left: 195px;
+    z-index: 10;
+}
+
+.con{
+    margin: 15px 0;
+}
+
+.what{
+    margin: 0;
+    font-size: 15px;
+    width: 100px;
+    color: #222;
+}
+
+.input-text{
+    line-height: 27px;
+    height: 27px;
+    width: 150px;
+    padding: 0 5px;
+    border: 1px solid #b4b3aa;
+    color: #585858;
+}
+
+.label{
+    width: 80px;
+}
+
+.label > input{
+    margin: 0 8px;
+}
+
+/*예매내역 목록*/
+
+table{
+    font-size: 13px;
+    line-height: 1.2;
+    color: #666;
+    font-weight: 300;
+    border-bottom: 1px solid #b8b6aa;
+}
+
+.memberList-bar{
+    background-color: #e2e2e0;
+    border-top: 1px solid #b8b6aa;
+    border-bottom: 1px solid #b8b6aa;
+}
+
+/*버튼*/
+
+.button-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancle{
+    background: #000;
+    border: 2px solid #000;
+    color: #ffffff;
+    line-height: 21px;
+    border-radius: 5%;
+    margin: 0 5px;
+}
+
+.del{
+    background: #e71a0f;
+    border: 2px solid #e71a0f;
+    color: #ffffff;
+    line-height: 21px;
+    border-radius: 5%;
+    margin: 0 5px;
+}

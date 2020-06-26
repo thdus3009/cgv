@@ -14,7 +14,9 @@
 				<a href="./movieSelect?num=${list.num}">
 				  
 					<span class="thumb-image">
+
 						<img alt="이미지" src="../images/movie/movieList/filmCover/${list.movieImageVOs.fileName}">
+
 						<span class="icon-grade grade-${list.ageLimit }">${list.ageLimit }</span>
 					</span>
 				</a>

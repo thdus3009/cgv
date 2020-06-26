@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class CinemaService {
 	
 	@Autowired
 	private CinemaRepository cinemaRepository;
-	
+
 	
 	//List
 	public List<CinemaVO> cinemaList() throws Exception {
@@ -53,4 +52,16 @@ public class CinemaService {
 		return cinemaRepository.selectLocal();
 	}
 	
+
+	//지역 조회
+	public List<CinemaVO> cinemaLocalList() throws Exception{
+		return cinemaRepository.cinemaLocalList();
+	}
+	
+	//지역별 극장 조회
+	public List<CinemaVO> cinemaList() throws Exception{
+		return cinemaRepository.cinemaList();
+	}
+
+
 }
