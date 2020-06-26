@@ -61,6 +61,9 @@
 						contents : g_mContents.value,
 					},
 					success:function(data){
+						var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+						
+						$("#"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
 						alert("리뷰가 등록되었습니다.")
 					}
 				})
@@ -148,7 +151,12 @@
 							emotionPoint: g_emotionPoint
 						},
 						success:function(data){
+							//버튼바꾸기
+							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+							
+							$("#"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
 							alert("리뷰가 등록되었습니다.")
+							
 						}
 					})
 					
@@ -156,6 +164,11 @@
 				}
 			}
 		}
+	 });
+	 
+	 
+	 $("#submitBtn3").click(function(){
+		 $("#exit3").click();
 	 });
 	 
 //	 ------------------------------------------------------------------------------
@@ -186,6 +199,7 @@
 			$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
 				$('#result').append(result);
 				
+				//1.첫번째 모달
 				$(".popupBtn1").click(function(){
 					g_num=$(this).data("num");//jquery
 					console.log(g_num);
@@ -201,12 +215,70 @@
 					$('input:radio[name="egg"][value=1]').prop('checked', true);
 				});
 				
+				//2.두번째 모달
 				$(".popupBtn2").click(function(){
 				
 					// init
 					$(".charmPoint").prop("checked", false);
 					$(".emotionPoint").prop("checked", false);
 				});
+				
+				//3. 세번째 모달
+/*			$(".popupOnlyRead").click(function(){
+					
+					g_num=$(this).data("num2");
+					console.log(g_num);
+					$.ajax({
+						type:"POST",
+						url:"./review_Select",
+						data:{
+							reservationNum : g_num,
+						},
+						success:function(data){//여기서 data는 json
+							$("#photo").html('<img alt="" src="../images/'+data.fileName+'" width="110px" height="154.6px">')
+							$("#title1").html(data.title);
+							$("#uid").html(data.uid);	
+							$("#egg1").html(data.egg);
+							$("#contents").html(data.contents);
+							$("#createAt").html(data.createAt);	
+							$("#sss"+g_num).click();
+							
+							}
+						})
+					
+				});*/
+				
+
+				
+			});
+			
+			
+			/////////////////////////////////////////////////////////
+			
+		
+			$("#result").on("click", ".popupOnlyRead",function(){
+				
+				g_num=$(this).data("num2");
+				//g_num=$(this).attr("title");
+				console.log(g_num);
+				$.ajax({
+					type:"POST",
+					url:"./review_Select",
+					data:{
+						reservationNum : g_num,
+					},
+					success:function(data){//여기서 data는 json
+						console.log(data);
+						$("#photo").html('<img alt="" src="../images/'+data.fileName+'" width="110px" height="154.6px">')
+						$("#title1").html(data.title);
+						$("#uid").html(data.uid);	
+						$("#egg1").html(data.egg);
+						$("#contents").html(data.contents);
+						$("#createAt").html(data.createAt);	
+						$("#sss"+g_num).click();
+						
+						}
+					})
 				
 			});
 		}

@@ -82,7 +82,8 @@
 		</div>
 		
 		
-
+<!-- ----------------------------------------------------------------------------------------------------------------  -->
+	<!-- 쓰기 전용 -->
 	
 	<!-- Modal -->
 		
@@ -105,8 +106,8 @@
 
 						<!-- Modal body -->
 						<div class="modal-body">
-							<div id="title"></div>  <!-- reviewSubmit.js / reviewMore / $(".popupBtn1").click 참고 -->
-							<br> 
+							<div id="title"></div><br>   <!-- reviewSubmit.js / reviewMore / $(".popupBtn1").click 참고 -->
+							
 							<div style="text-align: center;">
 							
 									<div class="group_radio" id="egg" >	
@@ -198,6 +199,56 @@
 				</div>
 			</div>
 		</div>
+		
+		
+<!-- ----------------------------------------------------------------------------------------------------------------  -->
+	<!-- 읽기 전용 -->
+			
+	<!-- OnlyRead Modal -->
+		
+	<div class="modal" id="myModal3">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+
+					<div class="modal-header" style="background-color: #333;">
+						<h4 class="modal-title"
+							style="color: #F2F0E5; font-size: X-large;">평점 보기</h4>
+						<button id="exit3" type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+
+						<div id="photo" class="list_p_photo">
+						<!-- reviewSubmit.js에서 ajax로 review_Select에서 json형태의 데이터값을 $("#read").html()형태로 가져온다. (아이디값이 read라서 이 div밑으로 값이 꾸려진다.)-->
+						</div>
+						
+						<div style="font-size: small;">
+							<div id="title1"></div>
+							<div id="uid"></div>
+							<div id="egg1"></div>
+							<div id="contents"></div>
+							<div id="createAt"></div>
+						
+						</div>
+	
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<input type="button" class="btn btn-danger" id="submitBtn3" value="확인">
+					</div>
+
+			</div>
+		</div>
+	</div>	
+		
+		
+		
+		
+		
 
 		<!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
 
@@ -219,17 +270,6 @@
 </div>
 
 <!-- 스크립트 -->
-	<script type="text/javascript">
-
-		for(var i=0; i<values.length; i++) {
-			if(values[i].checked){
-				alert(values[i].value);
-			}					
-		}
-	 
-	</script>
-	
-
 
 	<script type="text/javascript" src="../js/review/checkByte.js"></script>
 

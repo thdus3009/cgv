@@ -17,4 +17,6 @@ public interface ReviewRepository {
 	public int review_Write1(ReviewVO reviewVO);
 	
 	public int review_Write2(ReviewVO reviewVO);
+	
+	public ReviewVO reviewSelect(ReviewVO reviewVO);
 }

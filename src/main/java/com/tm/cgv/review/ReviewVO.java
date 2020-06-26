@@ -21,7 +21,7 @@ public class ReviewVO {
 //reservation (reviewList)	
 
 	private int movieNum;	//영화번호
-	private int mId;		//아이디
+	private String uid;		//아이디
 	private String fileName;//이미지
 	
 	//인원수

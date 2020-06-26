@@ -17,15 +17,18 @@
 					<div class="list_p_contents2">
 					
 						<!-- Modal 1 Button + 조건-->
-								<c:set var="name" value="${vo.createAt}" />
-
+							<c:set var="name" value="${vo.createAt}" />
+							<div id="${vo.num}">
 								<c:if test="${empty name}">
-								    <button type="button" class="btn btn-primary popupBtn1" data-toggle="modal"data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>
+								    <button type="button" class="btn btn-primary popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>							    
 								</c:if>
 								<c:if test="${not empty name}">
-								    <button type="button" class="btn btn-danger">리뷰쓴후</button>
+									<!--  -->
+								    <button type="button" class="btn btn-danger popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">리뷰쓴후</button>
+									<!--  -->
+								    <button type="button" class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">리뷰쓴후</button>
 								</c:if>
-						
+							</div>
 						
 						<!-- Modal 2 Button-->
 						<button type="button" class="popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num="${vo.num}"></button>
