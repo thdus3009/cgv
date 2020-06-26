@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.theater.TheaterRepository">
+	
+	<select id="theaterList" resultType="TheaterVO">
+		select * from theater
+	</select>
+	
+	<insert id="theaterWrite" parameterType="TheaterVO">
+		insert into theater(cinemaNum,name,seatCount,filmType) values(#{cinemaNum},#{name},#{seatCount},#{filmType})
+	</insert>
+	
+	<select id="cinemaList" resultType="com.tm.cgv.theater.CinemaVO">
+		select num,name from cinema
+	</select>
+	
+	<select id="theaterSelect" resultType="TheaterVO">
+		select * from theater where num=#{num}
+	</select>
+	
+	<update id="theaterUpdate" parameterType="TheaterVO">
+		update theater set name=#{name}, seatCount=#{seatCount}, filmType=#{filmType} where num=#{num}
+	</update>
+	
+	<delete id="theaterDelete" parameterType="Integer">
+		delete from theater where num=#{num}
+	</delete>
+
+</mapper>
