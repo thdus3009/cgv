@@ -33,12 +33,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON(M.username = A.username);
 	</select>
 	
+	<select id="memberIdCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
+		SELECT * FROM member WHERE username = #{username}
+	</select>
+	
 	<select id="phoneCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
 		SELECT * FROM member WHERE phone = #{phone}
 	</select>
 	
-	<insert id="insert" parameterType="MemberBasicVO">
-		INSERT INTO user VALUES(
-			#{username}, #{password}, 'admin', null, null, 'admin@naver.com', 1, 20, '관리자', null, 1)
+	<insert id="join" parameterType="MemberBasicVO">
+		INSERT INTO member VALUES(
+			#{username}, #{password}, #{name}, #{birth}, #{phone}, #{email}, 
+			#{gender}, #{age}, #{nick}, #{fileName}, 1
+		)
 	</insert>
 </mapper>

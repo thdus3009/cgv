@@ -1,4 +1,4 @@
-package com.tm.cgv.member;
+package com.tm.cgv.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Role {
+public enum RoleEnum {
     ADMIN("ROLE_ADMIN"),
     MEMBER("ROLE_MEMBER");
 

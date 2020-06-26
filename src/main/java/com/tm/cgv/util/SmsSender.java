@@ -24,6 +24,8 @@ public class SmsSender {
 		
 		System.out.println(ACCOUNT_SID);
     	System.out.println(AUTH_TOKEN);
+    	System.out.println(phoneNum);
+    	System.out.println(contents);
     	
     	Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     	

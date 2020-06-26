@@ -133,7 +133,7 @@
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
 	
-<script type="text/javascript" src="../js/terms.js"></script>
+<script type="text/javascript" src="../js/member/terms.js"></script>
 
 </body>
 </html>

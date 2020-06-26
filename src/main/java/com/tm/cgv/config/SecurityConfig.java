@@ -68,9 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
     	http.authorizeRequests()
                 // 페이지 권한 설정 (순서 위에서 아래로, 제한할 경로를 위로, 제한 없는 경로를 아래로)
-        		.antMatchers("/admin/**").hasRole("ADMIN")
-        		.antMatchers("/member/info").hasRole("MEMBER")
-        		.antMatchers("/member/**").permitAll()
+        		//.antMatchers("/admin/**").hasRole("ADMIN")
+        		//.antMatchers("/member/info").hasRole("MEMBER")
+        		//.antMatchers("/member/**").permitAll()
                 .antMatchers("/**").permitAll()
             .and() // 로그인 설정
                 .formLogin()

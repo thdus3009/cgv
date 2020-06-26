@@ -2,6 +2,8 @@ package com.tm.cgv.member;
 
 import java.util.List;
 
+import com.tm.cgv.auth.AuthVO;
+
 import lombok.Data;
 
 @Data
@@ -13,7 +15,7 @@ public class MemberBasicVO {
 	private String birth;
 	private String phone;
 	private String email;
-	private String gender;
+	private boolean gender;
 	private int age;
 	private String nick;
 	private String fileName;

@@ -1,4 +1,4 @@
-package com.tm.cgv.member;
+package com.tm.cgv.auth;
 
 import lombok.Data;
 
