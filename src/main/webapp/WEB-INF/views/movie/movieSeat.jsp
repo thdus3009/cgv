@@ -71,11 +71,15 @@
 											<span class="text"></span>
 										</div>
 										<div class="seats" style="width: 272px; height: 192px;">
+										
+										
 											<c:forEach var="row" items="${rowList}" varStatus="t" >
 												<div class="row" style="top:${t.index+(t.index*16)}px;" data-row="${row.rowIdx}">
 													<div class="label">${row.rowIdx}</div>
 													<div class="seat_group" data-seat-group="">
 														<div class="group"> 
+														
+														
 															<c:forEach begin="1" end="${maxCol}" var="i" >
 																<!--blocked(선택불가)  reserved(이미 예매)  -->
 																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
@@ -93,7 +97,6 @@
 													</div>
 												</div>
 												<br>
-												
 											</c:forEach>
 											
 										</div>
@@ -122,17 +125,12 @@
 						</div>
 					</div>
 					<a class="btn-refresh" href="#" onclick="return false;"><span>다시하기</span></a>
-			
 				</div>
-	
-	<script type="text/javascript" src="/js/movie/movieSeatReservation.js"></script>
-
-	
-	
 	
 <script type="text/javascript">
 
 	var seatList = [];
+
 
 
 	<c:forEach items="${seatList}" var="vo">
@@ -143,29 +141,13 @@
 		      colIdx :	`${vo.colIdx}`,
 		      grade:	`${vo.grade}`,
 		      bNum : 	`${vo.seatBookingVO.num}`,
-		      movieNum : 	`${vo.seatBookingVO.movieNum}`,
+		      movieTimeNum : `${vo.seatBookingVO.movieTimeNum}`,
 		      reservationNum : 	`${vo.seatBookingVO.reservationNum}`
 		};
-	
-		if(seatVO.grade == 1){
-			console.log("economy");
-		}else if(seatVO.grade == 2){
-			console.log("standard");
-		}else if(seatVO.grade == 3){
-			console.log("prome");
-		}
-	
-		
+
 		seatList.push(seatVO);   
 	</c:forEach>
 
-	console.log(seatList);
-
-
-// 	var str = 'ABCD';
-// 	console.log(str);
-// 	console.log(str.charCodeAt(0));
-// 	console.log(str.charCodeAt(0)-64);
 
 	var seatNumList = [];
 
@@ -173,13 +155,12 @@
 		var row = seatList[i].rowIdx;
 		row = row.charCodeAt(0)-64;
 		var col = seatList[i].colIdx;
-
-// 		console.log("seat["+i+"] : "+row+col);
-// 		console.log(row+col);
-		seatNumList.push(row+col);
 		
+		seatNumList.push(row+col);
+
 	}
 
+	//좌석 띄우는 값 리스트
 	var seatSpaceList = [];
 	<c:forEach items="${seatSpaceList}" var="seatSpaceVO">
 		var seatSpaceVO = {
@@ -190,30 +171,65 @@
 	</c:forEach>
 	
 
+	//reservationNum 값에 따라 CSS적용
+	$(".seats .seat").each(function(){
+		var checkNum = $(this).data("row")+""+$(this).data("col");
+
+// 		console.log("this의 좌리값 : "+checkNum);
+		
+		for(i=0;i<seatList.length;i++){
+			var row = seatList[i].rowIdx;
+			row = row.charCodeAt(0)-64;
+			var col = seatList[i].colIdx;
+			var str = row+""+col;	
+			
+
+			if(checkNum == str){
+// 				console.log(seatList[i].reservationNum);
+				
+				if(seatList[i].reservationNum == '0'){
+					$(this).addClass("blocked");
+					$(this).find(".mod").text("0");
+				}else if(seatList[i].reservationNum > 0){
+					//예매좌석
+					$(this).addClass("reserved");
+					$(this).find(".mod").text(seatList[i].reservationNum);
+				}
+				
+				seatList.shift();
+				break;
+			}
+		}
+
+		
+	});
+	
 
 	$(".seats .seat").each(function(){
 		//없는 좌석 삭제
 		var checkNum = $(this).data("row")+""+$(this).data("col");
-		console.log(checkNum);
+// 		console.log(checkNum);
 
 // 		console.log(seatNumList.indexOf(checkNum));
 		if(seatNumList.indexOf(checkNum) == -1){
 			$(this).remove();
 		}
 
-
-		//좌석 등급 css 등록
-		<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
-		if($(this).data("grade")==1){
-			//economy
-			$(this).addClass("rating_economy");
-		}else if($(this).data("grade")==2){
-			//standard
-			$(this).addClass("rating_comfort");
-		}else if($(this).data("grade")==3){
-			//prime
-			$(this).addClass("rating_prime");
+		if($(this).find(".mod").text() == ""){
+			//좌석 등급 css 등록
+			<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+			if($(this).data("grade")==1){
+				//economy
+				$(this).addClass("rating_economy");
+			}else if($(this).data("grade")==2){
+				//standard
+				$(this).addClass("rating_comfort");
+			}else if($(this).data("grade")==3){
+				//prime
+				$(this).addClass("rating_prime");
+			}
 		}
+		
 	});
 
 
@@ -222,9 +238,6 @@
 		var type = seatSpaceList[i].type;
 		var index = seatSpaceList[i].index;
 
-		console.log(type +" : "+index);
-
-		
 		//행띄우기
 		if(type == 0){
 			$(".seats .row").each(function(){
@@ -234,47 +247,42 @@
 				if(charAt > index){
 					console.log(charAt + " "+index);
 					var top = ($(this).css('top').replace('px', ''))*1;
-					console.log("top : "+top);
 					top = top+16;
-					console.log("top2 : "+top);
 
 					$(this).css('top',top+"px");
 				}
 				
 			});
 		}else if(type == 1){
+			//열 띄우기
 			$(".seats .seat").each(function(){
 				var charAt = $(this).data("col");
+				if(charAt == index){
+					$(this).before('</div>');
+				}
 				
 				
 				if(charAt > index){
-					console.log(charAt + " "+index);
+// 					console.log(charAt + " "+index);
 					var top = ($(this).css('left').replace('px', ''))*1;
-					console.log("left : "+top);
+// 					console.log("left : "+top);
 					top = top+16;
-					console.log("left : "+top);
+// 					console.log("left : "+top);
 
 					$(this).css('left',top+"px");
 				}
 			});
-
 		}
-		
-		
-		
-		
-		
-		
 	}
-	
+
+	var maxCol = `${maxCol}`;
 
 
 	
-
-
-
-
+	
+	
 </script>
+<script type="text/javascript" src="/js/movie/movieSeatReservation.js"></script>
 	
 	
 	

@@ -427,7 +427,7 @@ body{
 
 #ticket .section-seat .theater .seats .row .seat.blocked a .no{
 	background-color: #bbb;
-    background-position: -25px 0;
+    background-position: -25px -1px;
     text-indent: -9999px;
 }
 

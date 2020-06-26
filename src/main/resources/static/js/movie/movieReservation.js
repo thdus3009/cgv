@@ -24,28 +24,35 @@ $(function() {
 			if($(this).hasClass("dimmed") === true){
 				alert("선택할수 없습니다.");
 			}else{
-			
-				$("#movie-list-content li").removeClass("selected");
-				$(this).addClass("selected");
 				
-				$("#select_title").text($(this).data("title"));
-				$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
-				$("#select_ageLimit").text($(this).data("age_limit"));
-				$("#movieNum").val($(this).data("index"));
-				title = $(this).data("title");
-				
-				
-				
-				
-				$(".movie_poster img").css("display","inline");
-				$(".movie_title").css("display","block");
-				
-				$(".movie .placeholder").css("display","none");
-				
-	//			console.log("title : "+title);
-	//			console.log("theater : "+theater);
-	//			console.log("date : "+date);
-				
+				if($(this).hasClass("selected")){
+					//선택 취소
+					$(this).removeClass("selected");
+					title ="";
+					
+				}else{
+					$("#movie-list-content li").removeClass("selected");
+					$(this).addClass("selected");
+					
+					$("#select_title").text($(this).data("title"));
+					$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+					$("#select_ageLimit").text($(this).data("age_limit"));
+					$("#movieNum").val($(this).data("index"));
+					title = $(this).data("title");
+					
+					
+					
+					
+					$(".movie_poster img").css("display","inline");
+					$(".movie_title").css("display","block");
+					
+					$(".movie .placeholder").css("display","none");
+					
+		//			console.log("title : "+title);
+		//			console.log("theater : "+theater);
+		//			console.log("date : "+date);
+					
+				}
 				$.ajax({
 					type:'GET',
 					url:'../reserveCheck/reserve',
@@ -108,8 +115,8 @@ $(function() {
 					}
 				
 				});
+				
 			}
-			
 		});
 		
 		
@@ -140,23 +147,29 @@ $(function() {
 				alert("선택할수 없습니다.");
 			}else{
 				
-				$(".area_theater_list li").removeClass("selected");
-				$(this).addClass("selected");
-	//			console.log($(this).data("theater"))
-				theater = $(this).data("theater");
-				$("#cinemaName").val(theater);
-				
-				
-				$("#select_cinema").text($(this).data("theater"));
-				$(".row.name").css("display","block");
-				$(".row.date").css("display","block");
-				$(".row.screen").css("display","block");
-				$(".row.number").css("display","block");
-				$(".info.theater .placeholder").css("display","none");
-				
-	//			console.log("title : "+title);
-	//			console.log("theater : "+theater);
-	//			console.log("date : "+date);
+				if($(this).hasClass("selected")){
+					//선택 취소
+					$(this).removeClass("selected");
+					theater ="";
+				}else{
+					$(".area_theater_list li").removeClass("selected");
+					$(this).addClass("selected");
+		//			console.log($(this).data("theater"))
+					theater = $(this).data("theater");
+					$("#cinemaName").val(theater);
+					
+					
+					$("#select_cinema").text($(this).data("theater"));
+					$(".row.name").css("display","block");
+					$(".row.date").css("display","block");
+					$(".row.screen").css("display","block");
+					$(".row.number").css("display","block");
+					$(".info.theater .placeholder").css("display","none");
+					
+		//			console.log("title : "+title);
+		//			console.log("theater : "+theater);
+		//			console.log("date : "+date);
+				}
 				
 				$.ajax({
 					type:'GET',
@@ -243,46 +256,50 @@ $(function() {
 				alert("선택할수 없습니다.");
 			}else{
 				
-				$(".date-list ul li.day").removeClass("selected");
-				$(this).addClass("selected");
-				//console.log($(this).data("year")+" "+$(this).data("month")+" "+$(this).data("date")+" "+$(this).data("week"));
-				
-				var str = $(this).data("year")+"."+$(this).data("month")+"."+$(this).data("date")+"("+$(this).data("week")+")";
-				
-				$("#sDate").val(str)
-				
-				$("#select_day").text(str);
-				//date = $(this).data("year")+"-"+$(this).data("month")+"-"+$(this).data("date")
-				var sYear = $(this).data("year");
-				var sMonth = $(this).data("month")+"";
-				var sDate = $(this).data("date")+"";
-				
-	//			console.log("length : "+sMonth.length);
-	//			console.log("length : "+sDate.length);
-				
-				if(sMonth.length == 1){
-					sMonth = "0"+sMonth;
+				if($(this).hasClass("selected")){
+					$(this).removeClass("selected");
+					date="";
+				}else{
+					$(".date-list ul li.day").removeClass("selected");
+					$(this).addClass("selected");
+					//console.log($(this).data("year")+" "+$(this).data("month")+" "+$(this).data("date")+" "+$(this).data("week"));
+					
+					var str = $(this).data("year")+"."+$(this).data("month")+"."+$(this).data("date")+"("+$(this).data("week")+")";
+					
+					$("#sDate").val(str)
+					
+					$("#select_day").text(str);
+					//date = $(this).data("year")+"-"+$(this).data("month")+"-"+$(this).data("date")
+					var sYear = $(this).data("year");
+					var sMonth = $(this).data("month")+"";
+					var sDate = $(this).data("date")+"";
+					
+		//			console.log("length : "+sMonth.length);
+		//			console.log("length : "+sDate.length);
+					
+					if(sMonth.length == 1){
+						sMonth = "0"+sMonth;
+					}
+					if(sDate.length == 1){
+						sDate = "0"+sDate;
+					}
+					
+		//			console.log("length : "+sMonth.length);
+		//			console.log("length : "+sDate.length);
+					
+					date = sYear+"-"+sMonth+"-"+sDate;
+					
+					$(".row.name").css("display","block");
+					$(".row.date").css("display","block");
+					$(".row.screen").css("display","block");
+					$(".row.number").css("display","block");
+					$(".info.theater .placeholder").css("display","none");
+					
+		//			console.log("title : "+title);
+		//			console.log("theater : "+theater);
+		//			console.log("date : "+date);
 				}
-				if(sDate.length == 1){
-					sDate = "0"+sDate;
-				}
 				
-	//			console.log("length : "+sMonth.length);
-	//			console.log("length : "+sDate.length);
-				
-				date = sYear+"-"+sMonth+"-"+sDate;
-				
-				$(".row.name").css("display","block");
-				$(".row.date").css("display","block");
-				$(".row.screen").css("display","block");
-				$(".row.number").css("display","block");
-				$(".info.theater .placeholder").css("display","none");
-				
-	//			console.log("title : "+title);
-	//			console.log("theater : "+theater);
-	//			console.log("date : "+date);
-				
-			
 				$.ajax({
 					type:'GET',
 					url:'../reserveCheck/reserve',

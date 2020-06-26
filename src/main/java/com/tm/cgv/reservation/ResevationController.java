@@ -63,7 +63,7 @@ public class ResevationController {
 		List<SeatSpaceVO> seatSpaceList = seatSpaceService.seatSpaceSelect(seatSpaceVO);
 		
 		
-		List<SeatVO> seatList = seatService.seatSelectOne(seatVO);
+		List<SeatVO> seatList = seatService.seatSelectList(seatVO);
 
 		int runningTime = Integer.parseInt(movieVO.getRuntime()); 
 		String startTime = movieTimeVO.getScreenTime();
