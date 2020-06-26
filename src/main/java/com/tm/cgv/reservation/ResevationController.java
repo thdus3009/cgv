@@ -54,7 +54,7 @@ public class ResevationController {
 		seatVO.setTheaterNum(movieTimeVO.getTheaterNum());
 		seatVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
 		
-		int maxRow = seatService.rowCount(seatVO);
+		List<SeatVO> rowList = seatService.rowCount(seatVO);
 		int maxCol = seatService.colCount(seatVO);
 		
 		//seatSapce 
@@ -71,7 +71,7 @@ public class ResevationController {
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
 		
 		
-		mv.addObject("maxRow", maxRow);
+		mv.addObject("rowList", rowList);
 		mv.addObject("maxCol", maxCol);
 		
 		mv.addObject("endTime", endTime);

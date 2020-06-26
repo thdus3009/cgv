@@ -71,16 +71,16 @@
 											<span class="text"></span>
 										</div>
 										<div class="seats" style="width: 272px; height: 192px;">
-											<c:forEach begin="0" end="${maxRow-1}" var="t">
-												<div class="row" style="top:${t+(t*16)}px;">
-													<div class="label">${t+1}</div>
+											<c:forEach var="row" items="${rowList}" varStatus="t">
+												<div class="row" style="top:${t.index+(t.index*16)}px;">
+													<div class="label">${row.rowIdx}</div>
 													<div class="seat_group" data-seat-group="">
 														<div class="group"> 
 															<c:forEach begin="1" end="${maxCol}" var="i" >
 																<!--blocked(선택불가)  reserved(이미 예매)  -->
 																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
 																
-																<div class="seat" style="left:${48+(i*16)}px" data-row="${t+1}" data-col="${i}"> 
+																<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}"> 
 																	<a href="#" onclick="return false;"> 
 																		<span class="no">${i}</span>
 																		<span class="sreader"></span>

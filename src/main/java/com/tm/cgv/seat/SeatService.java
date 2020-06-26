@@ -15,7 +15,7 @@ public class SeatService {
 		return seatRepository.seatSelectOne(seatVO);
 	}
 	
-	public int rowCount(SeatVO seatVO) throws Exception{
+	public List<SeatVO> rowCount(SeatVO seatVO) throws Exception{
 		return seatRepository.rowCount(seatVO);
 	}
 	

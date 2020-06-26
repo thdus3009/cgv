@@ -35,8 +35,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(S.num = SB.seatNum)
  	</select>
  	
- 	<select id="rowCount" parameterType="SeatVO" resultType="Integer">
- 		select count(rowIdx) from (select rowIdx from seat where theaterNum = #{theaterNum} group by rowIdx) A
+ 	<select id="rowCount" parameterType="SeatVO" resultType="SeatVO">
+ 		select rowIdx,grade from (select rowIdx,grade from seat where theaterNum = #{theaterNum} group by rowIdx,grade order by rowIdx) A
  	</select>
  	
  	<select id="colCount" parameterType="SeatVO" resultType="Integer">
