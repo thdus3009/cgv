@@ -118,13 +118,19 @@ public class MovieInfoService {
 		}
 		
 		System.out.println("링크값 : "+videolink);	
+		//같으면 업데이트x
+		//다르면 업데이트를 하고
+		String same = videolink;
 		
-		if(videolink!=null) {
+		if(videolink!=null ) {
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
-			movieVideoVO.setMovieNum(movieInfoVO.getNum());
-			movieVideoVO.setVideolink(videolink);
 			
-			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
+				movieVideoVO.setMovieNum(movieInfoVO.getNum());
+				movieVideoVO.setVideolink(videolink);
+								
+				result = movieVideoRepository.movieVideoUpdate(movieVideoVO);
+			
+			
 		}
 		
 		return result;
