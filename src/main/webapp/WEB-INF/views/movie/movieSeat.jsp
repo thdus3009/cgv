@@ -71,8 +71,8 @@
 											<span class="text"></span>
 										</div>
 										<div class="seats" style="width: 272px; height: 192px;">
-											<c:forEach var="row" items="${rowList}" varStatus="t">
-												<div class="row" style="top:${t.index+(t.index*16)}px;">
+											<c:forEach var="row" items="${rowList}" varStatus="t" >
+												<div class="row" style="top:${t.index+(t.index*16)}px;" data-row="${row.rowIdx}">
 													<div class="label">${row.rowIdx}</div>
 													<div class="seat_group" data-seat-group="">
 														<div class="group"> 
@@ -80,7 +80,7 @@
 																<!--blocked(선택불가)  reserved(이미 예매)  -->
 																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
 																
-																<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}"> 
+																<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}" data-grade="${row.grade}"> 
 																	<a href="#" onclick="return false;"> 
 																		<span class="no">${i}</span>
 																		<span class="sreader"></span>
@@ -132,34 +132,34 @@
 	
 <script type="text/javascript">
 
-	var list = [];
+	var seatList = [];
 
 
 	<c:forEach items="${seatList}" var="vo">
-	var seatVO = {
-	      num: `${vo.num}`,
-	      theaterNum:	`${vo.theaterNum}`,
-	      rowIdx :	`${vo.rowIdx}`,
-	      colIdx :	`${vo.colIdx}`,
-	      grade:	`${vo.grade}`,
-	      bNum : 	`${vo.seatBookingVO.num}`,
-	      movieNum : 	`${vo.seatBookingVO.movieNum}`,
-	      reservationNum : 	`${vo.seatBookingVO.reservationNum}`
-	};
-
-	if(seatVO.grade == 1){
-		console.log("economy");
-	}else if(seatVO.grade == 2){
-		console.log("standard");
-	}else if(seatVO.grade == 3){
-		console.log("prome");
-	}
-
+		var seatVO = {
+		      num: `${vo.num}`,
+		      theaterNum:	`${vo.theaterNum}`,
+		      rowIdx :	`${vo.rowIdx}`,
+		      colIdx :	`${vo.colIdx}`,
+		      grade:	`${vo.grade}`,
+		      bNum : 	`${vo.seatBookingVO.num}`,
+		      movieNum : 	`${vo.seatBookingVO.movieNum}`,
+		      reservationNum : 	`${vo.seatBookingVO.reservationNum}`
+		};
 	
-	list.push(seatVO);   
+		if(seatVO.grade == 1){
+			console.log("economy");
+		}else if(seatVO.grade == 2){
+			console.log("standard");
+		}else if(seatVO.grade == 3){
+			console.log("prome");
+		}
+	
+		
+		seatList.push(seatVO);   
 	</c:forEach>
 
-	console.log(list);
+	console.log(seatList);
 
 
 // 	var str = 'ABCD';
@@ -169,10 +169,10 @@
 
 	var seatNumList = [];
 
-	for(i=0;i<list.length;i++){
-		var row = list[i].rowIdx;
+	for(i=0;i<seatList.length;i++){
+		var row = seatList[i].rowIdx;
 		row = row.charCodeAt(0)-64;
-		var col = list[i].colIdx;
+		var col = seatList[i].colIdx;
 
 // 		console.log("seat["+i+"] : "+row+col);
 // 		console.log(row+col);
@@ -180,9 +180,19 @@
 		
 	}
 
+	var seatSpaceList = [];
+	<c:forEach items="${seatSpaceList}" var="seatSpaceVO">
+		var seatSpaceVO = {
+		      type : `${seatSpaceVO.rowOrCol}`,
+		      index : `${seatSpaceVO.index}`
+		};
+		seatSpaceList.push(seatSpaceVO);
+	</c:forEach>
+	
 
 
 	$(".seats .seat").each(function(){
+		//없는 좌석 삭제
 		var checkNum = $(this).data("row")+""+$(this).data("col");
 		console.log(checkNum);
 
@@ -190,9 +200,75 @@
 		if(seatNumList.indexOf(checkNum) == -1){
 			$(this).remove();
 		}
-		
-	
+
+
+		//좌석 등급 css 등록
+		<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
+		if($(this).data("grade")==1){
+			//economy
+			$(this).addClass("rating_economy");
+		}else if($(this).data("grade")==2){
+			//standard
+			$(this).addClass("rating_comfort");
+		}else if($(this).data("grade")==3){
+			//prime
+			$(this).addClass("rating_prime");
+		}
 	});
+
+
+	//좌석 빈칸 띄우기
+	for(i=0;i<seatSpaceList.length;i++){
+		var type = seatSpaceList[i].type;
+		var index = seatSpaceList[i].index;
+
+		console.log(type +" : "+index);
+
+		
+		//행띄우기
+		if(type == 0){
+			$(".seats .row").each(function(){
+				var charAt = $(this).data("row");
+				charAt = charAt.charCodeAt(0)-64;
+				
+				if(charAt > index){
+					console.log(charAt + " "+index);
+					var top = ($(this).css('top').replace('px', ''))*1;
+					console.log("top : "+top);
+					top = top+16;
+					console.log("top2 : "+top);
+
+					$(this).css('top',top+"px");
+				}
+				
+			});
+		}else if(type == 1){
+			$(".seats .seat").each(function(){
+				var charAt = $(this).data("col");
+				
+				
+				if(charAt > index){
+					console.log(charAt + " "+index);
+					var top = ($(this).css('left').replace('px', ''))*1;
+					console.log("left : "+top);
+					top = top+16;
+					console.log("left : "+top);
+
+					$(this).css('left',top+"px");
+				}
+			});
+
+		}
+		
+		
+		
+		
+		
+		
+	}
+	
+
+
 	
 
 
