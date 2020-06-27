@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -23,6 +24,8 @@ import com.tm.cgv.util.TimeADD;
 public class ResevationController {
 
 	@Autowired
+	private ReservationService reservationService;
+	@Autowired
 	private MovieInfoService movieInfoService;
 	@Autowired
 	private MovieTimeService movieTimeService;
@@ -32,6 +35,17 @@ public class ResevationController {
 	private SeatSpaceService seatSpaceService;
 	@Autowired
 	private TimeADD timeAdd;
+	
+	@ResponseBody
+	@PostMapping("reservationInsert")
+	public int reservationInsert(ReservationVO reservationVO) throws Exception{
+		int result = 0;
+		
+		result = reservationService.reservationInsert(reservationVO);
+		result = reservationVO.getNum();
+		
+		return result;
+	}
 	
 	
 	@PostMapping("/seatReservation")
@@ -43,6 +57,7 @@ public class ResevationController {
 		System.out.println("극장명 : "+reservationVO.getCinemaName());
 		System.out.println("상영관 : "+reservationVO.getTheaterName());
 		System.out.println("2D/3D : "+reservationVO.getFilmType());
+		
 		System.out.println("총 좌석수 : "+seatCount);
 		
 		
@@ -62,7 +77,7 @@ public class ResevationController {
 		seatSpaceVO.setTheaterNum(movieTimeVO.getTheaterNum());
 		List<SeatSpaceVO> seatSpaceList = seatSpaceService.seatSpaceSelect(seatSpaceVO);
 		
-		
+		//좌석 리스트 - seat - seatBooking (Join)
 		List<SeatVO> seatList = seatService.seatSelectList(seatVO);
 
 		int runningTime = Integer.parseInt(movieVO.getRuntime()); 

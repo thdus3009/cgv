@@ -591,23 +591,23 @@ $(function() {
 		
 		//결제완료 페이지로 이동
 		$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
-				alert("결제진행");
-				payment();
-				//결제진행 - ajax()
-//				$.ajax({
-//					url : '',
-//					type : 'post',
-//					data : {
-//						
-//					},
-//					success : function(result){
-////						
-//					}
-//					
-//				});
-				
+				//결제 작업을 위한 값 - 이니시스 : tel
+				var data = {
+//						tel = `${sessionScope.memberVO.phone}`;
+//						email = `${sessionScope.memberVO.email}`;
+//						amount = lastPrice;
+						tel : '010-1234-5678',
+						email : 'gtm1213@naver.com',
+						amount : '100'
+				}
+				payment_inicis(data);
 				
 		});
+		
+		
+		
+		
+		
 		
 		
 		

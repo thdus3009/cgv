@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <div class="ticket_payment_method">
 	<a href="#" onclick="return false;" id="ticket_payment_top" class="sreader">결제시작</a>
 
