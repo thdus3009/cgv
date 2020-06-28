@@ -58,6 +58,7 @@
 		
 		seatCountListMake();
 		
+		personCheck();
 	});
 	
 	//청소년 인원 수 선택
@@ -80,6 +81,7 @@
 			teenagerCount = preTeenager;
 		}
 		
+		personCheck();
 	});
 	
 	//우대 인원 수 선택
@@ -102,13 +104,23 @@
 		}else{
 			preferenceCount = prePreference;
 		}
+		
+		personCheck();
 	});
+	
+	
+	function personCheck(){
+		if(totalCount > 0){
+			$("#ticket .section-seat").removeClass("dimmed");
+		}else{
+			$("#ticket .section-seat").addClass("dimmed");
+		}
+	}
 	
 	
 	//전체 선택완료 했는지를 검사
 	function allSelectedCheck(){
-		
-		if(totalCount == selectedCount){
+		if(totalCount == selectedCount && totalCount != 0){
 			$(".tnb.step2 .btn-right").addClass("on");
 		}else{
 			$(".tnb.step2 .btn-right").removeClass("on");

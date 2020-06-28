@@ -4,7 +4,7 @@
 			
 
 			<div class="contents">
-					<div class="section section-seat three_line">   <!-- dimmed -->
+					<div class="section section-seat three_line dimmed">   <!-- dimmed -->
 						<div class="col-head">
 						</div>	
 						<div class="col-body">
@@ -119,6 +119,7 @@
 									</div>
 									
 								</div>
+								<div class="mouse_block"></div>
 							</div>							
 							
 							

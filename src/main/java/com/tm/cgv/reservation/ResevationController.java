@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,19 +43,20 @@ public class ResevationController {
 	@Autowired
 	private TimeADD timeAdd;
 	
-	
+
 	
 	
 	@ResponseBody
 	@PostMapping("reservationInsert")
 	public int reservationInsert(ReservationVO reservationVO) throws Exception{
 		int result = 0;
+		int seatCheck = 0;
 		
-		System.out.println(reservationVO.getMovieNum());
-		
+		//예매 번호 등록 - Reservation
 		result = reservationService.reservationInsert(reservationVO);
+		result = reservationVO.getNum();
 		
-		//예매테이블 등록 성공시 좌서 예매 테이블에 좌석값 등록
+		//좌석 번호 등록 - SeatBooking
 		if(result > 0) {
 			
 			String [] selectedSeat = reservationVO.getSelectedSeatNums().split(",");
@@ -63,14 +67,29 @@ public class ResevationController {
 				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
 				seatBookingVO.setSeatNum(Integer.parseInt(str));
 				
-				result = seatBookingService.seatBookingInsert(seatBookingVO);
+				seatCheck = seatBookingService.seatBookingInsert(seatBookingVO);
+			}
+			
+			//상영관 잔여좌석 수 변경 - MovieTime
+			if(seatCheck > 0) {
 				
-				System.out.println(str);
+				MovieTimeVO movieTimeVO = new MovieTimeVO();
+				movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
+				int remainSeat = movieTimeVO.getRemainSeat() - (reservationVO.getCommon()+reservationVO.getTeenager()+reservationVO.getPreference());
+				
+				movieTimeVO.setRemainSeat(remainSeat);
+				movieTimeVO.setNum(reservationVO.getMovieTimeNum());
+				movieTimeService.remainSeatUpdate(movieTimeVO);
 			}
 		}
 		
 		return result;
 	}
+	
+	
+	
+	
+	
 	
 	
 	@PostMapping("/seatReservation")

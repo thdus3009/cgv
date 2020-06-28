@@ -107,7 +107,6 @@ function payment_inicis(data){
             	}
             });
             
-            
         } else {
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
@@ -120,7 +119,6 @@ function payment_inicis(data){
 
 
 function reservation_save(result){
-	
 	var reservationVO = {
 		movieNum : $("#movieNum").val(),
 		paymentNum : result,
@@ -134,12 +132,13 @@ function reservation_save(result){
 		common : commonCount,
 		teenager : teenagerCount,
 		preference : preferenceCount,
-		
 		selectedSeatNums : selectedSeatNumList.join(",")
 	}
 	console.log(reservationVO);
 	
-	var result = 0;
+	//잔여 좌석 계산
+	//	var seatRemain = $("#user-select-info .seatNum .restNum").text();
+	//	seatRemain = seatRemain - (commonCount+teenagerCount+preferenceCount);
 	
 	$.ajax({
 		url : '../reservation/reservationInsert',

@@ -1,5 +1,4 @@
 
-$(function() {
 	
 		var title ="";
 		var theater = "";
@@ -401,9 +400,9 @@ $(function() {
 				
 				var fType = "";
 				
-				if(result[i].theaterVOs[0].filmType === 1){
+				if(result[i].theaterVOs[0].filmType == 1){
 					fType = '3D';
-				}else if(result[i].theaterVOs[0].filmType === 2){
+				}else if(result[i].theaterVOs[0].filmType == 2){
 					fType = '4D';
 				}else{
 					fType = '2D';
@@ -413,7 +412,7 @@ $(function() {
 				var li = '<li data-time="'+ result[i].movieTimeVOs[0].screenTime +'" data-index="'+ result[i].movieTimeVOs[0].num +'">'
 					+'<a class="button" href="#" title="" onclick="return false;">'
 					+'<span class="time"><span>'+ result[i].movieTimeVOs[0].screenTime +'</span></span>'
-					+'<span class="count">'+ result[i].movieTimeVOs[0].remainSeat +'석</span>'
+					+'<span class="count" data-count="'+ result[i].movieTimeVOs[0].remainSeat +'">'+ result[i].movieTimeVOs[0].remainSeat +'석</span>'
 					+'<span class="sreader mod"> 선택불가</span>'
 					+'</a>'
 					+'</li>'
@@ -434,7 +433,7 @@ $(function() {
 				var checkFloor = result[i].theaterVOs[0].name;
 				var check = true;
 
-				//				console.log(checkName+checkFloor +" "+result[i].movieTimeVOs[0].screenTime)
+//				console.log(checkName+checkFloor +" "+result[i].movieTimeVOs[0].screenTime)
 //				console.log("size: "+list.length)
 				for(k=0;k<list.length;k++){
 //					console.log("list["+ k +"] : "+list[k]);
@@ -448,7 +447,6 @@ $(function() {
 				if(i != 0){
 					$(".time-list .theater").each(function(){
 //						console.log("있는값:"+ $(this).data("name")+$(this).data("floor"));
-						
 						if($(this).data("name") == checkName && $(this).data("floor") == checkFloor){
 							$(this).find("ul").append(li);
 						}
@@ -465,11 +463,21 @@ $(function() {
 				
 //				console.log("=================================");
 				list.push(checkName+checkFloor);
-				
-				
-				
 			}
+			
+			//.time-list ul li 잔여좌석이 0인 경우 class = "disabled"추가
+			$(".time-list ul li .count").each(function(){
+//				console.log("count: "+$(this).data("count"));
+				if($(this).data("count") == 0){
+					$(this).parent().parent().addClass("disabled");
+				}
+			});
+			
 		}
+		
+		
+		
+		
 		
 		
 		
@@ -478,33 +486,34 @@ $(function() {
 			//console.log($(this).data("time"));
 			//console.log($(this).data("index"));
 			
-			$("#movieTimeNum").val($(this).data("index"));
-			$(".theater ul li").removeClass("selected");
-			$(this).addClass("selected");
-			
-			var select_time= $("#sDate").val() +" "+$(this).data("time");
-			$("#select_day").text(select_time);
-			
-//			console.log($(this).parent().parent().data("name"));
-//			console.log($(this).parent().parent().data("floor"));
-//			console.log($(this).parent().parent().data("seatcount"));
-			
-			//seatCount
-			$("#seatCount").val($(this).parent().parent().data("seatcount"));
-			
-			
-			//theater
-			$("#select_theater").text($(this).parent().parent().data("floor"));
-			$("#theaterName").val($(this).parent().parent().data("floor"));
-			
-			//filmType
-			$("#select_movieType").text($(this).parent().parent().data("name"));
-			$("#filmType").val($(this).parent().parent().data("name"));
-			
-			$(".row.movie_type").css("display","block");
-			
-			
-			$(".tnb.step1 .btn-right").addClass("on");
+			if(!$(this).hasClass("disabled")){
+				$("#movieTimeNum").val($(this).data("index"));
+				$(".theater ul li").removeClass("selected");
+				$(this).addClass("selected");
+				
+				var select_time= $("#sDate").val() +" "+$(this).data("time");
+				$("#select_day").text(select_time);
+				
+//				console.log($(this).parent().parent().data("name"));
+//				console.log($(this).parent().parent().data("floor"));
+//				console.log($(this).parent().parent().data("seatcount"));
+				
+				//seatCount
+				$("#seatCount").val($(this).parent().parent().data("seatcount"));
+				
+				
+				//theater
+				$("#select_theater").text($(this).parent().parent().data("floor"));
+				$("#theaterName").val($(this).parent().parent().data("floor"));
+				
+				//filmType
+				$("#select_movieType").text($(this).parent().parent().data("name"));
+				$("#filmType").val($(this).parent().parent().data("name"));
+				
+				$(".row.movie_type").css("display","block");
+				
+				$(".tnb.step1 .btn-right").addClass("on");
+			}
 			
 		});
 		
@@ -542,8 +551,6 @@ $(function() {
 					
 				});
 				
-				
-				//payment();
 			}else{
 				alert("선택해주세요");
 			}
@@ -575,9 +582,7 @@ $(function() {
 						$(".step.step3").css("display","block");
 						$(".step.step3").html(result);
 					}
-					
 				});
-				
 				
 			}else{
 				if(totalCount == 0){
@@ -600,11 +605,52 @@ $(function() {
 						email : 'gtm1213@naver.com',
 						amount : '100'
 				}
-//				payment_inicis(data);
+				//이니시스 실행
+				payment_inicis(data);
 				
 				//test 결제 없이 바로 예매 - 좌석예매 진행
-				reservation_save(2);
+				//reservation_save(2);
 				
+		});
+		
+		
+		
+		
+		
+		//뒤로가기 버튼 - 영화예매로 이동
+		$(".ticket_tnb").on("click",".tnb.step2 .btn-left",function(){
+			alert("aa")
+			$(".steps .step2").empty();
+			
+			$(".steps .step.step2").css("display","none");
+			$(".steps .step.step1").css("display","block");
+			
+			$(".ticket_tnb .tnb_container .tnb").removeClass("step2");
+			$(".ticket_tnb .tnb_container .tnb").addClass("step1");
+			
+			$(".info.seat").css("display","none");
+			$(".info.payment-ticket").css("display","none");
+			$(".info.path").css("display","block");
+			$(".info.theater .row.number .data").text("");
+			
+			$(".tnb.step1 .btn-right").addClass("on");
+		});
+		
+		
+		//뒤로가기 버튼 - 좌석예매 이동
+		$(".ticket_tnb").on("click",".tnb.step3 .btn-left",function(){
+			alert("aa")
+			$(".steps .step.step3").empty();
+			
+			$(".steps .step.step3").css("display","none");
+			$(".steps .step.step2").css("display","block");
+			
+			$(".ticket_tnb .tnb_container .tnb").removeClass("step3");
+			$(".ticket_tnb .tnb_container .tnb").addClass("step2");
+			
+			$(".info.payment-ticket").css("display","block");
+			
+			$(".tnb.step2 .btn-right").addClass("on");
 		});
 		
 		
@@ -624,7 +670,6 @@ $(function() {
 			console.log(height);
 			
 		});
-	})
 
 	
 	
