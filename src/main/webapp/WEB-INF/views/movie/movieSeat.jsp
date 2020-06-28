@@ -84,11 +84,12 @@
 																<!--blocked(선택불가)  reserved(이미 예매)  -->
 																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
 																
-																<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}" data-grade="${row.grade}"> 
+																<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}" data-grade="${row.grade}" > 
 																	<a href="#" onclick="return false;"> 
 																		<span class="no">${i}</span>
 																		<span class="sreader"></span>
 																		<span class="sreader mod"></span>
+																		<span class="sreader seatNum"></span>
 																	</a>
 																</div>
 															</c:forEach>
@@ -160,6 +161,7 @@
 
 	}
 
+	
 	//좌석 띄우는 값 리스트
 	var seatSpaceList = [];
 	<c:forEach items="${seatSpaceList}" var="seatSpaceVO">
@@ -171,21 +173,24 @@
 	</c:forEach>
 	
 
-	//reservationNum 값에 따라 CSS적용
+	//reservationNum 값에 따라 CSS적용 - 0이면 좌석예매 불가 / 0이 아닌 값이면 예매된 좌석
 	$(".seats .seat").each(function(){
 		var checkNum = $(this).data("row")+""+$(this).data("col");
-
-// 		console.log("this의 좌리값 : "+checkNum);
+// 		console.log("this의 자리값 : "+checkNum);
 		
 		for(i=0;i<seatList.length;i++){
 			var row = seatList[i].rowIdx;
 			row = row.charCodeAt(0)-64;
 			var col = seatList[i].colIdx;
+			
 			var str = row+""+col;	
 			
 
+			
 			if(checkNum == str){
 // 				console.log(seatList[i].reservationNum);
+				//해당 좌석에 좌석 번호 부여
+				$(this).find(".sreader.seatNum").text(seatList[i].num);
 				
 				if(seatList[i].reservationNum == '0'){
 					$(this).addClass("blocked");

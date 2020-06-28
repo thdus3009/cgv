@@ -27,6 +27,8 @@
 	var selectedSeatList = [];
 	var selectedSeatGrade = [];
 	
+	var selectedSeatNumList = [];
+	
 	
 	$(".group.adult.common ul li:first").addClass("selected");
 	$(".group.adult.teenager ul li:first").addClass("selected");
@@ -578,14 +580,18 @@
 	function textInput(){
 		selectedSeatList = [];
 		selectedSeatGrade = [];
+		selectedSeatNumList = [];
 		
 		$(".seats .seat").each(function(){
 			if($(this).hasClass("selected")){
 				
-				selectedSeatList.push($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 				
+				selectedSeatList.push($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
+				selectedSeatNumList.push($(this).find(".sreader.seatNum").text());
 				selectedSeatGrade.push($(this).data("grade"));
 				//Economy Standard Prime
+				
+				console.log("seatNum : "+selectedSeatNumList);
 				
 				
 //				console.log($(this).data("grade"));

@@ -120,6 +120,7 @@ function payment_inicis(data){
 
 
 function reservation_save(result){
+	
 	var reservationVO = {
 		movieNum : $("#movieNum").val(),
 		paymentNum : result,
@@ -132,7 +133,9 @@ function reservation_save(result){
 		totalPrice : lastPrice,
 		common : commonCount,
 		teenager : teenagerCount,
-		preference : preferenceCount
+		preference : preferenceCount,
+		
+		selectedSeatNums : selectedSeatNumList.join(",")
 	}
 	console.log(reservationVO);
 	

@@ -15,6 +15,8 @@ import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatBooking.SeatBookingService;
+import com.tm.cgv.seatBooking.SeatBookingVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.util.TimeADD;
@@ -34,15 +36,38 @@ public class ResevationController {
 	@Autowired
 	private SeatSpaceService seatSpaceService;
 	@Autowired
+	private SeatBookingService seatBookingService;
+	@Autowired
 	private TimeADD timeAdd;
+	
+	
+	
 	
 	@ResponseBody
 	@PostMapping("reservationInsert")
 	public int reservationInsert(ReservationVO reservationVO) throws Exception{
 		int result = 0;
 		
+		System.out.println(reservationVO.getMovieNum());
+		
 		result = reservationService.reservationInsert(reservationVO);
-		result = reservationVO.getNum();
+		
+		//예매테이블 등록 성공시 좌서 예매 테이블에 좌석값 등록
+		if(result > 0) {
+			
+			String [] selectedSeat = reservationVO.getSelectedSeatNums().split(",");
+			
+			for (String str : selectedSeat) {
+				SeatBookingVO seatBookingVO = new SeatBookingVO();
+				seatBookingVO.setReservationNum(reservationVO.getNum());
+				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
+				seatBookingVO.setSeatNum(Integer.parseInt(str));
+				
+				result = seatBookingService.seatBookingInsert(seatBookingVO);
+				
+				System.out.println(str);
+			}
+		}
 		
 		return result;
 	}
