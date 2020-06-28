@@ -137,7 +137,8 @@
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Cinema List</h1>
-                        <ol class="breadcrumb mb-4">
+                        <h3>${cine.name}</h3>
+                       <!--  <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"><a href="#">서울</li></a>
                             <li class="breadcrumb-item active">경기</li>
                             <li class="breadcrumb-item active">인천</li>
@@ -147,12 +148,27 @@
                             <li class="breadcrumb-item active">부산/울산</li>
                             <li class="breadcrumb-item active">경상</li>
                             <li class="breadcrumb-item active">광주/전라/제주</li>
-                        </ol>
-
+                        </ol> -->
+						<div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                   
+                                    <code>Cinema Info</code><br>
+                               		<span>${cine.name}</span><br>
+                               		<span>${cine.local}</span><br>
+                               		<span>${cine.tel}</span><br>
+                               		<span>${cine.totalTheater}</span><br>
+                               		<span>${cine.totalSeat}</span><br>
+                               		<span>${cine.trafficInfo}</span><br>
+                               		<span>${cine.parkingInfo}</span><br>
+                               		<span>${cine.intro}</span><br>
+                                </p>
+                            </div>
+                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                DataTable Example
+                                Theater List
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -160,45 +176,38 @@
                                         <thead>
                                             <tr>
                                                 <th>Num</th>
-                                                <th>극장명</th>
-                                                <th>지역</th>
-                                                <th>주소</th>
-                                                <th>연락처</th>
-                                                <th>총 관수</th>
-                                                <th>총 좌석수 </th>
-                                                <th>교통안내</th>
-                                                <th>주차안내</th>
-                                                <th>소개</th>
+                                                <!-- <th>CinemaNum</th> -->
+                                                <th>Name</th>
+                                                <th>seatCount</th>
+                                                <th>filmType</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Num</th>
-                                                <th>극장명</th>
-                                                <th>지역</th>
-                                                <th>주소</th>
-                                                <th>연락처</th>
-                                                <th>총 관수</th>
-                                                <th>총 좌석수 </th>
-                                                <th>교통안내</th>
-                                                <th>주차안내</th>
-                                                <th>소개</th>
-                                            </tr>
+                                               <th>Num</th>
+                                               <!-- <th>CinemaNum</th> -->
+                                               <th>Name</th>
+                                               <th>seatCount</th>
+                                               <th>filmType</th>
+                                           </tr>
                                         </tfoot>
                                         <tbody>
-                                        	<c:forEach items="${list}" var="vo">
-                                            <tr>
-                                                <td>${vo.num}</td>
-                                                <td><a href="../admin/cinemaSelect?num=${vo.num}">${vo.name}</a></td>
-                                                <td>${vo.local}</td>
-                                                <td>${vo.address}</td>
-                                                <td>${vo.tel}</td>
-                                                <td>${vo.totalTheater}</td>
-                                                <td>${vo.totalSeat}</td>
-                                                <td>${vo.trafficInfo}</td>
-                                                <td>${vo.parkingInfo}</td>
-                                                <td>${vo.intro}</td>
-                                            </tr>
+                                        	<c:forEach items="${theaterList}" var="vo">
+												<tr class="theaterList-c">
+													<td><a href="">${vo.num}</a></td>
+													<%-- <td>${vo.cinemaNum}</td> --%>
+													<td>${vo.name}</td>
+													<td>${vo.seatCount}</td>
+													<c:if test="${vo.filmType eq 0}">
+														<td>2D</td>
+													</c:if>
+													<c:if test="${vo.filmType eq 1}">
+														<td>3D</td>
+													</c:if>
+													<c:if test="${vo.filmType eq 2}">
+														<td>4D</td>
+													</c:if>
+												</tr>
 											</c:forEach>
                                         </tbody>
                                     </table>

@@ -94,6 +94,10 @@ public class TheaterService {
 	
 
 	//Select
+	public TheaterVO theaterSelect(int num) throws Exception {
+		return theaterRepository.theaterSelect(num);
+	}
+	
 	public List<SeatVO> theaterSeat(int num) throws Exception{
 		return theaterRepository.theaterSeat(num);
 	}

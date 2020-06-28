@@ -15,7 +15,7 @@ public class AdminController {
 	@Autowired
 	private PathTest test;
 	
-	@GetMapping("/theater/")
+	@GetMapping("/")
 	public String admin() throws Exception {
 		return "admin/adminIndex";
 	}
@@ -23,6 +23,12 @@ public class AdminController {
 	@GetMapping("cinemaList")
 	public ModelAndView adminCinemaList(ModelAndView mv) throws Exception {
 		mv = test.adminCinemaList(mv);
+		return mv;
+	}
+	
+	@GetMapping("cinemaSelect")
+	public ModelAndView adminCinemaSelect(ModelAndView mv, int num) throws Exception {
+		mv = test.adminCinemaSelect(mv, num);
 		return mv;
 	}
 }

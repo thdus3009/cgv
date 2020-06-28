@@ -54,7 +54,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	
+	<select id="theaterSelect" parameterType="Integer" resultType="TheaterVO">
+		select * from theater where num=#{num}
+	</select>
 	
 	<select id="theaterSeat" parameterType="Integer" resultType="SeatVO">
 		 select * from seat where theaterNum=#{num}

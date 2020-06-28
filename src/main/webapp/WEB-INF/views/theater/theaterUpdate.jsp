@@ -92,23 +92,29 @@
 			   	 <select class="cinemaNum" name="cinemaNum">
 			   	 	<!-- <option value="2d">2D</option>
 			   	 	<option value="3d">3D</option> -->
-			   	 	<c:forEach items="${cine}" var="cnt">
-			   	 		<option value="${cnt.num}">${cnt.num} / ${cnt.name}</option>
-			   	 	</c:forEach>
+			   	 	<%-- <c:forEach items="${cine}" var="cnt"> --%>
+			   	 		<option value="${theater.cinemaNum}">${theater.cinemaNum}</option>
+			   	 	<%-- </c:forEach> --%>
 			   	 </select>
 			  
 			  	 <br>
 			  	 <br>
 			  	 <label for="name">Name:</label>
-			   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
+			   	 <input type="text" class="form-control" id="name" name="name" value="${theater.name}">
 			  
 			  
 			  	 <br>
 			   	 <label for="filmType">FilmType:</label>
 			   	 <select class="filmType" name="filmType">
-			   	 	<option value="0">2D</option>
-			   	 	<option value="1">3D</option>
-			   	 	<option value="2">4D</option>
+			   	 	<c:if test="${theater.filmType eq 0}">
+			   	 		<option value="0">2D</option>
+			   	 	</c:if>
+			   	 	<c:if test="${theater.filmType eq 1}">
+			   	 		<option value="1">3D</option>
+			   	 	</c:if>
+			   	 	<c:if test="${theater.filmType eq 2}">
+			   	 		<option value="2">4D</option>
+			   	 	</c:if>
 			   	 </select>
 			   
 			   	 
@@ -232,8 +238,62 @@
 
 <script type="text/javascript" src="../js/movie/movieList.js"></script>
 <script type="text/javascript" src="../js/theater/theaterInsert.js"></script>
+<script type="text/javascript">
 
 
+var row = "${seat.rowIdx}";
+var col = "${seat.colIdx}";
+console.log(row);
+console,log(col);
+/* $("#seat_row").val(row);
+$("#seat_col").val(col); */
+
+
+
+
+// 0 : 검은색(자리 없음)
+// 1 : 테두리 노랑 = 주황
+// 2 : 테두리 빨강
+// 3 : 테두리 초록
+
+var seatCount = 0;
+
+var seatColor = 1;
+
+function changeGrade(grade){
+	seatColor = grade;
+}
+
+
+var list = [];
+
+var listLength = 0;
+
+function makeVo(row, col, grade){
+	var vo = {
+		"row":row,
+		"col":col,
+		"grade":1
+	}
+
+	list.push(vo);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>

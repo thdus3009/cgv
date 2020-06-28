@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class MemberVO {
-
 	private int num;
 	private String uid;
 	private String pwd;
@@ -16,8 +15,5 @@ public class MemberVO {
 	private int age; 
 	private String nick;
 	private String fileName;
-	
-	
-	
 	
 }

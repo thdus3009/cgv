@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cinema where num=#{num}
 	</select>
 	
+	<select id="selectTheaterList" parameterType="CinemaVO" resultType="TheaterVO">
+		select * from theater where cinemaNum=#{num}
+	</select>
+	
 
 	
 	<update id="cinemaUpdate" parameterType="CinemaVO">

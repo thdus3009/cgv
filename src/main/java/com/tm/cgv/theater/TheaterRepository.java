@@ -17,6 +17,8 @@ public interface TheaterRepository {
 	
 	public List<CinemaVO> cinemaList() throws Exception;
 	
+	public TheaterVO theaterSelect(int num) throws Exception;
+	
 	public List<SeatVO> theaterSeat(int num) throws Exception;
 	
 	public List<SeatSpaceVO> theaterSpace(int num) throws Exception;
