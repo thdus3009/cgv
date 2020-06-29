@@ -41,6 +41,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM member WHERE phone = #{phone}
 	</select>
 	
+	<select id="memberCount" resultType="Long">
+		SELECT COUNT(username) FROM member
+		<!-- 
+		<where>
+			<if test="kind == 'bt'">
+				title <include refid="search"></include>
+			</if>
+			<if test="kind == 'bw'">
+				writer <include refid="search"></include>
+			</if>
+			<if test="kind == 'bc'">
+				contents <include refid="search"></include>
+			</if>
+		</where>
+		 -->
+	</select>
+	
+	<select id="memberList" parameterType="Pager" resultType="MemberBasicVO">
+		SELECT * FROM member ORDER BY username DESC LIMIT #{startRow}, #{perPage};
+	</select>
+	
 	<insert id="join" parameterType="MemberBasicVO">
 		INSERT INTO member VALUES(
 			#{username}, #{password}, #{name}, #{birth}, #{phone}, #{email}, 

@@ -1,8 +1,9 @@
 package com.tm.cgv.member;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import com.tm.cgv.auth.AuthVO;
 import com.tm.cgv.auth.RoleEnum;
 import com.tm.cgv.util.GenerateAuthNumber;
 import com.tm.cgv.util.MemberInfoMaker;
+import com.tm.cgv.util.Pager;
 import com.tm.cgv.util.SmsSender;
 
 @Service
@@ -134,5 +136,14 @@ public class MemberService implements UserDetailsService {
         }
         
  		return result;
+ 	}
+ 	
+ 	// memberList 띄우기
+ 	public List<MemberBasicVO> memberList(Pager pager) throws Exception {
+ 		
+ 		long totalNum = memberRepository.memberCount();
+		pager.makeRow();
+		pager.makeBlock(totalNum);
+ 		return memberRepository.memberList(pager);
  	}
 }
