@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.point.PointRepository">
 	
 	<select id="pointSelectList" parameterType="String" resultType="PointVO">
-		select * from point whrer memberNum=#{memberNum}
+		select * from point where memberNum=#{memberNum}
 	</select>
 	
 

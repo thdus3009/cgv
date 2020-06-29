@@ -29,14 +29,31 @@ function discount_select(selected,other){
 
 //할인 수단 선택시 ajax으로 해당 값들을 읽어옴
 function discount_point_ajax(){
-	var id = $("#memberId").val();
+	alert("ajax")
+	var memberNum = $("#memberId").val();
 	
 	$.ajax({
 		url : '../point/pointSelectList',
 		type : 'get',
-		data : id
+		data : {
+			memberNum : memberNum
+		},
 		success : function(result){
-			console.log(result);
+			for(i=0;i<result.length;i++){
+				var type = result[i].type;
+				var price = result[i].price;
+				
+				switch (type) {
+				case 'cjone':
+					$("#cjOnePoint .hasPoint").text(addComma(price));
+					break;
+				case 'cgvgift':
+					$("#cgvGiftPrePay .hasPoint").text(addComma(price));
+					break;			
+				}
+				
+			}
+			
 		}
 	});
 }
