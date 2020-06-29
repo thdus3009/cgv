@@ -37,7 +37,7 @@
 				idcheck = false;
 			}else{
 				
-					idc.innerText = '사용가능한 아이디입니다.';
+					idc.innerText = '사용가능한 아이디입니다. 아이디 중복체크를 해주세요';
 					idc.style.color = "green";
 					idcheck = true;
 			}

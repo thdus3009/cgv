@@ -24,6 +24,9 @@ public class MemberService implements UserDetailsService {
 	private MemberRepository memberRepository;
 	
 	@Autowired
+	private AuthRepository authRepository;
+	
+	@Autowired
 	private MemberInfoMaker memberInfoMaker;
 	
 	@Autowired
