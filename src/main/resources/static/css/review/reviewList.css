@@ -33,8 +33,10 @@
 }
 
 .br {
-	padding-top: 7px;
-	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	font-size: 15px;
+	font-weight: 600;
 }
 
 .list_p_content {
@@ -49,11 +51,22 @@
 }
 .list_p_contents1 {
 	float: right;
-	width:85%;
+	width:83%;
 	height:100%;
 }
 
+.list_p_photo11 {
+	float: left;
+}
+.list_p_contents11 {
+	float: right;
+	width:72%;
+	height:100%;
+}
 
+.list_p_contents2 {
+	padding-top: 13px;
+}
 
 #title {
 	padding-bottom: 10px;
@@ -63,3 +76,15 @@
 	color: #333;
 	border-bottom: 1px dashed #cccccc; 
 }
+
+.sss {
+	display:none;
+}
+
+#result {
+
+	width: 80%;
+	min-width: 1000px;
+}
+
+

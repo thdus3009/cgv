@@ -37,4 +37,8 @@ public class ReviewService {
 		return reviewRepository.review_Write2(reviewVO);
 	}
 
+	public ReviewVO reviewSelect(ReviewVO reviewVO)throws Exception {
+		
+		return reviewRepository.reviewSelect(reviewVO);
+	}
 }
