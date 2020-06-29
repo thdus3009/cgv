@@ -1,6 +1,8 @@
 /**
  * 
  */
+		console.log("asdasdasdasdas");
+
 		var frm = document.getElementById("frm");
 
 		var userID = document.getElementById("userID");
@@ -368,21 +370,7 @@
 					}
 				});
 		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 		

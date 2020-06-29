@@ -15,12 +15,6 @@ public class HomeController {
 		return "main";
 	}
 	
-	@GetMapping("/admin")
-	public String admin(HttpSession session) throws Exception{
-		
-		return "/admin";
-	}
-	
 //	@GetMapping("/accessError")
 //	public void accessDenied(Authentication auth, Model model) {
 //		System.out.println("access denied : "+auth);
