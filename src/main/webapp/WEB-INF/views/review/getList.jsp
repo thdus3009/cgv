@@ -22,32 +22,23 @@
 								<c:if test="${empty name}">								 
 								    <button class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}" style="border: 0; background-color: transparent !important;">
 								    	<img alt="" src="${pageContext.request.contextPath}/images/before.JPG">
-								    </button>								    
-								    <!--<button type="button" class="btn btn-primary popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>	  -->		
-								    <%-- <div class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">이 영화를 평가해 주세요</div> --%>				    				
+								    </button>								    			    				
 								</c:if>
 								
 								<c:if test="${not empty name}">				
 									<c:if test="${vo.egg eq 1}">										
-										<%-- <div class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">좋았어요</div> --%>
 										<button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
 											<img alt="" src="${pageContext.request.contextPath}/images/good.JPG">
 										</button>
 										<div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">좋았어요</div>
 								    </c:if>
 								    <c:if test="${vo.egg eq 0}">								    	
-								    	<%-- <div class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">별로예요</div> --%>
 										<button class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
 											<img alt="" src="${pageContext.request.contextPath}/images/bad.JPG">
 										</button>
 										<div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">별로예요</div>
 								    </c:if>
-								    
-								    <%-- 								<!-- ajax기능 실행 + modal기능 버튼 클릭(click이벤트) -->
-								    <button type="button" class="btn btn-danger popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">리뷰쓴후</button>
-									<!-- modal기능 실행 -->
-								    <button type="button" class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">리뷰쓴후</button> --%>
-									<!-- .sss{display:none;} -->
+
 								</c:if>
 							</div>
 						
