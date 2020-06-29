@@ -78,7 +78,7 @@ function changeSelect(){
 		 src="../images/login/btn_home.png">	
 		
 		$("#seats_list").append('<div class="seat_row r'+(i+1)+'"><div class="bo">'
-		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="../images/theater/plus.png" id="img"></span>'
+		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="/images/theater/plus.png" id="img"></span>'
 		+'<div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
 		
 		
@@ -95,7 +95,7 @@ function changeSelect(){
 				//첫번째 로우라면  버튼 만들기
 				if(i<1){
 				$("#r"+i).find(".c"+j).append(
-				'<span class="col_plus" onclick="colPlus('+j+')"><img src="../images/theater/plus.png" id="img"></span>'+
+				'<span class="col_plus" onclick="colPlus('+j+')"><img src="/images/theater/plus.png" id="img"></span>'+
 				'<div class="col_label">'+j+'</div>');
 				}	
 
@@ -240,7 +240,7 @@ function rowPlus(i){
 	//
 	
 	$(c).find(".row_plus").attr("onclick","rowMinus("+(i)+");");
-	$(c).find(".row_plus").find("#img").attr("src","../images/theater/minus.png");
+	$(c).find(".row_plus").find("#img").attr("src","/images/theater/minus.png");
 	$(c).find(".row_plus").attr("class","row_minus");
 
 }
@@ -263,7 +263,7 @@ function rowMinus(i){
 
 	var c = ".r"+(i+1);
 	$(c).find(".row_minus").attr("onclick","rowPlus("+i+");");
-	$(c).find(".row_minus").find("#img").attr("src","../images/theater/plus.png");
+	$(c).find(".row_minus").find("#img").attr("src","/images/theater/plus.png");
 	$(c).find(".row_minus").attr("class","row_plus");
 
 	
@@ -276,7 +276,7 @@ function colPlus(j){
 	colList.push(j);
 	console.log(colList);
 	$(c).find(".col_plus").attr("onclick","colMinus("+j+");");
-	$(c).find(".col_plus").find("#img").attr("src","../images/theater/minus.png");
+	$(c).find(".col_plus").find("#img").attr("src","/images/theater/minus.png");
 	$(c).find(".col_plus").attr("class","col_minus");
 
 
@@ -297,7 +297,7 @@ function colMinus(j){
 
 	var c = ".c"+j;
 	$(c).find(".col_minus").attr("onclick","colPlus("+j+");");
-	$(c).find(".col_minus").find("#img").attr("src","../images/theater/plus.png");
+	$(c).find(".col_minus").find("#img").attr("src","/images/theater/plus.png");
 	$(c).find(".col_minus").attr("class","col_plus");
 	
 }

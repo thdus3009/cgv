@@ -62,7 +62,7 @@ public class CinemaController {
 	@GetMapping("cinemaUpdate")
 	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 
-		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO.getNum());
 		
 		mv.addObject("vo", cinemaVO);
 		mv.addObject("board", "cinema");

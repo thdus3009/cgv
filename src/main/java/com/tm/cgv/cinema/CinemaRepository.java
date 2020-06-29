@@ -13,9 +13,9 @@ public interface CinemaRepository {
 	public int cinemaInsert(CinemaVO cinemaVO) throws Exception;
 	
 	//Select
-	public CinemaVO cinemaSelect(CinemaVO cinemaVO) throws Exception;
+	public CinemaVO cinemaSelect(int num) throws Exception;
 	
-	public List<TheaterVO> selectTheaterList(CinemaVO cinemaVO) throws Exception;
+	public List<TheaterVO> selectTheaterList(int num) throws Exception;
 	
 	
 	//Update

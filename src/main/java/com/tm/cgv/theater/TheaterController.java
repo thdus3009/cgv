@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 
@@ -20,6 +21,9 @@ import com.tm.cgv.seatSpace.SeatSpaceVO;
 public class TheaterController {
 	@Autowired
 	private TheaterService theaterService;
+	
+	@Autowired
+	private SeatService SeatService;
 	
 	@ModelAttribute("board")
 	public String getBoard() throws Exception{
@@ -82,6 +86,8 @@ public class TheaterController {
 		
 		char c = row.charAt(0);
 		int k = c-64;
+		
+		
 		int col = theaterService.selectCol(num);
 		System.out.println("row : " + k);
 		System.out.println("col : " + col);
