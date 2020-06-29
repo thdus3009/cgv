@@ -664,7 +664,14 @@
 	
 	
 	
-	
+	function removeComma(str)
+	{
+		n = parseInt(str.replace(/,/g,""));
+		return n;
+	}
+
+
+
 	
 	
 	

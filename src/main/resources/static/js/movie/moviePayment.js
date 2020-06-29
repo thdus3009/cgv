@@ -3,6 +3,36 @@
 //payPoints : 포인트 
 
 
+//포인트에서 선택한  li값의 명칭 (default)
+var selected_li = "CJ ONE 포인트";
+var total_discount = 0;
+var lastPrice = 0;
+
+var hasPoint = 0;
+var usePoint = 0;
+var chaPoint = 0;
+
+//info payment-ticket - 아래 바의 결제 부분 감추기
+$(".info.payment-ticket").css("display","none");
+
+
+//summary_total_amount - 결제 총액
+var totalPrice = $(".payment-ticket .payment-final .data .price").attr("title");
+console.log(totalPrice);
+$("#summary_total_amount").text(addComma(totalPrice));
+
+
+//summary_discount_total - 할인 금액
+$("#summary_discount_total").text(0);
+
+
+//summary_payment_total  - 남은 결제금액
+lastPrice = totalPrice-$("#summary_discount_total").text();
+$("#summary_payment_total").text(addComma(lastPrice));
+$("#summary_payment_list .num").text(addComma(lastPrice));
+
+
+
 //#discCoupon .tpm_body - 할인 쿠폰
 $("#discCoupon .tpm_header").click(function(){
 	discount_select("#discCoupon ","#payPoints ");
@@ -51,10 +81,167 @@ function discount_point_ajax(){
 					break;			
 				}
 			}
-			
 		}
 	});
 }
+
+
+//사용금액창(input)클릭시 내용지움
+$(".textBox2.type-n.nohan").click(function(){
+	$(this).val("");
+});
+
+
+//포인트 사용 금액 적용
+$(".textBox2.type-n.nohan").blur(function(){
+	//보유 금액
+	hasPoint = removeComma($(this).parent().prev().prev().children().text());
+	//사용금액
+	usePoint = $(this).val();
+	chaPoint = hasPoint - usePoint;
+	
+	if(usePoint == 0){
+		$(this).val(0);
+		
+		if(total_discount > 0){
+			var id = $(this).attr("id");
+			removeDiscount(id);
+		}
+		console.log("totalPrice : "+ totalPrice);
+		console.log("total_discount : "+ total_discount);
+		
+		
+	}else if(chaPoint < 0){
+		alert("보유하신 금액인 "+hasPoint+"보다 크게 입력하셨습니다.");
+		$(this).val(usePoint);
+	}else if(usePoint < 1000){
+		alert("최소 1,000P부터 사용 가능합니다.");
+		$(this).val(usePoint);
+	}else if(usePoint % 10 != 0){
+		alert("10P 단위로 사용 가능합니다.");
+		$(this).val(usePoint);
+	}else{
+		
+		//정상적인 사용가능 포인트
+		var id = $(this).attr("id");
+		appendDiscount(id);
+		
+	}
+});
+
+
+//할인 내역 추가 + 총 할인 금액 계산
+function appendDiscount(id){
+	total_discount += (usePoint*1);
+
+	var html = '<dl>'
+	+'<dt>' + selected_li + '</dt>'
+	+'<dd><span class="num">'+ addComma(usePoint) +'</span>'
+	+'<span class="won">원</span>'
+	+'<a class="discount_del" id="'+ id +'_del" href="#none"><span>적용취소</span></a>'
+	+'</dd>'
+	+'</dl>';
+	
+	$("#summary_discount_list").append(html);
+	$("#summary_discount_total").text(addComma(total_discount));
+	
+	console.log("totalPrice : "+ totalPrice);
+	console.log("total_discount : "+ total_discount);
+	
+	//남은 결제 금액 출력
+	console.log("aa");
+	console.log($("#summary_total_amount").text());
+	var startPrice = removeComma($("#summary_total_amount").text());
+	$("#summary_payment_total").text(addComma(startPrice - total_discount));
+}
+
+//할인 내역 제거 + 가격 변환
+function removeDiscount(id){
+	total_discount -= removeComma($("#"+ id +"_del").prev().prev().text());
+	$("#summary_discount_total").text(addComma(total_discount));
+	$("#"+ id +"_del").parent().parent().remove();
+}
+
+
+//적용 포인트 X버튼 클릭시 취소
+$("#summary_discount_list").on("click",".discount_del",function(){
+	console.log($(this).prev().prev().text());
+	var subPoint = removeComma($(this).prev().prev().text());
+	total_discount -= (subPoint*1);
+	
+	var arr = [];
+	arr = $(this).attr("id").split("_");
+	$("#"+arr[0]).val(0)
+	
+	$(this).parent().parent().remove();
+	$("#summary_discount_total").text(addComma(total_discount));
+	
+	totalPrice += usePoint;
+	
+	console.log("totalPrice : "+ totalPrice);
+	console.log("total_discount : "+ total_discount);
+});
+
+
+//포인트 모두 사용
+//계산해야될 금액 - 잔여금액 < 0     :       계산해야될금액  
+//계산해야될 금액 - 잔여금액 > 0     :		잔여금액 전부 (일의 자리 내림)
+$(".secondTit").click(function(){
+	//checked가 true이면
+	if($(this).children().prop("checked") == true){
+		usePoint = removeComma($(this).parent().find(".hasPoint").text());
+		
+		if(totalPrice - usePoint < 0){
+			console.log(totalPrice);
+			usePoint = totalPrice;
+		}else{
+			usePoint = Math.floor(usePoint/10)*10;
+			console.log(usePoint);
+		}
+		
+		totalPrice -= usePoint;
+		//input창에 출력
+		$(this).parent().find("input").val(usePoint);
+		//할인내역 추가
+		var id = $(this).parent().find("input").attr("id");
+		appendDiscount(id);
+		
+	}else{
+		console.log("false");
+		//input창에 0
+		//할인내역에서 삭제 
+		//totalPrice값 더하기
+		//total_discount값 빼기
+		
+		if(total_discount > 0){
+			var id = $(this).parent().find("input").attr("id");
+			removeDiscount(id);
+			
+			$(this).parent().find("input").val(0);
+			totalPrice += usePoint;
+		}
+		
+		console.log("totalPrice : "+ totalPrice);
+		console.log("total_discount : "+ total_discount);
+		
+		
+	}
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -81,6 +268,11 @@ $("#payPoints .discount_list li").click(function(){
 function discount_form_change(selected){
 	$(selected+".discount_list li").each(function(){
 		if($(this).hasClass("selected")){
+			
+			selected_li = $(this).find("a").text();
+			console.log("li name : "+ selected_li);
+			
+			
 			$(selected+".discount_form .form").css("display","none");
 			console.log($(this).attr("id"));
 			
@@ -102,27 +294,6 @@ function discount_form_change(selected){
 
 
 
-
-
-
-//info payment-ticket - 아래 바의 결제 부분 감추기
-$(".info.payment-ticket").css("display","none");
-
-
-//summary_total_amount - 결제 총액
-var totalPrice = $(".payment-ticket .payment-final .data .price").attr("title");
-console.log(totalPrice);
-$("#summary_total_amount").text(addComma(totalPrice));
-
-
-//summary_discount_total - 할인 금액
-$("#summary_discount_total").text(0);
-
-
-//summary_payment_total  - 남은 결제금액
-var lastPrice = totalPrice-$("#summary_discount_total").text();
-$("#summary_payment_total").text(addComma(lastPrice));
-$("#summary_payment_list .num").text(addComma(lastPrice));
 
 
 
