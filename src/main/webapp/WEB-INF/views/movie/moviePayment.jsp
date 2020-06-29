@@ -181,8 +181,7 @@
 									<label for="cjOnePointipt">사용할 포인트</label>
 								</dt>
 								<dd>
-									<input class="textBox2 type-n nohan" type="text"
-										id="cjOnePointipt">원
+									<input class="textBox2 type-n nohan" type="text" id="cjOnePointipt" value="0">원
 								</dd>
 
 								<dt class="secondTit">
@@ -224,8 +223,7 @@
 									<label for="cgvGiftPrePayipt">적용금액</label>
 								</dt>
 								<dd>
-									<input class="textBox2 type-n nohan" type="text"
-										id="cgvGiftPrePayipt">원
+									<input class="textBox2 type-n nohan" type="text" id="cgvGiftPrePayipt" value="0">원
 								</dd>
 
 								<dt class="secondTit">

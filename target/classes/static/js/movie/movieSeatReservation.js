@@ -115,7 +115,10 @@
 		if(totalCount > 0){
 			$("#ticket .section-seat").removeClass("dimmed");
 		}else{
-			$("#ticket .section-seat").addClass("dimmed");
+			if(selectedCount == 0){
+				$("#ticket .section-seat").addClass("dimmed");
+			}
+			
 		}
 	}
 	
@@ -337,7 +340,7 @@
 				
 		}else{
 			//좌석 추가
-			if(!$(this).hasClass("reserved") && !$(this).hasClass("blocked")){
+			if(!$(this).hasClass("reserved") && !$(this).hasClass("blocked") && !$(this).hasClass("selected")){
 //				console.log("total : "+ totalCount);
 //				console.log("select : "+ selectedCount);
 				
@@ -348,63 +351,7 @@
 				//preSelect가 2이상 존재 할때 실행
 				if(preCheck == 2){  
 					if(totalCount-selectedCount > 1){
-						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ
-						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ
-//						if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved")){
-//							//2명선택
-//							selectedCount = selectedCount + 2;
-//							var check = selectedCountCheck(2);
-//							if(check){
-//								$(this).prev().addClass("selected");
-//								$(this).addClass("selected");
-//								
-//								console.log("prev()");
-//								console.log($(this).parent().parent().prev().text()+"-"+$(this).prev().find(".no").text());
-//								console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
-//								
-//								
-//								var gradeType = $(this).data("grade");
-//								
-//							}
-//							
-//						}else if($(this).prev().hasClass("blocked") || $(this).prev().hasClass("reserved")){
-//							//2명선택
-////							console.log("next()")
-//							selectedCount = selectedCount + 2;
-//							var check = selectedCountCheck(2);
-//							if(check){
-//								$(this).next().addClass("selected");
-//								$(this).addClass("selected");
-//								
-//								console.log("열 : "+$(this).find(".no").text());
-//								console.log("열 : "+$(this).next().find(".no").text());
-//								console.log("행 : "+ $(this).parent().parent().prev().text());
-//								
-//								console.log("next()");
-//								console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
-//								console.log($(this).parent().parent().prev().text()+"-"+$(this).next().find(".no").text());
-//								
-//								var gradeType = $(this).data("grade");
-//								
-//								
-//							}
-//						}else if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved")){
-////							alert("양옆 모두 비어있음");
-//							selectedCount = selectedCount + 2;
-//							var check = selectedCountCheck(2);
-//							if(check){
-//								$(this).next().addClass("selected");
-//								$(this).addClass("selected");
-//								
-//								console.log("next-middle()");
-//								console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
-//								console.log($(this).parent().parent().prev().text()+"-"+$(this).next().find(".no").text());
-//								
-//								
-//								var gradeType = $(this).data("grade");
-//								
-//							}
-//						}
+						
 						if(!$(this).hasClass("blocked") && !$(this).hasClass("reserved") && !$(this).hasClass("selected")){
 							var check1 = true;
 							var check2 = false;
@@ -498,14 +445,16 @@
 						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ
 						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ						
 					}else if(char === 0){
-						alert("모든 좌석 선택했음");
+						alert("모든 좌석 선택했음111");
 					}
 					
 					
-				}else if(char === 0){
-					alert("모든 좌석 선택했음");
-					
-				}else{
+				}
+//				else if(char === 0){
+//					alert("모든 좌석 선택했음222");
+//					
+//				}
+				else{
 					//1명선택
 //					console.log("normal()")
 					selectedCount = selectedCount + 1;  
