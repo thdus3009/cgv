@@ -53,6 +53,7 @@ public class ReviewController {
 //		return "member/memberReview"; 
 //	  }
 
+//	-------------------------------------------------------------------------------------------------------
 	
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(ModelAndView mv)throws Exception {
@@ -86,6 +87,7 @@ public class ReviewController {
 			  reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
 			  
 			  ar.add(reviewVO);
+			  System.out.println(reviewVO.getCreateAt());
 		  }
 		
 		
@@ -106,7 +108,7 @@ public class ReviewController {
 			System.out.println("성공");
 		}
 		
-		return 0;
+		return result;
 	
 	}
 	
@@ -122,16 +124,28 @@ public class ReviewController {
 			System.out.println("성공");
 		}
 		
-		return 0;
+		return result;
 	
 	}
 	
-	//review update (영화해당 상세페이지)
-	public void review_Update()throws Exception {
+	//review update (영화해당 상세페이지) -- memberReview에 있는 modal3내용채우기
+	@PostMapping("review_Select")
+	@ResponseBody
+	public ReviewVO review_Select(ReviewVO reviewVO, Model model)throws Exception {
+		System.out.println("modal3 테스트 : "+reviewVO.getReservationNum());
 		
+		ReviewVO reviewSelect = reviewService.reviewSelect(reviewVO);
+		
+		System.out.println("영화제목:"+reviewSelect.getTitle());
+		System.out.println("아이디:"+reviewSelect.getUid());
+		System.out.println("egg:"+reviewSelect.getEgg());
+				
+		return reviewSelect;//json
+	
 	}
 	
 	//review delete (마이페이지 , 상세페이지)
+	@PostMapping("review_Delete")
 	public void review_Delete()throws Exception {
 		
 	}
