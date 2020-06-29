@@ -181,7 +181,7 @@
 									<label for="cjOnePointipt">사용할 포인트</label>
 								</dt>
 								<dd>
-									<input class="textBox2 type-n nohan" type="text" id="cjOnePointipt" value="0">원
+									<input class="textBox2 type-n nohan" type="text" id="cjOnePointipt" placeholder="0">원
 								</dd>
 
 								<dt class="secondTit">
@@ -223,7 +223,7 @@
 									<label for="cgvGiftPrePayipt">적용금액</label>
 								</dt>
 								<dd>
-									<input class="textBox2 type-n nohan" type="text" id="cgvGiftPrePayipt" value="0">원
+									<input class="textBox2 type-n nohan" type="text" id="cgvGiftPrePayipt" placeholder="0">원
 								</dd>
 
 								<dt class="secondTit">
@@ -334,7 +334,13 @@
 		</div>
 		<div class="summary_box payment_box" id="tps_payment_box">
 			<div class="payment_header">결제내역</div>
-			<div class="payment_body" id="summary_payment_list"><dl><dt>카드결제</dt><dd><span class="num"></span><span class="won">원</span></dd></dl></div>
+			<div class="payment_body" id="summary_payment_list">
+				<dl>
+					<dt>신용카드</dt>
+					<dd><span class="num"></span>
+					<span class="won">원</span></dd>
+				</dl>
+			</div>
 			<div class="payment_footer">
 				<div class="label">
 					<span>남은 결제금액</span>

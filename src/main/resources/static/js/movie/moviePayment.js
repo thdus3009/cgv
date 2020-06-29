@@ -1,5 +1,4 @@
 
-
 //discCoupon : 할인쿠폰
 //payPoints : 포인트 
 
@@ -51,7 +50,6 @@ function discount_point_ajax(){
 					$("#cgvGiftPrePay .hasPoint").text(addComma(price));
 					break;			
 				}
-				
 			}
 			
 		}
@@ -91,7 +89,7 @@ function discount_form_change(selected){
 			
 			$("#"+str).css("display","block");
 		}
-	})
+	});
 }
 
 
@@ -123,14 +121,18 @@ $("#summary_discount_total").text(0);
 
 //summary_payment_total  - 남은 결제금액
 var lastPrice = totalPrice-$("#summary_discount_total").text();
-$("#summary_payment_total").text(addComma(totalPrice-$("#summary_discount_total").text()));
+$("#summary_payment_total").text(addComma(lastPrice));
+$("#summary_payment_list .num").text(addComma(lastPrice));
 
 
 
 //간편 결제 클릭시 아래 수단 추가
 //last_pay_radio3
-$("#lastPayCon span input").click(function(){
-	if($(this).prop("checked") == true && $(this).val() == 3){
+$("#lastPayCon span").click(function(){
+	$("#summary_payment_list dl dt").text($(this).find("label").text());
+	
+	
+	if($(this).find("input").prop("checked") == true && $(this).val() == 3){
 		$("#smartPayCon").css("display","block");
 	}else{
 		$("#smartPayCon").css("display","none");
