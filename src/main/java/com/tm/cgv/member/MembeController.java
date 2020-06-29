@@ -246,7 +246,18 @@ public class MembeController {
 	}
 	
 	
-
+	//시험용
+	//myPage(GET)
+	@GetMapping("memberAdminPage")
+	public void memberAdminPage() throws Exception{
+			
+	}
+		
+	//myPage(GET)
+	@GetMapping("memberTestPage")
+	public void memberTestPage() throws Exception{
+			
+	}
 	
 }
 

@@ -58,7 +58,7 @@
 						<ul>
 							<li class="on"><a href="">ADMIN HOME<i></i></a></li>
 							<li><a href="">회원 관리<i></i></a></li>
-							<li><a href="">영화관 관리<i></i></a></li>
+							<li><a href="">☞ 영화관 관리<i></i></a></li>
 							<li><a href="">상영관 관리<i></i></a></li>
 							<li><a href="">공지사항 관리</a></li>
 						</ul>
@@ -85,12 +85,7 @@
 							<h1>Cinema List</h1>
 							<!-- 검색 -->
 							<form action="" method="get" class="search-form">
-								<select class="select">
-									<option>극장명</option>
-									<option>지역명</option>
-									<option>주소</option>
-									<option>전화번호</option>
-								</select> <input type="text" class="serach-text">
+							<input type="text" class="serach-text">
 								<button type="submit" class="search-btn">검색</button>
 								<a href="" class="theaterAdd-btn">영화관 등록</a>
 							</form>
