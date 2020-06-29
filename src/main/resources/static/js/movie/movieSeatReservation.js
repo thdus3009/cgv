@@ -202,18 +202,12 @@
 						//띄워져있는지 검사
 						for(i=0;i<seatSpaceList.length;i++){
 							if(seatSpaceList[i].type == 1){  //col
-								
 								if($(this).data("col") == seatSpaceList[i].index){
-									if($(this).prev().hasClass("blocked") || $(this).prev().hasClass("reserved") || $(this).prev().hasClass("selected")){
-										check1 = false;
-									}else{
+									if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
 										$(this).prev().addClass("preSelect");
 										check1 = false;
 									}
 								}
-								
-//								console.log($(this).data("col") + " / "+seatSpaceList[i].index)
-//								console.log(check1);
 							}
 						}
 
@@ -226,15 +220,21 @@
 							check2 = true;
 						}
 						
-//						console.log(check1 + " "+check2);
 						if(check1 && check2){
 							$(this).next().addClass("preSelect");
 						}
 					}
+				
 					if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
 						if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
-							
-							$(this).prev().addClass("preSelect");
+							//띄워져있는지 검사
+							for(i=0;i<seatSpaceList.length;i++){
+								if(seatSpaceList[i].type == 1){  //col
+									if($(this).prev().data("col") != seatSpaceList[i].index){
+										$(this).prev().addClass("preSelect");
+									}
+								}
+							}
 						}
 					}
 				}
@@ -352,12 +352,12 @@
 				if(preCheck == 2){  
 					if(totalCount-selectedCount > 1){
 						
-						if(!$(this).hasClass("blocked") && !$(this).hasClass("reserved") && !$(this).hasClass("selected")){
 							var check1 = true;
 							var check2 = false;
 							
 							//2개 출력
 							if((totalCount - selectedCount) != 1){
+								//오른쪽 검사
 								if(!$(this).next().hasClass("blocked") && !$(this).next().hasClass("reserved") && !$(this).next().hasClass("selected")){
 										//띄워져있는지 검사
 										for(i=0;i<seatSpaceList.length;i++){
@@ -429,39 +429,36 @@
 												var gradeType = $(this).data("grade");
 											}
 										}
+									
+									//hover가 2칸이 안잡히면 자동으로 1칸만 등록 되므로 여기서는 그냥 클릭되면 -> 클릭한 자신 + prev() 셀렉트 해주면 됨 (구별은 호버에서)
+									}else if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
+										selectedCount = selectedCount + 2;
+										$(this).addClass("selected");
+										$(this).prev().addClass("selected");
+										
 									}
 								
-								
-								}
-								
-							
+							//}
 						}
 						
 						console.log("select : "+ selectedCount);
 						console.log("cha : "+ (totalCount-selectedCount)*1);
 						console.log("-----------------------------")
-						
 					
 						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ
 						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ						
-					}else if(char === 0){
+					}else if(char == 0){
 						alert("모든 좌석 선택했음111");
 					}
 					
 					
-				}
-//				else if(char === 0){
-//					alert("모든 좌석 선택했음222");
-//					
-//				}
-				else{
+				}else{
 					//1명선택
 //					console.log("normal()")
 					selectedCount = selectedCount + 1;  
 					var check = selectedCountCheck(1);
 					if(check){
 						$(this).addClass("selected");
-						
 //						console.log("열 : "+$(this).find(".no").text());
 //						console.log("행 : "+ $(this).parent().parent().prev().text());
 						
@@ -469,13 +466,9 @@
 						console.log("normal()");
 						console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 						
-						
 						//계산 - eachGradePayment(gradeType,num)
 						var gradeType = $(this).data("grade");
 //						console.log("gradeType : "+ gradeType);
-						
-						
-						
 					}
 //					console.log("select : "+ selectedCount);
 //					console.log("cha : "+ (totalCount-selectedCount)*1);
