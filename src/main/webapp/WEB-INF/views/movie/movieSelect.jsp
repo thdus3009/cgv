@@ -14,10 +14,21 @@
 <link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- chart CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+<link href="${pageContext.request.contextPath}/css/test.css" rel="stylesheet" type="text/css">
+<!-- chart CDN -->
+
 <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -50,6 +61,7 @@
 			<div class="wrap-movie-detail" id="select_main">
 				<div class="tit-heading-wrap">
 					<h3>영화상세</h3>
+					
 				</div>
 				<div class="sect-base-movie">
 					<div class="box-image"  >
@@ -165,14 +177,18 @@
 							<li>
 								<strong>성별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								그래프자리1
+								 <div id="chart_div">
+								 	
+								 </div>
 								</div>
 							</li>
 							
 							<li>
 								<strong>연령별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								그래프자리2
+								<div id="columnchart_values" style="width: 900px; height: 300px;">
+								
+								</div>
 								</div>
 							</li>
 						</ul>
@@ -241,6 +257,7 @@
 										<span class="desc" >PreEgg</span>
 										<span class="percent">94%</span>
 										<span class="tooltip">사전기대지수</span>
+										
 									</div>
 									<div class="box box_golden">
 										<span class="sprite_preegg big great" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -115px -135px;"></span>
@@ -255,11 +272,21 @@
 								<div class="box">
 									<div class="title">매력 포인트</div>
 									<div class="radar-graph" id="chart2">
+										<div id="myChartTest">
+											<canvas id="myChart" width="100" height="100">
+											
+											</canvas>
+										</div>
 									</div>
 								</div>
 								<div class="box">
 									<div class="title">감정 포인트</div>
 									<div class="radar-graph" id="chart3">
+										<div id="myChartTest">
+											<canvas id="myChart2" width="100" height="100">
+											
+											</canvas>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -350,8 +377,184 @@
 </div>
 
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+<!-- 성별 그래프 1번 -->
+<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
 
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
 
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
 
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['여성', 8],
+          ['남성', 2],
+         
+        ]);
+
+        // Set chart options
+        var options = {'title':'',
+                       'width':450,
+                       'height':320,
+                       backgroundColor : '#fdfcf0'};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      </script>
+<!-- 연령별 그래프 2번 -->
+
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["10대", 8.94, "#b87333"],
+        ["20대", 10.49, "silver"],
+        ["30대", 19.30, "gold"],
+        ["40대", 21.45, "color: #e5e4e2"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation",
+                        },
+                       2]);
+
+      var options = {
+        title: "",
+        width: 490,
+        height: 320,
+        backgroundColor : '#fdfcf0',
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" 
+        },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+<!-- 방사형 chart  -->
+<script>
+
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+	type: 'radar',
+    data: {
+        labels: ['감독연출', '즐거움', '공감', '배우연기', 'OST'],
+        datasets: [{
+            label: '',
+            data: [11, 19, 3, 5, 2],
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                
+            ], 
+             borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+               
+            ], 
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+
+var ctx = document.getElementById('myChart2');
+var myChart = new Chart(ctx, {
+	type: 'radar',
+    data: {
+        labels: ['스트레스해소', '스토리', '영상미', '몰입감', '감동'],
+        datasets: [{
+            label: '',
+            data: [11, 10, 8, 7, 2],
+            scaleShowLabels : false,
+            omitXLabels: true,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                
+            ], 
+             borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+               
+            ], 
+            borderWidth: 1,
+            
+            
+        }]
+    },
+    options: {		
+        
+        scales: { 
+        			           	
+            xAxes:[{
+            	gridLines:{
+					 display:false,
+				},
+				
+            	ticks:{
+					display:false
+					
+                },
+               
+            }],
+        	 
+            yAxes: [{
+				gridLines:{
+					 display:false,
+				},
+                
+                ticks: {
+                    beginAtZero: true,
+                  
+                    
+                }
+            }]
+        }
+    }
+});
+</script>
 </body>
 </html>

@@ -345,7 +345,7 @@ ul {
 }
 .graph li {
     overflow: hidden;
-    height: 250px;
+    height: 350px;
 }
 
 .graph li strong {
@@ -361,6 +361,14 @@ ul {
     clear: both;
     padding: 30px 0 0;
 }
+ /*  -------------------------------------------------------------------------------성별/연령병 그래프 api*/
+#chart_div {
+	 margin-left: 30px;
+	
+
+}
+
+
  /*  -------------------------------------------------------------------------------중간 광고 영화 */
 .sect-trailer{
 	margin-top: 40px;
