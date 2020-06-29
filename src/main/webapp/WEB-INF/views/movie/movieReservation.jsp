@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -43,7 +45,6 @@
 			</div>
 
 		<div id="container">
-			
 		
 			<div id="ticket">
 			
@@ -322,7 +323,7 @@
 											</c:if>
 																						
 											<li data-index="0" class="day" data-index="0" data-week="${calendarVO.week}" data-date="${calendarVO.date}" data-month="${calendarVO.month}" data-year="${calendarVO.year}">
-												<a href="#">
+												<a href="#" onclick="return false;">
 													<span class="dayweek">${calendarVO.week}</span>
 													<span class="day">${calendarVO.date}</span>
 													<span class="sreader"></span>
@@ -390,6 +391,7 @@
 			<input type="hidden" id="filmType" name="filmType" value="">
 			
 			<input type="hidden" id="seatCount" name="seatCount" value="">
+			<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			
 			<input type="hidden" id="sDate" value="">
 		</form>
@@ -471,7 +473,7 @@
 						</div>
 						<div class="row payment-final" style="display: none;">
 							<span class="header">총금액</span>
-							<span class="data"><span class="price"></span><span class="won">원</span></span>
+							<span class="data"><span class="price" title=""></span><span class="won">원</span></span>
 						<span id="priceMapInfoIco" style="position: absolute; right: -17px; margin-top: 3px; cursor: pointer;"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/ico_circle_14.png" height="14" width="14" alt="mappingIco"></span><div id="priceMappingContainer" style="display: none; position: absolute; right: -80px; z-index: 100; width: 150px; height: auto; padding: 10px; background: rgb(51, 51, 51); bottom: 115px;"><span class="typeNm" style="display:inline-block; width:40px;">일반</span> : PRIME X 2<br></div></div>
 					</div>
 					
@@ -487,15 +489,17 @@
 				</div>
 			</div>
 		</div>
-
+		
+		
+		
 
 
 		<c:import url="../template/footer.jsp"></c:import>
 		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
 
-<script type="text/javascript" src="../js/movie/movieReservation.js"></script>
 
+<script type="text/javascript" src="../js/movie/movieReservation.js"></script>
 <script type="text/javascript">
     var list = [];
     
@@ -508,11 +512,8 @@
        list.push(cinemaVO);   
     </c:forEach>
 
-// 	console.log("size: "+list.length);
-// 	console.log("a : "+list[0].name);
-	
 	for(i=0;i<list.length;i++){
-// 		console.log(list[i].name+" "+list[i].local);
+		console.log(list[i].name+" "+list[i].local);
 		$(".theater-area-list > ul > li").each(function(){
 
 // 			console.log("읽어온값 : "+i+" "+ list[i].local);
@@ -520,7 +521,7 @@
 			
 			if(list[i].local == $(this).data("local")){
 				console.log(list[i].name+" "+list[i].local);
-				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a>'+list[i].name+'<span class="sreader"></span></a></li>');
+				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
 			}
 			
 // 			console.log("==================================");
@@ -529,12 +530,26 @@
 	}
 
 
+	//결제완료 페이지로 이동
+	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
+			//결제 작업을 위한 값 - 이니시스 : tel
+			var data = {
+					tel : `${memberVO.phone}`,
+					email : `${memberVO.email}`,
+					name : `${memberVO.name}`,
+					//amount : lastPrice
+					amount : '100'
+			}
+			//이니시스 실행
+			//payment_inicis(data);
+			
+			//test 결제 없이 바로 예매 - 좌석예매 진행
+			reservation_save(8);
+	});
 
+	
 
 </script>
-
-
-
 
 </body>
 </html>

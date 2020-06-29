@@ -13,4 +13,8 @@ public class MovieTimeService {
 		return movieTimeRepository.movieTimeSelectOne(num);
 	}
 	
+	public int remainSeatUpdate(MovieTimeVO movieTimeVO) throws Exception{
+		return movieTimeRepository.remainSeatUpdate(movieTimeVO);
+	}
+	
 }

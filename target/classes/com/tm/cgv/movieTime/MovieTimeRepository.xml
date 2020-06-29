@@ -10,5 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select * from movieTime where num = #{num}
  	</select>
  	
+ 	
+ 	<update id="remainSeatUpdate" parameterType="MovieTimeVO">
+ 		update movieTime set remainSeat=#{remainSeat} where num = #{num}
+ 	</update>
  
 </mapper>
