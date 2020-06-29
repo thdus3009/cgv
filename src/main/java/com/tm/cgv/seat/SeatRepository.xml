@@ -52,6 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select max(colIdx) from seat where theaterNum = #{theaterNum}
  	</select>
 	
+	<select id="seatSelect" parameterType="SeatVO" resultType="SeatVO">
+		select * from seat where theaterNum=#{theaterNum}
+	</select>
  
 
 </mapper>
