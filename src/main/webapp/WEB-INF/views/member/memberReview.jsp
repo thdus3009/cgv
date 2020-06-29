@@ -165,26 +165,28 @@
 							<div style="width: 100%; height: 100px; text-align: center; padding-top: 20px;"><span style="font-size: large; color: #333333">이 영화의 관람포인트를 선택해 주세요!</span><br>
 							<span style="color: red;">중복선택</span>이 가능합니다.</div>
 							
+							<!-- label과 id가 같으면 글씨만 클릭해도 체크박스를 클릭할수 있다. -->
+							
 							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">매력 포인트</div>
 								<div style="font-weight: lighter;">
-								<input type="checkbox" value="감독연출" class="charmPoint" data-charm="1"> 감독연출 &emsp; &emsp; &emsp; &emsp;
-								<input type="checkbox" value="스토리" class="charmPoint" data-charm="2"> 스토리 &emsp; &emsp; &emsp; &emsp;
-								<input type="checkbox" value="영상미" class="charmPoint" data-charm="4"> 영상미
+								<input type="checkbox" value="감독연출" id="a" class="charmPoint" data-charm="1"> <label for="a">감독연출</label> &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="스토리" id="b" class="charmPoint" data-charm="2"> <label for="b">스토리</label> &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="영상미" id="c" class="charmPoint" data-charm="4"> <label for="c">영상미</label>
 								<br>
-								<input type="checkbox" value="배우연기" class="charmPoint" data-charm="8"> 배우연기 &emsp; &emsp; &emsp; &emsp;
-								<input type="checkbox" value="OST" class="charmPoint" data-charm="16"> OST
+								<input type="checkbox" value="배우연기" id="d" class="charmPoint" data-charm="8"> <label for="d">배우연기</label> &emsp; &emsp; &emsp; &emsp;
+								<input type="checkbox" value="OST" id="e" class="charmPoint" data-charm="16"> <label for="e">OST</label>
 								<br><br>
 								</div>
 							</div>
 							
 							<div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">감정 포인트</div>
 								<div style="font-weight: lighter;">
-								<input type="checkbox" value="몰입감" class="emotionPoint" data-emotion="1"> 몰입감 &emsp; &emsp; &emsp; &emsp; &ensp;
-								<input type="checkbox" value="감동" class="emotionPoint" data-emotion="2"> 감동 &emsp; &emsp; &emsp; &emsp; &ensp;
-								<input type="checkbox" value="스트레스 해소" class="emotionPoint" data-emotion="4"> 스트레스 해소
+								<input type="checkbox" value="몰입감" id="f" class="emotionPoint" data-emotion="1"> <label for="f">몰입감</label> &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="감동" id="g" class="emotionPoint" data-emotion="2"> <label for="g">감동</label> &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="스트레스 해소" id="h" class="emotionPoint" data-emotion="4"> <label for="h">스트레스 해소</label>
 								<br>
-								<input type="checkbox" value="즐거움" class="emotionPoint" data-emotion="8"> 즐거움 &emsp; &emsp; &emsp; &emsp; &ensp;
-								<input type="checkbox" value="공감" class="emotionPoint" data-emotion="16"> 공감
+								<input type="checkbox" value="즐거움" id="i" class="emotionPoint" data-emotion="8"> <label for="i">즐거움</label> &emsp; &emsp; &emsp; &emsp; &ensp;
+								<input type="checkbox" value="공감" id="j" class="emotionPoint" data-emotion="16"> <label for="j">공감</label>
 								<br><br>
 								</div>
 							</div>

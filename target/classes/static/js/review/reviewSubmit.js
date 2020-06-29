@@ -154,7 +154,7 @@
 							//버튼바꾸기
 							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
 							
-							$("#"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
+							$("#r"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
 							alert("리뷰가 등록되었습니다.")
 							
 						}
@@ -252,8 +252,9 @@
 				
 			});
 			
-			
-			/////////////////////////////////////////////////////////
+		}
+			//getList안에 식을 넣으면 "getList(count);"로 인해 자동으로 일단 한번 출력되고
+			// memberReview.jsp의 부모(result)영역의 위임으로 한번더 실행된다. //그러므로 getList에서 빼주어야함
 			
 			//이벤트위임(부모영역의 이벤트를 자식으로 전달)
 			$("#result").on("click", ".popupOnlyRead",function(){
@@ -282,7 +283,7 @@
 					})
 				
 			});
-		}
+	
 		
 		getList(count);
 		/* ------------------- */

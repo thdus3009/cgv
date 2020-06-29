@@ -18,7 +18,7 @@
 					
 						<!-- Modal 1 Button + 조건-->
 							<c:set var="name" value="${vo.createAt}" />
-							<div id="${vo.num}">
+							<div id="r${vo.num}">
 								<c:if test="${empty name}">
 								    <button type="button" class="btn btn-primary popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>							    
 								</c:if>
