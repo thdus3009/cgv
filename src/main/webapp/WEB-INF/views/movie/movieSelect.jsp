@@ -38,7 +38,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
-	
+	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container" >
 		<div class="c_nav">
 			<div class="nav_linemap">
@@ -483,11 +483,32 @@ var myChart = new Chart(ctx, {
             borderWidth: 1
         }]
     },
-    options: {
-        scales: {
+    options: {		
+        
+        scales: { 
+        			           	
+            xAxes:[{
+            	gridLines:{
+					 display:false,
+				},
+				
+            	ticks:{
+					display:false
+					
+                },
+               
+            }],
+        	 
             yAxes: [{
+				gridLines:{
+					 display:false,
+				},
+                
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    display:false
+                  
+                    
                 }
             }]
         }
@@ -550,6 +571,7 @@ var myChart = new Chart(ctx, {
                 
                 ticks: {
                     beginAtZero: true,
+                    display:false
                   
                     
                 }

@@ -18,7 +18,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
-	
+	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container">
 		<div class="c_nav">
 			<div class="nav_linemap">
