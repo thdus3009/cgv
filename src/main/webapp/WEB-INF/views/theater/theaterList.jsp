@@ -15,9 +15,9 @@
 	<!-- 헤더 -->
 	<c:import url="../template/header.jsp"></c:import>
 
-	<!-- 사이드바 -->
+	<%-- <!-- 사이드바 -->
 	<c:import url="../template/adminSidebar.jsp"></c:import>
-
+ --%>
 	<!-- 상단바 -->
 	<div class="top-bar">
 		<h1>영화관 리스트</h1>
