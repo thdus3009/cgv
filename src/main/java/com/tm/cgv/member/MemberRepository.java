@@ -4,18 +4,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberRepository {
-	public MemberVO memberLogin(MemberVO memberVO) throws Exception;
+
+	public MemberBasicVO read(String username) throws Exception;
 	
-	public MemberVO naverMemberCheck(MemberVO memberVO) throws Exception;
+	// 회원가입
+	public int join(MemberBasicVO memberBasicVO) throws Exception;
+
+	// 이미 등록된 id 인지 Check
+	public MemberBasicVO memberIdCheck(MemberBasicVO memberBasicVO) throws Exception;
 	
-	public int memberJoin(MemberVO memberVO) throws Exception;
-	
-	public MemberVO memberIdCheck(String id) throws Exception;
-	
-	public MemberVO memberSelect(MemberVO memberVO) throws Exception;
-	
-	public int memberUpdate(MemberVO memberVO) throws Exception;
-	
-	public int memberDelete(MemberVO memberVO) throws Exception;
-	
+	// 이미 등록된 phone 번호인지 Check
+	public MemberBasicVO phoneCheck(MemberBasicVO memberBasicVO) throws Exception;
 }

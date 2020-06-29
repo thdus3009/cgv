@@ -50,12 +50,18 @@
 					</li>
 				</ul>
 				<div class="box_login">
-					<form action="./memberLogin" method="post">
+					<form action="/member/login" method="post">
 						<fieldset>
 							<p>아이디 비밀번호를 입력하신 후, 로그인 버튼을 클릭해 주세요.</p>
 							<div class="login_input">
-								<input type="text" name="uid" value="${cookie.cId.value}">
-								<input type="password" name="pwd">
+								<!-- security 사용을 위해 필요한 것 -->
+								<!-- 1. action 값 = GetMapping된 login 페이지 경로 -->
+								<!-- 2. csrf token input field-->
+								<!-- 3. id input field의 name 속성값이 'username' -->
+								<!-- 4. pw input field의 name 속성값이 'password' -->
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<input type="text" name="username">
+								<input type="password" name="password">
 							</div>
 							<button type="submit"><span>로그인</span></button>
 							
@@ -72,6 +78,7 @@
 								<a href="#">아이디 찾기</a>
 								<a href="#">비밀번호 찾기</a>
 							</div>
+							
 							<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 						 	<!-- 네이버 로그인 창으로 이동 -->
 							<div id="naver_id_login" style="position: absolute; top: 200px; left: 163px;">

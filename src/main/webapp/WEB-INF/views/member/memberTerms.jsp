@@ -132,9 +132,8 @@
 	<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>		
-<script type="text/javascript" src="../js/member/memberTerms.js"></script>
+	
+<script type="text/javascript" src="../js/member/terms.js"></script>
 
 </body>
 </html>

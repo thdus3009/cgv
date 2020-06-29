@@ -89,7 +89,7 @@ btn.addEventListener("click", function() {
 
 	if (flag) {
 		alert("회원가입 페이지로 이동합니다.");
-		location.href = "./memberJoin";
+		location.href = "./join";
 	} else {
 		alert("체크하지 않은 필수 항목이 있습니다.");
 	}
