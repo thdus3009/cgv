@@ -36,7 +36,7 @@ public class MemberService implements UserDetailsService {
 	RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public MemberVO loadUserByUsername(String username) throws UsernameNotFoundException {
         
     	System.out.println("loadUserByUsername");
     	System.out.println(username);
