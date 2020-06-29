@@ -33,8 +33,10 @@
 }
 
 .br {
-	padding-top: 7px;
-	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	font-size: 15px;
+	font-weight: 600;
 }
 
 .list_p_content {
@@ -62,6 +64,9 @@
 	height:100%;
 }
 
+.list_p_contents2 {
+	padding-top: 13px;
+}
 
 #title {
 	padding-bottom: 10px;
@@ -82,10 +87,4 @@
 	min-width: 1000px;
 }
 
-.egg1 {
-	background: url("${pageContext.request.contextPath}/images/movie/movieList/sprite_egg.png") 
-	no-repeat;
-}
-.egg2 {
-	
-}
+

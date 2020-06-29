@@ -9,36 +9,45 @@
 			<div class="list_p_content"><!-- 이미지 주소부분 나중에 수정해야함 -->
 				<div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px"> </div>
 				<div class="list_p_contents1">
-					<div class="list_p_contents2"><span style="font-weight: bold; font-size: x-large;">${vo.title}</span></div>
+					<div class="list_p_contents2 "><span style="font-weight: bold; font-size: x-large; ">${vo.title}</span></div>
 					<div class="br">
-					<div class="list_p_contents2"><span>${vo.screenDate} ${vo.screenTime}</span></div>
-					<div class="list_p_contents2"><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명</span></div>
+					<div><span>${vo.screenDate} ${vo.screenTime}</span></div>
+					<div><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명</span></div>
 					</div>
-					<div class="list_p_contents2">
+					<div>
 					
 						<!-- Modal 1 Button + 조건-->
 							<c:set var="name" value="${vo.createAt}" />
 							<div id="r${vo.num}">
-								<c:if test="${empty name}">
+								<c:if test="${empty name}">								 
+								    <button class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}" style="border: 0; background-color: transparent !important;">
+								    	<img alt="" src="${pageContext.request.contextPath}/images/before.JPG">
+								    </button>								    
 								    <!--<button type="button" class="btn btn-primary popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">리뷰쓰기전</button>	  -->		
-								    <div class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">이 영화를 평가해 주세요</div>				    
+								    <%-- <div class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}">이 영화를 평가해 주세요</div> --%>				    				
 								</c:if>
-								<c:if test="${not empty name}">
-<%-- 								<!-- ajax기능 실행 + modal기능 버튼 클릭(click이벤트) -->
+								
+								<c:if test="${not empty name}">				
+									<c:if test="${vo.egg eq 1}">										
+										<%-- <div class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">좋았어요</div> --%>
+										<button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
+											<img alt="" src="${pageContext.request.contextPath}/images/good.JPG">
+										</button>
+										<div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">좋았어요</div>
+								    </c:if>
+								    <c:if test="${vo.egg eq 0}">								    	
+								    	<%-- <div class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">별로예요</div> --%>
+										<button class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
+											<img alt="" src="${pageContext.request.contextPath}/images/bad.JPG">
+										</button>
+										<div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">별로예요</div>
+								    </c:if>
+								    
+								    <%-- 								<!-- ajax기능 실행 + modal기능 버튼 클릭(click이벤트) -->
 								    <button type="button" class="btn btn-danger popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}">리뷰쓴후</button>
 									<!-- modal기능 실행 -->
 								    <button type="button" class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">리뷰쓴후</button> --%>
 									<!-- .sss{display:none;} -->
-									
-									
-									<c:if test="${vo.egg eq 1}">
-										<div class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}"><span class="egg1"></span> 좋았어요</div>
-										<div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">좋았어요</div>
-								    </c:if>
-								    <c:if test="${vo.egg eq 0}">
-								    	<div class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}"><span></span> 별로예요</div>
-										<div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">별로예요</div>
-								    </c:if>
 								</c:if>
 							</div>
 						
