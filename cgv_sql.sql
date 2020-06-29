@@ -24,6 +24,7 @@ DROP TABLE `payment`;
 DROP TABLE `seat`;
 DROP TABLE `seatSpace`;
 DROP TABLE `seatBooking`;
+DROP TABLE `point`;
 
 CREATE TABLE `member` (
   `username` varchar(50),
@@ -250,7 +251,17 @@ CREATE TABLE `seatBooking` (
   KEY `SEATBOOKING_MOVIETIMENUM_FK_idx` (`movieTimeNum`),
   CONSTRAINT `SEATBOOKING_SEATNUM_FK` FOREIGN KEY (`seatNum`) REFERENCES `seat` (`num`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `SEATBOOKING_MOVIETIMENUM_FK` FOREIGN KEY (`movieTimeNum`) REFERENCES `movieTime` (`num`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;ㄴ
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `point` (
+  `num` INT NOT NULL AUTO_INCREMENT,
+  `memberNum` VARCHAR(50) NULL,
+  `price` INT NULL,
+  `type` VARCHAR(20) NULL,
+  PRIMARY KEY (`num`),
+  INDEX `point_memberNum_FK_idx` (`memberNum` ASC) VISIBLE,
+  CONSTRAINT `point_memberNum_FK` FOREIGN KEY (`memberNum`) REFERENCES `cgv`.`member` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 
 -- memberSQL
 

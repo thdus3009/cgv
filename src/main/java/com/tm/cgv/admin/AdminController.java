@@ -13,7 +13,7 @@ import com.tm.cgv.admin.cinema.AdminCinemaService;
 public class AdminController {
 
 	@Autowired
-	private AdminCinemaService test;
+	private AdminCinemaService adminCinemaService;
 	
 	@GetMapping("/")
 	public String admin() throws Exception {
