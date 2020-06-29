@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+
+.col {
+	background-color:#000;
+}
+
+
+.contents {
+	width:840px;
+	height:370px;
+}
+
+
+
+.seats {
+	width:550px;
+	height:300px;
+	background:#fff;
+	padding:20px;
+	padding-top:40px;
+}
+
+.seats .seat_row	{
+	height:15px;
+	line-height:15px;
+	margin-left:20px;
+	margin-bottom:3px;
+	position:relative;
+	
+}
+
+.seats .seat_row .label {
+	position:absolute;
+	left:0;
+	width:15px;
+	height:14px;
+	line-height:14px;
+	border-top:1px solid #d4d3c9;
+	font-size:11px;
+	text-align:center;
+	color:#000;
+}
+
+
+.seats .seat_row .seat_group {
+	width:550px;
+	margin-left:20px;
+	
+}
+
+.seats .seat_row .seat_group .seat {
+	position:relative;
+	float:left;
+	margin-right:3px;
+	width:16px;
+	height:15px;
+	background-color: #666;
+}
+
+
+.seats .seat_row .seat_group .seat .sb {
+	display:block;
+	position:relative;
+	height:100%;
+	cursor:pointer;
+	text-decoration:none;
+	text-align:center;
+	color:#fff;
+	cursor:pointer;
+}
+
+
+.no {
+	display:block;
+	height:100%;
+	overflow:hidden;
+	text-align:center;
+	vertical-align:middle;
+	font-size:10px;
+	border:2px solid #ed8c00;
+	background-image: 0;
+}
+
+
+/* row */
+
+.row_plus	{
+	position:absolute;
+	left:-10px;
+	top:2px;
+	width:15px;
+	height:15px;
+	cursor:pointer;
+}
+
+.row_plus img	{
+
+	width:12px;
+	height:12px;
+	
+}
+
+
+.row_minus {
+	position:absolute;
+	left:-10px;
+	top:2px;
+	width:15px;
+	height:15px;
+	cursor:pointer;
+}
+
+.row_minus img	{
+
+	width:12px;
+	height:12px;
+	
+}
+
+
+/* col */
+
+.col_plus	{
+	position:absolute;
+	left:2px;
+	top:-30px;
+	width:15px;
+	height:15px;
+	cursor:pointer;
+}
+
+.col_plus img	{
+
+	width:12px;
+	height:12px;
+	
+}
+
+
+.col_minus {
+	position:absolute;
+	left:2px;
+	top:-30px;
+	width:15px;
+	height:15px;
+	cursor:pointer;
+}
+
+.col_minus img	{
+
+	width:12px;
+	height:12px;
+	
+}
+
+.row_space	{
+	
+}
+
+.col_space	{
+	display:inline-block;
+	float:left;
+	width:15px;
+}
+
+
+.col_label	{
+	position:absolute;
+	left:0;
+	top:-15px;
+	width:15px;
+	height:14px;
+	line-height:14px;
+	border-top:1px solid #d4d3c9;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+	color:#000;
+}

@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileManager {
-
+	//filsaver
 	public String saveTransfer(MultipartFile file,File dest) throws Exception{
 		String fileName ="";
 
@@ -37,7 +37,10 @@ public class FileManager {
 	
 	// fileDelete
 	public int deleteFile(String fileName, File dest)throws Exception{
+		
+		
 		File file = new File(dest, fileName);
+		
 		boolean check=false;
 		int result=0;
 		if(file.exists()) {

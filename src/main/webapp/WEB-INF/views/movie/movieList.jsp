@@ -66,26 +66,29 @@
 					</button>
 				</div>
 				
+				<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
+				<input type="hidden" value="${pager.startRow}" id="startRow">
 				
 				
 <!-- 			리스트 출력부분 -->
-				<div class="sect-movie-chart">
+				<div class="sect-movie-chart" id="list_total">
 					<ol>
 					<c:forEach var="list" items="${list}" varStatus="i">
 						<li>
 							<!-- 윗 부분 -->
 							<div class="box-image">
+							 
 								<strong class="rank">No.${i.index+1}</strong> 
-								<a href=""> 
+								<a href="./movieSelect?num=${list.num}"> 
 									<span class="thumb-image"> 
-										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.imageName}">
+										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVOs.fileName}">
 										<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 									</span>
-								</a> 
+								</a>
 								<span class="screentype"></span>
 							</div> <!-- 아래 부분 -->
 							<div class="box-contents">
-								<a href="#"><strong class="title">${list.title}</strong> </a>
+								<a href="./movieSelect?num=${list.num}"><strong class="title">${list.title}</strong> </a>
 								<div class="score">
 									<strong class="percent">예매율<span>${list.rate}%</span></strong>
 									<div class="egg-gage small">
@@ -105,7 +108,12 @@
 						<c:if test="${i.index == 2}">
 							</ol><ol>
 						</c:if>
-					</c:forEach>
+						
+						
+						
+						
+						</c:forEach>
+					
 					</ol>
 					
 					<div class="sect-movie-chart" id="list-more"></div>
@@ -128,10 +136,11 @@
 						</div>
 					</div>
 				</div>
+			
 			<div class="btn-more" id="btn-more">더보기
 				<i class="link-more"></i>
 			</div>
-				
+			
 			</div>
 			
 		</div>

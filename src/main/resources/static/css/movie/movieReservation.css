@@ -474,6 +474,12 @@ body{
 	width: 154px;
 }
 
+
+#ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li.dimmed{
+	opacity: 0.25;
+}
+
+
 #ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul li.selected{
 	background-color: #333;
     width: 112px;
@@ -673,11 +679,11 @@ body{
     line-height: 416px;
     text-align: center;
     color: #666;
-    display: none;
+/*     display: none; */
 }
 
 #ticket .step1 .section-time .col-body .time-list{
-/* 	display: none; */
+	display: none;
 	float: left;
     width: 316px;
     height: 88%;
@@ -742,6 +748,23 @@ body{
     width: 103px;
     height: 25px;
 }
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.selected a span.time{
+	background-image: none;
+    border-color: #000;
+    background-color: #333;
+}
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.selected a span.time span{
+	border: 1px solid #5c5c5c;
+    margin: 1px;
+    line-height: 19px;
+}
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.selected a span.time{
+	color: #fff;
+}
+
 
 #ticket .step1 .section-time .col-body .time-list .theater ul li a span.time{
 	width: 49px;
@@ -1007,6 +1030,11 @@ body{
     border: 1px solid #000;
 }
 
+#ticket .section-movie .col-body .movie-select .movie-list > ul > li.dimmed > a{
+	opacity: 0.25;
+}
+
+
 #ticket .section-movie .col-body .movie-select .movie-list > ul > li.selected a{
 	border: 1px solid #5c5c5c;
     line-height: 29px;
@@ -1017,5 +1045,55 @@ body{
 #ticket .section-movie .col-body .movie-select .movie-list > ul > li.selected > a span.text{
 	color: #fff;
 }
+
+#ticket .section-date .col-body .date-list ul li.day.selected{
+	background-color: #333;
+    width: 60px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #000;
+}
+
+#ticket .section-date .col-body .date-list ul li.day.selected a{
+	border: 1px solid #5c5c5c;
+    height: 29px;
+    line-height: 29px;
+    margin: 1px;
+    padding-left: 6px;
+    padding-right: 5px;
+    color: #fff;
+}
+
+#ticket .section-date .col-body .date-list ul li.day.selected a span.dayweek{
+	color: #fff;
+}
+
+#ticket .section-date .col-body .date-list ul li.day.selected a span.day{
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

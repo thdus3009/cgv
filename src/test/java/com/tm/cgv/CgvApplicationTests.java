@@ -9,5 +9,4 @@ class CgvApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

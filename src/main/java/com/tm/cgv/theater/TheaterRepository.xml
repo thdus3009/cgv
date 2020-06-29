@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.theater.TheaterRepository">
+	<resultMap type="TheaterVO" id="selectTheater">
+		<id column="num" property="num"></id>
+		<result column="cinemaNum" property="cinemaNum"/>
+		<result column="name" property="name"/>
+		<result column="filmType" property="filmType"/>
+		<result column="seatCount" property="seatCount"/>
+		
+		<association property="seatVOs" javaType="List">
+			<id column="num" property="num"/>
+			<result column="theaterNum" property="theaterNum"/>
+			<result column="row" property="row"/>
+			<result column="col" property="col"/>
+			<result column="grade" property="grade"/>
+		</association>
+		
+	</resultMap>
+	
+	
+	<resultMap type="TheaterVO" id="selectSpace">
+		<id column="num" property="num"></id>
+		<result column="cinemaNum" property="cinemaNum"/>
+		<result column="name" property="name"/>
+		<result column="filmType" property="filmType"/>
+		<result column="seatCount" property="seatCount"/>
+		
+		<association property="seatSpaceVOs" javaType="List">
+		<id column="num" property="num"/>
+		<result column="theaterNum" property="theaterNum"/>
+		<result column="rowOrCol" property="rowOrCol"/>
+		<result column="index" property="index"/>
+		</association>
+	</resultMap>
+	
+	
+	
+	
+	<select id="theaterList" resultType="TheaterVO">
+		select * from theater
+	</select>
+	
+	<insert id="theaterInsert" parameterType="TheaterVO">
+		insert into theater(cinemaNum,name,seatCount,filmType) values(#{cinemaNum},#{name},#{seatCount},#{filmType})
+	</insert>
+	
+	<select id="cinemaList" resultType="CinemaVO">
+		select num,name from cinema
+	</select>
+	
+	<select id="selectRow" parameterType="Integer" resultType="String">
+		select max(rowIdx) from seat where theaterNum=20;
+	</select>
+	
+	<select id="selectCol" parameterType="Integer" resultType="Integer">
+		select max(colIdx) from seat where theaterNum=#{num}
+	</select>
+	
+	
+	<select id="theaterSelect" parameterType="Integer" resultType="TheaterVO">
+		select * from theater where num=#{num}
+	</select>
+	
+	<select id="theaterSeat" parameterType="Integer" resultType="SeatVO">
+		 select * from seat where theaterNum=#{num}
+	</select>
+	
+	<select id="theaterSpace" parameterType="Integer" resultType="SeatSpaceVO">
+		 select * from seatSpace where theaterNum=#{num}
+	</select>
+	
+	
+	
+	
+	
+	<update id="theaterUpdate" parameterType="TheaterVO">
+		update theater set name=#{name}, seatCount=#{seatCount}, filmType=#{filmType} where num=#{num}
+	</update>
+	
+	<delete id="theaterDelete" parameterType="Integer">
+		delete from theater where num=#{num}
+	</delete>
+	
+	<select id="theaterNum" resultType="Integer">
+		select max(num) from theater
+	</select>
+
+</mapper>

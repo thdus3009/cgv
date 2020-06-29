@@ -1,80 +1,39 @@
 package com.tm.cgv.member;
 
-public class MemberVO {
+import java.util.Collection;
+import java.util.stream.Collectors;
 
-	private int num;
-	private String id;
-	private String pwd;
-	private String name;
-	private String birth;
-	private String phone;
-	private String email;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import lombok.Data;
+
+@Data
+public class MemberVO extends User{
+
+	private static final long serialVersionUID = 1L;
+
+	private MemberBasicVO memberBasicVO;
 	
-	private String deleteAt;
-	private String fileName;
-	private String oriName;
-	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPwd() {
-		return pwd;
-	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getBirth() {
-		return birth;
-	}
-	public void setBirth(String birth) {
-		this.birth = birth;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getDeleteAt() {
-		return deleteAt;
-	}
-	public void setDeleteAt(String deleteAt) {
-		this.deleteAt = deleteAt;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getOriName() {
-		return oriName;
-	}
-	public void setOriName(String oriName) {
-		this.oriName = oriName;
+	public MemberVO(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, authorities);
 	}
 	
-	
-	
+	public MemberVO(MemberBasicVO memberBasicVO) {
+		super(memberBasicVO.getUsername(), memberBasicVO.getPassword(), 
+				memberBasicVO.getAuthVOs().stream().map(auth -> new SimpleGrantedAuthority(auth.getAuth()))
+				.collect(Collectors.toList()));
+		
+		this.memberBasicVO = memberBasicVO;
+		
+		// 위의 람다식 대체
+//		List<SimpleGrantedAuthority> map = new ArrayList();
+//				
+//		for(Auth2VO auth2vo: userVO.getAuth2VOs()) {
+//			SimpleGrantedAuthority simpleGrantedAuthority=new SimpleGrantedAuthority(auth2vo.getAuth());
+//			map.add(simpleGrantedAuthority);
+//			
+//		}
+	}
 }
