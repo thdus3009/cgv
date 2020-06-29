@@ -79,14 +79,18 @@ public class TheaterController {
 		List<SeatVO> seat = theaterService.theaterSeat(num);
 		List<SeatSpaceVO> space = theaterService.theaterSpace(num);
 		String row = theaterService.selectRow(num); //int값으로
-		int r = Integer.parseInt(row)+65;
-		int col = theaterService.selectCol(num);
-		System.out.println("row : " + r);
-		System.out.println("col : " + col);
 		
+		char c = row.charAt(0);
+		int k = c-64;
+		int col = theaterService.selectCol(num);
+		System.out.println("row : " + k);
+		System.out.println("col : " + col);
+//		System.out.println("ㅠ ㅠ : " + seat.get(0).getGrade());
+//		System.out.println("ㅠ ㅠ : " + seat.get(7).getGrade());
 //		System.out.println(seat.size());
 //		System.out.println(space.size());
-		//mv.addObject("rowIdx", attributeValue)
+		mv.addObject("rowIdx", k);
+		mv.addObject("colIdx",col);
 		mv.addObject("path","Update");
 		mv.addObject("theater",theater);
 		mv.addObject("seat",seat);

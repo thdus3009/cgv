@@ -17,15 +17,14 @@ public class AdminCinemaService {
 	@Autowired
 	private CinemaRepository cinemaRepository;
 
-	public ModelAndView adminCinemaList(ModelAndView mv) throws Exception {
+	public List<CinemaVO> adminCinemaList() throws Exception {
 		List<CinemaVO> list = cinemaRepository.cinemaList();
 		
-		mv.addObject("list", list);
-		mv.setViewName("admin/cinema/cinemaList");
-		return mv;
+		return list;
 	}
 	
-	public ModelAndView adminCinemaSelect(ModelAndView mv, int num) throws Exception {
+	public ModelAndView adminCinemaSelect(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		CinemaVO cinemaVO = new CinemaVO();
 		cinemaVO.setNum(num);
 		List<TheaterVO> theaterList = cinemaRepository.selectTheaterList(cinemaVO);
@@ -34,7 +33,7 @@ public class AdminCinemaService {
 		
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("theaterList", theaterList);
-		mv.setViewName("admin/cinema/cinemaSelect");
+		
 		return mv;
 	}
 }
