@@ -34,7 +34,8 @@
 	$(".group.adult.teenager ul li:first").addClass("selected");
 	$(".group.adult.preference ul li:first").addClass("selected");
 
-
+	$(".btn-right").removeClass("on");
+	
 	//일반 인원 수 선택
 	$(".group.adult.common ul li").click(function(){
 //		console.log($(this).data("index"));
@@ -109,6 +110,7 @@
 	});
 	
 	
+	//인원 미선택시 dimmed 활성화 상태 
 	function personCheck(){
 		if(totalCount > 0){
 			$("#ticket .section-seat").removeClass("dimmed");
