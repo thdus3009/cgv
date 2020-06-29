@@ -13,9 +13,10 @@ $("#discCoupon .tpm_header").click(function(){
 //#payPoints .tpm_body - 포인트 
 $("#payPoints .tpm_header").click(function(){
 	discount_select("#payPoints ","#discCoupon ");
+	discount_point_ajax();
 });
 
-
+//할인 수단 방법 선택
 function discount_select(selected,other){
 	if($(selected +".tpm_body").css("display") == 'none'){
 		$(selected +".tpm_body").css("display","block");
@@ -25,6 +26,23 @@ function discount_select(selected,other){
 		$(selected+" .tpm_body").css("display","none");
 	}
 }
+
+//할인 수단 선택시 ajax으로 해당 값들을 읽어옴
+function discount_point_ajax(){
+	var id = $("#memberId").val();
+	
+	$.ajax({
+		url : '../point/pointSelectList',
+		type : 'get',
+		data : id
+		success : function(result){
+			console.log(result);
+		}
+	});
+}
+
+
+
 
 
 //포인트 및 기타 결제 수단 출력 내용 변경 
@@ -44,8 +62,8 @@ $("#payPoints .discount_list li").click(function(){
 });
 
 
+//li selected값 변경 
 function discount_form_change(selected){
-	
 	$(selected+".discount_list li").each(function(){
 		if($(this).hasClass("selected")){
 			$(selected+".discount_form .form").css("display","none");
@@ -116,6 +134,7 @@ function payment_inicis(data){
         merchant_uid : 'cgv_' + new Date().getTime(),
         amount : data.amount,
         buyer_email : data.email,
+        buyer_name : data.name,
         buyer_tel : data.tel,
         m_redirect_url : 'https://www.yourdomain.com/payments/complete'
         	
@@ -138,7 +157,9 @@ function payment_inicis(data){
             			merchant_uid : merchant_uid,
             			apply_num : apply_num,
             			pay_method : pay_method,
-            			pg : pg_provider
+            			pg : pg_provider,
+            			_csrf : $("#_csrf").val(),
+            			
             	},
             	success : function(result){
             		if(result > 0){
@@ -165,31 +186,26 @@ function payment_inicis(data){
 
 //예매 정보 + 좌석예매 정보 DB저장
 function reservation_save(result){
-	var reservationVO = {
-		movieNum : $("#movieNum").val(),
-		paymentNum : result,
-		movieTimeNum : $("#movieTimeNum").val(),
-		uid : 'tester',
-		filmType : $("#filmType").val(),
-		cinemaName : $("#cinemaName").val(),
-		theaterName : $("#theaterName").val(),
-		seats : $("#select_Seat").text(),
-		totalPrice : lastPrice,
-		common : commonCount,
-		teenager : teenagerCount,
-		preference : preferenceCount,
-		selectedSeatNums : selectedSeatNumList.join(",")
-	}
-	console.log(reservationVO);
-	
-	//잔여 좌석 계산
-	//	var seatRemain = $("#user-select-info .seatNum .restNum").text();
-	//	seatRemain = seatRemain - (commonCount+teenagerCount+preferenceCount);
-	
 	$.ajax({
 		url : '../reservation/reservationInsert',
 		type : 'post',
-		data : reservationVO,
+		data : { 
+			movieNum : $("#movieNum").val(),
+			paymentNum : result,
+			movieTimeNum : $("#movieTimeNum").val(),
+			uid : 'tester',
+			filmType : $("#filmType").val(),
+			cinemaName : $("#cinemaName").val(),
+			theaterName : $("#theaterName").val(),
+			seats : $("#select_Seat").text(),
+			totalPrice : lastPrice,
+			common : commonCount,
+			teenager : teenagerCount,
+			preference : preferenceCount,
+			selectedSeatNums : selectedSeatNumList.join(","),
+			_csrf : $("#_csrf").val()
+			
+		},
 		success : function(data){
 			console.log(data);
 			if(data > 0){

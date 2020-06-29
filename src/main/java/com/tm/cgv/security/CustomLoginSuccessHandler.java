@@ -45,7 +45,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		// session에 값 저장
 		HttpSession session = request.getSession();
-		session.setAttribute("memberVO", memberVO);
+		session.setAttribute("memberVO", memberVO.getMemberBasicVO());
 		
 		request.setAttribute("msg", "로그인 성공");
         request.setAttribute("path", "/");

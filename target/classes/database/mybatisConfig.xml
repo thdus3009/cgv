@@ -25,9 +25,10 @@
  		<typeAlias type="com.tm.cgv.seat.SeatVO" alias="SeatVO"/>
  		<typeAlias type="com.tm.cgv.seatBooking.SeatBookingVO" alias="SeatBookingVO"/>
  		<typeAlias type="com.tm.cgv.seatSpace.SeatSpaceVO" alias="SeatSpaceVO"/>
-
  		<typeAlias type="com.tm.cgv.payment.PaymentVO" alias="PaymentVO"/>
+ 		<typeAlias type="com.tm.cgv.point.PointVO" alias="PointVO"/>
  		
+
 
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>

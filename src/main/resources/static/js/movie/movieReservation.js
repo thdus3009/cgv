@@ -518,12 +518,14 @@
 		});
 		
 		
-		
 		//좌석예매페이지로 이동
 		$(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 			if($(this).hasClass("on") == true){
 //				$("#data-from").submit();
 				//alert("전송전송");
+				
+				console.log("aa: "+`${_csrf.parameterName}`)
+				console.log("bb: "+`${_csrf.token}`)
 				
 				$.ajax({
 					url : '../reservation/seatReservation',
@@ -534,7 +536,8 @@
 						cinemaName : $("#cinemaName").val(),
 						theaterName : $("#theaterName").val(),
 						filmType : $("#filmType").val(),
-						seatCount : $("#seatCount").val()
+						seatCount : $("#seatCount").val(),
+						_csrf : $("#_csrf").val()
 					},
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(result){
@@ -558,6 +561,7 @@
 		});
 		
 		
+		
 		//결제하기 페이지로 이동
 		$(".tnb_container").on("click",".tnb.step2 .btn-right",function(){
 			if($(this).hasClass("on")){
@@ -567,7 +571,7 @@
 					url : '../reservation/reservePayment',
 					type : 'post',
 					data : {
-						
+						_csrf : $("#_csrf").val()
 					},
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					success : function(result){
@@ -592,27 +596,6 @@
 				}
 			}
 		});
-		
-		
-		//결제완료 페이지로 이동
-		$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
-				//결제 작업을 위한 값 - 이니시스 : tel
-				var data = {
-//						tel = `${sessionScope.memberVO.phone}`;
-//						email = `${sessionScope.memberVO.email}`;
-//						amount = lastPrice;
-						tel : '010-1234-5678',
-						email : 'gtm1213@naver.com',
-						amount : '100'
-				}
-				//이니시스 실행
-				payment_inicis(data);
-				
-				//test 결제 없이 바로 예매 - 좌석예매 진행
-				//reservation_save(2);
-				
-		});
-		
 		
 		
 		
@@ -654,14 +637,6 @@
 		});
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		//스크롤 이동
 		$("#movie-list-content").scroll(function () {
 			var height = $(this).scrollTop();
@@ -671,10 +646,6 @@
 			
 		});
 
-	
-	
-	
-	
 	
 	//menu tab클리하여 ajax로 값 변경(정렬 방법 선택)
 	$(".btn-rank").click(function(){

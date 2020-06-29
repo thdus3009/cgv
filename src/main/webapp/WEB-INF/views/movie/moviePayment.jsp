@@ -4,7 +4,7 @@
 
 <div class="ticket_payment_method">
 	<a href="#" onclick="return false;" id="ticket_payment_top" class="sreader">결제시작</a>
-
+	<input type="hidden" id="memberId" value="${memberVO.name}">
 	<!-- 할인쿠폰 -->
 	<div class="tpm_wrap" id="discCoupon">
 		<h4 class="ts3_titlebar ts3_t1">
