@@ -22,10 +22,15 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 target/m2e-wtp/web-resources/META-INF/maven/com.tm/Cgv/pom.properties
-.classpath
-.factorypath
 target/classes/application-devInfo.properties
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.wst.common.component
+
+target/**
+.factorypath
+.classpath
+src/main/resources/application-devInfo.properties
+src/main/resources/application-devInfo.properties
+

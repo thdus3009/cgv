@@ -9,18 +9,14 @@
  		<typeAlias type="java.lang.Integer" alias="Integer"/>
  		<typeAlias type="java.lang.Long" alias="Long"/>
  		<typeAlias type="java.util.List" alias="List"/>
- 		
- 		
+ 		 		
+ 		<typeAlias type="com.tm.cgv.auth.AuthVO" alias="AuthVO"/>
  		<typeAlias type="com.tm.cgv.member.MemberVO" alias="MemberVO"/>
+ 		<typeAlias type="com.tm.cgv.member.MemberBasicVO" alias="MemberBasicVO"/>
  		<typeAlias type="com.tm.cgv.movieInfo.MovieInfoVO" alias="MovieInfoVO"/>
  		<typeAlias type="com.tm.cgv.board.bbs.BbsVO" alias="BbsVO"/>
  		<typeAlias type="com.tm.cgv.review.TestVO" alias="TestVO"/>
  		<typeAlias type="com.tm.cgv.review.ReviewVO" alias="ReviewVO"/>
- 		
- 		
-		
-
- 		
  		<typeAlias type="com.tm.cgv.cinema.CinemaVO" alias="CinemaVO"/>
  		<typeAlias type="com.tm.cgv.reserveCheck.ReserveCheckVO" alias="ReserveCheckVO"/>
  		<typeAlias type="com.tm.cgv.reservation.ReservationVO" alias="ReservationVO"/>
@@ -29,8 +25,10 @@
  		<typeAlias type="com.tm.cgv.seat.SeatVO" alias="SeatVO"/>
  		<typeAlias type="com.tm.cgv.seatBooking.SeatBookingVO" alias="SeatBookingVO"/>
  		<typeAlias type="com.tm.cgv.seatSpace.SeatSpaceVO" alias="SeatSpaceVO"/>
+
  		<typeAlias type="com.tm.cgv.payment.PaymentVO" alias="PaymentVO"/>
  		
+
 
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>

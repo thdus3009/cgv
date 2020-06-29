@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tm.cgv.theater.TheaterVO;
+
 @Mapper
 public interface CinemaRepository {
 	
@@ -12,6 +14,9 @@ public interface CinemaRepository {
 	
 	//Select
 	public CinemaVO cinemaSelect(CinemaVO cinemaVO) throws Exception;
+	
+	public List<TheaterVO> selectTheaterList(CinemaVO cinemaVO) throws Exception;
+	
 	
 	//Update
 	public int cinemaUpdate(CinemaVO cinemaVO) throws Exception;

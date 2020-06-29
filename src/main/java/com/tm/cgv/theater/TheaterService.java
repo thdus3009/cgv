@@ -94,12 +94,24 @@ public class TheaterService {
 	
 
 	//Select
+	public TheaterVO theaterSelect(int num) throws Exception {
+		return theaterRepository.theaterSelect(num);
+	}
+	
 	public List<SeatVO> theaterSeat(int num) throws Exception{
 		return theaterRepository.theaterSeat(num);
 	}
 	
 	public List<SeatSpaceVO> theaterSpace(int num) throws Exception{
 		return theaterRepository.theaterSpace(num);
+	}
+	
+	public String selectRow(int num) throws Exception{
+		return theaterRepository.selectRow(num);
+	}
+	
+	public int selectCol(int num) throws Exception{
+		return theaterRepository.selectCol(num);
 	}
 	
 	//Update
