@@ -68,6 +68,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</association>
  	</resultMap>
  	
+ 	<resultMap type="ReservationVO" id="errRate">
+ 		<id column="num" property="num"/>
+ 		<result column="movieNum" property="movieNum"/>
+
+		<association property="reviewVOs" javaType="ReviewVO">
+				<id column="num" property="num"/>
+				<result column="reservationNum" property="reservationNum"/>
+				<result column="egg" property="egg"/>
+				
+		</association>
+ 		
+ 	</resultMap>
  	
  	
  	
@@ -176,7 +188,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	
 
- 	<select id=""></select>
+ 	<select id="errRate" resultType="java.util.Map" parameterType="ReservationVO">
+ 		select R.movieNum,R.total,E.good from
+		(select re.movieNum,count(movieNum) total from
+		(select * from review where createAt is not null and deleteAt is null) as rv
+		Join reservation as re
+		on(rv.reservationNum = re.num )
+		where re.movieNum=31) R 
+		
+		inner Join
+		
+		(select re.movieNum,count(movieNum) good from
+		(select * from review where createAt is not null and deleteAt is null) as rv
+		Join reservation as re
+		on(rv.reservationNum = re.num)
+		where re.movieNum=#{movieNum} and egg=#{egg}) E
+		on(R.movieNum=E.movieNum)
+ 	</select>
 
  	
  

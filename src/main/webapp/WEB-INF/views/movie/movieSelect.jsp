@@ -462,7 +462,7 @@ var myChart = new Chart(ctx, {
     data: {
         labels: ['감독연출', '즐거움', '공감', '배우연기', 'OST'],
         datasets: [{
-            label: '',
+            label: 'Charm',
             data: [11, 19, 3, 5, 2],
              backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -523,8 +523,8 @@ var myChart = new Chart(ctx, {
     data: {
         labels: ['스트레스해소', '스토리', '영상미', '몰입감', '감동'],
         datasets: [{
-            label: '',
-            data: [11, 10, 8, 7, 2],
+            label: 'Emotion',
+            data: [11, 19, 3, 5, 16],
             scaleShowLabels : false,
             omitXLabels: true,
              backgroundColor: [

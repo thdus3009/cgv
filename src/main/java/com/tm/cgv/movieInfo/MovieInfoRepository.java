@@ -1,9 +1,11 @@
 package com.tm.cgv.movieInfo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.util.Pager;
 
 @Mapper
@@ -26,6 +28,8 @@ public interface MovieInfoRepository {
 	
 	
 	public MovieInfoVO movieSelectOne(int num) throws Exception;
+	
+	public Map<String, Object> errRate(ReservationVO reservationVO) throws Exception;
 
 
 }

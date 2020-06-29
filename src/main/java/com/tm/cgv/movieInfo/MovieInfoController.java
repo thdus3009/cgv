@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.util.MakeCalendar;
 import com.tm.cgv.util.MakeCalendarVO;
 import com.tm.cgv.util.Pager;
@@ -147,9 +148,13 @@ public class MovieInfoController {
 	}
 	
 	@GetMapping("movieSelect")
-	public ModelAndView movieSelect(MovieInfoVO movieInfoVO) throws Exception{
+	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		movieInfoVO = movieInfoService.movieSelect(movieInfoVO);
+		
+		reservationVO.setMovieNum(num);
+		System.out.println(reservationVO.getMovieNum());
+		
+		movieInfoVO = movieInfoService.movieSelect(movieInfoVO,reservationVO);
 		if(movieInfoVO==null) {
 			mv.setViewName("redirect:../error/404");
 		}
@@ -161,8 +166,8 @@ public class MovieInfoController {
 	}
 	
 	@GetMapping("movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO)throws Exception{
-		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO)throws Exception{
+		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO,reservationVO);
 		
 		mv.addObject("vo",movieInfoVO);
 		mv.addObject("path","Update");

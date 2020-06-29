@@ -1,7 +1,9 @@
 package com.tm.cgv.movieInfo;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import com.tm.cgv.movieImage.MovieImageRepository;
 import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.movieVideo.MovieVideoRepository;
 import com.tm.cgv.movieVideo.MovieVideoVO;
+import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.util.FileManager;
 import com.tm.cgv.util.FilePathGenerator;
 import com.tm.cgv.util.Pager;
@@ -98,7 +101,17 @@ public class MovieInfoService {
 		return result;
 	}
 	
-	public MovieInfoVO movieSelect(MovieInfoVO movieInfoVO) throws Exception{
+	public MovieInfoVO movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
+		//reservationVO=movieInfoRepository.errRate(reservationVO);
+		System.out.println(reservationVO.getMovieNum()+"uuuu");
+		System.out.println(reservationVO.getReviewVOs().getEgg()+"iiii");
+		Map< String , Object> map = movieInfoRepository.errRate(reservationVO);
+		Iterator<String> mm=map.keySet().iterator();
+		while(mm.hasNext()) {
+			String key = mm.next();
+			System.out.println("dd"+map.get(key));
+		}
+		System.out.println(reservationVO.getTotal());
 		
 		return movieInfoRepository.movieSelect(movieInfoVO);
 		

@@ -66,7 +66,7 @@ public class Pager {
 	}
 	public Integer getPerPage() {
 		if(this.perPage == null || this.perPage == 0) {
-			this.perPage=10;
+			this.perPage=7;
 		}
 		return perPage;
 	}
