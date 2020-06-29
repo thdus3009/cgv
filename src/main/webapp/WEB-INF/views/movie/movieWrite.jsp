@@ -94,6 +94,7 @@
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
 						<form action="./${board}${path}" method="post" enctype="multipart/form-data">
+							<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<fieldset>
 								
 								<div class="tbl_write">
@@ -219,7 +220,7 @@
 			console.log(s);//o
 			console.log(fileName);//o
 
-			$.post("../movieImage/movieImageDelete",{num:s,fileName:fileName},function(data){
+			$.post("../movieImage/movieImageDelete",{num:s,fileName:fileName,_csrf : $("#_csrf").val()},function(data){
 				console.log(data+"dd");//null
 				
 				if(data>0){

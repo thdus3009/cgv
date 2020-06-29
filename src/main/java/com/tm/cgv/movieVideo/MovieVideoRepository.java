@@ -6,5 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MovieVideoRepository {
 	
 	public int movieVideoInsert(MovieVideoVO movieVideoVO) throws Exception;
+	
+	public int movieVideoUpdate(MovieVideoVO movieVideoVO)throws Exception;
 
 }
