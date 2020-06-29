@@ -46,15 +46,12 @@
 						</div>
 						<div class="box-contents">
 							<div class="person-info1">
-<<<<<<< HEAD
 								<strong>${memberVO.name } 님</strong> <em>(${memberVO.id })</em>
 								<button id="go_edit_page" type="button" title="새창열림">정보수정</button>
-=======
 
 								<strong>${memberVO.name } 님</strong> <em>(${memberVO.id })</em>
 								<button id="go_edit_page" type="button" title="새창열림">정보수정</button>
 
->>>>>>> merge_branch
 							</div>
 							<div class="person-info2">
 								<p>전화번호 : ${memberVO.phone }</p>

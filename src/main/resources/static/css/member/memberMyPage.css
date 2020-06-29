@@ -218,11 +218,51 @@
 
 
 
+/* error */
+
+.error-sect{
+	width: 980px;
+    height: 280px;
+    padding-top: 150px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.error-sect > h3{
+	background: url(/images/myPage/ico_info.png) 50% 0 no-repeat;
+	height: auto;
+    margin: 0;
+    line-height: 1.2;
+    text-align: center;
+    padding-top: 50px;
+    color: #222222;
+    font-size: 23px;
+}
+
+.error-sect > p{
+	margin: 12px 0 40px;
+    color: #222222;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.error-btn{
+    border: 2px solid #e71a0f;
+    color: #e71a0f;
+    border-radius: 5%;
+    padding: 2px 5px;
+    margin: 0 5px;
+}
 
 
-
-
-
+.red-button{
+    border: 2px solid #e71a0f;
+    background-color: #e71a0f;
+    color: #ffffff;
+    border-radius: 5%;
+    padding: 2px 5px;
+    margin: 0 5px;
+}
 
 
 

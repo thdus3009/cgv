@@ -27,12 +27,10 @@
  		<typeAlias type="com.tm.cgv.seatSpace.SeatSpaceVO" alias="SeatSpaceVO"/>
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>
-<<<<<<< HEAD
-=======
+
  		<typeAlias type="com.tm.cgv.theater.TheaterVO" alias="TheaterVO"/>
  		<typeAlias type="com.tm.cgv.movieImage.MovieImageVO" alias="MovieImageVO"/>
  		<typeAlias type="com.tm.cgv.movieVideo.MovieVideoVO" alias="MovieVideoVO"/>
 
->>>>>>> merge_branch
  	</typeAliases>
  </configuration>
