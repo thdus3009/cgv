@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaRepository;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.theater.TheaterVO;
 
-@Component
-public class PathTest {
+@Service
+public class AdminCinemaService {
 
 	@Autowired
 	private CinemaRepository cinemaRepository;
