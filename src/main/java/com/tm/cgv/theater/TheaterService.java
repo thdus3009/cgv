@@ -106,6 +106,14 @@ public class TheaterService {
 		return theaterRepository.theaterSpace(num);
 	}
 	
+	public String selectRow(int num) throws Exception{
+		return theaterRepository.selectRow(num);
+	}
+	
+	public int selectCol(int num) throws Exception{
+		return theaterRepository.selectCol(num);
+	}
+	
 	//Update
 	public int theaterUpdate(TheaterVO  theaterVO) throws Exception{
 		return theaterRepository.theaterUpdate(theaterVO);

@@ -241,12 +241,7 @@
 <script type="text/javascript">
 
 
-var row = "${seat.rowIdx}";
-var col = "${seat.colIdx}";
-console.log(row);
-console,log(col);
-/* $("#seat_row").val(row);
-$("#seat_col").val(col); */
+
 
 
 

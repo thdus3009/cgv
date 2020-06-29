@@ -53,6 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select num,name from cinema
 	</select>
 	
+	<select id="selectRow" parameterType="Integer" resultType="String">
+		select max(rowIdx) from seat where theaterNum=20;
+	</select>
+	
+	<select id="selectCol" parameterType="Integer" resultType="Integer">
+		select max(colIdx) from seat where theaterNum=#{num}
+	</select>
+	
 	
 	<select id="theaterSelect" parameterType="Integer" resultType="TheaterVO">
 		select * from theater where num=#{num}

@@ -23,6 +23,10 @@ public interface TheaterRepository {
 	
 	public List<SeatSpaceVO> theaterSpace(int num) throws Exception;
 	
+	public String selectRow(int num) throws Exception;
+	
+	public int selectCol(int num) throws Exception;
+	
 	public int theaterUpdate(TheaterVO theaterVO) throws  Exception;
 	
 	public int theaterDelete(int num) throws Exception;
