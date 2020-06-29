@@ -159,7 +159,7 @@
 							<a href="#" onclick="return false;">CJ ONE 포인트</a>
 						</li>
 						<li id="cgvGiftPrePay_li" >
-							<div class="dimmCon"style="display: none;">&nbsp;</div>
+							<div class="dimmCon" style="display: none;">&nbsp;</div>
 							<a href="#" onclick="return false;">CGV 기프트카드</a>
 						</li>
 					</ul>

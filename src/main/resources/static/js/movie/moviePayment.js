@@ -1,29 +1,75 @@
 
 
+//discCoupon : 할인쿠폰
+//payPoints : 포인트 
 
 
 //#discCoupon .tpm_body - 할인 쿠폰
 $("#discCoupon .tpm_header").click(function(){
-	if($("#discCoupon .tpm_body").css("display") == 'none'){
-		$("#discCoupon .tpm_body").css("display","block");
-		$("#payPoints .tpm_body").css("display","none");
-	}else{
-		$("#discCoupon .tpm_body").css("display","none");
-	}
+	discount_select("#discCoupon ","#payPoints ");
 });
-
-
 
 
 //#payPoints .tpm_body - 포인트 
 $("#payPoints .tpm_header").click(function(){
-	if($("#payPoints .tpm_body").css("display") == 'none'){
-		$("#payPoints .tpm_body").css("display","block");
-		$("#discCoupon .tpm_body").css("display","none");
-	}else{
-		$("#payPoints .tpm_body").css("display","none");
-	}
+	discount_select("#payPoints ","#discCoupon ");
 });
+
+
+function discount_select(selected,other){
+	if($(selected +".tpm_body").css("display") == 'none'){
+		$(selected +".tpm_body").css("display","block");
+		$(other+".tpm_body").css("display","none");
+		
+	}else{
+		$(selected+" .tpm_body").css("display","none");
+	}
+}
+
+
+//포인트 및 기타 결제 수단 출력 내용 변경 
+$("#discCoupon .discount_list li").click(function(){
+	$("#discCoupon .discount_list li").removeClass("selected");
+	$(this).addClass("selected");
+	
+	discount_form_change("#discCoupon ");
+});
+
+//포인트 및 기타 결제 수단 출력 내용 변경 
+$("#payPoints .discount_list li").click(function(){
+	$("#payPoints .discount_list li").removeClass("selected");
+	$(this).addClass("selected");
+	
+	discount_form_change("#payPoints ");
+});
+
+
+function discount_form_change(selected){
+	
+	$(selected+".discount_list li").each(function(){
+		if($(this).hasClass("selected")){
+			$(selected+".discount_form .form").css("display","none");
+			console.log($(this).attr("id"));
+			
+			var str = [];
+			str = $(this).attr("id").split("_");
+			
+			$("#"+str).css("display","block");
+		}
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //info payment-ticket - 아래 바의 결제 부분 감추기
@@ -117,7 +163,7 @@ function payment_inicis(data){
 	
 }
 
-
+//예매 정보 + 좌석예매 정보 DB저장
 function reservation_save(result){
 	var reservationVO = {
 		movieNum : $("#movieNum").val(),
@@ -155,6 +201,33 @@ function reservation_save(result){
 		}
 	});
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
