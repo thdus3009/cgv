@@ -1,7 +1,7 @@
 package com.tm.cgv.util;
 
 
-public class Pager {
+public class Pager_reviewList {
 
 	private Long curPage; //현재페이지
 	private Integer perPage; //출력할 갯수
@@ -66,7 +66,7 @@ public class Pager {
 	}
 	public Integer getPerPage() {
 		if(this.perPage == null || this.perPage == 0) {
-			this.perPage=7;
+			this.perPage=10;
 		}
 		return perPage;
 	}

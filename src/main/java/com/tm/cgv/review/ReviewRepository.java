@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_reviewList;
 
 @Mapper
 public interface ReviewRepository {

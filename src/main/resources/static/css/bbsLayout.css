@@ -9,21 +9,12 @@ a{
 strong{
 	font-weight: 500;
 }
-select , table{
-	line-height: 27px;
-	height: 29px;
-	padding: 3px 5px;
-/* 	border: 1px solid #b4b3aa; */
-}
+
 option{
 	padding: 0px 2px 1px;
 }
 
-table{
-	width: 100%;
-	border-collapse: separate;
-	border-spacing: 0;
-}
+
 
 colgroup{
 	display: table-column-group;
@@ -33,6 +24,19 @@ col{
 }
 thead{
 	display: table-header-group;
+}
+/* ------------------------------------------------ */
+select , table{
+	line-height: 27px;
+	height: 29px;
+	padding: 3px 5px;
+/* 	border: 1px solid #b4b3aa; */
+}
+
+table{
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
 }
 
 table thead th{
@@ -54,7 +58,7 @@ td{
 tbody{
 	display: table-row-group;
 }
-
+/* ------------------------------------------------  */
 
 /*  ------------------------------------------------------------------------------- container */
 

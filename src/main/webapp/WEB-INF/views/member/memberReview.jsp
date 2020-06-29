@@ -89,7 +89,15 @@
 		
 	<div class="container"> <!-- Write, Update -->
 		<h4>내가 본 영화</h4><br>
-
+<!--   		<table>
+			<tr>
+			<td style="width: 20px;"><div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -50px" class="egg3"></div></td>
+			<td>좋았어요</td>
+			</tr>
+		</table>   -->
+		<button style="display: none;" id="test">
+			
+		</button>
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
 			<div class="modal-dialog">
@@ -142,7 +150,7 @@
 		</div>
 
 
-
+<!-- ----------------------------------------------------------------------------------------------------------------  -->
 
 
 		<!-- The Modal2 -->
@@ -230,13 +238,12 @@
 						<div style="font-size: small;" class="list_p_contents11">
 							<div id="title1" style="font-size: large; font-weight: bold;"></div>
 							<div id="egg1"> <!-- c:set의 value값이 1,0(int값넣기) -->
-
 							</div>
 							<div id="contents"></div>
 							<br>
 							<span id="uid"></span> | 
-							<span id="createAt"></span> | <span id="t1">삭제</span>
-						
+							<span id="createAt"></span> | <button id="t1" style="border: 0; outline:0; background-color: transparent !important;">삭제</button>
+					
 						</div>
 	
 					</div>
@@ -279,7 +286,6 @@
 	<script type="text/javascript" src="../js/review/checkByte.js"></script>
 
 	<script type="text/javascript" src="../js/review/reviewSubmit.js"></script>
-
 
 </body>
 </html>

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_reviewList;
 
 @Service
 public class ReviewService {
@@ -17,7 +17,7 @@ public class ReviewService {
 	private ReviewRepository reviewRepository;
 
 	
-	public List<ReviewVO> reviewList(String uid, Pager pager)throws Exception {
+	public List<ReviewVO> reviewList(String uid, Pager_reviewList pager)throws Exception {
 		pager.makeRow();
 		HashMap<String, Object> pa = new HashMap<String, Object>(); //HashMap<String, Object> //<key,value>
 		pa.put("uid", uid);

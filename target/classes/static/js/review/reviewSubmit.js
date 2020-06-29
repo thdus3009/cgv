@@ -154,15 +154,33 @@
 						},
 						success:function(data){
 							//버튼바꾸기-이벤트위임?
+							if(g_egg==1){
+								alert("ookkk");
+								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+										'<img alt="" src="${pageContext.request.contextPath}/images/good.JPG"></button>'+r)
+								var r = '<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>';
+								//redirect
+								$("#test").click();
+								
+							}else{
+								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+										'<img alt="" src="${pageContext.request.contextPath}/images/bad.JPG"></button>'+r)
+								var r = '<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>';
+								//redirect
+							}
 							
-							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+							//기존 버튼
 							
-							$("#r"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
+/*							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+							
+							$("#r"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)*/
 							
 						}
 					})
 					
 					 $("#exit2").click();
+					 
+						
 				}
 			}
 		}
@@ -173,6 +191,10 @@
 		 $("#exit3").click();
 	 });
 	 
+	 $("#test").click(function(){
+		 $("#r"+g_num.load(window.location.href+g_num));
+				
+	 });
 //	 ------------------------------------------------------------------------------
 	 
 /* 
@@ -254,6 +276,8 @@
 				
 			});
 			
+			
+			
 		}
 			//getList안에 식을 넣으면 "getList(count);"로 인해 자동으로 일단 한번 출력되고
 			// memberReview.jsp의 부모(result)영역의 위임으로 한번더 실행된다. //그러므로 getList에서 빼주어야함
@@ -263,7 +287,7 @@
 				
 				g_num=$(this).data("num2");
 				//g_num=$(this).attr("title");
-				console.log("??"+g_num);
+				console.log(g_num);
 				$.ajax({
 					type:"POST",
 					url:"./review_Select",
@@ -282,13 +306,27 @@
 						
 						$("#sss"+g_num).click();
 						
+						//모달 이미지 변경
+						var d=$("#egg1").html();
+						if(d==1){
+							$("#egg1").html('<table style=\"height:30px;\"><tr>'+
+									'<td style=\"height:30px; width:15px;\"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -20px -50px\" class=\"egg2\"></div></td>'+
+									'<td style=\"height:30px; width:100px;\">좋았어요</td>'+
+									'</tr></table>');
+							}else{
+							$("#egg1").html('<table style=\"height:30px;\"><tr>'+
+									'<td style=\"height:30px; width:15px;\"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -0px -50px\" class=\"egg3\"></div></td>'+
+									'<td style=\"height:30px; width:100px;\">별로예요</td>'+
+									'</tr></table>');
+							}
+						
 						}
 					})
 				
 			});
 			
 			//이벤트위임-버튼 변경
-	
+
 		
 		getList(count);
 		/* ------------------- */

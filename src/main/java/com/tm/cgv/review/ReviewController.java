@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.member.MemberVO;
-import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_reviewList;
 
 @Controller
 @RequestMapping("/review/**")
@@ -67,7 +67,7 @@ public class ReviewController {
 	
 	//예매정보 리스트로 출력 
 	@GetMapping("getList")
-	public  void getList(HttpSession session, Pager pager, Model model) throws Exception{
+	public  void getList(HttpSession session, Pager_reviewList pager, Model model) throws Exception{
 		//아직 회원가입, 로그인 쪽 안되니까 session은 나중에 적용하기
 		//MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		//String id = memberVO.getId();  
@@ -87,7 +87,6 @@ public class ReviewController {
 			  reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
 			  
 			  ar.add(reviewVO);
-			  System.out.println(reviewVO.getCreateAt());
 		  }
 		
 		
