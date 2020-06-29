@@ -14,10 +14,21 @@
 <link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- chart CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+<link href="${pageContext.request.contextPath}/css/test.css" rel="stylesheet" type="text/css">
+<!-- chart CDN -->
+
 <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -27,7 +38,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
-	
+	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container" >
 		<div class="c_nav">
 			<div class="nav_linemap">
@@ -51,6 +62,7 @@
 			<div class="wrap-movie-detail" id="select_main">
 				<div class="tit-heading-wrap">
 					<h3>영화상세</h3>
+					
 				</div>
 				<div class="sect-base-movie">
 					<div class="box-image"  >
@@ -65,22 +77,40 @@
 						<div class="title">
 							<strong id="title">${vo.title}</strong>
 							<em class="round lightblue">
-								<span>"현재 상영중"</span>
+								<span>현재 상영중</span>
 							</em>
 							<p>${vo.titleEng}</p>
 						</div>
 						
-						<div class="score">
-							<strong class="rate">
-								"예매율&nbsp;"
+						<div class="score" >
+							<strong class="percent">
+								예매율&nbsp;
 								<span>${vo.rate}</span>
 							</strong>
+						
+						
+							<div class="egg-gage small" style="background: url('../images/movie/movieList/bg_writeinfo.gif') 0 12px no-repeat;">
+									<!--   <img alt="" src="../images/movie/movieList/sprite_egg.png">-->
+									
+									<!-- <div class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png')" ></div> -->
+									<c:if test="${vo.errRate lt 50 }">
+									<!-- 터진  계란  -->
+									<span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -47px"></span>
+									</c:if>
+									
+									<c:if test="${vo.errRate lt 70 && vo.errRate ge 50 }">
+									<!-- 왕관없는 계란  -->
+									<span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -18px -47px"></span>
+									</c:if>
+									
+									<c:if test="${vo.errRate ge 70 }">
+									<!-- 왕관있는 계란 -->
+									 <span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
+									</c:if>
+								<span class="percent">${vo.errRate}</span>
+							</div>
 						</div>
 						
-						<div class="egg-gage-small">
-							<span class="egg great"></span>
-							<span class="percent">${vo.errRate}</span>
-						</div>
 						
 						<div class="spec">
 							<dl>
@@ -94,7 +124,8 @@
 								<dt>장르 :&nbsp;${vo.ganre}</dt>
 								<dd></dd>
 								<dt>&nbsp;/ 기본 : &nbsp;</dt>
-								<dd class="">${vo.ageLimit} 이상,&nbsp;${vo.runtime},&nbsp;${vo.country}</dd>
+								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime},&nbsp;${vo.country}</dd>
+								<br>
 								<dt>개봉 : &nbsp;</dt>
 								<dd class="on">${vo.openDate}</dd>
 							</dl>
@@ -105,11 +136,11 @@
 						
 						
 						<span class="like">
-							<a class="link-count" href="">
-								<i class="sprite_preegg btn_md default"></i>
-								"프리에그"
+							<a class="link-count" href="" >
+								<i class="sprite_preegg1 btn_md default"></i>
+								프리에그
 							</a>
-							<a class="link-reservation" href="">예매</a>
+							<a class="link-reservation" href="" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
 						</span>
 						
 					</div>
@@ -117,15 +148,15 @@
 					<!--여기까지가 상영시간, 감독 등등 나오는 곳----------------------------------------------------------------------------------------------------->
 
 					<!----------------------------------------------------------------------------------------------------- contents detail -->
-					<div class="cols-content" id="menu">
+					<div class="cols-content" id="menu" >
 					<div class="col_detail">
 					
-					<ul class="tab-menu">
-						<li class="on">
+					<ul class="tab-menu" style="padding-top: 40px;" >
+						<li class="on" >
 							<a title="현재 선택됨" href="">주요정보</a>
 						</li>
 						<li>
-							<a href="">트레일러</a>
+							<a href="" >트레일러</a>
 						</li>
 						<li>
 							<a href="">스틸컷</a>
@@ -138,23 +169,27 @@
 						</li>
 					</ul>
 					
-					<div class="sect-story-movie">
+					<div class="sect-story-movie" >
 						<strong>${vo.contents}</strong>
 					</div>
 					
-					<div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph sect-graph-emotion">
+					<div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph sect-graph-emotion" style="margin-top: 40px;">
 						<ul class="graph">
 							<li>
 								<strong>성별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								
+								 <div id="chart_div">
+								 	
+								 </div>
 								</div>
 							</li>
 							
 							<li>
 								<strong>연령별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
+								<div id="columnchart_values" style="width: 900px; height: 300px;">
 								
+								</div>
 								</div>
 							</li>
 						</ul>
@@ -162,26 +197,26 @@
 					
 					
 					<div class="movie-detail-ad">
-						<iframe src="" width="800" height="90"> </iframe>
+						<iframe src="" width="100%" height="90px"> </iframe>
 					</div>
 					
 					<div id="ctl00_PlaceHolderContent_Section_Trailer" class="sect-trailer" >
 						<div class="heading">
 							<h4>트레일러</h4>
-							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count"></span>
+							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
 						</div>
 						<ul>
 							<li>
 							<div class="box-image">
-								<a href="">
-									<img alt="" src="">
+								<a href="${vo.movieVideoVOs.videolink }">
+									<img alt="메인예고편" src="../images/movie/movieList/filmCover/rr.JPG" class="box-image">
 								</a>
 							</div>
 							<div class="box-contents">
 								<a href="">
 									<strong class="title">
 										<span class="ico-trailer hd">HD</span>
-										현장 조사 보고서 영상
+										메인 예고편 영상
 									</strong>
 								</a>
 								
@@ -190,34 +225,45 @@
 						</ul>
 					</div>
 					<!-- 여기까지가 트레일러 -->
-					<div id="ctl00_PlaceHolderContent_Section_Still_Cut">
+					
+					<div id="ctl00_PlaceHolderContent_Section_Still_Cut" class="sect-stillcut">
 						<div class="heading">
-						<h4>스틸컷</h4>
+							<h4>스틸컷</h4>
+							<span class="count">
+								<strong id="stillcut_current">1</strong>
+								21건
+							</span>
 						</div>
 						
 						<div class="slider-wrap">
 						
 						</div>
-					</div>
+					</div> 
 					<!-- 여기까지가 스틸컷 -->
-					<div class="sect-grade">
-						<div class="movie-grade">
+					<div class="sect-grade" style="margin-top: 40px;">
+						<div class="movie_grade">
 							<div class="egg_point">
 								<div class="title">
 									배우들의 연기가 메소드급인<br>
 									몰입하여 보게 되는 영화
 								</div>
-								<div class="rating">
+								<div class="rating" id="rating">
 									<div class="box">
-										<span class="sprite_preegg big default"></span>
-										<span class="desc">Pre Egg</span>
-										<span class="rate">94%</span>
+									
+									<!-- pre egg -->
+									<!-- <div class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png')no-repeat -25px -20px;" ></div> -->
+										
+										 <span class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -4px -35px;"></span> 
+										
+										<span class="desc" >PreEgg</span>
+										<span class="percent">94%</span>
 										<span class="tooltip">사전기대지수</span>
+										
 									</div>
 									<div class="box box_golden">
-										<span class="sprite_preegg big great"></span>
-										<span class="desc">Golden Egg</span>
-										<span class="rate">94%</span>
+										<span class="sprite_preegg big great" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -115px -135px;"></span>
+										<span class="desc">GoldenEgg</span>
+										<span class="percent">94%</span>
 										<span class="tooltip">실관람평지수</span>
 									</div>
 								</div>
@@ -227,11 +273,21 @@
 								<div class="box">
 									<div class="title">매력 포인트</div>
 									<div class="radar-graph" id="chart2">
+										<div id="myChartTest">
+											<canvas id="myChart" width="100" height="100">
+											
+											</canvas>
+										</div>
 									</div>
 								</div>
 								<div class="box">
 									<div class="title">감정 포인트</div>
 									<div class="radar-graph" id="chart3">
+										<div id="myChartTest">
+											<canvas id="myChart2" width="100" height="100">
+											
+											</canvas>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -322,9 +378,208 @@
 </div>
 
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+<!-- 성별 그래프 1번 -->
+<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['여성', 8],
+          ['남성', 2],
+         
+        ]);
 
 
+        // Set chart options
+        var options = {'title':'',
+                       'width':450,
+                       'height':320,
+                       backgroundColor : '#fdfcf0'};
 
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      </script>
+<!-- 연령별 그래프 2번 -->
+
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["10대", 8.94, "#b87333"],
+        ["20대", 10.49, "silver"],
+        ["30대", 19.30, "gold"],
+        ["40대", 21.45, "color: #e5e4e2"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation",
+                        },
+                       2]);
+
+      var options = {
+        title: "",
+        width: 490,
+        height: 320,
+        backgroundColor : '#fdfcf0',
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" 
+        },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+<!-- 방사형 chart  -->
+<script>
+
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+	type: 'radar',
+    data: {
+        labels: ['감독연출', '즐거움', '공감', '배우연기', 'OST'],
+        datasets: [{
+            label: '',
+            data: [11, 19, 3, 5, 2],
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                
+            ], 
+             borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+               
+            ], 
+            borderWidth: 1
+        }]
+    },
+    options: {		
+        
+        scales: { 
+        			           	
+            xAxes:[{
+            	gridLines:{
+					 display:false,
+				},
+				
+            	ticks:{
+					display:false
+					
+                },
+               
+            }],
+        	 
+            yAxes: [{
+				gridLines:{
+					 display:false,
+				},
+                
+                ticks: {
+                    beginAtZero: true,
+                    display:false
+                  
+                    
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+
+var ctx = document.getElementById('myChart2');
+var myChart = new Chart(ctx, {
+	type: 'radar',
+    data: {
+        labels: ['스트레스해소', '스토리', '영상미', '몰입감', '감동'],
+        datasets: [{
+            label: '',
+            data: [11, 10, 8, 7, 2],
+            scaleShowLabels : false,
+            omitXLabels: true,
+             backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                
+            ], 
+             borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+               
+            ], 
+            borderWidth: 1,
+            
+            
+        }]
+    },
+    options: {		
+        
+        scales: { 
+        			           	
+            xAxes:[{
+            	gridLines:{
+					 display:false,
+				},
+				
+            	ticks:{
+					display:false
+					
+                },
+               
+            }],
+        	 
+            yAxes: [{
+				gridLines:{
+					 display:false,
+				},
+                
+                ticks: {
+                    beginAtZero: true,
+                    display:false
+                  
+                    
+                }
+            }]
+        }
+    }
+});
+</script>
 
 </body>
 </html>

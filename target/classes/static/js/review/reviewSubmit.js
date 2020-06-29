@@ -59,6 +59,7 @@
 						reservationNum : g_num,
 						egg : g_egg,
 						contents : g_mContents.value,
+						_csrf : $("#_csrf").val(),
 					},
 					success:function(data){
 						var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
@@ -148,7 +149,8 @@
 							egg : g_egg,
 							contents : g_mContents.value,
 							charmPoint: g_charmPoint,
-							emotionPoint: g_emotionPoint
+							emotionPoint: g_emotionPoint,
+							_csrf : $("#_csrf").val(),
 						},
 						success:function(data){
 							//버튼바꾸기-이벤트위임?
@@ -261,12 +263,13 @@
 				
 				g_num=$(this).data("num2");
 				//g_num=$(this).attr("title");
-				console.log(g_num);
+				console.log("??"+g_num);
 				$.ajax({
 					type:"POST",
 					url:"./review_Select",
 					data:{
 						reservationNum : g_num,
+						_csrf : $("#_csrf").val(),
 					},
 					success:function(data){//여기서 data는 json
 						console.log(data);

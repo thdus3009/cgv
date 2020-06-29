@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
+<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 <c:forEach items="${list}" var="vo">
 
 		<div class="list_p">
