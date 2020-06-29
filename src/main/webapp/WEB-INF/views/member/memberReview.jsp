@@ -230,17 +230,12 @@
 						<div style="font-size: small;" class="list_p_contents11">
 							<div id="title1" style="font-size: large; font-weight: bold;"></div>
 							<div id="egg1"> <!-- c:set의 value값이 1,0(int값넣기) -->
-							<c:if test="">
-							
-							</c:if>
-							<c:if test="">
-							
-							</c:if>
+
 							</div>
 							<div id="contents"></div>
 							<br>
 							<span id="uid"></span> | 
-							<span id="createAt"></span> | 삭제
+							<span id="createAt"></span> | <span id="t1">삭제</span>
 						
 						</div>
 	

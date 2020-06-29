@@ -87,6 +87,7 @@ public class ReviewController {
 			  reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
 			  
 			  ar.add(reviewVO);
+			  System.out.println(reviewVO.getCreateAt());
 		  }
 		
 		

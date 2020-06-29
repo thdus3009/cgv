@@ -81,3 +81,11 @@
 	width: 80%;
 	min-width: 1000px;
 }
+
+.egg1 {
+	background: url("${pageContext.request.contextPath}/images/movie/movieList/sprite_egg.png") 
+	no-repeat;
+}
+.egg2 {
+	
+}

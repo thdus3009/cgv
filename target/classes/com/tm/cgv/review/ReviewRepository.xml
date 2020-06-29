@@ -6,19 +6,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.review.ReviewRepository">
 
-	<!-- 해당 조건의 num 받아오기 -->
+	<!-- 해당 조건의 num 받아오기 +egg-->
 	<select id="reviewList" parameterType="java.util.Map" resultType="ReviewVO">
-		SELECT R.num, R.movieNum, R.title, R.fileName, R.theaterName, R.cinemaName, R.movieTimeNum, R.screenDate, R.screenTime, R.common, R.teenager, R.preference, C.createAt
+		select L.num, L.movieNum, L.title, L.fileName, L.theaterName, L.cinemaName, L.movieTimeNum, L.screenDate, L.screenTime, L.common, L.teenager, L.preference, L.createAt, R.egg
+		from(SELECT R.num, R.movieNum, R.title, R.fileName, R.theaterName, R.cinemaName, R.movieTimeNum, R.screenDate, R.screenTime, R.common, R.teenager, R.preference, C.createAt
 		FROM (select MRI.num, MRI.movieNum, MRI.title, MRI.fileName, MRI.theaterName, MRI.cinemaName, MRI.movieTimeNum, T.screenDate, T.screenTime, MRI.common, MRI.teenager, MRI.preference
 		from movieTime T inner join (select RI.num, RI.movieNum, RI.title, M.fileName, RI.theaterName, RI.cinemaName, RI.movieTimeNum, RI.common, RI.teenager, RI.preference
 		from movieImage M inner join (select R.num, R.movieNum, R.cinemaName, R.theaterName, R.movieTimeNum, R.common, R.teenager, R.preference, I.title
 		from (select * from reservation 
-		where uid=#{uid} and deleteAt is null ) R inner join movieInfo I
+		where uid='admin' and deleteAt is null ) R inner join movieInfo I
 		on(R.movieNum = I.num)) RI
 		on(M.movieNum = RI.movieNum)) MRI
 		on(T.num = MRI.movieTimeNum)) R LEFT OUTER JOIN (select reservationNum, createAt from review where createAt is not null and deleteAt is null) C
-		ON R.num = C.reservationNum
-		ORDER BY R.num desc
+		ON R.num = C.reservationNum) L LEFT OUTER JOIN (select reservationNum, egg from review where createAt is not null and deleteAt is null) R 
+		on(L.num = R.reservationNum)
+		ORDER BY L.num desc
 		limit #{pager.startRow},#{pager.perPage}
 	</select>
 	
