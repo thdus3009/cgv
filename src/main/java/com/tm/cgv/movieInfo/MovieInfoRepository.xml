@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		order by
 		<choose>
 			<when test="kind == 'date'">
-				openDate desc
+				openDate asc
 				
 			</when>
 			<when test="kind == 'title'">
@@ -169,11 +169,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update movieInfo set deleteAt=now() where num=#{num}
  	</update>
  	
+
  	<select id="movieSelectOne" parameterType="Integer" resultType="MovieInfoVO">
  		select * from movieInfo where num = #{num}
  	</select>
  	
  	
+
+ 	<select id=""></select>
+
  	
  
  </mapper>
