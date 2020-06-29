@@ -25,8 +25,9 @@
 
 		//아이디 기입 조건 설명 출력
 		userID.addEventListener("focus",function(){
-			idc.innerText = '아이디는 6글자 이상입니다.';
-			
+			if (userID.value.length < 6) {
+				idc.innerText = '아이디는 6글자 이상입니다.';
+			}
 		});
 		
 		//아이디 조건 체크
@@ -46,7 +47,9 @@
 		
 		//패스워드 조건 설명 출력
 		pwd1.addEventListener("focus",function(){
+
 			pwd1c.innerText = '패스워드는는 6글자 이상입니다.';
+
 		});
 		
 		//패스워드 조건 체크

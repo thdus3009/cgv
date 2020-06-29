@@ -55,6 +55,9 @@ function spaceVO(){
 // 선택한 행, 열 수만큼 seat 생성
 function changeSelect(){
 	$("#seats_list").empty();
+	list = [];
+	rowList = [];
+	colList = [];
 	//list = [];
 
 		

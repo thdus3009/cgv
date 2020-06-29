@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+body	{
+	padding:0;
+	margin:0;
+}
+
+a {
+	text-decoration:none;
+}
+
+.side_nav	{
+	display:inline-block;
+	width:250px;
+	min-width:250px;
+	background:black;
+	float:left;
+}
+
+.main_content	{
+	display:inline-block;
+	width:1670px;
+	height:80px;
+	/* min-width:40%; */
+	background:pink;
+	float:left;
+}

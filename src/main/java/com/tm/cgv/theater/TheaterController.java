@@ -73,13 +73,25 @@ public class TheaterController {
 	
 	//Update
 	@GetMapping("theaterUpdate")
-	public ModelAndView theaterUpdate(TheaterVO theaterVO, ModelAndView mv, int num) throws Exception{
-		System.out.println("Num : " + num);
+	public ModelAndView theaterUpdate(ModelAndView mv, TheaterVO theaterVO, int num) throws Exception{
+	
+		TheaterVO theater = theaterService.theaterSelect(num);
 		List<SeatVO> seat = theaterService.theaterSeat(num);
 		List<SeatSpaceVO> space = theaterService.theaterSpace(num);
-		System.out.println(seat.size());
-		System.out.println(space.size());
+		String row = theaterService.selectRow(num); //int값으로
+		int r = Integer.parseInt(row)+65;
+		int col = theaterService.selectCol(num);
+		System.out.println("row : " + r);
+		System.out.println("col : " + col);
 		
+//		System.out.println(seat.size());
+//		System.out.println(space.size());
+		//mv.addObject("rowIdx", attributeValue)
+		mv.addObject("path","Update");
+		mv.addObject("theater",theater);
+		mv.addObject("seat",seat);
+		mv.addObject("space", space);
+		mv.setViewName("theater/theaterUpdate");
 
 		return mv;
 	}
@@ -118,4 +130,11 @@ public class TheaterController {
 		System.out.println(result+"dd");
 		return result;
 	}
+	
+	@GetMapping("admin")
+	public String home() throws Exception{
+		return "admin/adminTemplate";
+	}
+	
+
 }
