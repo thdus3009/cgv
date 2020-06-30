@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.discountInfo.DiscountInfoService;
+import com.tm.cgv.discountInfo.DiscountInfoVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
@@ -44,6 +46,8 @@ public class ResevationController {
 	private TimeADD timeAdd;
 	@Autowired
 	private PointService pointService;
+	@Autowired
+	private DiscountInfoService discountInfoService;
 
 	
 	@GetMapping("reservationResultSelectOne")
@@ -72,24 +76,32 @@ public class ResevationController {
 		int result = 0;
 		int seatCheck = 0;
 		
-		//할인 금액 디비에 적용
-		for (String str : discountList) {
-			String arr[]  = str.split("_");
-			
-			PointVO pointVO = new PointVO();
-			pointVO.setMemberNum(reservationVO.getUid());
-			pointVO.setType(arr[0]);
-			pointVO.setPrice(Integer.parseInt(arr[1]));
-			
-			pointService.pointDiscountUpdate(pointVO);
-		}
-		
 		//예매 번호 등록 - Reservation
 		result = reservationService.reservationInsert(reservationVO);
 		result = reservationVO.getNum();
 		
 		
-		//좌석 번호 등록 - SeatBooking
+		//할인 금액 디비에 적용 + 할인 정보 테이블 추가
+		for (String str : discountList) {
+			String arr[]  = str.split("_");
+			
+			//할인금액 point에 적용(빼기)
+			PointVO pointVO = new PointVO();
+			pointVO.setMemberNum(reservationVO.getUid());
+			pointVO.setType(arr[0]);
+			pointVO.setPrice(Integer.parseInt(arr[1]));
+			pointService.pointDiscountUpdate(pointVO);
+			
+			//할인정보 추가
+			DiscountInfoVO discountInfoVO = new DiscountInfoVO();
+			discountInfoVO.setReservationNum(result);
+			discountInfoVO.setType(arr[0]);
+			discountInfoVO.setDiscountPrice(Integer.parseInt(arr[1]));
+			discountInfoService.discountInfoInsert(discountInfoVO);
+		}
+		
+		
+		//좌석 번호 등록 : SeatBooking
 		if(result > 0) {
 			
 			String [] selectedSeat = selectedSeatNums.split(",");
@@ -115,8 +127,6 @@ public class ResevationController {
 				movieTimeService.remainSeatUpdate(movieTimeVO);
 			}
 		}
-
-		
 		return result;
 	}
 	
@@ -129,14 +139,6 @@ public class ResevationController {
 	@PostMapping("/seatReservation")
 	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("INN");
-		System.out.println("영화번호 : "+reservationVO.getMovieNum());
-		System.out.println("영화시간 번호 : "+reservationVO.getMovieTimeNum());
-		System.out.println("극장명 : "+reservationVO.getCinemaName());
-		System.out.println("상영관 : "+reservationVO.getTheaterName());
-		System.out.println("2D/3D : "+reservationVO.getFilmType());
-		System.out.println("총 좌석수 : "+seatCount);
-		
 		
 		MovieInfoVO movieInfoVO = movieInfoService.movieSelectOne(reservationVO.getMovieNum());
 		MovieTimeVO movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
