@@ -133,20 +133,19 @@ public class ReviewController {
 	public ReviewVO review_Select(ReviewVO reviewVO, Model model)throws Exception {
 		System.out.println("modal3 테스트 : "+reviewVO.getReservationNum());
 		
-		ReviewVO reviewSelect = reviewService.reviewSelect(reviewVO);
-		
-		System.out.println("영화제목:"+reviewSelect.getTitle());
-		System.out.println("아이디:"+reviewSelect.getUid());
-		System.out.println("egg:"+reviewSelect.getEgg());
-				
+		ReviewVO reviewSelect = reviewService.reviewSelect(reviewVO);				
 		return reviewSelect;//json
 	
 	}
 	
 	//review delete (마이페이지 , 상세페이지)
-	@PostMapping("review_Delete")
-	public void review_Delete()throws Exception {
-		
+	@GetMapping("review_Delete")
+	@ResponseBody //리턴되는 값은 View 를 통해서 출력되지 않고 HTTP Response Body 에 직접 쓰여지게 됨.
+	public int review_Delete(ReviewVO reviewVO)throws Exception {
+		System.out.println("delete 테스트 : "+reviewVO.getReservationNum());
+		int result=0;
+		result = reviewService.review_Delete(reviewVO);
+		return result;
 	}
 	
 }

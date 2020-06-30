@@ -43,11 +43,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(M.movieNum = I.movieNum)) M inner join (select * from review) R
 		on(M.num = R.reservationNum)
 		where R.createAt is not null and R.deleteAt is null 
-		and R.reservationNum = #{reservationNum};
+		and R.reservationNum = #{reservationNum}
 	</select>
 	
 	
-	
+	<update id="review_Delete">
+	UPDATE review
+	SET deleteAt = now()
+	where reservationNum=#{reservationNum}
+	</update>
 	
 	
 	

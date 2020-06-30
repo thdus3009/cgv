@@ -41,4 +41,8 @@ public class ReviewService {
 		
 		return reviewRepository.reviewSelect(reviewVO);
 	}
+	
+	public int review_Delete(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.review_Delete(reviewVO);
+	}
 }

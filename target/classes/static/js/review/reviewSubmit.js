@@ -67,6 +67,7 @@
 									'<img alt="" src="../images/good.JPG"></button>'+
 									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')								
 							alert("리뷰가 등록되었습니다.")
+							
 						}else{
 							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
 									'<img alt="" src="../images/bad.JPG"></button>'+
@@ -91,7 +92,7 @@
 		}
 	
 		 });
-	 
+
 //	 ------------------------------------------------------------------------------
 	 
 	 //charmpoint
@@ -329,14 +330,32 @@
 
 		
 		getList(count);
-		/* ------------------- */
+		
 		$("#more").click(function(){
 			count++;
 			getList(count);
 		});
 
-		$("#t1").click(function(){
-			alert("dddddd");
+		/* ---------delete---------- */
+		
+		$("#delete").click(function(){
+			if(confirm("작성한 평점을 삭제하시겠습니까?")== true){
+				$("#exit3").click();
+				$.ajax({
+					type:"GET",
+					url:"./review_Delete",
+					data:{
+						reservationNum : g_num,
+					},
+					success:function(data){
+						if(data!=null){
+							alert("삭제 완료");
+							location.reload();
+						}
+					}
+				})
+					
+			}
 		});
 		
 		
