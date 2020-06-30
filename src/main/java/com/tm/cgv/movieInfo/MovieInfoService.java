@@ -1,6 +1,7 @@
 package com.tm.cgv.movieInfo;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,7 @@ public class MovieInfoService {
 	}
 	
 	public List<MovieInfoVO> movieList(Pager pager) throws Exception{
+			
 		pager.makeRow();
 		long totalCount = movieInfoRepository.movieNumCount(pager);
 		pager.makeBlock(totalCount);
@@ -102,18 +104,51 @@ public class MovieInfoService {
 	}
 	
 	public MovieInfoVO movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
-		//reservationVO=movieInfoRepository.errRate(reservationVO);
-		System.out.println(reservationVO.getMovieNum()+"uuuu");
-		System.out.println(reservationVO.getReviewVOs().getEgg()+"iiii");
-		Map< String , Object> map = movieInfoRepository.errRate(reservationVO);
-		Iterator<String> mm=map.keySet().iterator();
-		while(mm.hasNext()) {
-			String key = mm.next();
-			System.out.println("dd"+map.get(key));
-		}
-		System.out.println(reservationVO.getTotal());
 		
-		return movieInfoRepository.movieSelect(movieInfoVO);
+		System.out.println(reservationVO.getMovieNum()+"uuuu");
+		
+		//vo에  total과 good을 받아줄 변수명이 없으므로 map으로 받아서 가지고 옴
+		//eggRate계산
+		Map< String , Object> map = movieInfoRepository.errRate2(reservationVO);
+		Iterator<String> mm = map.keySet().iterator();
+		
+		long total = (long)map.get("total");
+		long good = (long)map.get("good");
+		
+		double total2 = Double.valueOf(total);
+		double good2 = Double.valueOf(good);
+		
+		if(total2>0) { //작성된 리뷰가 1개 이상일 경우 계산해서 errRate를 업데이트
+			double errRate =(double)(good2/total2)*100;				
+			System.out.println(errRate + " : errRate");
+			
+			movieInfoVO.setErrRate(errRate);
+			
+			movieInfoRepository.errUpdate(movieInfoVO);
+		
+		}
+		
+		//예매율 계산
+		Map<String, Object> map2 = movieInfoRepository.rate(reservationVO);
+		Iterator<String> mm2 = map.keySet().iterator();
+		
+		float totalTicket = ((BigDecimal)map2.get("totalTicket")).floatValue();
+		float movieOne = (BigDecimal)map2.get("movieOne")==null?0.0f:((BigDecimal)map2.get("movieOne")).floatValue();
+
+		if(movieOne>0) { //예매된 표가 1개 이상일 때 업데이트
+			double rate = (double)(movieOne/totalTicket)*100;
+			double rate2 = Double.parseDouble(String.format("%.1f", rate));			
+			System.out.println(rate2 + " : rate");
+			
+			movieInfoVO.setRate(rate2);
+			
+			movieInfoRepository.rateUpdate(movieInfoVO);
+		
+		}
+		
+		movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); //
+		
+		return movieInfoVO ;
 		
 	}
 	

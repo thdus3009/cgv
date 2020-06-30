@@ -28,8 +28,8 @@ public class ReservationVO {
 	
 	private ReviewVO reviewVOs;//리뷰
 	
-	private int total;
-	private int good;
+	//private int total;
+	//private int good;
 	
 //	movieInfo join해서 불러올값
 //	private String title;

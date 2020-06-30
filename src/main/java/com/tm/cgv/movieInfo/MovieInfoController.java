@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.reservation.ReservationVO;
+import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.MakeCalendar;
 import com.tm.cgv.util.MakeCalendarVO;
 import com.tm.cgv.util.Pager;
@@ -152,7 +153,12 @@ public class MovieInfoController {
 		ModelAndView mv = new ModelAndView();
 		
 		reservationVO.setMovieNum(num);
-		System.out.println(reservationVO.getMovieNum());
+		System.out.println(reservationVO.getMovieNum()+"con");
+		
+		//reservationVO.setReviewVOs(reviewVOs);
+		//reservationVO.setTotal(total);
+		//System.out.println(reservationVO.getTotal());
+		
 		
 		movieInfoVO = movieInfoService.movieSelect(movieInfoVO,reservationVO);
 		if(movieInfoVO==null) {

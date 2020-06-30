@@ -263,7 +263,7 @@
 									<div class="box box_golden">
 										<span class="sprite_preegg big great" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -115px -135px;"></span>
 										<span class="desc">GoldenEgg</span>
-										<span class="percent">94%</span>
+										<span class="percent">${vo.errRate}</span>
 										<span class="tooltip">실관람평지수</span>
 									</div>
 								</div>
@@ -399,8 +399,8 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['여성', 8],
-          ['남성', 2],
+          ['여성', 7],
+          ['남성', 1],
          
         ]);
 

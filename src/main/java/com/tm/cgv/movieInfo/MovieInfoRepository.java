@@ -29,7 +29,13 @@ public interface MovieInfoRepository {
 	
 	public MovieInfoVO movieSelectOne(int num) throws Exception;
 	
-	public Map<String, Object> errRate(ReservationVO reservationVO) throws Exception;
+	public Map<String, Object> errRate2(ReservationVO reservationVO) throws Exception;
 
-
+	public long errUpdate(MovieInfoVO movieInfoVO) throws Exception;
+	//insert, update , delete는 리턴타입이 무조건 넘버타입이어야함. int, long 등등
+	//그래서 xml 파일에 따로 리턴 타입을 적어주지 않는 것
+	
+	public Map<String, Object> rate(ReservationVO reservationVO) throws Exception;
+	
+	public long rateUpdate(MovieInfoVO movieInfoVO) throws Exception;
 }
