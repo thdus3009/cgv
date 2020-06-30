@@ -95,3 +95,26 @@ main{
 .pager{
 	item-align: center;
 }
+
+.btn_s{
+	display: flex;
+	justify-content: center;
+}
+
+#cancle {
+	border: none;
+	background-color: #d9dee3;
+	color: #000;
+	border-radius: 0.25rem;
+	padding: 5px 10px ;
+	margin: 0 5px;
+}
+
+#btn{
+	border: none;
+	background-color: #dc3545;
+	color: #fff;
+	border-radius: 0.25rem;
+	padding: 5px 10px ;
+	margin: 0 5px;
+}

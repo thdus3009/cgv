@@ -52,6 +52,9 @@ h3{
 	width: 135px;
 	height: 135px;
 	vertical-align: middle;
+	
+	border: 3px solid #7b6746;
+	border-radius: 50%;
 }
 
 .profile-mask{
@@ -128,11 +131,24 @@ h3{
 
 .col-my-coupon > h3{
 	width: 246px;
-	background-position: 31px 12px;
 	display: inline-block;
 	height: 40px;
 	margin: 0 0 14px;
-	background: url("../images/myPage/sprite_text.png") no-repeat 0 0;
+	background: url("/images/myPage/sprite_text.png") no-repeat 0 0;
+	background-position: 30px 12px;
+	line-height: 40px;
+	font:  0/0 a;
+	vertical-align: middle;
+	zoom:1;
+}
+
+.col-my-coupon > h4{
+	width: 246px;
+	display: inline-block;
+	height: 40px;
+	margin: 0 0 14px;
+	background: url("/images/myPage/sprite_text.png") no-repeat 0 0;
+	background-position: 26px -26px;
 	line-height: 40px;
 	font:  0/0 a;
 	vertical-align: middle;
@@ -232,6 +248,18 @@ h3{
 	line-height: 1;
 }
 
+.btn-setfav{
+    padding-left: 9px;
+    background: #3b3425 url(../images/common/ico/ico_plus02.png) no-repeat 80px 15px;
+    border: 2px solid #7b6746;
+    color: #dac190 !important;
+    font-size: 11px;
+    text-align: left;
+}
+
+.btn-setfav > a{
+    color: #dac190;
+}
 
 
 /* error */
@@ -245,7 +273,7 @@ h3{
 }
 
 .error-sect > h3{
-	background: url(/images/myPage/ico_info.png) 50% 0 no-repeat;
+	background: url("/images/myPage/ico_info.png") 50% 0 no-repeat;
 	height: auto;
     margin: 0;
     line-height: 1.2;

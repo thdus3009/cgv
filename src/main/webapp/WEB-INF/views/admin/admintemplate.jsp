@@ -25,7 +25,7 @@
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
-		<a href="/"><img src="/images/header/h1_cgv.png"
+		<a href="/admin"><img src="/images/header/h1_cgv.png"
 			class="admin-logo" /></a>
 		<!-- 검색 바-->
 		<form
@@ -48,6 +48,7 @@
 				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
+					<a class="dropdown-item" href="/">메인 페이지로</a>
 					<a class="dropdown-item" href="#">관리자 설정</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="login.html">로그아웃</a>
@@ -63,33 +64,33 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="index.html">
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="index.html">
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="./admin/movie/movieWrite">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
-						</a> <a class="nav-link" href="../admin/cinemaList">
+						</a> <a class="nav-link" href="./admin/cinema/cinemaList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 극장 관리
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리

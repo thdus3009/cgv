@@ -16,7 +16,7 @@
 <title>관리자 페이지</title>
 
 <link rel="stylesheet" href="/css/styles.css" />
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+<link rel="stylesheet" href="/css/admin/admin.css" />
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
@@ -48,8 +48,8 @@
 				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a>
-					<a class="dropdown-item" href="#">관리자 설정</a>
+					<a class="dropdown-item" href="/">메인 페이지로</a> <a
+						class="dropdown-item" href="#">관리자 설정</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="login.html">로그아웃</a>
 				</div></li>
@@ -64,13 +64,13 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="./admin/notice/noticeList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="./admin/member/memberList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
@@ -105,15 +105,49 @@
 			<main>
 				<div class="container-fluid">
 					<h1>AdminPage</h1>
-
-
-
+					<p class="pp">관리자 정보 수정 페이지</p>
+					<div>
+						<form action="" method="get">
+							<table>
+								<tr>
+									<th>이름</th>
+									<td><input type="text" required="required" value=""></td>
+								</tr>
+								<tr>
+									<th>아이디</th>
+									<td><input type="text" required="required" value=""></td>
+								</tr>
+								<tr>
+									<th>비밀번호</th>
+									<td><input type="text" class="pwd" value="" required="required"></td>
+								</tr>
+								<tr>
+									<th>비밀번호 확인</th>
+									<td><input type="text" class="pwd_chk" required="required"></td>
+								</tr>
+							</table>
+							<div class="btn_s">
+							<button id="cancle" type="submit">수정하기</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</main>
 		</div>
 	</div>
 
 	<!-- 스크립트 -->
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	$("#cancle").click(function(){
+		if($(".pwd").val() != $(".pwd_chk").val()){
+			alert("비밀번호가 일치하지 않습니다!");
+		}
+	});
+
+	</script>
+	
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>

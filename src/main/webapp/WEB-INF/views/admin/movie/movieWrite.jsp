@@ -12,7 +12,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<!-- movieWAdd -->
+<!-- movieWrite -->
 <title>관리자 페이지</title>
 
 <link rel="stylesheet" href="/css/styles.css" />
@@ -105,17 +105,47 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>Movie Add</h1>
+					<h1>Movie Write</h1>
 					<div>
+
 						<div class="contents">
 							<div>
+
 								<div class="col_content">
+
+									<!----------------------------------------------------------------------------------------------------- contents detail -->
+
 									<div class="col_detail">
-										<form action="./${board}${path}" method="post" enctype="multipart/form-data">
+
+										<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
+										<div class="customer_top">
+											<!-- 뭐하는 부분일까요..? -->
+											<h2 class="tit">Movie${path}</h2>
+											<span>CGV이용과 관련된 사항에 대하여서 작성가능합니다.</span>
+										</div>
+
+										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
+										<form action="./${board}${path}" method="post"
+											enctype="multipart/form-data">
 											<fieldset>
+
 												<div class="tbl_write">
+
+													<input type="text" value="${vo.movieImageVOs.num}"
+														id="num1">
+													<!-- imgaeVO의 AI인 num -->
+													<input type="text" value="${vo.num}" name="num"> <input
+														type="text" value="${vo.movieImageVOs.fileName}"
+														id="fileName">
+
 													<table class="tbl_bbs_write">
+														<colgroup>
+															<col style="width: 100px;">
+															<col style="width: 320px;">
+														</colgroup>
 														<tbody>
+
+
 															<div class="form-group">
 																<label for="files">타이틀 이미지:</label> <input type="file"
 																	class="form-control files" id="files"
@@ -132,44 +162,54 @@
 															<div class="form-group">
 																<label for="videolink">예고 영상:</label> <input type="text"
 																	class="form-control videolink" id="videolink"
-																	placeholder="예고편 영상 링크" name="videolink">
+																	placeholder="예고편 영상 링크" name="videolink"
+																	value="${vo.movieVideoVOs.videolink }"
+																	style="padding: 12px;">
 															</div>
 															<div class="form-group">
 																<label for="title">제목:</label> <input type="text"
-																	class="form-control" id="title" name="title">
+																	class="form-control" id="title" name="title"
+																	value="${vo.title }">
 															</div>
 															<div class="form-group">
 																<label for="titleEng">영문제목:</label> <input
 																	type="text" class="form-control" id="titleEng"
-																	name="titleEng">
+																	name="titleEng" value="${vo.titleEng }">
 															</div>
 															<div class="form-group">
 																<label for="runtime">러닝타임:</label> <input type="text"
-																	class="form-control" id="runtime" name="runtime">
+																	class="form-control" id="runtime" name="runtime"
+																	value="${vo.runtime }">
 															</div>
 															<div class="form-group">
 																<label for="director">감독:</label> <input type="text"
-																	class="form-control" id="director" name="director">
+																	class="form-control" id="director" name="director"
+																	value="${vo.director }">
 															</div>
 															<div class="form-group">
 																<label for="actor">출연 배우:</label> <input type="text"
-																	class="form-control" id="actor" name="actor">
+																	class="form-control" id="actor" name="actor"
+																	value="${vo.actor }">
 															</div>
 															<div class="form-group">
 																<label for="ganre">장르:</label> <input type="text"
-																	class="form-control" id="ganre" name="ganre">
+																	class="form-control" id="ganre" name="ganre"
+																	value="${vo.ganre }">
 															</div>
 															<div class="form-group">
 																<label for="ageLimit">연령제한:</label> <input type="text"
-																	class="form-control" id="ageLimit" name="ageLimit">
+																	class="form-control" id="ageLimit" name="ageLimit"
+																	value="${vo.ageLimit }">
 															</div>
 															<div class="form-group">
 																<label for="country">국가:</label> <input type="text"
-																	class="form-control" id="country" name="country">
+																	class="form-control" id="country" name="country"
+																	value="${vo.country }">
 															</div>
 															<div class="form-group">
 																<label for="openDate">개봉일:</label> <input type="date"
-																	class="form-control" id="openDate" name="openDate">
+																	class="form-control" id="openDate" name="openDate"
+																	value="${vo.openDate }">
 															</div>
 
 															<c:set var="now" value="<%=new java.util.Date()%>" />
@@ -189,7 +229,7 @@
 															<div class="form-group">
 																<label for="contents">Contents:</label>
 																<textarea rows="" cols="" class="form-control"
-																	id="contents" name="contents"></textarea>
+																	id="contents" name="contents">${vo.contents }</textarea>
 
 															</div>
 
