@@ -141,9 +141,17 @@ public class MemberService implements UserDetailsService {
  	// memberList 띄우기
  	public List<MemberBasicVO> memberList(Pager pager) throws Exception {
  		
- 		long totalNum = memberRepository.memberCount();
+ 		System.out.println("startNum : "+pager.getStartNum());
+ 		System.out.println("perpage : "+pager.getPerPage());
+ 		long totalNum = memberRepository.memberCount(pager);
 		pager.makeRow();
 		pager.makeBlock(totalNum);
  		return memberRepository.memberList(pager);
+ 	}
+ 	
+ 	// member 지우기 (실데이터 삭제 아님)
+ 	public int memberDelete(MemberBasicVO memberBasicVO) throws Exception {
+ 		
+ 		return memberRepository.memberDelete(memberBasicVO);
  	}
 }

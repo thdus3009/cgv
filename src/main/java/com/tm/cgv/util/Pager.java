@@ -134,6 +134,9 @@ public class Pager {
 		this.search = search;
 	}
 	public String getKind() {
+		if(this.kind == null) {
+			this.kind ="";
+		}
 		return kind;
 	}
 	public void setKind(String kind) {

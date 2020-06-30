@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
+import com.tm.cgv.movieInfo.MovieInfoService;
+import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -19,18 +21,27 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private MovieInfoService movieInfoService;
+	
 	@GetMapping("/")
 	public String admin() throws Exception {
 		return "admin/adminIndex";
 	}
 	
+	//==============================
 	// memberPart
+	//==============================
+	
 	// memberList
 	@GetMapping("member/memberList")
 	public ModelAndView memberList(Pager pager) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
-		System.out.println(pager.toString());
+		System.out.println("memberList");
+		System.out.println(pager.getCurPage());
+		System.out.println(pager.getKind());
+		System.out.println(pager.getSearch());
 		
 		List<MemberBasicVO> list = memberService.memberList(pager);
 		mv.addObject("list", list);
@@ -39,11 +50,22 @@ public class AdminController {
 		return mv;
 	}
 	
-	// memberDelete
-	@GetMapping("member/memberDelete")
-	public ModelAndView memberDelete(MemberBasicVO memberBasicVO) throws Exception {
+	//==============================
+	// movieTime
+	//==============================
+	
+	// movieTimeWrite
+	@GetMapping("movieTime/write")
+	public ModelAndView movieTimeWrite(Pager pager) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
+		
+		pager.setPerPage(12);
+		List<MovieInfoVO> movieInfoList = movieInfoService.movieList(pager);
+		mv.addObject("list", movieInfoList);
+		mv.addObject("size", movieInfoList.size());
+		mv.addObject("perRow", 6);
+		mv.setViewName("admin/movieTime/movieTImeWrite");
 		return mv;
 	}
 }

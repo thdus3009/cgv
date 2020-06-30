@@ -285,3 +285,12 @@ ON(M.username = A.username);
   
 SELECT * FROM cinema WHERE local = "서울" limit 2,2;
 
+SELECT * FROM member WHERE username = 'user94' AND enabled=1;
+
+SELECT * FROM member
+WHERE username LIKE '%user0%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;
+
+SELECT count(username) FROM member
+WHERE username LIKE '%user0%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;
+
+SELECT * FROM member WHERE username LIKE '%'||'user0'||'%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;

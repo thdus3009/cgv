@@ -21,8 +21,11 @@ public interface MemberRepository {
 	public MemberBasicVO phoneCheck(MemberBasicVO memberBasicVO) throws Exception;
 	
 	// pager를 위한 count 값 가져오기
-	public Long memberCount() throws Exception;
+	public Long memberCount(Pager pager) throws Exception;
 	
 	// 멤버 list 가져오기
 	public List<MemberBasicVO> memberList(Pager pager) throws Exception;
+	
+	// 멤버 하나 지우기
+	public int memberDelete(MemberBasicVO memberBasicVO) throws Exception;
 }
