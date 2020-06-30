@@ -93,7 +93,7 @@
 
 		<div id="result">
 			<c:forEach items="${look}" var="vo">
-				<div class="list_p2">
+				<div class="list_p2"><!-- dd -->
 					<div class="list_p_content">
 						<!-- 이미지 주소부분 나중에 수정해야함 -->
 						<div class="list_p_photo">
@@ -101,25 +101,21 @@
 						</div>
 						<div class="list_p_contents1">
 							<div style="font-weight: bold; font-size: large;">${vo.title}</div>
-							<table><!-- 알, 아이디, 날짜 -->
-								<tr>
-									<td style="width: 30px;">
-										<c:if test="${vo.egg eq 1}">
-										<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -50px" class="egg3"></div>
-										</c:if>
-										<c:if test="${vo.egg eq 0}">
-										<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -50px" class="egg3"></div>
-										</c:if>
-									</td>
-									<td>${vo.uid}</td> 
-									<td> | ${vo.createAt}</td>
-								</tr>
-							</table>
-							<div>${vo.contents}</div>
-						
-							<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -40px" class="egg3 egg4"></div>
-							<div class="egg4" style="font-size: small;">ddddd</div>
-							<div class="egg4">eee</div>
+							<c:if test="${vo.egg eq 1}">
+								<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px" class="egg3 egg4"></div>
+							</c:if>
+							<c:if test="${vo.egg eq 0}">
+								<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -45px" class="egg3 egg4"></div>
+							</c:if>
+							<div class="egg4">${vo.uid}</div>
+							<div class="egg4"> | ${vo.createAt}</div>
+
+							<div style="font-size: 13px; height: 70px">${vo.contents}</div>
+							
+							<div >
+							<button id="review_update" style="font-size: 13px; font-weight: bolder; color: #666666;">수정하기</button> ㆍ <img alt="" src="${pageContext.request.contextPath}/images/like.png">
+							</div>
+
 							
 						</div>
 					</div>
