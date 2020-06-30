@@ -16,14 +16,20 @@
 	font-weight: bold;
 	color: #808080;
 }
-.list_p {
+.list_p {/* getList.jsp */
 
 	height : 180px;
 	width : 800px; 
 	border-bottom: 1px solid #cccccc; 
 	padding: 0 0 20px 0;
 }
+.list_p2 {/* reviewLook.jsp */
 
+	height : 200px;
+	width : 800px; 
+	border-bottom: 1px solid #cccccc; 
+	padding: 20px 0 20px 0;
+}
 
 .list_p_name {
 	padding: 20px 0 13px;
@@ -94,5 +100,22 @@ height: 30px;
 	
 .egg3 {
 width: 18px;
-height: 30px;
+height: 34px;
 	}
+	
+.egg4 {
+ 	display: inline-block;
+ 	font-size: small;
+}
+
+#look {
+	float: right;
+	height: 33px;
+	width: 90px;
+	border: 0;
+	outline: 0;
+	background-color: #e71a0f;
+	color: white;
+	border-radius: 5px;
+	font-weight: bold;
+}

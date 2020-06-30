@@ -22,36 +22,9 @@ import com.tm.cgv.util.Pager_reviewList;
 @Controller
 @RequestMapping("/review/**")
 public class ReviewController {
-	//url?영화번호=00#리뷰페이지
-	//url?midx=83006#2
-	//url?midx=83006&page=2
-	
-	//아이디 : 6글자 이상 > 3,4번째 글자는 **처리필요
-	//레이어 팝업 사용
-	//Pager
-	
-	// review write (마이페이지) > jsp 페이지 띄워주기
-	// 버튼 : <a href="javascipt:void(0);" onclick="goPopup(); return false;">
-	// Script - Function으로 이동
-	
-	// 	function goPopup(){
-	// 주소검색을 수행할 팝업 페이지를 호출합니다.
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-	// var pop = window.open("./jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	// }
-	
+
 	@Autowired
 	private ReviewService reviewService;
-	
-	//레이어 팝업 : class="layer-wrap" 검색하기
-	
-	//마이페이지에서 review페이지로 이동
-	
-//	  @GetMapping("reviewList") 
-//	  public String reviewList()throws Exception { 
-//		
-//		return "member/memberReview"; 
-//	  }
 
 //	-------------------------------------------------------------------------------------------------------
 	
@@ -133,7 +106,13 @@ public class ReviewController {
 	public ReviewVO review_Select(ReviewVO reviewVO, Model model)throws Exception {
 		System.out.println("modal3 테스트 : "+reviewVO.getReservationNum());
 		
-		ReviewVO reviewSelect = reviewService.reviewSelect(reviewVO);				
+		ReviewVO reviewSelect = reviewService.reviewSelect(reviewVO);	
+		
+		//*처리 해주기 (예시 : th**s3009)
+		String id = reviewSelect.getUid();
+		id = id.substring(0, 1)+"**"+id.substring(3);
+		reviewSelect.setUid(id);
+		
 		return reviewSelect;//json
 	
 	}
@@ -147,5 +126,69 @@ public class ReviewController {
 		result = reviewService.review_Delete(reviewVO);
 		return result;
 	}
+	
+	
+	// ---------------------------------------------------------------------------------
+	
+	//내가 쓴 평점 모아보기
+	@GetMapping("reviewLook")
+	public ModelAndView reviewLook(ModelAndView mv)throws Exception {
+		
+		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
+
+		List<ReviewVO> reviewLook = reviewService.reviewLook(uid);//10개씩 끊어서 가져와야 하니까 List로 받아준다.
+		
+		//하나씩 받은 reviewVO를 다시 ArrayList로 보내기 (people때문에 이작업이 필요)
+		List<ReviewVO> ar = new ArrayList<ReviewVO>();
+		
+		//VO를 가지고 있는 List를 하나씩빼줄때 foreach문 사용
+		for(ReviewVO reviewVO : reviewLook) {
+			
+			//*처리 해주기 (예시 : th**s3009)
+			String id = reviewVO.getUid();
+			id = id.substring(0, 1)+"**"+id.substring(3);
+			reviewVO.setUid(id);
+			
+			  ar.add(reviewVO);
+		  }
+		
+		mv.addObject("look", ar);
+		mv.setViewName("review/reviewLook");
+
+		return mv;
+	}
+
+	
+	// ---------------------------------------------------------------------------------
+	
+	//url?영화번호=00#리뷰페이지
+	//url?midx=83006#2
+	//url?midx=83006&page=2
+	
+	//아이디 : 6글자 이상 > 3,4번째 글자는 **처리필요
+	//레이어 팝업 사용
+	//Pager
+	
+	// review write (마이페이지) > jsp 페이지 띄워주기
+	// 버튼 : <a href="javascipt:void(0);" onclick="goPopup(); return false;">
+	// Script - Function으로 이동
+	
+	// 	function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	// var pop = window.open("./jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	// }
+	
+	
+	
+	//레이어 팝업 : class="layer-wrap" 검색하기
+	
+	//마이페이지에서 review페이지로 이동
+	
+//	  @GetMapping("reviewList") 
+//	  public String reviewList()throws Exception { 
+//		
+//		return "member/memberReview"; 
+//	  }
 	
 }

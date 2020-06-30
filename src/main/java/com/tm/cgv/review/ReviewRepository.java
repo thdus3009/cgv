@@ -21,4 +21,6 @@ public interface ReviewRepository {
 	public ReviewVO reviewSelect(ReviewVO reviewVO);
 	
 	public int review_Delete(ReviewVO reviewVO);
+	
+	public List<ReviewVO> reviewLook(String uid);
 }

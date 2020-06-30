@@ -53,17 +53,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where reservationNum=#{reservationNum}
 	</update>
 	
+	<select id="reviewLook" parameterType="String" resultType="ReviewVO">
+		select R.reservationNum, R.createAt, M.uid, M.title, M.fileName, R.contents, R.egg, R.like1
+		from(select M.num, M.movieNum, M.uid, M.title, I.fileName
+		from (select R.num, R.movieNum, R.uid, I.title
+		from (select num,movieNum,uid from reservation) R inner join (select num, title from movieInfo) I
+		on (R.movieNum = I.num)) M inner join (select * from movieImage) I
+		on(M.movieNum = I.movieNum)) M inner join (select * from review) R
+		on(M.num = R.reservationNum)
+		where R.createAt is not null and R.deleteAt is null
+		ORDER BY R.reservationNum desc
+	</select>
 	
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
+
 	<!-- 받아온 num으로 join하여 정보출력 -->
 	<select id="reviewList2" parameterType="Long" resultType="ReviewVO">
 		select MRI.num, MRI.movieNum, MRI.title, MRI.fileName, MRI.theaterName, MRI.cinemaName, MRI.movieTimeNum, T.screenDate, T.screenTime, MRI.common, MRI.teenager, MRI.preference

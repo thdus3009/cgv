@@ -28,7 +28,6 @@
 </head>
 <body>
 
-
 <div class="root">
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
@@ -88,13 +87,13 @@
 	<!-- Modal -->
 		
 	<div class="container"> <!-- Write, Update -->
-		<h4>내가 본 영화</h4><br>
-<!--   		<table>
+   		
+   		<table>
 			<tr>
-			<td style="width: 20px;"><div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -50px" class="egg3"></div></td>
-			<td>좋았어요</td>
+			<td><h4>내가 본 영화</h4><br></td>
+			<td><button id="look">내 평점 보기</button></td>
 			</tr>
-		</table>   -->
+		</table>  
 
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
