@@ -1,4 +1,20 @@
 @charset "UTF-8";
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium';
+  src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
+  src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+body{
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
+}
+
+h3{
+  font-family: 'CJ+ONLYONE+Medium';
+}
 
 .sect-common{
 	height: 450px;
@@ -249,9 +265,10 @@
 .error-btn{
     border: 2px solid #e71a0f;
     color: #e71a0f;
-    border-radius: 5%;
+    border-radius: 0.25rem;
     padding: 2px 5px;
     margin: 0 5px;
+    font-weight: 500;
 }
 
 
@@ -259,9 +276,10 @@
     border: 2px solid #e71a0f;
     background-color: #e71a0f;
     color: #ffffff;
-    border-radius: 5%;
+    border-radius: 0.25rem;
     padding: 2px 5px;
     margin: 0 5px;
+    font-weight: 500;
 }
 
 

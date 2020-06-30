@@ -25,7 +25,7 @@
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
-		<a href="/"><img src="/images/header/h1_cgv.png"
+		<a href="/admin"><img src="/images/header/h1_cgv.png"
 			class="admin-logo" /></a>
 		<!-- 검색 바-->
 		<form
@@ -105,8 +105,7 @@
 				<div class="container-fluid">
 					<h1>Cinema List</h1>
 					<ol class="cinema-ol">
-						<li class="breadcrumb-item active"><a href="#">서울</li>
-						</a>
+						<li class="breadcrumb-item active"><a href="#">서울</a></li>
 						<li class="breadcrumb-item active">경기</li>
 						<li class="breadcrumb-item active">인천</li>
 						<li class="breadcrumb-item active">강원</li>
@@ -155,7 +154,7 @@
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>
 										<td class="ate-center"><a
-											href="../admin/cinemaSelect?num=${vo.num}">${vo.name}</a></td>
+											href="../cinema/cinemaSelect?num=${vo.num}">${vo.name}</a></td>
 										<td class="ate-center">${vo.local}</td>
 										<td>${vo.address}</td>
 										<td class="ate-center">${vo.tel}</td>

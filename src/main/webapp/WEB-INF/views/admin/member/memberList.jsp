@@ -1,99 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
-<link href="../css/layout.css" rel="stylesheet" type="text/css">
-<link href="../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
-<link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
-<link href="../css/admin/member/memberList.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<title>memberList - 회원 목록</title>
+<title>관리자 페이지</title>
+
+<link rel="stylesheet" href="/css/styles.css" />
+<link rel="stylesheet" href="/css/admin/member/member.css" />
+<link
+	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
+	rel="stylesheet" crossorigin="anonymous" />
+
 </head>
-<body>
-	<div class="root">
-
-		<!-- 헤더 -->
-		<c:import url="../template/header.jsp"></c:import>
-
-		<!-- 컨테이너 -->
-		<div class="container">
-			<div class="c_nav">
-				<div class="nav_linemap">
-					<ul>
-						<li><a href="../"> <img alt="go to Home"
-								src="../images/login/btn_home.png">
-						</a></li>
-						<li><a href="">MY CGV</a></li>
-						<li class="last">ADMIN HOME</li>
-					</ul>
+<body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- 로고 -->
+		<a href="/"><img src="/images/header/h1_cgv.png"
+			class="admin-logo" /></a>
+		<!-- 검색 바-->
+		<form
+			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="검색어를 입력"
+					aria-label="Search" aria-describedby="basic-addon2" />
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="button">
+						<i class="fas fa-search"></i>
+					</button>
 				</div>
 			</div>
+		</form>
+		<!-- 로그인-->
+		<ul class="navbar-nav ml-auto ml-md-0">
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" id="userDropdown" href="#"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+				<div class="dropdown-menu dropdown-menu-right"
+					aria-labelledby="userDropdown">
+					<a class="dropdown-item" href="#">관리자 설정</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="login.html">로그아웃</a>
+				</div></li>
+		</ul>
+	</nav>
 
+	<!-- 사이드바 -->
+	<div id="layoutSidenav">
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark"
+				id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">게시판</div>
+						<a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 공지사항
+						</a>
+						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
+						<a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 회원 관리
+						</a> <a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 영화 관리
+						</a> <a class="nav-link" href="../cinema/cinemaList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 극장 관리
+						</a> <a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 예매 관리
+						</a> <a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 리뷰 관리
+						</a> <a class="nav-link" href="index.html">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 배너 관리
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
 
-			<div class="contents" style="background-color: #fdfcf0;">
-				<div>
-					<div class="col_content">
-
-						<!-- 메뉴바 -->
-						<div class="col_aside">
-							<div class="snb">
-								<ul>
-									<li class="on"><a href="">ADMIN HOME<i></i></a></li>
-									<li><a href="">☞ 회원 관리<i></i></a></li>
-									<li><a href="">영화관 관리<i></i></a></li>
-									<li><a href="">상영관 관리<i></i></a></li>
-									<li><a href="">공지사항 관리</a></li>
-								</ul>
-							</div>
-							<div class="ad_area">
-								<div class="ad_panner_1">
-									<a href=""> <img alt=""
-										src="../images/bbsList/200313_160x300.jpg">
-									</a>
-								</div>
-								<div class="ad_panner_2">
-									<a href=""> <img alt=""
-										src="../images/bbsList/0325_160x35.png">
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- 내용 -->
+		<!-- 내용 -->
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid">
+					<h1>member List</h1>
+					<!-- 내용 -->
 						<div class="col_detail">
-							<div class="top-bar">
-								<h1>회원 목록</h1>
-								<div>
-									<form action="" method="POST" class="search-form">
-										<em>검색</em> <select class="select">
-											<option value="">num</option>
-											<option value="">uid</option>
-											<option value="">pwd</option>
-											<option value="">name</option>
-											<option value="">birth</option>
-											<option value="">phone</option>
-											<option value="">email</option>
-											<option value="">gender</option>
-											<option value="">age</option>
-											<option value="">nick</option>
-											<option value="">enabled</option>
-										</select> <input type="text" class="serach-text">
-										<button type="submit" class="search-btn">검색하기</button>
-										<a href="#" class="memberAdd-btn">회원 등록</a>
-									</form>
-								</div>
-							</div>
 
 							<!-- 멤버 목록 -->
-							<table class="memberList-bar">
-								<tr>
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+								<tr class="admin-tr">
 									<td>번호</td>
 									<td>아이디</td>
 									<td>패스워드</td>
@@ -110,7 +127,7 @@
 								<!-- 이름 누르면 회원 상세 페이지로 이동 -->
 								<c:forEach items="" var="vo">
 										<tr class="memberList-c">
-											<td>num</td>
+											<td><a href="../member/memberSelect?num=${vo.num}">num</a></td>
 											<td>uid</td>
 											<td>pwd</td>
 											<td><a href="#">name</a></td>
@@ -142,19 +159,37 @@
 								</ul>
 							</div>
 						</div>
+					
 
-					</div>
+
+
 				</div>
-			</div>
+			</main>
 		</div>
-
-
-		<!-- 푸터 -->
-		<c:import url="../template/footer.jsp"></c:import>
 	</div>
 
-
 	<!-- 스크립트 -->
-	<script type="text/javascript"></script>
+	<script src="js/scripts.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/datatables-demo.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+
 </body>
 </html>

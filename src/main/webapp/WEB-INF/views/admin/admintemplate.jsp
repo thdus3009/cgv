@@ -16,7 +16,7 @@
 <title>관리자 페이지</title>
 
 <link rel="stylesheet" href="/css/styles.css" />
-<link rel="stylesheet" href="/css/admin/movie/movie.css" />
+<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
@@ -25,7 +25,7 @@
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
-		<a href="/admin"><img src="/images/header/h1_cgv.png"
+		<a href="/"><img src="/images/header/h1_cgv.png"
 			class="admin-logo" /></a>
 		<!-- 검색 바-->
 		<form
@@ -48,12 +48,10 @@
 				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a>
 					<a class="dropdown-item" href="#">관리자 설정</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">로그아웃</a>
-				</div>
-			</li>
+					<a class="dropdown-item" href="login.html">로그아웃</a>
+				</div></li>
 		</ul>
 	</nav>
 
@@ -65,33 +63,33 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="index.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="index.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="../movie/movieList">
+						</a> <a class="nav-link" href="index.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
-						</a> <a class="nav-link" href="../cinema/cinemaList">
+						</a> <a class="nav-link" href="../admin/cinemaList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 극장 관리
-						</a> <a class="nav-link" href="#">
+						</a> <a class="nav-link" href="index.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리
-						</a> <a class="nav-link" href="#">
+						</a> <a class="nav-link" href="index.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
-						</a> <a class="nav-link" href="#">
+						</a> <a class="nav-link" href="index.html">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리
@@ -105,64 +103,11 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>movie List</h1>
-					<div class="col_detail">
-						<!-- 목록 -->
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<tr class="admin-tr">
-								<td>제목</td>
-								<td>영문제목</td>
-								<td>상영시간</td>
-								<td>감독</td>
-								<td>배우</td>
-								<td>장르</td>
-								<td>연령가</td>
-								<td>국가</td>
-								<td>개봉일</td>
-								<td>관람객 수</td>
-								<td>평점</td>
-							</tr>
-							<!-- 반복 -->
-							<!-- 이름 누르면 상세 페이지로 이동 -->
-							<c:forEach items="" var="vo">
-								<tr class="memberList-c">
-									<td>title</td>
-									<td>titleEng</td>
-									<td>runtime</td>
-									<td>director</td>
-									<td>actor</td>
-									<td>genre</td>
-									<td>ageLimit</td>
-									<td>country</td>
-									<td>openDate</td>
-									<td>visitor</td>
-									<td>rate</td>
-								</tr>
-							</c:forEach>
-						</table>
+					<h1>Cinema List</h1>
+					
 
-						<!-- 페이저 -->
-						<div class="pager">
-							<ul class="pagination">
-								<c:if test="${pager.curBlock>1}">
-									<li><a href="#" class="custompager"
-										title="${pager.startNum-1}">이전</a></li>
-								</c:if>
 
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-									var="p">
-									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
-								</c:forEach>
 
-								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
-										title="${pager.lastNum+1}">다음</a></li>
-								</c:if>
-							</ul>
-						</div>
-						
-					</div>
 				</div>
 			</main>
 		</div>
