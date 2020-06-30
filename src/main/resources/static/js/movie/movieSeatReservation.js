@@ -136,17 +136,11 @@
 	
 	//각 선택시 리스트에 추가된 인원값 추가 (일반 1명 )식으로 저장
 	function seatCountListMake(){
-		
 		var seatCount = {
 				'common' : commonCount,
 				'teenager' : teenagerCount,
 				'special':preferenceCount
 		}
-		
-//		console.log(seatCount);
-//		console.log(seatCount['common']);
-//		console.log(seatCount['teenager']);
-//		console.log(seatCount['special']);
 		
 		var cNum = seatCount['common'];
 		var tNum = seatCount['teenager'];
@@ -164,8 +158,6 @@
 		}
 //		console.log(list.join(","));
 		$(".row.number .data").text(list.join(","));
-		
-		
 	}
 	
 	
@@ -245,10 +237,8 @@
 						}
 					}
 				}
-				
 			
 			//하나만 출력
-//			console.log("ffffff")
 			$(this).addClass("preSelect");
 		}
 		

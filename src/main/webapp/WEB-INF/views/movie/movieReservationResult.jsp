@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 
 
 <div class="section section-complement">
@@ -31,11 +32,11 @@
                             </tr>
                             <tr class="movie_date">
                                 <th scope="row">일시</th>
-                                <td><em>${reservationVO.movieTimeVO.screenDate} ${reservationVO.movieTimeVO.screenTime} ~ ${endTime}</em></td>
+                                <td><em></em></td>
                             </tr>
                             <tr class="people">
                                 <th scope="row">인원</th>
-                                <td><em>일반 2명</em></td>
+                                <td><em></em></td>
                             </tr>
                             <tr class="seat">
                                 <th scope="row">좌석</th>
@@ -43,7 +44,7 @@
                             </tr>
                             <tr class="payment_price">
                                 <th scope="row">결제금액</th>
-                                <td><span class="price">${reservationVO.totalPrice}</span> 원</td>
+                                <td><span class="price"></span> 원</td>
                             </tr>
                             <tr class="payment_method">
                                 <th scope="row">결제수단</th>
@@ -84,7 +85,47 @@
 </div>
 
 <script>
-$(".ticket_summary .movie_date em").
+
+dateForm();
+personnel();
+
+//날짜 포맷
+function dateForm(){
+	var screenDate = `${reservationVO.movieTimeVO.screenDate}`;
+	var screenTime = `${reservationVO.movieTimeVO.screenTime}`;
+	var endTime = `${endTime}`;
+	
+	var arr = [];
+	arr = screenDate.split("-");
+	var y = arr[0];
+	var m = arr[1];
+	var d = arr[2];
+
+	$(".ticket_summary .movie_date em").text(y+"년 "+m+"월 "+d+"일 "+screenTime+"~"+endTime);
+}
+
+//인원
+function personnel(){
+	var common = `${reservationVO.common}`;
+	var teenager = `${reservationVO.teenager}`;
+	var preference = `${reservationVO.preference}`;
+
+	var personnelList =[];
+	if(common > 0){
+		personnelList.push("일반: "+common);
+	}
+	if(teenager > 0){
+		personnelList.push("청소년: "+teenager);
+	}
+	if(preference > 0){
+		personnelList.push("우대: "+preference);
+	}
+	
+	$(".ticket_summary .people em").text(personnelList.join(","));
+}
+
+//총 결제액
+$(".ticket_summary .payment_price .price").text(addComma(`${reservationVO.totalPrice}`));
 
 </script>
 
