@@ -194,11 +194,11 @@
 	//hover
 	$(".seats .seat").hover(function(){
 		if(!$(this).hasClass("blocked") && !$(this).hasClass("reserved") && !$(this).hasClass("selected")){
-			var check1 = true;
-			var check2 = false;
 			//2개 출력
 			if((totalCount - selectedCount) != 1){
 				if(!$(this).next().hasClass("blocked") && !$(this).next().hasClass("reserved") && !$(this).next().hasClass("selected")){
+					var check1 = true;
+					var check2 = false;
 						//띄워져있는지 검사
 						for(i=0;i<seatSpaceList.length;i++){
 							if(seatSpaceList[i].type == 1){  //col
@@ -225,15 +225,22 @@
 						}
 					}
 				
+				
 					if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
 						if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
 							//띄워져있는지 검사
+							var check = true;
+							
 							for(i=0;i<seatSpaceList.length;i++){
 								if(seatSpaceList[i].type == 1){  //col
-									if($(this).prev().data("col") != seatSpaceList[i].index){
-										$(this).prev().addClass("preSelect");
+									if($(this).prev().data("col") == seatSpaceList[i].index){
+										check = false;
 									}
 								}
+							}
+							
+							if(check){
+								$(this).prev().addClass("preSelect");
 							}
 						}
 					}

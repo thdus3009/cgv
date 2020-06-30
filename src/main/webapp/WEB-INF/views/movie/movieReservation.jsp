@@ -529,11 +529,14 @@
 		});
 	}
 
+	var data;
 
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
 			//결제 작업을 위한 값 - 이니시스 : tel
-			var data = {
+			discount_detail_list();
+			
+			data = {
 					tel : `${memberVO.phone}`,
 					email : `${memberVO.email}`,
 					name : `${memberVO.name}`,

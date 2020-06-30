@@ -23,7 +23,6 @@ public class ReservationVO {
 	private String createAt;
 	private String deleteAt;
 	
-	private String selectedSeatNums;
 	
 //	movieInfo join해서 불러올값
 //	private String title;

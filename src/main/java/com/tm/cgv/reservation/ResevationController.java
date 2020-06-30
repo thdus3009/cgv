@@ -2,6 +2,7 @@ package com.tm.cgv.reservation;
 
 import java.util.List;
 
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,8 @@ import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.point.PointService;
+import com.tm.cgv.point.PointVO;
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatBooking.SeatBookingService;
@@ -42,24 +45,38 @@ public class ResevationController {
 	private SeatBookingService seatBookingService;
 	@Autowired
 	private TimeADD timeAdd;
-	
+	@Autowired
+	private PointService pointService;
 
 	
 	
 	@ResponseBody
 	@PostMapping("reservationInsert")
-	public int reservationInsert(ReservationVO reservationVO) throws Exception{
+	public int reservationInsert(ReservationVO reservationVO,String selectedSeatNums,String[] discountList) throws Exception{
 		int result = 0;
 		int seatCheck = 0;
+		
+		//할인 금액 디비에 적용
+		for (String str : discountList) {
+			String arr[]  = str.split("_");
+			
+			PointVO pointVO = new PointVO();
+			pointVO.setMemberNum(reservationVO.getUid());
+			pointVO.setType(arr[0]);
+			pointVO.setPrice(Integer.parseInt(arr[1]));
+			
+			pointService.pointDiscountUpdate(pointVO);
+		}
 		
 		//예매 번호 등록 - Reservation
 		result = reservationService.reservationInsert(reservationVO);
 		result = reservationVO.getNum();
 		
+		
 		//좌석 번호 등록 - SeatBooking
 		if(result > 0) {
 			
-			String [] selectedSeat = reservationVO.getSelectedSeatNums().split(",");
+			String [] selectedSeat = selectedSeatNums.split(",");
 			
 			for (String str : selectedSeat) {
 				SeatBookingVO seatBookingVO = new SeatBookingVO();
@@ -82,6 +99,7 @@ public class ResevationController {
 				movieTimeService.remainSeatUpdate(movieTimeVO);
 			}
 		}
+
 		
 		return result;
 	}

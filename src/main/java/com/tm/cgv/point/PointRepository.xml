@@ -10,5 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from point where memberNum=#{memberNum}
 	</select>
 	
+	
+	<update id="pointDiscountUpdate" parameterType="PointVO">
+		update point set price=price-#{price} where memberNum=#{memberNum} and type=#{type}
+	</update>
+	
 
 </mapper>
