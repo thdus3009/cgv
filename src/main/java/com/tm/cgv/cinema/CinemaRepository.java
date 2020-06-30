@@ -35,6 +35,9 @@ public interface CinemaRepository {
 	public List<CinemaVO> cinemaList() throws Exception;
 	
 	public int cinemaWrite() throws Exception;
+	
+	//
+	public List<CinemaVO> cineList(String local) throws Exception;
 
 	
 }

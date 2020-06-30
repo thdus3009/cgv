@@ -148,6 +148,6 @@
         <c:import url="../template/scripts.jsp"></c:import>
       	<script src="/js/theater/theaterInsert.js"></script>
 
-</script>
+
     </body>
 </html>

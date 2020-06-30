@@ -115,9 +115,22 @@ public class TheaterService {
 	}
 	
 	//Update
-	public int theaterUpdate(TheaterVO  theaterVO) throws Exception{
+	public int theaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{
+		//theater update
+		theaterRepository.theaterUpdate(theaterVO);
+		
+		//seat update insert
+		
+		
+		//seatSpace update insert
+		
+		
+		
+		
 		return theaterRepository.theaterUpdate(theaterVO);
 	}
+	
+	
 	
 	//Delete
 	public int theaterDelete(int num) throws Exception{

@@ -13,19 +13,20 @@
         <div id="layoutSidenav">
             <c:import url="../template/sidenav.jsp"></c:import>
             <div id="layoutSidenav_content">
+            <input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <main>
                     <div class="container-fluid">
                         <h1 class="mt-4">Cinema List</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><a href="#">서울</li></a>
-                            <li class="breadcrumb-item active">경기</li>
-                            <li class="breadcrumb-item active">인천</li>
-                            <li class="breadcrumb-item active">강원</li>
-                            <li class="breadcrumb-item active">대전/충청</li>
-                            <li class="breadcrumb-item active">대구</li>
-                            <li class="breadcrumb-item active">부산/울산</li>
-                            <li class="breadcrumb-item active">경상</li>
-                            <li class="breadcrumb-item active">광주/전라/제주</li>
+                            <li class="breadcrumb-item active"><a href="#" id="se">서울</a></li>
+                            <li class="breadcrumb-item active"><a href="#" id="ky">경기</a></li>
+                            <li class="breadcrumb-item active"><a href="#" id="in">인천</a></li>
+                            <li class="breadcrumb-item active"><a href="#" id="ka">강원</a></li>
+                            <li class="breadcrumb-item active"><a href="#" id="da">대전/충청</a></li>
+                            <li class="breadcrumb-item active"><a href="#">대구</a></li>
+                            <li class="breadcrumb-item active"><a href="#">부산/울산</a></li>
+                            <li class="breadcrumb-item active"><a href="#">경상</a></li>
+                            <li class="breadcrumb-item active"><a href="#">광주/전라/제주</a></li>
                         </ol>
 
                         <div class="card mb-4">
@@ -64,7 +65,7 @@
                                                 <th>소개</th>
                                             </tr>
                                         </tfoot>
-                                        <tbody>
+                                        <tbody id="tb">
                                         	<c:forEach items="${list}" var="vo">
                                             <tr>
                                                 <td>${vo.num}</td>
@@ -90,5 +91,53 @@
             </div>
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
+        
+        
+        
+        <script type="text/javascript">
+        	
+        	console.log("ㅎㅎ");
+        	var local = '';
+         	$(".breadcrumb-item>a").click(function(){
+				local = $(this).text();
+				console.log(local);
+			/* 	$.ajax({ 
+					url : "./cinemaList", 
+					type : "POST", 
+					data : {"local":local},
+					_csrf : $("#_csrf").val(),
+					success : function(data) { 
+						if(data>0){
+					 		alert("전송 성공");
+					 		console.log(data);
+						}
+					} 
+				}); */
+
+				$.post("./cinemaList",{"local":local, "_csrf": $("#_csrf").val()},function(data){
+					
+					$("#tb").html(data);
+					
+				});
+				
+            }); 
+
+        
+
+   
+            
+	    /* 	$.ajax({ 
+				url : "./cinemaSearch", 
+				type : "POST", 
+				data : {"local":local},
+				success : function(data) { 
+					if(data>0){
+				 		alert("전송 성공");
+					}
+				} 
+			}); */
+
+		
+        </script>
     </body>
 </html>

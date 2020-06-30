@@ -63,6 +63,11 @@ public class CinemaService {
 	public List<CinemaVO> cinemaList() throws Exception{
 		return cinemaRepository.cinemaList();
 	}
+	
+	//
+	public List<CinemaVO> cineList(String local) throws Exception {
+		return cinemaRepository.cineList(local);
+	}
 
 
 }

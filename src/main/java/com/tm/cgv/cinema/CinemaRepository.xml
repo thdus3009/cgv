@@ -46,6 +46,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cinema order by local;
 	</select>
 	
+	<select id="cineList" parameterType="String" resultType="CinemaVO">
+		select * from cinema
+		<where>
+		<if test="local != ''">
+			local=#{local}
+		</if>
+		</where>
+		order by num
+	</select>
+	
 	
 
 </mapper>

@@ -108,17 +108,10 @@ public class TheaterController {
 	
 	
 	//Update
-	@PostMapping("theaterUpdate")
-	public ModelAndView theaterUpdate2(TheaterVO theaterVO, ModelAndView mv)throws Exception{
-
-		int result = theaterService.theaterUpdate(theaterVO);
-			
-		if(result>0) {
-			mv.setViewName("redirect:./theaterList");
-		}else {
-			System.out.println("실패");
-			//mv.setViewName("redirect:./theaterUpdate?num="+theaterVO.getNum());
-		}
+	@PostMapping("cinema/theaterUpdate")
+	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		theaterService.theaterUpdate(theaterVO, row, col, grade, row_space, col_space);
 		
 		
 		return mv;

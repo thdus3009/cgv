@@ -92,6 +92,11 @@
 							</div>			
 							<!-- 좌석 배치 -->
                     </div>
+                    
+                    <div class="">
+                    	<a href="" id="de" class="btn btn-danger">Delete</a>
+                    	<a href="./theaterUpdate?num=${theater.num}" id="up" class="btn btn-primary">Update</a>
+                    </div>
                     </div>
                 </main>
                 <c:import url="../template/footer.jsp"></c:import>
@@ -100,6 +105,8 @@
         <c:import url="../template/scripts.jsp"></c:import>
     <script type="text/javascript">
 
+	
+    
 	var seatList = [];
 
 
