@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,8 +20,9 @@ public class ReserveCheckController {
 	@GetMapping("reserve")
 	public List<ReserveCheckVO> reservationCheckedSelect(ReserveCheckVO reserveCheckVO) throws Exception{
 		
-		System.out.println("INNNNN");
 		System.out.println(reserveCheckVO.getTitle()+ "/ "+reserveCheckVO.getTheater()+"/ "+reserveCheckVO.getDate());
+		
+		
 		
 		List<ReserveCheckVO> reserveList = reserveCheckService.reservationCheckedSelect(reserveCheckVO);
 		

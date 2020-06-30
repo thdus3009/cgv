@@ -214,17 +214,17 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 $(".secondTit").click(function(){
 	//checked가 true이면
 	if($(this).children().prop("checked") == true){
-		var usedPoint = removeComma($(this).parent().find(".hasPoint").text());
+		usePoint = removeComma($(this).parent().find(".hasPoint").text());
 		
-		if(lastPrice - usedPoint < 0){
+		if(lastPrice - usePoint < 0){
 			usePoint = lastPrice;
 		}else{
-			usePoint = Math.floor(usedPoint/10)*10;
+			usePoint = Math.floor(usePoint/10)*10;
 		}
 		
-		lastPrice = lastPrice - usedPoint;
+		lastPrice = lastPrice - usePoint;
 		//input창에 출력
-		$(this).parent().find("input").val(usedPoint);
+		$(this).parent().find("input").val(usePoint);
 		//할인내역 추가
 		var id = $(this).parent().find("input").attr("id");
 		appendDiscount(id);
