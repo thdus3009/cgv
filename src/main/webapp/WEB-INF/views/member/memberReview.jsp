@@ -95,9 +95,7 @@
 			<td>좋았어요</td>
 			</tr>
 		</table>   -->
-		<button style="display: none;" id="test">
-			
-		</button>
+
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
 			<div class="modal-dialog">

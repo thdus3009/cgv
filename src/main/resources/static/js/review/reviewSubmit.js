@@ -62,10 +62,17 @@
 						_csrf : $("#_csrf").val(),
 					},
 					success:function(data){
-						var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
-						
-						$("#"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
-						alert("리뷰가 등록되었습니다.")
+						if(g_egg==1){//egg:1==좋아요 egg:0==싫어요
+							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+									'<img alt="" src="../images/good.JPG"></button>'+
+									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')								
+							alert("리뷰가 등록되었습니다.")
+						}else{
+							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+									'<img alt="" src="../images/bad.JPG"></button>'+
+									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>')
+							alert("리뷰가 등록되었습니다.")
+						}
 					}
 				})
 				
@@ -153,20 +160,17 @@
 							_csrf : $("#_csrf").val(),
 						},
 						success:function(data){
-							//버튼바꾸기-이벤트위임?
-							if(g_egg==1){
-								alert("ookkk");
+							if(g_egg==1){//egg:1==좋아요 egg:0==싫어요
 								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
-										'<img alt="" src="${pageContext.request.contextPath}/images/good.JPG"></button>'+r)
-								var r = '<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>';
-								//redirect
-								$("#test").click();
+										'<img alt="" src="../images/good.JPG"></button>'+
+										'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')
+								alert("리뷰가 등록되었습니다.")
 								
 							}else{
 								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
-										'<img alt="" src="${pageContext.request.contextPath}/images/bad.JPG"></button>'+r)
-								var r = '<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>';
-								//redirect
+										'<img alt="" src="../images/bad.JPG"></button>'+
+										'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>')
+								alert("리뷰가 등록되었습니다.")
 							}
 							
 							//기존 버튼
@@ -190,11 +194,7 @@
 	 $("#submitBtn3").click(function(){
 		 $("#exit3").click();
 	 });
-	 
-	 $("#test").click(function(){
-		 $("#r"+g_num.load(window.location.href+g_num));
-				
-	 });
+
 //	 ------------------------------------------------------------------------------
 	 
 /* 
