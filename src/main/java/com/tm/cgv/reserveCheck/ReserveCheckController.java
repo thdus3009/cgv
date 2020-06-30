@@ -22,8 +22,6 @@ public class ReserveCheckController {
 		
 		System.out.println(reserveCheckVO.getTitle()+ "/ "+reserveCheckVO.getTheater()+"/ "+reserveCheckVO.getDate());
 		
-		
-		
 		List<ReserveCheckVO> reserveList = reserveCheckService.reservationCheckedSelect(reserveCheckVO);
 		
 		return reserveList;

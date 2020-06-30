@@ -7,4 +7,7 @@ public interface ReservationRepository {
 
 	public int reservationInsert(ReservationVO reservationVO) throws Exception;
 	
+	
+	public ReservationVO reservationResultSelectOne(int num) throws Exception;
+	
 }

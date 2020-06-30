@@ -12,4 +12,8 @@ class ReservationService{
 	public int reservationInsert(ReservationVO reservationVO) throws Exception{
 		return reservationRepository.reservationInsert(reservationVO);
 	}
+	
+	public ReservationVO reservationResultSelectOne(int num) throws Exception{
+		return reservationRepository.reservationResultSelectOne(num);
+	}
 }

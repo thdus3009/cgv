@@ -2,14 +2,11 @@ package com.tm.cgv.reservation;
 
 import java.util.List;
 
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,7 +46,26 @@ public class ResevationController {
 	private PointService pointService;
 
 	
+	@GetMapping("reservationResultSelectOne")
+	public ModelAndView reservationResultSelectOne(String num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		ReservationVO reservationVO = reservationService.reservationResultSelectOne(Integer.parseInt(num));
+		
+		int runningTime = Integer.parseInt(reservationVO.getMovieInfoVO().getRuntime()); 
+		String startTime = reservationVO.getMovieTimeVO().getScreenTime();
+		
+		String endTime = timeAdd.timeAdd(startTime, runningTime);
+		
+		mv.addObject("endTime", endTime);
+		mv.addObject("reservationVO", reservationVO);
+		
+		mv.setViewName("movie/movieReservationResult");
+		return mv;
+	}
 	
+	
+
 	@ResponseBody
 	@PostMapping("reservationInsert")
 	public int reservationInsert(ReservationVO reservationVO,String selectedSeatNums,String[] discountList) throws Exception{
@@ -119,11 +135,10 @@ public class ResevationController {
 		System.out.println("극장명 : "+reservationVO.getCinemaName());
 		System.out.println("상영관 : "+reservationVO.getTheaterName());
 		System.out.println("2D/3D : "+reservationVO.getFilmType());
-		
 		System.out.println("총 좌석수 : "+seatCount);
 		
 		
-		MovieInfoVO movieVO = movieInfoService.movieSelectOne(reservationVO.getMovieNum());
+		MovieInfoVO movieInfoVO = movieInfoService.movieSelectOne(reservationVO.getMovieNum());
 		MovieTimeVO movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
 		
 		//좌석 관련
@@ -142,7 +157,7 @@ public class ResevationController {
 		//좌석 리스트 - seat - seatBooking (Join)
 		List<SeatVO> seatList = seatService.seatSelectList(seatVO);
 
-		int runningTime = Integer.parseInt(movieVO.getRuntime()); 
+		int runningTime = Integer.parseInt(movieInfoVO.getRuntime()); 
 		String startTime = movieTimeVO.getScreenTime();
 		
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
@@ -155,7 +170,7 @@ public class ResevationController {
 		mv.addObject("seatCount", seatCount);
 		
 		mv.addObject("seatSpaceList", seatSpaceList);
-		mv.addObject("movieVO", movieVO);
+		mv.addObject("movieVO", movieInfoVO);
 		mv.addObject("movieTimeVO", movieTimeVO);
 		mv.addObject("seatList", seatList);
 		mv.addObject("reservationVO", reservationVO);

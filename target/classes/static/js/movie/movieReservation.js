@@ -120,7 +120,6 @@
 					$(".row.number").css("display","block");
 					$(".info.theater .placeholder").css("display","none");
 					
-				
 				//ajax
 				ajaxLoad();
 			
@@ -215,23 +214,6 @@ function ajaxLoad(){
 	selectedCheck();
 	
 }
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		//3개다 체크했는지 여부 판단
@@ -352,30 +334,33 @@ function ajaxLoad(){
 				}
 			});
 			
+			
+			// 초기화
+			//date - time
+			$("#select_day").text($("#sDate").val());
+			//theater
+			$("#select_theater").text("");
+			$("#theaterName").val("");
+			
+			//filmType
+			$("#select_movieType").text("");
+			$("#filmType").val("");
+			
+			$(".tnb.step1 .btn-right").removeClass("on");
 		}
-		
-		
-		
-		
-		
 		
 		
 		// 상영시간 선택
 		$(".time-list").on("click",".theater ul li",function(){
-			//console.log($(this).data("time"));
-			//console.log($(this).data("index"));
-			
 			if(!$(this).hasClass("disabled")){
 				$("#movieTimeNum").val($(this).data("index"));
 				$(".theater ul li").removeClass("selected");
 				$(this).addClass("selected");
 				
+				
+				//날짜 값 + 시간값
 				var select_time= $("#sDate").val() +" "+$(this).data("time");
 				$("#select_day").text(select_time);
-				
-//				console.log($(this).parent().parent().data("name"));
-//				console.log($(this).parent().parent().data("floor"));
-//				console.log($(this).parent().parent().data("seatcount"));
 				
 				//seatCount
 				$("#seatCount").val($(this).parent().parent().data("seatcount"));
@@ -390,7 +375,6 @@ function ajaxLoad(){
 				$("#filmType").val($(this).parent().parent().data("name"));
 				
 				$(".row.movie_type").css("display","block");
-				
 				$(".tnb.step1 .btn-right").addClass("on");
 			}
 			
@@ -405,9 +389,6 @@ function ajaxLoad(){
 			if($(this).hasClass("on") == true){
 //				$("#data-from").submit();
 				//alert("전송전송");
-				
-				console.log("aa: "+`${_csrf.parameterName}`)
-				console.log("bb: "+`${_csrf.token}`)
 				
 				$.ajax({
 					url : '../reservation/seatReservation',

@@ -419,17 +419,35 @@ function reservation_save(result){
 		type : 'post',
 		data : aa,
 		success : function(data){
-			console.log(data);
 			if(data > 0){
 				console.log("예매 번호 : "+data);
+				reservation_result(data);
+				
 			}else{
 				console.log(">>>예매 테이블 등록 실패");
 			}
-			
 		}
 	});
 }
 
+
+
+function reservation_result(data){
+	
+	$.get("../reservation/reservationResultSelectOne?num="+data,function(result){
+		console.log(result);
+		
+		$(".step.step3").css("display","none");
+		$(".ticket_tnb .tnb_container .tnb").removeClass("step3");
+		$(".ticket_tnb .tnb_container .tnb").addClass("step4");
+		
+		//할인 - 결제수단 결정 페이지
+		$(".ticket_tnb .tnb.step4 .btn-left").css("display","none");
+		
+		$(".step.step4").css("display","block");
+		$(".step.step4").html(result);
+	});
+}
 
 
 

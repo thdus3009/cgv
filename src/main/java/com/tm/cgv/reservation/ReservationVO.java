@@ -1,5 +1,9 @@
 package com.tm.cgv.reservation;
 
+import com.tm.cgv.movieInfo.MovieInfoVO;
+import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.payment.PaymentVO;
+
 import lombok.Data;
 
 @Data
@@ -22,6 +26,12 @@ public class ReservationVO {
 	
 	private String createAt;
 	private String deleteAt;
+	
+	
+	private MovieInfoVO movieInfoVO;
+	private MovieTimeVO movieTimeVO;
+	private PaymentVO paymentVO;
+	
 	
 	
 //	movieInfo join해서 불러올값

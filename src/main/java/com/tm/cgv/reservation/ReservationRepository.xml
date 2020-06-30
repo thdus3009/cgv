@@ -10,5 +10,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into reservation values(#{num},#{movieNum},#{paymentNum},#{movieTimeNum},#{uid},#{filmType},
 		#{cinemaName},#{theaterName},#{seats},#{totalPrice},#{common},#{teenager},#{preference},sysdate(),null)
 	</insert>
+	
+	
+	<resultMap type="ReservationVO" id="reservationResult">
+		<id column="num" property="num"/>
+		<result column="movieNum" property="movieNum"/>
+		<result column="paymentNum" property="paymentNum"/>
+		<result column="movieTimeNum" property="movieTimeNum"/>
+		<result column="uid" property="uid"/>
+		<result column="filmType" property="filmType"/>
+		<result column="cinemaName" property="cinemaName"/>
+		<result column="theaterName" property="theaterName"/>
+		<result column="seats" property="seats"/>
+		<result column="totalPrice" property="totalPrice"/>
+		<result column="common" property="common"/>
+		<result column="teenager" property="teenager"/>
+		<result column="preference" property="preference"/>
+		<result column="createAt" property="createAt"/>
+		<result column="deleteAt" property="deleteAt"/>
+		
+		
+		<association property="movieInfoVO" javaType="MovieInfoVO">
+			<id column="miNum" property="num"/>
+			<result column="title" property="title"/>
+			<result column="runtime" property="runtime"/>
+		</association>
+		
+		<association property="movieTimeVO" javaType="MovieTimeVO">
+			<id column="mtNum" property="num"/>
+			<result column="screenTime" property="screenTime"/>
+			<result column="screenDate" property="screenDate"/>
+		</association>
+		
+		<association property="paymentVO" javaType="paymentVO">
+			<id column="pNum" property="num"/>
+			<result column="pay_method" property="pay_method"/>
+		</association>	
+	</resultMap>
+	
+	
+
+	<select id="reservationResultSelectOne" parameterType="Integer" resultMap="reservationResult">
+		select * from 
+		(select * from 
+		(select * from 
+		(select * from reservation where num = #{num}) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum))B
+		join
+		(select num as pNum,pay_method from payment) P
+		on(B.paymentNum = P.pNum)
+	
+	</select>
+
 
 </mapper>

@@ -10,6 +10,7 @@
 
 <link href="${pageContext.request.contextPath}/css/movie/movieSeatReservation.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/moviePayment.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieReservationResult.css" rel="stylesheet" type="text/css">
 
 <!-- payment -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -549,8 +550,6 @@
 			//test 결제 없이 바로 예매 - 좌석예매 진행
 			reservation_save(8);
 	});
-
-	
 
 </script>
 
