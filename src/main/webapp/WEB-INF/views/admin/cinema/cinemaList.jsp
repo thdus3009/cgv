@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/head.jsp"></c:import> 
-
+<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 </head>
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
@@ -62,7 +62,7 @@
 									<th>소개</th>
 								</tr>
 							</tfoot>
-							<tbody>
+							<tbody id="tb">
 								<c:forEach items="${list}" var="vo">
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>

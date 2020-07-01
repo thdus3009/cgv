@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport"
@@ -12,14 +11,16 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-
 <title>관리자 페이지</title>
 
-<link rel="stylesheet" href="/css/styles.css" />
+<link href="/css/styles.css" rel="stylesheet" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+	crossorigin="anonymous"></script>
 
 </head>
 <body class="sb-nav-fixed">
@@ -101,124 +102,102 @@
 
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
-		<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<div class="container-fluid">
-					<h1>Cinema List</h1>
-					<ol class="cinema-ol">
-						<li class="breadcrumb-item active"><a href="#">서울</a></li>
-						<li class="breadcrumb-item active"><a href="#">경기</a></li>
-						<li class="breadcrumb-item active"><a href="#">인천</a></li>
-						<li class="breadcrumb-item active"><a href="#">강원</a></li>
-						<li class="breadcrumb-item active"><a href="#">대전/충청</a></li>
-						<li class="breadcrumb-item active"><a href="#">대구</a></li>
-						<li class="breadcrumb-item active"><a href="#">부산/울산</a></li>
-						<li class="breadcrumb-item active"><a href="#">경상</a></li>
-						<li class="breadcrumb-item active"><a href="#">광주/전라/제주</a></li>
-					</ol>
-
-
-					<!-- 목록 -->
+					<h1>${cine.name}</h1>
+					<div class="card mb-4">
+						<div class="card-body">
+							<p class="mb-0">
+								<code>Cinema Info</code>
+								<br> 
+								<span>영화관 이름: ${cine.name} CGV</span><br> 
+								<span>지역: ${cine.local}</span><br>
+								<span>번호: ${cine.tel}</span><br> 
+								<span>총 관수: ${cine.totalTheater}개</span><br>
+								<span>총 좌석: ${cine.totalSeat}개</span><br> 
+								<span>교톻안내: ${cine.trafficInfo}</span><br>
+								<span>주차안내: ${cine.parkingInfo}</span><br> 
+								<span>영화관 소개: ${cine.intro}</span><br>
+							</p>
+						</div>
+					</div>
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
-								<tr class="admin-tr">
-									<th>No.</th>
-									<th>극장명</th>
-									<th>지역</th>
-									<th>주소</th>
-									<th>연락처</th>
-									<th>총 관수</th>
-									<th>총 좌석수</th>
-									<th>교통안내</th>
-									<th>주차안내</th>
-									<th>소개</th>
+								<tr>
+									<th>Num</th>
+									<!-- <th>CinemaNum</th> -->
+									<th>Name</th>
+									<th>seatCount</th>
+									<th>filmType</th>
 								</tr>
 							</thead>
 							<tfoot>
-								<tr class="admin-tr">
-									<th>No.</th>
-									<th>극장명</th>
-									<th>지역</th>
-									<th>주소</th>
-									<th>연락처</th>
-									<th>총 관수</th>
-									<th>총 좌석수</th>
-									<th>교통안내</th>
-									<th>주차안내</th>
-									<th>소개</th>
+								<tr>
+									<th>Num</th>
+									<!-- <th>CinemaNum</th> -->
+									<th>Name</th>
+									<th>seatCount</th>
+									<th>filmType</th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<c:forEach items="${list}" var="vo">
-									<tr class="admin-tr-each">
-										<td class="ate-center">${vo.num}</td>
-										<td class="ate-center"><a
-											href="../cinema/cinemaSelect?num=${vo.num}">${vo.name}</a></td>
-										<td class="ate-center">${vo.local}</td>
-										<td>${vo.address}</td>
-										<td class="ate-center">${vo.tel}</td>
-										<td class="ate-center">${vo.totalTheater}</td>
-										<td class="ate-center">${vo.totalSeat}</td>
-										<td>${vo.trafficInfo}</td>
-										<td>${vo.parkingInfo}</td>
-										<td>${vo.intro}</td>
+								<c:forEach items="${theaterList}" var="vo">
+									<tr class="theaterList-c">
+										<td><a href="../theater/theaterSelect">${vo.num}</a></td>
+										<%-- <td>${vo.cinemaNum}</td> --%>
+										<td>${vo.name}</td>
+										<td>${vo.seatCount}</td>
+										<c:if test="${vo.filmType eq 0}">
+											<td>2D</td>
+										</c:if>
+										<c:if test="${vo.filmType eq 1}">
+											<td>3D</td>
+										</c:if>
+										<c:if test="${vo.filmType eq 2}">
+											<td>4D</td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-
-
-						<!-- 페이저 -->
-						<div class="pager">
-							<ul class="pagination">
-								<c:if test="${pager.curBlock>1}">
-									<li><a href="#" class="custompager"
-										title="${pager.startNum-1}">이전</a></li>
-								</c:if>
-
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-									var="p">
-									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
-								</c:forEach>
-
-								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
-										title="${pager.lastNum+1}">다음</a></li>
-								</c:if>
-							</ul>
-						</div>
-
 					</div>
-
 				</div>
 			</main>
+			<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid">
+					<div
+						class="d-flex align-items-center justify-content-between small">
+						<div class="text-muted">Copyright &copy; Your Website 2020</div>
+						<div>
+							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
+								&amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
 		</div>
 	</div>
+	</div>
 
-	<!-- 스크립트 -->
-	<script src="js/scripts.js"></script>
-	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script src="assets/demo/chart-area-demo.js"></script>
-	<script src="assets/demo/datatables-demo.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
 		crossorigin="anonymous"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-
+	<script src="js/scripts.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+		crossorigin="anonymous"></script>
+	<script src="assets/demo/datatables-demo.js"></script>
 </body>
 </html>
