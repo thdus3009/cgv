@@ -18,17 +18,6 @@
                     <div class="container-fluid">
                         <h1 class="mt-4">Theater Select</h1>
                         <h3>${cine.name}</h3>
-                       <!--  <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><a href="#">서울</li></a>
-                            <li class="breadcrumb-item active">경기</li>
-                            <li class="breadcrumb-item active">인천</li>
-                            <li class="breadcrumb-item active">강원</li>
-                            <li class="breadcrumb-item active">대전/충청</li>
-                            <li class="breadcrumb-item active">대구</li>
-                            <li class="breadcrumb-item active">부산/울산</li>
-                            <li class="breadcrumb-item active">경상</li>
-                            <li class="breadcrumb-item active">광주/전라/제주</li>
-                        </ol> -->
 						<div class="card mb-4">
                             <div class="card-body">
                                 <p class="mb-0">
@@ -94,7 +83,7 @@
                     </div>
                     
                     <div class="">
-                    	<a href="" id="de" class="btn btn-danger">Delete</a>
+                    	<span id="de" class="btn btn-danger">Delete</span>
                     	<a href="./theaterUpdate?num=${theater.num}" id="up" class="btn btn-primary">Update</a>
                     </div>
                     </div>
@@ -104,7 +93,13 @@
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
     <script type="text/javascript">
-
+	$("#de").click(function(){
+		//정말 삭제할 거냐고 묻는 alert창
+		var check = confirm("삭제하시겠습니까?");
+		if(check){
+			location.href="./theaterDelete?num="+${theater.num}+"&cinemaNum="+${theater.cinemaNum};
+		}
+	});
 	
     
 	var seatList = [];

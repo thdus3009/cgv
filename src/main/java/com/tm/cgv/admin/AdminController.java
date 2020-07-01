@@ -40,6 +40,8 @@ public class AdminController {
 		return "admin/adminIndex";
 	}
 	
+	
+	//cinema
 	@GetMapping("cinema/cinemaList")
 	public ModelAndView adminCinemaList(ModelAndView mv) throws Exception {
 		List<CinemaVO> list = cinemaService.cinemaList();
@@ -75,11 +77,71 @@ public class AdminController {
 	@GetMapping("cinema/cinemaInsert")
 	public ModelAndView admincinemaInsert() throws Exception {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("path", "Insert");
 		mv.setViewName("admin/cinema/cinemaInsert");
 		return mv;
 	}
 	
+	@PostMapping("cinema/cinemaInsert")
+	public ModelAndView cinemaInsert(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
+		System.out.println("ㅠ.ㅠ");
+		int result = cinemaService.cinemaInsert(cinemaVO);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:./cinemaList");
+		}else {
+			System.out.println("삽입 실패");
+		}
+		
+		return mv;
+	}
 	
+	
+	@GetMapping("cinema/cinemaUpdate")
+	public ModelAndView adminCinemaUpdate(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
+		mv.addObject("path", "Update");
+		mv.addObject("vo", cinemaVO);
+		mv.setViewName("admin/cinema/cinemaInsert");
+
+		return mv;
+	}
+	
+	
+	@PostMapping("cinema/cinemaUpdate")
+	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
+		System.out.println("ㅠ.ㅠ");
+		int result = cinemaService.cinemaUpdate(cinemaVO);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:./cinemaList");
+		}else {
+			System.out.println("삽입 실패");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	@GetMapping("cinema/cinemaDelete")
+	public ModelAndView adminCinemaDelete(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("num : " + num);
+		System.out.println("-------------------");
+		int result = cinemaService.cinemaDelete(num);
+		
+		mv.setViewName("redirect:./cinemaList");
+
+		return mv;
+	}
+	
+	
+	
+	
+	//theater
 	@GetMapping("cinema/theaterInsert")
 	public ModelAndView adminTheaterInsert() throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -167,7 +229,17 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	
+
+	@GetMapping("cinema/theaterDelete")
+	public ModelAndView adminTheaterDelete(int num, int cinemaNum) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("num : " + num);
+		System.out.println("-------------------");
+		int result = theaterService.theaterDelete(num);
+		
+		mv.setViewName("redirect:./cinemaSelect?num="+cinemaNum);
+
+		return mv;
+	}
 	
 }

@@ -64,7 +64,7 @@ public class TheaterController {
 		int result = theaterService.theaterInsert(theaterVO, row, col, grade, row_space, col_space);
 		
 		if(result>0) {
-			mv.setViewName("redirect:admin/cinema/cinemaList");
+			mv.setViewName("redirect:../admin/cinema/cinemaList");
 		}else {
 			System.out.println("등록 실패");
 		}

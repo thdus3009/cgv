@@ -15,14 +15,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                    		<form action="${board}${path}" method="post" enctype="multipart/form-data">
+                    		<form action="cinema${path}" method="post" enctype="multipart/form-data">
+                    		<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<c:if test="${path eq 'Update'}">
 								<input type="hidden" name="num" id="num" value="${vo.num}">
 							</c:if>
-							
-							<c:if test="${path eq 'Reply'}">
-								<input type="hidden" name="num" id="num" value="${vo.num}">
-							</c:if>
+
 							
 						  <div class="form-group">
 						   	 <label for="name">Name:</label>

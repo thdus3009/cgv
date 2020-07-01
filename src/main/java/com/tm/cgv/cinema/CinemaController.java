@@ -49,7 +49,7 @@ public class CinemaController {
 		int result = cinemaService.cinemaInsert(cinemaVO);
 		
 		if(result > 0) {
-			mv.setViewName("redirect:./cinemaList");
+			mv.setViewName("redirect:../admin/cinema/cinemaList");
 		}else {
 			System.out.println("삽입 실패");
 		}

@@ -86,6 +86,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </main>
                 <c:import url="../template/footer.jsp"></c:import>
             </div>

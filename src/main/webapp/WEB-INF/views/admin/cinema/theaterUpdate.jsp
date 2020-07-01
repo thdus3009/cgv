@@ -335,7 +335,7 @@
 			$(".c"+index).after('<span class="col_space cs'+index+'">　</span>')
 			colList.push(index);
 
-			$(c).find(".col_plus").attr("onclick","colMinus("+j+");");
+			$(c).find(".col_plus").attr("onclick","colMinus("+index+");");
 			$(c).find(".col_plus").find("#img").attr("src","/images/theater/minus.png");
 			$(c).find(".col_plus").attr("class","col_minus");
 
@@ -518,7 +518,7 @@
 		break;
 	}
 
-	case 5:
+/* 	case 5:
 		//seatBooking table의 reservationNum을 0으로
 		//grade는 5로
 		//컨트롤러 넘긴 후 grade가 5인 것은....X > 몇 개 없을 테니까 따로 String을 보내도 될 것 같음
@@ -526,7 +526,7 @@
 		//아니면 따로따로 보내서
 		//DB에서 검색 몇관의 몇번시트인지
 		//
-		break;
+		break; */
 
 	
 }

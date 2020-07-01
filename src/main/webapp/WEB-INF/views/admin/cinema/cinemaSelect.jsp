@@ -93,11 +93,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="" style="float:right;">
+	                    	<span id="de" class="btn btn-danger">Delete</span>
+	                    	<span id="up" class="btn btn-primary">Update</span>
+	                    </div>
                     </div>
+                  
                 </main>
                 <c:import url="../template/footer.jsp"></c:import>
             </div>
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
+        <script type="text/javascript">
+			//delete submit
+			$("#de").click(function(){
+				//정말 삭제할 거냐고 묻는 alert창
+				var check = confirm("삭제하시겠습니까?");
+				if(check){
+					location.href="./cinemaDelete?num="+${cine.num};
+				}
+			});
+
+			
+			//update submit
+			$("#up").click(function(){		
+				location.href="./cinemaUpdate?num="+${cine.num};
+			});
+			
+        </script>
     </body>
 </html>
