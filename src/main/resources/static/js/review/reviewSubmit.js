@@ -265,20 +265,22 @@
 								if(data!=null){
 									alert("삭제 되었습니다.");
 									location.reload();
+									
+									//review deleteAt
+									$.ajax({
+										type:"GET",
+										url:"./review_Delete",
+										data:{
+											reservationNum : g_num,
+										},
+										success:function(){
+
+										}
+									})
 								}
 							}
 						})
-						//review deleteAt
-						$.ajax({
-							type:"GET",
-							url:"./review_Delete",
-							data:{
-								reservationNum : g_num,
-							},
-							success:function(){
 
-							}
-						})
 					}
 				});
 				

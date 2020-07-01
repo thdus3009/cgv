@@ -88,8 +88,6 @@
    		
    		<h1 style="border-bottom: 3px solid black; font-weight: bold; padding-bottom: 10px">내가 쓴 평점</h1>
 
-		<!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
-
 		<div id="result">
 			<c:forEach items="${look}" var="vo">
 				<div class="list_p2"><!-- dd -->
@@ -133,9 +131,14 @@
 				</div>
 			</c:forEach>
 		</div>
-
-
 	</div>	
+	
+	
+		<!-- Modal ------------------------------------------------------------------------------------->
+	
+	
+	
+	
 		<!-- 푸터 -------------------------------------------------------------------------------------->
 		<c:import url="../template/footer.jsp"></c:import>
 
@@ -144,6 +147,8 @@
 
 
 <!-- 스크립트 -->
+
+
 <script type="text/javascript">
 var g_num = 0;
 
@@ -157,23 +162,27 @@ $(".delete2").click(function(){
 			url:"./review_Delete",
 			data:{
 				reservationNum : g_num,
-			},
+				},
 			success:function(data){
 				if(data!=null){
 					if(confirm("삭제가 완료되었습니다.\n새로 작성하시겠습니까?")== true){
 						window.location.href='http://localhost/review/reviewList';
 					}else{
 						location.reload();
+						}
 					}
-				}
-			},
+				},
 			error:function(){
 				alert("삭제권한이 없습니다.")
-			}
+				}
 
-		})
+			})
 	
-	}
+		}
+	});
+
+$(".ud").click(function(){
+	alert("꺄르르르를르르를");
 });
 
 </script>
