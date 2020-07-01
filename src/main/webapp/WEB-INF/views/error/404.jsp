@@ -1,193 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
-<link href="../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
+<link href="../css/member/memberMyPage.css" rel="stylesheet"
+	type="text/css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>404 error</title>
 </head>
 <body>
 
 	<div class="root">
-		<!-- 헤더 -------------------------------------------------------------------------------------->
+		<!-- 헤더 -->
 		<c:import url="../template/header.jsp"></c:import>
+		
+		<!-- 사이드바 -->
+		<c:import url="../template/sidebar.jsp"></c:import>
 
-		<!-- 컨테이너 -------------------------------------------------------------------------------------->
-
+		<!-- 콘텐츠 -->
 		<div class="container">
 			<div class="c_nav">
 				<div class="nav_linemap">
 					<ul>
 						<li><a href="../"> <img alt="go to Home"
-								src="../images/login/btn_home.png">
+								src="../images/login/btn_home.png" style="padding: 7px 0 0 0;">
 						</a></li>
-						<li><a href="">MY CGV</a></li>
-						<li class="last">MY CGV HOME</li>
+						<li><a href="" style="color: black;">안내</a></li>
 					</ul>
 				</div>
 			</div>
-			
-
 			<div class="contents">
-				<div class="sect-common">
-				<div class="mycgv-info-wrap">
-					<div class="sect-person-info">
-						<div class="box-image">
-							<span class="thumb-image"> 
-							<img alt="" src="../images/myPage/default_profile.gif"> <span class="profile-mask"></span>
-							</span>
-						</div>
-						<div class="box-contents">
-							<div class="person-info1">
-								<strong>${memberVO.name } 님</strong> <em>(${memberVO.id })</em>
-								<button id="go_edit_page" type="button" title="새창열림">정보수정</button>
-							</div>
-							<div class="person-info2">
-								<p>전화번호 : ${memberVO.phone }</p>
-								<p>생년월일 : ${memberVO.birth }</p>
-								<p>E-mail : ${memberVO.email }</p>
-							</div>
-						</div>
-					</div>
-					
-
-					<div class="sect-movie-info">
-						<div class="col-my-coupon">
-							<h3>MY COUPON</h3>
-							<ul>
-								<li>
-									<strong>CGV VIP에 도전하세요!</strong>
-									<span></span>
-								</li>
-								<li>
-									<strong>CGV 할인쿠폰</strong>
-									<span><em>4</em>개</span>
-								</li>
-								<li>
-									<strong>영화관람권</strong>
-									<span><em>0</em>개</span>
-								</li>
-							</ul>
-						</div>
-						<div class="col-my-movie">
-						
-					<div class="col-my-coupon">
-							<h4>CJ ONE POINT</h4>
-							<ul>
-								<li>
-									<strong>CJ ONR 사용가능 포인트</strong>
-									<span></span>
-								</li>
-								<li>
-									<strong>VIP 선정 포인트</strong>
-									<span><em>4</em>개</span>
-								</li>
-								<li>
-									<strong>아놔</strong>
-									<span><em></em></span>
-								</li>
-							</ul>
-						</div>
-						</div>
-						<div class="col-favorite-theater">
-							<div class="sect-favorite">
-								<ul>
-									<li>
-										<a href=""><span>1</span>CGV불광</a>
-									</li>
-									<li>
-										<a href=""><span>2</span>CGV상봉</a>
-									</li>
-									<li>
-										<a href=""><span>3</span>CGV홍대</a>
-									</li>
-									<li>
-										<a href=""><span>4</span></a>
-									</li>
-									<li>
-										<a href=""><span>5</span></a>
-									</li>
-									<li class="btn-setfav">
-										<a href=""><span></span>자주가는 CGV<br>설정하기</a>
-									</li>
-								</ul>
-<!-- 								<button class="setting"></button> -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-				<div>
-					<div class="col_content">
-						<!----------------- contents aside -->
-						<div class="col_aside">
-							<div class="snb">
-								<ul>
-									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
-									<li><a href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보 수정<i></i></a></li>
-									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
-									<li><a href="">예매 영화 관리<i></i></a></li>
-									<li><a href="../review/reviewList" style="background-color: black; color: white;">내가 본 영화<i></i></a></li>
-								</ul>
-
-							</div>
-							<div class="ad_area">
-								<div class="ad_panner_1">
-									<a href=""> <img alt="" src="../images/bbsList/200313_160x300.jpg">
-									</a>
-								</div>
-								<div class="ad_panner_2">
-									<a href=""> <img alt="" src="../images/bbsList/0325_160x35.png">
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!------contents detail -->
-						<div class="col_detail"></div>
-
+				<div class="error-sect">
+					<h3>이용에 불편을 드려 죄송합니다.</h3>
+					<p>방문하시려는 웹 페이지의 주소가 잘못 입력되었거나 변경 또는 삭제되어 요청하신 페이지를 찾을 수 없습니다.<br>
+						입력하신 주소가 정확한지 다시 한 번 확인해 주시기 바랍니다. 감사합니다.</p>
+					<div>
+						<a href="" class="error-btn" onclick="document.referrer"><span>이전 페이지 이동</span></a> 
+						<a href="#" class="error-btn"><span>고객센터(1544-1122)</span></a>
+						<a href="${pageContext.request.contextPath}/" class="red-button"><span>CGV 첫 화면 이동</span></a>
 					</div>
 				</div>
 			</div>
 		</div>
 
-
-		<!-- 푸터 -------------------------------------------------------------------------------------->
+		<!-- 푸터 -->
 		<c:import url="../template/footer.jsp"></c:import>
-
-		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
-		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
-
-<script type="text/javascript">
-
-	//회원 탈퇴 알림창
-	$("#memberDelete").click(function(){
-		var check = confirm("회원 탈퇴하시겠습니까?");
-
-		if(check){
-			location.href="./memberDelete?id=${memberVO.id}";
-		}
-	});
-
-	//정보 수정 팝업창
-	$("#go_edit_page").click(function(){
-		window.open( 
-			"memberPopUpEdit.jsp", 
-			"마이페이지 - 정보수정", 
-			"width = 700, height = 565, top=100, left 200, locations = no");
-		});
-
-</script>
-
-
 
 </body>
 </html>
