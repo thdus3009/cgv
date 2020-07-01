@@ -313,7 +313,7 @@ function discount_form_change(selected){
 
 
 
-//CGV 기프트카드 등록
+//CGV 기프트카드 등록창 열기
 $("#cgvGiftPrePay .tpm_coupon_button").click(function(){
 	$(".blackscreen").css("display","block");
 	$(".ft_layer_popup.f_popup").css("display","block");
@@ -327,7 +327,44 @@ function window_close(){
 	$(".ft_layer_popup.f_popup").css("display","none");
 }
 
-
+//CGV 기프트 카드 등록
+function giftCardEnrollment(){
+	var serialCode="";
+	$(".inputCon.cardNum .input_txt").each(function(){
+		serialCode += $(this).val();
+	});
+	
+	var password = $(".inputCon.cardPw .input_txt").val();
+	
+	console.log(serialCode);
+	console.log(password);
+	
+	
+	
+	$.ajax({
+		url : '../cuponInfo/cuponeEnrollment',
+		type: 'post',
+		data : {
+			serialNum : serialCode,
+			pwd : password,
+			_csrf : $("#_csrf").val()
+		},
+		success : function(price){
+			console.log("더해야될 가격 : "+price);
+			
+			if(price > 0){
+				alert("등록이 완료 되었습니다.");
+				window_close();
+				
+				//출력되어있는 값 더하기
+				var preVal = removeComma($("#cgvGiftPrePay .hasPoint").text());
+				var updateVal = preVal + price; 
+				$("#cgvGiftPrePay .hasPoint").text(addComma(updateVal));
+			}
+		}
+	});
+	
+}
 
 
 

@@ -422,7 +422,7 @@
 					</ul>
 				</div>
 				<div style="text-align: center; margin-bottom: 10px;">
-					<a href="#none" onclick="return false;" class="btn btn_regist btn_size2" title="등록하기">
+					<a href="#none" onclick="giftCardEnrollment(); return false;" class="btn btn_regist btn_size2" title="등록하기">
 						<span>등록하기</span>
 					</a>
 					<a href="#none" onclick="window_close(); return false;" class="btn btn_white btn_close" title="닫기">
