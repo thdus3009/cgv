@@ -103,7 +103,7 @@
 							<!-- 타이틀(제목)/리뷰삭제 -->
 							<div>
 								<div class="td1" style="font-weight: bold; font-size: large;">${vo.title}</div>
-								<button id="delete2" class="td1 td2">
+								<button data-num2="${vo.num}" id="delete2" class="td1 td2">
 									<div class="td_image" style="background: url('../images/movie/movieList/sprite_icon.png') no-repeat -195px -40px"></div>
 								</button>
 							</div>

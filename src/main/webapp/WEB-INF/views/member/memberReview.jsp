@@ -239,7 +239,7 @@
 							<div id="contents"></div>
 							<br>
 							<span id="uid"></span> | 
-							<span id="createAt"></span> | <button id="delete" style="border: 0; outline:0; background-color: transparent !important;">삭제</button>
+							<span id="createAt"></span> | <button id="delete1" style="border: 0; outline:0; background-color: transparent !important;">삭제</button>
 					
 						</div>
 	
