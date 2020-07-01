@@ -358,25 +358,7 @@
 			}
 		});
 		
-		$("#delete2").click(function(){
-			if(confirm("작성한 평점을 삭제하시겠습니까?")== true){
-				$("#exit3").click();
-				$.ajax({
-					type:"GET",
-					url:"./review_Delete",
-					data:{
-						reservationNum : g_num,
-					},
-					success:function(data){
-						if(data!=null){
-							alert("삭제 완료");
-							location.reload();
-						}
-					}
-				})
-					
-			}
-		});
+
 		/* ---------내 평점 보기---------- */
 		$("#look").click(function(){
 			window.location.href='http://localhost/review/reviewLook';

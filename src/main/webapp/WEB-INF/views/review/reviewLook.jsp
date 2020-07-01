@@ -103,9 +103,10 @@
 							<!-- 타이틀(제목)/리뷰삭제 -->
 							<div>
 								<div class="td1" style="font-weight: bold; font-size: large;">${vo.title}</div>
-								<button data-num2="${vo.num}" id="delete2" class="td1 td2">
+								<button class="td1 td2 delete2" data-num3="${vo.reservationNum}" >
 									<div class="td_image" style="background: url('../images/movie/movieList/sprite_icon.png') no-repeat -195px -40px"></div>
 								</button>
+								${vo.reservationNum}
 							</div>
 
 							<!-- egg/uid/날짜 -->
@@ -142,5 +143,36 @@
 		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 		<c:import url="../template/sidebar.jsp"></c:import>
 </div>
+
+<!-- 스크립트 -->
+<script type="text/javascript">
+var g_num = 0;
+
+$(".delete2").click(function(){
+	g_num=$(this).data("num3");
+	console.log(g_num);
+	
+	if(confirm("작성한 관람평을 삭제하시겠습니까?")== true){
+		$("#exit3").click();
+		$.ajax({
+			type:"GET",
+			url:"./review_Delete",
+			data:{
+				reservationNum : g_num,
+			},
+			success:function(data){
+				if(data!=null){
+					alert("삭제 완료");
+					location.reload();
+				}
+			}
+		})
+			
+	}
+});
+
+</script>
+
+
 </body>
 </html>
