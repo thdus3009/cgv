@@ -115,7 +115,7 @@
 					<h1>Notice Write</h1>
 
 					<!-- 내용 -->
-					<form action="" method="post">
+					<form action="./bbsWrite" method="post" enctype="multipart/form-data">
 						<div>
 							<ul>
 								<label class="label">카테고리</label>
@@ -129,11 +129,11 @@
 								</label></li>
 							</ul>
 							<label for="title" class="label">제목</label>
-							<input type="text" required="required" class="title" id="title" value="내용">
-							<div id="summernote"></div>
+							<input type="hidden" value="${sessionScope.memberVO.id}" name="writer">
+							<input type="text" required="required" class="title" id="title">
+							<textarea id="summernote"></textarea>
 							<div class="btn_s">
-								<button type="button" class="write-cancle"
-									onClick="location.href='./noticeWrite'" id="cancle">취소</button>
+								<button type="button" class="write-cancle" onClick="location.href='./noticeWrite'" id="cancle">취소</button>
 								<button type="submit" class="write-submit" id="btn">등록하기</button>
 							</div>
 						</div>
@@ -159,8 +159,6 @@
 							[ 'insert', [ 'link', 'picture', 'video' ] ],
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});
-
-		$('#summernote').summernote('editor.insertText', '내용');
 	</script>
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>

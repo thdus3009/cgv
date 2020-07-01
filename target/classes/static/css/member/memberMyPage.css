@@ -336,7 +336,7 @@ h3 {
 	display: flex;
 }
 
-.box-polaroid > p{
+.box-polaroid>p {
 	border-left: 1px #c0c0c0 dashed;
 }
 
@@ -352,84 +352,80 @@ h3 {
 	padding: 50px 0 16px;
 }
 
-.inner-box-a > h3 {
+.inner-box-a>h3 {
 	margin-bottom: 5px;
 	color: #333;
 }
 
-.inner-box-a > span {
+.inner-box-a>span {
 	color: #333;
 }
 
 /**/
-
-.my-reserve-bar{
+.my-reserve-bar {
 	overflow: hidden;
-    position: relative;
-    line-height: 34px;
+	position: relative;
+	line-height: 34px;
 	display: flex;
 	justify-content: space-between;
 }
 
-.my-reserve-bar > div{
+.my-reserve-bar>div {
 	display: flex;
 }
 
-.plus-btn{
+.plus-btn {
 	display: inline-block;
-    width: 20px;
-    height: 19px;
-    margin-left: 5px;
-    margin-top: 8px;
-    background: url(/images/myPage/sprite_btn.png) no-repeat -50px -62px;
-    font: 0/0 a;
-    vertical-align: middle;
-    zoom: 1;
+	width: 20px;
+	height: 19px;
+	margin-left: 5px;
+	margin-top: 8px;
+	background: url(/images/myPage/sprite_btn.png) no-repeat -50px -62px;
+	font: 0/0 a;
+	vertical-align: middle;
+	zoom: 1;
 }
 
-.my-movie-reserve{
+.my-movie-reserve {
 	border: 1px solid #333;
-	
 }
 
-.reserve-ticket{
+.reserve-ticket {
 	width: 746px;
-    padding: 26px;
-    display: flex;
+	padding: 26px;
+	display: flex;
 }
 
-.rt-info1{
+.rt-info1 {
 	margin-right: 20px;
 }
 
-.rt-info2 > div{
+.rt-info2>div {
 	display: flex;
-	
 }
 
-.rt-ul > li{
+.rt-ul>li {
 	height: 20px;
-	
 }
 
-li > strong{
+li>strong {
 	font-family: 'CJ+ONLYONE+Medium';
 	font-weight: 600;
 }
 
-.poster{
+.poster {
 	margin-right: 15px;
 	width: 55px;
-    height: 70px;
+	height: 70px;
 }
 
-.rt-info2-div1{
+.rt-info2-div1 {
 	padding-bottom: 20px;
 	width: 610px;
-	border-bottom: 1px solid #c0c0c0; 
+	border-bottom: 1px solid #c0c0c0;
 }
 
-.rt-info2-div2{
+.rt-info2-div2 {
 	margin-top: 20px;
 	text-align: left;
 	display: flex;
@@ -442,32 +438,189 @@ dl {
 	display: flex;
 }
 
-dt{
+dt {
 	color: #2275a4;
 }
 
-.message-reserve{
+.message-reserve {
 	border-radius: 0.25rem;
 	border: 1px solid #333333;
-    color: #fff;
+	color: #fff;
 	background-color: #333333;
 	padding: 1px;
-	padding-bottom: 4px;
+	padding-top: 5px;
+	padding-bottom: 8px;
+	height: 28px;
 }
 
-.cancle-reserve{
+.cancle-reserve {
 	border-radius: 0.25rem;
 	border: 2px solid #333333;
-    color: #333333;
+	color: #333333;
 	background-color: transparent;
 	padding: 1px 6px;
 	padding-bottom: 4px;
 }
 
-.message-reserve > span{
+.message-reserve>span {
 	border-radius: 0.25rem;
 	width: 100%;
-    height: 100%;
-    border: 1px solid #5b5b58;
-	padding: 3px 6px;
+	height: 100%;
+	border: 1px solid #727272;
+	padding: 2px 10px;
+	padding-top: 3px;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
+}
+
+/**/
+.tit-mycgv {
+	height: 34px;
+	margin: 0;
+	background-image: none;
+	color: #222;
+	font-weight: 600;
+	font-size: 17px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.set-btn {
+	margin-top: 0;
+	text-align: right;
+}
+
+.tbl-data {
+	
+}
+
+.member-table {
+	padding: 0;
+	border-top: 1px solid #b8b6aa;
+	border-bottom: 1px solid #b8b6aa;
+	margin: 5px 0;
+}
+
+.member-thead {
+	background-color: #e2e2e0;
+	font-size: 13px;
+}
+
+.member-tr>th {
+	height: 34px;
+	padding-left: 12px;
+	background-color: #e2e2e0;
+	font-size: 13px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.coupon-h4 {
+	height: 34px;
+	margin: 0;
+	background-image: none;
+	color: #222;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+/**/
+.coupon-form {
+	border: 1px solid #656560;
+	height: 100px;
+	width: 798x;
+	background-color: #f3f2e7;
+	position: relative;
+}
+
+.coupon-form>strong {
+	position: absolute;
+	left: 45px; top : 45px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	color: #333;
+}
+
+.coupon-form>span {
+	position: absolute;
+	left: 130px; top : 25px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	top: 25px;
+}
+
+.coupon-term {
+	border-radius: 0.25rem;
+	border: 2px solid #7b7b7b; 
+	color : #7b7b7b;
+	background-color: transparent;
+	padding: 3px 6px 1px 6px;
+	color: #7b7b7b;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.coupon-3m{
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	margin-left: 15px;
+}
+
+.coupon-form>p {
+	position: absolute;
+	left: 130px; top : 50px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	top: 50px;
+}
+
+.data-p > input{
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	width: 200px;
+	display: inline-block;
+    height: 25px;
+    line-height: 22px;
+    padding-left: 10px;
+    border: 1px solid #b5b5b5;
+    background-color: #e8e8dd;
+    color: #666;
+}
+
+/**/
+.coupon-notice {
+	border: 2px solid #d5d5ce;
+	margin-top: 80px;
+}
+
+.coupon-notice>div {
+	display: flex;
+	width: 796px;
+	padding: 29px 25px 20px 25px;
+	width: 796px;
+}
+
+.coupon-em {
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 1.5;
+	font-style: normal;
+	width: 100px;
+}
+
+.coupon-notice-ul {
+	width: 598px;
+	padding: 0 2px 0 25px;
+	border-left: 1px solid #d7d6ce;
+	font-weight: 300;
+}
+
+.coupon-notice-ul>li {
+	margin-top: 5px;
+	font-size: 12px;
+	line-height: 1.5;
 }
