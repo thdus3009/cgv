@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</insert>
  	
  	<delete id="seatBookingDelete" parameterType="Integer">
- 		delete from seatBooking where num =#{num}
+ 		delete from seatBooking where reservationNum =#{reservationNum}
  	</delete>
 
 </mapper>

@@ -372,38 +372,6 @@ function giftCardEnrollment(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //간편 결제 클릭시 아래 수단 추가
 //last_pay_radio3
 $("#lastPayCon span").click(function(){

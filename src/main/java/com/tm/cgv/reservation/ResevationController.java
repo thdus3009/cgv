@@ -63,10 +63,6 @@ public class ResevationController {
 		//예매번호로 reservationVO 값 조회
 		reservationVO = reservationService.reservationSelectOne(reservationVO);
 		
-		//결제 DB삭제
-		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
-		System.out.println("결제 : "+result);
-		
 		//좌석예약 DB삭제
 		result = seatBookingService.seatBookingDelete(reservationVO.getNum());
 		System.out.println("좌석예약 : "+result);
@@ -94,9 +90,13 @@ public class ResevationController {
 			System.out.println("포인트 : "+result);
 		}
 		
+		//결제 DB삭제 -> 예매 삭제 -> 할인정보 삭제(cascade)
+//		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
+//		System.out.println("결제 : "+result);
+		
 		//예매 DB삭제
-		result = reservationService.reservationDelete(reservationVO);
-		System.out.println("예매정보 : "+result);
+		//result = reservationService.reservationDelete(reservationVO);
+		//System.out.println("예매정보 : "+result);
 				
 		return result;
 	}
