@@ -44,7 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select * from 
 		(select num as mNum,title from movieInfo) M
 		join
-		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat from movieTime) T
+		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat from movieTime
+        where left(screenTime,2) >= date_format(sysdate(),'%H')
+        or screenDate > sysdate()
+        ) T
 		on(M.mNum = T.movieNum)) A
 		join
 		(select num as sNum,cinemaNum,name,seatCount,filmType from theater) C
@@ -53,6 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select num as cNum,name as cName from cinema) I
 		on(I.cNum = B.cinemaNum)) F
 		where F.title Like concat('%',#{title},'%') and F.cName Like concat('%',#{theater},'%') and F.screenDate Like concat('%',#{date},'%')
+        and screenDate > date_add(now(),interval -1 day)
 	</select>
  	
  

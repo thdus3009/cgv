@@ -294,35 +294,25 @@ function ajaxLoad(){
 				var checkFloor = result[i].theaterVOs[0].name;
 				var check = true;
 
-//				console.log(checkName+checkFloor +" "+result[i].movieTimeVOs[0].screenTime)
-//				console.log("size: "+list.length)
 				for(k=0;k<list.length;k++){
-//					console.log("list["+ k +"] : "+list[k]);
-					
 					if(list[k] == checkName+checkFloor){
-//						console.log("겹치는 값이 하나라도 존재 -> 쿼리 추가X");
 						check = false;
 					}
 				}
 				
 				if(i != 0){
 					$(".time-list .theater").each(function(){
-//						console.log("있는값:"+ $(this).data("name")+$(this).data("floor"));
 						if($(this).data("name") == checkName && $(this).data("floor") == checkFloor){
 							$(this).find("ul").append(li);
 						}
 					});
-					
 					if(check){
-//						console.log("없는 값이 추가 되므로 쿼리 추가");
 						$(".time-list .content").append(query);
 					}
-					
 				}else{
 					$(".time-list .content").append(query);
 				}
 				
-//				console.log("=================================");
 				list.push(checkName+checkFloor);
 			}
 			
@@ -348,6 +338,37 @@ function ajaxLoad(){
 			
 			$(".tnb.step1 .btn-right").removeClass("on");
 		}
+		
+		
+		
+		function timeDimmedCheck(){
+			var rdate = new Date();
+			var rhour = rdate.getHours();
+			var rminute = rdate.getMinutes();
+			
+			console.log("현재 시간 : "+ rdate);
+			console.log("시 : " +rhour);
+			console.log("분 : " +rminute);
+			
+			console.log("누른시간 : "+date);
+			
+			
+			//누른날짜랑 현재 지금 날짜랑 동일 할때 
+			//누른 각 버튼의 시간대와 현재의 시간대를 비교해서 dimmed추가
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		// 상영시간 선택
@@ -376,6 +397,8 @@ function ajaxLoad(){
 				
 				$(".row.movie_type").css("display","block");
 				$(".tnb.step1 .btn-right").addClass("on");
+				
+				timeDimmedCheck();
 			}
 			
 		});

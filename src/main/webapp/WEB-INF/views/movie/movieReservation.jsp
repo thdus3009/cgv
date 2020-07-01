@@ -312,10 +312,13 @@
 							<div class="col-body" style="height: 560px;">
 								<div class="date-list nano has-scrollbar has-scrollbar-y" id="date_list">
 									<ul class="content scroll-y" tabindex="-1" style="right: -21px;">
-										<li class="month dimmed ">
-											<span class="year">${calendarList[0].year}</span>
-											<span class="month" data-month="">${calendarList[0].month}</span>
-										</li>
+										<c:if test="${calendarList[0].date != 1}">
+											<li class="month dimmed ">
+												<span class="year">${calendarList[0].year}</span>
+												<span class="month" data-month="">${calendarList[0].month}</span>
+											</li>
+										</c:if>
+										
 										
 										<c:forEach var="calendarVO" items="${calendarList}" varStatus="i">
 											<c:if test="${calendarVO.date eq 1}">
