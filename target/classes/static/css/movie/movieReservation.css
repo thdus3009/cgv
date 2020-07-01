@@ -337,7 +337,22 @@ body{
 	display: inline-block;
 	width: 32px;
 	height: 35px;
-	background: url("../../images/movie/movieReservation/icon_ratings2.png") no-repeat 0 0;
+	background: url("../../images/movie/movieReservation/icon_ratings2.png") no-repeat 4px 6px;
+}
+
+#ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-15.selected > a span.icon, #ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-15.press > a span.icon{
+	background-position: 2px -67px;
+}
+
+#ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-12.selected > a span.icon, #ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-12.press > a span.icon{
+	background-position: 2px -32px;
+}
+
+#ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-18.selected > a span.icon, #ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-18.press > a span.icon {
+    background-position: 2px -102px;
+}
+#ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-all.selected > a span.icon, #ticket .section-movie .col-body .movie-select .movie-list > ul > li.rating-all.press > a span.icon {
+    background-position: 2px 3px;
 }
 
 .movie-list > ul > li > a span.text{

@@ -16,4 +16,13 @@ class ReservationService{
 	public ReservationVO reservationResultSelectOne(int num) throws Exception{
 		return reservationRepository.reservationResultSelectOne(num);
 	}
+	
+	public ReservationVO reservationSelectOne(ReservationVO reservationVO) throws Exception{
+		return reservationRepository.reservationSelectOne(reservationVO);
+	}
+	
+	public int reservationDelete(ReservationVO reservationVO) throws Exception{
+		return reservationRepository.reservationDelete(reservationVO);
+	}
+	
 }

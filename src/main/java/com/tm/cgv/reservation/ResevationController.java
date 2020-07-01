@@ -16,6 +16,7 @@ import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.payment.PaymentService;
 import com.tm.cgv.point.PointService;
 import com.tm.cgv.point.PointVO;
 import com.tm.cgv.seat.SeatService;
@@ -48,7 +49,59 @@ public class ResevationController {
 	private PointService pointService;
 	@Autowired
 	private DiscountInfoService discountInfoService;
+	@Autowired
+	private PaymentService paymentService;
 
+	
+	
+	//예매 취소
+	@ResponseBody
+	@GetMapping("reservationCancle")
+	public int reservationCancle(ReservationVO reservationVO) throws Exception{
+		int result = 0;
+		
+		//예매번호로 reservationVO 값 조회
+		reservationVO = reservationService.reservationSelectOne(reservationVO);
+		
+		//결제 DB삭제
+		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
+		System.out.println("결제 : "+result);
+		
+		//좌석예약 DB삭제
+		result = seatBookingService.seatBookingDelete(reservationVO.getNum());
+		System.out.println("좌석예약 : "+result);
+		
+		//movieTime DB업데이트 - 잔여좌석 (인원 파악해야됨)
+		int totalCount = reservationVO.getCommon() + reservationVO.getTeenager() + reservationVO.getPreference();
+		MovieTimeVO movieTimeVO = new MovieTimeVO();
+		movieTimeVO.setNum(reservationVO.getMovieTimeNum());
+		movieTimeVO.setRemainSeat(totalCount);
+		result = movieTimeService.remainSeatSum(movieTimeVO);
+		System.out.println("잔여좌석 : "+result);
+		
+		//포인트 DB업데이트 - (할인 정보 조회 -> 조회결과로 각 point 값 들 갱신)
+		//1.할인정보 조회
+		List<DiscountInfoVO> discountList = discountInfoService.discountInfoSelect(reservationVO.getNum());
+		for (DiscountInfoVO vo : discountList) {
+			//2.point 정보 갱신
+			PointVO pointVO = new PointVO();
+			pointVO.setKind("sum");
+			pointVO.setType(vo.getType());
+			pointVO.setPrice(vo.getDiscountPrice());
+			pointVO.setMemberNum(reservationVO.getUid());
+			
+			result = pointService.pointDiscountUpdate(pointVO);
+			System.out.println("포인트 : "+result);
+		}
+		
+		//예매 DB삭제
+		result = reservationService.reservationDelete(reservationVO);
+		System.out.println("예매정보 : "+result);
+				
+		return result;
+	}
+	
+	
 	
 	//예매 완료 페이지 
 	@GetMapping("reservationResultSelectOne")

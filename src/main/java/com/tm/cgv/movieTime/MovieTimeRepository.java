@@ -9,4 +9,6 @@ public interface MovieTimeRepository {
 	
 	public int remainSeatUpdate(MovieTimeVO movieTimeVO) throws Exception;
 	
+	public int remainSeatSum(MovieTimeVO movieTimeVO) throws Exception;
+	
 }

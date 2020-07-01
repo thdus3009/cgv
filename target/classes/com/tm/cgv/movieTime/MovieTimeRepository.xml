@@ -14,5 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="remainSeatUpdate" parameterType="MovieTimeVO">
  		update movieTime set remainSeat=#{remainSeat} where num = #{num}
  	</update>
+ 	
+ 	<update id="remainSeatSum" parameterType="MovieTimeVO">
+ 		update movieTime set remainSeat = remainSeat + #{remainSeat} where num =#{num}
+ 	</update>
  
 </mapper>

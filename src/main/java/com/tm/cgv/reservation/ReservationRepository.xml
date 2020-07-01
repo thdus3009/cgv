@@ -64,8 +64,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join
 		(select num as pNum,pay_method from payment) P
 		on(B.paymentNum = P.pNum)
-	
 	</select>
+	
+	<select id="reservationSelectOne" parameterType="ReservationVO" resultType="ReservationVO">
+		select * from reservation where num=#{num}
+	</select>
+	
+	
+	<delete id="reservationDelete" parameterType="ReservationVO">
+		delete from reservation where num=#{num}
+	</delete>
 
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

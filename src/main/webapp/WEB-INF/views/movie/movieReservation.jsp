@@ -11,6 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/movie/movieSeatReservation.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/moviePayment.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/movieReservationResult.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieCGVgift.css" rel="stylesheet" type="text/css">
 
 <!-- payment -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -47,7 +48,7 @@
 			</div>
 
 		<div id="container">
-		
+			<div class="blackscreen" style="display: none;" id="blackscreen"></div>
 			<div id="ticket">
 			
 				<!-- navigation -->
@@ -375,14 +376,66 @@
 					
 					<div class="step step4" style="display: none;">
 					</div>
-					
-					
-					
-					
 				</div>			
 			</div>
-		
 		</div>
+		
+		
+		
+		<!-- CGV 기프트 카드 등록 -->
+		<div class="ft_layer_popup f_popup" style="display: none;">
+			<div class="hd">
+				<div class="title_area"><h4>CGV 기프트카드 등록하기</h4></div>
+			</div>
+			<div class="bd">
+				<p class="notice">CGV 기프트카드를 등록하시면 온/오프라인에서 모두 편리하게 이용 하실수 있습니다.</p>
+				<div class="f_card innerCon" style="display: block;">
+					<p class="inputCon cardNum">
+						<label for="f_cardNo">카드번호</label>
+						<input id="f_cardNo" type="text" class="input_txt" maxlength="4"> -
+						<input type="password" class="input_txt" maxlength="4" > -
+						<input type="password" class="input_txt" maxlength="4" > -
+						<input type="text" class="input_txt" maxlength="4" > 
+					</p>
+					<p class="inputCon cardPw">
+						<label for="f_cardPw">비밀번호</label>
+						<input id="f_cardPw" type="password" class="input_txt" maxlength="6" placeholder="스크래치번호">
+					</p>
+				</div>
+		
+				<div id="movieMoneyNT" style="margin-bottom: 20px; display: block;">
+					<img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/popup/image_cgvticket.png" alt="CGV영화관람권 비밀번호 스크래치 부분을 동전 등으로 긁으면 비밀번호가 나타납니다.">
+						
+					<ul class="info">
+						<li>
+							<div class="title">이용안내</div>
+							<div class="text">
+								CGV 영화관람권 <em>비밀번호</em>를 입력해주세요.<br>
+								CGV GOLD CLASS 이용권 <em>비밀번호</em>를 등록해주세요.<br>
+								CGV온라인(홈페이지/모바일)에서 등록하신 관람권은 홈페이지/모바일예매에<br>
+								한하여 사용할 수 있으며, CGV 현장 매표소에서는 사용할 수 없습니다.<br> 
+								CGV 영화 관람권은 일반 인터넷 사이트를 포함한 시중에서 임의로 매매될 수<br>
+								없으며 반드시 CGV를 통해서만 구입하실 수 있습니다.
+							</div>
+								
+						</li>
+					</ul>
+				</div>
+				<div style="text-align: center; margin-bottom: 10px;">
+					<a href="#none" onclick="return false;" class="btn btn_regist btn_size2" title="등록하기">
+						<span>등록하기</span>
+					</a>
+					<a href="#none" onclick="window_close(); return false;" class="btn btn_white btn_close" title="닫기">
+						<span>닫기</span>
+					</a>
+				</div>
+			
+			</div>
+			<a href="#none" onclick="window_close(); return false;" class="pop_close" title="닫기"></a>
+		</div>
+		<!-- End CGV 기프트 카드 등록  -->
+		
+		
 		
 		<!-- url : ../reservation/seatReservation -->
 		<form action="" id="data-from" method="post">

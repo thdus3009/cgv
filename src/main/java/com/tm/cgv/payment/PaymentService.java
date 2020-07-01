@@ -13,5 +13,8 @@ public class PaymentService {
 		return paymentRepository.paymentInsert(paymentVO);
 	}
 	
+	public int paymentDelete(int num) throws Exception{
+		return paymentRepository.paymentDelete(num);
+	}
 
 }

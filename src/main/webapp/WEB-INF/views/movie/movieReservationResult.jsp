@@ -66,8 +66,8 @@
                 <span class="desc">발레파킹을 이용하실 수 있으나, 가능 차량수가 한정적이며 주변 교통상황에 따라 지연될 수 있습니다.</span>
             </div>
             <div class="ticket_button_group"><div>
-                <a class="btn_step4 btn_result_smssend" href="#" onclick="sendTicketResultSMS();return false;"><span>예매결과 SMS발송</span></a>
-                <a class="btn_step4 btn_red btn_ticket_check" href="#" onclick="confirmCancelTicketResult();return false;"><span>예매확인/취소</span></a>
+                <a class="btn_step4 btn_result_smssend" href="#" onclick="return false;"><span>예매결과 SMS발송</span></a>
+                <a class="btn_step4 btn_red btn_ticket_check" id="ticket_cancle" data-index="${reservationVO.num}" href="#" onclick="return false;"><span>예매확인/취소</span></a>
             </div></div>
             <div class="ticket_instructions">
                 <dl>
@@ -92,9 +92,12 @@ dateForm();
 personnel();
 discountInfo();
 
+//하단바 
 $("#ticket_tnb").css("display","none");
 $(".ticket_tnb").css("margin-top","100px");
 
+//총 결제액
+$(".ticket_summary .payment_price .price").text(addComma(`${reservationVO.totalPrice}`));
 
 //날짜 포맷
 function dateForm(){
@@ -130,10 +133,6 @@ function personnel(){
 	
 	$(".ticket_summary .people em").text(personnelList.join(","));
 }
-
-//총 결제액
-$(".ticket_summary .payment_price .price").text(addComma(`${reservationVO.totalPrice}`));
-
 
 //할인 금액 정보 
 // 형식 :  (CJ ONE 포인트 <span class="price">3,000</span>원)
@@ -196,10 +195,8 @@ function discountInfo(){
 
 }
 
-
-
 </script>
-
+<script type="text/javascript" src="/js/movie/movieReservationResult.js"></script>
 
 
 

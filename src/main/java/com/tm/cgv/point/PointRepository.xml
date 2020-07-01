@@ -12,8 +12,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<update id="pointDiscountUpdate" parameterType="PointVO">
-		update point set price=price-#{price} where memberNum=#{memberNum} and type=#{type}
+		update point set
+		<choose>
+			<when test="kind == 'sum'">
+				price=price+#{price}
+			</when>
+			<otherwise>
+				price=price-#{price}			
+			</otherwise>
+		</choose>
+		where memberNum=#{memberNum} and type=#{type}
 	</update>
+	
+	
 	
 
 </mapper>

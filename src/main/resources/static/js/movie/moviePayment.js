@@ -313,6 +313,50 @@ function discount_form_change(selected){
 
 
 
+//CGV 기프트카드 등록
+$("#cgvGiftPrePay .tpm_coupon_button").click(function(){
+	$(".blackscreen").css("display","block");
+	$(".ft_layer_popup.f_popup").css("display","block");
+	
+});
+
+
+//CGV 기프트카드 창 닫기
+function window_close(){
+	$(".blackscreen").css("display","none");
+	$(".ft_layer_popup.f_popup").css("display","none");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -431,7 +475,7 @@ function reservation_save(result){
 }
 
 
-
+//예매 결과
 function reservation_result(data){
 	$.get("../reservation/reservationResultSelectOne?num="+data,function(result){
 		
@@ -446,6 +490,12 @@ function reservation_result(data){
 		$(".step.step4").html(result);
 	});
 }
+
+
+
+
+
+
 
 
 
