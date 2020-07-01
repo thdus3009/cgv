@@ -50,19 +50,26 @@ public class ResevationController {
 	private DiscountInfoService discountInfoService;
 
 	
+	//예매 완료 페이지 
 	@GetMapping("reservationResultSelectOne")
 	public ModelAndView reservationResultSelectOne(String num) throws Exception{
 		ModelAndView mv = new ModelAndView();
 
+		//예매정보 
 		ReservationVO reservationVO = reservationService.reservationResultSelectOne(Integer.parseInt(num));
 		
+		//EndTime
 		int runningTime = Integer.parseInt(reservationVO.getMovieInfoVO().getRuntime()); 
 		String startTime = reservationVO.getMovieTimeVO().getScreenTime();
-		
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
+		
+		//할인 적용 정보
+		List<DiscountInfoVO> discountInfoList = discountInfoService.discountInfoSelect(reservationVO.getNum());
+		
 		
 		mv.addObject("endTime", endTime);
 		mv.addObject("reservationVO", reservationVO);
+		mv.addObject("discountInfoList", discountInfoList);
 		
 		mv.setViewName("movie/movieReservationResult");
 		return mv;

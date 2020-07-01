@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 
 
@@ -51,7 +51,9 @@
                                 <td>
                                     <div class="row">
                                         <span class="title"><em>${reservationVO.paymentVO.pay_method}</em></span>
-                                        <span class="content"><span class="price">5,000</span>원 (CJ ONE 포인트 <span class="price">3,000</span>원)</span>
+                                        <span class="content">
+                                        	<span class="price"></span>
+										</span>
                                     </div>
                                 </td>
                             </tr>
@@ -88,6 +90,11 @@
 
 dateForm();
 personnel();
+discountInfo();
+
+$("#ticket_tnb").css("display","none");
+$(".ticket_tnb").css("margin-top","100px");
+
 
 //날짜 포맷
 function dateForm(){
@@ -126,6 +133,70 @@ function personnel(){
 
 //총 결제액
 $(".ticket_summary .payment_price .price").text(addComma(`${reservationVO.totalPrice}`));
+
+
+//할인 금액 정보 
+// 형식 :  (CJ ONE 포인트 <span class="price">3,000</span>원)
+function discountInfo(){
+	var list = [];
+	
+	<c:forEach var="vo" items="${discountInfoList}">
+		var discountInfoVO = {
+			type : `${vo.type}`,
+			discountPrice : `${vo.discountPrice}`
+		}
+		
+		list.push(discountInfoVO);
+	</c:forEach>
+
+	var html = "원 ";	
+	var discountTotal = 0;
+	
+	for(i=0;i<list.length;i++){
+		var type = list[i].type;
+		var discountPrice = list[i].discountPrice;
+
+		discountTotal += (discountPrice*1);
+		
+		var str = "";
+		
+		switch(type){
+		case 'cjOnePointipt':
+			str = "CJ ONE 포인트";
+			break;
+		case 'cgvGiftPrePayipt':
+			str = "CGV GIFT 포인트";
+			break;
+
+		}
+		html = html + '('+ str +' <span class="price">' + discountPrice + '</span>원)';
+		console.log(html);
+	}
+
+	var totalPrice = `${reservationVO.totalPrice}`;
+	console.log("------------------------")
+	console.log("총 금액 : "+totalPrice);
+	console.log("타입 : "+ typeof totalPrice);
+
+	console.log("총 할인액 : "+discountTotal);
+	console.log("타입 : "+ typeof discountTotal);
+	console.log("------------------------")
+
+		
+	var paymentPrice = (totalPrice)*1 - discountTotal
+
+	console.log("실 결제액 : "+paymentPrice);
+	console.log("타입 : "+ typeof paymentPrice);
+	console.log("------------------------")
+
+	//할인정보 추가
+	$(".payment_method .content .price").after(html);
+	//실 결제액 추가
+	$(".payment_method .content .price:first").text(addComma(paymentPrice));
+
+}
+
+
 
 </script>
 

@@ -402,7 +402,7 @@ function reservation_save(result){
 			cinemaName : $("#cinemaName").val(),
 			theaterName : $("#theaterName").val(),
 			seats : $("#select_Seat").text(),
-			totalPrice : lastPrice,
+			totalPrice : totalPrice,
 			common : commonCount,
 			teenager : teenagerCount,
 			preference : preferenceCount,
@@ -433,9 +433,7 @@ function reservation_save(result){
 
 
 function reservation_result(data){
-	
 	$.get("../reservation/reservationResultSelectOne?num="+data,function(result){
-		console.log(result);
 		
 		$(".step.step3").css("display","none");
 		$(".ticket_tnb .tnb_container .tnb").removeClass("step3");
