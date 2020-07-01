@@ -100,21 +100,32 @@
 							<img alt=""	src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px">
 						</div>
 						<div class="list_p_contents1">
-							<div style="font-weight: bold; font-size: large;">${vo.title}</div>
+							<!-- 타이틀(제목)/리뷰삭제 -->
+							<div>
+								<div class="td1" style="font-weight: bold; font-size: large;">${vo.title}</div>
+								<button id="delete2" class="td1 td2">
+									<div class="td_image" style="background: url('../images/movie/movieList/sprite_icon.png') no-repeat -195px -40px"></div>
+								</button>
+							</div>
+
+							<!-- egg/uid/날짜 -->
 							<c:if test="${vo.egg eq 1}">
-								<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px" class="egg3 egg4"></div>
+								<div class="egg3 egg4" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px"></div>
 							</c:if>
 							<c:if test="${vo.egg eq 0}">
-								<div style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -45px" class="egg3 egg4"></div>
+								<div class="egg3 egg4" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -45px"></div>
 							</c:if>
 							<div class="egg4">${vo.uid}</div>
 							<div class="egg4"> | ${vo.createAt}</div>
-
-							<div style="font-size: 13px; height: 70px">${vo.contents}</div>
 							
-							<div >
-							<button id="review_update" style="font-size: 13px; font-weight: bolder; color: #666666;">수정하기</button> ㆍ <img alt="" src="${pageContext.request.contextPath}/images/like.png">
-							</div>
+							<!-- 컨텐츠(내용) -->
+							<div style="font-size: 13px; height: 68px">${vo.contents}</div>							
+							
+							<!-- 수정하기/like -->
+							<button id="review_update" class="ud" style="font-size: 13px; font-weight: bolder; color: #666666;">수정하기</button>
+							<span class="ud" > ㆍ </span>
+							<img class="ud" alt="" src="${pageContext.request.contextPath}/images/like.png">
+							<span class="ud" >&nbsp; ${vo.like1}</span>							
 
 							
 						</div>

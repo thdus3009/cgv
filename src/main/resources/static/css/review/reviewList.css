@@ -96,13 +96,30 @@
 }
 
 .egg2 {
-width: 15px;
-height: 30px;
+	width: 15px;
+	height: 30px;
 	}
 	
+	
+
+.td1 {
+	display: inline-block;
+}
+.td2 {
+	float: right;
+	border: 0;
+	outline: 0 !important;
+	background-color: transparent;
+}
+
+.td_image {
+	width: 30px;
+	height: 20px;	
+}
+	
 .egg3 {
-width: 18px;
-height: 34px;
+	width: 18px;
+	height: 34px;
 	}
 	
 .egg4 {
@@ -115,6 +132,11 @@ height: 34px;
 	border: 0;
 	outline: 0;
 	background-color: transparent;
+}
+
+.ud {
+	color: #666666;
+	vertical-align: middle;
 }
 
 #look {
