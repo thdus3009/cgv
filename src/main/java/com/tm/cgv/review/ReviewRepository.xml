@@ -53,6 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where reservationNum=#{reservationNum}
 	</update>
 	
+	<update id="reservation_Delete">
+	UPDATE reservation
+	SET deleteAt = now()
+	where num=#{num}
+	</update>
+	
 	<select id="reviewLook" parameterType="String" resultType="ReviewVO">
 		select R.reservationNum, R.createAt, M.uid, M.title, M.fileName, R.contents, R.egg, R.like1
 		from(select M.num, M.movieNum, M.uid, M.title, I.fileName
@@ -62,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(M.movieNum = I.movieNum)) M inner join (select * from review) R
 		on(M.num = R.reservationNum)
 		where R.createAt is not null and R.deleteAt is null
-		ORDER BY R.reservationNum desc
+		ORDER BY R.createAt desc
 	</select>
 	
 	

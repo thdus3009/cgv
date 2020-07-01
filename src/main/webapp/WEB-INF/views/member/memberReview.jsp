@@ -87,13 +87,12 @@
 	<!-- Modal -->
 		
 	<div class="container"> <!-- Write, Update -->
-   		
    		<table>
 			<tr>
 			<td><h4>내가 본 영화</h4><br></td>
 			<td><button id="look">내 평점 보기</button></td>
 			</tr>
-		</table>  
+		</table>
 
 		<!-- The Modal -->
 		<div class="modal" id="myModal">

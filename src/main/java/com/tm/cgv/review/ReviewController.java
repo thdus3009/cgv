@@ -121,12 +121,21 @@ public class ReviewController {
 	@GetMapping("review_Delete")
 	@ResponseBody //리턴되는 값은 View 를 통해서 출력되지 않고 HTTP Response Body 에 직접 쓰여지게 됨.
 	public int review_Delete(ReviewVO reviewVO)throws Exception {
-		System.out.println("delete 테스트 : "+reviewVO.getReservationNum());
+		System.out.println("review_delete 테스트 : "+reviewVO.getReservationNum());
 		int result=0;
 		result = reviewService.review_Delete(reviewVO);
 		return result;
 	}
 	
+	@GetMapping("reservation_Delete")
+	@ResponseBody
+	public int reservation_Delete(ReviewVO reviewVO)throws Exception {
+		System.out.println("reservation_delete 테스트 : "+reviewVO.getNum());
+		int result=0;
+		result = reviewService.reservation_Delete(reviewVO);
+		
+		return result;
+	}
 	
 	// ---------------------------------------------------------------------------------
 	

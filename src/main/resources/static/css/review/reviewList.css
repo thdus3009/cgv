@@ -101,6 +101,15 @@
 	}
 	
 	
+	
+.hd {
+	float: right;
+}	
+
+.hd_btn {
+	border: 0; 
+	outline: 0;
+}
 
 .td1 {
 	display: inline-block;

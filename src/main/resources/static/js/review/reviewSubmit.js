@@ -248,6 +248,41 @@
 					$(".emotionPoint").prop("checked", false);
 				});
 				
+				
+				/* ---------reservation deleteAt=now()삽입---------- */
+				$(".hd_btn").click(function(){
+					g_num=$(this).data("num");
+					
+					if(confirm("내가본영화 목록에서 삭제됩니다.\n삭제하시겠습니까?")== true){
+						//reservation deleteAt
+						$.ajax({
+							type:"GET",
+							url:"./reservation_Delete",
+							data:{
+								num : g_num,
+							},
+							success:function(data){
+								if(data!=null){
+									alert("삭제 되었습니다.");
+									location.reload();
+								}
+							}
+						})
+						//review deleteAt
+						$.ajax({
+							type:"GET",
+							url:"./review_Delete",
+							data:{
+								reservationNum : g_num,
+							},
+							success:function(){
+
+							}
+						})
+					}
+				});
+				
+				
 				//3. 세번째 모달
 /*			$(".popupOnlyRead").click(function(){
 					
@@ -359,6 +394,7 @@
 		});
 		
 
+		
 		/* ---------내 평점 보기---------- */
 		$("#look").click(function(){
 			window.location.href='http://localhost/review/reviewLook';

@@ -11,7 +11,15 @@
 			<div class="list_p_content"><!-- 이미지 주소부분 나중에 수정해야함 -->
 				<div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px"> </div>
 				<div class="list_p_contents1">
-					<div class="list_p_contents2 "><span style="font-weight: bold; font-size: x-large; ">${vo.title}</span></div>
+					<div><!-- 제목,삭제버튼 -->
+						<div class="list_p_contents2 td1" style="font-weight: bold; font-size: x-large; ">${vo.title}</div>${vo.num}
+						<div class="td1 hd">
+							<button class="hd_btn" data-num="${vo.num}">
+								<img alt="" src="${pageContext.request.contextPath}/images/btn_del.gif">
+							</button>
+						</div>
+					</div>
+					
 					<div class="br">
 					<div><span>${vo.screenDate} ${vo.screenTime}</span></div>
 					<div><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명</span></div>

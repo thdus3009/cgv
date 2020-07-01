@@ -46,6 +46,11 @@ public class ReviewService {
 		return reviewRepository.review_Delete(reviewVO);
 	}
 	
+	public int reservation_Delete(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.reservation_Delete(reviewVO);
+	}
+	
+	
 	public List<ReviewVO> reviewLook(String uid)throws Exception {
 		return reviewRepository.reviewLook(uid);
 	}

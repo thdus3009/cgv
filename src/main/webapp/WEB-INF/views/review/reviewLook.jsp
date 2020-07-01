@@ -76,8 +76,7 @@
 
 					</div>
 				</div>
-			</div>
-		</div>
+
 		
 		
 <!-- ----------------------------------------------------------------------------------------------------------------  -->
@@ -142,7 +141,7 @@
 
 		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 		<c:import url="../template/sidebar.jsp"></c:import>
-</div>
+
 
 <!-- 스크립트 -->
 <script type="text/javascript">
@@ -161,12 +160,19 @@ $(".delete2").click(function(){
 			},
 			success:function(data){
 				if(data!=null){
-					alert("삭제 완료");
-					location.reload();
+					if(confirm("삭제가 완료되었습니다.\n새로 작성하시겠습니까?")== true){
+						window.location.href='http://localhost/review/reviewList';
+					}else{
+						location.reload();
+					}
 				}
+			},
+			error:function(){
+				alert("삭제권한이 없습니다.")
 			}
+
 		})
-			
+	
 	}
 });
 
