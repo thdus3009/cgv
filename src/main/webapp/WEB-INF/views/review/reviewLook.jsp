@@ -153,7 +153,6 @@ $(".delete2").click(function(){
 	console.log(g_num);
 	
 	if(confirm("작성한 관람평을 삭제하시겠습니까?")== true){
-		$("#exit3").click();
 		$.ajax({
 			type:"GET",
 			url:"./review_Delete",
