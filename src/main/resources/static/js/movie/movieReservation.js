@@ -339,7 +339,7 @@ function timeMake(result){
 	
 	
 	//상영 20분 전 예매 불가능
-	timeDimmedCheck();
+	timeDisabledCheck();
 }
 		
 
@@ -379,27 +379,26 @@ Number.prototype.zf = function (len) { return this.toString().zf(len); };
 
 
 
-function timeDimmedCheck(){
+function timeDisabledCheck(){
 	var nowDate = new Date();
-	console.log("현재 시간 : "+nowDate)
 
 	var nowTime = nowDate.format("yyyy-MM-dd");
-	
+	console.log(nowDate)
 	//누른날짜랑 현재 지금 날짜랑 동일 할때
 	//시간이 지나있으면 disabled
 	//읽어온 시간 값이 현재시간 20분 뒤면 disabled
 	
 	if(nowTime == date){
 		$(".time-list ul li").each(function(){
-			console.log("읽어온 시간 : "+$(this).data("time"));
 			var arr = $(this).data("time").split(":");
 			var readDate = new Date(nowDate.getFullYear(),nowDate.getMonth(),nowDate.getDate(),arr[0],arr[1]);
-			//console.log("읽은 시간 :  "+readTime)
-			
+			console.log(readDate)
 			var resultTime = readDate - nowDate;
+			var hh = Math.floor((resultTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			var mi = (Math.floor((resultTime % (1000 * 60 * 60)) / (1000 * 60)))+1;
-			console.log("minute : "+mi);
 			
+			console.log("시차: "+hh)
+			console.log("분차: "+mi)
 			if(mi < 20){
 				$(this).addClass("disabled");
 			}
@@ -409,11 +408,6 @@ function timeDimmedCheck(){
 }
 
 
-
-//if($(this).data("time") == 0){
-//	$(this).addClass("disabled");
-//}
-		
 		
 		
 		
@@ -447,7 +441,7 @@ $(".time-list").on("click",".theater ul li",function(){
 		$("#theaterName").val($(this).parent().parent().data("floor"));
 
 		//filmType
-		$("#select_movieType").text($(this).parent().parent().data("name"));
+		$("#select_movieType").text($(this).parent().parent().find(".title .name").text());
 		$("#filmType").val($(this).parent().parent().data("name"));
 
 		$(".row.movie_type").css("display","block");
