@@ -66,7 +66,6 @@
 					</button>
 				</div>
 				
-				<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 				<input type="hidden" value="${pager.startRow}" id="startRow">
 				
 				

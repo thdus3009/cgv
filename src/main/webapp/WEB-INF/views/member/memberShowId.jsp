@@ -40,43 +40,41 @@
 		</div>
 		
 		<div class="contents">
-			<div class="wrap_login">
-				<ul class="tab_menu_round">
-					<li>
-						<a class="lo" href="">로그인</a>
-					</li>
-					<li>
-						<a href="#">비회원 예매확인</a>
-					</li>
-				</ul>
-				<div class="box_login">
-					<form action="/member/login" method="post">
-						<fieldset>
-							<h1>이미 존재하는 ID입니다</h1>
-							<h1 id="showID"></h1> 
-						</fieldset>
-						
-					</form>
-				</div>
-				
-				<div class="login_guide">
-					<div class="box_guide">
-						<strong>CJ ONE 회원이 아니신가요?</strong>
-						<span>회원가입하시고 다양한 혜택을 누리세요!</span>
-						<strong>
-							<a href="./memberjoin" class="round red">
-								<span>CJ ONE 회원가입하기</span>
+				<div class="wrap_login">
+					<ul class="tab_menu_round">
+						<li><a class="lo" href="">로그인</a></li>
+						<li><a href="#">비회원 예매확인</a></li>
+					</ul>
+					<div class="showId-box">
+						<form action="/member/login" method="post" class="showId-form">
+							<fieldset class="showId-field">
+								<h1>이미 존재하는 ID입니다.</h1>
+								<h1 id="showID"></h1>
+							</fieldset>
+							<div class="showId-button">
+								<a href="${pageContext.request.contextPath}/member/memberLogin"
+									class="move-login"> <span>로그인 화면으로 이동</span></a> 
+								<a href="${pageContext.request.contextPath}/" class="move-home"> <span>메인
+										화면으로 이동</span></a>
+							</div>
+						</form>
+						<div></div>
+					</div>
+
+					<div class="login_guide">
+						<div class="box_guide">
+							<strong>CJ ONE 회원이 아니신가요?</strong> <span>회원가입하시고 다양한 혜택을
+								누리세요!</span> <strong> <a href="./memberjoin" class="round red">
+									<span>CJ ONE 회원가입하기</span>
 							</a>
-						</strong>
-						<em>
-							<a href="" class="round black">
-								<span>CJ ONE 멤버쉽이란?</span>
+							</strong> <em> <a href="" class="round black"> <span>CJ
+										ONE 멤버쉽이란?</span>
 							</a>
-						</em>
+							</em>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	
 	</div>
 	

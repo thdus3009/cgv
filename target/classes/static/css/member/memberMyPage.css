@@ -1,6 +1,28 @@
 @charset "UTF-8";
 
-.sect-common{
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+body {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+}
+
+h3 {
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.person-info1>strong {
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.sect-common {
 	height: 450px;
 	overflow: hidden;
 	width: 980px;
@@ -8,7 +30,7 @@
 }
 
 /* 멤버정보 전체 sector */
-.mycgv-info-wrap{
+.mycgv-info-wrap {
 	width: 882px;
 	height: 390px;
 	padding: 60px 40px 0 58px;
@@ -16,29 +38,31 @@
 }
 
 /* 멤버 정보 (member영역) */
-.sect-person-info{
+.sect-person-info {
 	height: 135px;
 }
 
 /* member영역의 멤버 이미지 아이콘 */
-.box-image{
+.box-image {
 	float: left;
 	width: 135px;
 	height: 135px;
 }
 
-.thumb-image{
+.thumb-image {
 	display: block;
 	position: relative;
 }
 
-.thumb-image > img {
+.thumb-image>img {
 	width: 135px;
 	height: 135px;
 	vertical-align: middle;
+	border: 3px solid #7b6746;
+	border-radius: 50%;
 }
 
-.profile-mask{
+.profile-mask {
 	display: block;
 	position: absolute;
 	left: 0;
@@ -48,16 +72,37 @@
 	background: url("../images/myPage/bg_photocircle03.png");
 }
 
+.setting {
+	width: 117px;
+	height: 49px;
+	padding-left: 9px;
+	background: #3b3425 url(/images/myPage/icon_setting.png) no-repeat 85px
+		15px;
+	border: 2px solid #7b6746;
+	color: #dac190;
+	font-size: 11px;
+	text-align: left;
+}
 
-
+#go_edit_page {
+	width: 17px;
+	height: 20px;
+	margin: 5px 0 0 0;
+	background: url(/images/myPage/sprite_btn.png) no-repeat 0 -218px;
+	cursor: pointer;
+	vertical-align: top;
+	zoom: 1;
+	color: transparent;
+	border: none;
+}
 
 /* member영역 멤버 정보 */
-.box-contents{
+.box-contents {
 	float: right;
 	width: 719px;
 }
 
-.person-info1{
+.person-info1 {
 	width: 482px;
 	margin-bottom: 15px;
 	padding-bottom: 20px;
@@ -68,46 +113,34 @@
 	font-weight: 500;
 }
 
-.person-info1 > strong{
+.person-info1>strong {
 	font-size: 29px;
 	line-height: 32px;
-	
 }
 
-.person-info1 > em{
+.person-info1>em {
 	font-size: 14px;
 	line-height: 14px;
 	font-style: normal;
 }
 
-.person-info2{
+.person-info2 {
 	width: 482px;
 }
 
-.person-info2 > p {
+.person-info2>p {
 	font-size: 14px;
 	color: black;
 	margin-top: 4px;
 	margin-bottom: 9px;
 }
- 
-
-.box-image{
-	background-image: url("images/myPage/default_profile.gif");
-}
-
-
-
-
-
-
 
 /* 영화 정보(movie 영역) */
-.sect-movie-info{
+.sect-movie-info {
 	margin-top: 47px;
 }
 
-.col-my-coupon{
+.col-my-coupon {
 	display: inline-block;
 	margin-left: 0;
 	padding-left: 0;
@@ -115,20 +148,33 @@
 	display: inline-block;
 }
 
-.col-my-coupon > h3{
+.col-my-coupon>h3 {
 	width: 246px;
-	background-position: 31px 12px;
 	display: inline-block;
 	height: 40px;
 	margin: 0 0 14px;
-	background: url("../images/myPage/sprite_text.png") no-repeat 0 0;
+	background: url("/images/myPage/sprite_text.png") no-repeat 0 0;
+	background-position: 30px 12px;
 	line-height: 40px;
-	font:  0/0 a;
+	font: 0/0 a;
 	vertical-align: middle;
-	zoom:1;
+	zoom: 1;
 }
 
-.col-my-coupon li{
+.col-my-coupon>h4 {
+	width: 246px;
+	display: inline-block;
+	height: 40px;
+	margin: 0 0 14px;
+	background: url("/images/myPage/sprite_text.png") no-repeat 0 0;
+	background-position: 26px -26px;
+	line-height: 40px;
+	font: 0/0 a;
+	vertical-align: middle;
+	zoom: 1;
+}
+
+.col-my-coupon li {
 	overflow: hidden;
 	width: 246px;
 	margin-top: 13px;
@@ -138,24 +184,27 @@
 	vertical-align: baseline;
 }
 
-.col-my-coupon li > strong{
+.col-my-coupon li>strong {
 	width: 143px;
 	float: left;
 	white-space: nowrap;
 	color: #342929;
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
 }
 
-.col-my-coupon li > span{
+.col-my-coupon li>span {
 	width: auto;
 	vertical-align: top;
 	float: right;
 	text-align: right;
 	color: #342929;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
 }
 
-.col-my-coupon li > span > em{
+.col-my-coupon li>span>em {
 	color: #342929;
 	font-size: 16px;
 	vertical-align: middle;
@@ -164,7 +213,7 @@
 	text-align: right;
 }
 
-.col-my-movie{
+.col-my-movie {
 	display: inline-block;
 	width: 250px;
 	height: 155px;
@@ -173,7 +222,7 @@
 	border-left: 1px solid #8c7651;
 }
 
-.col-favorite-theater{
+.col-favorite-theater {
 	display: inline-block;
 	width: 250px;
 	height: 155px;
@@ -182,16 +231,13 @@
 	border-left: 1px solid #8c7651;
 }
 
-
-.sect-favorite{
+.sect-favorite {
 	overflow: hidden;
 	width: 240px;
-	clear:both;
-	
-	
+	clear: both;
 }
 
-.sect-favorite li{
+.sect-favorite li {
 	float: left;
 	width: 109px;
 	height: 41px;
@@ -200,7 +246,7 @@
 	border: 2px solid #7b6746;
 }
 
-.sect-favorite li > a{
+.sect-favorite li>a {
 	position: relative;
 	display: block;
 	width: 107px;
@@ -213,26 +259,467 @@
 	text-align: center;
 }
 
-.sect-favorite li > a > span {
+.sect-favorite li>a>span {
 	position: absolute;
 	top: 0;
 	right: 0;
-	font-family: verdana,sans-serif;
+	font-family: verdana, sans-serif;
 	line-height: 1;
 }
 
+.btn-setfav {
+	padding-left: 9px;
+	background: #3b3425 url(../images/common/ico/ico_plus02.png) no-repeat
+		80px 15px;
+	border: 2px solid #7b6746;
+	color: #dac190 !important;
+	font-size: 11px;
+	text-align: left;
+}
 
+.btn-setfav>a {
+	color: #dac190;
+}
 
+/* error */
+.error-sect {
+	width: 980px;
+	height: 280px;
+	padding-top: 150px;
+	text-align: center;
+	margin: 0 auto;
+}
 
+.error-sect>h3 {
+	background: url("/images/myPage/ico_info.png") 50% 0 no-repeat;
+	height: auto;
+	margin: 0;
+	line-height: 1.2;
+	text-align: center;
+	padding-top: 50px;
+	color: #222222;
+	font-size: 23px;
+}
 
+.error-sect>p {
+	margin: 12px 0 40px;
+	color: #222222;
+	font-size: 13px;
+	line-height: 1.4;
+}
 
+.error-btn {
+	border: 2px solid #e71a0f;
+	color: #e71a0f;
+	border-radius: 0.25rem;
+	padding: 2px 5px;
+	margin: 0 5px;
+	font-weight: 500;
+}
 
+.red-button {
+	border: 2px solid #e71a0f;
+	background-color: #e71a0f;
+	color: #ffffff;
+	border-radius: 0.25rem;
+	padding: 2px 5px;
+	margin: 0 5px;
+	font-weight: 500;
+}
 
+/* 마이페이지 폴라로이드 */
+.box-polaroid {
+	margin-bottom: 30px;
+	overflow: hidden;
+	background-color: #f2f0e5;
+	border: 1px solid #333;
+	display: flex;
+}
 
+.box-polaroid>p {
+	border-left: 1px #c0c0c0 dashed;
+}
 
+.inner-box {
+	width: 198px !important;
+	padding: 0;
+	text-align: center;
+	line-height: 16px;
+}
 
+.inner-box-a {
+	display: inline-block;
+	padding: 50px 0 16px;
+}
 
+.inner-box-a>h3 {
+	margin-bottom: 5px;
+	color: #333;
+}
 
+.inner-box-a>span {
+	color: #333;
+}
 
+/*할인쿠폰 테이블 헤더*/
+.my-reserve-bar {
+	overflow: hidden;
+	position: relative;
+	line-height: 34px;
+	display: flex;
+	justify-content: space-between;
+}
 
+.my-reserve-bar>div {
+	display: flex;
+}
 
+.plus-btn {
+	display: inline-block;
+	width: 20px;
+	height: 19px;
+	margin-left: 5px;
+	margin-top: 8px;
+	background: url(/images/myPage/sprite_btn.png) no-repeat -50px -62px;
+	font: 0/0 a;
+	vertical-align: middle;
+	zoom: 1;
+}
+
+.my-movie-reserve {
+	border: 1px solid #333;
+}
+
+.reserve-ticket {
+	width: 746px;
+	padding: 26px;
+	display: flex;
+}
+
+.rt-info1 {
+	margin-right: 20px;
+}
+
+.rt-info2>div {
+	display: flex;
+}
+
+.rt-ul>li {
+	height: 20px;
+}
+
+li>strong {
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+}
+
+.poster {
+	margin-right: 15px;
+	width: 55px;
+	height: 70px;
+}
+
+.rt-info2-div1 {
+	padding-bottom: 20px;
+	width: 610px;
+	border-bottom: 1px solid #c0c0c0;
+}
+
+.rt-info2-div2 {
+	margin-top: 20px;
+	text-align: left;
+	display: flex;
+	justify-content: space-between;
+}
+
+dl {
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+	display: flex;
+}
+
+dt {
+	color: #2275a4;
+}
+
+.red-btn {
+	border-radius: 0.25rem;
+	border: 1px solid #e71a0f;
+	color: #fff;
+	background-color: #e71a0f;
+	padding: 1px;
+	padding-top: 5px;
+	padding-bottom: 8px;
+	height: 28px;
+}
+
+.red-btn>span {
+	border-radius: 0.25rem;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #ea5b50;
+	padding: 2px 10px;
+	padding-top: 3px;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
+}
+
+.message-reserve {
+	border-radius: 0.25rem;
+	border: 1px solid #333333;
+	color: #fff;
+	background-color: #333333;
+	padding: 1px;
+	padding-top: 5px;
+	padding-bottom: 8px;
+	height: 28px;
+}
+
+.cancle-reserve {
+	border-radius: 0.25rem;
+	border: 2px solid #333333;
+	color: #333333;
+	background-color: transparent;
+	padding: 1px 6px;
+	padding-bottom: 4px;
+}
+
+.message-reserve>span {
+	border-radius: 0.25rem;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #727272;
+	padding: 2px 10px;
+	padding-top: 3px;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
+}
+
+/* 할인쿠폰 테이블 */
+.tit-mycgv {
+	height: 34px;
+	margin: 0;
+	background-image: none;
+	color: #222;
+	font-weight: 600;
+	font-size: 17px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.set-btn {
+	margin-top: 0;
+	text-align: right;
+}
+
+.tbl-data {
+	
+}
+
+.member-table {
+	padding: 0;
+	border-top: 1px solid #b8b6aa;
+	border-bottom: 1px solid #b8b6aa;
+	margin: 5px 0;
+}
+
+.member-thead {
+	background-color: #e2e2e0;
+	font-size: 13px;
+}
+
+.member-tr>th {
+	height: 34px;
+	padding-left: 12px;
+	background-color: #e2e2e0;
+	font-size: 13px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+}
+
+.member-tr>td {
+	height: 34px;
+	padding-left: 12px;
+	background-color: #fdfcf0;
+	font-size: 13px;
+	line-height: 34px;
+	text-align: left;
+}
+
+.coupon-h4 {
+	height: 34px;
+	margin: 0;
+	background-image: none;
+	color: #222;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+/*할인 쿠폰 폼*/
+.coupon-form {
+	border: 1px solid #656560;
+	height: 100px;
+	width: 798x;
+	background-color: #f3f2e7;
+	position: relative;
+}
+
+.coupon-form>strong {
+	position: absolute;
+	left: 45px;
+	top: 45px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	color: #333;
+}
+
+.coupon-form>span {
+	position: absolute;
+	left: 130px;
+	top: 25px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	top: 25px;
+}
+
+.coupon-term {
+	border-radius: 0.25rem;
+	border: 2px solid #7b7b7b;
+	color: #7b7b7b;
+	background-color: transparent;
+	padding: 3px 6px 1px 6px;
+	color: #7b7b7b;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	margin-right: 5px;
+	-webkit-appearance: none;
+	width: 51.5px;
+	height: 22px;
+}
+
+.coupon-term:checked {
+	border: 2px solid #7b7b7b;
+	background-color: #7b7b7b;
+	color: #fff;
+}
+
+.term-label2{
+	position: absolute;
+	left: 10px;
+    top: 5px;
+}
+
+.term-label1{
+	position: absolute;
+	left: 70px;
+    top: 5px;
+}
+
+.term-label3{
+	position: absolute;
+	left: 130px;
+    top: 5px;
+}
+
+.coupon-3m {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	margin-left: 15px;
+}
+
+.coupon-form>p {
+	position: absolute;
+	left: 130px;
+	top: 50px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	top: 50px;
+}
+
+.data-p>input {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	width: 200px;
+	display: inline-block;
+	height: 25px;
+	line-height: 22px;
+	padding-left: 10px;
+	border: 1px solid #b5b5b5;
+	background-color: #e8e8dd;
+	color: #666;
+}
+
+/* 할인쿠폰 이용안내 */
+.coupon-notice {
+	border: 2px solid #d5d5ce;
+	margin-top: 80px;
+}
+
+.coupon-notice>div {
+	display: flex;
+	width: 796px;
+	padding: 29px 25px 20px 25px;
+	width: 796px;
+}
+
+.coupon-em {
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 1.5;
+	font-style: normal;
+	width: 100px;
+}
+
+.coupon-notice-ul {
+	width: 598px;
+	padding: 0 2px 0 25px;
+	border-left: 1px solid #d7d6ce;
+	font-weight: 300;
+}
+
+.coupon-notice-ul>li {
+	margin-top: 5px;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+/* 할인 쿠폰 등록*/
+.coupon-num-bar {
+	display: grid;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.coupon-num-bar>strong {
+	font-family: 'CJ+ONLYONE+Medium';
+	display: block;
+	margin-bottom: 10px;
+	color: #222;
+	font-size: 24px;
+}
+
+.coupon-pwd-form {
+	margin-top: 20px;
+	padding: 30px 180px;
+	position: relative;
+	background-color: #fff;
+	border: 1px solid #cbcac4;
+}
+
+.coupon-num-input {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	width: 200px;
+	display: inline-block;
+	height: 25px;
+	line-height: 22px;
+	padding-left: 10px;
+	border: 1px solid #b5b5b5;
+	background-color: #fff;
+	color: #666;
+	margin: 0 10px 0 20px;
+}

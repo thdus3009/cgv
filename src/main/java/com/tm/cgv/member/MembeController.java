@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/member/**")
 @EnableAsync
-public class MemberController {
+class MemberController {
 	
 	@Autowired
     private MemberService memberService;
