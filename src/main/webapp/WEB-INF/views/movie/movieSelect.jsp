@@ -299,7 +299,7 @@
 							<p class="desc"><span><em>15,557</em>명의 실관람객이 평가해주셨습니다.</span></p>
 							<div class="wrap_btn">
 								<a class="link-gradewrite" href=""><span>평점작성</span></a>
-								<a class="link-reviewwrite" href=""><span>내 평점</span></a>
+								<a class="link-reviewwrite" href="./review/reviewLook"><span>내 평점</span></a>
 							</div>
 						</div>
 						
