@@ -136,8 +136,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	
  	 	
  	 <insert id="movieWrite" parameterType="MovieInfoVO" useGeneratedKeys="true" keyProperty="num"> 
- 	 	insert into movieInfo (num,title,titleEng,runtime,director,actor,ganre,ageLimit,country,openDate,contents,createAt)
- 	 	values(#{num},#{title},#{titleEng},#{runtime},#{director},#{actor},#{ganre},#{ageLimit},#{country},#{openDate},#{contents},#{createAt})
+ 	 	insert into movieInfo (num,title,titleEng,runtime,director,actor,ganre,ageLimit,country,openDate,contents,visitor,rate,errRate,createAt)
+ 	 	values(#{num},#{title},#{titleEng},#{runtime},#{director},#{actor},#{ganre},#{ageLimit},#{country},#{openDate},#{contents},0,0.0,100.0,#{createAt})
  	 </insert>
  	 
  	 <select id="movieSelect" parameterType="MovieInfoVO" resultMap="movieJoin">

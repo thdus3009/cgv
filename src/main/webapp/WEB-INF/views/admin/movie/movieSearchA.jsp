@@ -113,7 +113,7 @@
 							<input class="form-control" type="text" placeholder="검색어를 입력"
 								aria-label="Search" aria-describedby="basic-addon2" />
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="admin_search" name="search">
+								<button class="btn btn-primary" type="button" id="admin_search">
 									<i class="fas fa-search"></i>
 								</button>
 							</div>
@@ -139,7 +139,7 @@
 							</tr>
 							<!-- 반복 -->
 							<!-- 이름 누르면 상세 페이지로 이동 -->
-							<c:forEach items="${list}" var="vo">
+							<c:forEach items="${searchA}" var="vo">
 								<tr class="memberList-c">
 									<td>${vo.title}</td>
 									<td>${vo.titleEng}</td>
@@ -175,9 +175,6 @@
 								</c:if>
 							</ul>
 						</div>
-						
-						<!-- 글쓰기 버튼 -->
-						<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 						
 					</div>
 				</div>

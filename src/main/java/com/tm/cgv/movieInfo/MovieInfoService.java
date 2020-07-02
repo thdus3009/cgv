@@ -70,6 +70,7 @@ public class MovieInfoService {
 	public List<MovieInfoVO> movieList(Pager pager) throws Exception{
 			
 		pager.makeRow();
+		System.out.println(pager.getStartRow()+"pppppp");
 		long totalCount = movieInfoRepository.movieNumCount(pager);
 		pager.makeBlock(totalCount);
 		

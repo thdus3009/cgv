@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,13 +121,13 @@
 										<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
 										<div class="customer_top">
 											<!-- 뭐하는 부분일까요..? -->
-											<h2 class="tit">Movie${path}</h2>
-											<span>CGV이용과 관련된 사항에 대하여서 작성가능합니다.</span>
+											
+											
 										</div>
 
 										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-										<form action="./${board}${path}" method="post"
-											enctype="multipart/form-data">
+										<form action="./movieWrite" method="post" enctype="multipart/form-data">
+										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<fieldset>
 
 												<div class="tbl_write">
@@ -209,7 +210,7 @@
 															<div class="form-group">
 																<label for="openDate">개봉일:</label> <input type="date"
 																	class="form-control" id="openDate" name="openDate"
-																	value="${vo.openDate }">
+																	value="${vo.openDate}">
 															</div>
 
 															<c:set var="now" value="<%=new java.util.Date()%>" />
