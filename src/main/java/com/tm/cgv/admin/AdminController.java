@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
@@ -67,10 +69,43 @@ public class AdminController {
 		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
 		
+		List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
+	
+		//쪼개는 서비스 만들기..theaterService에
+		List<String[]> totalInfo = theaterService.movieTime(m);
+		System.out.println(totalInfo.size());
+		String[] a = totalInfo.get(0);
+		System.out.println(a[0]);
+		System.out.println(a[1]);
+		
+		
+		
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("theaterList", list);
 		mv.setViewName("admin/cinema/cinemaSelect");
+		
+		
 		return mv;
+	}
+	
+	@GetMapping("cinema/theaterTime")
+	@ResponseBody
+	public List<String[]>  theaterTime(int theaterNum) throws Exception {
+		System.out.println("들어왓나?");
+		ModelAndView mv = new ModelAndView();
+		List<MovieTimeVO> m = theaterService.theaterMovieTime(theaterNum); /*나중에는 list로 뽑아와야됨!*/
+		
+		//쪼개는 서비스 만들기..theaterService에
+		List<String[]> totalInfo = theaterService.movieTime(m);
+
+		
+		//정보를 list로 만들어서 잘 가져왔고..............
+		//
+		mv.addObject("totalInfo", totalInfo);
+		mv.setViewName("admin/cinema/ajax/theaterTime");
+		
+		//return mv;
+		return totalInfo;
 	}
 	
 	

@@ -16,10 +16,12 @@
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
         <div id="layoutSidenav">
+        <input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <c:import url="../template/sidenav.jsp"></c:import>
             <div id="layoutSidenav_content">
              			<main>
 				<div class="container-fluid">
+					<h1>${test}</h1>
 					<h1>${cine.name}</h1>
 					<div class="card mb-4">
 						<div class="card-body">
@@ -63,7 +65,7 @@
 							<tbody id="accordion">
 								<c:forEach items="${theaterList}" var="vo" varStatus="i">
 									<tr class="theaterList-c">
-										<td><a href="../theater/theaterSelect">${vo.num}</a></td>
+										<td><a href="../theater/theaterSelect" id="td${i.index}">${vo.num}</a></td>
 										<%-- <td>${vo.cinemaNum}</td> --%>
 										<td>${vo.name}</td>
 										<td>${vo.seatCount}</td>
@@ -78,18 +80,18 @@
 										</c:if>
 										<%-- <td><input class="time_block" name="tb${i.index}" type="button" value="▼"></td> --%>
 										<td>
-											<a class="collapsed card-link" data-toggle="collapse" href="#tb${i.index}">▼</a>
+											<a class="collapsed card-link" id="table${i.index}" data-toggle="collapse" href="#tb${i.index}">▼</a>
 										</td>
 									</tr>
 									<tr id="tb${i.index}"  class="collapse" data-parent="#accordion">
-										<td colspan="5">
-										  <div class="timetable"></div>
+										<td colspan="5" id="">
+										  <div class="timetable" id="timetable${i.index}" name="${i.index}" style="overflow-x:auto; width:1400px;"></div>
+											<div class="test123"></div>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						 <div class="timetable"></div>
 					</div>
 				</div>
 			</main>
@@ -121,27 +123,122 @@
          <script src="/js/theater/timetable.js"></script>
 
     <script>
-      var timetable = new Timetable();
+/*     	$("#table0").click(function(){
+    		  var timetable = new Timetable();
 
-      timetable.setScope(9,3)
+    	      timetable.setScope(9,3)
 
-      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+    	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
 
-      timetable.addEvent('Sightseeing', '월', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-      timetable.addEvent('test', '월', new Date(2015,7,17,9,30), new Date(2015,7,17,130,30), { url: '#' });
-      timetable.addEvent('Zumba', '화', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
-      timetable.addEvent('Zumbu', '화', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
-      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-      }});
-      timetable.addEvent('Cocktails', '월', new Date(2015,7,18,00,00), new Date(2015,7,18,02,00), { class: 'vip-only' });
+    	      timetable.addEvent('Sightseeing', '월', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
+    	      timetable.addEvent('test', '월', new Date(2015,7,17,9,30), new Date(2015,7,17,13,30), { url: '#' });
+    	      timetable.addEvent('Zumba', '화', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
+    	      timetable.addEvent('Zumbu', '화', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
+    	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+    	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
+    	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
+    	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
+    	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
+    	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+    	      }});
+    	      
 
-      var renderer = new Timetable.Renderer(timetable);
-      renderer.draw('.timetable');
+    	      var renderer = new Timetable.Renderer(timetable);
+    	      renderer.draw('#timetable0');
+    	      $(".room-timeline").css("width","100%");
+	
+        });
+
+
+    	$("#table1").click(function(){
+  		  var timetable = new Timetable();
+
+  	      timetable.setScope(9,3)
+
+  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+
+  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
+  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
+  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
+  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
+  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+  	      }});
+  	      
+
+  	      var renderer = new Timetable.Renderer(timetable);
+  	      renderer.draw('#timetable1');
+  	      $(".room-timeline").css("width","100%");
+	
+      }); */
+
+
+		$(".timetable").each(function(){
+
+			var tid = $(this).attr("id");
+			var name = $(this).attr("name");
+
+		   	$("#table"+name).click(function(){
+
+				var theaterNum = $("#td"+name).html();
+				console.log(theaterNum);
+			 	$.get("./theaterTime",{"theaterNum":theaterNum, "_csrf": $("#_csrf").val()},function(data){
+			 		$(".test123").html(data);
+					
+			  		  var timetable = new Timetable();
+
+			  	      timetable.setScope(7,3)
+
+			  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+
+			  	      $(data).each(function(){
+				  	      alert($(this)[0]);
+			  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+				  	  });
+
+			  	   /*    timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+			  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
+			  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
+			  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
+			  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
+			  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+			  	      }}); */
+			  	      
+
+			  	      var renderer = new Timetable.Renderer(timetable);
+			  	      renderer.draw('#'+tid);
+			  	      $(".room-timeline").css("width","100%");
+			  	      $(".time-entry").css("width","11.8%");
+			  	    $(".time-entry").css("left","38.9%");
+					
+				}); 
+
+
+			   	
+	/* 	  		  var timetable = new Timetable();
+
+		  	      timetable.setScope(7,3)
+
+		  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+
+		  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+		  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
+		  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
+		  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
+		  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
+		  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+		  	      }});
+		  	      
+
+		  	      var renderer = new Timetable.Renderer(timetable);
+		  	      renderer.draw('#'+tid);
+		  	      $(".room-timeline").css("width","100%"); */
+			
+		      });
+			
+		
+		});
+    
     </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -151,7 +248,7 @@
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-37417680-5');ga('send','pageview');
+      ga('create','UA-171485633-1');ga('send','pageview');
 
       $(".room-timeline").css("width","100%");
       

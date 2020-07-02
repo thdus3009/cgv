@@ -1,5 +1,7 @@
 package com.tm.cgv.movieTime;
 
+import com.tm.cgv.movieInfo.MovieInfoVO;
+
 import lombok.Data;
 
 @Data
@@ -10,4 +12,7 @@ public class MovieTimeVO {
 	private String screenDate;
 	private String screenTime;
 	private int remainSeat;
+	
+	private MovieInfoVO movieInfoVOs; //movieNum의 title, runtime
+
 }
