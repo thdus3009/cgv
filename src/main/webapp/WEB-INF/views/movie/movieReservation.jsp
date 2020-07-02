@@ -612,30 +612,22 @@
 		console.log(list[i].name+" "+list[i].local);
 		$(".theater-area-list > ul > li").each(function(){
 
-// 			console.log("읽어온값 : "+i+" "+ list[i].local);
-// 			console.log("폼 값 : "+$(this).data("local"));
-			
 			if(list[i].local == $(this).data("local")){
 				console.log(list[i].name+" "+list[i].local);
 				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
 			}
 			
-// 			console.log("==================================");
-			
 		});
 	}
 
 	var data;
-
 	var memberID = `${memberVO.username}`;
 	
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
-			//결제 작업을 위한 값 - 이니시스 : tel
-			discount_detail_list();
 			
+			//결제 작업을 위한 값 - 이니시스 
 			data = {
-					
 					tel : `${memberVO.phone}`,
 					email : `${memberVO.email}`,
 					name : `${memberVO.name}`,

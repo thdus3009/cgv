@@ -312,7 +312,6 @@
 
 <div class="ticket_payment_summary">
 	<div class="tps_wrap" style="top: 0px;">
-	<!--<div class="tps_header"><div><span>10분</span> 안에<br/>예매를 완료해 주세요</div></div>-->
 	<div class="tps_body">
 		<div class="summary_box total_box">
 			<div class="payment_header">결제하실 금액</div>

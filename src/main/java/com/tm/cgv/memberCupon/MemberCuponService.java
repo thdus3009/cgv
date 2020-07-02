@@ -14,4 +14,8 @@ public class MemberCuponService {
 	public List<MemberCuponVO> memberCuponSelect(MemberCuponVO memberCuponVO)throws Exception{
 		return memberCuponeRepository.memberCuponSelect(memberCuponVO);
 	}
+	
+	public int memberCuponUpdate(MemberCuponVO memberCuponVO) throws Exception{
+		return memberCuponeRepository.memberCuponUpdate(memberCuponVO);
+	}
 }

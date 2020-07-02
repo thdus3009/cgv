@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.discountInfo.DiscountInfoService;
 import com.tm.cgv.discountInfo.DiscountInfoVO;
+import com.tm.cgv.memberCupon.MemberCuponService;
+import com.tm.cgv.memberCupon.MemberCuponVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
@@ -51,6 +53,8 @@ public class ResevationController {
 	private DiscountInfoService discountInfoService;
 	@Autowired
 	private PaymentService paymentService;
+	@Autowired
+	private MemberCuponService memberCuponService;
 
 	
 	
@@ -132,63 +136,83 @@ public class ResevationController {
 	//예매하기
 	@ResponseBody
 	@PostMapping("reservationInsert")
-	public int reservationInsert(ReservationVO reservationVO,String selectedSeatNums,String[] discountList) throws Exception{
+	public int reservationInsert(ReservationVO reservationVO,String selectedSeatNums,String[] discountList,int type,int couponNum) throws Exception{
 		int result = 0;
 		int seatCheck = 0;
+		
+		System.out.println("할인 타입(0없음/1쿠폰/2포인트) : "+type);
+		System.out.println("선택한 쿠폰 번호 : "+couponNum);
 		
 		//예매 번호 등록 - Reservation
 		result = reservationService.reservationInsert(reservationVO);
 		result = reservationVO.getNum();
 		
-		
-		//추가추가 - > 쿠폰인지 포인트인지 구별해야됨
-		
-		//할인 금액 디비에 적용 + 할인 정보 테이블 추가
-		for (String str : discountList) {
-			String arr[]  = str.split("_");
+		if(type != 0) {
 			
-			//할인금액 point에 적용(빼기)
-			PointVO pointVO = new PointVO();
-			pointVO.setMemberNum(reservationVO.getUid());
-			pointVO.setType(arr[0]);
-			pointVO.setPrice(Integer.parseInt(arr[1]));
-			pointService.pointDiscountUpdate(pointVO);
-			
-			//할인정보 추가
-			DiscountInfoVO discountInfoVO = new DiscountInfoVO();
-			discountInfoVO.setReservationNum(result);
-			discountInfoVO.setType(arr[0]);
-			discountInfoVO.setDiscountPrice(Integer.parseInt(arr[1]));
-			discountInfoService.discountInfoInsert(discountInfoVO);
-		}
-		
-		
-		//좌석 번호 등록 : SeatBooking
-		if(result > 0) {
-			
-			String [] selectedSeat = selectedSeatNums.split(",");
-			
-			for (String str : selectedSeat) {
-				SeatBookingVO seatBookingVO = new SeatBookingVO();
-				seatBookingVO.setReservationNum(reservationVO.getNum());
-				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
-				seatBookingVO.setSeatNum(Integer.parseInt(str));
+			if(type == 1) {
+				//멤버쿠폰 deleteAt 업데이트
+				MemberCuponVO memberCuponVO = new MemberCuponVO();
+				memberCuponVO.setUid(reservationVO.getUid());
+				memberCuponVO.setCuponInfoNum(couponNum);
 				
-				seatCheck = seatBookingService.seatBookingInsert(seatBookingVO);
+				memberCuponService.memberCuponUpdate(memberCuponVO);
+				
 			}
 			
-			//상영관 잔여좌석 수 변경 - MovieTime
-			if(seatCheck > 0) {
+			//할인 금액 디비에 적용 + 할인 정보 테이블 추가 - 포인트
+			for (String str : discountList) {
+				String arr[]  = str.split("_");
 				
-				MovieTimeVO movieTimeVO = new MovieTimeVO();
-				movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
-				int remainSeat = movieTimeVO.getRemainSeat() - (reservationVO.getCommon()+reservationVO.getTeenager()+reservationVO.getPreference());
+				if(type == 2) {
+					//할인금액 point에 적용(빼기)
+					PointVO pointVO = new PointVO();
+					pointVO.setMemberNum(reservationVO.getUid());
+					pointVO.setType(arr[0]);
+					pointVO.setPrice(Integer.parseInt(arr[1]));
+						
+					pointService.pointDiscountUpdate(pointVO);
+				}
 				
-				movieTimeVO.setRemainSeat(remainSeat);
-				movieTimeVO.setNum(reservationVO.getMovieTimeNum());
-				movieTimeService.remainSeatUpdate(movieTimeVO);
+				//할인정보 추가
+				DiscountInfoVO discountInfoVO = new DiscountInfoVO();
+				discountInfoVO.setReservationNum(result);
+				discountInfoVO.setType(arr[0]);
+				discountInfoVO.setDiscountPrice(Integer.parseInt(arr[1]));
+				
+				discountInfoService.discountInfoInsert(discountInfoVO);
 			}
 		}
+		
+		
+//		
+//		//좌석 번호 등록 : SeatBooking
+//		if(result > 0) {
+//			
+//			String [] selectedSeat = selectedSeatNums.split(",");
+//			
+//			for (String str : selectedSeat) {
+//				SeatBookingVO seatBookingVO = new SeatBookingVO();
+//				seatBookingVO.setReservationNum(reservationVO.getNum());
+//				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
+//				seatBookingVO.setSeatNum(Integer.parseInt(str));
+//				
+//				seatCheck = seatBookingService.seatBookingInsert(seatBookingVO);
+//			}
+//			
+//			//상영관 잔여좌석 수 변경 - MovieTime
+//			if(seatCheck > 0) {
+//				
+//				MovieTimeVO movieTimeVO = new MovieTimeVO();
+//				movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
+//				int remainSeat = movieTimeVO.getRemainSeat() - (reservationVO.getCommon()+reservationVO.getTeenager()+reservationVO.getPreference());
+//				
+//				movieTimeVO.setRemainSeat(remainSeat);
+//				movieTimeVO.setNum(reservationVO.getMovieTimeNum());
+//				movieTimeService.remainSeatUpdate(movieTimeVO);
+//			}
+//		}
+		
+		
 		return result;
 	}
 	

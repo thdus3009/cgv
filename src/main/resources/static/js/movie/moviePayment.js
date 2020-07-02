@@ -10,7 +10,6 @@ var lastPrice = 0;
 var usePrice = 0;
 
 var discountList;
-var discount_type = 0; //1:쿠폰 , 2:포인트 , 0:없음
 
 //info payment-ticket - 아래 바의 결제 부분 감추기
 $(".info.payment-ticket").css("display","none");
@@ -54,15 +53,18 @@ $("#payPoints .tpm_header").click(function(){
 	
 });
 
-
-
+var discount_type = 0; //1:쿠폰 , 2:포인트 , 0:없음
 //하나의 할인 방법만 사용가능(쿠폰 :1 or 포인트:2 /없음 : 0)
 function discountTypeCheck(type,step){
 	var check = true;
 
+	console.log("discountType : "+discount_type);
+	console.log("type : "+type);
+	
 	if(discount_type != type && discount_type != 0){
 		var check = confirm("할인수단 변경시, 이미 적용된 포인트 및 기타 결제 수단이 초기화 됩니다.\n "+ step +" 적용/변경하시겠습니까?") //초기화 시킴
 		if(check){
+			//discount_type = type;
 			discount_type = type;
 			
 			//할인내역 폼 지우기
@@ -93,9 +95,8 @@ function discountTypeCheck(type,step){
 			//총 할인액초기화
 			$("#summary_discount_total").text(0);
 			totalDiscount = 0;
+			selected_cuponNum = 0;
 		}
-	}else{
-		discount_type = type;
 	}
 	return check;
 }
@@ -131,6 +132,7 @@ function discount_cupon_ajax(){
 			
 			for(i=0;i<result.length;i++){
 				var name = result[i].cuponInfoVO.name;
+				var couponNum = result[i].cuponInfoNum;
 				var serialNum = result[i].cuponInfoVO.serialNum;
 				var eIssuance = result[i].cuponInfoVO.eissuance;
 				var count = result[i].cuponInfoVO.count;
@@ -139,7 +141,7 @@ function discount_cupon_ajax(){
 				var arr = eIssuance.split("-");
 				eIssuance = arr[0]+"."+arr[1]+"."+arr[2];
 				
-				makeCuponList(name,serialNum,eIssuance,price,count);
+				makeCuponList(name,couponNum,serialNum,eIssuance,price,count);
 			}
 		}
 	});
@@ -147,8 +149,8 @@ function discount_cupon_ajax(){
 
 
 //쿠폰 리스트 생성 - 출력
-function makeCuponList(name,serialNum,eIssuance,price,count){
-	var html = '<li class="row" data-price="'+ price +'" data-count="'+ count +'">'
+function makeCuponList(name,couponNum,serialNum,eIssuance,price,count){
+	var html = '<li class="row" data-price="'+ price +'" data-count="'+ count +'" data-coupon_num="'+ couponNum +'">'
 		+ '<label>'
 		+ '<span class="col col1">'+ name +'</span>'
 		+ '<span class="col col2">'+ serialNum +'</span>'
@@ -167,7 +169,6 @@ function makeCuponList(name,serialNum,eIssuance,price,count){
 var checkedCoupon = false;
 $("#discCoupon").on("click","#cgvCoupon ul li",function(evt){
 	console.log($(this).find("input").prop("checked"));
-	
 	
 	if($(this).find("input").prop("checked")){
 		//선택 취소
@@ -189,20 +190,14 @@ $("#discCoupon").on("click","#cgvCoupon ul li",function(evt){
 		usePrice = $(this).data("price");
 		
 		//할인내역 추가 - 폼 생성
-		appendDiscount("cgvCoupon");
-		
+		appendDiscount("cgvCoupon",1);
 	}
 	//할인 금액 출력
 	$("#cgvCoupon .form_result .price").text(addComma(usePrice));
 	
-	
 	//2번 클릭 방지
 	evt.preventDefault();
 });
-
-
-
-
 
 
 
@@ -274,14 +269,14 @@ $(".textBox2.type-n.nohan").blur(function(){
 	}else{
 		//정상적인 사용가능 포인트
 		var id = $(this).attr("id");
-		appendDiscount(id);
+		appendDiscount(id,2);
 	}
 });
 
 
 
 //할인 내역 추가 + 총 할인 금액 계산
-function appendDiscount(id){
+function appendDiscount(id,type){
 	//생성하려는 아이디가 존재하면 삭제후 재생성
 	if($("#"+id+"_del").length > 0){
         console.log("jquery : 해당 객체 존재함");
@@ -291,6 +286,8 @@ function appendDiscount(id){
     }
 	//총 할인액 갱신
 	totalDiscount += (usePrice*1);
+	
+	discount_type = type;
 
 	var html = '<dl>'
 	+'<dt>' + selected_li + '</dt>'
@@ -365,7 +362,6 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 		
 	}
 	
-	
 	//할인 내역 삭제
 	$(this).parent().parent().remove();
 	
@@ -395,7 +391,7 @@ $(".secondTit").click(function(){
 		$(this).parent().find("input").val(usePrice);
 		//할인내역 추가
 		var id = $(this).parent().find("input").attr("id");
-		appendDiscount(id);
+		appendDiscount(id,2);
 		
 	}else{
 		
@@ -409,7 +405,6 @@ $(".secondTit").click(function(){
 });
 
 
-
 //X버튼이나 0으로 선택 기능중 input val값이 0면 모두사용(Checkbox) false로 변경
 function checkboxValue(id){
 	if($("#"+id).val() == 0){
@@ -417,18 +412,30 @@ function checkboxValue(id){
 	}
 }
 
-
+var selected_cuponNum = 0;
 //할인 내역 조회해 리스트 생성 : 타입 - 금액
 function discount_detail_list(){
 	var list = [];
 	$(".discountNum").each(function(){
 		var type = $(this).data("type");
 		var price = removeComma($(this).text());
-		
 		list.push(type+"_"+price);
+		
+		if(type == 'cgvCoupon'){
+			$("#cgvCoupon ul li").each(function(){
+				if($(this).find("span > input").prop("checked")){
+					selected_cuponNum = $(this).data("coupon_num");
+				}
+			});
+		}
+		
 	});
+	
 	discountList = list.join(",");
+	console.log(discountList);
 }
+
+
 
 
 
@@ -504,8 +511,6 @@ function giftCardEnrollment(){
 	
 	console.log(serialCode);
 	console.log(password);
-	
-	
 	
 	$.ajax({
 		url : '../cuponInfo/cuponeEnrollment',
@@ -604,6 +609,14 @@ function payment_inicis(data){
 
 //예매 정보 + 좌석예매 정보 DB저장
 function reservation_save(result){
+	//할인 내역 할인 리스트 생성
+	discount_detail_list();
+
+	if(discountList == ""){
+		discount_type = 0;
+	}
+	
+	
 	var aa = { 
 			movieNum : $("#movieNum").val(),
 			paymentNum : result,
@@ -619,6 +632,8 @@ function reservation_save(result){
 			preference : preferenceCount,
 			
 			selectedSeatNums : selectedSeatNumList.join(","),
+			type : discount_type,
+			couponNum : selected_cuponNum,
 			
 			discountList : discountList, 
 			
