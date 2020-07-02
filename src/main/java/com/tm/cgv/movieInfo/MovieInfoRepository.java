@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tm.cgv.reservation.ReservationVO;
+import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.Pager;
 
 @Mapper
@@ -38,4 +39,10 @@ public interface MovieInfoRepository {
 	public Map<String, Object> rate(ReservationVO reservationVO) throws Exception;
 	
 	public long rateUpdate(MovieInfoVO movieInfoVO) throws Exception;
-}
+	
+	public Map<String, Object> gender2(ReservationVO reservationVO) throws Exception;
+	public Map<String, Object> gTotal(ReservationVO reservationVO) throws Exception;
+	public Map<String, Object> age(ReservationVO reservationVO) throws Exception;
+	public List<Integer> charmPoint(ReservationVO reservationVO) throws Exception;
+	public List<Integer> emotionPoint(ReservationVO reservationVO) throws Exception;
+ }

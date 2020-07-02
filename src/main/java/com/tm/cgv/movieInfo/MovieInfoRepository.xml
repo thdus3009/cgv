@@ -115,9 +115,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left join movieImage as MK
 		on(MM.num = MK.movieNum)
 		
-		
-		
- 			
  	</select>
  	
  	<select id="movieListAll" parameterType="MovieInfoVO" resultType="MovieInfoVO">
@@ -193,4 +190,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<update id="rateUpdate" parameterType="MovieInfoVO">
  		update movieInfo set rate=#{rate} where num=#{num}
  	</update>
+ 	
+ 	<select id="gender2" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select count(uu.gender) as cgender from
+		(select username,gender from member where username in (select uid from reservation where movieNum=#{movieNum} )) as uu 
+		where gender=1 
+ 	</select>
+ 	
+ 	<select id="gTotal" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select count(total.gender) as gTotal from
+		(select username,gender from member where username in (select uid from reservation where movieNum=#{movieNum})) as total ;
+ 	</select>
+ 	
+ 	<select id="age" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select count(age1.age)as age10,(select count(age2.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 20 and 30) as age2)as age20,(select count(age3.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 30 and 40) as age3)as age30,(select count(age4.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 40 and 50) as age4)as age40,(select count(age5.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 50 and 60) as age5)as age50,
+		(select count(age) from member where username in (select uid from reservation where movieNum=#{movieNum}))as total from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 10 and 20) as age1;
+ 			
+ 	</select>
+ 	
+ 	<select id="charmPoint" parameterType="ReservationVO" resultType="Integer">
+ 		select charmPoint  from review where reservationNum in (select num from reservation where movieNum=#{movieNum});
+ 	</select>
+ 	
+ 	<select id="emotionPoint" parameterType="ReservationVO" resultType="Integer">
+ 		select emotionPoint as emotion from review where reservationNum in (select num from reservation where movieNum=#{movieNum});
+ 	</select>
+ 	
  </mapper>
