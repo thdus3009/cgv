@@ -25,7 +25,7 @@
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="index.html">CGV Admin</a>
+		<a class="navbar-brand" href="#">CGV Admin</a>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle" href="#">
 			<i class="fas fa-bars"></i>
@@ -65,17 +65,17 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Core</div>
-						<a class="nav-link" href="index.html">
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 공지사항
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
 						</a>
 						<div class="sb-sidenav-menu-heading">Interface</div>
-						<a class="nav-link" href="index.html">
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
@@ -83,23 +83,14 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 극장 관리
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리
-						</a> <a class="nav-link" href="index.html">
+						</a> <a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
-						</a> <a class="nav-link collapsed" href="#" data-toggle="collapse"
-							data-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> Layouts
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
 						</a>
 						<div class="collapse" id="collapseLayouts"
 							aria-labelledby="headingOne" data-parent="#sidenavAccordion">
@@ -193,14 +184,10 @@
 						<div class="card-body">
 							<p class="mb-0">
 								<code>Theater Info</code>
-								<br><span>${cine.name}</span><br> 
-								<span>${cine.local}</span><br>
-								<span>${cine.tel}</span><br> 
-								<span>${cine.totalTheater}</span><br>
-								<span>${cine.totalSeat}</span><br> 
-								<span>${cine.trafficInfo}</span><br>
-								<span>${cine.parkingInfo}</span><br> 
-								<span>${cine.intro}</span><br>
+								<br> <span>${cine.name}</span><br> <span>${cine.local}</span><br>
+								<span>${cine.tel}</span><br> <span>${cine.totalTheater}</span><br>
+								<span>${cine.totalSeat}</span><br> <span>${cine.trafficInfo}</span><br>
+								<span>${cine.parkingInfo}</span><br> <span>${cine.intro}</span><br>
 							</p>
 						</div>
 					</div>

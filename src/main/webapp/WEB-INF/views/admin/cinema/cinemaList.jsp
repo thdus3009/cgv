@@ -106,14 +106,14 @@
 					<h1>Cinema List</h1>
 					<ol class="cinema-ol">
 						<li class="breadcrumb-item active"><a href="#">서울</a></li>
-						<li class="breadcrumb-item active">경기</li>
-						<li class="breadcrumb-item active">인천</li>
-						<li class="breadcrumb-item active">강원</li>
-						<li class="breadcrumb-item active">대전/충청</li>
-						<li class="breadcrumb-item active">대구</li>
-						<li class="breadcrumb-item active">부산/울산</li>
-						<li class="breadcrumb-item active">경상</li>
-						<li class="breadcrumb-item active">광주/전라/제주</li>
+						<li class="breadcrumb-item active"><a href="#">경기</a></li>
+						<li class="breadcrumb-item active"><a href="#">인천</a></li>
+						<li class="breadcrumb-item active"><a href="#">강원</a></li>
+						<li class="breadcrumb-item active"><a href="#">대전/충청</a></li>
+						<li class="breadcrumb-item active"><a href="#">대구</a></li>
+						<li class="breadcrumb-item active"><a href="#">부산,울산</a></li>
+						<li class="breadcrumb-item active"><a href="#">경상</a></li>
+						<li class="breadcrumb-item active"><a href="#">광주,전라,제주</a></li>
 					</ol>
 
 
