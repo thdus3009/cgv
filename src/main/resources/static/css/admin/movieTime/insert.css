@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.div-btn {
+	cursor: pointer;
+}
+
+.div-btn:hover {
+	cursor: pointer;
+}

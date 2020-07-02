@@ -14,6 +14,7 @@
 		<div id="layoutSidenav_content">
 			
 			<main>
+				<br>
 				<!-- main contents -->
 				<!-- 검색창 -->
 				<div class="input-group">
