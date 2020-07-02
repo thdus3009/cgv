@@ -94,7 +94,7 @@ public class ResevationController {
 //		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
 //		System.out.println("결제 : "+result);
 		
-		//예매 DB삭제
+		//예매 DB삭제 - 할 필요 X
 		//result = reservationService.reservationDelete(reservationVO);
 		//System.out.println("예매정보 : "+result);
 				

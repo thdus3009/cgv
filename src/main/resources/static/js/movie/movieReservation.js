@@ -547,35 +547,8 @@ function login_form_close(){
 	$(".blackscreen").css("display","none");
 }
 
-console.log(window.location.href);
-$(".button.btn-guide").click(function(){
-	location.href = window.location.href;
-});
+$("#location").val(window.location.href);
 
-//로그인 ajax
-$(".ft_layer_popup.popup_login .btn_login").click(function(){
-	console.log("login");
-	console.log($("#txtUserId").val());
-	console.log($("#txtPassword").val());
-	
-	
-	var username = $("#txtUserId").val();
-	var password = $("#txtPassword").val();
-	
-	$.ajax({
-		url : '../member/login',
-		type : 'post',
-		data : {
-			username : username,
-			password : password,
-			_csrf : $("#_csrf").val()
-		},
-		success : function(result){
-			console.log(result);
-		}
-	});
-	
-});
 
 
 

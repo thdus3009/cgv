@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberVO;
 
@@ -47,8 +48,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		HttpSession session = request.getSession();
 		session.setAttribute("memberVO", memberVO.getMemberBasicVO());
 		
+		
+		String loc = (String)request.getParameter("loc");
+	    System.out.println(loc);
+	        
 		request.setAttribute("msg", "로그인 성공");
-        request.setAttribute("path", "/");
+        request.setAttribute("path",loc);
+        
+       
  
         request.getRequestDispatcher("../WEB-INF/views/common/result.jsp").forward(request, response);
 	}

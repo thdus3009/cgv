@@ -395,17 +395,22 @@
 			</div>
 			<div class="bd">
 				<div class="login_form">
+				<form action="../member/login" method="post">
+					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<input type="hidden"  id="location" name="loc" value="/" />
 					<div class="input_wrap id">
 						<label for="txtUserId" class="blind">아이디</label>
-						<input name="txtUserId" id="txtUserId" maxlength="25">
+						<input name="username" id="txtUserId" maxlength="25">
 					</div>
 					<div class="input_wrap password">
 						<label for="txtPassword" class="blind">비밀번호</label>
-						<input name="txtPassword" id="txtPassword" maxlength="25" type="password">
+						<input name="password" id="txtPassword" maxlength="25" type="password">
 					</div>
-					<button type="button" title="Login" class="btn_login">
+					<button type="submit" title="Login" class="btn_login">
 						<span>로그인</span>
 					</button>
+				</form>
+			
 				</div>
 				<div class="linkbar">
 					<a href="#" class="join_member">회원가입</a>

@@ -10,6 +10,7 @@ var lastPrice = 0;
 var usePrice = 0;
 
 var discountList;
+var discount_type = 0; //1:쿠폰 , 2:포인트 , 0:없음
 
 //info payment-ticket - 아래 바의 결제 부분 감추기
 $(".info.payment-ticket").css("display","none");
@@ -30,20 +31,75 @@ $("#summary_payment_list .num").text(addComma(lastPrice));
 var cupon_load = 0;
 //#discCoupon .tpm_body - 할인 쿠폰
 $("#discCoupon .tpm_header").click(function(){
-	discount_select("#discCoupon ","#payPoints ");
-	
-	if(cupon_load == 0){
-		discount_cupon_ajax();
-		cupon_load = 1;
+	var check = discountTypeCheck(1,"할인 쿠폰을");
+	if(check){
+		discount_select("#discCoupon ","#payPoints ");
+		if(cupon_load == 0){
+			selected_li = "CGV 할인쿠폰";
+			discount_cupon_ajax();
+			cupon_load = 1;
+		}
 	}
-	
 });
 
 //#payPoints .tpm_body - 포인트 
 $("#payPoints .tpm_header").click(function(){
-	discount_select("#payPoints ","#discCoupon ");
-	discount_point_ajax();
+	var check = discountTypeCheck(2,"포인트를");
+	
+	if(check){
+		discount_select("#payPoints ","#discCoupon ");
+		selected_li="CJ ONE 포인트";
+		discount_point_ajax();
+	}
+	
 });
+
+
+
+//하나의 할인 방법만 사용가능(쿠폰 :1 or 포인트:2 /없음 : 0)
+function discountTypeCheck(type,step){
+	var check = true;
+
+	if(discount_type != type && discount_type != 0){
+		var check = confirm("할인수단 변경시, 이미 적용된 포인트 및 기타 결제 수단이 초기화 됩니다.\n "+ step +" 적용/변경하시겠습니까?") //초기화 시킴
+		if(check){
+			discount_type = type;
+			
+			//할인내역 폼 지우기
+			$("#summary_discount_list").empty();
+			
+			switch (type) {
+			case 1: //할인 쿠폰
+				$(".discount_form span > input").each(function(){
+					$(this).prop("checked",false);
+				});
+				$("#cgvCoupon .price").text(0);
+				break;
+			case 2: //포인트
+				//포인트 val()값 초기화
+				$(".discount_form dd > input").each(function(){
+					$(this).val(0);
+				});
+
+				$(".discount_form dt > input").each(function(){
+					$(this).prop("checked",false);
+				});
+				break;
+			}
+			
+			//금액 초기화 >>>>
+			//총액 초기화
+			totalPriceSum(totalDiscount);
+			//총 할인액초기화
+			$("#summary_discount_total").text(0);
+			totalDiscount = 0;
+		}
+	}else{
+		discount_type = type;
+	}
+	return check;
+}
+
 
 //할인 수단 방법 선택 - (할인쿠폰 or 포인트)
 function discount_select(selected,other){
@@ -371,7 +427,6 @@ function discount_detail_list(){
 		
 		list.push(type+"_"+price);
 	});
-	
 	discountList = list.join(",");
 }
 
