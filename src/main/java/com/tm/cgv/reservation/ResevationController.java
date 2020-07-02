@@ -129,7 +129,7 @@ public class ResevationController {
 	}
 	
 	
-
+	//예매하기
 	@ResponseBody
 	@PostMapping("reservationInsert")
 	public int reservationInsert(ReservationVO reservationVO,String selectedSeatNums,String[] discountList) throws Exception{
@@ -140,6 +140,8 @@ public class ResevationController {
 		result = reservationService.reservationInsert(reservationVO);
 		result = reservationVO.getNum();
 		
+		
+		//추가추가 - > 쿠폰인지 포인트인지 구별해야됨
 		
 		//할인 금액 디비에 적용 + 할인 정보 테이블 추가
 		for (String str : discountList) {
