@@ -327,7 +327,7 @@ h3 {
 	font-weight: 500;
 }
 
-/*  */
+/* 마이페이지 폴라로이드 */
 .box-polaroid {
 	margin-bottom: 30px;
 	overflow: hidden;
@@ -361,7 +361,7 @@ h3 {
 	color: #333;
 }
 
-/**/
+/*할인쿠폰 테이블 헤더*/
 .my-reserve-bar {
 	overflow: hidden;
 	position: relative;
@@ -442,6 +442,28 @@ dt {
 	color: #2275a4;
 }
 
+.red-btn {
+	border-radius: 0.25rem;
+	border: 1px solid #e71a0f;
+	color: #fff;
+	background-color: #e71a0f;
+	padding: 1px;
+	padding-top: 5px;
+	padding-bottom: 8px;
+	height: 28px;
+}
+
+.red-btn>span {
+	border-radius: 0.25rem;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #ea5b50;
+	padding: 2px 10px;
+	padding-top: 3px;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
+}
+
 .message-reserve {
 	border-radius: 0.25rem;
 	border: 1px solid #333333;
@@ -473,7 +495,7 @@ dt {
 	font-weight: 600;
 }
 
-/**/
+/* 할인쿠폰 테이블 */
 .tit-mycgv {
 	height: 34px;
 	margin: 0;
@@ -515,6 +537,16 @@ dt {
 	line-height: 34px;
 	text-align: left;
 	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+}
+
+.member-tr>td {
+	height: 34px;
+	padding-left: 12px;
+	background-color: #fdfcf0;
+	font-size: 13px;
+	line-height: 34px;
+	text-align: left;
 }
 
 .coupon-h4 {
@@ -529,7 +561,7 @@ dt {
 	font-family: 'CJ+ONLYONE+Medium';
 }
 
-/**/
+/*할인 쿠폰 폼*/
 .coupon-form {
 	border: 1px solid #656560;
 	height: 100px;
@@ -540,7 +572,8 @@ dt {
 
 .coupon-form>strong {
 	position: absolute;
-	left: 45px; top : 45px;
+	left: 45px;
+	top: 45px;
 	font-weight: 600;
 	font-family: 'CJ+ONLYONE+Medium';
 	color: #333;
@@ -548,7 +581,8 @@ dt {
 
 .coupon-form>span {
 	position: absolute;
-	left: 130px; top : 25px;
+	left: 130px;
+	top: 25px;
 	font-weight: 600;
 	font-family: 'CJ+ONLYONE+Medium';
 	top: 25px;
@@ -556,41 +590,70 @@ dt {
 
 .coupon-term {
 	border-radius: 0.25rem;
-	border: 2px solid #7b7b7b; 
-	color : #7b7b7b;
+	border: 2px solid #7b7b7b;
+	color: #7b7b7b;
 	background-color: transparent;
 	padding: 3px 6px 1px 6px;
 	color: #7b7b7b;
 	font-weight: 600;
 	font-family: 'CJ+ONLYONE+Medium';
+	margin-right: 5px;
+	-webkit-appearance: none;
+	width: 51.5px;
+	height: 22px;
 }
 
-.coupon-3m{
+.coupon-term:checked {
+	border: 2px solid #7b7b7b;
+	background-color: #7b7b7b;
+	color: #fff;
+}
+
+.term-label2{
+	position: absolute;
+	left: 10px;
+    top: 5px;
+}
+
+.term-label1{
+	position: absolute;
+	left: 70px;
+    top: 5px;
+}
+
+.term-label3{
+	position: absolute;
+	left: 130px;
+    top: 5px;
+}
+
+.coupon-3m {
 	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	margin-left: 15px;
 }
 
 .coupon-form>p {
 	position: absolute;
-	left: 130px; top : 50px;
+	left: 130px;
+	top: 50px;
 	font-weight: 600;
 	font-family: 'CJ+ONLYONE+Medium';
 	top: 50px;
 }
 
-.data-p > input{
+.data-p>input {
 	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	width: 200px;
 	display: inline-block;
-    height: 25px;
-    line-height: 22px;
-    padding-left: 10px;
-    border: 1px solid #b5b5b5;
-    background-color: #e8e8dd;
-    color: #666;
+	height: 25px;
+	line-height: 22px;
+	padding-left: 10px;
+	border: 1px solid #b5b5b5;
+	background-color: #e8e8dd;
+	color: #666;
 }
 
-/**/
+/* 할인쿠폰 이용안내 */
 .coupon-notice {
 	border: 2px solid #d5d5ce;
 	margin-top: 80px;
@@ -623,4 +686,40 @@ dt {
 	margin-top: 5px;
 	font-size: 12px;
 	line-height: 1.5;
+}
+
+/* 할인 쿠폰 등록*/
+.coupon-num-bar {
+	display: grid;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.coupon-num-bar>strong {
+	font-family: 'CJ+ONLYONE+Medium';
+	display: block;
+	margin-bottom: 10px;
+	color: #222;
+	font-size: 24px;
+}
+
+.coupon-pwd-form {
+	margin-top: 20px;
+	padding: 30px 180px;
+	position: relative;
+	background-color: #fff;
+	border: 1px solid #cbcac4;
+}
+
+.coupon-num-input {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	width: 200px;
+	display: inline-block;
+	height: 25px;
+	line-height: 22px;
+	padding-left: 10px;
+	border: 1px solid #b5b5b5;
+	background-color: #fff;
+	color: #666;
+	margin: 0 10px 0 20px;
 }

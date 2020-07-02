@@ -82,41 +82,38 @@
 					<!--contents detail -->
 					<div class="col_detail">
 						<div class="tit-mycgv">CGV 할인쿠폰 내역</div>
-						<div class="set-btn">
-							<button class="message-reserve" onClick="location.href='../member/memberCouponAdd'">
-								<span>CGV 할인쿠폰 등록</span>
-							</button>
-						</div>
 						<div>
-							<h4 class="coupon-h4">CGV 할인쿠폰 보유(등록) 내역</h4>
+							<h4 class="coupon-h4">CGV 이용 / CJ ONE 포인트 적립 및 사용내역</h4>
 							<table class="member-table">
 								<thead class="member-thead">
 									<tr class="member-tr">
-										<th>쿠폰이름</th>
-										<th>사용기간</th>
-										<th>쿠폰 번호</th>
-										<th>쿠폰정보</th>
+										<th>구분</th>
+										<th>내용</th>
 									</tr>
 								</thead>
 								<tbody>
 									<!-- 반복 -->
 									<tr class="member-tr">
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>CJ ONE 사용가능 포인트</td>
+										<td>점</td>
 									</tr>
 								</tbody>
 							</table>
+							<p>※ CGV VIP 선정은 이벤트 포인트를 제외한 매표/매점/씨네샵 구매 포인트 합산 기준으로 적용됩니다.</p>
+							<p>※ 매표/매점 구매 누적 포인트는 관람 후 2-3일 후에 반영됩니다.</p>
+							<p>※ 포인트 조회 시 표시되는 적립일은 VIP 선정기준 적립일이며 CJ ONE 가용일자와 상이할 수 있습니다.</p>
+							<p>※ 자세한 포인트 적립 및 사용내역은 CJ ONE에서 확인하시기 바랍니다.[CJ ONE 포인트 조회]</p>
 						</div>
 						<div>
 							<h4 class="coupon-h4">CGV 영화관람권 사용내역</h4>
 							<form action="" method="get" class="coupon-form">
 								<strong>조회기간</strong> <span> 
-								<label class="coupon-term" id="2w"><input type="radio" name="term">2주일</label> 
-								<label class="coupon-term" id="1m"><input type="radio" name="term">1개월</label> 
-								<label class="coupon-term" id="3m"><input type="radio" name="term">3개월</label> 
-								<span class="coupon-3m">3개월 이전의 내역은 자동 삭제됩니다.</span>
+								<input type="radio" name="term" class="coupon-term" id="2w">
+								<label for="2w" class="term-label2">2주일</label> 
+								<input type="radio" name="term" class="coupon-term" id="1m">
+								<label for="1m" class="term-label1">1개월</label> 
+								<input type="radio" name="term" class="coupon-term" id="3m">
+								<label for="3m" class="term-label3">3개월</label> 
 								</span>
 								<p class="data-p">
 									<input type="text" id="datepicker1" readonly="readonly"> ~ 
@@ -131,10 +128,10 @@
 							<table class="member-table">
 								<thead class="member-thead">
 									<tr class="member-tr">
-										<th>쿠폰이름</th>
-										<th>쿠폰번호</th>
-										<th>사용일</th>
-										<th>관람극장</th>
+										<th>구매 구분</th>
+										<th>구매 극장</th>
+										<th>적립일</th>
+										<th>적립</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -153,19 +150,8 @@
 								<em class="coupon-em">이용안내</em>
 								<div>
 									<ul class="coupon-notice-ul">
-										<li>등록하신 쿠폰은 홈페이지 예매 시, 결제수단 &gt; 할인/무료/ 포인트 &gt; 할인쿠폰에서
-											사용 가능합니다.</li>
-										<li>특정 영화/극장 전용 쿠폰일 경우, 지정 영화 및 극장에서 명시된 사용기간 내에만 사용이
-											가능합니다.</li>
-										<li>온라인 전용으로 발행된 쿠폰의 경우에는 현장 사용이 불가능합니다.</li>
-										<li>영화 예매 시에는 다른 결제수단(신용카드, 예매쿠폰, 계좌이체 등)과 병행하여 사용이
-											가능합니다.</li>
-										<li>CGV홈페이지 예매 후 예매취소는 CGV홈페이지에서 상영시간 20분 전까지 가능합니다.</li>
-										<li>취소 시 현금 환불은 되지 않으며,기존 쿠폰으로 유효기간 중에서 재 사용하실 수 있습니다.</li>
-										<li>유효기간이 경과한 미사용 쿠폰(관람권)의 경우, 지난 3개월 내역만 보유(등록)내역에서 확인하실
-											수 있습니다.</li>
-										<li>기타 할인쿠폰에 대한 문의사항이 있으실 경우, 1544-1122 또는 홈페이지를 이용해 주시기
-											바랍니다.</li>
+										<li>CJ ONE 카드 등록 및 분실신고, 비밀번호 변경 등 자세한 사항은 CJ ONE 홈페이지에서 하실 수 있습니다.</li>
+										<li>전체 CJ ONE 포인트 적립 및 사용내역, 보너스 포인트, 선물포인트, 소멸포인트 정보는 CJ ONE 홈페이지에서 조회하실 수 있습니다.</li>
 									</ul>
 								</div>
 							</div>
@@ -221,6 +207,8 @@
 		$("#3m").click(function(){
 	        $('#datepicker1').datepicker('setDate', '-3M'); 
 		});
+
+
 	</script>
 
 
