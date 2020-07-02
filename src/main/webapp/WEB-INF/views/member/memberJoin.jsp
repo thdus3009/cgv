@@ -53,7 +53,8 @@
 								
 								<h2>아이디</h2>
 								<input id="userID" class="id check" type="text" style="display: inline-block;" name="username">
-								<button id="idCheck" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;">중복체크</button>
+								<button id="idCheck" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px; 
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';">중복체크</button>
 								<p id="idc"></p>
 								
 								<h2>비밀번호</h2>
@@ -81,7 +82,8 @@
 								<h2>전화번호</h2>
 								<!-- id명 phone / phoneAuth 입력 유효성 검사 필요(전부 숫자만 입력되도록) -->
 								<input id="phone" class="text" type="text" style="display: inline-block;" placeholder="' - ' 없이 입력해 주세요" maxlength="11"  onkeyup=keyinCheck(this.id) name="phone">
-								<button id="phoneBtn" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px; margin-bottom: 0px; margin-right: 200px;">인증번호 발송</button>
+								<button id="phoneBtn" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px; margin-bottom: 0px; margin-right: 200px; 
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';">인증번호 발송</button>
 								<input id="phoneAuth" class="text" type="text" style="display: none;" placeholder="인증번호를 입력해주세요" maxlength="6" onkeyup=keyinCheck(this.id)>
 								<button id="phoneAuthBtn" type="button" style="display: none;">인증번호 확인</button>
 								
@@ -94,7 +96,8 @@
 							</div>
 						
 						</fieldset>
-						<button id="btn" type="submit"><span>가입 신청</span></button>
+						<button id="btn" type="submit" style="
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';"><span>가입 신청</span></button>
 					</form>
 					
 				</div>

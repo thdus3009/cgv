@@ -48,9 +48,9 @@
 				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="#">관리자 설정</a>
+					<a class="dropdown-item" href="/">메인 페이지로</a> 
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
 				</div></li>
 		</ul>
 	</nav>
@@ -60,24 +60,23 @@
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
 				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
+				<div class="sb-sidenav-menu"><div class="nav">
 						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/noticeList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/member/bannerList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="#">
+						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/movie/movieList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
-						</a> <a class="nav-link" href="../cinema/cinemaList">
+						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/cinema/cinemaList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 극장 관리
@@ -89,7 +88,7 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
-						</a> <a class="nav-link" href="#">
+						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/bannerManage">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리
@@ -105,64 +104,63 @@
 				<div class="container-fluid">
 					<h1>member List</h1>
 					<!-- 내용 -->
-						<div class="col_detail">
+					<div class="col_detail">
 
-							<!-- 멤버 목록 -->
+						<!-- 멤버 목록 -->
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
-								<tr class="admin-tr">
-									<td>번호</td>
-									<td>아이디</td>
-									<td>패스워드</td>
-									<td>이름</td>
-									<td>생년월일</td>
-									<td>전화번호</td>
-									<td>이메일</td>
-									<td>성별</td>
-									<td>나이</td>
-									<td>닉네임</td>
-									<td>상태</td>
+							<tr class="admin-tr">
+								<td>번호</td>
+								<td>아이디</td>
+								<td>패스워드</td>
+								<td>이름</td>
+								<td>생년월일</td>
+								<td>전화번호</td>
+								<td>이메일</td>
+								<td>성별</td>
+								<td>나이</td>
+								<td>닉네임</td>
+								<td>상태</td>
+							</tr>
+							<!-- 반복 -->
+							<!-- 이름 누르면 회원 상세 페이지로 이동 -->
+							<c:forEach items="" var="vo">
+								<tr class="memberList-c">
+									<td>num</td>
+									<td>uid</td>
+									<td>pwd</td>
+									<td><a href="#">name</a></td>
+									<td>birth</td>
+									<td>phone</td>
+									<td>email</td>
+									<td>gender</td>
+									<td>age</td>
+									<td>nick</td>
+									<td>enabled</td>
 								</tr>
-								<!-- 반복 -->
-								<!-- 이름 누르면 회원 상세 페이지로 이동 -->
-								<c:forEach items="" var="vo">
-										<tr class="memberList-c">
-											<td><a href="../member/memberSelect?num=${vo.num}">num</a></td>
-											<td>uid</td>
-											<td>pwd</td>
-											<td><a href="#">name</a></td>
-											<td>birth</td>
-											<td>phone</td>
-											<td>email</td>
-											<td>gender</td>
-											<td>age</td>
-											<td>nick</td>
-											<td>enabled</td>
-										</tr>
-								 </c:forEach>
-							</table>
+							</c:forEach>
+						</table>
 
-							<!-- 페이저 -->
-							<div class="pager">
-								<ul class="pagination">
-									<c:if test="${pager.curBlock>1}">
-										<li><a href="#" class="custompager" title="${pager.startNum-1}">이전</a></li>
-									</c:if>
+						<!-- 페이저 -->
+						<div class="pager">
+							<ul class="pagination">
+								<c:if test="${pager.curBlock>1}">
+									<li><a href="#" class="custompager"
+										title="${pager.startNum-1}">이전</a></li>
+								</c:if>
 
-									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
-										<li><a href="#" class="custompager" title="${p}">${p}</a></li>
-									</c:forEach>
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+									var="p">
+									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+								</c:forEach>
 
-									<c:if test="${pager.curBlock<pager.totalBlock}">
-										<li><a href="#" class="custompager" title="${pager.lastNum+1}">다음</a></li>
-									</c:if>
-								</ul>
-							</div>
+								<c:if test="${pager.curBlock<pager.totalBlock}">
+									<li><a href="#" class="custompager"
+										title="${pager.lastNum+1}">다음</a></li>
+								</c:if>
+							</ul>
 						</div>
-					
-
-
-
+					</div>
 				</div>
 			</main>
 		</div>

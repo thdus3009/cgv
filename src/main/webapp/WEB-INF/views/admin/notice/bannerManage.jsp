@@ -112,14 +112,14 @@
 						<!-- 배너사진 설정 -->
 						<div class="banner-list">
 							<p class="notice-ul2">
-								<span class="title-ul">배너 목록</span> <span class="banner-add">+
+								<span class="title-ul">배너 목록</span> <span class="banner-add">
 									배너 추가</span>
 							</p>
-							<form action="" method="post" class="banner-form">
+							<form action="" method="post" id="banner-form" class="banner-form">
 							<!-- 배너 목록 -->
 							</form>
 							<div class="btn_s">
-								<button id="cancle" type="button">취소</button>
+								<button id="cancle" type="reset">취소</button>
 								<button id="btn" type="submit">등록하기</button>
 							</div>
 						</div>
@@ -130,24 +130,30 @@
 	</div>
 
 	<!-- 스크립트 -->
-	<!-- 스크립트 -->
 	<script type="text/javascript">
 		var count = 0;
 
 		//버튼 누를때마다 input추가
-		$(".banner-add")
-				.click(
-						function() {
-							var $banner = $('<div class="banner-label"><input type="file"><span class="del">삭제</span></div>');
-							$(".banner-form").append($banner);
-						});
+		$(".banner-add").click(
+			function() {
+				var $banner = $('<div class="banner-label"><input type="file"><span class="del" id="btn" style="cursor:pointer;">삭제</span></div>');
+				var bannerForm = document.getElementById("banner-form");
+				var bannerCount = bannerForm.childElementCount+1;
 
-		//배너 추가 라벨 삭제
+				if( bannerCount <= 10){
+					$("#banner-form").append($banner);
+				}else{
+					alert("배너는 10개까지만 가능합니다!");
+					}
+			});
+
 		$(function() {
+			//배너 추가 라벨 삭제
 			$(".banner-form").on("click", "span", function() {
 				$(this).parent().remove();
 			});
 		});
+		
 	</script>
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>

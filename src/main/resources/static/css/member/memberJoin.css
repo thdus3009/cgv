@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
 a{
 	text-decoration: none;
 	color: black;
@@ -15,6 +25,7 @@ strong{
 }
 
 body{
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	line-height: 1.2;
 	color :#666;
 	font-weight: 300px;
@@ -54,7 +65,7 @@ body{
 	line-height: 30px;
 	margin-left: 12px;
 	padding-left: 20px;
-	background: url("../images/login/ico_arrow.png") no-repeat 0 9px;
+	background: url("/images/login/ico_arrow.png") no-repeat 0 9px;
 }
 
 .last{
@@ -80,8 +91,8 @@ body{
 }
 
 .tab_menu_round{
-	background: url("../images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
-	height: 37px;
+	background: url("/images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
+	height: 39px;
 /* 	border: 1px solid black; */
 }
 
@@ -110,10 +121,10 @@ body{
 .box_login{
 	margin: 0 auto;
 	border-top: 2px solid #898987;
-	border-bottom: 2px solid #898987;
+	border-bottom: 4px solid #898987;
 	padding: 70px 0 0 295px;
 	padding-top: 20px;
-	height: 750px;
+	height: 820px;
 }
 
 
@@ -130,12 +141,14 @@ body{
 .login_input > h2{
 	margin-top: 24px;
 	margin-bottom: 5px;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
 }
 
 .login_input .id {
 	width: 275px;
 	margin-bottom: 5px;
-	background: url("../images/sprite_icon.png") 12px -230px no-repeat;
+	background: url("/images/sprite_icon.png") 12px -230px no-repeat;
 	display: block;
 	height: 35px;
 	padding: 0 5px 0 40px;
@@ -179,7 +192,7 @@ body{
 .login_input input[type="password"]{
 	width: 275px;
 	margin-bottom: 5px;
-	background: url("../images/sprite_icon.png") 12px -261px no-repeat;
+	background: url("/images/sprite_icon.png") 12px -261px no-repeat;
 	display: block;
 	height: 35px;
 	padding: 0 5px 0 40px;
