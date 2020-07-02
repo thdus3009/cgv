@@ -11,7 +11,7 @@
 			<span class="header">STEP 1. </span> 
 			<a href="#"><span>다시하기</span></a>
 		</h4>
-		<div class="tpm_header">
+		<div class="tpm_header" data-index="-1">
 			<h4>할인쿠폰</h4>
 			<a class="tpmh_btn"><span>펼치기</span></a>
 		</div>
@@ -55,8 +55,10 @@
 							</div>
 							<div class="list_body nano has-scrollbar">
 								<ul class="content" tabindex="-1" style="right: -17px; bottom: -17px;">
-								
+									
 								</ul>
+								
+								
 								<div class="message">사용 가능한 CGV 할인쿠폰이(가) 없습니다.</div>
 								<div class="pane pane-y" style="display: none; opacity: 1; visibility: visible;">
 									<div class="slider slider-y" style="height: 50px;">

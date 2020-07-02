@@ -54,10 +54,10 @@
 				<!-- navigation -->
 				<div class="navi">
 					<span class="right">
-						<a href="#" class="button btn-guide">
+						<a href="#" class="button btn-guide" onclick="return false;">
 							<span>예매가이드</span>
 						</a>
-						<a href="#" class="button btn-reservation-restart">
+						<a href="#" class="button btn-reservation-restart" onclick="return false;">
 							<span>예매 다시하기</span>
 						</a>
 					</span>
@@ -384,6 +384,39 @@
 		</div>
 		
 		
+		<!-- 로그인 폼 -->
+		<div class="ft_layer_popup popup_login ko" style="top: 231px; position: absolute; display: none;" name="popup_login">
+			<div class="hd">
+				<div class="title_area">
+					<h4>CGV회원 로그인</h4>
+<!-- 					<span class="sreader">빠른예매는 레이어로 서비스 되기 때문에 가상커서를 해지(Ctrl+Shift+F12)한 후 사용합니다.</span> -->
+				</div>
+					<a href="#" class="layer_close">닫기</a>
+			</div>
+			<div class="bd">
+				<div class="login_form">
+					<div class="input_wrap id">
+						<label for="txtUserId" class="blind">아이디</label>
+						<input name="txtUserId" id="txtUserId" maxlength="25">
+					</div>
+					<div class="input_wrap password">
+						<label for="txtPassword" class="blind">비밀번호</label>
+						<input name="txtPassword" id="txtPassword" maxlength="25" type="password">
+					</div>
+					<button type="button" title="Login" class="btn_login">
+						<span>로그인</span>
+					</button>
+				</div>
+				<div class="linkbar">
+					<a href="#" class="join_member">회원가입</a>
+					<a href="#" class="join_guest">비회원 예매</a>
+					<a href="#" class="id_find">아이디찾기</a>
+					<a href="#" class="pw_find">비밀번호찾기</a>
+				</div>
+			</div>
+		</div>
+				
+		
 		
 		<!-- CGV 기프트 카드 등록 -->
 		<div class="ft_layer_popup f_popup" style="display: none;">
@@ -589,12 +622,15 @@
 
 	var data;
 
+	var memberID = `${memberVO.username}`;
+	
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
 			//결제 작업을 위한 값 - 이니시스 : tel
 			discount_detail_list();
 			
 			data = {
+					
 					tel : `${memberVO.phone}`,
 					email : `${memberVO.email}`,
 					name : `${memberVO.name}`,
@@ -607,6 +643,7 @@
 			//test 결제 없이 바로 예매 - 좌석예매 진행
 			reservation_save(6);
 	});
+
 
 </script>
 

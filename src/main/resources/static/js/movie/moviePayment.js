@@ -7,7 +7,7 @@
 var selected_li = "CJ ONE 포인트";
 var totalDiscount = 0;
 var lastPrice = 0;
-var usePoint = 0;
+var usePrice = 0;
 
 var discountList;
 
@@ -27,10 +27,16 @@ lastPrice = totalPrice-$("#summary_discount_total").text();
 $("#summary_payment_total").text(addComma(lastPrice));
 $("#summary_payment_list .num").text(addComma(lastPrice));
 
-
+var cupon_load = 0;
 //#discCoupon .tpm_body - 할인 쿠폰
 $("#discCoupon .tpm_header").click(function(){
 	discount_select("#discCoupon ","#payPoints ");
+	
+	if(cupon_load == 0){
+		discount_cupon_ajax();
+		cupon_load = 1;
+	}
+	
 });
 
 //#payPoints .tpm_body - 포인트 
@@ -39,7 +45,7 @@ $("#payPoints .tpm_header").click(function(){
 	discount_point_ajax();
 });
 
-//할인 수단 방법 선택
+//할인 수단 방법 선택 - (할인쿠폰 or 포인트)
 function discount_select(selected,other){
 	if($(selected +".tpm_body").css("display") == 'none'){
 		$(selected +".tpm_body").css("display","block");
@@ -49,9 +55,104 @@ function discount_select(selected,other){
 	}
 }
 
-//할인 수단 선택시 ajax으로 해당 값들을 읽어옴
+
+
+//할인 수단으로 쿠폰 선택시 ajax으로 해당 값들을 읽어옴
+function discount_cupon_ajax(){
+	var memberNum = $("#memberId").val();
+	$.ajax({
+		url : '../memberCupon/memberCuponSelect',
+		type : 'get',
+		data : {
+			uid : memberNum
+		},
+		dataType : 'json',
+		success : function(result){
+
+			if(result != null){
+				$("#cgvCoupon .form_list .list_body .message").css("display","none");
+			}
+			
+			for(i=0;i<result.length;i++){
+				var name = result[i].cuponInfoVO.name;
+				var serialNum = result[i].cuponInfoVO.serialNum;
+				var eIssuance = result[i].cuponInfoVO.eissuance;
+				var count = result[i].cuponInfoVO.count;
+				var price = result[i].cuponInfoVO.price;
+				
+				var arr = eIssuance.split("-");
+				eIssuance = arr[0]+"."+arr[1]+"."+arr[2];
+				
+				makeCuponList(name,serialNum,eIssuance,price,count);
+			}
+		}
+	});
+}
+
+
+//쿠폰 리스트 생성 - 출력
+function makeCuponList(name,serialNum,eIssuance,price,count){
+	var html = '<li class="row" data-price="'+ price +'" data-count="'+ count +'">'
+		+ '<label>'
+		+ '<span class="col col1">'+ name +'</span>'
+		+ '<span class="col col2">'+ serialNum +'</span>'
+		+ '<span class="col col3">'+ eIssuance +'</span>'
+		+ '<span class="col col4">'
+		+ '<input type="checkbox">'
+		+ '</span>'
+		+ '</label>'
+		+ '</li>';
+	
+	$("#cgvCoupon .form_list .list_body ul").append(html);
+}
+
+
+//쿠폰은 하나만 체크 가능하도록
+var checkedCoupon = false;
+$("#discCoupon").on("click","#cgvCoupon ul li",function(evt){
+	console.log($(this).find("input").prop("checked"));
+	
+	
+	if($(this).find("input").prop("checked")){
+		//선택 취소
+		$(this).find("input").prop("checked",false);
+		checkedCoupon = false;
+		usePrice = 0;
+		
+		//할인 내역 삭제
+		removeDiscount("cgvCoupon");
+	}else{
+		//선택
+		if(checkedCoupon){
+			$("#cgvCoupon ul li input").each(function(){
+				$(this).prop("checked",false);
+			});
+		}
+		$(this).find("input").prop("checked",true);
+		checkedCoupon = true;
+		usePrice = $(this).data("price");
+		
+		//할인내역 추가 - 폼 생성
+		appendDiscount("cgvCoupon");
+		
+	}
+	//할인 금액 출력
+	$("#cgvCoupon .form_result .price").text(addComma(usePrice));
+	
+	
+	//2번 클릭 방지
+	evt.preventDefault();
+});
+
+
+
+
+
+
+
+
+//할인 수단으로 포인트 선택시 ajax으로 해당 값들을 읽어옴
 function discount_point_ajax(){
-	alert("ajax")
 	var memberNum = $("#memberId").val();
 	
 	$.ajax({
@@ -90,10 +191,10 @@ $(".textBox2.type-n.nohan").blur(function(){
 	//보유 금액
 	var hasPoint = removeComma($(this).parent().prev().prev().children().text());
 	//사용금액
-	usePoint = $(this).val();
-	var chaPoint = hasPoint - usePoint;
+	usePrice = $(this).val();
+	var chaPoint = hasPoint - usePrice;
 	
-	if(usePoint == 0){
+	if(usePrice == 0){
 		$(this).val(0);
 		
 		if(totalDiscount > 0){
@@ -107,18 +208,17 @@ $(".textBox2.type-n.nohan").blur(function(){
 		
 	}else if(chaPoint < 0){
 		alert("보유하신 금액인 "+hasPoint+"보다 크게 입력하셨습니다.");
-		$(this).val(usePoint);
-	}else if(usePoint < 1000){
+		$(this).val(usePrice);
+	}else if(usePrice < 1000){
 		alert("최소 1,000P부터 사용 가능합니다.");
-		$(this).val(usePoint);
-	}else if(usePoint % 10 != 0){
+		$(this).val(usePrice);
+	}else if(usePrice % 10 != 0){
 		alert("10P 단위로 사용 가능합니다.");
-		$(this).val(usePoint);
+		$(this).val(usePrice);
 	}else{
 		//정상적인 사용가능 포인트
 		var id = $(this).attr("id");
 		appendDiscount(id);
-		
 	}
 });
 
@@ -133,14 +233,12 @@ function appendDiscount(id){
     }else{
         console.log("jquery : 해당 객체 존재안함");
     }
-
-
 	//총 할인액 갱신
-	totalDiscount += (usePoint*1);
+	totalDiscount += (usePrice*1);
 
 	var html = '<dl>'
 	+'<dt>' + selected_li + '</dt>'
-	+'<dd><span class="num discountNum" data-type="'+ id +'">'+ addComma(usePoint) +'</span>'
+	+'<dd><span class="num discountNum" data-type="'+ id +'">'+ addComma(usePrice) +'</span>'
 	+'<span class="won">원</span>'
 	+'<a class="discount_del" id="'+ id +'_del" href="#none"><span>적용취소</span></a>'
 	+'</dd>'
@@ -191,10 +289,25 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 	//해당 맞는 input id 값 도출  -> val값을 0으로 초기화
 	var arr = [];
 	arr = $(this).attr("id").split("_");
-	$("#"+arr[0]).val(0)
-	
 	var id = arr[0];
-	checkboxValue(id);
+
+	
+	if(id != 'cgvCoupon'){
+		//포인트일때만 실행
+		$("#"+id).val(0)
+		checkboxValue(id);
+		
+	}else{
+		//쿠폰일때만 실행
+		$("#cgvCoupon ul li input").each(function(){
+			$(this).prop("checked",false);
+		});
+
+		usePrice = 0;
+		checkedCoupon = false;
+		$("#cgvCoupon .form_result .price").text(0);
+		
+	}
 	
 	
 	//할인 내역 삭제
@@ -204,7 +317,6 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 	$("#summary_discount_total").text(addComma(totalDiscount));
 
 	totalPriceSum(delPoint);
-	
 });
 
 
@@ -214,17 +326,17 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 $(".secondTit").click(function(){
 	//checked가 true이면
 	if($(this).children().prop("checked") == true){
-		usePoint = removeComma($(this).parent().find(".hasPoint").text());
+		usePrice = removeComma($(this).parent().find(".hasPoint").text());
 		
-		if(lastPrice - usePoint < 0){
-			usePoint = lastPrice;
+		if(lastPrice - usePrice < 0){
+			usePrice = lastPrice;
 		}else{
-			usePoint = Math.floor(usePoint/10)*10;
+			usePrice = Math.floor(usePrice/10)*10;
 		}
 		
-		lastPrice = lastPrice - usePoint;
+		lastPrice = lastPrice - usePrice;
 		//input창에 출력
-		$(this).parent().find("input").val(usePoint);
+		$(this).parent().find("input").val(usePrice);
 		//할인내역 추가
 		var id = $(this).parent().find("input").attr("id");
 		appendDiscount(id);
@@ -299,7 +411,6 @@ function discount_form_change(selected){
 	$(selected+".discount_list li").each(function(){
 		if($(this).hasClass("selected")){
 			selected_li = $(this).find("a").text();
-			
 			$(selected+".discount_form .form").css("display","none");
 			
 			var str = [];
@@ -365,10 +476,6 @@ function giftCardEnrollment(){
 	});
 	
 }
-
-
-
-
 
 
 

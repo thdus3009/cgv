@@ -1105,6 +1105,192 @@ body{
 
 
 
+/* 로그인 폼 */
+.ft_layer_popup.popup_login {
+    width: 462px;
+    margin-left: -232px;
+}
+
+.ft_layer_popup .hd {
+    border-bottom: 4px solid #333;
+    height: 51px !important;
+    background-color: #333 !important;
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.ft_layer_popup .hd .title_area h4 {
+    float: none !important;
+    width: auto !important;
+    margin-right: 0 !important;
+    background: none !important;
+    color: #f2f0e5;
+    border: 1px solid #707070;
+    height: 35px !important;
+    padding-top: 14px;
+    padding-left: 20px;
+    font-family: Nanum Gothic, 나눔고딕, Apple SD Gothic Neo, AppleGothic, 돋움, dotum, Sans-serif;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: -1px;
+}
+
+.ft_layer_popup .hd a.layer_close {
+    display: block;
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/popup/btn_close_x.png) no-repeat;
+    overflow: hidden;
+    text-indent: -1000px;
+}
+
+.ft_layer_popup.popup_login .bd {
+    padding-bottom: 40px;
+    padding-left: 75px;
+    padding-right: 75px;
+}
+
+.ft_layer_popup.popup_login .bd .login_form {
+    width: 266px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap.id {
+    width: 212px;
+    border: 2px solid #b5b5b5;
+    margin-bottom: 5px;
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap.id {
+    top: 0px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/popup/login_icon_id.png) no-repeat left center;
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap {
+    position: static;
+}
+
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap.password{
+	width: 212px;
+    border: 2px solid #b5b5b5!important;
+    padding-bottom: 7px;
+    margin-bottom: 5px;
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap {
+    left: 0;
+    padding: 8px 10px 8px 40px;
+    height: 21px;
+    line-height: 21px;
+}
+
+input {
+	border: none;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.ft_layer_popup.popup_login .bd .linkbar {
+    margin-top: 11px;
+    font-family: 'NanumBarunGothicBold', 'Nanum Gothic', 'Dotum';
+    margin-left: 3px;
+}
+
+.ft_layer_popup.popup_login .bd .linkbar a {
+
+	float: left;
+	font-weight: normal;
+	color: #333;
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap.password {
+    top: 44px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/popup/login_icon_pw.png) no-repeat left center;
+}
+
+.blind, .blind tbody, .blind thead, .blind tfoot, .blind div, .blind p, .blind span, .blind ol, .blind ul, .blind dl {
+    display: block;
+    visibility: hidden;
+    overflow: hidden;
+    position: absolute;
+    top: -1000em;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    font-size: 1px;
+    line-height: 1px;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap input {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.ft_layer_popup.popup_login .bd .login_form .input_wrap.password {
+    width: 212px;
+    border: 2px solid #b5b5b5!important;
+    padding-bottom: 7px;
+    margin-bottom: 5px;
+}
+
+.ft_layer_popup.popup_login .bd .login_form button, .ft_layer_popup.popup_login.english .bd .login_form button {
+    float: none;
+    width: 266px;
+    background: #e71a0f;
+    color: #f2f0e5;
+    height: 42px;
+    line-height: 37px;
+    font-weight: bold;
+    font-family: 'NanumBarunGothicBold', 'Nanum Gothic', 'Dotum';
+}
+
+.ft_layer_popup.popup_login .bd .login_form button span, .ft_layer_popup.popup_login.english .bd .login_form button span {
+    display: block;
+    border: 1px solid #f07469;
+    color: #f2f0e5;
+    font-size: 15px;
+    font-family: 'NanumBarunGothicBold', 'Nanum Gothic', 'Dotum';
+    height: 36px;
+    line-height: 37px;
+    width: 259px;
+    margin: 0 auto;
+}
+
+.ft_layer_popup.popup_login .bd .linkbar {
+    margin-top: 11px;
+    font-family: 'NanumBarunGothicBold', 'Nanum Gothic', 'Dotum';
+    margin-left: 3px;
+}
+
+.ft_layer_popup.popup_login .bd .linkbar {
+    margin-top: 15px;
+    margin-bottom: 18px;
+    height: 12px;
+}
+
+.ft_layer_popup.popup_login .bd .linkbar a:first-child {
+    padding-left: 0px;
+    background: none;
+}
+
+.ft_layer_popup.popup_login .bd .linkbar a {
+    padding-left: 21px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/popup/login_split.png) no-repeat 11px center;
+}
 
 
 

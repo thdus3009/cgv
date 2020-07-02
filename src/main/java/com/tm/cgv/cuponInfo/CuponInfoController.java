@@ -23,6 +23,8 @@ public class CuponInfoController {
 	private PointService pointService;
 	
 	
+	
+	//CGV 기프티카드 포인트 쿠폰 등록
 	@ResponseBody
 	@PostMapping("cuponeEnrollment")
 	public int cuponeEnrollment(CuponInfoVO cuponInfoVO,HttpSession session)throws Exception{

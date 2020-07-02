@@ -458,35 +458,39 @@ $(".time-list").on("click",".theater ul li",function(){
 //좌석예매페이지로 이동
 $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 	if($(this).hasClass("on") == true){
-//		$("#data-from").submit();
-		//alert("전송전송");
 
-		$.ajax({
-			url : '../reservation/seatReservation',
-			type : 'post',
-			data : {
-				movieNum : $("#movieNum").val(),
-				movieTimeNum : $("#movieTimeNum").val(),
-				cinemaName : $("#cinemaName").val(),
-				theaterName : $("#theaterName").val(),
-				filmType : $("#filmType").val(),
-				seatCount : $("#seatCount").val(),
-				_csrf : $("#_csrf").val()
-			},
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			success : function(result){
-//				console.log(result);
-				$(".step.step1").css("display","none");
-				$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
-				$(".ticket_tnb .tnb_container .tnb").addClass("step2");
-				$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
+		if(memberID == ''){
+			console.log("로그인 필요");
+			$(".ft_layer_popup.popup_login").css("display","block");
+			$(".blackscreen").css("display","block");
+		}else{
+			$.ajax({
+				url : '../reservation/seatReservation',
+				type : 'post',
+				data : {
+					movieNum : $("#movieNum").val(),
+					movieTimeNum : $("#movieTimeNum").val(),
+					cinemaName : $("#cinemaName").val(),
+					theaterName : $("#theaterName").val(),
+					filmType : $("#filmType").val(),
+					seatCount : $("#seatCount").val(),
+					_csrf : $("#_csrf").val()
+				},
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				success : function(result){
+//					console.log(result);
+					$(".step.step1").css("display","none");
+					$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
+					$(".ticket_tnb .tnb_container .tnb").addClass("step2");
+					$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
 
 
-				$(".step.step2").css("display","block");
-				$(".step.step2").html(result);
-			}
+					$(".step.step2").css("display","block");
+					$(".step.step2").html(result);
+				}
 
-		});
+			});
+		}
 
 	}else{
 		alert("선택해주세요");
@@ -531,7 +535,52 @@ $(".tnb_container").on("click",".tnb.step2 .btn-right",function(){
 	}
 });
 
-		
+
+//예메 - 로그인 폼
+//로그인 창 닫기
+$(".ft_layer_popup.popup_login .layer_close").click(function(){
+	login_form_close();
+});
+
+function login_form_close(){
+	$(".ft_layer_popup.popup_login").css("display","none");
+	$(".blackscreen").css("display","none");
+}
+
+console.log(window.location.href);
+$(".button.btn-guide").click(function(){
+	location.href = window.location.href;
+});
+
+//로그인 ajax
+$(".ft_layer_popup.popup_login .btn_login").click(function(){
+	console.log("login");
+	console.log($("#txtUserId").val());
+	console.log($("#txtPassword").val());
+	
+	
+	var username = $("#txtUserId").val();
+	var password = $("#txtPassword").val();
+	
+	$.ajax({
+		url : '../member/login',
+		type : 'post',
+		data : {
+			username : username,
+			password : password,
+			_csrf : $("#_csrf").val()
+		},
+		success : function(result){
+			console.log(result);
+		}
+	});
+	
+});
+
+
+
+
+
 		
 
 //뒤로가기 버튼 - 영화예매로 이동

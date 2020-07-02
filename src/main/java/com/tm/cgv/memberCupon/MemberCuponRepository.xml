@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.memberCupon.MemberCuponRepository">
+
+	<resultMap type="MemberCuponVO" id="memberCuponList">
+		<id property="num" column="mNum"/>
+		<result property="uid" column="uid"/>
+		<result property="cuponInfoNum" column="cuponInfoNum"/>
+		<result property="deleteAt" column="deleteAt"/>
+	
+		<association property="cuponInfoVO" javaType="CuponInfoVO">
+			<id property="num" column="num"/>
+			<result property="name" column="name"/>
+			<result property="serialNum" column="serialNum"/>
+			<result property="pwd" column="pwd"/>
+			<result property="price" column="price"/>
+			<result property="type" column="type"/>
+			<result property="count" column="count"/>
+			<result property="sIssuance" column="sIssuance"/>
+			<result property="eIssuance" column="eIssuance"/>
+		</association>		
+		
+	</resultMap>
+
+
+	<select id="memberCuponSelect" parameterType="MemberCuponVO" resultMap="memberCuponList">
+		select * from
+		(select num as mNum,uid,cuponInfoNum,deleteAt from memberCupon where deleteAt is null) MC
+		join
+		(select * from cuponInfo) CI
+		on(MC.cuponInfoNum = CI.num)
+		where uid = #{uid}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
