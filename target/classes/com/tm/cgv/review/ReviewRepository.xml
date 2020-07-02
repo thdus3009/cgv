@@ -71,6 +71,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY R.createAt desc
 	</select>
 	
+	<select id="search_Count" resultType="Integer">
+		select count(*) as count from reservation where uid=#{uid} and deleteAt is null;
+	</select>
+	
 	
 	
 	

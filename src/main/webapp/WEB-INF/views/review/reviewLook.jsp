@@ -120,7 +120,7 @@
 							<div style="font-size: 13px; height: 68px">${vo.contents}</div>							
 							
 							<!-- 수정하기/like -->
-							<button id="review_update" class="ud" style="font-size: 13px; font-weight: bolder; color: #666666;">수정하기</button>
+							<button id="review_update" class="ud popupBtn1" style="font-size: 13px; font-weight: bolder; color: #666666;">수정하기</button>
 							<span class="ud" > ㆍ </span>
 							<img class="ud" alt="" src="${pageContext.request.contextPath}/images/like.png">
 							<span class="ud" >&nbsp; ${vo.like1}</span>							
@@ -135,8 +135,7 @@
 	
 	
 		<!-- Modal ------------------------------------------------------------------------------------->
-	
-	
+		<c:import url="../template/modal.jsp"></c:import>	
 	
 	
 		<!-- 푸터 -------------------------------------------------------------------------------------->
@@ -147,6 +146,12 @@
 
 
 <!-- 스크립트 -->
+
+<script type="text/javascript">
+$(".popupBtn1").click(function(){
+	alert("꺄르르르를르르를");
+});
+</script>
 
 
 <script type="text/javascript">
@@ -181,9 +186,6 @@ $(".delete2").click(function(){
 		}
 	});
 
-$(".ud").click(function(){
-	alert("꺄르르르를르르를");
-});
 
 </script>
 

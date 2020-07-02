@@ -214,15 +214,25 @@
 */
 	 
 //	 ------------------------------------------------------------------------------
+	 
 	 //reviewMore
-	
-	 
-	 
-		var count=1;	
-		function getList(curPage){//처음 창을 열면 curPage가 안떠있다가("getList?curPage=" 이 형태) 더보기를 누르면 count++된 정보가 curPage에 들어가게 된다.
+		var count=1;
+		
+		getList(count);
+		
+		$("#more").click(function(){
+			count++;
+
+			getList(count);
+		});
+		
+		function getList(curPage){//처음 창을 열면 "getList?curPage=1" 이 형태였다가, 더보기를 누르면 count++되어서 1씩 증가된 정보가 curPage에 들어가게 된다.
 			//ajax
 			$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
 				$('#result').append(result);
+				//alert($(".l_count:last-child").val());
+				//$("#l_count1").html($(".l_count:last-child").val());
+			
 				
 				//1.첫번째 모달
 				$(".popupBtn1").click(function(){
@@ -314,9 +324,19 @@
 				
 			});
 			
+			//1.현재 getList의 curPage을 받는 function 안쪽에 , 2.getList꾸려주는 ajax 바깥에 쓰기
 			
+			var now = curPage * 10;
+			var total = $("#total").attr("title")*1; //total에 있는 title이라는 속성값 가져오기 (정수로 변환이 안될수도 있으니 *1해주기)
+			if(now>=total){ 
+				$("#l_count1").html("("+total+"/"+total+")");
+			}else {
+				$("#l_count1").html("("+now+"/"+total+")");
+			}
 			
 		}
+		
+		
 			//getList안에 식을 넣으면 "getList(count);"로 인해 자동으로 일단 한번 출력되고
 			// memberReview.jsp의 부모(result)영역의 위임으로 한번더 실행된다. //그러므로 getList에서 빼주어야함
 			
@@ -363,15 +383,8 @@
 				
 			});
 			
-			//이벤트위임-버튼 변경
 
-		
-		getList(count);
-		
-		$("#more").click(function(){
-			count++;
-			getList(count);
-		});
+
 
 		/* ---------delete---------- */
 		

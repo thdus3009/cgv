@@ -113,6 +113,7 @@
 
 .td1 {
 	display: inline-block;
+	
 }
 .td2 {
 	float: right;
@@ -158,4 +159,21 @@
 	color: white;
 	border-radius: 5px;
 	font-weight: bold;
+}
+
+button#more {
+	border-right: 0;
+	border-left: 0;
+	border-top-style: dotted;
+	border-bottom-style: dotted;
+	
+	outline: 0;
+	background-color: transparent;
+	
+	width: 258px;
+	height: 46px;
+	
+	display: block;
+	margin : 0 auto;
+	
 }

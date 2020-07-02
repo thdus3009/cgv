@@ -25,4 +25,6 @@ public interface ReviewRepository {
 	public int reservation_Delete(ReviewVO reviewVO);
 	
 	public List<ReviewVO> reviewLook(String uid);
+	
+	public int search_Count(String uid);
 }

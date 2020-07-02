@@ -29,9 +29,16 @@ public class ReviewController {
 //	-------------------------------------------------------------------------------------------------------
 	
 	@GetMapping("reviewList")
-	public ModelAndView reviewList(ModelAndView mv)throws Exception {
+	public ModelAndView reviewList(HttpSession session, ModelAndView mv)throws Exception {
+		//아직 회원가입, 로그인 쪽 안되니까 session은 나중에 적용하기
+		//MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		//String id = memberVO.getId(); 
+		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
 		
-		 mv.setViewName("member/memberReview");
+		/* 내가 본 영화 총 건 수 */
+		int movie_count=reviewService.search_Count(uid);
+		mv.addObject("m_count", movie_count);
+		mv.setViewName("member/memberReview");
 
 		return mv;
 	}
@@ -54,15 +61,20 @@ public class ReviewController {
 		//하나씩 받은 reviewVO를 다시 ArrayList로 보내기 (people때문에 이작업이 필요)
 		List<ReviewVO> ar = new ArrayList<ReviewVO>();
 		
+		int list_count = 0;
 		//VO를 가지고 있는 List를 하나씩빼줄때 foreach문 사용
 		for(ReviewVO reviewVO : reviewList) {
 		  
 			  reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
 			  
 			  ar.add(reviewVO);
+			  
+			  list_count+=1;
 		  }
 		
+		System.out.println("list_count: "+list_count);
 		
+		model.addAttribute("l_count", list_count);
 		model.addAttribute("list",ar);
 		  
 	}
@@ -167,6 +179,8 @@ public class ReviewController {
 		return mv;
 	}
 
+	
+	
 	
 	// ---------------------------------------------------------------------------------
 	

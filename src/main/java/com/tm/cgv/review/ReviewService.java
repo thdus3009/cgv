@@ -54,4 +54,8 @@ public class ReviewService {
 	public List<ReviewVO> reviewLook(String uid)throws Exception {
 		return reviewRepository.reviewLook(uid);
 	}
+	
+	public int search_Count(String uid)throws Exception {
+		return reviewRepository.search_Count(uid);
+	}
 }

@@ -22,7 +22,7 @@
 					
 					<div class="br">
 					<div><span>${vo.screenDate} ${vo.screenTime}</span></div>
-					<div><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명</span></div>
+					<div><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명 </span></div>
 					</div>
 					<div>
 					
