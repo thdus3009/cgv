@@ -6,20 +6,106 @@
 }
 
 
-.contents {
-	width:840px;
-	height:370px;
+/* seat box */
+.seat_box	{
+	width:650px;
+	height:450px;
+	background:#eff2f8;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	overflow:hidden;
+}
+
+.seat_box .seat_header	{
+	width:100%;
+	height:60px;
+	background:#6a75ca;
+	
+}
+
+.seat_box .seat_header .header_btn	{
+	padding:15px;
+	float:right;
+}
+
+.seat_box .seat_header .header_btn select	{
+	width:65px;
+	border-radius:5px;
+	padding-left:2px;
+	margin-top:2px;
+}	
+
+.seat_box .seat_header .header_btn button	{
+	width:85px;
+	height:30px;
+	border-radius:5px;
+	background:#3747c2;
+	color:#fff;
+	font-size:12px;
+	font-weight:600;
+	outline:none;
+	border:0;
+	margin-left:15px;
+	
 }
 
 
 
-.seats {
-	width:550px;
-	height:300px;
+.seat_box .seat_section	{
+	
+}
+
+
+.seat_box .seat_section .section_btn	{
+	width:120px;
+	height:440px;
 	background:#fff;
-	padding:20px;
-	padding-top:40px;
+	background:#6a75ca;
+	float:left;
 }
+
+.seat_box .seat_section .section_btn button	{
+	width:92px;
+	height:35px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	background:#fff;
+	color:#000;
+	font-size:12px;
+	font-weight:600;
+	outline:none;
+	border:0;
+	margin-left:15px;
+	margin-bottom:15px;
+}
+
+.seat_box .seat_section .section_btn .btn_del {
+	border-bottom:5px solid #000;
+}
+
+.seat_box .seat_section .section_btn .btn_economy {
+	border-bottom:5px solid #ed8c00;
+}
+
+.seat_box .seat_section .section_btn .btn_standard {
+	border-bottom:5px solid #01c73c;
+}
+
+.seat_box .seat_section .section_btn .btn_prime {
+	border-bottom:5px solid #f71708;
+}
+
+.seat_box .seat_section .contents	{
+	width:450px;
+	float:left;
+}
+
+.seat_box .seat_section .contents .seats	{
+	margin-top:50px;
+	margin-left:20px;
+}
+
+
 
 .seats .seat_row	{
 	height:15px;
@@ -221,3 +307,34 @@
 	color:#fff;
 }
 
+
+/*정리*/
+
+.form-group	{
+	margin-top:30px;
+	
+}
+
+.theaterLebel	{
+	margin-bottom:30px;
+}
+
+.selectcinenum	{	/* cinema select box */
+	width:300px;
+	height:40px;
+	padding-left:15px;
+	border:1px solid #ced4da;
+}
+
+.lebelname	{
+	margin-bottom:40px;
+}
+
+.ckfm	{
+	width:45px;
+}
+
+
+#btn_insert	{
+	border:1px solid #ddd;
+}

@@ -1,203 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+<c:import url="../template/head.jsp"></c:import> 
 
-<title>관리자 페이지</title>
-
-<link href="/css/styles.css" rel="stylesheet" />
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-
+<link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
-		<a href="/admin"><img src="/images/header/h1_cgv.png"
-			class="admin-logo" /></a>
-		<!-- 검색 바-->
-		<form
-			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="검색어를 입력"
-					aria-label="Search" aria-describedby="basic-addon2" />
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-		<!-- 로그인-->
-		<ul class="navbar-nav ml-auto ml-md-0">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="userDropdown" href="#"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="#">관리자 설정</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
-				</div></li>
-		</ul>
-	</nav>
-
-	<!-- 사이드바 -->
-	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 공지사항
-						</a>
-						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 회원 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 영화 관리
-						</a> <a class="nav-link" href="../admin/cinemaList">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 극장 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 예매 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 리뷰 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 배너 관리
-						</a>
-					</div>
-				</div>
-			</nav>
-		</div>
-
-		<!-- 내용 -->
-		<div id="layoutSidenav_content">
+		<c:import url="../template/header.jsp"></c:import> 
+        <div id="layoutSidenav">
+            <c:import url="../template/sidenav.jsp"></c:import>
+            <div id="layoutSidenav_content">
+	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<div class="container-fluid">
-					<h1>${cine.name}</h1>
-					<div class="card mb-4">
-						<div class="card-body">
-							<p class="mb-0">
-								<code>Cinema Info</code>
-								<br> 
-								<span>영화관 이름: ${cine.name} CGV</span><br> 
-								<span>지역: ${cine.local}</span><br>
-								<span>번호: ${cine.tel}</span><br> 
-								<span>총 관수: ${cine.totalTheater}개</span><br>
-								<span>총 좌석: ${cine.totalSeat}개</span><br> 
-								<span>교톻안내: ${cine.trafficInfo}</span><br>
-								<span>주차안내: ${cine.parkingInfo}</span><br> 
-								<span>영화관 소개: ${cine.intro}</span><br>
-							</p>
+ <h1>Theater Insert</h1>
+	                     <form id="frm" action="/theater/${board}${path}" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<c:if test="${path eq 'Update'}">
+						<input type="hidden" name="num" id="num" value="${vo.num}">
+					</c:if>
+	
+				  <div class="form-group">
+	
+				     <label for="cinemaNum">CinemaNum:</label>
+				   	 <select class="cinemaNum" name="cinemaNum">
+				   	 	<!-- <option value="2d">2D</option>
+				   	 	<option value="3d">3D</option> -->
+				   	 	<c:forEach items="${cine}" var="cnt">
+				   	 		<option value="${cnt.num}">${cnt.num} / ${cnt.name}</option>
+				   	 	</c:forEach>
+				   	 </select>
+				  
+				  	 <br>
+				  	 <br>
+				  	 <label for="name">Name:</label>
+				   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
+				  
+				  
+				  	 <br>
+				   	 <label for="filmType">FilmType:</label>
+				   	 <select class="filmType" name="filmType">
+				   	 	<option value="0">2D</option>
+				   	 	<option value="1">3D</option>
+				   	 	<option value="2">4D</option>
+				   	 </select>
+				   
+				   	 
+				   	 <br>
+				   	 <br>
+				   	 <br>
+				   	 <br>
+				   	 <br>
+				   	 <select class="seat_row" id="seat_row">
+				   	 	<option value="1">A</option>
+				   	 	<option value="2">B</option>
+				   	 	<option value="3">C</option>
+				   	 	<option value="4">D</option>
+				   	 	<option value="5">E</option>
+				   	 	<option value="6">F</option>
+				   	 	<option value="7">G</option>
+				   	 	<option value="8">H</option>
+				   	 	<option value="9">I</option>
+				   	 	<option value="10">J</option>
+				   	 	<option value="11">K</option>
+				   	 	<option value="12">L</option>
+				   	 	<option value="13">M</option>
+				   	 	<option value="14">N</option>
+				   	 </select>
+				   	 
+				   	 
+				   	 <select class="seat_col" id="seat_col" onchange="">
+				   	 	<option value="1">1</option>
+				   	 	<option value="2">2</option>
+				   	 	<option value="3">3</option>
+				   	 	<option value="4">4</option>
+				   	 	<option value="5">5</option>
+				   	 	<option value="6">6</option>
+				   	 	<option value="7">7</option>
+				   	 	<option value="8">8</option>
+				   	 	<option value="9">9</option>
+				   	 	<option value="10">10</option>
+				   	 	<option value="11">11</option>
+				   	 	<option value="12">12</option>
+				   	 	<option value="13">13</option>
+				   	 	<option value="14">14</option>
+				   	 	<option value="15">15</option>
+				   	 	<option value="16">16</option>
+				   	 	<option value="17">17</option>
+				   	 	<option value="18">18</option>
+				   	 	<option value="19">19</option>
+				   	 	<option value="20">20</option>
+				   	 </select>
+				   	 
+				   	 <!-- 아니면 select 할 때마다  script 처리 해서 바로 생성 -->
+				   	 <button type="button" onclick="changeSelect()">좌석 생성</button>
+				   	 
+				   	 
+				   	 <div class="">
+				   	 	<button type="button" onclick="changeGrade(0)">좌석 삭제</button>
+				   	 	<button type="button" onclick="changeGrade(1)">Economy</button>
+				   	 	<button type="button" onclick="changeGrade(2)">Standard</button>
+				   	 	<button type="button" onclick="changeGrade(3)">Prime</button>
+				   	 </div>
+				  </div>
+				  
+					<br>
+					<div class="contents">
+						<div class="seats" id="seats_list">
+							<!-- <div class="seat_row">
+								<div class="label">A</div>
+								<div class="seat_group">
+									<div class="seat">
+										<a href="" onclick="">
+											<span class="no">1</span>
+										</a>
+									</div>
+								</div>
+							</div> -->
 						</div>
 					</div>
-					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
-								<tr>
-									<th>Num</th>
-									<!-- <th>CinemaNum</th> -->
-									<th>Name</th>
-									<th>seatCount</th>
-									<th>filmType</th>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr>
-									<th>Num</th>
-									<!-- <th>CinemaNum</th> -->
-									<th>Name</th>
-									<th>seatCount</th>
-									<th>filmType</th>
-								</tr>
-							</tfoot>
-							<tbody>
-								<c:forEach items="${theaterList}" var="vo">
-									<tr class="theaterList-c">
-										<td><a href="../theater/theaterSelect">${vo.num}</a></td>
-										<%-- <td>${vo.cinemaNum}</td> --%>
-										<td>${vo.name}</td>
-										<td>${vo.seatCount}</td>
-										<c:if test="${vo.filmType eq 0}">
-											<td>2D</td>
-										</c:if>
-										<c:if test="${vo.filmType eq 1}">
-											<td>3D</td>
-										</c:if>
-										<c:if test="${vo.filmType eq 2}">
-											<td>4D</td>
-										</c:if>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
+				  
+	
+	 				 <label for="seatCount">SeatCount:</label>
+				   	 <input type="text" class="form-control" id="seatCount" name="seatCount" value="${vo.seatCount}">
+	
+	
+	   				 <br>
+				   	 <br>
+				   	 <br>
+				   	 <br>
+				   	 <br>
+	
+				  <input type="button" id="btn_insert" class="btn btn-default" value="submit">
+	
+			</form>
+			  <c:if test="${path eq 'Update'}">
+					<button type="button" id="btn_delete" value="${vo.num}">Delete</button>
+			  </c:if>
+
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2020</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script src="assets/demo/chart-area-demo.js"></script>
-	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script src="assets/demo/datatables-demo.js"></script>
-</body>
+                <c:import url="../template/footer.jsp"></c:import>
+            </div>
+        </div>
+        <c:import url="../template/scripts.jsp"></c:import>
+        
+        
+       
+    </body>
 </html>
