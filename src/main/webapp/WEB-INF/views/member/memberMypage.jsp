@@ -198,8 +198,8 @@
 													<dt>20,000원</dt>
 												</dl>
 												<div>
-													<button class="message-reserve"><span>문자보내기</span></button>
-													<button class="cancle-reserve"><span>예매취소</span></button>
+													<button class="message-reserve" type="button"><span>문자보내기</span></button>
+													<button class="cancle-reserve" type="submit"><span>예매취소</span></button>
 												</div>
 											</div>
 										</div>
@@ -232,24 +232,26 @@
 		});
 
 		//정보 수정 팝업창
-		$("#go_edit_page")
-				.click(
+		$("#go_edit_page") .click(
 						function() {
-							window
-									.open("memberPopUpEdit.jsp",
-											"마이페이지 - 정보수정",
-											"width = 700, height = 565, top=100, left 200, locations = no");
+							window .open("memberPopUpEdit.jsp", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
 						});
 
 		//자주가는 CGV 팝업창
-		$("#go_edit_page")
-				.click(
+		$("#go_edit_page") .click(
 						function() {
-							window
-									.open("memberPopUpEdit.jsp",
-											"마이페이지 - 정보수정",
-											"width = 700, height = 565, top=100, left 200, locations = no");
+							window .open("memberPopUpEdit.jsp", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
 						});
+
+		//안됨빡친다
+		$(".cancle-reserve").click(function(e){
+			e.preventdefault();
+			alert("e.preventdefault()");
+			e.preventdefault();
+			if(confirm("예매를 취소하시겠습니까? \n\n※인터넷 예매 취소는 상영시간 20분 전까지 가능하며, \n예매 가능은 상영시간 30분 전까지 가능합니다.")){
+					
+				}
+			});
 	</script>
 
 

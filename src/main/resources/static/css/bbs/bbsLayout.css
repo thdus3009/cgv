@@ -102,7 +102,7 @@ tbody{
 	line-height: 30px;
 	margin-left: 12px;
 	padding-left: 20px;
-	background: url("../images/login/ico_arrow.png") no-repeat 0 9px;
+	background: url("/images/login/ico_arrow.png") no-repeat 0 9px;
 }
 
 .last{
@@ -164,7 +164,7 @@ tbody{
 	left: -18px;
 	width: 18px;
 	height: 34px;
-	background: url("../images/bbsList/ribon_left.png") no-repeat 0 0px;
+	background: url("/images/bbsList/ribon_left.png") no-repeat 0 0px;
 }
 
 

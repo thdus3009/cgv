@@ -82,7 +82,7 @@ input[type="text"]{
 }
 
 .tab_menu_round{
-	background: url("../images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
+	background: url("/images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
 	height: 37px;
 /* 	border: 1px solid black; */
 }
@@ -212,7 +212,7 @@ input[type="text"]{
 	height: 28px;
 	margin: 0 2px;
 	border: 1px solid #cacac1;
-	background: url("../images/bbsList/btn_paging.gif") no-repeat;
+	background: url("/images/bbsList/btn_paging.gif") no-repeat;
 	background-color: #faf9ed;
 	color: #333333;
 	font-size: 11px;
