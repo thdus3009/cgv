@@ -69,6 +69,22 @@ body{
     margin-bottom: 1px;   
 }
 
+/* 지역 목록 */
+.ol{
+	border-top: 3px solid #000;
+	border-bottom: 1px solid #ccc;
+	display: flex;
+	list-style: none;
+	margin-bottom: 5px;
+}
+
+.ol > li{
+	display: inline-block;
+    line-height: 20px;
+    font-size: 13px;
+    height: 20px;
+    padding: 10px;
+}
 
 /*멤버 목록*/
 

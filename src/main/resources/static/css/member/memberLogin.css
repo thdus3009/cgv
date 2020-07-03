@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
 a{
 	text-decoration: none;
 	color: black;
@@ -10,6 +20,8 @@ strong{
 }
 
 body{
+    background-color: #fdfcf0;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	line-height: 1.2;
 	color :#666;
 	font-weight: 300px;
@@ -49,7 +61,7 @@ body{
 	line-height: 30px;
 	margin-left: 12px;
 	padding-left: 20px;
-	background: url("../images/login/ico_arrow.png") no-repeat 0 9px;
+	background: url("/images/login/ico_arrow.png") no-repeat 0 9px;
 }
 
 .last{
@@ -77,7 +89,7 @@ body{
 }
 
 .tab_menu_round{
-	background: url("../images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
+	background: url("/images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
 	height: 37px;
 /* 	border: 1px solid black; */
 }
@@ -89,19 +101,24 @@ body{
 .tab_menu_round li{
 	float: left;
 	display: inline-block;
-	width: 100px;
+	width: 130px;
 	position: relative;
 	line-height: 37px;
 	color: #fdfcf0;
 	background: #898987;
 	text-align: center;
+	margin-left: 1px;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
 }
 
 .tab_menu_round li a{
 	font-size: 13px;
-	font-weight: 500;
 	display: block;
 	color: #ffffff;
+	font-weight: 600;
 }
 
 .box_login{
@@ -109,7 +126,7 @@ body{
 	border-bottom: 2px solid #898987;
 	padding: 70px 0 0 300px;
 	padding-top: 50px;
-	height: 246px;
+	height: 280px;
 /* 	border: 1px solid black; */
 }
 
@@ -126,23 +143,27 @@ body{
 
 .login_input input[type="text"]{
 	width: 275px;
+	color: #727272;
 	margin-bottom: 5px;
-	background: url("../images/sprite_icon.png") 12px -230px no-repeat;
+	background: url("/images/sprite_icon.png") 12px -230px no-repeat;
 	display: block;
 	height: 35px;
 	padding: 0 5px 0 40px;
 	line-height: 33px;
 	border: 2px solid #b5b5b5;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 .login_input input[type="password"]{
 	width: 275px;
+	color: #727272;
 	margin-bottom: 5px;
-	background: url("../images/sprite_icon.png") 12px -261px no-repeat;
+	background: url("/images/sprite_icon.png") 12px -261px no-repeat;
 	display: block;
 	height: 35px;
 	padding: 0 5px 0 40px;
 	line-height: 33px;
 	border: 2px solid #b5b5b5;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
 .box_login button{
@@ -188,7 +209,7 @@ body{
 	display: inline-block;
 	margin-left: 5px;
 	padding-right: 8px;
-	background: url("../images/login/bg_arrow03.png") right 5px no-repeat;
+	background: url("/images/login/bg_arrow03.png") right 5px no-repeat;
 	font-size: 12px;
 }
 
@@ -234,6 +255,13 @@ body{
 .red{
 	border: 2px solid #e71a0f;
 	color: #e71a0f;
+	border-radius: 0.25rem;
+	padding: 3px 5px;
+	font-weight: 600;
+}
+
+.red > span{
+	font-weight: 600;
 }
 
 
@@ -257,6 +285,8 @@ body{
 	font-weight: 500;
 	text-align: center;
 	vertical-align:middle;
+	border-radius: 0.25rem;
+	padding: 3px 5px;
 }
 
 
@@ -265,14 +295,80 @@ body{
 	color: #333333;
 }
 
+.black > span{
+	font-weight: 600;
+}
 
+/* showId */
 
+.showId-box{
 
+}
 
+.showId-form{
+	height: auto;
+    padding: 70px 110px 70px;
+	border-bottom: 2px solid #898987;
+}
 
+.showId-field{
+	display: table-cell;
+    width: 700px;
+    margin: 0 auto;
+    background: #f2f2f2;
+    text-align: center;
+    vertical-align: middle;
+	border: none;
+	padding: 50px 0;
+}
 
+.showId-field > h1{
+	font-size: 13px;
+	padding: 2px 0;
+}
 
+.showId-button{
+	margin-top: 25px;
+	text-align: center;
+}
 
+.move-login{
+	border: 2px solid #333333;
+    color: #333333;
+    line-height: 23px;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+    margin: 5px;
+    padding: 3px 5px;
+}
+
+.move-login > span{
+	font-size: 12px;
+    padding: 5px 20px;
+    font-weight: 600;
+}
+
+.move-home{
+	border: 2px solid #7b7b7b;
+    color: #7b7b7b;
+    line-height: 23px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+    margin: 5px;
+    padding: 3px 5px;
+}
+
+.move-home > span{
+	font-size: 12px;
+    padding: 5px 20px;
+    width: 100%;
+    height: 100%;
+    font-weight: 600;
+}
 
 
 

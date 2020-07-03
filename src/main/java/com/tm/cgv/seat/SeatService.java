@@ -11,8 +11,8 @@ public class SeatService {
 	@Autowired
 	private SeatRepository seatRepository;
 	
-	public List<SeatVO> seatSelectOne(SeatVO seatVO) throws Exception{
-		return seatRepository.seatSelectOne(seatVO);
+	public List<SeatVO> seatSelectList(SeatVO seatVO) throws Exception{
+		return seatRepository.seatSelectList(seatVO);
 	}
 	
 	public List<SeatVO> rowCount(SeatVO seatVO) throws Exception{

@@ -178,6 +178,7 @@ CREATE TABLE `movieTime` (
   `screenDate` date DEFAULT NULL,
   `screenTime` varchar(5) DEFAULT NULL,
   `remainSeat` int(11) DEFAULT NULL,
+  `selectedFirm` int(11) DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `MOVIETIME_MOVIENUM_FK_idx` (`movieNum`),
   KEY `MOVIETIME_THEATERNUM_FK_idx` (`theaterNum`),
@@ -285,3 +286,10 @@ ON(M.username = A.username);
   
 SELECT * FROM cinema WHERE local = "서울" limit 2,2;
 
+SELECT * FROM member WHERE username = 'user94' AND enabled=1;
+
+SELECT * FROM member
+WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;movieTime
+
+SELECT count(username) FROM member
+WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;

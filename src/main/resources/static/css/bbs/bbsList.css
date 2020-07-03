@@ -1,41 +1,47 @@
 @charset "UTF-8";
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
 
-.container{
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+.container {
 	width: 100%;
 	background-color: #fdfcf0;
-	
-	height: 1300px; 
-
+	height: 1300px;
 }
 
 /*  ------------------------------------------------------------------------------- container contents detail box_bbsList*/
-.box_bbsList{
-	overflow:hidden;
+.box_bbsList {
+	overflow: hidden;
 	padding-top: 10px;
-	
-/* 	height: 990px; */
-/* 	border: 1px solid black; */
+
+	/* 	height: 990px; */
+	/* 	border: 1px solid black; */
 }
 
 /*  ------------------------------------------------------------------------------- container contents detail search_area*/
-.search_area{
+.search_area {
 	overflow: hidden;
 	margin-top: 20px;
-	
-/* 	height: 29px; */
-/* 	border: 1px solid black; */
+
+	/* 	height: 29px; */
+	/* 	border: 1px solid black; */
 }
 
-.search_area select:focus{
+.search_area select:focus {
 	outline: 3px solid #ead3d7;
 }
 
-.search_area select{
+.search_area select {
 	vertical-align: bottom;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
-
-input{
+input {
 	font-size: 13px;
 	line-height: 1.2;
 	color: #666;
@@ -44,54 +50,63 @@ input{
 	vertical-align: middle;
 }
 
-input[type="text"]{
+input[type="text"] {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	display: inline-block;
 	height: 26px;
 	line-height: 22px;
-	margin-bottom:1px;
+	margin-bottom: 1px;
 	padding-left: 10px;
 	border: 1px solid #b5b5b5;
 }
-.round > *{
+
+.round>* {
 	box-sizing: border-box;
 	display: inline-block;
 	position: relative;
 }
 
-.round.inblack{
-	background: #222222;
-	border: 2px solid #222222;
-	color: #ffffff;
-	line-height: 21px;
+.round.inblack {
+	border-radius: 0.25rem;
+	border: 1px solid #333333;
+	color: #fff;
+	background-color: #333333;
+	padding: 1px;
+	padding-bottom: 2px;
+	height: 28px;
 }
 
-.round.inblack > *{
-	border: 1px solid #5b5b58;
-	padding: 0 12px;
+.round.inblack> span {
+	border-radius: 0.25rem;
+	border: 1px solid #727272;
+	padding: 0 10px;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
 }
-
 
 /*  ------------------------------------------------------------------------------- container contents detail wrap_tab*/
-.wrap_tab{
+.wrap_tab {
 	position: relative;
-	padding-bottom : 2px solid #898987;
+	padding-bottom: 2px solid #898987;
 	margin-top: 15px;
-/* 	height:35px; */
-	
-/* 	border: 1px solid black; */
+	/* 	height:35px; */
+
+	/* 	border: 1px solid black; */
 }
 
-.tab_menu_round{
-	background: url("../images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
+.tab_menu_round {
+	background: url("/images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
 	height: 37px;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 }
 
-.tab_menu_round li:first-child{
+.tab_menu_round li:first-child {
 	background: #e71a0f;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
 }
 
-.tab_menu_round li{
+.tab_menu_round li {
 	float: left;
 	display: inline-block;
 	width: 100px;
@@ -102,39 +117,38 @@ input[type="text"]{
 	text-align: center;
 }
 
-.tab_menu_round li a{
+.tab_menu_round li a {
 	font-size: 13px;
-	font-weight: 500;
+	font-weight: 600;
 	display: block;
 	color: #ffffff;
+	font-family: 'CJ+ONLYONE+Medium';
 }
 
 /*  ------------------------------------------------------------------------------- container contents detail search_result*/
-.search_result{
+.search_result {
 	margin: 30px 0 10px 0;
-	
-/* 	height: 15px; */
-/* 	border: 1px solid black; */
+
+	/* 	height: 15px; */
+	/* 	border: 1px solid black; */
 }
 
-.search_result .num{
+.search_result .num {
 	font-weight: bold;
 }
 
-
 /*  ------------------------------------------------------------------------------- container contents detail box_bbsList*/
-.box_bbsList{
-	overflow:hidden;
+.box_bbsList {
+	overflow: hidden;
 	padding-top: 10px;
-	
-/* 	height: 990px; */
-/* 	border: 1px solid black; */
+
+	/* 	height: 990px; */
+	/* 	border: 1px solid black; */
 }
 
-.tbl_list{
+.tbl_list {
 	border-top: 1px solid #d6d4ca;
 	border-bottom: 1px solid #b8b6aa;
-
 	width: 100%;
 	border-spacing: 0;
 	border-collapse: separate;
@@ -143,55 +157,57 @@ input[type="text"]{
 	padding: 0;
 }
 
-
-.tbl_list thead th{
-	box-sizing:border-box;
+.tbl_list thead th {
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600; box-sizing : border-box;
 	padding: 10px 0 8px 0;
 	border-bottom: 1px solid #e1dfd5;
 	text-align: center;
 	background-color: #edebe1;
-	
+	box-sizing: border-box;
 }
-.tbl_list .tit{
-	box-sizing:border-box;
+
+.tbl_list .tit {
+	box-sizing: border-box;
 	text-align: left;
 	padding: 10px 15px 8px;
 }
 
-.tbl_list .first td{
+.tbl_list .first td {
 	border-top: 0;
-	box-sizing:border-box;	
+	box-sizing: border-box;
 	padding: 15px 0 13px 0;
 	vertical-align: middle;
 	text-align: center;
 }
-.tbl_list .first .txt{
+
+.tbl_list .first .txt {
 	text-align: left;
 }
 
-.tbl_list .first .txt:hover{
+.tbl_list .first .txt:hover {
 	font-weight: bold;
 	text-decoration: underline;
 }
 
-
-
 /*  ------------------------------------------------------------------------------- container contents detail paging	*/
-
-.paging{
+.paging {
+	font-family: 'CJ+ONLYONE+Medium';
 	text-align: center;
 	margin-top: 25px;
-	
-/* 	height: 28px; */
-/* 	border: 1px solid black; */
+	font-weight: 600;
+
+	/* 	height: 28px; */
+	/* 	border: 1px solid black; */
 }
 
-.paging ul{
+.paging ul {
 	display: inline-block;
 	vertical-align: top;
 }
 
-.paging li{
+.paging li {
+	font-family: 'CJ+ONLYONE+Medium';
 	display: inline-block;
 	padding: 0 8px;
 	color: #333333;
@@ -201,18 +217,18 @@ input[type="text"]{
 	line-height: 28px;
 }
 
-.paging li.on, .paging li a:hover{
+.paging li.on, .paging li a:hover {
 	color: #993333;
 	text-decoration: underline;
 }
 
-.btn_page{
+.btn_page {
 	display: inline-block;
 	min-width: 56px;
 	height: 28px;
 	margin: 0 2px;
 	border: 1px solid #cacac1;
-	background: url("../images/bbsList/btn_paging.gif") no-repeat;
+	background: url("/images/bbsList/btn_paging.gif") no-repeat;
 	background-color: #faf9ed;
 	color: #333333;
 	font-size: 11px;
@@ -221,7 +237,7 @@ input[type="text"]{
 	vertical-align: middle;
 }
 
-.first{
+.first {
 	min-width: 27px;
 	padding: 0;
 	width: 25px;
@@ -229,60 +245,33 @@ input[type="text"]{
 	font: 0/0 a;
 }
 
-
-.pre{
+.pre {
 	padding: 0 10px 0 24px;
 	background-position: 0 0;
 }
 
-.end{
+.end {
 	min-width: 27px;
 	padding: 0;
 	background-position: 5px -156px;
 	font: 0/0 a;
-	
 }
 
-.next{
+.next {
 	padding: 0 24px 0 10px;
 	background-position: right -52px;
-	
 }
 
-
-.inred{
+.inred {
 	background: #e71a0f;
 	border: 2px solid #e71a0f;
 	color: #ffffff;
-	line-height: 21px; 
+	line-height: 21px;
 	width: 76px;
 	float: right;
 }
 
-.inred > *{
+.inred>* {
 	width: 75px;
 	border: 1px solid #ea5b50;
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

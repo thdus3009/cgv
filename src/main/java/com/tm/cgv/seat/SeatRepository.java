@@ -15,7 +15,7 @@ public interface SeatRepository {
 	
 
 	
-	public List<SeatVO> seatSelectOne(SeatVO seatVO) throws Exception;
+	public List<SeatVO> seatSelectList(SeatVO seatVO) throws Exception;
 	
 	public List<SeatVO> rowCount(SeatVO seatVO) throws Exception;
 	

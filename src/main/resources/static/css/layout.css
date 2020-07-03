@@ -1,11 +1,19 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium';
+  src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
+  src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
 * {
 	margin: 0px;
 	padding: 0px;
 }
-
-
 
 div{
 	display: block;
@@ -36,7 +44,7 @@ body{
 .root > .header {
 	width: 100%;
 	height: 149px;
-	background-image: url("../images/header/bg_header.gif");
+	background-image: url("/images/header/bg_header.gif");
 	background-repeat: repeat-x;
 	/* 	border: 1px solid black; */
 }
@@ -71,14 +79,14 @@ body{
 	line-height: 29.6px;
 	display: inline-block;
 	float: left;
-	background: url("../images/header/bg_v_line.gif") no-repeat 0 50%;
+	background: url("/images/header/bg_v_line.gif") no-repeat 0 50%;
 /* 	border: 1px solid red; */
 }
 
 .gnb li a{
 	
 	overflow: hidden;
-	background-image: url("../images/common_sprite_area_v4_2016.png");
+	background-image: url("/images/common_sprite_area_v4_2016.png");
 	background-repeat: no-repeat;
 	text-indent: 100%;
 	white-space: nowrap;
@@ -180,6 +188,7 @@ body{
 .menu li a{
 	color: black;
 	text-decoration: none;
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
 .menu>ul>.menu_movie {
@@ -207,7 +216,7 @@ body{
 	left: 749px;
 	width: 141px;
 	height: 24px;
-	
+	  font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
 .search > fieldset{
@@ -224,9 +233,11 @@ body{
 	border: 1px solid #b5b5b5;
 	font-size: 12px;
 	color: #666;
+	  font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
 .btn-go-search{
+	  font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	position: absolute;
 	top: 0px;
 	left: 110px;
@@ -256,7 +267,7 @@ body{
 	height: 86px;
 	background-position: -364px -305px;
 	overflow: hidden;
-	background-image: url("../images/common_sprite_area_v4_2016.png");
+	background-image: url("/images/common_sprite_area_v4_2016.png");
 	background-repeat: no-repeat;
 	text-indent: 100%;
 /* 	border: 3px solid black; */
@@ -291,7 +302,7 @@ body{
 	line-height: 30px;
 	margin-left: 12px;
 	padding-left: 20px;
-	background: url("../images/login/ico_arrow.png") no-repeat 0 9px;
+	background: url("/images/login/ico_arrow.png") no-repeat 0 9px;
 }
 
 .last{
@@ -302,7 +313,7 @@ body{
 
 /* ---------------------------------------------------------------------footer */
 .footer {
-	background: url("../images/footer/bg_footer_com.gif") repeat-x 0 100% ;
+	background: url("/images/footer/bg_footer_com.gif") repeat-x 0 100% ;
 	clear: both;
 }
 
@@ -311,7 +322,7 @@ body{
 	width: auto;
 	height: 240px;
 	text-align: center;
-	background-image: url("../images/footer/bg_temp_foot_banner.gif");
+	background-image: url("/images/footer/bg_temp_foot_banner.gif");
 	background-repeat: repeat-x;
 	background-color : #f3afb2;
 	
@@ -368,7 +379,7 @@ body{
 .smuse li a{
 	display: block;
 	height: 44px;
-	background-image: url("../images/common_sprite_area_v4_2016.png");
+	background-image: url("/images/common_sprite_area_v4_2016.png");
 	background-repeat: no-repeat;
 	text-indent: 100%;
 	white-space: nowrap;
@@ -440,7 +451,7 @@ body{
 	height: 43px; 
 	background-position: -145px -319px;
 	overflow: hidden;
-	background-image: url("../images/common_sprite_area_v4_2016.png");
+	background-image: url("/images/common_sprite_area_v4_2016.png");
 /* 	background: no-repeat; */
 	text-indent: 100%;
 	white-space: nowrap;
@@ -465,25 +476,27 @@ body{
 .policy li{
 	float: left;
 	display: inline-block;
-	background: url("../images/footer/bg_li_vline2.gif") no-repeat 0 5px;
+	background: url("/images/footer/bg_li_vline2.gif") no-repeat 0 5px;
 /* 	border: 1px solid black; */
 }
 
 .policy li > a{
 	padding: 0 8px;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 13px;
 	color: #444444;
 	text-decoration: none;
 	vertical-align: middle;
 	letter-spacing: -1px;
+    font-family: 'CJ+ONLYONE+Medium';
 }
 
 /* ---------------------------------------------------------------------footer cjinfo address*/
 .address{
-	padding: 20px 0  0 108px;
+	padding: 10px 0  0 108px;
 	font-size: 12px;
-	color: #555555;
+	color: #555555;  
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 /* 	border: 1px solid red; */
 }
 
@@ -576,11 +589,11 @@ body{
 
 .aside-content-top{
 	padding-top: 10px;
-	background: url("../images/asidebar/bg_aside_banner_top.png") no-repeat 0 0;
+	background: url("/images/asidebar/bg_aside_banner_top.png") no-repeat 0 0;
 }
 .aside-content-btm{
 	padding: 0 7px 10px;
-	background: url("../images/asidebar/bg_aside_banner_bottom.png") no-repeat 0 100%;
+	background: url("/images/asidebar/bg_aside_banner_bottom.png") no-repeat 0 100%;
 }
 .aside-content-btm > a{
 	display: block;
@@ -590,7 +603,7 @@ body{
 	
 	width: 116px;
 	height: 72px;
-	background: url("../images/asidebar/btn_top.png") no-repeat 0 0;
+	background: url("/images/asidebar/btn_top.png") no-repeat 0 0;
 /* 	border: 1px solid black; */
 }
 

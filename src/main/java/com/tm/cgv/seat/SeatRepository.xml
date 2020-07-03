@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<resultMap type="SeatVO" id="SeatResul">
+	<resultMap type="SeatVO" id="SeatList">
 
 		<id column="num" property="num"/>
 		<result column="theaterNum" property="theaterNum"/>
@@ -35,13 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
- 	<select id="seatSelectOne" parameterType="SeatVO" resultType="SeatVO">
+ 	<select id="seatSelectList" parameterType="SeatVO" resultMap="SeatList">
 		<!-- select * from seat where theaterNum = #{theaterNum} order by 3, col -->
 		select * from 
-		(select * from seat where theaterNum = #{theaterNum} order by rowIdx, colIdx) S
+		(select * from seat where theaterNum = #{theaterNum} ) S
 		left join
 		(select num as bNum,seatNum,movieTimeNum,reservationNum from seatBooking where movieTimeNum = #{movieTimeNum}) SB
 		on(S.num = SB.seatNum)
+		order by rowIdx, colIdx
  	</select>
  	
  	<select id="rowCount" parameterType="SeatVO" resultType="SeatVO">
@@ -51,6 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="colCount" parameterType="SeatVO" resultType="Integer">
  		select max(colIdx) from seat where theaterNum = #{theaterNum}
  	</select>
+ 	
+ 	
+ 	
 	
 	<select id="seatSelect" parameterType="SeatVO" resultType="SeatVO">
 		select * from seat where theaterNum=#{theaterNum}

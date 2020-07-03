@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
 img{
 	vertical-align: middle;
 }
@@ -51,7 +61,7 @@ img{
 .tbl_bbs_write th{
 	line-height: 27px;
 	vertical-align: top;
-	padding: 15px 0 15px 13px;
+	padding: 10px;
 	text-align: left;
 }
 
@@ -96,9 +106,11 @@ input[type='text'] {
 	overflow-x : hidden;
 	vertical-align: top; 
 	
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
 .byte_info{
+	font-family: 'CJ+ONLYONE+Medium';
 	margin-top: 5px;
 	color: #333333;
 	font-weight: bold;

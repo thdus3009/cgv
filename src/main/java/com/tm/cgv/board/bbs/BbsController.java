@@ -53,6 +53,7 @@ public class BbsController {
 	@GetMapping("bbsSelect")
 	public ModelAndView bbsSelect(BbsVO bbsVO,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ModelAndView mv = new ModelAndView();
+ 
 
 //		MemberVO memberVO = null; //(MemberBasicVO)request.getSession().getAttribute("memberVO");
 //		String id = "";
@@ -93,7 +94,7 @@ public class BbsController {
 //			mv.addObject("path", "./bbsList");
 //			mv.setViewName("common/result");
 //		}
-
+ 
 		return mv;
 	}
 	

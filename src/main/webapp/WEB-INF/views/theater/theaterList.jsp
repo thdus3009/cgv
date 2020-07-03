@@ -78,6 +78,9 @@
 
 	<!-- 푸터 -->
 	<c:import url="../template/footer.jsp"></c:import>
+<<<<<<< HEAD
+=======
 
+>>>>>>> merge_branch
 </body>
 </html>
