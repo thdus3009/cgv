@@ -197,8 +197,8 @@
 								if($(this).data("col") == seatSpaceList[i].index){
 									if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
 										$(this).prev().addClass("preSelect");
-										check1 = false;
 									}
+									check1 = false;
 								}
 							}
 						}
@@ -584,39 +584,37 @@
 	}
 	
 	
+	//var common_standard = 9000;
+	//var teenager_standard = 7000;
 	
 	//eachGradePayment(grade구분/몇명인지 구분)
 	function eachGradePayment(gradeType,num){
 		
-		//amountCommon
-		//amountTeenager
-		//amountPreference
-
+		common_standard *= 1;
+		teenager_standard *= 1;
+		
 		//일반일때 계산
 		if(amountCommon > 0){
 			amountCommon = amountCommon - num;
-			
 			var check = true;
 			
 			if(amountCommon < 0){
 				num = 1;
 			}
-				
 			switch (gradeType) {
 			case 1: //Economy - 8000
-				totalCommonPay = totalCommonPay + (num * 8000);
+				totalCommonPay = totalCommonPay + (num * (common_standard-1000));
 				break;
 			case 2: //Standard - 9000
-				totalCommonPay = totalCommonPay + (num * 9000);
+				totalCommonPay = totalCommonPay + (num * common_standard);
 				break;
 			case 3: //Prime - 10000
-				totalCommonPay = totalCommonPay + (num * 10000);
+				totalCommonPay = totalCommonPay + (num * (common_standard+1000));
 				break;
 			}
 			
 			$(".row.payment-adult").css("display","block"); 
 			$(".payment-ticket .payment-adult .data .price").text(addComma(totalCommonPay)+"원");
-			
 			if(check){
 				return totalCommonPay;
 			}
@@ -625,29 +623,25 @@
 		//청소년일때 계산
 		if(amountTeenager > 0){
 			amountTeenager = amountTeenager - num;
-			
 			var check = true;
-			
 			if(amountTeenager < 0){
 				num = 1;
 				chck = false;
 			}
-			
 			switch (gradeType) {
 			case 1: //Economy - 6000
-				totalTeenagerPay = totalTeenagerPay + (num * 6000);
+				totalTeenagerPay = totalTeenagerPay + (num * (teenager_standard-1000));
 				break;
 			case 2: //Standard - 7000
-				totalTeenagerPay = totalTeenagerPay + (num * 7000);
+				totalTeenagerPay = totalTeenagerPay + (num * teenager_standard);
 				break;
 			case 3: //Prime - 8000
-				totalTeenagerPay = totalTeenagerPay + (num * 8000);
+				totalTeenagerPay = totalTeenagerPay + (num * (teenager_standard+1000));
 				break;
 
 			default:
 				break;
 			}
-			
 			$(".row.payment-youth").css("display","block"); 
 			$(".payment-ticket .payment-youth .data .price").text(addComma(totalTeenagerPay)+"원");
 			
@@ -659,14 +653,12 @@
 		//우대일때 계산
 		if(amountPreference > 0){
 			amountPreference = amountPreference - num;
-			
 			var check = true;
 			
 			if(amountPreference < 0){
 				num = 1;
 				chck = false;
 			}
-			
 			totalPreferencePay = totalPreferencePay + (num * 5000);
 			
 			$(".row.payment-special").css("display","block"); 

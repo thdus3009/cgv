@@ -284,7 +284,12 @@
 	var maxCol = `${maxCol}`;
 
 
-	
+	//시간대별 금액 변경 
+	var common_standard = `${timePriceVO.commonPrice}`;
+	var teenager_standard = `${timePriceVO.teenagerPrice}`;
+	console.log("일반 가격 : "+common_standard);
+	console.log("청소년 가격 : "+teenager_standard);
+	console.log("aa: "+`${timePriceVO}`);
 	
 	
 </script>

@@ -166,7 +166,10 @@ function discountInfo(){
 		case 'cgvGiftPrePayipt':
 			str = "CGV GIFT 포인트";
 			break;
-
+		case 'cgvCoupon':
+			str = "CGV 할인 쿠폰";
+			break;
+			
 		}
 		html = html + '('+ str +' <span class="price">' + discountPrice + '</span>원)';
 		console.log(html);

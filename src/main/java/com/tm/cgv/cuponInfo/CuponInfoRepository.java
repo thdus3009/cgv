@@ -9,4 +9,6 @@ public interface CuponInfoRepository {
 
 	public int cuponInfoDelete(CuponInfoVO cuponInfoVO) throws Exception;
 	
+	public CuponInfoVO cuponInfoSelect(CuponInfoVO cuponInfoVO) throws Exception;
+	
 }

@@ -3,6 +3,8 @@
 		var title ="";
 		var theater = "";
 		var date = "";
+		
+		var time="";
 	
 	
 		//class selected값 변경
@@ -77,17 +79,15 @@
 		
 
 		// 날짜 토,일 CSS 적용
-		$(".dayweek").each(function(){
+		$(".date-list ul li.day").each(function(){
 			if($(this).data("week") == '토'){
-				$(this).parent().parent().addClass("day-sat");
+				$(this).addClass("day-sat");
+				
+			}else if($(this).data("week") == '일'){
+				$(this).addClass("day-sun");
 			}
 		});
 
-		$(".dayweek").each(function(){
-			if($(this).data("week") == '일'){
-				$(this).parent().parent().addClass("day-sun");
-			}
-		});
 
 
 		//날짜 선택
@@ -399,7 +399,8 @@ function timeDisabledCheck(){
 			
 			console.log("시차: "+hh)
 			console.log("분차: "+mi)
-			if(mi < 20){
+			
+			if(mi < 20 && hh == 0){
 				$(this).addClass("disabled");
 			}
 			
@@ -431,6 +432,8 @@ $(".time-list").on("click",".theater ul li",function(){
 		//날짜 값 + 시간값
 		var select_time= $("#sDate").val() +" "+$(this).data("time");
 		$("#select_day").text(select_time);
+		console.log("선택한 시간 : "+$(this).data("time"))
+		time = $(this).data("time");
 
 		//seatCount
 		$("#seatCount").val($(this).parent().parent().data("seatcount"));
@@ -474,6 +477,8 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 					theaterName : $("#theaterName").val(),
 					filmType : $("#filmType").val(),
 					seatCount : $("#seatCount").val(),
+					
+					time : time,
 					_csrf : $("#_csrf").val()
 				},
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",

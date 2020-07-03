@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.cuponInfo.CuponInfoService;
+import com.tm.cgv.cuponInfo.CuponInfoVO;
 import com.tm.cgv.discountInfo.DiscountInfoService;
 import com.tm.cgv.discountInfo.DiscountInfoVO;
 import com.tm.cgv.memberCupon.MemberCuponService;
@@ -27,6 +29,8 @@ import com.tm.cgv.seatBooking.SeatBookingService;
 import com.tm.cgv.seatBooking.SeatBookingVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
+import com.tm.cgv.timePrice.TimePriceService;
+import com.tm.cgv.timePrice.TimePriceVO;
 import com.tm.cgv.util.TimeADD;
 
 @Controller
@@ -55,7 +59,11 @@ public class ResevationController {
 	private PaymentService paymentService;
 	@Autowired
 	private MemberCuponService memberCuponService;
-
+	@Autowired
+	private CuponInfoService cuponInfoService;
+	@Autowired
+	private TimePriceService timePriceService;
+	
 	
 	
 	//예매 취소
@@ -82,21 +90,30 @@ public class ResevationController {
 		//포인트 DB업데이트 - (할인 정보 조회 -> 조회결과로 각 point 값 들 갱신)
 		//1.할인정보 조회
 		List<DiscountInfoVO> discountList = discountInfoService.discountInfoSelect(reservationVO.getNum());
+		
 		for (DiscountInfoVO vo : discountList) {
-			//2.point 정보 갱신
-			PointVO pointVO = new PointVO();
-			pointVO.setKind("sum");
-			pointVO.setType(vo.getType());
-			pointVO.setPrice(vo.getDiscountPrice());
-			pointVO.setMemberNum(reservationVO.getUid());
+			if(vo.getType().equals("cgvCoupon")) { //2.멤버 할인쿠폰 갱신
+				
+				
+				
+				
+			}else { //2.point 정보 갱신
+				PointVO pointVO = new PointVO();
+				pointVO.setKind("sum");
+				pointVO.setType(vo.getType());
+				pointVO.setPrice(vo.getDiscountPrice());
+				pointVO.setMemberNum(reservationVO.getUid());
+				
+				result = pointService.pointDiscountUpdate(pointVO);
+				System.out.println("포인트 : "+result);
+				
+			}
 			
-			result = pointService.pointDiscountUpdate(pointVO);
-			System.out.println("포인트 : "+result);
 		}
 		
 		//결제 DB삭제 -> 예매 삭제 -> 할인정보 삭제(cascade)
-//		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
-//		System.out.println("결제 : "+result);
+		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
+		System.out.println("결제 : "+result);
 		
 		//예매 DB삭제 - 할 필요 X
 		//result = reservationService.reservationDelete(reservationVO);
@@ -123,6 +140,18 @@ public class ResevationController {
 		//할인 적용 정보
 		List<DiscountInfoVO> discountInfoList = discountInfoService.discountInfoSelect(reservationVO.getNum());
 		
+		//쿠폰일때와 포인트 일때 구별
+		for (DiscountInfoVO vo : discountInfoList) {
+			if(vo.getType().equals("cgvCoupon")) {
+				//쿠폰 번호로 해당 쿠폰의 금액 조회
+				CuponInfoVO cuponInfoVO = new CuponInfoVO();
+				cuponInfoVO.setNum(vo.getDiscountPrice());
+				cuponInfoVO = cuponInfoService.cuponInfoSelect(cuponInfoVO);
+				
+				discountInfoList.get(0).setDiscountPrice(cuponInfoVO.getPrice());
+			}
+		}
+		
 		
 		mv.addObject("endTime", endTime);
 		mv.addObject("reservationVO", reservationVO);
@@ -148,6 +177,8 @@ public class ResevationController {
 		result = reservationVO.getNum();
 		
 		if(type != 0) {
+			//할인정보 추가
+			DiscountInfoVO discountInfoVO = new DiscountInfoVO();
 			
 			if(type == 1) {
 				//멤버쿠폰 deleteAt 업데이트
@@ -156,7 +187,8 @@ public class ResevationController {
 				memberCuponVO.setCuponInfoNum(couponNum);
 				
 				memberCuponService.memberCuponUpdate(memberCuponVO);
-				
+				//쿠폰일 때는 금액 대신 쿠폰의 번호를 넣어 줌
+				discountInfoVO.setDiscountPrice(couponNum);
 			}
 			
 			//할인 금액 디비에 적용 + 할인 정보 테이블 추가 - 포인트
@@ -171,46 +203,45 @@ public class ResevationController {
 					pointVO.setPrice(Integer.parseInt(arr[1]));
 						
 					pointService.pointDiscountUpdate(pointVO);
+					
+					//포인트일때는 할인된 금액을 넣어줌
+					discountInfoVO.setDiscountPrice(Integer.parseInt(arr[1]));
 				}
 				
-				//할인정보 추가
-				DiscountInfoVO discountInfoVO = new DiscountInfoVO();
 				discountInfoVO.setReservationNum(result);
 				discountInfoVO.setType(arr[0]);
-				discountInfoVO.setDiscountPrice(Integer.parseInt(arr[1]));
-				
 				discountInfoService.discountInfoInsert(discountInfoVO);
 			}
 		}
 		
 		
-//		
-//		//좌석 번호 등록 : SeatBooking
-//		if(result > 0) {
-//			
-//			String [] selectedSeat = selectedSeatNums.split(",");
-//			
-//			for (String str : selectedSeat) {
-//				SeatBookingVO seatBookingVO = new SeatBookingVO();
-//				seatBookingVO.setReservationNum(reservationVO.getNum());
-//				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
-//				seatBookingVO.setSeatNum(Integer.parseInt(str));
-//				
-//				seatCheck = seatBookingService.seatBookingInsert(seatBookingVO);
-//			}
-//			
-//			//상영관 잔여좌석 수 변경 - MovieTime
-//			if(seatCheck > 0) {
-//				
-//				MovieTimeVO movieTimeVO = new MovieTimeVO();
-//				movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
-//				int remainSeat = movieTimeVO.getRemainSeat() - (reservationVO.getCommon()+reservationVO.getTeenager()+reservationVO.getPreference());
-//				
-//				movieTimeVO.setRemainSeat(remainSeat);
-//				movieTimeVO.setNum(reservationVO.getMovieTimeNum());
-//				movieTimeService.remainSeatUpdate(movieTimeVO);
-//			}
-//		}
+		
+		//좌석 번호 등록 : SeatBooking
+		if(result > 0) {
+			
+			String [] selectedSeat = selectedSeatNums.split(",");
+			
+			for (String str : selectedSeat) {
+				SeatBookingVO seatBookingVO = new SeatBookingVO();
+				seatBookingVO.setReservationNum(reservationVO.getNum());
+				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
+				seatBookingVO.setSeatNum(Integer.parseInt(str));
+				
+				seatCheck = seatBookingService.seatBookingInsert(seatBookingVO);
+			}
+			
+			//상영관 잔여좌석 수 변경 - MovieTime
+			if(seatCheck > 0) {
+				
+				MovieTimeVO movieTimeVO = new MovieTimeVO();
+				movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
+				int remainSeat = movieTimeVO.getRemainSeat() - (reservationVO.getCommon()+reservationVO.getTeenager()+reservationVO.getPreference());
+				
+				movieTimeVO.setRemainSeat(remainSeat);
+				movieTimeVO.setNum(reservationVO.getMovieTimeNum());
+				movieTimeService.remainSeatUpdate(movieTimeVO);
+			}
+		}
 		
 		
 		return result;
@@ -221,10 +252,14 @@ public class ResevationController {
 	
 	
 	
-	
+	//좌석예매 페이지 출력
 	@PostMapping("/seatReservation")
-	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount) throws Exception{
+	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount,String time) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		//System.out.println("선택한 시간 - "+time);
+		//System.out.println("필름 타입 : "+reservationVO.getFilmType());
+		
 		
 		MovieInfoVO movieInfoVO = movieInfoService.movieSelectOne(reservationVO.getMovieNum());
 		MovieTimeVO movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
@@ -244,10 +279,20 @@ public class ResevationController {
 		
 		//좌석 리스트 - seat - seatBooking (Join)
 		List<SeatVO> seatList = seatService.seatSelectList(seatVO);
-
+		
+		
+		//시간대별 가격 조회 - String time
+		TimePriceVO timePriceVO = new TimePriceVO();
+		timePriceVO.setTime(time);
+		timePriceVO.setFilmType(reservationVO.getFilmType());
+		
+		timePriceVO = timePriceService.timePriceSelect(timePriceVO);
+		
+		
+		
+		//영화 종료시간 생성
 		int runningTime = Integer.parseInt(movieInfoVO.getRuntime()); 
 		String startTime = movieTimeVO.getScreenTime();
-		
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
 		
 		
@@ -262,6 +307,7 @@ public class ResevationController {
 		mv.addObject("movieTimeVO", movieTimeVO);
 		mv.addObject("seatList", seatList);
 		mv.addObject("reservationVO", reservationVO);
+		mv.addObject("timePriceVO", timePriceVO);
 		
 		mv.setViewName("movie/movieSeat");
 		return mv;

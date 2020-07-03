@@ -17,4 +17,7 @@ public class CuponInfoService {
 		return cuponInfoRepository.cuponInfoDelete(cuponInfoVO);
 	}
 
+	public CuponInfoVO cuponInfoSelect(CuponInfoVO cuponInfoVO) throws Exception{
+		return cuponInfoRepository.cuponInfoSelect(cuponInfoVO);
+	}
 }
