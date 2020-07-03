@@ -139,7 +139,7 @@
 												<li class="selected" data-index="0" data-local="서울">
 													<a>
 														<span class="name">서울</span>
-														<span class="count">(30)</span>
+														<span class="count">(0)</span>
 													</a>
 													
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
@@ -156,7 +156,7 @@
 												<li class="" data-index="0" data-local="경기">
 													<a>
 														<span class="name">경기</span>
-														<span class="count">(46)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -172,7 +172,7 @@
 												<li class="" data-index="0" data-local="인천">
 													<a>
 														<span class="name">인천</span>
-														<span class="count">(9)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -188,7 +188,7 @@
 												<li class="" data-index="0" data-local="강원">
 													<a>
 														<span class="name">강원</span>
-														<span class="count">(4)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -204,7 +204,7 @@
 												<li class="" data-index="0" data-local="대전/충청">
 													<a>
 														<span class="name">대전/충청</span>
-														<span class="count">(19)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -220,7 +220,7 @@
 												<li class="" data-index="0" data-local="대구">
 													<a>
 														<span class="name">대구</span>
-														<span class="count">(9)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -236,7 +236,7 @@
 												<li class="" data-index="0" data-local="부산/울산">
 													<a>
 														<span class="name">부산/울산</span>
-														<span class="count">(14)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -252,7 +252,7 @@
 												<li class="" data-index="0" data-local="경상">
 													<a>
 														<span class="name">경상</span>
-														<span class="count">(15)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -268,7 +268,7 @@
 												<li class="" data-index="0" data-local="광주/전라/제주">
 													<a>
 														<span class="name">광주/전라/제주</span>
-														<span class="count">(22)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -599,7 +599,6 @@
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
 <script type="text/javascript">
     var list = [];
-    
     <c:forEach items="${cinemaList}" var="vo">
        var cinemaVO = {
     	     num : `${vo.num}`,
@@ -611,18 +610,37 @@
        list.push(cinemaVO);   
     </c:forEach>
 
-    
 	for(i=0;i<list.length;i++){
-		console.log(list[i].name+" "+list[i].local);
+		//console.log(list[i].name+" "+list[i].local);
 		$(".theater-area-list > ul > li").each(function(){
-
+			
 			if(list[i].local == $(this).data("local")){
 				console.log(list[i].name+" "+list[i].local);
-				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'" data-num="'+ list[i].num+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
+				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'" data-num="'+ list[i].num+'">'
+						+ '<a href="#" onclick="return false;">'
+						+ list[i].name
+						+ '<span class="sreader"></span></a></li>');
+
+
+
+				//지역마다 극장 개수  출력
+				var pre = $(this).data("index");
+				pre += 1;
+				$(this).data("index",pre);
+				
+				var next = $(this).data("index");
+				$(this).find(".count").text("("+$(this).data("index")+")");
 			}
 			
 		});
 	}
+
+
+	console.log($(".theater-area-list > ul > li").length);
+	
+	
+		
+
 
 	var data;
 	var memberID = `${memberVO.username}`;

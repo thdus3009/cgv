@@ -195,11 +195,34 @@ function ajaxLoad(){
 			//극장
 			$(".theater-list li").addClass("dimmed");
 			//극장, 날짜
+			
+			
 			for(i=0;i<result.length;i++){
 				//극장
-				$(".theater-list li").each(function(){
+				
+				$(".theater-list ul.content li").each(function(){
+
+					$(this).parent().parent().parent().data("index",0);
+					
 					if($(this).data("theater") == result[i].cinemaVOs[0].name){
-						$(this).removeClass("dimmed");
+						
+						
+						if($(this).hasClass("dimmed")){
+							console.log($(this).data("theater"))
+							console.log(result[i].cinemaVOs[0].name)							
+							
+							$(this).removeClass("dimmed");
+							console.log($(this).parent().parent().parent().data("index"));
+							
+							var prev = $(this).parent().parent().parent().data("index");
+							prev += 1;
+							$(this).parent().parent().parent().data("index",prev);
+							var next = $(this).parent().parent().parent().data("index");
+							$(this).parent().parent().parent().find(".count").text("("+next+")");
+							
+						}
+						
+						
 					}
 					
 				});
@@ -739,8 +762,7 @@ function removeComma(str)
 
 
 
-	
-	
+
 	
 	
 	
