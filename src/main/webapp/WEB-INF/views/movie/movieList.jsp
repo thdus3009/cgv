@@ -66,7 +66,6 @@
 					</button>
 				</div>
 				
-				<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 				<input type="hidden" value="${pager.startRow}" id="startRow">
 				
 				
@@ -92,7 +91,7 @@
 								<div class="score">
 									<strong class="percent">예매율<span>${list.rate}%</span></strong>
 									<div class="egg-gage small">
-										<span class="egg great"></span> <span class="percent">75%</span>
+										<span class="egg great"></span> <span class="percent">${list.errRate}%</span>
 									</div>
 								</div>
 								<span class="text-info"> 

@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium';
+  src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
+  src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
 a{
 	text-decoration: none;
 	color: inherit;
@@ -11,7 +21,10 @@ p{
 	width: 500px;
 }
 
-
+h3{
+	font-weight: 500;
+  font-family: 'CJ+ONLYONE+Medium';
+}
 
 ol,ul{
 	list-style: none;

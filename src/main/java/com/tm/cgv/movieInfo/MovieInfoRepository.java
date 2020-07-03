@@ -1,9 +1,12 @@
 package com.tm.cgv.movieInfo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tm.cgv.reservation.ReservationVO;
+import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.Pager;
 
 @Mapper
@@ -26,6 +29,20 @@ public interface MovieInfoRepository {
 	
 	
 	public MovieInfoVO movieSelectOne(int num) throws Exception;
+	
+	public Map<String, Object> errRate2(ReservationVO reservationVO) throws Exception;
 
-
-}
+	public long errUpdate(MovieInfoVO movieInfoVO) throws Exception;
+	//insert, update , delete는 리턴타입이 무조건 넘버타입이어야함. int, long 등등
+	//그래서 xml 파일에 따로 리턴 타입을 적어주지 않는 것
+	
+	public Map<String, Object> rate(ReservationVO reservationVO) throws Exception;
+	
+	public long rateUpdate(MovieInfoVO movieInfoVO) throws Exception;
+	
+	public Map<String, Object> gender2(ReservationVO reservationVO) throws Exception;
+	public Map<String, Object> gTotal(ReservationVO reservationVO) throws Exception;
+	public Map<String, Object> age(ReservationVO reservationVO) throws Exception;
+	public List<Integer> charmPoint(ReservationVO reservationVO) throws Exception;
+	public List<Integer> emotionPoint(ReservationVO reservationVO) throws Exception;
+ }

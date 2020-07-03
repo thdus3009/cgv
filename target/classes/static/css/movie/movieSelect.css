@@ -169,7 +169,8 @@ strong{
 }
 
 .score .egg-gage {
-    margin-top: -8px;
+
+    margin-top: 0px;
     margin-left: 2px;
     padding-left: 6px;
     background: url(../images/movie/movieList/bg_writeinfo.gif) 0 12px no-repeat;

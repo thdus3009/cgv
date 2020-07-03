@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 본 영화</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/member/memberMyMovieWatch.css" type="text/css">
 </head>
 <body>

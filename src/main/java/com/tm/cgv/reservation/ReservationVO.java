@@ -1,5 +1,7 @@
 package com.tm.cgv.reservation;
 
+import com.tm.cgv.review.ReviewVO;
+
 import lombok.Data;
 
 @Data
@@ -22,6 +24,12 @@ public class ReservationVO {
 	
 	private String createAt;
 	private String deleteAt;
+	
+	
+	private ReviewVO reviewVOs;//리뷰
+	
+	//private int total;
+	//private int good;
 	
 //	movieInfo join해서 불러올값
 //	private String title;

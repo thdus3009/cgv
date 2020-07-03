@@ -19,12 +19,15 @@ $("#btn-more").click(function() {
 		
 	});
 
-
+	//고객용 리스트 정렬
 	$("#btn-sort").click(function(){
 		var kind = $("#select").val();
 		location.href = "./movieList?kind="+kind;
 	});
 	
+	
+	
+	// 고객용 영화 리스트 페이지 검색 기능
 	$("#btn_search").click(function() {
 		var search=$("#search").val();
 		var kind =$("#select").val();
@@ -46,7 +49,8 @@ $("#btn-more").click(function() {
 		console.log(temp);
 		$("#param").attr("value",temp);
 		
-
+		
+	
 	
 	$(document).ready(function() {
 		//url로 들어오는 파라미터값 읽어들이기
