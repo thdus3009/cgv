@@ -25,11 +25,9 @@ public class ReservationVO {
 	private String createAt;
 	private String deleteAt;
 	
-	
-	private ReviewVO reviewVOs;//리뷰
-	
-	//private int total;
-	//private int good;
+
+	private String selectedSeatNums;
+
 	
 //	movieInfo join해서 불러올값
 //	private String title;

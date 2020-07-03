@@ -9,6 +9,7 @@
 
 <link href="../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../css/bbs/layout.css" rel="stylesheet" type="text/css">
+<link href="../css/layout.css" rel="stylesheet" type="text/css">
 
 <link href="../css/bbs/bbsSelect.css" rel="stylesheet" type="text/css">
 

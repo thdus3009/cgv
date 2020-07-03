@@ -9,10 +9,10 @@
 				<c:if test="${not empty sessionScope.memberVO}">
 					<ul class="gnb">
 						<li>
-							<a class="logout" href="${pageContext.request.contextPath}/member/memberLogout" style="width: 43px; background-position: -521px 9px;">
+							<a class="logout" href="${pageContext.request.contextPath}/member/logout" style="width: 43px; background-position: -521px 9px;">
 							<span>로그아웃</span></a>
 						</li>
-						<li><a class="mycgv" href="${pageContext.request.contextPath}/member/memberMypage"><span>MyCGV</span></a></li>
+						<li><a class="mycgv" href="${pageContext.request.contextPath}/member/myPage"><span>MyCGV</span></a></li>
 						<li><a class="vip_lounge" href="#"><span>VIPLOUNGE</span></a></li>
 						<li><a class="club_service" href="#"><span>Club서비스</span></a></li>
 						<li><a class="customer" href="${pageContext.request.contextPath}/bbs/bbsList"><span>고객센터</span></a></li>
@@ -21,7 +21,7 @@
 				</c:if>
 				<c:if test="${empty sessionScope.memberVO}">
 					<ul class="gnb">
-						<li><a class="login" href="${pageContext.request.contextPath}/member/memberLogin"><span>로그인</span></a></li>
+						<li><a class="login" href="${pageContext.request.contextPath}/member/login"><span>로그인</span></a></li>
 						<li><a class="join" href="${pageContext.request.contextPath}/member/memberTerms"><span>회원가입</span></a></li>
 						<li><a class="mycgv" href="${pageContext.request.contextPath}/member/memberMypage"><span>MyCGV</span></a></li>
 						<li><a class="vip_lounge" href="#"><span>VIPLOUNGE</span></a></li>
