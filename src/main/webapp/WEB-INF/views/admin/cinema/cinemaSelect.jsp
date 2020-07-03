@@ -131,6 +131,10 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="">
+                    	<span id="de" class="btn btn-danger">Delete</span>
+                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+                    </div>
 				</div>
 			</main>
                 <c:import url="../template/footer.jsp"></c:import>
@@ -147,20 +151,13 @@
 				}
 			});
 
-			
-			//update submit
-			$("#up").click(function(){		
-				location.href="./cinemaUpdate?num="+${cine.num};
-			});
 
-
-			//time block 스르륵
 
         </script>
         
          <script src="/js/theater/timetable.js"></script>
 
-    <script>
+   		 <script>
 /*     	$("#table0").click(function(){
     		  var timetable = new Timetable();
 
@@ -186,32 +183,10 @@
     	      $(".room-timeline").css("width","100%");
 	
         });
+*/
 
 
-    	$("#table1").click(function(){
-  		  var timetable = new Timetable();
-
-  	      timetable.setScope(9,3)
-
-  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-  	      }});
-  	      
-
-  	      var renderer = new Timetable.Renderer(timetable);
-  	      renderer.draw('#timetable1');
-  	      $(".room-timeline").css("width","100%");
-	
-      }); */
-
-
-		$(".timetable").each(function(){
+		$("#timetable").each(function(){
 
 			var tid = $(this).attr("id");
 			var name = $(this).attr("name");

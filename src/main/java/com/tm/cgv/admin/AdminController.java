@@ -193,7 +193,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@PostMapping("theaterInsert")
+	@PostMapping("cinema/theaterInsert")
 	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		
@@ -209,7 +209,7 @@ public class AdminController {
 		}else {
 			System.out.println("등록 실패");
 		}
-		
+		System.out.println("123");
 		return mv;
 	}
 	
