@@ -7,7 +7,6 @@ a{text-decoration:none}
 .timetable .time-entry.vip-only:hover{background-color:#ae67f0}
 .filmInfo	{
 	display:inline-block;
-	width:100%;
 	height:100%;
 	margin-left:45px;
 }
@@ -36,4 +35,6 @@ a{text-decoration:none}
 .filmInfo .film_4d	{
 	background:#f5d090;
 }
+
+
 
