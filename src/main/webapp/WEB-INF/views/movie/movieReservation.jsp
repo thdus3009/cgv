@@ -488,6 +488,7 @@
 			
 			<input type="hidden" id="seatCount" name="seatCount" value="">
 			<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" id="cinemaNum" value="" />
 			
 			<input type="hidden" id="sDate" value="">
 		</form>

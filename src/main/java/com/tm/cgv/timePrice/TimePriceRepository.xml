@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.timePrice.TimePriceRepository">
 	
 	<select id="timePriceSelect" parameterType="TimePriceVO" resultType="TimePriceVO">
-		select * from timePrice where filmType=#{filmType} and time(#{time}) between sTime and eTime
+		select * from timePrice where cinemaNum=#{cinemaNum} and filmType=#{filmType} and time(#{time}) between sTime and eTime
 	</select>
 	
 	<select id="searchLimit" parameterType="TimePriceVO" resultType="TimePriceVO">

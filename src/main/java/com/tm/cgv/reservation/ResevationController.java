@@ -258,7 +258,7 @@ public class ResevationController {
 	
 	//좌석예매 페이지 출력
 	@PostMapping("/seatReservation")
-	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount,String time,String timeType) throws Exception{
+	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount,String time,int cinemaNum,String timeType) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		//System.out.println("선택한 시간 - "+time);
 		//System.out.println("필름 타입 : "+reservationVO.getFilmType());
@@ -286,6 +286,7 @@ public class ResevationController {
 		//시간대별 가격 조회 - String time
 		TimePriceVO timePriceVO = new TimePriceVO();
 		timePriceVO.setTime(time);
+		timePriceVO.setCinemaNum(cinemaNum);
 		timePriceVO.setFilmType(reservationVO.getFilmType());
 		
 		timePriceVO = timePriceService.timePriceSelect(timePriceVO);
@@ -297,6 +298,7 @@ public class ResevationController {
 		String startTime = movieTimeVO.getScreenTime();
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
 		
+		//조조.심야 or 일반인지 구분
 		mv.addObject("timeType", timeType);
 		
 		mv.addObject("rowList", rowList);

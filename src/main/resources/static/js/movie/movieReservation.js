@@ -50,8 +50,6 @@
 		
 		
 		
-		
-
 		//극장 선택
 		$(".theater-list").on("click",".area_theater_list > ul > li",function(){
 
@@ -75,6 +73,7 @@
 				ajaxLoad();
 				
 				var selected_cinema = $(this).data("num");
+				$("#cinemaNum").val(selected_cinema);
 				
 				//해당 극장의 조조,심야 시간 조회 - ajax
 				search_time_limit(selected_cinema);
@@ -583,6 +582,7 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 					seatCount : $("#seatCount").val(),
 					
 					timeType : timeType,
+					cinemaNum : $("#cinemaNum").val(),
 					time : time,
 					_csrf : $("#_csrf").val()
 				},
