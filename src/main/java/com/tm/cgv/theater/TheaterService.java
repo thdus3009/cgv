@@ -48,7 +48,7 @@ public class TheaterService {
 	//Insert
 	@Transactional
 	public int theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{
-
+		//theater insert 하기 전에 받아온 filmType을 비트플래그로 한 자리 수로 만들어서 theaterVO의 filmType에 넣어주기 >> select에서^^
 		BitFilmType bitFilmType = new BitFilmType();
 
 		System.out.println("======필름 타입=======");
@@ -215,7 +215,9 @@ public class TheaterService {
 		
 			//년 월 일 2 3 4 7 8 9
 			String [] d = date.split("-");
-
+			System.out.println(d[0]);
+			System.out.println(d[1]);
+			System.out.println(d[2]);
 			info[2] = d[0];
 			info[3] = d[1];
 			info[4] = d[2];
@@ -232,17 +234,32 @@ public class TheaterService {
 			info[5] = s[0];
 			info[6] = s[1];
 			
+			System.out.println(s[0]);
+			System.out.println(s[1]);
+			System.out.println("=================");
+			System.out.println(d[0]);
+			System.out.println(d[1]);
+			System.out.println(d[2]);
 			
 			
 			//runtime으로 끝나는 시간 구하기
 			int run = Integer.parseInt(list.get(0).getMovieInfoVOs().getRuntime());
 			int h = run/60;
 			int m = run%60;
-
+			System.out.println("=============");
+			System.out.println("시작 시간 : " + startH);
+			System.out.println("시작 분 : " + startM);
+			
+			System.out.println("=============");
+			System.out.println("시간 : " + h);
+			System.out.println("분 : " + m);
 			
 			String endH = String.valueOf(startH + h);
 			String endM = String.valueOf(startM + m);
-
+			System.out.println("=============");
+			System.out.println("끝나는 시간 : " + endH);
+			System.out.println("끝나는 분 : " + endM);
+			
 			info[10] = endH;
 			info[11] = endM;
 	

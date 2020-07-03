@@ -5,22 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<c:import url="../template/head.jsp"></c:import>
-
-
-<link rel="stylesheet" href="/css/template/bootstrap-datepicker.css">
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-<script src="/js/template/bootstrap-datepicker.js"></script>
-<script src="/js/template/bootstrap-datepicker.ko.min.js"></script>
-
-<!-- timepicker로 wickedpicker api 사용, 비슷한걸로 timepicki api 가 있음-->
-<link rel="stylesheet" href="http://ericjgagnon.github.io/wickedpicker/wickedpicker/wickedpicker.min.css">
-<script type="text/javascript" src="http://ericjgagnon.github.io/wickedpicker/javascript/smooth_scroll.js"></script>
-<script type="text/javascript" src="http://ericjgagnon.github.io/wickedpicker/wickedpicker/wickedpicker.min.js"></script>
-
-
-
+<c:import url="../template/head.jsp"></c:import> 
+<c:import url="../template/datepicker.jsp"></c:import>
+<c:import url="../template/timepicker.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 <link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
 <link rel="stylesheet" href="/css/admin/cinema/demo.css">
@@ -51,7 +38,6 @@
 								<span>교톻안내: ${cine.trafficInfo}</span><br>
 								<span>주차안내: ${cine.parkingInfo}</span><br> 
 								<span>영화관 소개: ${cine.intro}</span><br>
-								<input id="" class="form-control timepicker" type="text" name="screenTime" />
 							</p>
 						</div>
 					</div>
@@ -119,7 +105,7 @@
 										  		<span class="film_title">3D</span><span class="film_color film_3d"></span>
 										  		<span class="film_title">4D</span><span class="film_color film_4d"></span>
 										  	</div>
-										  	
+										  	<input id="" class="form-control timepicker" type="text" name="screenTime" />
 										  <div class="timetable" id="timetable${i.index}" name="${i.index}">
 										  	
 										  </div>
