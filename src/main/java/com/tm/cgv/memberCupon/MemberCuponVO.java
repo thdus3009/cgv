@@ -13,4 +13,6 @@ public class MemberCuponVO {
 	
 	private CuponInfoVO cuponInfoVO;
 	
+	private String kind;
+	
 }

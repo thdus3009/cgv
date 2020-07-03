@@ -8,9 +8,11 @@ public class TimePriceVO {
 	private int num;
 	private String sTime; 
 	private String eTime;
-	private int filmType;
+	private int filmType; //0:2D , 1:3D, 2:4D
 	private int commonPrice;
 	private int teenagerPrice;
+	private int type; //1:조조 , 2:심야 
+	private int cinemaNum; 
 	
 	private String time;
 

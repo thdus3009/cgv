@@ -601,20 +601,23 @@
     
     <c:forEach items="${cinemaList}" var="vo">
        var cinemaVO = {
+    	     num : `${vo.num}`,
              name: `${vo.name}`,
              local:	`${vo.local}`
+               
        };
        
        list.push(cinemaVO);   
     </c:forEach>
 
+    
 	for(i=0;i<list.length;i++){
 		console.log(list[i].name+" "+list[i].local);
 		$(".theater-area-list > ul > li").each(function(){
 
 			if(list[i].local == $(this).data("local")){
 				console.log(list[i].name+" "+list[i].local);
-				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
+				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'" data-num="'+ list[i].num+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
 			}
 			
 		});

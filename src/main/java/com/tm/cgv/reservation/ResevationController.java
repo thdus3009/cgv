@@ -94,8 +94,12 @@ public class ResevationController {
 		for (DiscountInfoVO vo : discountList) {
 			if(vo.getType().equals("cgvCoupon")) { //2.멤버 할인쿠폰 갱신
 				
+				MemberCuponVO memberCuponVO = new MemberCuponVO();
+				memberCuponVO.setKind("reserveDel");
+				memberCuponVO.setUid(reservationVO.getUid());
+				memberCuponVO.setCuponInfoNum(vo.getDiscountPrice());
 				
-				
+				memberCuponService.memberCuponUpdate(memberCuponVO);
 				
 			}else { //2.point 정보 갱신
 				PointVO pointVO = new PointVO();
@@ -254,12 +258,10 @@ public class ResevationController {
 	
 	//좌석예매 페이지 출력
 	@PostMapping("/seatReservation")
-	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount,String time) throws Exception{
+	public ModelAndView seatReservation(ReservationVO reservationVO,int seatCount,String time,String timeType) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
 		//System.out.println("선택한 시간 - "+time);
 		//System.out.println("필름 타입 : "+reservationVO.getFilmType());
-		
 		
 		MovieInfoVO movieInfoVO = movieInfoService.movieSelectOne(reservationVO.getMovieNum());
 		MovieTimeVO movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
@@ -295,6 +297,7 @@ public class ResevationController {
 		String startTime = movieTimeVO.getScreenTime();
 		String endTime = timeAdd.timeAdd(startTime, runningTime);
 		
+		mv.addObject("timeType", timeType);
 		
 		mv.addObject("rowList", rowList);
 		mv.addObject("maxCol", maxCol);

@@ -458,7 +458,6 @@
 						$(this).addClass("selected");
 //						console.log("열 : "+$(this).find(".no").text());
 //						console.log("행 : "+ $(this).parent().parent().prev().text());
-						
 //						console.log($(this).data("grade"));
 						console.log("normal()");
 						console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
@@ -473,10 +472,11 @@
 				}
 				
 			}
-			
+			//선택한 좌석 화면에 출력
 			textInput();
 			
 		}
+		//가격 계산
 		priceCount();
 		
 		//전좌석 선택 완료
@@ -499,17 +499,10 @@
 	
 	//선택한 좌석값이 지정한 총 좌석수보다 큰지를 판단
 	function selectedCountCheck(num){
-		
-//		console.log("num : "+ num);
-//		console.log("selected : "+ selectedCount);
-//		console.log("totalCount : "+ totalCount);
-
 		if(totalCount < selectedCount){
-//			console.log("false리턴");
 			selectedCount = selectedCount - num;
 			return false;
 		}else{
-//			console.log("true리턴");
 			return true;
 		}
 	}
@@ -518,14 +511,11 @@
 	//preSelect가 몇개를 나타내는지(1 or 2)
 	function preSelectCountCheck(){
 		var a = 0;
-		
 		$(".seats .seat").each(function(){
 			if($(this).hasClass("preSelect")){
 				a = a+1;
 			}
 		})
-//		console.log("preSelectCount : "+ a);
-//		
 		return a;
 	}
 	
@@ -537,38 +527,27 @@
 		
 		$(".seats .seat").each(function(){
 			if($(this).hasClass("selected")){
-				
-				
+
 				selectedSeatList.push($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
 				selectedSeatNumList.push($(this).find(".sreader.seatNum").text());
 				selectedSeatGrade.push($(this).data("grade"));
 				//Economy Standard Prime
 				
 				console.log("seatNum : "+selectedSeatNumList);
-				
-				
-//				console.log($(this).data("grade"));
-//				console.log($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
 			}
 		});
-//		console.log(selectedSeatList);
-//		console.log(selectedSeatList.join(","));
-//		console.log(selectedSeatGrade.sort());
-//		console.log(selectedSeatGrade);
 		
 		var gradeText = gradeTextMake(selectedSeatGrade);
+		console.log("seatGrade : "+selectedSeatGrade);
 		
-//		console.log(gradeText);
 		$("#select_Seat").text(selectedSeatList.join(","));
 		$("#select_seat_grade").text(gradeText);
 	}
 	
+	//선택한 좌석들중 가장 하위의 좌석등급 gradeText에 셋팅
 	function gradeTextMake(gradeList){
 		var gradeText = "";
-//		var a = gradeList.shift();
-		
 		var a = gradeList[0];
-//		console.log(a);
 		
 		if(a == 1){
 			gradeText = "Economy석";
@@ -579,7 +558,6 @@
 		}else{
 			gradeText ="";
 		}
-		
 		return gradeText;
 	}
 	
@@ -589,7 +567,6 @@
 	
 	//eachGradePayment(grade구분/몇명인지 구분)
 	function eachGradePayment(gradeType,num){
-		
 		common_standard *= 1;
 		teenager_standard *= 1;
 		
@@ -610,6 +587,9 @@
 				break;
 			case 3: //Prime - 10000
 				totalCommonPay = totalCommonPay + (num * (common_standard+1000));
+				break;
+			case 0: //normal
+				totalCommonPay = totalCommonPay + (num * common_standard);
 				break;
 			}
 			
@@ -638,8 +618,8 @@
 			case 3: //Prime - 8000
 				totalTeenagerPay = totalTeenagerPay + (num * (teenager_standard+1000));
 				break;
-
-			default:
+			case 0: //normal
+				totalTeenagerPay = totalTeenagerPay + (num * teenager_standard);
 				break;
 			}
 			$(".row.payment-youth").css("display","block"); 
@@ -685,6 +665,8 @@
 				
 			}else if(selectedSeatGrade[i] == 3){ //Prime
 				eachGradePayment(3,1)
+			}else if(selectedSeatGrade[i] == 0){ //normal
+				eachGradePayment(0,1)
 			}
 			
 			console.log("일반 : "+ amountCommon);

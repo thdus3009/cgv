@@ -37,8 +37,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="memberCuponUpdate" parameterType="MemberCuponVO">
-		update memberCupon set deleteAt = sysdate() where uid=#{uid} and cuponInfoNum=#{cuponInfoNum}
+		update memberCupon set
+		<choose>
+			<when test="kind == 'reserveDel'">
+				deleteAt = null
+			</when>
+			<otherwise>
+				deleteAt = sysdate()
+			</otherwise>
+		</choose> 
+		 where uid=#{uid} and cuponInfoNum=#{cuponInfoNum}
 	</update>
+	
+	
 	
 	
 </mapper>

@@ -73,9 +73,38 @@
 
 				//ajax
 				ajaxLoad();
+				
+				var selected_cinema = $(this).data("num");
+				
+				//해당 극장의 조조,심야 시간 조회 - ajax
+				search_time_limit(selected_cinema);
 
 			}
 		});
+		var sTimeList;
+		var eTimeList;
+		
+		//해당극장의 조조,심야시간 구해오기
+		function search_time_limit(selected_cinema){
+			
+			$.ajax({
+				url : '../timePrice/searchLimit',
+				type : 'get',
+				data : {
+					cinemaNum : selected_cinema
+				},
+				success : function(result){
+					sTimeList = result[0].etime.split(":");
+					eTimeList = result[1].stime.split(":");
+					
+					console.log(sTimeList)
+					console.log(eTimeList)
+					
+				}
+			});
+		}
+		
+		
 		
 
 		// 날짜 토,일 CSS 적용
@@ -246,6 +275,8 @@ function selectedCheck(){
 				date:date
 			},
 			success:function(result){
+				
+				//상영시간 html 생성
 				timeMake(result);
 			}
 		});
@@ -312,9 +343,13 @@ function timeMake(result){
 		}else{
 			$(".time-list .content").append(query);
 		}
-
 		list.push(checkName+checkFloor);
+		
+		
 	}
+	
+	
+	
 
 	//.time-list ul li 잔여좌석이 0인 경우 class = "disabled"추가
 	$(".time-list ul li .count").each(function(){
@@ -322,8 +357,67 @@ function timeMake(result){
 			$(this).parent().parent().addClass("disabled");
 		}
 	});
+	
+	
+	
 
+	//result[i].movieTimeVOs[0].screenTime 가  조조/심야 시간일때 CSS 부여 morning /night
+	var morningEndTime = ""; //조조 마무리 시간(10:00 or 11:00)
+	var nightStartTime = ""; //심야 시작 시간(23:01 or 00:01) => 00:01분은 비교를 위해 24:01분으로 변경해야됨(반대일수도..)
+	
+	//위 처럼 만드는 시간이 심야 또는 조조이면 addClass로 클래스 추가 해주면 끝 
+	$(".time-list ul li").each(function(){
+		var timeList =  $(this).data("time").split(":");
+		
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>t : "+timeList)
+		
+		if(eTimeList[0] == '00'){
+			eTimeList[0] = '24';
+		}
+		
+		var t1 = new Date(0,0,0,sTimeList[0],00); //조조
+		var t2 = new Date(0,0,0,eTimeList[0],01); //심야
+		
+		var t3 = new Date(0,0,0,timeList[0],timeList[1]); //비교시간
+		
+		
+		//비교시간이 10 > x || 23 < x
+		if(timeList[0] > 23){
+			//심야
+			var gap = t3.getTime() - t2.getTime();
+			var hh_gap = Math.floor(gap/1000/60/60);
+			
+			console.log("심야기준 : "+t2)
+			console.log("등록시간 : "+t3)
+			console.log("gap : "+hh_gap);
+			
+			if(hh_gap <= 0){
+				$(this).addClass("night");
+			}
+			
+		}else if(timeList[0] < 11){
+			//조조
+			
+			var gap = t1.getTime() - t3.getTime();
+			var hh_gap = Math.floor(gap/1000/60/60);
+			if(hh_gap > 0){
+				$(this).addClass("morning");
+			}
+		}
+		
+		
 
+		
+		
+		
+	});
+	
+	
+	
+	
+	
+	
+	
 	// 초기화
 	//date - time
 	$("#select_day").text($("#sDate").val());
@@ -378,7 +472,7 @@ String.prototype.zf = function (len) { return "0".string(len - this.length) + th
 Number.prototype.zf = function (len) { return this.toString().zf(len); };
 
 
-
+//현재시간을 지났거나 20분전에는 예매 불가 
 function timeDisabledCheck(){
 	var nowDate = new Date();
 
@@ -400,7 +494,7 @@ function timeDisabledCheck(){
 			console.log("시차: "+hh)
 			console.log("분차: "+mi)
 			
-			if(mi < 20 && hh == 0){
+			if(mi < 20 && hh <= 0){
 				$(this).addClass("disabled");
 			}
 			
@@ -409,7 +503,7 @@ function timeDisabledCheck(){
 }
 
 
-		
+
 		
 		
 		
@@ -462,6 +556,16 @@ $(".time-list").on("click",".theater ul li",function(){
 $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 	if($(this).hasClass("on") == true){
 
+		var timeType="normal";
+		$(".time-list ul li").each(function(){
+			if($(this).hasClass("selected")){
+				if($(this).hasClass("morning") || $(this).hasClass("night")){
+					timeType = "mn";
+				}
+			}
+		});
+		
+		
 		if(memberID == ''){
 			console.log("로그인 필요");
 			$(".ft_layer_popup.popup_login").css("display","block");
@@ -478,6 +582,7 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 					filmType : $("#filmType").val(),
 					seatCount : $("#seatCount").val(),
 					
+					timeType : timeType,
 					time : time,
 					_csrf : $("#_csrf").val()
 				},

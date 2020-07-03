@@ -1293,6 +1293,21 @@ button {
 }
 
 
+/* 조조심야 */
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.morning a span.count {
+    padding-left: 19px;
+    width: 33px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+    background-position: 2px 6px;
+}
+
+#ticket .step1 .section-time .col-body .time-list .theater ul li.night a span.count{
+	padding-left: 16px;
+    width: 33px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+    background-position: 2px -15px;
+}
 
 
 

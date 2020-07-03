@@ -10,5 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from timePrice where filmType=#{filmType} and time(#{time}) between sTime and eTime
 	</select>
 	
+	<select id="searchLimit" parameterType="TimePriceVO" resultType="TimePriceVO">
+		select distinct sTime,eTime,type from timePrice where cinemaNum = #{cinemaNum} and type =1 or type =2 order by type
+	</select>
+	
 	
 </mapper>
