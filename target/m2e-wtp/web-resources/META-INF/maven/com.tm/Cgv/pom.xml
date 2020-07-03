@@ -20,6 +20,7 @@
 	</properties>
 
 	<dependencies>
+ 
 		<!-- spring security taglib -->
 		<dependency>
 		     <groupId>org.springframework.security</groupId>
@@ -27,7 +28,7 @@
 			 <type>jar</type>
 			 <scope>compile</scope>
 		</dependency>
-		
+ 
 		<!-- for json parsing -->
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
