@@ -1,6 +1,4 @@
-/**
- * 
- */
+/*
 
 var all = document.getElementById("all");
 var ch1 = document.getElementsByClassName("ch1");
@@ -106,4 +104,27 @@ btn.addEventListener("click", function() {
 		alert("체크하지 않은 필수 항목이 있습니다.");
 	}
 
+});*/
+
+/*var*/
+var all = document.getElementById("all");
+var h_all = document.getElementById("h_all");
+var ch1 = document.getElementsByClassName("ch1");
+
+/*	전체 체크/해제	*/
+$("#h_all").click(function(){
+	ch1[i].checked = true;
+	for (i = 0; i < ch1.length; i++) {
+		ch1[i].checked = true;
+	}
 });
+
+/*	각자 체크 *3 전체체크	*/
+/*$(".content_title").click(function() {
+	console.log($(this).prev());
+	$(this).prev().prop("checked", true);
+});*/
+
+/*	전체체크 - 각자체크*1 해제	*/
+
+
