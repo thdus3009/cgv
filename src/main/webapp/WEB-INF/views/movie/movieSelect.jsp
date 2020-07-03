@@ -12,6 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieSelect2.css" rel="stylesheet" type="text/css">
+
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -24,7 +26,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
-<link href="${pageContext.request.contextPath}/css/test.css" rel="stylesheet" type="text/css">
+
 <!-- chart CDN -->
 
 <title>Insert title here</title>
@@ -298,55 +300,67 @@
 							<p class="title">관람일 포함 7일 이내 관람평을 남기시면 <strong>CJ ONE 20P</strong>가 적립됩니다.</p>
 							<p class="desc"><span><em>15,557</em>명의 실관람객이 평가해주셨습니다.</span></p>
 							<div class="wrap_btn">
-								<a class="link-gradewrite" href=""><span>평점작성</span></a>
-								<a class="link-reviewwrite" href="./review/reviewLook"><span>내 평점</span></a>
+								<a class="link-gradewrite" href="javascript:void(0);" onclick="review_Modal();"><span>평점작성</span></a>
+								<a class="link-reviewwrite" href="../review/reviewLook"><span>내 평점</span></a>
 							</div>
 						</div>
 						
 						<ul class="sort" id="sortTab">
 							<li class="sortTab on" data-order-type="0" id="test">
-								<a href="" title="현재선택">
+								<a href="javascript:void(0);" title="현재선택">
 									최신순
 									<span class="arrow-down"></span>
 								</a>	
 							</li>
 							<li class="sortTab" data-order-type="3" >
-								<a href="">
+								<a href="javascript:void(0);">
 									추천순
 									<span class="arrow-down"></span>
 								</a>
 							</li>
 						</ul>
 						
+
+						<!-- 시작 -->
 						<div class="wrap-persongrade">
 							<ul id="movie_point_list_container" class="point_col2">
 								<li class="liCommentFirst" data-spoilercnt="0" data-reportcnt="0">
 									<a href="" class="screen_spoiler">&nbsp;</a>
+									
+									<!-- 리뷰 이미지 -->
 									<div class="box-image">
-										<span class="thumb-image">
+										<!-- <span class="thumb-image">
 											<img alt="사용자 프로필" src="">
 											<span class="profile-mask"></span>
-										</span>
+										</span> -->
 									</div>
-									<div class="box-contents">
-										<ul class="writerinfo">
-											<li class="writer-name">
-												<a href="">
-													<span class=" egg-icon good "></span>
-													dm**ud9235
-												</a>
-											</li>
+											
+									<!-- 리뷰 컨텐츠 -->									
+									<div class="writer-name">
+										<p>
+											<!-- <div class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px"></div> --> 
+											<div class="id">admin</div>
+										</p>
+									</div>
+									<div class="box-comment" style="padding-top: 20px;">
+										<p>좋아요 재밌어요!!</p>
+									</div>
+									
+ 									<div class="box-contents"> 									
+										<ul class="writerinfo">											
 											<li class="writer-etc">
-												<span class="day">2020-06-23</span>
+												<span class="day">
+													<span class="date"> 2020-06-23</span> &ensp;|&ensp; <img class="date" alt="" src="../../images/like.png">
+												</span>
+												<span class="like1">0</span>
 											</li>
 										</ul>
-									</div>
-									<div class="box-comment">
-										<p>재밌어요 강추</p>
-									</div>
+									</div> 
+									
 								</li>
 							</ul>
 						</div>
+						<!-- 끝 -->
 						
 					</div>
 						
@@ -379,7 +393,33 @@
 	<c:import url="../template/sidebar.jsp"></c:import>
 </div>
 
+
+<!-- 스크립트 모음 ---------------------------------------------------------------------------------------------->
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+
+<!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
+<script type="text/javascript">
+
+function review_Modal(){
+	alert("dd");
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- 성별 그래프 1번 -->
 <!--Load the AJAX API-->

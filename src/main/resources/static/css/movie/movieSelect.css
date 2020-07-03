@@ -733,20 +733,19 @@ div[class^="sect-"] .box-contents li a {
     float: none;
     background: none;
 }
-.point_col2 .writerinfo .writer-etc {
-    position: absolute;
-    left: 0;
-    bottom: -146px;
-    padding: 0 !important;
-}
-.point_col2 .writerinfo li {
-    margin-bottom: 3px;
-    line-height: 20px!important;
-}
+
 .point_col2 .writerinfo .writer-etc .day {
     padding-right: 8px;
     margin-right: 6px;
     background: url(../images/common/bg/bg_writeinfo.gif) no-repeat 100% 0;
+}
+
+
+
+
+.point_col2 .writerinfo li {
+    margin-bottom: 3px;
+    line-height: 20px!important;
 }
 
 /*버튼*/

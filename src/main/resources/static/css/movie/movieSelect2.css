@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#myChartTest{
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
+}
+
+#myChartTest2{
+	width: 250px;
+	height: 250px;
+}
+
+/* soyeon */
+
+.box-image {
+	width: 62px;
+	height: 62px;
+	border-radius: 50%;
+	background-image: url("../../images/profile.gif");
+	background-size: 62px 62px;
+}
+
+.point_col2 .writerinfo .writer-etc { /* 날짜 */
+    position: absolute;
+    left: 0;
+    bottom: -76px;
+    padding: 0 !important;
+}
+.writer-name {
+	line-height: 0;
+	font-weight: bold;
+	color: #666666;
+}
+
+.id , .date{
+	display: inline-block;
+	vertical-align: middle; 
+}
+
+.id_image{
+	width: 18px;
+	height: 34px;
+}

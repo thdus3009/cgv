@@ -70,7 +70,7 @@
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="./admin/member/memberList">
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
