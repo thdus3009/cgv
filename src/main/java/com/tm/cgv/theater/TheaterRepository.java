@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 
@@ -32,5 +33,7 @@ public interface TheaterRepository {
 	public int theaterDelete(int num) throws Exception;
 	
 	public int theaterNum() throws Exception;
+	
+	public List<MovieTimeVO> theaterMovieTime(int num) throws Exception;
 
 }

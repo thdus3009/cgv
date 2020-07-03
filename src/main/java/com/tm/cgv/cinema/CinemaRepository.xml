@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cinema where num=#{num}
 	</select>
 	
-	<select id="selectTheaterList" parameterType="CinemaVO" resultType="TheaterVO">
+	<select id="selectTheaterList" parameterType="Integer" resultType="TheaterVO">
 		select * from theater where cinemaNum=#{num}
 	</select>
 	
@@ -44,6 +44,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="cinemaList" resultType="CinemaVO">
 		select * from cinema order by local;
+	</select>
+	
+	<select id="cineList" parameterType="String" resultType="CinemaVO">
+		select * from cinema
+		<where>
+		<if test="local != ''">
+			local=#{local}
+		</if>
+		</where>
+		order by num
 	</select>
 	
 	

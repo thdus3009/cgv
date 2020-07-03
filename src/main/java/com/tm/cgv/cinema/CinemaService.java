@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tm.cgv.theater.TheaterVO;
+
 
 @Service
 public class CinemaService {
@@ -15,9 +17,13 @@ public class CinemaService {
 	
 	
 	//Select
-	public CinemaVO cinemaSelect(CinemaVO cinemaVO) throws Exception {
-		System.out.println(cinemaVO.getNum() + "////");
-		return cinemaRepository.cinemaSelect(cinemaVO);
+	public CinemaVO cinemaSelect(int num) throws Exception {
+	
+		return cinemaRepository.cinemaSelect(num);
+	}
+	
+	public List<TheaterVO> selectTheaterList(int num) throws Exception {
+		return cinemaRepository.selectTheaterList(num);
 	}
 	
 	
@@ -56,6 +62,11 @@ public class CinemaService {
 	//지역별 극장 조회
 	public List<CinemaVO> cinemaList() throws Exception{
 		return cinemaRepository.cinemaList();
+	}
+	
+	//
+	public List<CinemaVO> cineList(String local) throws Exception {
+		return cinemaRepository.cineList(local);
 	}
 
 
