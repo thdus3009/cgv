@@ -58,8 +58,6 @@ public class AdminController {
 	@Autowired
 	private MovieTimeService movieTimeService;
 	
-	@Autowired
-	private TheaterService theaterService;
 
 	
 	@GetMapping("/")
@@ -95,7 +93,7 @@ public class AdminController {
 		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
 		
-		//List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
+		List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
 	
 	
 		//가져온 theater list에 들어있는 filmType을 가져와서 리스트 생성
@@ -107,7 +105,6 @@ public class AdminController {
 		//비트 플래그 이용하여 한자리수인 filmType을 쪼개어 list나 배열 형태로 가져와 jsp로 보내주기
 		BitFilmType bitFilmType = new BitFilmType();
 		List<List<Byte>> filmType = bitFilmType.getState(values);
-		
 		
 		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);

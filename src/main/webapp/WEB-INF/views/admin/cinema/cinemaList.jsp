@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-
+<c:import url="../template/head.jsp"></c:import>
 
 <title>관리자 페이지</title>
 
@@ -23,6 +23,7 @@
 
 </head>
 <body class="sb-nav-fixed">
+	<c:import url="../template/header.jsp"></c:import>
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
 		<a href="/admin"><img src="/images/header/h1_cgv.png"
@@ -102,6 +103,7 @@
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
+				<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="container-fluid">
 					<h1>Cinema List</h1>
 					<ol class="cinema-ol">

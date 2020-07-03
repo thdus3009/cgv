@@ -13,6 +13,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
+<c:import url="../template/head.jsp"></c:import>
 <link href="../css/styles.css" rel="stylesheet" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 <link
@@ -24,6 +25,7 @@
 
 </head>
 <body class="sb-nav-fixed">
+	<c:import url="../template/header.jsp"></c:import> 
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">CGV Admin</a>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
