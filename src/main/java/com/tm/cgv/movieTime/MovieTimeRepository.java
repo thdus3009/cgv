@@ -7,4 +7,7 @@ public interface MovieTimeRepository {
 
 	public MovieTimeVO movieTimeSelectOne(int num) throws Exception; 
 	
+	public int remainSeatUpdate(MovieTimeVO movieTimeVO) throws Exception;
+	
+	public int insert(MovieTimeVO movieTimeVO) throws Exception;
 }

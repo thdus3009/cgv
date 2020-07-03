@@ -14,7 +14,7 @@ public class MemberInfoMaker {
 			month = "0"+month; 
 		}
 		
-		String birth = year+"-"+month+"-"+day;
+		String birth = year+"/"+month+"/"+day;
 		System.out.println(birth);
 		
 		return birth;

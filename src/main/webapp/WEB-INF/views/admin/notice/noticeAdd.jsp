@@ -129,8 +129,8 @@
 								</label></li>
 							</ul>
 							<label for="title" class="label">제목</label>
-							<input type="hidden" value="${sessionScope.memberVO.id}" name="writer">
 							<input type="text" required="required" class="title" id="title">
+							<input type="hidden" value="${sessionScope.memberVO.id}" name="writer">
 							<textarea id="summernote"></textarea>
 							<div class="btn_s">
 								<button type="button" class="write-cancle" onClick="location.href='./noticeWrite'" id="cancle">취소</button>
@@ -159,6 +159,16 @@
 							[ 'insert', [ 'link', 'picture', 'video' ] ],
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});
+
+		//유효성 검사		
+		//제목
+		$("#btn").click(function(e){
+			if($(".title").val() == ""){
+				alert("제목을 입력해주세요!");
+				e.prventDefault();
+			}
+		});
+		
 	</script>
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
