@@ -6,7 +6,7 @@ h3{
 	margin : 30px 0 15px;
 /* 	border: 1px solid black; */
 	
-	background: url("../images/container/movie/bg_h3_line.jpg") repeat-x 0 50%;
+	background: url("/images/container/movie/bg_h3_line.jpg") repeat-x 0 50%;
 	line-height: 41px;
 	text-align: center;
 }
@@ -19,7 +19,7 @@ h3{
 }
 
 .container_bg{
-	background: url("../images/container/bg_c_bricks.png") repeat-x 0 29px;
+	background: url("/images/container/bg_c_bricks.png") repeat-x 0 29px;
 	background-position: 0 0;
 }
 
@@ -47,7 +47,7 @@ h3{
 
 .section_slider:before{
 	left: 0;
-	background: url("../images/container/slider/bg_bricks_before.png") no-repeat 0 0;
+	background: url("/images/container/slider/bg_bricks_before.png") no-repeat 0 0;
 	position: absolute;
 	top: 0;
 	z-index: 10;
@@ -58,7 +58,7 @@ h3{
 
 .section_slider:after{
 	right: 0;
-	background: url("../images/container/slider/bg_bricks_after.png") no-repeat 0 0;
+	background: url("/images/container/slider/bg_bricks_after.png") no-repeat 0 0;
 	position: absolute;
 	top: 0;
 	z-index: 10;
@@ -202,7 +202,7 @@ h3 > img{
 }
 .tab_menu li:first-child{
 	padding-left: 20px;
-	background: url("../images/sprite_corner.png") 0 -20px no-repeat;
+	background: url("/images/sprite_corner.png") 0 -20px no-repeat;
 }
 
 .tab_menu li:first-child a:before{
@@ -211,7 +211,7 @@ h3 > img{
 	width: 25px;
 	height: 39px;
 	padding-right: 5px;
-	background: url("../images/container/event/ico_finger.png") 0 50% no-repeat;
+	background: url("/images/container/event/ico_finger.png") 0 50% no-repeat;
 	vertical-align: top;
 }
 
@@ -225,7 +225,7 @@ h3 > img{
 	display: inline-block;
 	position: relative;
 	height: 39px;
-	background: #e71a0f url("../images/container/event/bg_tebmenu-line.gif") 0 12px no-repeat;
+	background: #e71a0f url("/images/container/event/bg_tebmenu-line.gif") 0 12px no-repeat;
 	padding: 0 15px;
 	color: #ffffff;
 	font-size: 15px;
@@ -238,7 +238,7 @@ h3 > img{
 
 .last{
 	padding-right: 19px;
-	background: url("../images/container/event/ribon_right.png") right 0 no-repeat;
+	background: url("/images/container/event/ribon_right.png") right 0 no-repeat;
 }
 
 .section_event {
@@ -329,7 +329,7 @@ h3 > img{
 	height: 35px;
 	margin: 0 5px 0 0;
 	padding: 0 0 0 26px;
-	background: url("../images/container/notice/ico_notice.png") no-repeat 1px 50%;
+	background: url("/images/container/notice/ico_notice.png") no-repeat 1px 50%;
 	color: #333;
 	font-size: 15px;
 	line-height: 35px;

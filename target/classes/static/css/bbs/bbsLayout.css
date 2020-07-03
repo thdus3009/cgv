@@ -1,101 +1,116 @@
 @charset "UTF-8";
 
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
 
-a{
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+a {
 	text-decoration: none;
 	color: inherit;
 }
 
-strong{
+strong {
 	font-weight: 500;
 }
-select , table{
+
+select, table {
 	line-height: 27px;
 	height: 29px;
 	padding: 3px 5px;
-/* 	border: 1px solid #b4b3aa; */
+	/* border: 1px solid #b4b3aa; */
 }
-option{
+
+form > select{
+	border: 1px solid #b4b3aa;
+}
+
+option {
 	padding: 0px 2px 1px;
 }
 
-table{
+table {
 	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0;
 }
 
-colgroup{
+colgroup {
 	display: table-column-group;
 }
-col{
+
+col {
 	display: table-column;
 }
-thead{
+
+thead {
 	display: table-header-group;
 }
 
-table thead th{
+table thead th {
 	font-weight: 500;
 }
 
-th,td{
+th, td {
 	font-weight: 300;
 	line-height: 1.5em;
 	vertical-align: middle;
 	font-size: 13px;
 }
 
-td{
+td {
 	display: table-cell;
 	vertical-align: inherit;
 }
 
-tbody{
+tbody {
 	display: table-row-group;
 }
 
-
 /*  ------------------------------------------------------------------------------- container */
-
-.container{
+.container {
 	background-color: #fdfcf0;
 }
 
-.round{
+.round {
 	line-height: 23px;
-	font-weight: 300;
+	font-weight: 600;
 	font-size: 12px;
 	text-align: center;
 	vertical-align: middle;
 	display: inline-block;
-	position: relative;	
-	
+	position: relative;
+	font-family: 'CJ+ONLYONE+Medium';
+	border-radius: 0.25rem;
 }
 
-
 /*  ------------------------------------------------------------------------------- container navigation lineamp*/
-.c_nav{
+.c_nav {
 	width: 100%;
 	background-color: #f1f0e5;
 	border-bottom: 1px solid #cacac0;
 }
 
-.nav_linemap{
+.nav_linemap {
 	position: relative;
 	width: 980px;
 	height: 28px;
 	margin: 0 auto;
-/* 	border: 1px solid green; */
+	/* 	border: 1px solid green; */
 }
 
-.nav_linemap li:first-child{
+.nav_linemap li:first-child {
 	margin-left: 0px;
 	padding-left: 0px;
 	background: none;
 }
 
-.nav_linemap li{
+.nav_linemap li {
 	float: left;
 	display: inline-block;
 	font-size: 12px;
@@ -105,47 +120,47 @@ tbody{
 	background: url("/images/login/ico_arrow.png") no-repeat 0 9px;
 }
 
-.last{
+.last {
 	text-decoration: underline;
 	color: #222;
 }
 /*  ------------------------------------------------------------------------------- container contents*/
-
-.contents{
+.contents {
 	position: relative;
 	width: 980px;
 	margin: 0 auto;
 	padding-bottom: 50px;
-/* 	border: 2px solid red; */
+	/* 	border: 2px solid red; */
 }
 
-.col_content{
+.col_content {
 	margin-top: 25px;
 }
 
 /*  ------------------------------------------------------------------------------- container contents aside*/
-
-.col_aside{
+.col_aside {
 	width: 160px;
 	float: left;
-	
-/* 	height:900px; */
-/* 	border: 2px solid red; */
+
+	/* 	height:900px; */
+	/* 	border: 2px solid red; */
 }
 /*  ------------------------------------------------------------------------------- container contents aside snb*/
-.snb{
+.snb {
 	height: 245px;
-/* 	border: 1px solid black; */
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	/* 	border: 1px solid black; */
 }
 
-.snb ul{
+.snb ul {
 	margin-bottom: 10px;
 }
 
-.snb li{
+.snb li {
 	border-top: 1px solid #bbb9b1;
 }
-.snb li a{
+
+.snb li a {
 	width: 155px;
 	height: 34px;
 	padding-left: 5px;
@@ -153,11 +168,11 @@ tbody{
 	font-weight: bold;
 	font-size: 14px;
 	line-height: 34px;
-	
 	display: block;
 	position: relative;
 }
-.snb li.on a i, .snb li a i:hover{
+
+.snb li.on a i, .snb li a i:hover {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -167,98 +182,72 @@ tbody{
 	background: url("/images/bbsList/ribon_left.png") no-repeat 0 0px;
 }
 
-
-.snb li.on{
+.snb li.on {
 	margin-top: 1px;
 	border-top: 0 none;
-} 
-
-.snb li.on > a, .snb li a:hover{
-	background-color: #e71a0f;
-	color: #fdfcf0;	
-} 
-
-
-/*  ------------------------------------------------------------------------------- container contents aside ad_area*/
-.ad_area{
-/* 	height: 345px; */
-/* 	border: 1px solid black; */
 }
 
-.ad_panner_1{
-/* 	height: 300px; */
-/* 	border: 1px solid black; */
+.snb li.on>a, .snb li a:hover {
+	background-color: #e71a0f;
+	color: #fdfcf0;
+}
+
+/*  ------------------------------------------------------------------------------- container contents aside ad_area*/
+.ad_area {
+	margin-top: 20px;
+	/* 	height: 345px; */
+	/* 	border: 1px solid black; */
+}
+
+.ad_panner_1 {
+	/* 	height: 300px; */
+	/* 	border: 1px solid black; */
 	margin-bottom: 10px;
 }
 
-.ad_panner_1 img{
+.ad_panner_1 img {
 	width: 160px;
 	height: 300px;
 	border: 0;
 }
 
-.ad_panner_2{
+.ad_panner_2 {
 	margin-bottom: 10px;
 	height: 35px;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 }
 
-.ad_panner_2 img{
+.ad_panner_2 img {
 	width: 160px;
 	height: 35px;
 	border: 0;
 }
 
 /*  ------------------------------------------------------------------------------- container contents detail*/
-
-.col_detail{
+.col_detail {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	width: 800px;
 	position: relative;
 	float: right;
-	
-/* 	border: 2px solid red; */
-}
 
+	/* 	border: 2px solid red; */
+}
 
 /*  ------------------------------------------------------------------------------- container contents detail customer_top*/
-
-.customer_top{
-/* 	height: 40px; */
-/* 	border: 1px solid black; */
+.customer_top {
+	/* 	height: 40px; */
+	/* 	border: 1px solid black; */
+	
 }
 
-.customer_top .tit{
+.customer_top .tit {
+	font-family: 'CJ+ONLYONE+Medium';
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
-.customer_top .stit{
+.customer_top .stit {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	margin-top: 5px;
 	font-size: 14px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
