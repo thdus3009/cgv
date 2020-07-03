@@ -17,6 +17,8 @@
 
 <link rel="stylesheet" href="/css/styles.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+<link rel="stylesheet" href="/css/admin/pager.css" />
+<
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
