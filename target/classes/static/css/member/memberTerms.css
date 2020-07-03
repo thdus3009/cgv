@@ -1,93 +1,101 @@
 @charset "UTF-8";
 
-a{
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+a {
 	text-decoration: none;
 	color: black;
 }
 
-strong{
+strong {
 	font-weight: 500;
 }
 
-body{
+body {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 	line-height: 1.2;
-	color :#666;
+	color: #666;
 	font-weight: 300px;
 	font-size: 13px;
 }
 
-
-.container{
+.container {
 	width: 100%;
 	height: 1128px;
-	
 }
 
-.c_nav{
+.c_nav {
 	width: 100%;
 	background-color: #f1f0e5;
 	border-bottom: 1px solid #cacac0;
 }
 
-.nav_linemap{
+.nav_linemap {
 	position: relative;
 	width: 980px;
 	height: 28px;
 	margin: 0 auto;
-/* 	border: 1px solid green; */
+	/* 	border: 1px solid green; */
 }
 
-.nav_linemap li:first-child{
+.nav_linemap li:first-child {
 	margin-left: 0px;
 	padding-left: 0px;
 	background: none;
 }
 
-.nav_linemap li{
+.nav_linemap li {
 	float: left;
 	display: inline-block;
 	font-size: 12px;
 	line-height: 30px;
 	margin-left: 12px;
 	padding-left: 20px;
-	background: url("../images/login/ico_arrow.png") no-repeat 0 9px;
+	background: url("/images/login/ico_arrow.png") no-repeat 0 9px;
 }
 
-.last{
+.last {
 	text-decoration: underline;
 	color: #222;
 }
 
-
-.contents{
+.contents {
 	position: relative;
 	width: 980px;
 	height: auto;
 	margin: 0 auto;
 	box-sizing: border-box;
 	padding-bottom: 50px;
-/* 	border: 2px solid red; */
+	/* 	border: 2px solid red; */
 }
 
-.wrap_login{
+.wrap_login {
 	position: relative;
 	padding: 30px 30px 0;
-/* 	height:467px; */
-	height:800px;
-/* 	border: 2px solid black; */
+	/* 	height:467px; */
+	height: 800px;
+	/* 	border: 2px solid black; */
 }
 
-.tab_menu_round{
-	background: url("../images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
+.tab_menu_round {
+	background: url("/images/login/bg_tabmenu_grade.gif") 0 100% repeat-x;
 	height: 37px;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 }
 
-.tab_menu_round li:first-child{
+.tab_menu_round li:first-child {
 	background: #e71a0f;
 }
 
-.tab_menu_round li{
+.tab_menu_round li {
 	float: left;
 	display: inline-block;
 	width: 100px;
@@ -98,149 +106,127 @@ body{
 	text-align: center;
 }
 
-.tab_menu_round li a{
+.tab_menu_round li a {
 	font-size: 13px;
 	font-weight: 500;
 	display: block;
 	color: #ffffff;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
 }
 
-.box_login{
+.box_login {
 	margin: 0 auto;
 	border-bottom: 2px solid #898987;
 	padding: 70px 200px 0 200px;
 	padding-top: 20px;
 	height: 770px;
-	
-/* 	border: 1px solid black; */
+
+	/* 	border: 1px solid black; */
 }
 
-
-.con:first-child{
-	height: 100px;
+.con:first-child {
+	height: 70px;
 	margin: 30px 0 20px 0;
 }
 
-.con{
+.con {
 	height: 180px;
 	margin-bottom: 20px;
 }
 
-
-.content_check{
-	display:inline-block;
-	float:left;
+.content_check {
+	display: inline-block;
+	float: left;
 	width: 7%;
 	line-height: 25px;
 }
 
-.content_title{
-	display:inline-block;
-	float:left;
+.content_title {
+	display: inline-block;
+	float: left;
 	width: 90%;
 }
 
-.content_title h3{
+.content_title h3 {
 	display: inline;
 	cursor: pointer;
 }
 
-
-
-.content_title span{
+.content_title span {
 	display: inline-block;
 	color: #e71a0f;
-	font-weight:bold;
-	font-size:13px;
+	font-weight: bold;
+	font-size: 13px;
 	width: 50px;
 }
 
-.content_title textarea{
+.content_title textarea {
 	margin-top: 10px;
 	height: 105px;
 	width: 461px;
-	
 	resize: none;
 	line-height: 1.7;
 	font-size: 13px;
 	font-weight: 300;
 	overflow: auto;
-	overflow-x : hidden;
-	vertical-align: top; 
+	overflow-x: hidden;
+	padding: 10px;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	vertical-align: top;
 }
 
-.btn-area{
+.btn-area {
 	width: 980px;
 	height: 100px;
 	margin: 0 auto;
 }
 
-button{
-	clear:both;
+button {
+	clear: both;
 	width: 100px;
 	height: 42px;
 	line-height: 37px;
-/* 	position: static; */
-/* 	left: 0px; */
+	/* 	position: static; */
+	/* 	left: 0px; */
 	margin: 2px 30px 0 0;
 	background: #e71a0f;
 	text-align: center;
 	border: none;
 	cursor: pointer;
-	
 	display: inline-block;
 }
 
-.btn_submit{
+.btn_submit {
 	float: right;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
 }
 
-.btn_cancle{
+.btn_cancle {
 	margin-left: 710px;
-	background:none;
+	background: none;
 	border: 2px solid #7b7b7b;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
 }
 
-.btn_cancle > span{
+.btn_cancle>span {
 	color: #7b7b7b;
+	font-weight: 600;
 }
 
-button > span{
+button>span {
 	width: 147px;
 	height: 36px;
 	color: #f2f0e5;
 	font-size: 15px;
-	font-weight: 500;
+	font-weight: 600;
 	margin: 0 auto;
 }
 
-
-.join_banner_img{
+.join_banner_img {
 	width: 50%;
 	height: 100%;
 	border: 2px solid red;
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
