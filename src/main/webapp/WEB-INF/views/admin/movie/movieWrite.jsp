@@ -106,7 +106,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>Movie Write</h1>
+					<h1>Movie ${path}</h1>
 					<div>
 
 						<div class="contents">

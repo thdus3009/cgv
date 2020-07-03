@@ -19,11 +19,13 @@ $("#btn-more").click(function() {
 		
 	});
 
-
+	//고객용 리스트 정렬
 	$("#btn-sort").click(function(){
 		var kind = $("#select").val();
 		location.href = "./movieList?kind="+kind;
 	});
+	
+	
 	
 	// 고객용 영화 리스트 페이지 검색 기능
 	$("#btn_search").click(function() {
@@ -48,29 +50,7 @@ $("#btn-more").click(function() {
 		$("#param").attr("value",temp);
 		
 		
-		// 관리자 페이지 영화 리스트 검색 기능
-		$("#admin_search").click(function() {
-			var search=$("#search").val();
-			var kind =$("#select").val();
-			console.log(search);
-			location.href = "./movieSearchA?search="+search;
-			
-			//$.get("./movieListSearch?search="+search,function(result){
-			//	console.log(result);
-			});
-			
-		
-			
-			var params = location.search.substr(location.search.indexOf("?") + 1);
-			params = params.split("=");
-			
-			for(var i=0;i<params.length;i++){
-				temp = params[0];
-			}
-			console.log(temp);
-			$("#param").attr("value",temp);
-			
-
+	
 	
 	$(document).ready(function() {
 		//url로 들어오는 파라미터값 읽어들이기

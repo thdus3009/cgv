@@ -74,7 +74,7 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="./admin/movie/movieList">
+						</a> <a class="nav-link" href="./admin/movie/movieList?kind=date">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리

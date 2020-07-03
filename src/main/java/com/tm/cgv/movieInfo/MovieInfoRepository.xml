@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		order by
 		<choose>
 			<when test="kind == 'date'">
-				openDate asc
+				createAt desc,openDate asc
 				
 			</when>
 			<when test="kind == 'title'">
@@ -122,11 +122,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		where deleteAt is null
  		ORDER by 
  			<choose>
+ 				<when test="kind == 'date'">
+ 					createAt desc,openDate asc
+ 				</when>
  				<when test="kind == 'title'">
  					title asc
  				</when>
  				<otherwise>
- 					rate desc
+ 					rate
  				</otherwise>
  			</choose>
  			

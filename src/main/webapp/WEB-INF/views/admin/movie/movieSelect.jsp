@@ -15,8 +15,10 @@
 
 <title>관리자 페이지</title>
 
-<link rel="stylesheet" href="/css/styles.css" />
+<link rel="stylesheet" href="/css/admin/movie/stylesMovieAdmin.css" />
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
+<link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
+
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
@@ -75,7 +77,7 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="../movie/movieList">
+						</a> <a class="nav-link" href="../movie/movieList?kind=date">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
@@ -105,94 +107,96 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>movie List</h1>
-					<!-- 검색바 -->
-					<form
-						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-						<div class="input-group">
-							<input class="form-control" type="text" placeholder="검색어를 입력"
-								aria-label="Search" aria-describedby="basic-addon2" />
-							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="admin_search" name="search">
-									<i class="fas fa-search"></i>
-								</button>
+					<h1>movie Select</h1>
+				
+					
+				<div class="sect-base-movie">
+					<div class="box-image"  >
+					<a href="">
+						<span class="thumb-image">
+							<img  class="box-image" alt="" src="../../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
+							<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
+						</span>
+					</a>
+					</div>
+					<div class="box-contents">
+						<div class="title">
+							<strong id="title">${vo.title}</strong>
+							<em class="round lightblue">
+								<span>현재 상영중</span>
+							</em>
+							<p>${vo.titleEng}</p>
+						</div>
+						
+						<div class="score" >
+							<strong class="percent">
+								예매율&nbsp;
+								<span>${vo.rate}</span>
+							</strong>
+						
+						
+							<div class="egg-gage small" style="background: url('../../images/movie/movieList/bg_writeinfo.gif') 0 12px no-repeat;">
+									<!--   <img alt="" src="../images/movie/movieList/sprite_egg.png">-->
+									
+									<!-- <div class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png')" ></div> -->
+									<c:if test="${vo.errRate lt 50 }">
+									<!-- 터진  계란  -->
+									<span class="egg great" id="this" style="background:url('../../images/movie/movieList/sprite_egg.png') no-repeat -0px -47px"></span>
+									</c:if>
+									
+									<c:if test="${vo.errRate lt 70 && vo.errRate ge 50 }">
+									<!-- 왕관없는 계란  -->
+									<span class="egg great" id="this" style="background:url('../../images/movie/movieList/sprite_egg.png') no-repeat -18px -47px"></span>
+									</c:if>
+									
+									<c:if test="${vo.errRate ge 70 }">
+									<!-- 왕관있는 계란 -->
+									 <span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
+									</c:if>
+								<span class="percent">${vo.errRate}</span>
 							</div>
 						</div>
-					</form>
-					<!-- 정렬바 -->
-						<div class="sect-sorting">
-							<select id="selectA" name="kind">
-								<option title="2" value="date" selected="selected">최신순</option>
-								<option title="1" value="rate" >예매율순</option>
-								<option title="3" value="title">제목순</option>
-							</select>
-							<!-- <input type="button" id="admin_sort" value="go"> -->
-							<button id="admin_sort" type="button" class="round gray">
-								<span>GO</span>
-							</button>
-						</div>
-					
-					<div class="col_detail">
-						<!-- 목록 -->
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<tr class="admin-tr">
-								<td>제목</td>
-								<td>영문제목</td>
-								<td>상영시간</td>
-								<td>감독</td>
-								<td>배우</td>
-								<td>장르</td>
-								<td>연령가</td>
-								<td>국가</td>
-								<td>개봉일</td>
-								<td>관람객 수</td>
-								<td>평점</td>
-							</tr>
-							<!-- 반복 -->
-							<!-- 이름 누르면 상세 페이지로 이동 -->
-							<c:forEach items="${list}" var="vo">
-								<tr class="memberList-c">
-									<td> <a href="./movieSelect?num=${vo.num}">${vo.title}</a></td>
-									<td>${vo.titleEng}</td>
-									<td>${vo.runtime}</td>
-									<td>${vo.director}</td>
-									<td>${vo.actor}</td>
-									<td>${vo.ganre}</td>
-									<td>${vo.ageLimit}</td>
-									<td>${vo.country}</td>
-									<td>${vo.openDate}</td>
-									<td>${vo.visitor}</td>
-									<td>${vo.rate}</td>
-								</tr>
-							</c:forEach>
-						</table>
-
-						<!-- 페이저 -->
-						<div class="pager">
-							<ul class="pagination">
-								<c:if test="${pager.curBlock gt 1}">
-									<li><a href="#" class="custompager"
-										title="${pager.startNum-1}">이전</a></li>
-								</c:if>
-
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-									var="p">
-									<li><a href="./movieList?curPage=${p}&kind=${pager.kind}" class="custompager" title="${p}">${p}</a></li>
-								</c:forEach>
-
-								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
-										title="${pager.lastNum+1}">다음</a></li>
-								</c:if>
-							</ul>
-						</div>
 						
-						<!-- 글쓰기 버튼 -->
-						<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 						
+						<div class="spec">
+							<dl>
+								<dt>감독 :&nbsp;</dt>
+								<dd><a href="">${vo.director}</a></dd>
+								<dd></dd>
+								<dt>&nbsp;/ 배우 :&nbsp;</dt>
+								<dd class="on">
+									<a href="">${vo.actor}</a>
+								</dd>
+								<dt>장르 :&nbsp;${vo.ganre}</dt>
+								<dd></dd>
+								<dt>&nbsp;/ 기본 : &nbsp;</dt>
+								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime}분,&nbsp;${vo.country}</dd>
+								<br>
+								<dt>개봉 : &nbsp;</dt>
+								<dd class="on">${vo.openDate}</dd>
+							</dl>
+						</div>
+						<span class="screentype">
+						
+						</span>
+						
+						<div class="sect-story-movie" >
+						<strong>${vo.contents}</strong>
 					</div>
+							
+					</div>
+					</div>
+					<div class="bbs_btn">
+						
+									
+							<c:if test="${bbsVO.writer eq memberVO.id }">
+								<a href="./moiveDelete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
+								<a href="./movieUpdate?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
+							</c:if>
+									
+					</div>	
 				</div>
+			
 			</main>
 		</div>
 	</div>

@@ -70,14 +70,13 @@ public class MovieInfoService {
 	public List<MovieInfoVO> movieList(Pager pager) throws Exception{
 			
 		pager.makeRow();
-		System.out.println(pager.getStartRow()+"pppppp");
+		System.out.println(pager.getStartRow()+"StartRow");
 		long totalCount = movieInfoRepository.movieNumCount(pager);
 		pager.makeBlock(totalCount);
 		
 		return movieInfoRepository.movieList(pager);
 	}
 	
-
 	
 	public long movieWrite(MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
 		
