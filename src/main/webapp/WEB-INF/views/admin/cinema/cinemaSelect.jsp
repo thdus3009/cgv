@@ -114,6 +114,10 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="">
+                    	<span id="de" class="btn btn-danger">Delete</span>
+                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+                    </div>
 				</div>
 			</main>
                 <c:import url="../template/footer.jsp"></c:import>
