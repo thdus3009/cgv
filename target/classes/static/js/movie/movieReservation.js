@@ -196,16 +196,17 @@ function ajaxLoad(){
 			$(".theater-list li").addClass("dimmed");
 			//극장, 날짜
 			
+			$(".theater-area-list > ul > li").each(function(){
+				$(this).data("index",0);
+				$(this).find(".count").text("("+$(this).data("index")+")");
+			});
+			
 			
 			for(i=0;i<result.length;i++){
 				//극장
 				
 				$(".theater-list ul.content li").each(function(){
-
-					$(this).parent().parent().parent().data("index",0);
-					
 					if($(this).data("theater") == result[i].cinemaVOs[0].name){
-						
 						
 						if($(this).hasClass("dimmed")){
 							console.log($(this).data("theater"))
@@ -219,6 +220,7 @@ function ajaxLoad(){
 							$(this).parent().parent().parent().data("index",prev);
 							var next = $(this).parent().parent().parent().data("index");
 							$(this).parent().parent().parent().find(".count").text("("+next+")");
+							console.log($(this).parent().parent().parent().data("index"));
 							
 						}
 						
