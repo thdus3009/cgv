@@ -152,10 +152,6 @@
 
 	<!-- 스크립트 ------------------------------------------------------------------------->
 	
-	<!-- 리뷰수정 -->
-	<script type="text/javascript" src="../js/review/reviewUpdate.js"></script>
-	
-	
 	<!-- 리뷰 삭제 -->
 	<script type="text/javascript">
 	var g_num = 0;
@@ -191,6 +187,9 @@
 		
 	</script>
 	
+		
+	<!-- 리뷰수정 -->
+	<script type="text/javascript" src="../js/review/reviewUpdate.js"></script>
 	
 	<!-- 글자 byte 체크 -->
 	<script type="text/javascript" src="../js/review/checkByte.js"></script>
