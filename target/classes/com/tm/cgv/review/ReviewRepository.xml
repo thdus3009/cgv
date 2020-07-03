@@ -71,15 +71,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY R.createAt desc
 	</select>
 	
-	<select id="search_Count" resultType="Integer">
-		select count(*) as count from reservation where uid=#{uid} and deleteAt is null;
+	<select id="search_Count" resultType="Integer"> <!-- 총 영화예매건수 확인 -->
+		select count(*) as count from reservation where uid=#{uid} and deleteAt is null
 	</select>
 	
+	<update id="review_Update1" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
+		UPDATE review
+		SET contents=#{contents},egg=#{egg}
+		where reservationNum=#{reservationNum}
+	</update>
+	
+	<update id="review_Update2" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
+		UPDATE review
+		SET contents=#{contents},egg=#{egg},charmPoint=#{charmPoint},emotionPoint=#{emotionPoint}
+		where reservationNum=#{reservationNum}
+	</update>
 	
 	
 	
 	
 	
+	
+	
+	
+	<!-- ........................................................................................... -->
 
 	<!-- 받아온 num으로 join하여 정보출력 -->
 	<select id="reviewList2" parameterType="Long" resultType="ReviewVO">

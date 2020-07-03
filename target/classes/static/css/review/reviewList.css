@@ -161,7 +161,7 @@
 	font-weight: bold;
 }
 
-button#more {
+#more {
 	border-right: 0;
 	border-left: 0;
 	border-top-style: dotted;
@@ -176,4 +176,10 @@ button#more {
 	display: block;
 	margin : 0 auto;
 	
+}
+
+.update {
+	font-size: 13px; 
+	font-weight: bolder; 
+	color: #666666;
 }

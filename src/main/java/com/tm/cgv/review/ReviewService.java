@@ -58,4 +58,12 @@ public class ReviewService {
 	public int search_Count(String uid)throws Exception {
 		return reviewRepository.search_Count(uid);
 	}
+	
+	public int review_Update1(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.review_Update1(reviewVO);
+	}
+	
+	public int review_Update2(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.review_Update2(reviewVO);
+	}
 }

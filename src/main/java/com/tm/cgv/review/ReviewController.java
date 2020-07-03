@@ -68,13 +68,9 @@ public class ReviewController {
 			  reviewVO.setPeople(reviewVO.getCommon()+reviewVO.getTeenager()+reviewVO.getPreference());
 			  
 			  ar.add(reviewVO);
-			  
-			  list_count+=1;
+
 		  }
 		
-		System.out.println("list_count: "+list_count);
-		
-		model.addAttribute("l_count", list_count);
 		model.addAttribute("list",ar);
 		  
 	}
@@ -173,13 +169,38 @@ public class ReviewController {
 			  ar.add(reviewVO);
 		  }
 		
+		//System.out.println("sssss:"+ar.get(0).getReservationNum());
+		
 		mv.addObject("look", ar);
 		mv.setViewName("review/reviewLook");
 
 		return mv;
 	}
 
+	@GetMapping("review_Update1")
+	@ResponseBody
+	public int review_Update1(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+		System.out.println(reviewVO.getReservationNum());
+		int result=0;
+		result = reviewService.review_Update1(reviewVO);
+		if(result>0) {
+			System.out.println("update1 성공");
+		}
+		return result;
+	}
 	
+	@GetMapping("review_Update2")
+	@ResponseBody
+	public int review_Update2(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+		System.out.println(reviewVO.getReservationNum());
+		int result=0;
+		result = reviewService.review_Update2(reviewVO);
+		if(result>0) {
+			System.out.println("update2 성공");
+		}
+		return result;
+	}
+		
 	
 	
 	// ---------------------------------------------------------------------------------

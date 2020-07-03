@@ -27,4 +27,8 @@ public interface ReviewRepository {
 	public List<ReviewVO> reviewLook(String uid);
 	
 	public int search_Count(String uid);
+	
+	public int review_Update1(ReviewVO reviewVO);
+	
+	public int review_Update2(ReviewVO reviewVO);
 }

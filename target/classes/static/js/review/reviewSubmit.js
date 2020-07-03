@@ -36,9 +36,10 @@
 				var popupBtn2List = document.getElementsByClassName('popupBtn2');
 				
 				for(i=0; i<popupBtn2List.length; i++){
-
+					console.log(popupBtn2List[i].dataset.num);
+					
 					if(popupBtn2List[i].dataset.num == g_num){
-						console.log(popupBtn2List[i].dataset.num);
+						console.log("list.dataset.num : "+popupBtn2List[i].dataset.num);
 						//2번째 모달로 이동
 						//(i번째 2번째모달 이동버튼 클릭)
 						popupBtn2List[i].click();
