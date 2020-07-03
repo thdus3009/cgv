@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -14,6 +18,8 @@ import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatBooking.SeatBookingService;
+import com.tm.cgv.seatBooking.SeatBookingVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.util.TimeADD;
@@ -23,6 +29,8 @@ import com.tm.cgv.util.TimeADD;
 public class ResevationController {
 
 	@Autowired
+	private ReservationService reservationService;
+	@Autowired
 	private MovieInfoService movieInfoService;
 	@Autowired
 	private MovieTimeService movieTimeService;
@@ -31,7 +39,57 @@ public class ResevationController {
 	@Autowired
 	private SeatSpaceService seatSpaceService;
 	@Autowired
+	private SeatBookingService seatBookingService;
+	@Autowired
 	private TimeADD timeAdd;
+	
+
+	
+	
+	@ResponseBody
+	@PostMapping("reservationInsert")
+	public int reservationInsert(ReservationVO reservationVO) throws Exception{
+		int result = 0;
+		int seatCheck = 0;
+		
+		//예매 번호 등록 - Reservation
+		result = reservationService.reservationInsert(reservationVO);
+		result = reservationVO.getNum();
+		
+		//좌석 번호 등록 - SeatBooking
+		if(result > 0) {
+			
+			String [] selectedSeat = reservationVO.getSelectedSeatNums().split(",");
+			
+			for (String str : selectedSeat) {
+				SeatBookingVO seatBookingVO = new SeatBookingVO();
+				seatBookingVO.setReservationNum(reservationVO.getNum());
+				seatBookingVO.setMovieTimeNum(reservationVO.getMovieTimeNum());
+				seatBookingVO.setSeatNum(Integer.parseInt(str));
+				
+				seatCheck = seatBookingService.seatBookingInsert(seatBookingVO);
+			}
+			
+			//상영관 잔여좌석 수 변경 - MovieTime
+			if(seatCheck > 0) {
+				
+				MovieTimeVO movieTimeVO = new MovieTimeVO();
+				movieTimeVO = movieTimeService.movieTimeSelectOne(reservationVO.getMovieTimeNum());
+				int remainSeat = movieTimeVO.getRemainSeat() - (reservationVO.getCommon()+reservationVO.getTeenager()+reservationVO.getPreference());
+				
+				movieTimeVO.setRemainSeat(remainSeat);
+				movieTimeVO.setNum(reservationVO.getMovieTimeNum());
+				movieTimeService.remainSeatUpdate(movieTimeVO);
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
 	
 	
 	@PostMapping("/seatReservation")
@@ -43,6 +101,7 @@ public class ResevationController {
 		System.out.println("극장명 : "+reservationVO.getCinemaName());
 		System.out.println("상영관 : "+reservationVO.getTheaterName());
 		System.out.println("2D/3D : "+reservationVO.getFilmType());
+		
 		System.out.println("총 좌석수 : "+seatCount);
 		
 		
@@ -62,8 +121,8 @@ public class ResevationController {
 		seatSpaceVO.setTheaterNum(movieTimeVO.getTheaterNum());
 		List<SeatSpaceVO> seatSpaceList = seatSpaceService.seatSpaceSelect(seatSpaceVO);
 		
-		
-		List<SeatVO> seatList = seatService.seatSelectOne(seatVO);
+		//좌석 리스트 - seat - seatBooking (Join)
+		List<SeatVO> seatList = seatService.seatSelectList(seatVO);
 
 		int runningTime = Integer.parseInt(movieVO.getRuntime()); 
 		String startTime = movieTimeVO.getScreenTime();

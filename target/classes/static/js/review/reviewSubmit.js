@@ -59,8 +59,12 @@
 						reservationNum : g_num,
 						egg : g_egg,
 						contents : g_mContents.value,
+						_csrf : $("#_csrf").val(),
 					},
 					success:function(data){
+						var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+						
+						$("#"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
 						alert("리뷰가 등록되었습니다.")
 					}
 				})
@@ -145,10 +149,16 @@
 							egg : g_egg,
 							contents : g_mContents.value,
 							charmPoint: g_charmPoint,
-							emotionPoint: g_emotionPoint
+							emotionPoint: g_emotionPoint,
+							_csrf : $("#_csrf").val(),
 						},
 						success:function(data){
-							alert("리뷰가 등록되었습니다.")
+							//버튼바꾸기-이벤트위임?
+							
+							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+							
+							$("#r"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
+							
 						}
 					})
 					
@@ -156,6 +166,11 @@
 				}
 			}
 		}
+	 });
+	 
+	 
+	 $("#submitBtn3").click(function(){
+		 $("#exit3").click();
 	 });
 	 
 //	 ------------------------------------------------------------------------------
@@ -186,6 +201,7 @@
 			$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
 				$('#result').append(result);
 				
+				//1.첫번째 모달
 				$(".popupBtn1").click(function(){
 					g_num=$(this).data("num");//jquery
 					console.log(g_num);
@@ -201,6 +217,7 @@
 					$('input:radio[name="egg"][value=1]').prop('checked', true);
 				});
 				
+				//2.두번째 모달
 				$(".popupBtn2").click(function(){
 				
 					// init
@@ -208,8 +225,70 @@
 					$(".emotionPoint").prop("checked", false);
 				});
 				
+				//3. 세번째 모달
+/*			$(".popupOnlyRead").click(function(){
+					
+					g_num=$(this).data("num2");
+					console.log(g_num);
+					$.ajax({
+						type:"POST",
+						url:"./review_Select",
+						data:{
+							reservationNum : g_num,
+						},
+						success:function(data){//여기서 data는 json
+							$("#photo").html('<img alt="" src="../images/'+data.fileName+'" width="110px" height="154.6px">')
+							$("#title1").html(data.title);
+							$("#uid").html(data.uid);	
+							$("#egg1").html(data.egg);
+							$("#contents").html(data.contents);
+							$("#createAt").html(data.createAt);	
+							$("#sss"+g_num).click();
+							
+							}
+						})
+					
+				});*/
+				
+
+				
 			});
+			
 		}
+			//getList안에 식을 넣으면 "getList(count);"로 인해 자동으로 일단 한번 출력되고
+			// memberReview.jsp의 부모(result)영역의 위임으로 한번더 실행된다. //그러므로 getList에서 빼주어야함
+			
+			//이벤트위임(부모영역의 이벤트를 자식으로 전달)-작성한글 새로고침없이 바로 내용출력
+			$("#result").on("click", ".popupOnlyRead",function(){
+				
+				g_num=$(this).data("num2");
+				//g_num=$(this).attr("title");
+				console.log("??"+g_num);
+				$.ajax({
+					type:"POST",
+					url:"./review_Select",
+					data:{
+						reservationNum : g_num,
+						_csrf : $("#_csrf").val(),
+					},
+					success:function(data){//여기서 data는 json
+						console.log(data);
+						$("#photo").html('<img alt="" src="../images/'+data.fileName+'" width="110px" height="154.6px">')
+						$("#title1").html(data.title);
+						$("#uid").html(data.uid);	
+						$("#egg1").html(data.egg);
+						$("#contents").html(data.contents);
+						$("#createAt").html(data.createAt);	
+						
+						$("#sss"+g_num).click();
+						
+						}
+					})
+				
+			});
+			
+			//이벤트위임-버튼 변경
+	
 		
 		getList(count);
 		/* ------------------- */
@@ -217,3 +296,10 @@
 			count++;
 			getList(count);
 		});
+
+		$("#t1").click(function(){
+			alert("dddddd");
+		});
+		
+		
+		

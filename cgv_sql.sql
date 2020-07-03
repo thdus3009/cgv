@@ -24,6 +24,7 @@ DROP TABLE `payment`;
 DROP TABLE `seat`;
 DROP TABLE `seatSpace`;
 DROP TABLE `seatBooking`;
+DROP TABLE `point`;
 
 CREATE TABLE `member` (
   `username` varchar(50),
@@ -177,6 +178,7 @@ CREATE TABLE `movieTime` (
   `screenDate` date DEFAULT NULL,
   `screenTime` varchar(5) DEFAULT NULL,
   `remainSeat` int(11) DEFAULT NULL,
+  `selectedFirm` int(11) DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `MOVIETIME_MOVIENUM_FK_idx` (`movieNum`),
   KEY `MOVIETIME_THEATERNUM_FK_idx` (`theaterNum`),
@@ -250,7 +252,17 @@ CREATE TABLE `seatBooking` (
   KEY `SEATBOOKING_MOVIETIMENUM_FK_idx` (`movieTimeNum`),
   CONSTRAINT `SEATBOOKING_SEATNUM_FK` FOREIGN KEY (`seatNum`) REFERENCES `seat` (`num`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `SEATBOOKING_MOVIETIMENUM_FK` FOREIGN KEY (`movieTimeNum`) REFERENCES `movieTime` (`num`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;ㄴ
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `point` (
+  `num` INT NOT NULL AUTO_INCREMENT,
+  `memberNum` VARCHAR(50) NULL,
+  `price` INT NULL,
+  `type` VARCHAR(20) NULL,
+  PRIMARY KEY (`num`),
+  INDEX `point_memberNum_FK_idx` (`memberNum` ASC) VISIBLE,
+  CONSTRAINT `point_memberNum_FK` FOREIGN KEY (`memberNum`) REFERENCES `cgv`.`member` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 
 -- memberSQL
 
@@ -274,3 +286,10 @@ ON(M.username = A.username);
   
 SELECT * FROM cinema WHERE local = "서울" limit 2,2;
 
+SELECT * FROM member WHERE username = 'user94' AND enabled=1;
+
+SELECT * FROM member
+WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;movieTime
+
+SELECT count(username) FROM member
+WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;

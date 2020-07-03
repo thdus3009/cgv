@@ -39,6 +39,7 @@ public class Pager {
 		if(totalPage%this.getPerBlock()!=0) {
 			totalBlock++;
 		}
+		
 		//몇번째 블록인가
 		curBlock = this.curPage/this.perBlock;
 		if(this.curPage%this.perBlock != 0) {
@@ -66,7 +67,7 @@ public class Pager {
 	}
 	public Integer getPerPage() {
 		if(this.perPage == null || this.perPage == 0) {
-			this.perPage=7;
+			this.perPage=10;
 		}
 		return perPage;
 	}
@@ -133,6 +134,9 @@ public class Pager {
 		this.search = search;
 	}
 	public String getKind() {
+		if(this.kind == null) {
+			this.kind ="";
+		}
 		return kind;
 	}
 	public void setKind(String kind) {

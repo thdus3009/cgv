@@ -101,11 +101,12 @@ class MemberController {
     	return result;
     }
     
+    // 핸드폰 인증
     @GetMapping("phoneConfirm")
     @ResponseBody
     public boolean phoneConfirm(MemberBasicVO memberBasicVO, String authCode) throws Exception {
     	
-    	// true : 인증 success / false : 인즐 fail
+    	// true : 인증 success / false : 인증 fail
     	boolean result = memberService.phoneConfirm(memberBasicVO, authCode);
     	if(!result) {
     		// 로그 남기거나 버그리포팅
@@ -126,7 +127,28 @@ class MemberController {
     	mv.setViewName("member/memberShowId");
     	return mv;
     }
-    
+  	
+  	// 회원 마이페이지
+    @GetMapping("myPage")
+    public ModelAndView memberMypage(MemberBasicVO memberBasicVO) throws Exception {
+    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	mv.setViewName("member/memberMypage");
+    	return mv;
+    }
+ 	
+    // 회원탈퇴
+   	@GetMapping("memberDelete")
+   	@ResponseBody
+   	public int memberDelete(MemberBasicVO memberBasicVO) throws Exception {
+   		
+   		System.out.println("memberDelete");
+   		System.out.println(memberBasicVO.getUsername());
+   		System.out.println(memberService.memberDelete(memberBasicVO));
+   		return 1;
+   	}
+   	
     // 접근 거부 페이지
     @GetMapping("denied")
     public String denied() {

@@ -84,6 +84,7 @@
 				<div class="sect-movie-chart">
 
 		<form id="frm" action="${board}${path}" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<c:if test="${path eq 'Update'}">
 					<input type="hidden" name="num" id="num" value="${vo.num}">
 				</c:if>

@@ -10,5 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select * from movieTime where num = #{num}
  	</select>
  	
- 
+ 	<update id="remainSeatUpdate" parameterType="MovieTimeVO">
+ 		update movieTime set remainSeat=#{remainSeat} where num = #{num}
+ 	</update>
+ 	
+ 	<insert id="insert" parameterType="MovieTimeVO">
+ 		INSERT INTO movieTime VALUES(
+ 			0, #{movieNum}, #{theaterNum}, #{screenDate}, #{screenTime}, #{remainSeat}, #{selectedFilm}
+ 		)
+ 	</insert>
 </mapper>

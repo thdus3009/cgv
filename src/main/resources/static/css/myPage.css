@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+.sect-common{
+	height: 450px;
+	overflow: hidden;
+	width: 980px;
+	margin: 0 auto;
+}
+
+/* 멤버정보 전체 sector */
+.mycgv-info-wrap{
+	width: 882px;
+	height: 390px;
+	padding: 60px 40px 0 58px;
+	background: url("../images/myPage/bg_mycgv_info.gif");
+}
+
+/* 멤버 정보 (member영역) */
+.sect-person-info{
+	height: 135px;
+}
+
+/* member영역의 멤버 이미지 아이콘 */
+.box-image{
+	float: left;
+	width: 135px;
+	height: 135px;
+}
+
+.thumb-image{
+	display: block;
+	position: relative;
+}
+
+.thumb-image > img {
+	width: 135px;
+	height: 135px;
+	vertical-align: middle;
+}
+
+.profile-mask{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 135px;
+	height: 135px;
+	background: url("../images/myPage/bg_photocircle03.png");
+}
+
+
+
+
+/* member영역 멤버 정보 */
+.box-contents{
+	float: right;
+	width: 719px;
+}
+
+.person-info1{
+	width: 482px;
+	margin-bottom: 15px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #8c7651;
+	display: inline-block;
+	margin-right: 8px;
+	color: #342929;
+	font-weight: 500;
+}
+
+.person-info1 > strong{
+	font-size: 29px;
+	line-height: 32px;
+	
+}
+
+.person-info1 > em{
+	font-size: 14px;
+	line-height: 14px;
+	font-style: normal;
+}
+
+.person-info2{
+	width: 482px;
+}
+
+.person-info2 > p {
+	font-size: 14px;
+	color: black;
+	margin-top: 4px;
+	margin-bottom: 9px;
+}
+
+
+
+
+
+
+
+/* 영화 정보(movie 영역) */
+.sect-movie-info{
+	margin-top: 47px;
+}
+
+.col-my-coupon{
+	display: inline-block;
+	margin-left: 0;
+	padding-left: 0;
+	border: 0 none;
+	display: inline-block;
+}
+
+.col-my-coupon > h3{
+	width: 246px;
+	background-position: 31px 12px;
+	display: inline-block;
+	height: 40px;
+	margin: 0 0 14px;
+	background: url("../images/myPage/sprite_text.png") no-repeat 0 0;
+	line-height: 40px;
+	font:  0/0 a;
+	vertical-align: middle;
+	zoom:1;
+}
+
+.col-my-coupon li{
+	overflow: hidden;
+	width: 246px;
+	margin-top: 13px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #8c7651;
+	line-height: 16px;
+	vertical-align: baseline;
+}
+
+.col-my-coupon li > strong{
+	width: 143px;
+	float: left;
+	white-space: nowrap;
+	color: #342929;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.col-my-coupon li > span{
+	width: auto;
+	vertical-align: top;
+	float: right;
+	text-align: right;
+	color: #342929;
+}
+
+.col-my-coupon li > span > em{
+	color: #342929;
+	font-size: 16px;
+	vertical-align: middle;
+	font-weight: bold;
+	font-style: normal;
+	text-align: right;
+}
+
+.col-my-movie{
+	display: inline-block;
+	width: 250px;
+	height: 155px;
+	margin-left: 30px;
+	padding-left: 30px;
+	border-left: 1px solid #8c7651;
+}
+
+.col-favorite-theater{
+	display: inline-block;
+	width: 250px;
+	height: 155px;
+	margin-left: 30px;
+	padding-left: 30px;
+	border-left: 1px solid #8c7651;
+}
+
+
+.sect-favorite{
+	overflow: hidden;
+	width: 240px;
+	clear:both;
+	
+	
+}
+
+.sect-favorite li{
+	float: left;
+	width: 109px;
+	height: 41px;
+	margin: 0 3px 2px 0;
+	padding: 2px;
+	border: 2px solid #7b6746;
+}
+
+.sect-favorite li > a{
+	position: relative;
+	display: block;
+	width: 107px;
+	height: 39px;
+	border: 1px solid #7b6746;
+	color: #342929;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 39px;
+	text-align: center;
+}
+
+.sect-favorite li > a > span {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-family: verdana,sans-serif;
+	line-height: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

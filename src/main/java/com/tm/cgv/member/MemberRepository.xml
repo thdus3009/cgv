@@ -6,6 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.member.MemberRepository">
 
+	<sql id="search">
+		LIKE concat('%',#{search},'%') AND enabled=1
+	</sql>
+
 	<resultMap type="MemberBasicVO" id="MemberMap">
 		<id property="username" column="username"/>
 		<result property="password" column="password"/>
@@ -25,27 +29,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</collection>
 	</resultMap>
 
-	<select id="read" parameterType="MemberBasicVO" resultMap="MemberMap">
-		SELECT * FROM 
-		(SELECT * FROM member WHERE username = #{username}) M
-		LEFT OUTER JOIN 
-		(SELECT * FROM auth) A
-		ON(M.username = A.username);
-	</select>
-	
-	<select id="memberIdCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
-		SELECT * FROM member WHERE username = #{username}
-	</select>
-	
-	<select id="phoneCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
-		SELECT * FROM member WHERE phone = #{phone}
-	</select>
-	
 	<insert id="join" parameterType="MemberBasicVO">
 		INSERT INTO member VALUES(
 			#{username}, #{password}, #{name}, #{birth}, #{phone}, #{email}, 
 			#{gender}, #{age}, #{nick}, #{fileName}, 1
 		)
 	</insert>
-
+	
+	<select id="read" parameterType="MemberBasicVO" resultMap="MemberMap">
+		SELECT * FROM 
+		(SELECT * FROM member WHERE username = #{username}) M
+		LEFT OUTER JOIN 
+		(SELECT * FROM auth) A
+		ON(M.username = A.username)
+	</select>
+	
+	<select id="memberIdCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
+		SELECT * FROM member WHERE username = #{username} AND enabled=1
+	</select>
+	
+	<select id="phoneCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
+		SELECT * FROM member WHERE phone = #{phone} AND enabled=1
+	</select>
+ 
+	<select id="memberCount" resultType="Long">
+		SELECT COUNT(username) FROM member
+		<where>
+			<if test="kind == 'id'">
+				username <include refid="search"/>
+			</if>
+			<if test="kind == 'name'">
+				name <include refid="search"/>
+			</if>
+			<if test="kind == 'phone'">
+				phone <include refid="search"/>
+			</if>
+		</where>
+		ORDER BY username DESC LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<select id="memberList" parameterType="Pager" resultType="MemberBasicVO">
+		SELECT * FROM member 
+		<where>
+			<if test="kind == 'id'">
+				username <include refid="search"/>
+			</if>
+			<if test="kind == 'name'">
+				name <include refid="search"/>
+			</if>
+			<if test="kind == 'phone'">
+				phone <include refid="search"/>
+			</if>
+		</where>
+		ORDER BY username DESC LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<update id="memberDelete" parameterType="MemberBasicVO">
+		UPDATE member SET enabled = 0 WHERE username = #{username}
+	</update>
+ 
 </mapper>

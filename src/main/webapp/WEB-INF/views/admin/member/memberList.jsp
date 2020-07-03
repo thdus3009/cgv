@@ -5,6 +5,109 @@
 <html>
 <head>
 
+	<c:import url="../template/head.jsp"></c:import>
+</head>
+<body class="sb-nav-fixed">
+	<c:import url="../template/header.jsp"></c:import>
+	<div id="layoutSidenav">
+		<c:import url="../template/sidenav.jsp"></c:import>
+		
+		<div id="layoutSidenav_content">
+			
+			<main>
+				<br>
+				<!-- main contents -->
+				<!-- 검색창 -->
+				<div class="input-group">
+					<select id="searchTag" name="searchTag">
+					    <option value="">검색 태그</option>
+					    <option value="id">아이디</option>
+					    <option value="name">이름</option>
+					    <option value="phone">핸드폰</option>
+					    <option value="email"></option>
+					</select>
+					
+					<input id="searchTxt" class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+					<div class="input-group-append">
+						<button id="searchBtn" class="btn btn-primary" type="button">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</div>
+				
+				<!-- 테이블 -->
+				<div style="margin: 10px;">
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th>아이디</th>
+								<th>이름</th>
+								<th>생일</th>
+								<th>핸드폰</th>
+								<th>이메일</th>
+								<th>성별</th>
+								<th>나이</th>
+								<th>닉네임</th>
+								<th>계정상태(활성/탈퇴)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list}" var="vo">
+								<tr>
+									<th>${vo.username}</th>
+									<th>${vo.name}</th>
+									<th>${vo.birth}</th>
+									<th>${vo.phone}</th>
+									<th>${vo.email}</th>
+									<th>
+										<c:if test="${vo.gender eq true}">남</c:if>
+										<c:if test="${vo.gender eq false}">여</c:if>
+									</th>
+									<th>${vo.age}</th>
+									<th>${vo.nick}</th>
+									<th>
+										<div id="username" class="btns">
+										<c:if test="${vo.enabled eq 1}">
+											<%-- <a class="btn btn-info updateBtn" href="./memberUpdate?username=${vo.username}">수정</a>
+											<button id="${vo.username}" class="btn btn-danger deleteBtn" type="button">탈퇴</button> --%>
+											활성
+										</c:if>
+										<c:if test="${vo.enabled eq 0}">
+											탈퇴
+										</c:if>
+										</div>
+									</th>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					
+					<!-- pager -->
+					<div>
+						<ul class="pagination">
+							<c:if test="${pager.curBlock gt 1}">
+								<li class="page-item"><a class="page-link" href="./memberList?curPage=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+							</c:if>
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+								<li class="page-item"><a class="page-link" href="./memberList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							</c:forEach>
+							<c:if test="${pager.curBlock lt pager.totalBlock}">
+								<li class="page-item"><a class="page-link" href="./memberList?curPage=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+			</main>
+			<c:import url="../template/footer.jsp"></c:import>
+		</div>
+	</div>
+	<c:import url="../template/scripts.jsp"></c:import>
+	<script type="text/javascript" src="/js/admin/member/memberList.js"></script>
+</body>
+</html>
+
+<!-- 
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport"
@@ -24,10 +127,10 @@
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
+		<!-- 로고  
 		<a href="/"><img src="/images/header/h1_cgv.png"
 			class="admin-logo" /></a>
-		<!-- 검색 바-->
+		<!-- 검색 바 
 		<form
 			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 			<div class="input-group">
@@ -40,7 +143,7 @@
 				</div>
 			</div>
 		</form>
-		<!-- 로그인-->
+		<!-- 로그인 
 		<ul class="navbar-nav ml-auto ml-md-0">
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" id="userDropdown" href="#"
@@ -55,7 +158,7 @@
 		</ul>
 	</nav>
 
-	<!-- 사이드바 -->
+	<!-- 사이드바  
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
@@ -98,15 +201,15 @@
 			</nav>
 		</div>
 
-		<!-- 내용 -->
+		<!-- 내용  
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
 					<h1>member List</h1>
-					<!-- 내용 -->
+					<!-- 내용  
 					<div class="col_detail">
 
-						<!-- 멤버 목록 -->
+						<!-- 멤버 목록  
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<tr class="admin-tr">
@@ -122,8 +225,8 @@
 								<td>닉네임</td>
 								<td>상태</td>
 							</tr>
-							<!-- 반복 -->
-							<!-- 이름 누르면 회원 상세 페이지로 이동 -->
+							<!-- 반복  
+							<!-- 이름 누르면 회원 상세 페이지로 이동  
 							<c:forEach items="" var="vo">
 								<tr class="memberList-c">
 									<td>num</td>
@@ -141,7 +244,7 @@
 							</c:forEach>
 						</table>
 
-						<!-- 페이저 -->
+						<!-- 페이저  
 						<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
@@ -166,7 +269,7 @@
 		</div>
 	</div>
 
-	<!-- 스크립트 -->
+	<!-- 스크립트  
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
@@ -189,5 +292,4 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 
-</body>
-</html>
+ -->

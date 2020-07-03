@@ -4,8 +4,53 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<c:import url="./template/head.jsp"></c:import>
+</head>
+<body class="sb-nav-fixed">
+	<c:import url="./template/header.jsp"></c:import>
+	<div id="layoutSidenav">
+		<c:import url="./template/sidenav.jsp"></c:import>
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid">
+					<h1>AdminPage</h1>
+					<p class="pp">관리자 정보 수정 페이지</p>
+					<div>
+						<form action="" method="get">
+							<table>
+								<tr>
+									<th>이름</th>
+									<td><input type="text" required="required" value=""></td>
+								</tr>
+								<tr>
+									<th>아이디</th>
+									<td><input type="text" required="required" value=""></td>
+								</tr>
+								<tr>
+									<th>비밀번호</th>
+									<td><input type="text" class="pwd" value="" required="required"></td>
+								</tr>
+								<tr>
+									<th>비밀번호 확인</th>
+									<td><input type="text" class="pwd_chk" required="required"></td>
+								</tr>
+							</table>
+							<div class="btn_s">
+							<button id="cancle" type="submit">수정하기</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</main>
+			<c:import url="./template/footer.jsp"></c:import>
+		</div>
+	</div>
+	<c:import url="./template/scripts.jsp"></c:import>
 
-<meta charset="UTF-8">
+</body>
+</html>
+
+<!-- <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -24,10 +69,11 @@
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
+		
+		<!-- 로고 
 		<a href="/admin"><img src="/images/header/h1_cgv.png"
 			class="admin-logo" /></a>
-		<!-- 검색 바-->
+		<!-- 검색 바 
 		<form
 			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 			<div class="input-group">
@@ -40,7 +86,7 @@
 				</div>
 			</div>
 		</form>
-		<!-- 로그인-->
+		<!-- 로그인
 		<ul class="navbar-nav ml-auto ml-md-0">
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" id="userDropdown" href="#"
@@ -56,7 +102,7 @@
 		</ul>
 	</nav>
 
-	<!-- 사이드바 -->
+	<!-- 사이드바 
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
@@ -100,43 +146,15 @@
 			</nav>
 		</div>
 
-		<!-- 내용 -->
+		<!-- 내용  
 		<div id="layoutSidenav_content">
 			<main>
-				<div class="container-fluid">
-					<h1>AdminPage</h1>
-					<p class="pp">관리자 정보 수정 페이지</p>
-					<div>
-						<form action="" method="get">
-							<table>
-								<tr>
-									<th>이름</th>
-									<td><input type="text" required="required" value=""></td>
-								</tr>
-								<tr>
-									<th>아이디</th>
-									<td><input type="text" required="required" value=""></td>
-								</tr>
-								<tr>
-									<th>비밀번호</th>
-									<td><input type="text" class="pwd" value="" required="required"></td>
-								</tr>
-								<tr>
-									<th>비밀번호 확인</th>
-									<td><input type="text" class="pwd_chk" required="required"></td>
-								</tr>
-							</table>
-							<div class="btn_s">
-							<button id="cancle" type="submit">수정하기</button>
-							</div>
-						</form>
-					</div>
-				</div>
+				
 			</main>
 		</div>
 	</div>
 
-	<!-- 스크립트 -->
+	<!-- 스크립트 
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -168,7 +186,4 @@
 		crossorigin="anonymous"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-
-</body>
-</html>
+		crossorigin="anonymous"></script> -->

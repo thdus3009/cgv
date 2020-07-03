@@ -10,4 +10,5 @@ public class MovieTimeVO {
 	private String screenDate;
 	private String screenTime;
 	private int remainSeat;
+	private int selectedFilm;
 }
