@@ -1,10 +1,10 @@
 package com.tm.cgv.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +20,7 @@ import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
+import com.tm.cgv.util.BitFilmType;
 
 @Controller
 @RequestMapping("/admin/**")
@@ -69,17 +70,21 @@ public class AdminController {
 		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
 		
-		List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
+		//List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
 	
-		//쪼개는 서비스 만들기..theaterService에
-		List<String[]> totalInfo = theaterService.movieTime(m);
-		System.out.println(totalInfo.size());
-		String[] a = totalInfo.get(0);
-		System.out.println(a[0]);
-		System.out.println(a[1]);
+	
+		//가져온 theater list에 들어있는 filmType을 가져와서 리스트 생성
+		List<Integer> values = new ArrayList<Integer>();
+		for(TheaterVO i:list) {
+			values.add(i.getFilmType());
+		}
+		
+		//비트 플래그 이용하여 한자리수인 filmType을 쪼개어 list나 배열 형태로 가져와 jsp로 보내주기
+		BitFilmType bitFilmType = new BitFilmType();
+		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
 		
-		
+		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("theaterList", list);
 		mv.setViewName("admin/cinema/cinemaSelect");
@@ -185,6 +190,26 @@ public class AdminController {
 		mv.addObject("board", "theater");
 		mv.addObject("path", "Insert");
 		mv.setViewName("admin/cinema/theaterInsert");
+		return mv;
+	}
+	
+	@PostMapping("theaterInsert")
+	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("length : " + filmType.length);
+		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
+		
+		
+		
+		int result = theaterService.theaterInsert(theaterVO, filmType, row, col, grade, row_space, col_space);
+		
+		if(result>0) {
+			mv.setViewName("redirect:../admin/cinema/cinemaList");
+		}else {
+			System.out.println("등록 실패");
+		}
+		
 		return mv;
 	}
 	

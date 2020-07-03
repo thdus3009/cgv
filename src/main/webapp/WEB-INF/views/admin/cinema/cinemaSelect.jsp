@@ -65,19 +65,33 @@
 							<tbody id="accordion">
 								<c:forEach items="${theaterList}" var="vo" varStatus="i">
 									<tr class="theaterList-c">
-										<td><a href="../theater/theaterSelect" id="td${i.index}">${vo.num}</a></td>
+										<td><a href="./theaterSelect?num=${vo.num}" id="td${i.index}">${vo.num}</a></td>
 										<%-- <td>${vo.cinemaNum}</td> --%>
 										<td>${vo.name}</td>
 										<td>${vo.seatCount}</td>
-										<c:if test="${vo.filmType eq 0}">
-											<td>2D</td>
-										</c:if>
-										<c:if test="${vo.filmType eq 1}">
-											<td>3D</td>
-										</c:if>
-										<c:if test="${vo.filmType eq 2}">
-											<td>4D</td>
-										</c:if>
+						
+										<td>
+										
+									 	<c:forEach items="${filmType}" begin="${i.index}" end="${i.index}" var="f">
+											
+											<c:forEach items="${f}" var="m">
+												<c:if test="${m eq 1}">
+													2D
+												</c:if>
+												<c:if test="${m eq 2}">
+													3D
+												</c:if>
+												<c:if test="${m eq 4}">
+													4D
+												</c:if>
+											</c:forEach>
+											
+										</c:forEach>
+										
+										</td>
+										
+										
+										
 										<%-- <td><input class="time_block" name="tb${i.index}" type="button" value="▼"></td> --%>
 										<td>
 											<a class="collapsed card-link" id="table${i.index}" data-toggle="collapse" href="#tb${i.index}">▼</a>
@@ -90,6 +104,7 @@
 										</td>
 									</tr>
 								</c:forEach>
+
 							</tbody>
 						</table>
 					</div>

@@ -22,7 +22,7 @@
     right: 0;
     bottom: 0; */
     left: -120px;
-    overflow: scroll;
+
 }
 
     .theater .screen{
@@ -44,7 +44,7 @@
 
     .theater .seats{
 	position: relative;
-    margin: 56px auto 40px auto;
+
     height: 627px;
 }
 
@@ -76,7 +76,7 @@
     height: 15px;
 }
 
-    .theater .seats .roww .seat a{
+.theater .seats .roww .seat a{
 	display: block;
     cursor: pointer;
     width: 15px;
@@ -88,7 +88,7 @@
     font-size: 11px;
 }
 
-    .theater .seats .roww .seat a .no{
+.theater .seats .roww .seat a .no{
 	display: block;
     width: 15px;
     height: 15px;
@@ -99,12 +99,12 @@
     font-size: 10px;
 }
 
-    .theater .seats .roww .seat a .no{
+.theater .seats .roww .seat a .no{
 	background-color: #666;
     background-position: 1000px 1000px;
 }
 
-    .theater .seats .roww .seat a .no{
+.theater .seats .roww .seat a .no{
 	background-image: url("/images/movie/movieSeatReservation/seat_icons_20190221.png");
     background-repeat: no-repeat;
 }
@@ -121,32 +121,32 @@
 }
 
     .theater .seats .roww .seat.rating_economy a .no{
-	width: 11px;
-    height: 11px;
-    line-height: 11px;
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
     border: solid 2px #ed8c00;
 }
 
     .theater .seats .roww .seat.rating_comfort a .no{
-	width: 11px;
-    height: 11px;
-    line-height: 11px;
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
     border: solid 2px #01c73c;
 }
 
     .theater .seats .roww .seat.rating_prime a .no{
-	width: 11px;
-    height: 11px;
-    line-height: 11px;
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
     border: solid 2px #f71708;
 }
 
 
 
     .theater .seats .roww .seat.rating_prime a .no{
-	width: 11px;
-    height: 11px;
-    line-height: 11px;
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
     border: solid 2px #f71708;
 }
 
@@ -285,3 +285,4 @@
     width: 11px;
     height: 12px;
 }
+

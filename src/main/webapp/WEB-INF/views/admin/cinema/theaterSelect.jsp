@@ -6,17 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/head.jsp"></c:import> 
+<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 <link href="/css/admin/cinema/theaterSeat.css" rel="stylesheet" type="text/css">
-
 </head>
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
         <div id="layoutSidenav">
             <c:import url="../template/sidenav.jsp"></c:import>
             <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid">
-                        <h1 class="mt-4">Theater Select</h1>
+	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<main>
+				<div class="container-fluid">
+					 <h1 class="mt-4">Theater Select</h1>
                         <h3>${cine.name}</h3>
 						<div class="card mb-4">
                             <div class="card-body">
@@ -86,13 +87,13 @@
                     	<span id="de" class="btn btn-danger">Delete</span>
                     	<a href="./theaterUpdate?num=${theater.num}" id="up" class="btn btn-primary">Update</a>
                     </div>
-                    </div>
-                </main>
+				</div>
+			</main>
                 <c:import url="../template/footer.jsp"></c:import>
             </div>
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
-    <script type="text/javascript">
+            <script type="text/javascript">
 	$("#de").click(function(){
 		//정말 삭제할 거냐고 묻는 alert창
 		var check = confirm("삭제하시겠습니까?");
@@ -224,22 +225,9 @@
 					$(this).css('left',top+"px");
 				}
 			});
-
 		}
-		
-		
-		
-		
-		
-		
 	}
 	
-
-
-	
-
-
-
 
 </script>
     </body>

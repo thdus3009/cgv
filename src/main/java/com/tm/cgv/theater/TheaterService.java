@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.el.parser.ParseException;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatRepository;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceRepository;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
+import com.tm.cgv.util.BitFilmType;
 
 @Service
 public class TheaterService {
@@ -47,7 +47,19 @@ public class TheaterService {
 	
 	//Insert
 	@Transactional
-	public int theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{
+	public int theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{
+		//theater insert 하기 전에 받아온 filmType을 비트플래그로 한 자리 수로 만들어서 theaterVO의 filmType에 넣어주기 >> select에서^^
+		BitFilmType bitFilmType = new BitFilmType();
+
+		System.out.println("======필름 타입=======");
+		int film = 0;
+		for(int i:filmType) {
+			film += i;
+		}
+		theaterVO.setFilmType(film);
+		
+		
+		
 		//theaterVO Insert 하고 오기
 		int result = theaterRepository.theaterInsert(theaterVO);
 		int result2 = 0;

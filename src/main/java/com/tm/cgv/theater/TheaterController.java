@@ -58,16 +58,21 @@ public class TheaterController {
 	
 	//Insert
 	@PostMapping("theaterInsert")
-	public ModelAndView theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
+	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		
-		int result = theaterService.theaterInsert(theaterVO, row, col, grade, row_space, col_space);
+		System.out.println("length : " + filmType.length);
+		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
 		
-		if(result>0) {
-			mv.setViewName("redirect:../admin/cinema/cinemaList");
-		}else {
-			System.out.println("등록 실패");
-		}
+		
+		
+		int result = theaterService.theaterInsert(theaterVO, filmType, row, col, grade, row_space, col_space);
+//		
+//		if(result>0) {
+//			mv.setViewName("redirect:../admin/cinema/cinemaList");
+//		}else {
+//			System.out.println("등록 실패");
+//		}
 		
 		return mv;
 	}

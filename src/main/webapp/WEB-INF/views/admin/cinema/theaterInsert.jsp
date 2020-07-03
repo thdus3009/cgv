@@ -18,7 +18,7 @@
 			<main>
 				<div class="container-fluid">
  					<h1>Theater Insert</h1>
-	                <form id="frm" action="/theater/${board}${path}" method="post" enctype="multipart/form-data">
+	                <form id="frm" action="./${board}${path}" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<c:if test="${path eq 'Update'}">
 						<input type="hidden" name="num" id="num" value="${vo.num}">
@@ -48,17 +48,17 @@
 				   	 </select> -->
 				   	 
 				   	<label class="ckfm">
-					  <input type="checkbox" name="filmType" value="0"> 2D
+					  <input type="checkbox" name="filmType" value="1"> 2D
 					  <span class="checkmark"></span>
 					</label>
 					
 					<label class="ckfm">
-					  <input type="checkbox" name="filmType" value="1"> 3D
+					  <input type="checkbox" name="filmType" value="2"> 3D
 					  <span class="checkmark"></span>
 					</label>
 					
 					<label class="ckfm">
-					  <input type="checkbox" name="filmType" value="2"> 4D
+					  <input type="checkbox" name="filmType" value="4"> 4D
 					  <span class="checkmark"></span>
 					</label>
 				    <br>

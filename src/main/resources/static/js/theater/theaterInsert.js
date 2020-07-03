@@ -78,7 +78,7 @@ function changeSelect(){
 		 src="../images/login/btn_home.png">	
 		
 		$("#seats_list").append('<div class="seat_row r'+(i+1)+'"><div class="bo">'
-		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="/images/theater/plus.png" id="img"></span>'
+		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="../../images/theater/plus.png" id="img"></span>'
 		+'<div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
 		
 		
@@ -95,7 +95,7 @@ function changeSelect(){
 				//첫번째 로우라면  버튼 만들기
 				if(i<1){
 				$("#r"+i).find(".c"+j).append(
-				'<span class="col_plus" onclick="colPlus('+j+')"><img src="/images/theater/plus.png" id="img"></span>'+
+				'<span class="col_plus" onclick="colPlus('+j+')"><img src="../../images/theater/plus.png" id="img"></span>'+
 				'<div class="col_label">'+j+'</div>');
 				}	
 
