@@ -57,12 +57,13 @@ public class BitFuction {
 		list.add(resultD);
 		list.add(resultE);
 		
-		System.out.println(list.get(0)+"비트플래그..?");//ost
-		System.out.println(list.get(1)+"비트플래그..?");//배우
-		System.out.println(list.get(2)+"비트플래그..?");//영상미
-		System.out.println(list.get(3)+"비트플래그..?");//스토리
-		System.out.println(list.get(4)+"비트플래그..?");//감독
-		
+		/*
+		 * System.out.println(list.get(0)+"비트플래그..?");//ost
+		 * System.out.println(list.get(1)+"비트플래그..?");//배우
+		 * System.out.println(list.get(2)+"비트플래그..?");//영상미
+		 * System.out.println(list.get(3)+"비트플래그..?");//스토리
+		 * System.out.println(list.get(4)+"비트플래그..?");//감독
+		 */		
 		
 		
 		return list;

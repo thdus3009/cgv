@@ -23,6 +23,7 @@
 
 </head>
 <body class="sb-nav-fixed">
+
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
 		<a href="/admin"><img src="/images/header/h1_cgv.png"
@@ -70,15 +71,15 @@
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="./admin/member/memberList">
+						<a class="nav-link" href="/admin/member/memberList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="./admin/movie/movieList?kind=date">
+						</a> <a class="nav-link" href="/admin/movie/movieList?kind=date">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
-						</a> <a class="nav-link" href="./admin/cinema/cinemaList">
+						</a> <a class="nav-link" href="/admin/cinema/cinemaList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 극장 관리

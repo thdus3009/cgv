@@ -98,6 +98,9 @@ public class AdminController {
 	
 	@GetMapping("movie/movieSelect")
 	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO) throws Exception{
+		System.out.println(movieInfoVO.getNum()+"con 무비넘");
+		reservationVO.setMovieNum(movieInfoVO.getNum());// 파라미터가 num인데 reservation에는 movieNum이 영화번호이니까
+														// 영화번호에 num을 넣어줘야지 제대로 돌아감
 		
 		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
 		if(map.get("vo")==null) {
@@ -126,6 +129,34 @@ public class AdminController {
 		mv.addObject("cimp",map.get("cimp"));
 		mv.addObject("cimm",map.get("cimm"));
 		mv.setViewName("admin/movie/movieSelect");
+		return mv;
+	}
+	
+	@GetMapping("movie/movieUpdate")
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
+		if(map.get("vo")==null) {
+			mv.setViewName("redirect:./error/404");
+		}
+		mv.addObject("vo",map.get("vo"));
+		mv.addObject("path","Update");
+		mv.setViewName("admin/movie/movieUpdate");
+		
+		return mv;
+	}
+	
+	@PostMapping("movie/movieUpdate")
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
+		
+		mv.setViewName("redirect:admin/movie/movieSelect?num="+movieInfoVO.getNum());
+		return mv;
+	}
+	
+	@GetMapping("movie/movieDelete")
+	public ModelAndView movieDelete(ModelAndView mv, MovieInfoVO movieInfoVO) throws Exception{
+		long result = movieInfoService.movieDelete(movieInfoVO);
+		mv.setViewName("redirect:./movieList?kind=date");
 		return mv;
 	}
 	
