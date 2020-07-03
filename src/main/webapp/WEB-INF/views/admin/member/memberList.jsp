@@ -13,7 +13,7 @@
 		<c:import url="../template/sidenav.jsp"></c:import>
 		
 		<div id="layoutSidenav_content">
-			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<br>
 				<!-- main contents -->

@@ -48,6 +48,7 @@ public class AdminController {
 	@Autowired
 	private SeatSpaceService seatSpaceService;
 
+	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
