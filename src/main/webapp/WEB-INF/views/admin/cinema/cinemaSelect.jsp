@@ -40,8 +40,7 @@
 						</div>
 					</div>
 					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<thead>
 								<tr>
 									<th>Num</th>
@@ -98,8 +97,15 @@
 										</td>
 									</tr>
 									<tr id="tb${i.index}"  class="collapse" data-parent="#accordion">
-										<td colspan="5" id="">
-										  <div class="timetable" id="timetable${i.index}" name="${i.index}" style="overflow-x:auto; width:1400px;"></div>
+										<td colspan="5">
+											<div class="filmInfo">
+										  		<span class="film_title">2D</span><span class="film_color film_2d"></span>
+										  		<span class="film_title">3D</span><span class="film_color film_3d"></span>
+										  		<span class="film_title">4D</span><span class="film_color film_4d"></span>
+										  	</div>
+										  <div class="timetable" id="timetable${i.index}" name="${i.index}">
+										  	
+										  </div>
 											<div class="test123"></div>
 										</td>
 									</tr>
@@ -208,7 +214,7 @@
 
 			  	      $(data).each(function(){
 				  	      alert($(this)[0]);
-			  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+			  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11])/* , { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } } */);
 				  	  });
 
 			  	   /*    timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });

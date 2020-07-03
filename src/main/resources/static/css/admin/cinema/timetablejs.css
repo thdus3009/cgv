@@ -10,7 +10,7 @@
 .timetable>aside:before{content:"";display:block;background-color:#fff;height:46px;position:relative;margin-top:-46px;top:0}
 .timetable aside li,.timetable time li{height:46px}
 .timetable>section{flex:3 0 auto;padding:0!important;}
-.timetable>section time{display:block;width:100%;overflow-x:scroll;}
+.timetable>section time{display:block;width:100%;}
 .timetable>section>header{position:relative;top:0;z-index:3;width:100%;overflow:hidden;background-color:#fff;transform-style:preserve-3d}
 .timetable>section>header ul{display:flex;height:46px;align-items:center}
 .timetable>section>header li{flex:none;display:block;position:relative;width:66px}
