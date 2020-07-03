@@ -1,29 +1,16 @@
 package com.tm.cgv.admin;
 
 import java.util.List;
-
 import java.util.Map;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.tm.cgv.admin.cinema.AdminCinemaService;
-import com.tm.cgv.movieInfo.MovieInfoService;
-import com.tm.cgv.movieInfo.MovieInfoVO;
-import com.tm.cgv.reservation.ReservationVO;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberBasicVO;
@@ -32,9 +19,9 @@ import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
-
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -53,8 +40,7 @@ public class AdminController {
 	@Autowired
 	private TheaterService theaterService;
 	
-	@Autowired
-	private MovieInfoService movieInfoService;
+	
 	@ModelAttribute("boardM")
 	public String getBoard() {
 		return "movie";

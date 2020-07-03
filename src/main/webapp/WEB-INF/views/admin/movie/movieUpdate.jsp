@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/css/styles.css" />
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
@@ -130,7 +130,7 @@
 
 															<c:if test="${path  eq 'Update'}">
 																<p>${vo.movieImageVOs.originName}<i id="${vo.num}"
-																		class="glyphicon glyphicon-remove remove fileDelete"></i>
+																		class=" fileDelete"></i>
 																</p>
 															</c:if>
 
