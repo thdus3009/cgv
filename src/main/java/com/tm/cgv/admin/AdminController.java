@@ -1,14 +1,12 @@
 package com.tm.cgv.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,14 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
-import com.tm.cgv.movieTime.MovieTimeVO;
-import com.tm.cgv.seat.SeatService;
-import com.tm.cgv.seat.SeatVO;
-import com.tm.cgv.seatSpace.SeatSpaceService;
-import com.tm.cgv.seatSpace.SeatSpaceVO;
-import com.tm.cgv.theater.TheaterService;
-import com.tm.cgv.theater.TheaterVO;
-import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -32,8 +22,13 @@ import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.reservation.ReservationVO;
+import com.tm.cgv.seat.SeatService;
+import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatSpace.SeatSpaceService;
+import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
+import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.util.Pager;
 
 @Controller
@@ -60,9 +55,6 @@ public class AdminController {
 	
 	@Autowired
 	private MovieTimeService movieTimeService;
-	
-	@Autowired
-	private TheaterService theaterService;
 	
 	@GetMapping("/")
 	public String admin() throws Exception {
