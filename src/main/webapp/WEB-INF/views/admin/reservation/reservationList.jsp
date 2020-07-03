@@ -16,11 +16,13 @@
 <title>관리자 페이지</title>
 
 <link rel="stylesheet" href="/css/styles.css" />
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+<link rel="stylesheet" href="/css/admin/reservation/reservation.css" />
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -48,9 +50,10 @@
 				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a> 
+					<a class="dropdown-item" href="/">메인 페이지로</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
+					<a class="dropdown-item"
+						href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
 				</div></li>
 		</ul>
 	</nav>
@@ -63,25 +66,30 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/noticeList">
+						<a class="nav-link"
+							href="${pageContext.request.contextPath}/admin/notice/noticeList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 공지사항
 						</a>
 						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="${pageContext.request.contextPath}/admin/member/memberList">
+						<a class="nav-link"
+							href="${pageContext.request.contextPath}/admin/member/memberList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 회원 관리
-						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/movie/movieList">
+						</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/admin/movie/movieList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
-						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/cinema/cinemaList">
+						</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/admin/cinema/cinemaList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 극장 관리
-						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/reservation/reservationList">
+						</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/admin/reservation/reservationList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리
@@ -89,7 +97,8 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
-						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/bannerManage">
+						</a> <a class="nav-link"
+							href="${pageContext.request.contextPath}/admin/notice/bannerManage">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리
@@ -111,20 +120,20 @@
 							cellspacing="0">
 							<thead>
 								<tr class="admin-tr">
-									<th>No.</th>
+									<th style="width: 60px;">No.</th>
 									<th>영화제목</th>
-									<th>상영시간</th>
-									<th>타입</th>
-									<th>영화관</th>
-									<th>극장</th>
-									<th>총 좌석</th>
-									<th>수입</th>
-									<th>일반</th>
-									<th>청소년</th>
-									<th>우대</th>
-									<th>paymentNum</th>
-									<th>생성일</th>
-									<th>삭제일</th>
+									<th style="width: 100px;">상영시간</th>
+									<th style="width: 100px;">가격</th>
+									<th style="width: 80px;">타입</th>
+									<th style="width: 100px;">영화관</th>
+									<th style="width: 100px;">극장</th>
+									<th style="width: 90px;">총 좌석</th>
+									<th style="width: 130px;">수입</th>
+									<th style="width: 80px;">일반</th>
+									<th style="width: 80px;">청소년</th>
+									<th style="width: 80px;">우대</th>
+									<th style="width: 170px;">생성일</th>
+									<th style="width: 50px;">삭제</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -132,6 +141,7 @@
 									<th>No.</th>
 									<th>영화제목</th>
 									<th>상영시간</th>
+									<th>가격</th>
 									<th>타입</th>
 									<th>영화관</th>
 									<th>극장</th>
@@ -140,9 +150,8 @@
 									<th>일반</th>
 									<th>청소년</th>
 									<th>우대</th>
-									<th>paymentNum</th>
 									<th>생성일</th>
-									<th>삭제일</th>
+									<th>삭제</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -150,18 +159,18 @@
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>
 										<td class=""><a href="#">${vo.movieNum}</a></td>
-										<td class="ate-center">${vo.movieTimeNum}</td>
+										<td class="ate-center">${vo.movieTimeNum}분</td>
+										<td>${vo.paymentNum}</td>
 										<td>${vo.filmType}</td>
 										<td class="ate-center">${vo.cinemaName}</td>
 										<td class="ate-center">${vo.theaterName}</td>
-										<td class="ate-center">${vo.seats}</td>
+										<td class="ate-center">${vo.seats}개</td>
 										<td>${vo.totalPrice}</td>
 										<td>${vo.common}</td>
 										<td>${vo.teenager}</td>
 										<td>${vo.preference}</td>
-										<td>${vo.paymentNum}</td>
 										<td>${vo.createAt}</td>
-										<td>${vo.deleteAt}</td>
+										<td class="del-td">X</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -196,6 +205,14 @@
 	</div>
 
 	<!-- 스크립트 -->
+	<script type="text/javascript">
+		$(".del-td").click(function(){
+			console.log("d")
+			if(confirm("삭제하시겠습니까?")){
+				alert("삭제되었습니다.");
+			}
+		});
+	</script>
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
