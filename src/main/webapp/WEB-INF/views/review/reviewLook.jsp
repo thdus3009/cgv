@@ -123,14 +123,14 @@
 							<!-- data-toggle="modal" data-target="#myModal" -->
 							
 							<button id="review_update" data-num3="${vo.reservationNum}" data-title="${vo.title}" data-contents="${vo.contents}" data-egg="${vo.egg}"
-							 class="ud update popupBtn1" >수정하기</button>
+							 class="ud update Up_popupBtn1" >수정하기</button>
 							<span class="ud" > ㆍ </span>
 							<img class="ud" alt="" src="${pageContext.request.contextPath}/images/like.png">
 							<span class="ud" >&nbsp; ${vo.like1}</span>							
 
 							<!-- Modal 2 Button-->
 							<!-- data-toggle="modal" data-target="#myModal2"  -->
-							<button type="button" class="popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num3="${vo.reservationNum}"></button>
+							<button type="button" class="Up_popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num3="${vo.reservationNum}"></button>
 						</div>
 					</div>
 				</div>
@@ -164,17 +164,17 @@
 		 
 
 		//모달1 영역밖 클릭시 닫힘방지 (foreach문이기 때문에 꼭 class로 이벤트를 주어야 한다.)
-		 $(".popupBtn1").click(function(){
+		 $(".Up_popupBtn1").click(function(){
 		     $("#myModal").modal({backdrop: 'static', keyboard: false});
 		 });
 /* 		//모달2 영역밖 클릭시 닫힘방지 (foreach문이기 때문에 꼭 class로 이벤트를 주어야 한다.)
-		 $(".popupBtn2").click(function(){
+		 $(".Up_popupBtn2").click(function(){
 		     $("#myModal2").modal({backdrop: 'static', keyboard: false});
 		 });
  */
 		
-		//1.첫 번째 모달     /* 수정button(.popupBtn1)을 클릭했을때 초기화된 상태로 */  /* x버튼 눌렀을때 초기화되면 자잘한 문제들이 생김 */
-		$(".popupBtn1").click(function(){
+		//1.첫 번째 모달     /* 수정button(.Up_popupBtn1)을 클릭했을때 초기화된 상태로 */  /* x버튼 눌렀을때 초기화되면 자잘한 문제들이 생김 */
+		$(".Up_popupBtn1").click(function(){
 			//contents부분 정보 다시 불러오기
 			
 			g_num=$(this).data("num3");
@@ -186,7 +186,7 @@
 
 			g_contents=$(this).data("contents");
 			console.log(g_contents);
-			document.getElementById("mContents").value =g_contents;
+			document.getElementById("mContents").value =g_contents; //innerHTML로 하면 값이 안바뀐다.
 
 			console.log("aaa");
 			//egg적용
@@ -231,15 +231,15 @@
 			
 			if(confirm("관람평이 수정되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
 
-				var popupBtn2List = document.getElementsByClassName('popupBtn2');
+				var Up_popupBtn2List = document.getElementsByClassName('Up_popupBtn2');
 				
-				for(i=0; i<popupBtn2List.length; i++){
+				for(i=0; i<Up_popupBtn2List.length; i++){
 					
-					if(popupBtn2List[i].dataset.num3 == g_num){
-						console.log("list.dataset.num : "+popupBtn2List[i].dataset.num3);
+					if(Up_popupBtn2List[i].dataset.num3 == g_num){
+						console.log("list.dataset.num : "+Up_popupBtn2List[i].dataset.num3);
 						//2번째 모달로 이동
 						//(i번째 2번째모달 이동버튼 클릭)
-						popupBtn2List[i].click();
+						Up_popupBtn2List[i].click();
 						break;
 					} 
 				}
@@ -260,6 +260,7 @@
 						_csrf : $("#_csrf").val(),
 					},
 					success:function(data){
+						alert("수정이 완료되었습니다.");
 						location.reload();
 						
 					}
@@ -282,7 +283,7 @@
 		 });
 
   	//2번째 모달들어갈때 checked초기화
-	$(".popupBtn2").click(function(){
+	$(".Up_popupBtn2").click(function(){
 		
 		// init
 		$(".charmPoint").prop("checked", false);
@@ -320,6 +321,7 @@
 							_csrf : $("#_csrf").val(),
 						},
 						success:function(data){
+							alert("수정이 완료되었습니다.");
 							location.reload();
 							
 						}
