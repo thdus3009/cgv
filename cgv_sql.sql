@@ -178,6 +178,7 @@ CREATE TABLE `movieTime` (
   `screenDate` date DEFAULT NULL,
   `screenTime` varchar(5) DEFAULT NULL,
   `remainSeat` int(11) DEFAULT NULL,
+  `selectedFirm` int(11) DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `MOVIETIME_MOVIENUM_FK_idx` (`movieNum`),
   KEY `MOVIETIME_THEATERNUM_FK_idx` (`theaterNum`),

@@ -82,8 +82,12 @@
 										<input id="remainSeat" type="hidden" name="remainSeat" value="${theaterVO.seatCount}"/>
 										
 										<div class="form-group">
-											<label for="title">선택된 영화 : </label>
+											<label for="title">선택된 영화 :</label>
 											<input id="movieTitle" class="form-control" type="text" disabled>
+										</div>
+										<div class="form-group">
+											<label for="selectedFilm">상영 필름 종류 선택:</label>
+											<select id=selectedFilm name="selectedFilm"></select>
 										</div>
 										<div class="form-group">
 											<label for="screenDate">날짜 선택 :</label>
@@ -200,6 +204,24 @@
 				location.href = "./insert?theaterNum="+theaterNum+"curPage=&kind="+searchTag+"&search="+searchTxt;
 			});
 		}
+
+		// 필름 종류 초기화
+		function initSelectedFilm() {
+
+			var filmType = ${theaterVO.filmType};
+
+			if(filmType & 1) {
+				$("#selectedFilm").append('<option value="1">2D</option>');
+			}
+
+			if(filmType & 2) {
+				$("#selectedFilm").append('<option value="2">3D</option>');
+			}
+			
+			if(filmType & 4) {
+				$("#selectedFilm").append('<option value="4">4D</option>');
+			}
+		}
 		
 		// datepicker 초기화
 		function initDatePicker() {
@@ -280,33 +302,50 @@
 					return;
 				}
 
+				var selectedFilm = $("#selectedFilm").val();
+				switch(selectedFilm) {
+				case "1": 
+					selectedFilm = "2D";
+					break;
+				case "2":
+					selectedFilm = "3D";
+					break;
+				case "4":
+					selectedFilm = "4D";
+					break;
+				}
+				
 				var msg = "정말 등록하시겠습니까?\n\n" +
 						"영화 이름 : " + $("#movieTitle").val() +"\n" +
+						"필름 종류 : " + selectedFilm + "\n" +
 						"상영 날짜 : " + $("#datepicker").val() +"\n" +
 						"상영 시간 : " + $("#timepicker").val();
 
 				var screenTimeSplit = $("#timepicker").val().split(" ");
 				var screenTime = screenTimeSplit[0] + screenTimeSplit[1] + screenTimeSplit[2]
 
-				if(confirm(msg)) {
-					$.post(
-						"./insert", {
-							_csrf : $("#_csrf").val(),
-							movieNum : $("#movieNum").val(),
-							theaterNum : $("#theaterNum").val(),
-							screenDate : $("#datepicker").val(),
-							screenTime : screenTime,
-							remainSeat : $("#remainSeat").val()
-						}, function(result) {
+				if(!confirm(msg))
+					return;
 
-							if(result > 0) {
-								alert("등록이 완료되었습니다");
-								location.href = "/admin";
-							} else {
-								alert("등록 실패, 재등록해주세요");
-							}
-						});
-				}
+				// 보내기			
+				$.post(
+					"./insert", {
+						_csrf : $("#_csrf").val(),
+						movieNum : $("#movieNum").val(),
+						theaterNum : $("#theaterNum").val(),
+						screenDate : $("#datepicker").val(),
+						screenTime : screenTime,
+						remainSeat : $("#remainSeat").val(),
+						selectedFilm : $("#selectedFilm").val()
+					}, function(result) {
+						if(result > 0) {
+							alert("등록이 완료되었습니다");
+							location.href = "/admin";
+						} else {
+							alert("등록 실패, 재등록해주세요");
+						}
+					});
+				
 			});
 		}
 		
@@ -321,6 +360,7 @@
 			addClickEventToMovieSearchBtn();
 			
 			// 날짜 시간 등록 단계 관련
+			initSelectedFilm();
 			initDatePicker();
 			initTimePicker();
 

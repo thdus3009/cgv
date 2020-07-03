@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<insert id="insert" parameterType="MovieTimeVO">
  		INSERT INTO movieTime VALUES(
- 			0, #{movieNum}, #{theaterNum}, #{screenDate}, #{screenTime}, #{remainSeat}
+ 			0, #{movieNum}, #{theaterNum}, #{screenDate}, #{screenTime}, #{remainSeat}, #{selectedFilm}
  		)
  	</insert>
 </mapper>
