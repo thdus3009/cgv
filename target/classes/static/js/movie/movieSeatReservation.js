@@ -652,8 +652,7 @@
 	
 	function priceCount(){
 
-//		console.log("sort : "+selectedSeatGrade.sort());
-		
+		console.log("aaaa")
 		for(i=0;i<selectedSeatGrade.length;i++){
 //			console.log(i + " : "+selectedSeatGrade[i]);
 			

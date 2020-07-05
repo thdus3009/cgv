@@ -57,7 +57,7 @@
 						<a href="#" class="button btn-guide" onclick="return false;">
 							<span>예매가이드</span>
 						</a>
-						<a href="#" class="button btn-reservation-restart" onclick="return false;">
+						<a href="javascript:location.reload();" class="button btn-reservation-restart" >
 							<span>예매 다시하기</span>
 						</a>
 					</span>

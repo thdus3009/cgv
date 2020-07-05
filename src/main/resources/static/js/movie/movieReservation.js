@@ -175,6 +175,11 @@ function ajaxLoad(){
 				$("#movie-list-content li").each(function(){
 					if($(this).data("title") == result[i].movieInfoVOs[0].title){
 						$(this).removeClass("dimmed");
+						
+						$li = $(this);
+						console.log("aaaaa>>>");
+						console.log($(this));
+						$("#movie-list-content").prepend($li);
 					}
 					
 				});
@@ -213,8 +218,16 @@ function ajaxLoad(){
 							console.log(result[i].cinemaVOs[0].name)							
 							
 							$(this).removeClass("dimmed");
-							console.log($(this).parent().parent().parent().data("index"));
 							
+							$li = $(this);
+							$parent = $(this).parent();
+							console.log("aaaaa>>>");
+							console.log($(this));
+							$parent.prepend($li);
+							
+							
+							//dimmed가 아닌 극장의 수 계산
+							console.log($(this).parent().parent().parent().data("index"));
 							var prev = $(this).parent().parent().parent().data("index");
 							prev += 1;
 							$(this).parent().parent().parent().data("index",prev);

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="movieInfoVOs" javaType="List" ofType="MovieInfoVO">
 			<result column="mNum" property="num"/>
 			<result column="title" property="title"/>
+			<result column="rate" property="rate"/>
 		</collection>
 		
 		<collection property="movieTimeVOs" javaType="List" ofType="MovieTimeVO">
@@ -42,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select * from 
 		(select * from 
 		(select * from 
-		(select num as mNum,title from movieInfo) M
+		(select num as mNum,title,rate from movieInfo) M
 		join
 		(select num as tNum, movieNum, theaterNum,screenDate,screenTime,remainSeat from movieTime
         where left(screenTime,2) >= date_format(sysdate(),'%H')
@@ -57,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(I.cNum = B.cinemaNum)) F
 		where F.title Like concat('%',#{title},'%') and F.cName Like concat('%',#{theater},'%') and F.screenDate Like concat('%',#{date},'%')
         and screenDate > date_add(now(),interval -1 day)
+        order by rate ,cname
 	</select>
  	
  
