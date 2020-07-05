@@ -256,7 +256,22 @@ public class AdminController {
 		
 		List<SeatVO> seatList = seatService.seatSelect(seatVO);
 		
+		//복사해온것
+		List<TheaterVO> list = new ArrayList<TheaterVO>();
+		list.add(theaterVO);
 		
+		//가져온 theater list에 들어있는 filmType을 가져와서 리스트 생성
+		List<Integer> values = new ArrayList<Integer>();
+		for(TheaterVO i:list) {
+			values.add(i.getFilmType());
+		}
+		
+		//비트 플래그 이용하여 한자리수인 filmType을 쪼개어 list나 배열 형태로 가져와 jsp로 보내주기
+		BitFilmType bitFilmType = new BitFilmType();
+		List<List<Byte>> filmType = bitFilmType.getState(values);
+		
+		mv.addObject("filmType", filmType);
+	
 		mv.addObject("rowList", rowList);
 		mv.addObject("maxCol", maxCol);
 		mv.addObject("seatSpaceList", seatSpaceList);
