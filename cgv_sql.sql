@@ -6,9 +6,6 @@ commit;
 
 -- DDL
 
-DROP TABLE `user`;
-DROP TABLE `auth2`;
-
 DROP TABLE `member`;
 DROP TABLE `auth`;
 DROP TABLE `movieInfo`;
@@ -40,28 +37,6 @@ CREATE TABLE `member` (
   `enabled` tinyint(1) default 1,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `user` (
-  `username` varchar(50),
-  `password` varchar(100) DEFAULT NULL,
-  `name` varchar(20) DEFAULT NULL,
-  `birth` varchar(10) DEFAULT NULL,
-  `phone` varchar(13) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `gender` tinyint(1) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `nick` varchar(20) DEFAULT NULL,
-  `fileName` varchar(255) DEFAULT NULL,
-  `enabled` tinyint(1) default 1,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `auth2` (
-  `username` varchar(50),
-  `auth` varchar(100) DEFAULT NULL,
-  KEY `AUTH_MEMBERNUM_FK_idx` (`username`),
-  CONSTRAINT `AUTH2_USERNAME_FK` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `auth` (
   `username` varchar(50),
@@ -111,19 +86,19 @@ CREATE TABLE `movieVideo` (
 
 CREATE TABLE `review` (
   `num` int(11) NOT NULL AUTO_INCREMENT,
-  `movieNum` int(11) DEFAULT NULL,
+  `reservationNum` int(11) DEFAULT NULL,
   `username` varchar(50) DEFAULT NULL,
   `contents` varchar(255) DEFAULT NULL,
-  `like` int(11) DEFAULT NULL,
+  `like1` int(11) DEFAULT NULL,
   `egg` tinyint(1) DEFAULT NULL,
   `charmPoint` tinyint(4) DEFAULT NULL,
   `emotionPoint` tinyint(4) DEFAULT NULL,
   `createAt` date DEFAULT NULL,
   `deleteAt` date DEFAULT NULL,
   PRIMARY KEY (`num`),
-  KEY `REVIEW_MOVIENUM_FK_idx` (`movieNum`),
+  KEY `REVIEW_RESERVATIONNUM_FK_idx` (`reservationNum`),
   KEY `REVIEW_USERNAME_FK_idx` (`username`),
-  CONSTRAINT `REVIEW_MOVIENUM_FK` FOREIGN KEY (`movieNum`) REFERENCES `movieInfo` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `REVIEW_RESERVATIONNUM_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `REVIEW_USERNAME_FK` FOREIGN KEY (`username`) REFERENCES `member` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
