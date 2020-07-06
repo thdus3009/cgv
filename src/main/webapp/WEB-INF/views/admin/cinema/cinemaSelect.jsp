@@ -4,30 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<c:import url="../template/head.jsp"></c:import> 
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
-<link rel="stylesheet" href="/css/admin/cinema/demo.css">
-<style type="text/css">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-
-<title>관리자 페이지</title>
-
-<link href="/css/styles.css" rel="stylesheet" />
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-
-</style>
+	<meta charset="UTF-8">
+	<c:import url="../template/head.jsp"></c:import> 
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
+	<link rel="stylesheet" href="/css/admin/cinema/demo.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<title>관리자 페이지</title>
+	
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -58,7 +50,8 @@
 					<a class="dropdown-item" href="/">메인 페이지로</a> 
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
-				</div></li>
+				</div>
+			</li>
 		</ul>
 	</nav>
 
@@ -129,7 +122,6 @@
 					</div>
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
 							<thead>
 								<tr>
 									<th>Num</th>
@@ -157,30 +149,21 @@
 										<%-- <td>${vo.cinemaNum}</td> --%>
 										<td>${vo.name}</td>
 										<td>${vo.seatCount}</td>
-						
 										<td>
-										
-									 	<c:forEach items="${filmType}" begin="${i.index}" end="${i.index}" var="f">
-											
-											<c:forEach items="${f}" var="m">
-												<c:if test="${m eq 1}">
-													2D
-												</c:if>
-												<c:if test="${m eq 2}">
-													3D
-												</c:if>
-												<c:if test="${m eq 4}">
-													4D
-												</c:if>
+										 	<c:forEach items="${filmType}" begin="${i.index}" end="${i.index}" var="f">
+												<c:forEach items="${f}" var="m">
+													<c:if test="${m eq 1}">
+														2D
+													</c:if>
+													<c:if test="${m eq 2}">
+														3D
+													</c:if>
+													<c:if test="${m eq 4}">
+														4D
+													</c:if>
+												</c:forEach>
 											</c:forEach>
-											
-										</c:forEach>
-										
 										</td>
-										
-										
-										
-										<%-- <td><input class="time_block" name="tb${i.index}" type="button" value="▼"></td> --%>
 										<td>
 											<a class="collapsed card-link" id="table${i.index}" data-toggle="collapse" href="#tb${i.index}">▼</a>
 										</td>
@@ -192,15 +175,13 @@
 										  		<span class="film_title">3D</span><span class="film_color film_3d"></span>
 										  		<span class="film_title">4D</span><span class="film_color film_4d"></span>
 										  	</div>
-										  <div class="timetable" id="timetable${i.index}" name="${i.index}">
+										  	<div class="timetable" id="timetable${i.index}" name="${i.index}">
 										  	
-										  </div>
+										  	</div>
 											<div class="test123"></div>
 										</td>
 									</tr>
 								</c:forEach>
-
-							</tbody>
 						</table>
 					</div>
 					<div class="">
@@ -209,32 +190,26 @@
                     </div>
 				</div>
 			</main>
-                <c:import url="../template/footer.jsp"></c:import>
+            <c:import url="../template/footer.jsp"></c:import>
             </div>
-        </div>
-        <c:import url="../template/scripts.jsp"></c:import>
-        <script type="text/javascript">
-			//delete submit
-			$("#de").click(function(){
-				//정말 삭제할 거냐고 묻는 alert창
-				var check = confirm("삭제하시겠습니까?");
-				if(check){
-					location.href="./cinemaDelete?num="+${cine.num};
-				}
-			});
-
-			
-			//update submit
-			$("#up").click(function(){		
-				location.href="./cinemaUpdate?num="+${cine.num};
-			});
+    </div>
+    <c:import url="../template/scripts.jsp"></c:import>
+    <script type="text/javascript">
+		//delete submit
+		$("#de").click(function(){
+			//정말 삭제할 거냐고 묻는 alert창
+			var check = confirm("삭제하시겠습니까?");
+			if(check){
+				location.href="./cinemaDelete?num="+${cine.num};
+			}
+		});
 
 
-			//time block 스르륵
+		//time block 스르륵
 
-        </script>
+    </script>
         
-         <script src="/js/theater/timetable.js"></script>
+    <script src="/js/theater/timetable.js"></script>
 
     <script>
 /*     	$("#table0").click(function(){
@@ -367,24 +342,15 @@
       $(".room-timeline").css("width","100%");
       
     </script>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
-    </body>
-
+</body>
+</html>
 
