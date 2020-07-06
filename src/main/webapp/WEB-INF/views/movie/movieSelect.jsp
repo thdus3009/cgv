@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/css/movie/movieSelect2.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieSelect2.css" rel="stylesheet" type="text/css"><!-- review -->
 
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 
@@ -321,31 +321,29 @@
 						</ul>
 						
 
-						<!-- 시작 -->
+						<!-- 리뷰 시작 -->
 						<div class="wrap-persongrade">
 							<ul id="movie_point_list_container" class="point_col2">
 								<li class="liCommentFirst" data-spoilercnt="0" data-reportcnt="0">
 									<a href="" class="screen_spoiler">&nbsp;</a>
 									
-									<!-- 리뷰 이미지 -->
-									<div class="box-image">
-										<!-- <span class="thumb-image">
-											<img alt="사용자 프로필" src="">
-											<span class="profile-mask"></span>
-										</span> -->
+									<!-- 리뷰 이미지 (movieSelect2.css참고)-->
+									<div class="box-image2">
+									
 									</div>
 											
-									<!-- 리뷰 컨텐츠 -->									
-									<div class="writer-name">
-										<p>
-											<!-- <div class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px"></div> --> 
-											<div class="id">admin</div>
-										</p>
+									<!-- 계란,아이디 -->								
+									<div class="writer-name" style="position: relative;">										 
+											<div class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px;"></div>   
+											<div class="id id_name">admin</div>
 									</div>
+									
+									<!-- 리뷰 컨텐츠 -->	
 									<div class="box-comment" style="padding-top: 20px;">
 										<p>좋아요 재밌어요!!</p>
 									</div>
 									
+									<!-- 날짜, 좋아요 -->
  									<div class="box-contents"> 									
 										<ul class="writerinfo">											
 											<li class="writer-etc">
@@ -360,22 +358,14 @@
 								</li>
 							</ul>
 						</div>
-						<!-- 끝 -->
+						<!-- 리뷰 끝 -->
 						
 					</div>
 						
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
 						
-								<div class="bbs_btn">
-									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
-									
-									<c:if test="${bbsVO.writer eq memberVO.id }">
-										<a href="./${board}Delete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
-										<a href="./${board}Update?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
-									</c:if>
-									
-								</div>
+
 							
 						
 					</div>

@@ -80,7 +80,6 @@ public class ReviewController {
 	@PostMapping("review_Write1")
 	@ResponseBody
 	public int review_Write1(ReviewVO reviewVO, ModelAndView mv)throws Exception {
-		
 		int result=0;
 		result = reviewService.review_Write1(reviewVO);
 		
@@ -199,6 +198,15 @@ public class ReviewController {
 			System.out.println("update2 성공");
 		}
 		return result;
+	}
+	
+	@GetMapping("movieSelect")
+	public void movieSelect(int num)throws Exception {
+		//reviewLook에서 파라미터 끌어다 쓰는거 찾아보기(movieList.jsp, MovieInfoController.java 참고)
+		System.out.println(num);
+		//List<ReviewVO> reviewList = reviewService.movieSelect(movieNum, pager);
+		
+		
 	}
 		
 	

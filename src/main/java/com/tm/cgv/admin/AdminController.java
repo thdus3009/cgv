@@ -56,7 +56,8 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 	
-
+	@Autowired
+	private MovieInfoService movieInfoService;
 	
 	@Autowired
 	private MovieTimeService movieTimeService;
@@ -65,6 +66,7 @@ public class AdminController {
 	public String admin() throws Exception {
 		return "admin/adminIndex";
 	}
+	
 	//==============================
 	// movieInfo
 	//==============================
