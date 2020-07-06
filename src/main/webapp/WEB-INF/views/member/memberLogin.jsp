@@ -60,6 +60,7 @@
 								<!-- 2. csrf token input field-->
 								<!-- 3. id input field의 name 속성값이 'username' -->
 								<!-- 4. pw input field의 name 속성값이 'password' -->
+								<input type="hidden" id="location" name="loc" value="/"/>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 								<input type="text" name="username">
 								<input type="password" name="password">

@@ -87,7 +87,6 @@ CREATE TABLE `movieVideo` (
 CREATE TABLE `review` (
   `num` int(11) NOT NULL AUTO_INCREMENT,
   `reservationNum` int(11) DEFAULT NULL,
-  `username` varchar(50) DEFAULT NULL,
   `contents` varchar(255) DEFAULT NULL,
   `like1` int(11) DEFAULT NULL,
   `egg` tinyint(1) DEFAULT NULL,
@@ -97,9 +96,7 @@ CREATE TABLE `review` (
   `deleteAt` date DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `REVIEW_RESERVATIONNUM_FK_idx` (`reservationNum`),
-  KEY `REVIEW_USERNAME_FK_idx` (`username`),
-  CONSTRAINT `REVIEW_RESERVATIONNUM_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `REVIEW_USERNAME_FK` FOREIGN KEY (`username`) REFERENCES `member` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `REVIEW_RESERVATIONNUM_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `cinema` (

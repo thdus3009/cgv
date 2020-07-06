@@ -1,5 +1,7 @@
 package com.tm.cgv.member;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.memberCoupon.MemberCouponService;
+import com.tm.cgv.point.PointService;
+import com.tm.cgv.point.PointVO;
+
 @Controller
 @RequestMapping("/member/**")
 @EnableAsync
@@ -16,6 +22,12 @@ class MemberController {
 	
 	@Autowired
     private MemberService memberService;
+	
+	@Autowired
+	private PointService pointService;
+	
+	@Autowired
+	private MemberCouponService memberCouponService;
 	
 	// 약관 동의 페이지
     @GetMapping("memberTerms")
@@ -85,6 +97,18 @@ class MemberController {
         }
         return result;
     }
+    
+    // nick이 이미 있는지 체크
+    @GetMapping("memberNickCheck")
+    @ResponseBody
+    public int memberNickCheck(MemberBasicVO memberBasicVO) throws Exception{
+    	memberBasicVO = memberService.memberNickCheck(memberBasicVO);
+    	int result = 0;
+    	if(memberBasicVO != null) {
+    		result = 1;
+    	}
+    	return result;
+    }
 
     // 등록된 번호인지 체크
     @GetMapping("phoneAuth")
@@ -130,6 +154,34 @@ class MemberController {
   	
   	// 회원 마이페이지
     @GetMapping("myPage")
+    public ModelAndView memberMypage(HttpSession session) throws Exception {
+    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	PointVO pointVO = new PointVO();
+    	pointVO.setUsername(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
+    	int cjPoint = pointService.getCjPoint(pointVO);
+    	System.out.println(cjPoint);
+    	
+//    	MemberCouponVO memberCouponVO = new MemberCouponVO();
+//    	memberCouponVO.setUid(memberBasicVO.getUsername());
+//    	memberCouponVO = 
+    	
+    	mv.addObject("cjPoint", cjPoint);
+    	mv.setViewName("member/memberMypage");
+    	return mv;
+    }
+    
+    @GetMapping("edit")
+    public ModelAndView memberEdit() throws Exception{
+    	
+    	ModelAndView mv = new ModelAndView();
+    	
+    	mv.setViewName("member/memberPopUpEdit");
+    	return mv;
+    }
+    
+    @PostMapping("myPage")
     public ModelAndView memberMypage(MemberBasicVO memberBasicVO) throws Exception {
     	
     	ModelAndView mv = new ModelAndView();
@@ -137,6 +189,8 @@ class MemberController {
     	mv.setViewName("member/memberMypage");
     	return mv;
     }
+    
+    
  	
     // 회원탈퇴
    	@GetMapping("memberDelete")

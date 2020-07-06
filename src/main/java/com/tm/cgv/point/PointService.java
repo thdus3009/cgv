@@ -15,6 +15,10 @@ public class PointService {
 		return pointRepository.pointSelectList(memberNum);
 	}
 	
+	public Integer getCjPoint(PointVO pointVO) throws Exception{
+		return pointRepository.getCjPoint(pointVO);
+	}
+	
 	public int pointDiscountUpdate(PointVO pointVO) throws Exception{
 		return pointRepository.pointDiscountUpdate(pointVO);
 	}

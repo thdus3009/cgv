@@ -48,6 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM member WHERE username = #{username} AND enabled=1
 	</select>
 	
+	<select id="memberNickCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
+		SELECT * FROM member WHERE nick = #{nick} AND enabled=1
+	</select>
+	
 	<select id="phoneCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
 		SELECT * FROM member WHERE phone = #{phone} AND enabled=1
 	</select>

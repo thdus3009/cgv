@@ -17,6 +17,9 @@ public interface MemberRepository {
 	// 이미 등록된 id 인지 Check
 	public MemberBasicVO memberIdCheck(MemberBasicVO memberBasicVO) throws Exception;
 	
+	// 이미 등록된 nick 인지 Check
+	public MemberBasicVO memberNickCheck(MemberBasicVO memberBasicVO) throws Exception;
+	
 	// 이미 등록된 phone 번호인지 Check
 	public MemberBasicVO phoneCheck(MemberBasicVO memberBasicVO) throws Exception;
 	

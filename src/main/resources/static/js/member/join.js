@@ -188,7 +188,7 @@
 						birthc.innerText = "year :태어난 월을 선택하세요."
 					}else{
 						if(!date_flag){
-							birthc.innerText = "year :태어난 일(날짜) 2자리를 정확하게 입력하세요."
+							//birthc.innerText = "year :태어난 일(날짜) 2자리를 정확하게 입력하세요."
 						}else{
 							birthc.innerText = "";
 						}
@@ -223,7 +223,6 @@
 			
 			console.log(year_flag);
 			console.log(month_flag);
-			
 			
 			if(ch_date.value.length != 2){
 				console.log("pont1");

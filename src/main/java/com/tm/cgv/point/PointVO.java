@@ -6,7 +6,7 @@ import lombok.Data;
 public class PointVO {
 
 	private int num;
-	private String memberNum;
+	private String username;
 	private int price;
 	private String type;
 	

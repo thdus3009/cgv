@@ -73,9 +73,11 @@ public class MemberService implements UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         memberBasicVO.setPassword(passwordEncoder.encode(memberBasicVO.getPassword()));
 
-        // birth, age 만들기
+        // birth, age, fileName 세팅
         memberBasicVO.setBirth(memberInfoMaker.makeBirth(year, month, day));
         memberBasicVO.setAge(memberInfoMaker.makeAge(year));
+        memberBasicVO.setFileName("defaultProfile");
+        
         
         // db에 저장
         int result = memberRepository.join(memberBasicVO);
@@ -93,7 +95,12 @@ public class MemberService implements UserDetailsService {
     public MemberBasicVO memberIdCheck(MemberBasicVO memberBasicVO) throws Exception {
     	return memberRepository.memberIdCheck(memberBasicVO);
     }
-     
+    
+    // 이미 등록된 nick 인지 Check
+ 	public MemberBasicVO memberNickCheck(MemberBasicVO memberBasicVO) throws Exception{
+ 		return memberRepository.memberNickCheck(memberBasicVO);
+ 	}
+    
     // 이미 등록된 phone 번호인지 Check
  	public MemberBasicVO phoneCheck(MemberBasicVO memberBasicVO) throws Exception {
  		

@@ -10,6 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from point where memberNum=#{memberNum}
 	</select>
 	
+	<select id="getCjPoint" parameterType="PointVO" resultType="Integer">
+		SELECT SUM(price) FROM point WHERE type = 'cjOnePointipt' AND username = #{username}; 
+	</select>	
 	
 	<update id="pointDiscountUpdate" parameterType="PointVO" >
 		update point set
@@ -23,8 +26,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 		where memberNum=#{memberNum} and type=#{type}
 	</update>
-	
-	
-	
 
 </mapper>

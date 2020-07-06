@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result property="count" column="count"/>
 			<result property="sIssuance" column="sIssuance"/>
 			<result property="eIssuance" column="eIssuance"/>
-		</association>		
+		</association>	
 		
 	</resultMap>
 
@@ -35,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(MC.cuponInfoNum = CI.num)
 		where uid = #{uid}
 	</select>
+	
+	<!-- <select id="memberCouponCount" parameterType="MemberCouponVO" resultType="Integer">
+		
+	</select> -->
 	
 	<update id="memberCouponUpdate" parameterType="MemberCouponVO">
 		update memberCoupon set
