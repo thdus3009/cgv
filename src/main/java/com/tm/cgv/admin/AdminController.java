@@ -106,6 +106,7 @@ public class AdminController {
 		BitFilmType bitFilmType = new BitFilmType();
 		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
+		mv.addObject("cinemaNum", num);
 		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("theaterList", list);
@@ -121,7 +122,8 @@ public class AdminController {
 		System.out.println("들어왓나?");
 		ModelAndView mv = new ModelAndView();
 		List<MovieTimeVO> m = theaterService.theaterMovieTime(theaterNum); /*나중에는 list로 뽑아와야됨!*/
-		
+		System.out.println(m.get(0));
+		System.out.println(m.get(1));
 		//쪼개는 서비스 만들기..theaterService에
 		List<String[]> totalInfo = theaterService.movieTime(m);
 
@@ -235,10 +237,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("cinema/theaterSelect")
-	public ModelAndView adminTheaterSelect(int num) throws Exception {
+	public ModelAndView adminTheaterSelect(int num, int cinemaNum) throws Exception {
 		System.out.println("num : " +num);
 		ModelAndView mv = new ModelAndView();
 		TheaterVO theaterVO = theaterService.theaterSelect(num);
+		CinemaVO cinemaVO = cinemaService.cinemaSelect(cinemaNum);
 		//theaterSelect
 		//상영관 정보
 		//좌석배치도
@@ -279,12 +282,13 @@ public class AdminController {
 
 		
 		mv.addObject("theater", theaterVO); //상영과정보
+		mv.addObject("cine", cinemaVO);
 		mv.setViewName("admin/cinema/theaterSelect");
 		return mv;
 	}
 	
 	@GetMapping("cinema/theaterUpdate")
-	public ModelAndView adminTheaterUpdate(int num) throws Exception {
+	public ModelAndView adminTheaterUpdate(int num, int cinemaNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		TheaterVO theaterVO = theaterService.theaterSelect(num);
 		SeatVO seatVO = new SeatVO();
@@ -297,11 +301,31 @@ public class AdminController {
 		List<SeatSpaceVO> seatSpaceList = seatSpaceService.seatSpaceSelect(seatSpaceVO);
 		List<SeatVO> seatList = seatService.seatSelect(seatVO);
 		int seatListSize = seatList.size();
+		
 		String row = theaterService.selectRow(num); //int값으로
 		char c = row.charAt(0);
 		int k = c-64;
 		int col = theaterService.selectCol(num);
+		CinemaVO cinemaVO = cinemaService.cinemaSelect(cinemaNum);
 		
+		
+		
+		
+		List<TheaterVO> list = new ArrayList<TheaterVO>();
+		list.add(theaterVO);
+		
+		//가져온 theater list에 들어있는 filmType을 가져와서 리스트 생성
+		List<Integer> values = new ArrayList<Integer>();
+		for(TheaterVO i:list) {
+			values.add(i.getFilmType());
+		}
+		
+		//비트 플래그 이용하여 한자리수인 filmType을 쪼개어 list나 배열 형태로 가져와 jsp로 보내주기
+		BitFilmType bitFilmType = new BitFilmType();
+		List<List<Byte>> filmType = bitFilmType.getState(values);
+		
+		mv.addObject("filmType", filmType);
+		mv.addObject("cine", cinemaVO);
 		mv.addObject("rowList", rowList);
 		mv.addObject("maxCol", maxCol);
 		mv.addObject("seatSpaceList", seatSpaceList);
@@ -311,17 +335,20 @@ public class AdminController {
 		mv.addObject("colIdx",col);
 		mv.addObject("seatListSize", seatListSize);
 		mv.addObject("board", "theater");
-		mv.addObject("path", "Insert");
+		mv.addObject("path", "Update");
 		mv.setViewName("admin/cinema/theaterUpdate");
 		return mv;
 	}
 	
 	@PostMapping("cinema/theaterUpdate")
-	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception {
+	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		theaterService.theaterUpdate(theaterVO, row, col, grade, row_space, col_space);
+		System.out.println(stop_row[0]);
+		System.out.println(stop_col[0]);
+		System.out.println(theaterVO.getName());
+		theaterService.theaterUpdate(theaterVO, row, col, grade, row_space, col_space, stop_row, stop_col);
 		
-		
+		mv.setViewName("admim/cinema/theagerSelect?num="+theaterVO.getNum());
 		return mv;
 	}
 	

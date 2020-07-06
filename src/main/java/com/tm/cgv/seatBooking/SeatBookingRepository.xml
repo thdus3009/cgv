@@ -9,4 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into seatBooking values(#{num},#{seatNum},#{movieTimeNum},#{reservationNum}) 	
  	</insert>
 
+	<update id="updateReservationNum" parameterType="Integer">
+		update seatBooking set reservationNum=0 where seatNum=#{seatNum}
+	</update>
 </mapper>

@@ -16,6 +16,7 @@ import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatRepository;
 import com.tm.cgv.seat.SeatVO;
+import com.tm.cgv.seatBooking.SeatBookingRepository;
 import com.tm.cgv.seatSpace.SeatSpaceRepository;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.util.BitFilmType;
@@ -30,6 +31,9 @@ public class TheaterService {
 	
 	@Autowired
 	private SeatSpaceRepository seatSpaceRepository;
+	
+	@Autowired
+	private SeatBookingRepository seatBookingRepository;
 	
 	//List
 	public List<TheaterVO> theaterList()throws Exception{
@@ -135,14 +139,54 @@ public class TheaterService {
 	}
 	
 	//Update
-	public int theaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{
+	@Transactional
+	public int theaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception{
 		//theater update
-		theaterRepository.theaterUpdate(theaterVO);
-		
+		//theaterRepository.theaterUpdate(theaterVO);
+//		System.out.println("service");
+//		System.out.println(stop_row.length);
+//		System.out.println(stop_col.length);
+//		System.out.println(stop_col[0]);
 		//seat update insert
+		int result2=0;
+		for(int i=0; i<row.length; i++) {
+			SeatVO seatVO = new SeatVO();
+			seatVO.setTheaterNum(theaterVO.getNum());
+			System.out.println("theaterNum : " + seatVO.getTheaterNum());
+			seatVO.setRowIdx(row[i]);
+			seatVO.setColIdx(Integer.parseInt(col[i]));
+			seatVO.setGrade(Integer.parseInt(grade[i]));
+			seatRepository.seatUpdate(seatVO);
+			//싹 업데이트를 하고 나서
+		}
 		
+		//여기서 ..reservation 어쩌구를 하기
+		for(int j=0; j<stop_row.length; j++) {
+			SeatVO seatVO = new SeatVO();
+			
+//			String str = stop_row[j];  //A
+//			System.out.println("str : " + str);
+//			char ch = str.charAt(j);
+//		
+//		    int num =  str.charAt(j)+65;
+//		    System.out.println("num : " + num);
+//		    
+//		    
+//			System.out.println("ch : " + ch);
+//			String r = String.valueOf(ch);
+//			
+		
+			//System.out.println("r : " + r);
+			seatVO.setTheaterNum(theaterVO.getNum());
+			seatVO.setRowIdx(stop_row[j]);	//문자로 바꿔 넣기
+			seatVO.setColIdx(Integer.parseInt(stop_col[j]));
+			SeatVO seat = seatRepository.selectSeatNum(seatVO);
+			//찾아온 seatNum으,로 reservationNum 0으로 바꾸기
+			seatBookingRepository.updateReservationNum(seat.getNum());
+		}
 		
 		//seatSpace update insert
+		//해당 theaterNum 다 삭제하고 다시 넣기
 		
 		
 		
@@ -227,7 +271,7 @@ public class TheaterService {
 			info[9] = d[2];
 			
 			//시작 시간
-			String screentime = list.get(0).getScreenTime();
+			String screentime = list.get(i).getScreenTime();
 			String [] s = screentime.split(":");
 			int startH = Integer.parseInt(s[0]); 
 			int startM = Integer.parseInt(s[1]);
@@ -243,7 +287,7 @@ public class TheaterService {
 			
 			
 			//runtime으로 끝나는 시간 구하기
-			int run = Integer.parseInt(list.get(0).getMovieInfoVOs().getRuntime());
+			int run = Integer.parseInt(list.get(i).getMovieInfoVOs().getRuntime());
 			int h = run/60;
 			int m = run%60;
 			System.out.println("=============");

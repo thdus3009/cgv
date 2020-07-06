@@ -99,13 +99,17 @@ function changeSelect(){
 				'<div class="col_label">'+j+'</div>');
 				}	
 
-
+				
 				
 				
 			}
 		$("#seats_list").append('</div></div>');		
 		listLength = list.length;
 	}
+	
+	//마지막 행, 열의 space 조정 버튼 지우기
+	$(".c"+col).find(".col_plus").remove();
+	$(".r"+row).find(".row_plus").remove();
 	
 }
 

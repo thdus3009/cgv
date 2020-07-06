@@ -90,7 +90,7 @@
                     
                     <div class="">
                     	<span id="de" class="btn btn-danger">Delete</span>
-                    	<a href="./theaterUpdate?num=${theater.num}" id="up" class="btn btn-primary">Update</a>
+                    	<a href="./theaterUpdate?num=${theater.num}&cinemaNum=${cine.num}" id="up" class="btn btn-primary">Update</a>
                     </div>
                     </div>
                 </main>

@@ -104,6 +104,7 @@
 			<main>
 				<div class="container-fluid">
 					<h1>${cine.name}</h1>
+		
 					<div class="card mb-4">
 						<div class="card-body">
 							<p class="mb-0">
@@ -145,7 +146,7 @@
 							<tbody id="accordion">
 								<c:forEach items="${theaterList}" var="vo" varStatus="i">
 									<tr class="theaterList-c">
-										<td><a href="./theaterSelect?num=${vo.num}" id="td${i.index}">${vo.num}</a></td>
+										<td><a href="./theaterSelect?num=${vo.num}&cinemaNum=${cinemaNum}" id="td${i.index}">${vo.num}</a></td>
 										<%-- <td>${vo.cinemaNum}</td> --%>
 										<td>${vo.name}</td>
 										<td>${vo.seatCount}</td>
@@ -297,8 +298,8 @@
 			  	      var renderer = new Timetable.Renderer(timetable);
 			  	      renderer.draw('#'+tid);
 			  	      $(".room-timeline").css("width","100%");
-			  	      $(".time-entry").css("width","11.8%");
-			  	    $(".time-entry").css("left","38.9%");
+			  	     
+			  	    
 					
 				}); 
 

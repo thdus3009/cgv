@@ -32,7 +32,7 @@
  							</select>
 							<br>
 							<label class="theaterLebel lebelname" for="name">Name:</label>
-							<input type="text" class="form-control" id="name" name="name" value="${vo.name}">
+							<input type="text" class="form-control selectcinenum" id="name" name="name" value="${vo.name}">
 							<br>
 							<label class="theaterLebel" for="filmType">FilmType:</label>
 							<label class="ckfm">
@@ -115,7 +115,7 @@
 							</div><!-- end seat box -->
 							<br>
 							<label for="seatCount">SeatCount:</label>
-	 						<input type="text" class="form-control" id="seatCount" name="seatCount" value="${vo.seatCount}">
+	 						<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}">
 							<br>
 							<br>
 							<br>
