@@ -1,6 +1,11 @@
 package com.tm.cgv.reservation;
 
+
 import com.tm.cgv.review.ReviewVO;
+import com.tm.cgv.movieInfo.MovieInfoVO;
+import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.payment.PaymentVO;
+
 
 import lombok.Data;
 
@@ -33,6 +38,13 @@ public class ReservationVO {
 	//private int good;
 
 	private String selectedSeatNums;
+
+	
+	private MovieInfoVO movieInfoVO;
+	private MovieTimeVO movieTimeVO;
+	private PaymentVO paymentVO;
+	
+	
 
 	
 //	movieInfo join해서 불러올값

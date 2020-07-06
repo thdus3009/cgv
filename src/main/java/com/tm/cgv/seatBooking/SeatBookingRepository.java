@@ -7,4 +7,6 @@ public interface SeatBookingRepository {
 
 	public int seatBookingInsert(SeatBookingVO seatBookingVO) throws Exception;
 	
+	public int seatBookingDelete(int num) throws Exception;
+	
 }

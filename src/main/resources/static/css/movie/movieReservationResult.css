@@ -1,0 +1,256 @@
+@charset "UTF-8";
+
+
+table{
+	border-spacing: 0;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    
+}
+
+
+#ticket .steps .step4{
+	display: none;
+    background-color: #d4d3c9;
+    overflow: hidden;
+    padding-bottom: 2px;
+}
+
+#ticket .section-complement{
+	width: 992px;
+}
+
+/* #ticket .section{ */
+/* 	position: relative; */
+/*     float: left; */
+/*     height: 100%; */
+/*     margin-left: 2px; */
+/*     background-color: #f2f0e5; */
+/*     overflow: hidden; */
+/* } */
+
+#ticket .section.section-complement .col-head{
+	background-position: 50% -157px;
+}
+
+#ticket .section .col-body{
+	height : 600px;
+}
+
+#ticket .section-complement .article.result{
+	margin: 0 auto;
+	width: 633px;
+	padding: 0 0 0 63px;
+	background-color: #f2f0e5;
+}
+
+#ticket .section-complement .article.result .text_complement{
+	height: 107px;
+    line-height: 107px;
+    text-align: center;
+}
+
+#ticket .section-complement .article.result .text_complement img{
+	    vertical-align: middle;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap{
+	overflow: hidden;
+    margin-bottom: 24px;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary{
+	float: left;
+    width: 539px;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary .poster{
+	float: left;
+    width: 110px;
+    height: 158px;
+    line-height: 158px;
+    margin-right: 30px;
+    overflow: hidden;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary .poster img{
+	visibility: hidden;
+    width: 100%;
+    vertical-align: middle;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table{
+	width: 395px;
+    border: none;
+}
+
+caption, legend{
+	overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table tr{
+	height: 24px;
+    line-height: 24px;
+    vertical-align: top;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table tr th{
+	width: 71px;
+    font-weight: normal;
+    text-align: left;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table tr td{
+	height: inherit;
+    line-height: inherit;
+    background: none;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table tr td .red, #ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table tr td .price{
+	color: #c62424;
+    font-weight: normal;
+    font-family: Verdana;
+}
+
+#ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary table tr td em{
+	color: #333;
+    font-weight: bold;
+}
+
+#ticket .section-complement .article.result .ticket_exception{
+	padding-top: 12px;
+    padding-bottom: 26px;
+    line-height: 22px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step4/pattern_line_dot.png) repeat-x top left;
+}
+
+#ticket .section-complement .article.result .ticket_exception em{
+	font-weight: bold;
+}
+
+em {
+    font-style: normal;
+}
+
+
+#ticket .section-complement .article.result .ticket_button_group {
+    position: relative;
+    margin-bottom: 20px;
+    height: 77px;
+    border-bottom: solid 1px #c9c7bc;
+}
+
+#ticket .section-complement .article.result .ticket_button_group > div {
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+#ticket .section-complement .article.result .ticket_button_group .btn_step4 {
+    display: block;
+    float: left;
+}
+
+#ticket .section-complement .article.result .ticket_button_group a {
+    margin: 0 5px;
+}
+
+#ticket .section-complement .article.result .ticket_button_group .btn_step4.btn_red > span {
+    background-position: 0 0;
+}
+
+
+#ticket .section-complement .article.result .ticket_button_group .btn_step4 > span {
+    display: block;
+    width: 129px;
+    height: 47px;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step4/step4_btns.png) no-repeat -150px 0;
+    line-height: 47px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #fff;
+}
+
+
+#ticket .section-complement .article.result .ticket_instructions {
+    margin-bottom: 40px;
+}
+
+#ticket .section-complement .article.result .ticket_instructions dl {
+    overflow: hidden;
+}
+
+
+#ticket .section-complement .article.result .ticket_instructions dl dt {
+    clear: both;
+    float: left;
+    width: 100px;
+    text-align: left;
+    line-height: 19px;
+}
+
+#ticket .section-complement .article.result .ticket_instructions img {
+    vertical-align: middle;
+}
+
+#ticket .section-complement .article.result .ticket_instructions dl dd {
+    float: left;
+    width: 470px;
+    line-height: 19px;
+}
+
+#ticket .section-complement .article.result .ticket_instructions dl dd ul {
+    overflow: hidden;
+}
+
+#ticket .section-complement .article.result .ticket_instructions dl dd ul li {
+    float: left;
+    width: 470px;
+    font-size: 11px/*padding-left:7px;background:url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step4/ticket_instructions_bullet.png) no-repeat left 8px;*/;
+}
+
+#ticket .section-complement .article.sub_contents{
+	float: left;
+    width: 260px;
+}
+
+.article.sub_contents {
+    padding: 37px 0 0 13px;
+}
+
+.article.sub_contents .option {
+    margin-bottom: 17px;
+    *zoom: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

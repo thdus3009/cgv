@@ -12,4 +12,8 @@ public class SeatBookingService {
 	public int seatBookingInsert(SeatBookingVO seatBookingVO) throws Exception{
 		return seatBookingRepository.seatBookingInsert(seatBookingVO);
 	}
+	
+	public int seatBookingDelete(int num) throws Exception{
+		return seatBookingRepository.seatBookingDelete(num);
+	}
 }
