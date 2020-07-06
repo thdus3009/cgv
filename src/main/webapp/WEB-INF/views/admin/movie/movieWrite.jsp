@@ -132,11 +132,12 @@
 
 												<div class="tbl_write">
 
-													<input type="text" value="${vo.movieImageVOs.num}"
+													<input type="hidden" value="${vo.movieImageVOs.num}"
 														id="num1">
 													<!-- imgaeVO의 AI인 num -->
-													<input type="text" value="${vo.num}" name="num"> <input
-														type="text" value="${vo.movieImageVOs.fileName}"
+													<input type="hidden" value="${vo.num}" name="num"> 
+													<input
+														type="hidden" value="${vo.movieImageVOs.fileName}"
 														id="fileName">
 
 													<table class="tbl_bbs_write">
