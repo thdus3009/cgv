@@ -12,11 +12,11 @@ public class MovieTimeVO {
 	private String screenDate;
 	private String screenTime;
 	private int remainSeat;
-
+	private int selectedFilm;
 	
 	private MovieInfoVO movieInfoVOs; //movieNum의 title, runtime
 
 
-	private int selectedFilm;
+	
 
 }

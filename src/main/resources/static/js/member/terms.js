@@ -1,4 +1,4 @@
-/*
+
 
 var all = document.getElementById("all");
 var ch1 = document.getElementsByClassName("ch1");
@@ -104,7 +104,7 @@ btn.addEventListener("click", function() {
 		alert("체크하지 않은 필수 항목이 있습니다.");
 	}
 
-});*/
+});
 
 /*var*/
 var all = document.getElementById("all");
