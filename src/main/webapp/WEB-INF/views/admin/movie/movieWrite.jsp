@@ -5,102 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-
-<!-- movieWrite -->
-<title>관리자 페이지</title>
-
-<link rel="stylesheet" href="/css/styles.css" />
+<c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-
 </head>
 <body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
-		<a href="/admin"><img src="/images/header/h1_cgv.png"
-			class="admin-logo" /></a>
-		<!-- 검색 바-->
-		<form
-			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="검색어를 입력"
-					aria-label="Search" aria-describedby="basic-addon2" />
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-		<!-- 로그인-->
-		<ul class="navbar-nav ml-auto ml-md-0">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="userDropdown" href="#"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a> <a
-						class="dropdown-item" href="#">관리자 설정</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
-				</div></li>
-		</ul>
-	</nav>
-
+	<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 공지사항
-						</a>
-						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 회원 관리
-						</a> <a class="nav-link" href="./admin/movie/movieWrite">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 영화 관리
-						</a> <a class="nav-link" href="./admin/cinema/cinemaList">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 극장 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 예매 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 리뷰 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 배너 관리
-						</a>
-					</div>
-				</div>
-			</nav>
-		</div>
+		<c:import url="../template/sidenav.jsp"></c:import>
 
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
@@ -150,7 +63,7 @@
 
 															<div class="form-group">
 																<label for="files">타이틀 이미지:</label> <input type="file"
-																	class="form-control files" id="files"
+																	class="form-control files check" id="files"
 																	placeholder="타이틀 이미지 선택" name="files">
 															</div>
 
@@ -163,54 +76,54 @@
 
 															<div class="form-group">
 																<label for="videolink">예고 영상:</label> <input type="text"
-																	class="form-control videolink" id="videolink"
+																	class="form-control videolink check" id="videolink"
 																	placeholder="예고편 영상 링크" name="videolink"
 																	value="${vo.movieVideoVOs.videolink }"
 																	style="padding: 12px;">
 															</div>
 															<div class="form-group">
 																<label for="title">제목:</label> <input type="text"
-																	class="form-control" id="title" name="title"
+																	class="form-control check" id="title" name="title"
 																	value="${vo.title }">
 															</div>
 															<div class="form-group">
 																<label for="titleEng">영문제목:</label> <input
-																	type="text" class="form-control" id="titleEng"
+																	type="text" class="form-control check"  id="titleEng"
 																	name="titleEng" value="${vo.titleEng }">
 															</div>
 															<div class="form-group">
 																<label for="runtime">러닝타임:</label> <input type="text"
-																	class="form-control" id="runtime" name="runtime"
+																	class="form-control check" id="runtime" name="runtime"
 																	value="${vo.runtime }">
 															</div>
 															<div class="form-group">
 																<label for="director">감독:</label> <input type="text"
-																	class="form-control" id="director" name="director"
+																	class="form-control check" id="director" name="director"
 																	value="${vo.director }">
 															</div>
 															<div class="form-group">
 																<label for="actor">출연 배우:</label> <input type="text"
-																	class="form-control" id="actor" name="actor"
+																	class="form-control check" id="actor" name="actor"
 																	value="${vo.actor }">
 															</div>
 															<div class="form-group">
 																<label for="ganre">장르:</label> <input type="text"
-																	class="form-control" id="ganre" name="ganre"
+																	class="form-control check" id="ganre" name="ganre"
 																	value="${vo.ganre }">
 															</div>
 															<div class="form-group">
 																<label for="ageLimit">연령제한:</label> <input type="text"
-																	class="form-control" id="ageLimit" name="ageLimit"
+																	class="form-control check" id="ageLimit" name="ageLimit"
 																	value="${vo.ageLimit }">
 															</div>
 															<div class="form-group">
 																<label for="country">국가:</label> <input type="text"
-																	class="form-control" id="country" name="country"
+																	class="form-control check" id="country" name="country"
 																	value="${vo.country }">
 															</div>
 															<div class="form-group">
 																<label for="openDate">개봉일:</label> <input type="date"
-																	class="form-control" id="openDate" name="openDate"
+																	class="form-control check" id="openDate" name="openDate"
 																	value="${vo.openDate}">
 															</div>
 
@@ -230,7 +143,7 @@
 
 															<div class="form-group">
 																<label for="contents">Contents:</label>
-																<textarea rows="" cols="" class="form-control"
+																<textarea rows="" cols="" class="form-control check"
 																	id="contents" name="contents">${vo.contents }</textarea>
 
 															</div>
@@ -259,6 +172,7 @@
 					</div>
 				</div>
 			</main>
+			<c:import url="../template/footer.jsp"></c:import>
 		</div>
 	</div>
 
@@ -284,6 +198,8 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-
+	<script type="text/javascript" src="../../js/movie/movieWrite.js"></script>
+	
+	
 </body>
 </html>

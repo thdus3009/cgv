@@ -93,7 +93,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="movieList" parameterType="Pager" resultMap="listResult">
  		select MM.* , MK.fileName,MK.originName,MK.movieNum from
  		(select * from
- 		
  		(select * from movieInfo where title like concat('%',#{search},'%') 
  		and deleteAt is null
  		order by
@@ -222,8 +221,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="visitor2" parameterType="ReservationVO" resultType="java.util.Map">
- 		select sum(person) as visitor2 from
+ 		select sum(person) as visitor from
 		(select common+teenager+preference as person from reservation where movieNum=#{movieNum} and deleteAt is null) as person;
  	</select>
+ 	
+ 	<update id="visiUpdate" parameterType="MovieInfoVO">
+ 		update movieInfo set visitor=#{visitor} where num=#{num};
+ 	</update>
  	
  </mapper>

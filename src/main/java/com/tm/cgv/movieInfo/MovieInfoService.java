@@ -54,8 +54,6 @@ public class MovieInfoService {
 	}
 	
 	
-	
-	
 	public List<MovieInfoVO> movieListAll(MovieInfoVO movieVO) throws Exception{
 		return movieInfoRepository.movieListAll(movieVO);
 	}
@@ -114,7 +112,7 @@ public class MovieInfoService {
 		
 		//vo에  total과 good을 받아줄 변수명이 없으므로 map으로 받아서 가지고 옴
 		
-		//eggRate계산//리뷰
+		//===eggRate계산//리뷰====
 		Map< String , Object> map=null;
 		long total = 0;
 		long good=0;
@@ -128,11 +126,8 @@ public class MovieInfoService {
 			
 		}
 		
-		
 			double total2 = Double.valueOf(total);//==null?0.0:Double.valueOf(total)
 			double good2 = Double.valueOf(good);//==null?0.0:Double.valueOf(good);
-		
-		
 		
 		
 		if(total2>0) { //작성된 리뷰가 1개 이상일 경우 계산해서 errRate를 업데이트
@@ -145,7 +140,7 @@ public class MovieInfoService {
 		
 		}
 		
-		//예매율 계산
+		//===예매율 계산====
 		Map<String, Object> map2 = movieInfoRepository.rate(reservationVO);
 		Iterator<String> mm2 = map2.keySet().iterator();
 		
@@ -162,7 +157,7 @@ public class MovieInfoService {
 			movieInfoRepository.rateUpdate(movieInfoVO);
 		
 		}
-		//성별 계산	
+		//=====성별 계산 =====
 		Map<String, Object> map3 = movieInfoRepository.gender2(reservationVO);
 		Iterator<String> mm3 = map3.keySet().iterator();
 		
@@ -179,7 +174,7 @@ public class MovieInfoService {
 		long gTotal =(long)map4.get("gTotal");
 		System.out.println(gTotal+"gTotal");
 		
-		//연령대 계산
+		//====연령대 계산=====
 		Map<String, Object> mapAge = movieInfoRepository.age(reservationVO);
 		Iterator<String> mmAge = mapAge.keySet().iterator();
 			
@@ -197,9 +192,7 @@ public class MovieInfoService {
 		double age40_2 = Double.valueOf(age40);
 		double age50_2 = Double.valueOf(age50);
 		
-		//매력포인트
-	
-	
+		//=====매력포인트=====
 		List<Integer> values = movieInfoRepository.charmPoint(reservationVO);
 		for(int i=0;i<values.size();i++) {
 			System.out.println(values.get(i)+" :  번 charm");
@@ -213,7 +206,7 @@ public class MovieInfoService {
 		System.out.println(charm.get(1)+"숫자2");
 		
 		
-		//감정 포인트
+		//===감정 포인트====
 		List<Integer> values2 = movieInfoRepository.emotionPoint(reservationVO);
 		for(int i=0;i<values2.size();i++) {
 			System.out.println(values2.get(i)+" :  번 emotion");
@@ -223,42 +216,47 @@ public class MovieInfoService {
 		List<Integer> emotion = bb2.getState2(values2);
  		
 		
-		//관객수
-		/*
-		 * Map<String, Object> mapV = movieInfoRepository.visitor2(reservationVO);
-		 * Iterator<String> mmV = mapV.keySet().iterator();
-		 * 
-		 * while(mmV.hasNext()) { String keyv = mmV.next();
-		 * System.out.println("관람객"+keyv); }
-		 */
-		
-		//
-		Map<String, Object> g = new HashMap<>();
-		if(total2 == 0.0 || total2>0 || totalTicket==0 || totalTicket>0) {
-			movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
-			
-			
-			g.put("gender", gender);
-			g.put("gTotal",gTotal);
-			g.put("ageTotal", ageTotal2);
-			g.put("age10", age10_2);
-			g.put("age20", age20_2);
-			g.put("age30", age30_2);
-			g.put("age40", age40_2);
-			g.put("age50", age50_2);
-			g.put("vo", movieInfoVO);
-			g.put("cost", charm.get(0));
-			g.put("cactor", charm.get(1));
-			g.put("cvisual", charm.get(2));
-			g.put("cstory", charm.get(3));
-			g.put("cdirector", charm.get(4));
-			g.put("cten", emotion.get(0));//긴장감
-			g.put("cfun", emotion.get(1));//즐거움
-			g.put("cstr", emotion.get(2));//스트레스
-			g.put("cimp", emotion.get(3));//감동
-			g.put("cimm", emotion.get(4));//몰입감
+		//===관객수======
+		 Map<String, Object> mapV=null;
+		 int visitor=0;
+		if(movieInfoVO.getVisitor()!=0 ) {
+			mapV = movieInfoRepository.visitor2(reservationVO);
+			visitor = ((BigDecimal)mapV.get("visitor")).intValue();
 		}
 		
+		  System.out.println(visitor+"명");
+
+		  if(visitor>0) {
+			  movieInfoVO.setVisitor(visitor);
+			  movieInfoRepository.visiUpdate(movieInfoVO);
+		  }
+		
+		//=============
+		Map<String, Object> g = new HashMap<>();
+		
+		movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
+		
+		g.put("vo", movieInfoVO);
+		
+		g.put("gender", gender);
+		g.put("gTotal",gTotal);
+		g.put("ageTotal", ageTotal2);
+		g.put("age10", age10_2);
+		g.put("age20", age20_2);
+		g.put("age30", age30_2);
+		g.put("age40", age40_2);
+		g.put("age50", age50_2);
+		
+		g.put("cost", charm.get(0));
+		g.put("cactor", charm.get(1));
+		g.put("cvisual", charm.get(2));
+		g.put("cstory", charm.get(3));
+		g.put("cdirector", charm.get(4));
+		g.put("cten", emotion.get(0));//긴장감
+		g.put("cfun", emotion.get(1));//즐거움
+		g.put("cstr", emotion.get(2));//스트레스
+		g.put("cimp", emotion.get(3));//감동
+		g.put("cimm", emotion.get(4));//몰입감
 		
 		return g ;
 		

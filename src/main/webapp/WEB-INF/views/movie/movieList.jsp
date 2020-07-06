@@ -58,8 +58,8 @@
 				<div class="sect-sorting">
 					<select id="select" name="kind">
 						<option title="1" value="rate" selected="selected">예매율순</option>
-						<option title="2" value="date">최신순</option>
-						<option title="3" value="title">제목순</option>
+						<option title="2" value="date" >최신순</option>
+						<option title="3" value="title" >제목순</option>
 					</select>
 					<button id="btn-sort" type="button" class="round gray">
 						<span>GO</span>

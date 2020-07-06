@@ -67,7 +67,9 @@ public class AdminController {
 	@GetMapping("movie/movieList")
 	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
 		List<MovieInfoVO> list = movieInfoService.movieList(pager);
-		
+		if(pager.getKind()==null || pager.getKind().equals("")) {
+			pager.setKind("date"); //최신순으로 설정
+		}
 		if(list !=null) {
 			mv.addObject("list",list);
 			mv.setViewName("admin/movie/movieList");
@@ -88,9 +90,12 @@ public class AdminController {
 	
 	
 	@GetMapping("movie/movieSearchA")
-	public ModelAndView movieSearchA(ModelAndView mv,Pager pager) throws Exception{
+	public ModelAndView movieSearchA(ModelAndView mv,Pager pager,String search) throws Exception{
 		
 		List<MovieInfoVO> searchA = movieInfoService.movieList(pager);
+		System.out.println(pager.getSearch()+"search++++");
+		System.out.println(search+"이거요거저거");
+		
 		if(searchA !=null) {
 			mv.addObject("searchA",searchA);
 			mv.setViewName("admin/movie/movieSearchA");
@@ -135,8 +140,6 @@ public class AdminController {
 		
 		//select 에서 예매율, 리뷰 없어도...
 		
-		
-		
 		mv.addObject("vo",map.get("vo"));
 		mv.addObject("gender",map.get("gender"));
 		mv.addObject("gTotal",map.get("gTotal"));
@@ -163,10 +166,14 @@ public class AdminController {
 	
 	@GetMapping("movie/movieUpdate")
 	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
+		reservationVO.setMovieNum(movieInfoVO.getNum());
 		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
+		
+		
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:./error/404");
 		}
+		System.out.println(map.get(0)+"뭐가 나와");
 		mv.addObject("vo",map.get("vo"));
 		mv.addObject("path","Update");
 		mv.setViewName("admin/movie/movieUpdate");
@@ -178,7 +185,7 @@ public class AdminController {
 	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
 		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
 		
-		mv.setViewName("redirect:admin/movie/movieSelect?num="+movieInfoVO.getNum());
+		mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		return mv;
 	}
 	

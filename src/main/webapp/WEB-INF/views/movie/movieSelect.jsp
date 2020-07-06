@@ -353,7 +353,7 @@
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
 						
-								<div class="bbs_btn">
+								<%-- <div class="bbs_btn">
 									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
 									
 									<c:if test="${bbsVO.writer eq memberVO.id }">
@@ -361,7 +361,7 @@
 										<a href="./${board}Update?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
 									</c:if>
 									
-								</div>
+								</div> --%>
 							
 						
 					</div>
