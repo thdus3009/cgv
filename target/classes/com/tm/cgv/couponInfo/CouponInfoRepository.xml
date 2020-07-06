@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.couponInfo.CouponInfoRepository">
+
+	<select id="couponInfoSelectOne" parameterType="CouponInfoVO" resultType="CouponInfoVO">
+		select * from couponInfo where serialNum = #{serialNum} and pwd=#{pwd}
+	</select>
+	
+	<delete id="couponInfoDelete" parameterType="CouponInfoVO">
+		delete from couponInfo where num=#{num}
+	</delete>
+	
+	<select id="couponInfoSelect" parameterType="CouponInfoVO" resultType="CouponInfoVO">
+		select * from couponInfo where num=#{num}
+	</select>
+
+</mapper>

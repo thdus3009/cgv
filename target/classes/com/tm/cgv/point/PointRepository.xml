@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.point.PointRepository">
+	
+	<select id="pointSelectList" parameterType="String" resultType="PointVO">
+		select * from point where memberNum=#{memberNum}
+	</select>
+	
+	
+	<update id="pointDiscountUpdate" parameterType="PointVO" >
+		update point set
+		<choose>
+			<when test="kind == 'sum'">
+				price=price + #{price}
+			</when>
+			<otherwise>
+				price=price - #{price}			
+			</otherwise>
+		</choose>
+		where memberNum=#{memberNum} and type=#{type}
+	</update>
+	
+	
+	
+
+</mapper>
