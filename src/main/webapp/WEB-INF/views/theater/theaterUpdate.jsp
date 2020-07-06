@@ -241,8 +241,21 @@
 <script type="text/javascript">
 
 
+var r = '${rowIdx}';
+var c = '${colIdx}';
+console.log("row : " + r);
+console.log("col : " + c);
+/* console.log($("#bar option[value=best]").val()); */
+console.log("------test------");
+console.log("seat[10].grade : "+"${seat[10].grade}");
 
 
+
+$("#seat_row option[value="+r+"]").prop("selected",true);
+$("#seat_col option[value="+c+"]").prop("selected",true);
+
+
+changeSelect(r, c);
 
 
 
@@ -265,23 +278,237 @@ var list = [];
 var listLength = 0;
 
 function makeVo(row, col, grade){
+	console.log("grade : " + grade);
 	var vo = {
 		"row":row,
 		"col":col,
-		"grade":1
+		"grade":grade
 	}
 
 	list.push(vo);
 }
 
+var rowList = [];
+var colList = [];
+
+function spaceVO(){
+	var l = [space, num]
+	spaceList.push(vo);
+}
+
+
+function changeSelect(r, c){
+	$("#seats_list").empty();
+	list = [];
+	rowList = [];
+	colList = [];
+	//list = [];
+
+		
+/* 	var row = $("#seat_row").val();
+	var col = $("#seat_col").val(); */
+
+	gradeList = [];
+	var seat ="${seat}";
+	for(i=0; i<c; i++){
+		console.log("${seat[i].grade}");
+	}
+	//console.log(gradeList);
+	
+	var row = r;
+	var col = c;
+	console.log("ttttttt : " + ${seat[10].grade});
+	
+	for(i=0; i<r; i++){
+		var ch = String.fromCharCode(i+65);
+		for(j=1; j<=c; j++){
+			var g = "${seat[cnt].grade}";
+			console.log(g);
+			makeVo(ch, j, g);
+			
+		
+		}
+	}
+	//makeVo(ch, j, 1);
+	
+	
+	console.log("생성한 row : " +row);
+	console.log("생성한 col : " +col);
+
+	seatCount = row * col;
+	$("#seatCount").val(seatCount);
+	
+	//1 2 3 4 5 6 7 8 
+	//1 -> 65  
+	for(i=0; i<row; i++){
+		var ch = String.fromCharCode(i+65);
+
+		console.log("ch : " + ch);
+		 src="../images/login/btn_home.png">	
+		
+		$("#seats_list").append('<div class="seat_row r'+(i+1)+'"><div class="bo">'
+		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="../images/theater/plus.png" id="img"></span>'
+		+'<div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
+		
+		
+	
+			for(j=1; j<=col; j++){
+
+		
+
+
+				
+				
+				$("#r"+i).append('<div class="seat c'+j+'"><span class="sb" onclick="checkSeat('+ch+j+')"  name="'+ch+j+'" id="'+ch+j+'"><span class="no">'+j+'</span></span></div>')	
+				
+				//첫번째 로우라면  버튼 만들기
+				if(i<1){
+				$("#r"+i).find(".c"+j).append(
+				'<span class="col_plus" onclick="colPlus('+j+')"><img src="../images/theater/plus.png" id="img"></span>'+
+				'<div class="col_label">'+j+'</div>');
+				}	
+
+
+				
+				
+			}
+		$("#seats_list").append('</div></div>');		
+		listLength = list.length;
+	}
+
+
+	console.log(list);
+	console.log(rowList);
+	console.log(colList);
+}
 
 
 
+//i = 2
+/* for(i=0; i<r; i++){
+	//숫자 2를 문자 B로 바꾸기
+	var ch = String.fromCharCode(i+65);
+	for(j=1; j<c; j++){
+		var m = ch+j;
+		console.log("m : " +m);
+		checkSeat(m);
+		break;
+	}
+} */
+ 
 
 
 
+function checkSeat(name){
+	console.log(name);
+
+	var grade=1; 
+	var ck = $("#"+name).attr("name");
+	console.log("ck : " + ck);
+
+	var rw = ck.substring(0,1);
+	var cl = ck.substring(1,2); 
+	console.log("rw : " + rw);
+	console.log("cl : " + cl);
+
+	
+	
+	switch(seatColor) {
+
+	//좌석 삭제
+	case 0:
+		
+		
+		if(ck=='del'){
+			$(name).attr("name","");
+			$(name).find("span").css('border','2px solid #ed8c00');
+			$(name).css('background','#666')
 
 
+			seatCount += 1;
+			$("#seatCount").val(seatCount);
+
+			
+		}else{
+			$(name).find("span").css('border','0');
+			$(name).css('background-color','black');
+			// vo.grade=0; (k k 0)
+			//vo의 row가 A, col이 B인 것을 찾아 grade 값 바꾸기
+			$(name).attr("name","del");
+			for(i=0; i<listLength; i++){
+				if(list[i].row == rw && list[i].col == cl){
+					list[i].grade = 0;
+					console.log("-----------:"+list[i].grade);
+				}
+			}
+
+			
+			grade=0;
+
+
+			seatCount -= 1;
+			$("#seatCount").val(seatCount);
+			
+		}
+		
+		break;
+
+	//Economy
+	case 1:
+		// 테두리 색 맞게 바꾸기
+		// vo.grade = 1
+		if(ck!='del'){
+		$(name).find("span").css('border','2px solid #ed8c00');
+		$(name).css('background','#666')
+			for(i=0; i<listLength; i++){
+				if(list[i].row == rw && list[i].col == cl){
+					list[i].grade = 1;
+					console.log("-----------:"+list[i].grade);
+				}
+			}
+		}
+		
+		
+		
+		break;
+
+	//Standard
+	case 2:
+		// 테두리 색 맞게 바꾸기
+		// vo.grade = 2 
+		if(ck!='del'){
+		$(name).find("span").css('border','2px solid #01c73c');
+		$(name).css('background','#666')
+		
+			for(i=0; i<listLength; i++){
+				if(list[i].row == rw && list[i].col == cl){
+					list[i].grade = 2;
+					console.log("-----------:"+list[i].grade);
+				}
+			}
+		}
+		
+		break;
+
+	//Prime
+	case 3:
+		// 테두리 색 맞게 바꾸기
+		// vo.grade = 3
+		if(ck!='del'){
+		$(name).find("span").css('border','2px solid #f71708');
+		$(name).css('background','#666')
+			for(i=0; i<listLength; i++){
+				if(list[i].row == rw && list[i].col == cl){
+					list[i].grade = 3;
+				}
+			}
+		}
+		
+		break;
+	}
+
+	
+}
 
 
 

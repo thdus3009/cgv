@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		
 		 <!-- 로고  -->

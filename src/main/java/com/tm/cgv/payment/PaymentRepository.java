@@ -6,5 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PaymentRepository {
 	
 	public int paymentInsert(PaymentVO paymentVO) throws Exception;
+	
+	public int paymentDelete(int num) throws Exception;
 
 }

@@ -49,7 +49,7 @@ public class CinemaController {
 		int result = cinemaService.cinemaInsert(cinemaVO);
 		
 		if(result > 0) {
-			mv.setViewName("redirect:./cinemaList");
+			mv.setViewName("redirect:../admin/cinema/cinemaList");
 		}else {
 			System.out.println("삽입 실패");
 		}
@@ -62,7 +62,7 @@ public class CinemaController {
 	@GetMapping("cinemaUpdate")
 	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 
-		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO.getNum());
 		
 		mv.addObject("vo", cinemaVO);
 		mv.addObject("board", "cinema");

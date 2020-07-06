@@ -221,4 +221,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select emotionPoint as emotion from review where reservationNum in (select num from reservation where movieNum=#{movieNum});
  	</select>
  	
+ 	<select id="visitor2" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select sum(person) as visitor2 from
+		(select common+teenager+preference as person from reservation where movieNum=#{movieNum} and deleteAt is null) as person;
+ 	</select>
+ 	
  </mapper>

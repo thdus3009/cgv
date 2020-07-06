@@ -23,6 +23,7 @@
 
 </head>
 <body class="sb-nav-fixed">
+	
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
 		<a href="/admin"><img src="/images/header/h1_cgv.png"
@@ -153,7 +154,7 @@
 							<!-- 이름 누르면 상세 페이지로 이동 -->
 							<c:forEach items="${list}" var="vo">
 								<tr class="memberList-c">
-									<td> <a href="./movieSelect?num=${vo.num}">${vo.title}</a></td>
+									<td> <a href="/admin/movie/movieSelect?num=${vo.num}">${vo.title}</a></td>
 									<td>${vo.titleEng}</td>
 									<td>${vo.runtime}</td>
 									<td>${vo.director}</td>

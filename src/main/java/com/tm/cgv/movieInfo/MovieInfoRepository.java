@@ -45,4 +45,6 @@ public interface MovieInfoRepository {
 	public Map<String, Object> age(ReservationVO reservationVO) throws Exception;
 	public List<Integer> charmPoint(ReservationVO reservationVO) throws Exception;
 	public List<Integer> emotionPoint(ReservationVO reservationVO) throws Exception;
+	
+	public Map<String, Object> visitor2(ReservationVO reservationVO) throws Exception;
  }

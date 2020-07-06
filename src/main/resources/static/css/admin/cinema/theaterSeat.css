@@ -1,0 +1,288 @@
+
+.theater_minimap{
+	position: relative;
+    width: auto;
+    padding-top: 20px;
+}
+
+     .theater{
+	height: 355px;
+}
+
+    .theater{
+	margin-left: 20px;
+    width: 974px;
+    height: 365px;
+    position: relative;
+}
+
+.nano .seat-content{
+	/* position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0; */
+    left: -120px;
+
+}
+
+    .theater .screen{
+	width: 100%;
+    height: 25px;
+    margin: 0 auto;
+    line-height: 25px;
+    text-align: center;
+    background: url("../../images/movie/movieSeatReservation/screen_bg.png") repeat-x left;
+}
+
+    .theater .screen .text{
+	width: 57px;
+    height: 25px;
+    display: inline-block;
+    zoom: 1;
+    background: url("../../images/movie/movieSeatReservation/screen_text.png") no-repeat;
+}
+
+    .theater .seats{
+	position: relative;
+
+    height: 627px;
+}
+
+
+
+    .theater .seats .roww .label{
+	position: absolute;
+    left: 0px;
+    margin-bottom: 1px;
+    width: 15px;
+    height: 14px;
+    line-height: 14px;
+    border-top: 1px solid #d4d3c9;
+    font-size: 11px;
+    font-family: Verdana;
+    font-weight: bold;
+    text-align: center;
+}
+
+    .theater .seats .roww{
+	position: absolute;
+    height: 15px;
+    line-height: 15px;
+}
+
+    .theater .seats .roww .seat{
+	position: absolute;
+    width: 16px;
+    height: 15px;
+}
+
+.theater .seats .roww .seat a{
+	display: block;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    font-size: 11px;
+}
+
+.theater .seats .roww .seat a .no{
+	display: block;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+}
+
+.theater .seats .roww .seat a .no{
+	background-color: #666;
+    background-position: 1000px 1000px;
+}
+
+.theater .seats .roww .seat a .no{
+	background-image: url("/images/movie/movieSeatReservation/seat_icons_20190221.png");
+    background-repeat: no-repeat;
+}
+
+    .theater .seats .roww .seat.blocked a .no{
+	background-color: #bbb;
+    background-position: -25px 0;
+    text-indent: -9999px;
+}
+
+    .theater .seats .roww .seat.reserved a .no{
+	background-color: #bbb;
+    background-position: -1000px 0;
+}
+
+    .theater .seats .roww .seat.rating_economy a .no{
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
+    border: solid 2px #ed8c00;
+}
+
+    .theater .seats .roww .seat.rating_comfort a .no{
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
+    border: solid 2px #01c73c;
+}
+
+    .theater .seats .roww .seat.rating_prime a .no{
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
+    border: solid 2px #f71708;
+}
+
+
+
+    .theater .seats .roww .seat.rating_prime a .no{
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
+    border: solid 2px #f71708;
+}
+
+    .theater .seats .roww .seat.selected a .no{
+	background-color: #ad1712;
+    background-position: 0 0;
+}
+
+    .theater .seats .roww .seat.preSelect a .no{
+	background-color: #ad1712;
+    background-position: 0 0;
+}
+
+/* 좌석 설명 */
+
+    .theater_minimap .legend{
+	position: absolute;
+    top: 20px;
+    right: 28px;
+    width: auto;
+    height: 100%;
+}
+
+    .theater_minimap .legend .buttons{
+	height: 55px;
+}
+
+    .theater_minimap .legend .btn-zoom{
+	background: url("/images/movie/movieSeatReservation/btn_zoom.png") no-repeat;
+}
+
+    .theater_minimap .legend .btn-zoom{
+	display: block;
+    width: 96px;
+    height: 35px;
+    overflow: hidden;
+    text-indent: -1000px;
+}
+
+    .seat-icon-desc{
+	margin-left: 5px;
+    line-height: 15px;
+}
+
+    .seat-icon-desc .icon:first-child{
+	margin-top: 0;
+}
+
+    .seat-icon-desc .icon{
+	position: relative;
+    display: block;
+    margin-top: 8px;
+    padding-left: 19px;
+    height: 15px;
+    color: #666;
+    font-size: 12px;
+}
+
+    .seat-icon-desc .icon > span{
+	position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 15px;
+    height: 16px;
+    padding: 0;
+    
+    background: url("/images/movie/movieSeatReservation/seat_icons_20190221.png") no-repeat;
+    background-position: 0 0;
+}
+
+    .seat-icon-desc .icon.reserved > span{
+	background-color: #bbb;
+    background-image: none;
+}
+
+
+    .seat-icon-desc .icon.notavail > span{
+	background-position: -25px 0;
+    background-color: #bbb;
+}
+
+
+
+    .seat-type{
+	margin-top: 23px;
+    margin-left: 5px;
+}
+
+    .seat-type .radiobutton:first-child{
+	margin-top: 0;
+}
+
+    .seat-type .radiobutton{
+	position: relative;
+    display: block;
+    padding-left: 19px;
+    color: #666;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+    .seat-type .radiobutton .icon{
+	background: url("/images/movie/movieSeatReservation/seat_icons_20190221.png") no-repeat 0,0;
+}
+
+    .seat-type .radiobutton.type-rating_economy .icon{
+	background-image: none;
+    border: 2px solid #ed8c00;
+    width: 11px;
+    height: 12px;
+}
+
+    .seat-type .radiobutton .icon{
+	position: absolute;
+    left: 0;
+    top: 0;
+    width: 15px;
+    height: 16px;
+    margin-right: 3px;
+    vertical-align: middle;
+    display: inline-block;
+    zoom: 1;
+}
+
+    .seat-type .radiobutton.type-rating_comfort .icon{
+	background-image: none;
+    border: 2px solid #01c73c;
+    width: 11px;
+    height: 12px;
+}
+
+    .seat-type .radiobutton.type-rating_prime .icon{
+	background-image: none;
+    border: 2px solid #f71708;
+    width: 11px;
+    height: 12px;
+}
+

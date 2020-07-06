@@ -210,6 +210,15 @@ public class MovieInfoService {
 		BitFuction2 bb2 = new BitFuction2();
 		List<Integer> emotion = bb2.getState2(values2);
  		
+		
+		//관객수
+		/*
+		 * Map<String, Object> mapV = movieInfoRepository.visitor2(reservationVO);
+		 * Iterator<String> mmV = mapV.keySet().iterator();
+		 * 
+		 * while(mmV.hasNext()) { String keyv = mmV.next();
+		 * System.out.println("관람객"+keyv); }
+		 */
 		//
 		movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
 		Map<String, Object> g = new HashMap<>();

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.timePrice.TimePriceRepository">
+	
+	<select id="timePriceSelect" parameterType="TimePriceVO" resultType="TimePriceVO">
+		select * from timePrice where cinemaNum=#{cinemaNum} and filmType=#{filmType} and time(#{time}) between sTime and eTime
+	</select>
+	
+	<select id="searchLimit" parameterType="TimePriceVO" resultType="TimePriceVO">
+		select distinct sTime,eTime,type from timePrice where cinemaNum = #{cinemaNum} and type =1 or type =2 order by type
+	</select>
+	
+	
+</mapper>

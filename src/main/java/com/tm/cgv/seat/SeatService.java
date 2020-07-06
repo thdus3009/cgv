@@ -23,4 +23,7 @@ public class SeatService {
 		return seatRepository.colCount(seatVO);
 	}
 	
+	public List<SeatVO> seatSelect(SeatVO seatVO) throws Exception{
+		return seatRepository.seatSelect(seatVO);
+	}
 }

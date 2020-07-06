@@ -2,7 +2,7 @@
  * 
  */
 
-$("#btn-more").click(function() {
+	$("#btn-more").click(function() {
 		var kind = $("#select").val();
 		var startRow = $("#startRow").val();
 		var search=$("#search").val();
@@ -36,18 +36,18 @@ $("#btn-more").click(function() {
 		
 		//$.get("./movieListSearch?search="+search,function(result){
 		//	console.log(result);
-		});
+	});
 		
 	
 		
-		var params = location.search.substr(location.search.indexOf("?") + 1);
-		params = params.split("=");
+	var params = location.search.substr(location.search.indexOf("?") + 1);
+	params = params.split("=");
 		
-		for(var i=0;i<params.length;i++){
-			temp = params[0];
-		}
-		console.log(temp);
-		$("#param").attr("value",temp);
+	for(var i=0;i<params.length;i++){
+		temp = params[0];
+	}
+	console.log(temp);
+	$("#param").attr("value",temp);
 		
 		
 	

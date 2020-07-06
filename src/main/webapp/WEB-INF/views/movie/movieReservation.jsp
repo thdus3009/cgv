@@ -10,10 +10,13 @@
 
 <link href="${pageContext.request.contextPath}/css/movie/movieSeatReservation.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/moviePayment.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieReservationResult.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieCGVgift.css" rel="stylesheet" type="text/css">
 
 <!-- payment -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -45,16 +48,16 @@
 			</div>
 
 		<div id="container">
-		
+			<div class="blackscreen" style="display: none;" id="blackscreen"></div>
 			<div id="ticket">
 			
 				<!-- navigation -->
 				<div class="navi">
 					<span class="right">
-						<a href="#" class="button btn-guide">
+						<a href="#" class="button btn-guide" onclick="return false;">
 							<span>예매가이드</span>
 						</a>
-						<a href="#" class="button btn-reservation-restart">
+						<a href="javascript:location.reload();" class="button btn-reservation-restart" >
 							<span>예매 다시하기</span>
 						</a>
 					</span>
@@ -136,7 +139,7 @@
 												<li class="selected" data-index="0" data-local="서울">
 													<a>
 														<span class="name">서울</span>
-														<span class="count">(30)</span>
+														<span class="count">(0)</span>
 													</a>
 													
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
@@ -153,7 +156,7 @@
 												<li class="" data-index="0" data-local="경기">
 													<a>
 														<span class="name">경기</span>
-														<span class="count">(46)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -169,7 +172,7 @@
 												<li class="" data-index="0" data-local="인천">
 													<a>
 														<span class="name">인천</span>
-														<span class="count">(9)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -185,7 +188,7 @@
 												<li class="" data-index="0" data-local="강원">
 													<a>
 														<span class="name">강원</span>
-														<span class="count">(4)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -201,7 +204,7 @@
 												<li class="" data-index="0" data-local="대전/충청">
 													<a>
 														<span class="name">대전/충청</span>
-														<span class="count">(19)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -217,7 +220,7 @@
 												<li class="" data-index="0" data-local="대구">
 													<a>
 														<span class="name">대구</span>
-														<span class="count">(9)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -233,7 +236,7 @@
 												<li class="" data-index="0" data-local="부산/울산">
 													<a>
 														<span class="name">부산/울산</span>
-														<span class="count">(14)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -249,7 +252,7 @@
 												<li class="" data-index="0" data-local="경상">
 													<a>
 														<span class="name">경상</span>
-														<span class="count">(15)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -265,7 +268,7 @@
 												<li class="" data-index="0" data-local="광주/전라/제주">
 													<a>
 														<span class="name">광주/전라/제주</span>
-														<span class="count">(22)</span>
+														<span class="count">(0)</span>
 													</a>
 													<div id="cinema_ajax" class="area_theater_list nano has-scrollbar has-scrollbar-y" style="width: 109px">
 														<ul class="content scroll-y" >
@@ -309,10 +312,13 @@
 							<div class="col-body" style="height: 560px;">
 								<div class="date-list nano has-scrollbar has-scrollbar-y" id="date_list">
 									<ul class="content scroll-y" tabindex="-1" style="right: -21px;">
-										<li class="month dimmed ">
-											<span class="year">${calendarList[0].year}</span>
-											<span class="month" data-month="">${calendarList[0].month}</span>
-										</li>
+										<c:if test="${calendarList[0].date != 1}">
+											<li class="month dimmed ">
+												<span class="year">${calendarList[0].year}</span>
+												<span class="month" data-month="">${calendarList[0].month}</span>
+											</li>
+										</c:if>
+										
 										
 										<c:forEach var="calendarVO" items="${calendarList}" varStatus="i">
 											<c:if test="${calendarVO.date eq 1}">
@@ -373,14 +379,104 @@
 					
 					<div class="step step4" style="display: none;">
 					</div>
-					
-					
-					
-					
 				</div>			
 			</div>
-		
 		</div>
+		
+		
+		<!-- 로그인 폼 -->
+		<div class="ft_layer_popup popup_login ko" style="top: 231px; position: absolute; display: none;" name="popup_login">
+			<div class="hd">
+				<div class="title_area">
+					<h4>CGV회원 로그인</h4>
+<!-- 					<span class="sreader">빠른예매는 레이어로 서비스 되기 때문에 가상커서를 해지(Ctrl+Shift+F12)한 후 사용합니다.</span> -->
+				</div>
+					<a href="#" class="layer_close">닫기</a>
+			</div>
+			<div class="bd">
+				<div class="login_form">
+				<form action="../member/login" method="post">
+					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<input type="hidden"  id="location" name="loc" value="/" />
+					<div class="input_wrap id">
+						<label for="txtUserId" class="blind">아이디</label>
+						<input name="username" id="txtUserId" maxlength="25">
+					</div>
+					<div class="input_wrap password">
+						<label for="txtPassword" class="blind">비밀번호</label>
+						<input name="password" id="txtPassword" maxlength="25" type="password">
+					</div>
+					<button type="submit" title="Login" class="btn_login">
+						<span>로그인</span>
+					</button>
+				</form>
+			
+				</div>
+				<div class="linkbar">
+					<a href="#" class="join_member">회원가입</a>
+					<a href="#" class="join_guest">비회원 예매</a>
+					<a href="#" class="id_find">아이디찾기</a>
+					<a href="#" class="pw_find">비밀번호찾기</a>
+				</div>
+			</div>
+		</div>
+				
+		
+		
+		<!-- CGV 기프트 카드 등록 -->
+		<div class="ft_layer_popup f_popup" style="display: none;">
+			<div class="hd">
+				<div class="title_area"><h4>CGV 기프트카드 등록하기</h4></div>
+			</div>
+			<div class="bd">
+				<p class="notice">CGV 기프트카드를 등록하시면 온/오프라인에서 모두 편리하게 이용 하실수 있습니다.</p>
+				<div class="f_card innerCon" style="display: block;">
+					<p class="inputCon cardNum">
+						<label for="f_cardNo">카드번호</label>
+						<input id="f_cardNo" type="text" class="input_txt" maxlength="4"> -
+						<input type="password" class="input_txt" maxlength="4" > -
+						<input type="password" class="input_txt" maxlength="4" > -
+						<input type="text" class="input_txt" maxlength="4" > 
+					</p>
+					<p class="inputCon cardPw">
+						<label for="f_cardPw">비밀번호</label>
+						<input id="f_cardPw" type="password" class="input_txt" maxlength="6" placeholder="스크래치번호">
+					</p>
+				</div>
+		
+				<div id="movieMoneyNT" style="margin-bottom: 20px; display: block;">
+					<img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/popup/image_cgvticket.png" alt="CGV영화관람권 비밀번호 스크래치 부분을 동전 등으로 긁으면 비밀번호가 나타납니다.">
+						
+					<ul class="info">
+						<li>
+							<div class="title">이용안내</div>
+							<div class="text">
+								CGV 영화관람권 <em>비밀번호</em>를 입력해주세요.<br>
+								CGV GOLD CLASS 이용권 <em>비밀번호</em>를 등록해주세요.<br>
+								CGV온라인(홈페이지/모바일)에서 등록하신 관람권은 홈페이지/모바일예매에<br>
+								한하여 사용할 수 있으며, CGV 현장 매표소에서는 사용할 수 없습니다.<br> 
+								CGV 영화 관람권은 일반 인터넷 사이트를 포함한 시중에서 임의로 매매될 수<br>
+								없으며 반드시 CGV를 통해서만 구입하실 수 있습니다.
+							</div>
+								
+						</li>
+					</ul>
+				</div>
+				<div style="text-align: center; margin-bottom: 10px;">
+					<a href="#none" onclick="giftCardEnrollment(); return false;" class="btn btn_regist btn_size2" title="등록하기">
+						<span>등록하기</span>
+					</a>
+					<a href="#none" onclick="window_close(); return false;" class="btn btn_white btn_close" title="닫기">
+						<span>닫기</span>
+					</a>
+				</div>
+			
+			</div>
+			<a href="#none" onclick="window_close(); return false;" class="pop_close" title="닫기"></a>
+		</div>
+		<!-- End CGV 기프트 카드 등록  -->
+		
+		
 		
 		<!-- url : ../reservation/seatReservation -->
 		<form action="" id="data-from" method="post">
@@ -392,6 +488,7 @@
 			
 			<input type="hidden" id="seatCount" name="seatCount" value="">
 			<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" id="cinemaNum" value="" />
 			
 			<input type="hidden" id="sDate" value="">
 		</form>
@@ -502,38 +599,57 @@
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
 <script type="text/javascript">
     var list = [];
-    
     <c:forEach items="${cinemaList}" var="vo">
        var cinemaVO = {
+    	     num : `${vo.num}`,
              name: `${vo.name}`,
              local:	`${vo.local}`
+               
        };
        
        list.push(cinemaVO);   
     </c:forEach>
 
 	for(i=0;i<list.length;i++){
-		console.log(list[i].name+" "+list[i].local);
+		//console.log(list[i].name+" "+list[i].local);
 		$(".theater-area-list > ul > li").each(function(){
-
-// 			console.log("읽어온값 : "+i+" "+ list[i].local);
-// 			console.log("폼 값 : "+$(this).data("local"));
 			
 			if(list[i].local == $(this).data("local")){
 				console.log(list[i].name+" "+list[i].local);
-				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'"><a href="#" onclick="return false;">'+list[i].name+'<span class="sreader"></span></a></li>');
+				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'" data-num="'+ list[i].num+'">'
+						+ '<a href="#" onclick="return false;">'
+						+ list[i].name
+						+ '<span class="sreader"></span></a></li>');
+
+
+
+				//지역마다 극장 개수  출력
+				var pre = $(this).data("index");
+				pre += 1;
+				$(this).data("index",pre);
+				
+				var next = $(this).data("index");
+				$(this).find(".count").text("("+$(this).data("index")+")");
 			}
-			
-// 			console.log("==================================");
 			
 		});
 	}
 
 
+	console.log($(".theater-area-list > ul > li").length);
+	
+	
+		
+
+
+	var data;
+	var memberID = `${memberVO.username}`;
+	
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
-			//결제 작업을 위한 값 - 이니시스 : tel
-			var data = {
+			
+			//결제 작업을 위한 값 - 이니시스 
+			data = {
 					tel : `${memberVO.phone}`,
 					email : `${memberVO.email}`,
 					name : `${memberVO.name}`,
@@ -544,10 +660,9 @@
 			//payment_inicis(data);
 			
 			//test 결제 없이 바로 예매 - 좌석예매 진행
-			reservation_save(8);
+			reservation_save(6);
 	});
 
-	
 
 </script>
 

@@ -126,7 +126,7 @@
 										</div>
 
 										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-										<form action="./movieWrite" method="post" enctype="multipart/form-data">
+										<form action="./movie${path}" method="post" enctype="multipart/form-data">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<fieldset>
 

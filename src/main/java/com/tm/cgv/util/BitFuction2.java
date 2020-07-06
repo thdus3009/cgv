@@ -50,12 +50,13 @@ public class BitFuction2 {
 		list.add(resultD);
 		list.add(resultE);
 		
-		System.out.println(list.get(0)+"비트플래그..?");//긴장감
-		System.out.println(list.get(1)+"비트플래그..?");//즐거움
-		System.out.println(list.get(2)+"비트플래그..?");//스트레스
-		System.out.println(list.get(3)+"비트플래그..?");//감동
-		System.out.println(list.get(4)+"비트플래그..?");//몰입감
-		
+		/*
+		 * System.out.println(list.get(0)+"비트플래그..?");//긴장감
+		 * System.out.println(list.get(1)+"비트플래그..?");//즐거움
+		 * System.out.println(list.get(2)+"비트플래그..?");//스트레스
+		 * System.out.println(list.get(3)+"비트플래그..?");//감동
+		 * System.out.println(list.get(4)+"비트플래그..?");//몰입감
+		 */		
 		
 		
 		return list;

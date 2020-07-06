@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+
+.ft_layer_popup.f_popup {
+    width: 564px;
+}
+
+.ft_layer_popup {
+    display: none;
+    background-color: #f6f6f4;
+    border: 5px solid #333;
+    position: absolute;
+    top: 10%;
+    width: 624px;
+    left: 50%;
+    margin-left: -312px;
+    z-index: 20000;
+    text-align: left;
+}
+
+.ft_layer_popup .hd {
+    border-bottom: 4px solid #333;
+    height: 51px !important;
+    background-color: #333 !important;
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.ft_layer_popup .hd .title_area h4 {
+    float: none !important;
+    width: auto !important;
+    margin-right: 0 !important;
+    background: none !important;
+    color: #f2f0e5;
+    border: 1px solid #707070;
+    height: 35px !important;
+    padding-top: 14px;
+    padding-left: 20px;
+    font-family: Nanum Gothic, 나눔고딕, Apple SD Gothic Neo, AppleGothic, 돋움, dotum, Sans-serif;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: -1px;
+}
+
+.ft_layer_popup .bd {
+    padding-top: 45px;
+}
+
+.ft_layer_popup .bd {
+    max-height: 710px;
+    overflow-y: hidden;
+}
+
+.ft_layer_popup .bd {
+    position: relative;
+    margin: 0 auto;
+    padding: 40px 40px 20px 40px;
+    overflow: hidden;
+    background-color: #f6f6f4;
+}
+
+.ft_layer_popup .bd p.notice {
+    line-height: 17px;
+}
+
+.f_popup .bd div.innerCon {
+    margin: 13px 0 20px 0;
+}
+
+.f_popup .bd div.innerCon p.inputCon {
+    height: 20px;
+    margin-bottom: 5px;
+    line-height: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.f_popup .bd div.innerCon p.inputCon label {
+    margin-right: 15px;
+}
+
+.f_popup .bd div.innerCon p.inputCon.cardNum input[type="text"], .f_popup .bd div.innerCon p.inputCon.cardNum input[type="password"] {
+    width: 75px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.input_txt {
+    height: 25px;
+    line-height: 23px;
+    padding-top: 2px;
+    padding-left: 5px;
+    border: 1px solid #b5b5b5;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/common/trans_bg.png);
+}
+
+.f_popup .bd div.innerCon p.inputCon.cardPw input {
+    width: 357px;
+}
+
+.ft_layer_popup .bd img {
+    width: 100%;
+    margin: 0 0 20px 0;
+}
+
+.ft_layer_popup .bd ul.info {
+    font-size: 12px;
+    color: #666;
+    overflow: hidden;
+}
+
+.ft_layer_popup .bd ul.info li:first-child {
+    margin-top: 0px;
+}
+
+.ft_layer_popup .bd ul.info li {
+    margin-top: 28px;
+    overflow: hidden;
+}
+
+.ft_layer_popup .bd ul.info li .title {
+    clear: both;
+    float: left;
+    width: 60px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.ft_layer_popup .bd ul.info li .text {
+    float: left;
+    padding-left: 19px;
+    width: 394px;
+    line-height: 22px;
+    margin-top: -4px;
+    letter-spacing: -1px;
+    border-left: 1px solid #d7d6cf;
+}
+
+.ft_layer_popup .bd em {
+    color: #c62424;
+}
+
+em {
+    font-style: normal;
+}
+
+.ft_layer_popup a.btn.btn_size2 {
+    width: 85px;
+}
+
+.ft_layer_popup .bd .btn {
+    text-align: center;
+}
+
+.ft_layer_popup a.btn {
+    margin-right: 3px;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: -1px;
+    font-weight: bold;
+    background-color: #333;
+    border-radius: 4px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    width: 54px;
+    height: 29px;
+    vertical-align: middle;
+}
+
+.ft_layer_popup a.btn.btn_size2 span {
+    width: 79px;
+}
+
+.ft_layer_popup a.btn.btn_white {
+    color: #000;
+}
+
+.ft_layer_popup a.btn.btn_white span {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+.ft_layer_popup a.btn span {
+    display: block;
+    margin: 2px;
+    width: 48px;
+    height: 23px;
+    line-height: 23px;
+    border: 1px solid #595957;
+    border-radius: 3px;
+    text-align: center;
+    color: #f2f0e5;
+}
+
+.pop_close {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    line-height: 0;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/common/k_layer_common.png) no-repeat top left;
+    color: #ffffff;
+    font-size: 0;
+}
+
+.blackscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    _height: 1000px;
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+    background-color: #fff;
+    text-align: center;
+    z-index: 10000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

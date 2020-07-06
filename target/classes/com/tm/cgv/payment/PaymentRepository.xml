@@ -10,5 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into payment values(#{num},#{imp_uid},#{merchant_uid},#{pg},#{pay_method},#{apply_num})
 	</insert>
 	
+	<delete id="paymentDelete" parameterType="Integer">
+		delete from payment where num=#{num}
+	</delete>
+	
 
 </mapper>
