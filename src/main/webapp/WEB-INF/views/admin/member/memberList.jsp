@@ -6,7 +6,6 @@
 <head>
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/member/member.css" />
-<link rel="stylesheet" href="/css/admin/pager.css" />
 </head>
 <body class="sb-nav-fixed">
 	<c:import url="../template/header.jsp"></c:import>
@@ -17,6 +16,7 @@
 			<main>
 				<div class="container-fluid">
 					<h1>Member List</h1>
+					<p>회원 목록</p>
 					<!-- 검색창 -->
 					<div class="input-group">
 						<select id="searchTag" name="searchTag">
@@ -26,7 +26,7 @@
 							<option value="phone">핸드폰</option>
 							<option value="email"></option>
 						</select> <input id="searchTxt" class="form-control" type="text"
-							placeholder="Search for..." aria-label="Search"
+							placeholder="검색어를 입력해주세요." aria-label="Search"
 							aria-describedby="basic-addon2" />
 						<div class="input-group-append">
 							<button id="searchBtn" class="btn btn-primary" type="button">
@@ -102,7 +102,6 @@
 					</div>
 				</div>
 			</main>
-			<c:import url="../template/footer.jsp"></c:import>
 		</div>
 	</div>
 	<c:import url="../template/scripts.jsp"></c:import>

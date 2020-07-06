@@ -10,6 +10,7 @@
 <title>관리자 페이지</title>
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/admin/admin.css" rel="stylesheet" />
+<link href="/css/admin/pager.css" rel="stylesheet"/>
 
 <!-- bootstrap 4 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
