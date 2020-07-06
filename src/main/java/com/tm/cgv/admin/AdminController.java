@@ -563,7 +563,6 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("payment/SelectOne")
 	public PaymentVO paymentSelectOne(PaymentVO paymentVO) throws Exception{
-		
 		paymentVO = paymentService.paymentSelectOne(paymentVO);
 
 		return paymentVO; 

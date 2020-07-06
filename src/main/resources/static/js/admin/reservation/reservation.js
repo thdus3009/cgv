@@ -63,8 +63,6 @@ $(".type").click(function(){
 
 
 
-
-
 //콤마 생성
 function addComma(num) {
 	var regexp = /\B(?=(\d{3})+(?!\d))/g;

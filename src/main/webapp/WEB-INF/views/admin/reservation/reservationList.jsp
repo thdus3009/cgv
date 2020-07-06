@@ -114,13 +114,13 @@
 
 					<form action="../reservation/selectList" id="form-Data" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" style="float: right; padding-bottom: 20px;">
 						<div class="input-group">
-							<input class="form-control" name="search" type="text" placeholder="검색어를 입력" aria-label="Search" aria-describedby="basic-addon2" />
+							<input class="form-control" name="search" value="${pager.search}" type="text" placeholder="검색어를 입력" aria-label="Search" aria-describedby="basic-addon2" />
 							<input type="hidden" id="curPage" name="curPage" value="">
 							<input type="hidden" id="sDate" name="sDate" value="">
 							<input type="hidden" id="eDate" name="eDate" value="">
 							 
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button">
+								<button class="btn btn-primary" type="submit">
 									<i class="fas fa-search"></i>
 								</button>
 							</div>
@@ -129,9 +129,9 @@
 						<div class="form-group "
 							style="float: right; padding-right: 10px; text-align: right;">
 							<select class="form-control col-md-12" name="kind">
-								<option class="type" value="title" selected="selected">제목</option>
-								<option class="type" value="username">아이디</option>
-								<option class="type" value="all">제목+아이디</option>
+								<option class="type" id="title" value="title" selected="selected">제목</option>
+								<option class="type" id="username" value="username">아이디</option>
+								<option class="type" id="all" value="all">제목+아이디</option>
 							</select>
 						</div>
 					</form>
@@ -286,9 +286,17 @@
 		</div>
 	</div>
 	
-	
-	
 	<script type="text/javascript" src="/js/admin/reservation/reservation.js"></script>
+	<script type="text/javascript">
+
+		var kind = '${pager.kind}';
+		if(kind == ''){
+			$("#title").prop("selected", true);
+		}else{
+			$("#"+kind).prop("selected",true);
+		}
+		
+	</script>
 	
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
