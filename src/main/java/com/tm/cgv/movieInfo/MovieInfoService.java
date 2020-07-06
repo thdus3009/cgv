@@ -113,15 +113,27 @@ public class MovieInfoService {
 		System.out.println(reservationVO.getMovieNum()+"uuuu");
 		
 		//vo에  total과 good을 받아줄 변수명이 없으므로 map으로 받아서 가지고 옴
-		//eggRate계산
-		Map< String , Object> map = movieInfoRepository.errRate2(reservationVO);
-		Iterator<String> mm = map.keySet().iterator();
 		
-		long total = (long)map.get("total");
-		long good = (long)map.get("good");
+		//eggRate계산//리뷰
+		Map< String , Object> map=null;
+		long total = 0;
+		long good=0;
 		
-		double total2 = Double.valueOf(total);
-		double good2 = Double.valueOf(good);
+		if (movieInfoVO.getErrRate()!=100.0) {
+			map = movieInfoRepository.errRate2(reservationVO);
+			Iterator<String> mm = map.keySet().iterator();
+			
+			 total = (long)map.get("total");
+			 good = (long)map.get("good");
+			
+		}
+		
+		
+			double total2 = Double.valueOf(total);//==null?0.0:Double.valueOf(total)
+			double good2 = Double.valueOf(good);//==null?0.0:Double.valueOf(good);
+		
+		
+		
 		
 		if(total2>0) { //작성된 리뷰가 1개 이상일 경우 계산해서 errRate를 업데이트
 			double errRate =(double)(good2/total2)*100;				
@@ -219,28 +231,35 @@ public class MovieInfoService {
 		 * while(mmV.hasNext()) { String keyv = mmV.next();
 		 * System.out.println("관람객"+keyv); }
 		 */
+		
 		//
-		movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
 		Map<String, Object> g = new HashMap<>();
-		g.put("gender", gender);
-		g.put("gTotal",gTotal);
-		g.put("ageTotal", ageTotal2);
-		g.put("age10", age10_2);
-		g.put("age20", age20_2);
-		g.put("age30", age30_2);
-		g.put("age40", age40_2);
-		g.put("age50", age50_2);
-		g.put("vo", movieInfoVO);
-		g.put("cost", charm.get(0));
-		g.put("cactor", charm.get(1));
-		g.put("cvisual", charm.get(2));
-		g.put("cstory", charm.get(3));
-		g.put("cdirector", charm.get(4));
-		g.put("cten", emotion.get(0));//긴장감
-		g.put("cfun", emotion.get(1));//즐거움
-		g.put("cstr", emotion.get(2));//스트레스
-		g.put("cimp", emotion.get(3));//감동
-		g.put("cimm", emotion.get(4));//몰입감
+		if(total2 == 0.0 || total2>0 || totalTicket==0 || totalTicket>0) {
+			movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
+			
+			
+			g.put("gender", gender);
+			g.put("gTotal",gTotal);
+			g.put("ageTotal", ageTotal2);
+			g.put("age10", age10_2);
+			g.put("age20", age20_2);
+			g.put("age30", age30_2);
+			g.put("age40", age40_2);
+			g.put("age50", age50_2);
+			g.put("vo", movieInfoVO);
+			g.put("cost", charm.get(0));
+			g.put("cactor", charm.get(1));
+			g.put("cvisual", charm.get(2));
+			g.put("cstory", charm.get(3));
+			g.put("cdirector", charm.get(4));
+			g.put("cten", emotion.get(0));//긴장감
+			g.put("cfun", emotion.get(1));//즐거움
+			g.put("cstr", emotion.get(2));//스트레스
+			g.put("cimp", emotion.get(3));//감동
+			g.put("cimm", emotion.get(4));//몰입감
+		}
+		
+		
 		return g ;
 		
 	}

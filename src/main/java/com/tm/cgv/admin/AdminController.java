@@ -133,6 +133,9 @@ public class AdminController {
 			mv.setViewName("redirect:../error/404");
 		}
 		
+		//select 에서 예매율, 리뷰 없어도...
+		
+		
 		
 		mv.addObject("vo",map.get("vo"));
 		mv.addObject("gender",map.get("gender"));
