@@ -354,9 +354,9 @@ button {
 }
 
 .egg-gage {
-	margin-top: -10px;
+	margin-top: 0px;
 	margin-left: 2px;
-	padding-left: 6px;
+	padding-left: 5px;
 	background: url("/images/movie/movieList/bg_writeinfo.gif") 0 12px
 		no-repeat;
 	vertical-align: middle;
