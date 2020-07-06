@@ -660,7 +660,7 @@
 			//payment_inicis(data);
 			
 			//test 결제 없이 바로 예매 - 좌석예매 진행
-			reservation_save(6);
+			reservation_save(2);
 	});
 
 

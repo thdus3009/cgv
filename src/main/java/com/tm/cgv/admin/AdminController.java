@@ -21,6 +21,8 @@ import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.payment.PaymentService;
+import com.tm.cgv.payment.PaymentVO;
 import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
@@ -30,13 +32,14 @@ import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
 import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.util.Pager;
+import com.tm.cgv.reservation.ReservationService;
+
 
 @Controller
 @RequestMapping("/admin/**")
 public class AdminController {
 
 	@Autowired
-
 	private CinemaService cinemaService;
 	
 	@Autowired
@@ -56,6 +59,12 @@ public class AdminController {
 	
 	@Autowired
 	private MovieTimeService movieTimeService;
+	@Autowired
+	private ReservationService reservationService;
+	@Autowired
+	private PaymentService paymentService;
+	
+	
 	
 	@GetMapping("/")
 	public String admin() throws Exception {
@@ -325,6 +334,17 @@ public class AdminController {
 		return mv;
 	}
 	
+	
+	
+	
+	//극장별 관람가격 (조회/수정/삭제 /삽입)
+	
+	
+	
+	
+	
+	
+	
 	//==============================
 	// theater
 	//==============================
@@ -507,5 +527,61 @@ public class AdminController {
 		int result = movieTimeService.insert(movieTimeVO);
 		return result;
 	}
+	
+	
+	//==============================
+	// reservation 
+	//==============================
+	//예매내역 (조회/삭제)
+	@GetMapping("reservation/selectList")
+	public ModelAndView reservationSelectList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<ReservationVO> reservationList = reservationService.reservationSelectList(pager);
+		
+		mv.addObject("reservationList", reservationList);
+		mv.setViewName("admin/reservation/reservationList");
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@GetMapping("reservation/delete")
+	public int reservationDelete(ReservationVO reservationVO) throws Exception{
+		int result = 0;
+		result = reservationService.reservationDelete(reservationVO);
+		
+		return result;
+	}
+	
+	
+	
+	//==============================
+	// payment  
+	//==============================
+	//결제내역 (조회)
+	@ResponseBody
+	@GetMapping("payment/SelectOne")
+	public PaymentVO paymentSelectOne(PaymentVO paymentVO) throws Exception{
+		
+		paymentVO = paymentService.paymentSelectOne(paymentVO);
+
+		return paymentVO; 
+	}
+	
+	
+	
+	
+	
+	//==============================
+	// coupon
+	//==============================
+	
+	//쿠폰 정보 (조회/삭제/수정/삽입)
+	
+	
+	
+	
+	
 
 }

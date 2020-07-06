@@ -329,9 +329,9 @@ function timeMake(result){
 	for(i=0;i<result.length;i++){
 		var fType = "";
 
-		if(result[i].theaterVOs[0].filmType == 1){
+		if(result[i].movieTimeVOs[0].selectedFilm == 2){
 			fType = '3D';
-		}else if(result[i].theaterVOs[0].filmType == 2){
+		}else if(result[i].movieTimeVOs[0].selectedFilm == 4){
 			fType = '4D';
 		}else{
 			fType = '2D';
@@ -346,7 +346,7 @@ function timeMake(result){
 		+'</a>'
 		+'</li>'
 
-		var query = '<div class="theater" data-name="'+ result[i].theaterVOs[0].filmType +'" data-floor="'+ result[i].theaterVOs[0].name 
+		var query = '<div class="theater" data-name="'+ result[i].movieTimeVOs[0].selectedFilm +'" data-floor="'+ result[i].theaterVOs[0].name 
 		+'" data-seatcount="'+ result[i].theaterVOs[0].seatCount +'">'
 		+'<span class="title">'
 		+'<span class="name">'+ fType +'</span>'
@@ -358,7 +358,7 @@ function timeMake(result){
 		+'</ul>'
 		+'</div>'
 
-		var checkName = result[i].theaterVOs[0].filmType;
+		var checkName = result[i].movieTimeVOs[0].selectedFilm;
 		var checkFloor = result[i].theaterVOs[0].name;
 		var check = true;
 

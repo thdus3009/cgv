@@ -106,7 +106,7 @@ public class ResevationController {
 				pointVO.setKind("sum");
 				pointVO.setType(vo.getType());
 				pointVO.setPrice(vo.getDiscountPrice());
-				pointVO.setMemberNum(reservationVO.getUid());
+				pointVO.setUsername(reservationVO.getUid());
 				
 				result = pointService.pointDiscountUpdate(pointVO);
 				System.out.println("포인트 : "+result);
@@ -202,7 +202,7 @@ public class ResevationController {
 				if(type == 2) {
 					//할인금액 point에 적용(빼기)
 					PointVO pointVO = new PointVO();
-					pointVO.setMemberNum(reservationVO.getUid());
+					pointVO.setUsername(reservationVO.getUid());
 					pointVO.setType(arr[0]);
 					pointVO.setPrice(Integer.parseInt(arr[1]));
 						
