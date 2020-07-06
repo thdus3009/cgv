@@ -1,4 +1,4 @@
-package com.tm.cgv.memberCupon;
+package com.tm.cgv.memberCoupon;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/memberCupon/**")
-public class MemberCuponController {
+public class MemberCouponController {
 	
 	@Autowired
-	private MemberCuponService memberCuponService;
+	private MemberCouponService memberCuponService;
 	
 	@ResponseBody
 	@GetMapping("memberCuponSelect")
-	public List<MemberCuponVO> memberCuponSelect(MemberCuponVO memberCuponVO) throws Exception{
-		List<MemberCuponVO> memberCuponList = memberCuponService.memberCuponSelect(memberCuponVO);
+	public List<MemberCouponVO> memberCuponSelect(MemberCouponVO memberCouponVO) throws Exception{
+		List<MemberCouponVO> memberCuponList = memberCuponService.memberCuponSelect(memberCouponVO);
 		
 		return memberCuponList;
 	}

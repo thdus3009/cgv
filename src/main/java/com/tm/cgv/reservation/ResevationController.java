@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tm.cgv.cuponInfo.CuponInfoService;
-import com.tm.cgv.cuponInfo.CuponInfoVO;
+import com.tm.cgv.couponInfo.CouponInfoService;
+import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.discountInfo.DiscountInfoService;
 import com.tm.cgv.discountInfo.DiscountInfoVO;
-import com.tm.cgv.memberCupon.MemberCuponService;
-import com.tm.cgv.memberCupon.MemberCuponVO;
+import com.tm.cgv.memberCoupon.MemberCouponService;
+import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
@@ -58,9 +58,9 @@ public class ResevationController {
 	@Autowired
 	private PaymentService paymentService;
 	@Autowired
-	private MemberCuponService memberCuponService;
+	private MemberCouponService memberCuponService;
 	@Autowired
-	private CuponInfoService cuponInfoService;
+	private CouponInfoService cuponInfoService;
 	@Autowired
 	private TimePriceService timePriceService;
 	
@@ -94,10 +94,10 @@ public class ResevationController {
 		for (DiscountInfoVO vo : discountList) {
 			if(vo.getType().equals("cgvCoupon")) { //2.멤버 할인쿠폰 갱신
 				
-				MemberCuponVO memberCuponVO = new MemberCuponVO();
+				MemberCouponVO memberCuponVO = new MemberCouponVO();
 				memberCuponVO.setKind("reserveDel");
 				memberCuponVO.setUid(reservationVO.getUid());
-				memberCuponVO.setCuponInfoNum(vo.getDiscountPrice());
+				memberCuponVO.setCouponInfoNum(vo.getDiscountPrice());
 				
 				memberCuponService.memberCuponUpdate(memberCuponVO);
 				
@@ -148,11 +148,11 @@ public class ResevationController {
 		for (DiscountInfoVO vo : discountInfoList) {
 			if(vo.getType().equals("cgvCoupon")) {
 				//쿠폰 번호로 해당 쿠폰의 금액 조회
-				CuponInfoVO cuponInfoVO = new CuponInfoVO();
-				cuponInfoVO.setNum(vo.getDiscountPrice());
-				cuponInfoVO = cuponInfoService.cuponInfoSelect(cuponInfoVO);
+				CouponInfoVO couponInfoVO = new CouponInfoVO();
+				couponInfoVO.setNum(vo.getDiscountPrice());
+				couponInfoVO = cuponInfoService.couponInfoSelect(couponInfoVO);
 				
-				discountInfoList.get(0).setDiscountPrice(cuponInfoVO.getPrice());
+				discountInfoList.get(0).setDiscountPrice(couponInfoVO.getPrice());
 			}
 		}
 		
@@ -186,9 +186,9 @@ public class ResevationController {
 			
 			if(type == 1) {
 				//멤버쿠폰 deleteAt 업데이트
-				MemberCuponVO memberCuponVO = new MemberCuponVO();
+				MemberCouponVO memberCuponVO = new MemberCouponVO();
 				memberCuponVO.setUid(reservationVO.getUid());
-				memberCuponVO.setCuponInfoNum(couponNum);
+				memberCuponVO.setCouponInfoNum(couponNum);
 				
 				memberCuponService.memberCuponUpdate(memberCuponVO);
 				//쿠폰일 때는 금액 대신 쿠폰의 번호를 넣어 줌

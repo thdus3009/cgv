@@ -4,15 +4,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tm.cgv.memberCupon.MemberCuponRepository">
+<mapper namespace="com.tm.cgv.memberCoupon.MemberCouponRepository">
 
-	<resultMap type="MemberCuponVO" id="memberCuponList">
+	<resultMap type="MemberCouponVO" id="memberCouponList">
 		<id property="num" column="mNum"/>
 		<result property="uid" column="uid"/>
 		<result property="cuponInfoNum" column="cuponInfoNum"/>
 		<result property="deleteAt" column="deleteAt"/>
 	
-		<association property="cuponInfoVO" javaType="CuponInfoVO">
+		<association property="couponInfoVO" javaType="CouponInfoVO">
 			<id property="num" column="num"/>
 			<result property="name" column="name"/>
 			<result property="serialNum" column="serialNum"/>
@@ -27,17 +27,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 
-	<select id="memberCuponSelect" parameterType="MemberCuponVO" resultMap="memberCuponList">
+	<select id="memberCouponSelect" parameterType="MemberCouponVO" resultMap="memberCouponList">
 		select * from
-		(select num as mNum,uid,cuponInfoNum,deleteAt from memberCupon where deleteAt is null) MC
+		(select num as mNum,uid,cuponInfoNum,deleteAt from memberCoupon where deleteAt is null) MC
 		join
 		(select * from cuponInfo) CI
 		on(MC.cuponInfoNum = CI.num)
 		where uid = #{uid}
 	</select>
 	
-	<update id="memberCuponUpdate" parameterType="MemberCuponVO">
-		update memberCupon set
+	<update id="memberCouponUpdate" parameterType="MemberCouponVO">
+		update memberCoupon set
 		<choose>
 			<when test="kind == 'reserveDel'">
 				deleteAt = null

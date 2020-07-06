@@ -1,11 +1,11 @@
-package com.tm.cgv.cuponInfo;
+package com.tm.cgv.couponInfo;
 
 import java.sql.Date;
 
 import lombok.Data;
 
 @Data
-public class CuponInfoVO {
+public class CouponInfoVO {
 
 	private int num;
 	private String name;
