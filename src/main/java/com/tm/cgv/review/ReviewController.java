@@ -201,10 +201,10 @@ public class ReviewController {
 	}
 	
 	@GetMapping("movieSelect")
-	public void movieSelect(int movieNum, Model model)throws Exception {
+	public ModelAndView movieSelect(int movieNum)throws Exception {
 		//reviewLook에서 파라미터 끌어다 쓰는거 찾아보기(movieList.jsp, MovieInfoController.java 참고)
 		System.out.println("movieNum?? "+movieNum);
-		
+		ModelAndView mv = new ModelAndView();
 		List<ReviewVO> reviewList = reviewService.movieSelect(movieNum);
 		
 		//하나씩 받은 reviewVO를 다시 ArrayList로 보내기 
@@ -217,11 +217,12 @@ public class ReviewController {
 			id = id.substring(0, 1)+"**"+id.substring(3);
 			reviewVO.setUid(id);
 
+			System.out.println(reviewVO.getUid());
 			ar.add(reviewVO);
-
 		  }
-		
-		model.addAttribute("review",ar);
+		mv.addObject("review", ar);
+		mv.setViewName("movie/ajax/ajax_movieSelect");
+		return mv;
 	}
 		
 	

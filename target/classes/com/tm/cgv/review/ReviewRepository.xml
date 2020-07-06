@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="movieSelect" resultType="ReviewVO" parameterType="Integer">
-		select RV.reservationNum, RV.contents, RV.like1, RE.uid, RE.createAt
+		select RV.reservationNum, RV.contents, RV.egg, RV.like1, RE.uid, RE.createAt
 		from(select num,uid,createAt from reservation 
 		where movieNum=#{movieNum} and createAt is not null and deleteAt is null) RE inner join (select * from review) RV
 		on(RV.reservationNum = RE.num)

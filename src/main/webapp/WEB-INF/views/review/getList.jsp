@@ -27,15 +27,15 @@
 					<div>
 					
 						<!-- Modal 1 Button + 조건-->
-							<c:set var="name" value="${vo.createAt}" />
+					
 							<div id="r${vo.num}">
-								<c:if test="${empty name}">								 
+								<c:if test="${empty vo.createAt}">								 
 								    <button class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}" style="border: 0; background-color: transparent !important;">
 								    	<img alt="" src="${pageContext.request.contextPath}/images/before.JPG">
 								    </button>								    			    				
 								</c:if>
 								
-								<c:if test="${not empty name}">				
+								<c:if test="${not empty vo.createAt}">				
 									<c:if test="${vo.egg eq 1}">										
 										<button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
 											<img alt="" src="${pageContext.request.contextPath}/images/good.JPG">

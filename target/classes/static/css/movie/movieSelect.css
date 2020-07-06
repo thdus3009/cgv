@@ -658,10 +658,26 @@ input, select, img {
     margin: 0 25px -2px;
     overflow: hidden;
 }
+
+#ajax_ms {
+	border-top: 1px solid #999999;
+}
+
 .sect-grade .wrap-persongrade > ul {
-    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
     color: #333333;
 }
+.wrap-movie-detail ul.point_col2>li {
+    position: relative;
+    float: left;
+    margin-right: -1px;
+    border-right: none;
+    width: 50%;
+    height: 150px;
+    padding: 15px 0 30px 0;
+    zoom: 1;
+}
+
 .point_col2 {
     margin: 0 auto -2px!important;
     padding: 0 25px;
@@ -672,17 +688,7 @@ input, select, img {
     border-right: 1px solid #ceccc1;
 }
 
-.wrap-movie-detail ul.point_col2>li {
-    position: relative;
-    float: left;
-    margin-right: -1px;
-    border-right: none;
-    width: 50%;
-    height: 150px;
-    padding: 15px 0 30px 0;
-    border-bottom: 1px solid #ceccc1;
-    zoom: 1;
-}
+
 .sect-grade .wrap-persongrade .box-image .thumb-image {
     width: 62px;
     height: 62px;
