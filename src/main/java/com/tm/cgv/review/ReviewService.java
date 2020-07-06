@@ -66,4 +66,8 @@ public class ReviewService {
 	public int review_Update2(ReviewVO reviewVO)throws Exception {
 		return reviewRepository.review_Update2(reviewVO);
 	}
+	
+	public List<ReviewVO> movieSelect(int movieNum)throws Exception {
+		return reviewRepository.movieSelect(movieNum);
+	}
 }

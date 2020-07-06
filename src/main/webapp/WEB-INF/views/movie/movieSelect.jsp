@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
@@ -41,6 +39,8 @@
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
 	<input type="hidden" id = "gTotal" value="${gTotal}">
+	<input type="hidden" value="${vo.num }" class="num4">
+	
 	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container" >
 		<div class="c_nav">
@@ -322,6 +322,18 @@
 						
 
 						<!-- 리뷰 시작 -->
+						<c:forEach items="${review}" var="vo2">
+							<div>${vo2.reservationNum}</div>
+							<div>${vo2.uid}</div>
+							<div>${vo2.contents}</div>
+							<div>${vo2.like1}</div>
+							<div>${vo2.createAt}</div>
+							<div>-----------------</div>
+							
+						</c:forEach>
+						<!-- 리뷰 끝 -->
+						
+						<!-- 리뷰 시작 test -->
 						<div class="wrap-persongrade">
 							<ul id="movie_point_list_container" class="point_col2">
 								<li class="liCommentFirst" data-spoilercnt="0" data-reportcnt="0">
@@ -390,6 +402,24 @@
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
 
+var num4 = $(".num4").val();
+
+//페이지 들어가면 바로 실행(리뷰리스트)
+window.onload = function () {
+	$.ajax({
+		type:"GET",
+		url:"../review/movieSelect",
+		data:{
+			movieNum : num4,
+			
+		},
+		success:function(data){
+
+		}
+	})
+}
+
+//리뷰 update, write
 function review_Modal(){
 	alert("dd");
 }

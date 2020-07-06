@@ -31,4 +31,6 @@ public interface ReviewRepository {
 	public int review_Update1(ReviewVO reviewVO);
 	
 	public int review_Update2(ReviewVO reviewVO);
+	
+	public List<ReviewVO> movieSelect(int movieNum);
 }
