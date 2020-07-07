@@ -37,9 +37,10 @@
 					<button type="button" id="delete_image" class="btn-del">프로필이미지 삭제</button>
 				</div>
 				<p class="img-condition">JPG, GIF, BMP 파일만 등록 가능합니다.(최대 3M)</p>
-				<input id="profile_upload_file" name="profile_upload_file"
-					title="프로필사진 업로드" type="file" accept=".jpg, .bmp, .gif"
-					onchange="resizeImage()" multiple="multiple"/>
+				<!-- 위 : 다중 / 아래 : 단일     파일 전송용 -->
+				<!-- <input id="profile_upload_file" type="file" name="profile_upload_file" title="프로필사진 업로드" multiple/> -->
+				<input id="profile_upload_file" type="file" name="profile_upload_file" title="프로필사진 업로드" accept="image/*" multiple/>
+				<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</dd>
 		</dl>
 	</div>
@@ -81,32 +82,6 @@
 		$("#user_image").attr('src','/images/member/defaultProfile.png');
 	});
 
-	//프로필 첨부파일 크기제한
-	function checkSize(input) {
-		console.log("isComeIn?");
-	    if (input.files && input.files[0].size > 3340032) {
-	        alert("파일 사이즈가 3M를 넘습니다.");
-	        input.value = null;
-	    }
-	}
-
-	//등록하기 - 닉네임과 프로필 사진 정보 보내기
-	$(".upload").click(function() {
-        	console.log('성공');
-            var id = $("#id").val();
-            console.log(id);
-            $.ajax({
-                url:'./memberIdCheck',
-                type:'get',
-                data:{ id:id },
-                success: function(data) {
-                },
-                error: function() {
-					alert("연결 실패");
-				}
-            });
-    });
-
 	//취소 - 창닫기
 	$(".cancle").click(function() {
 		window.close();
@@ -115,8 +90,56 @@
 		window.close();
 	});
 
-	// image resizing
+	// 파일 확장자 및 크기 체크
+	function checkFile(fileName, fileSize) {
+
+		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		var maxSize = 3145728; 		// 3MB
+
+		if(fileSize >= maxSize) {
+			alert(file.name+" 파일 사이즈 초과");
+			return false;
+		}
 	
+		if(regex.test(fileName)) {
+			alert(file.name+" 해당 종류의 파일은 업로드 할 수 없습니다");
+			return false;
+		}
+		return true;
+	}
+	
+	// update 요청
+	$(".upload").on("click", function(e) {
+
+		var formData = new FormData();
+		var inputFile = $("input[name='profile_upload_file']");
+		var files = inputFile[0].files;
+
+		console.log(files);
+
+		for(var i=0; i<files.length; i++) {
+
+			if(!checkFile(files[i].name, files[i].size)) {
+				return false;
+			}
+
+			formData.append("files", files[i]);
+		}
+
+		formData.append("_csrf", $("#_csrf").val());
+
+		$.ajax({
+			url: './edit',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'post',
+			success: function(result) {
+				if(result>0)
+					alert("수정이 완료되었습니다");
+			}
+		});
+	});
 
 </script>
 

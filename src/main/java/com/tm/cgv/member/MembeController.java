@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.memberCoupon.MemberCouponService;
@@ -181,17 +182,20 @@ class MemberController {
     	return mv;
     }
     
-    @PostMapping("myPage")
-    public ModelAndView memberMypage(MemberBasicVO memberBasicVO) throws Exception {
+    @PostMapping("edit")
+    @ResponseBody
+    public int memberEdit(MultipartFile[] files) throws Exception{
     	
-    	ModelAndView mv = new ModelAndView();
+    	System.out.println("edit");
+    	for (MultipartFile file : files) {
+    		System.out.println("==========================");
+    		System.out.println("upload File Name : "+file.getOriginalFilename());
+    		System.out.println("upload File Size : "+file.getSize());
+		}
     	
-    	mv.setViewName("member/memberMypage");
-    	return mv;
+    	return 1;
     }
     
-    
- 	
     // 회원탈퇴
    	@GetMapping("memberDelete")
    	@ResponseBody
