@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -86,7 +82,7 @@
 						<div class="score" >
 							<strong class="percent">
 								예매율&nbsp;
-								<span>${vo.rate}</span>
+								<span>${vo.rate}%</span>
 							</strong>
 						
 						
@@ -125,7 +121,7 @@
 								<dt>장르 :&nbsp;${vo.ganre}</dt>
 								<dd></dd>
 								<dt>&nbsp;/ 기본 : &nbsp;</dt>
-								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime},&nbsp;${vo.country}</dd>
+								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime}분,&nbsp;${vo.country}</dd>
 								<br>
 								<dt>개봉 : &nbsp;</dt>
 								<dd class="on">${vo.openDate}</dd>
@@ -206,6 +202,7 @@
 						<div class="heading">
 							<h4>트레일러</h4>
 							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
+							<a href="#" class="link-more">더보기</a>
 						</div>
 						<ul>
 							<li>
@@ -232,9 +229,10 @@
 						<div class="heading">
 							<h4>스틸컷</h4>
 							<span class="count">
-								<strong id="stillcut_current">1</strong>
+								<strong id="stillcut_current">1</strong>/
 								21건
 							</span>
+							<a href="#" class="link-more">더보기</a>
 						</div>
 						
 						<div class="slider-wrap">

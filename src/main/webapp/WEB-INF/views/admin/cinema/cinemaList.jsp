@@ -4,19 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="../template/head.jsp"></c:import>
-	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+
+<c:import url="../template/head.jsp"></c:import>
+<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 </head>
 <body class="sb-nav-fixed">
+	
 	<c:import url="../template/header.jsp"></c:import>
+
+	<!-- 사이드바 -->
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
-		
+
 		<div id="layoutSidenav_content">
 			<input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<div class="container-fluid">
 					<h1>Cinema List</h1>
+					<p>영화관 목록</p>
 					<ol class="cinema-ol">
 						<li class="breadcrumb-item active"><a href="#">서울</a></li>
 						<li class="breadcrumb-item active"><a href="#">경기</a></li>
@@ -105,8 +110,10 @@
 					</div>
 
 				</div>
+
 			</main>
 			<c:import url="../template/footer.jsp"></c:import>
+
 		</div>
 	</div>
 	<c:import url="../template/scripts.jsp"></c:import>
