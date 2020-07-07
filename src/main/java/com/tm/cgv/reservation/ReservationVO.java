@@ -30,8 +30,6 @@ public class ReservationVO {
 	private String createAt;
 	private String deleteAt;
 	
-
-	
 	private ReviewVO reviewVOs;//리뷰
 	
 	//private int total;
@@ -43,8 +41,6 @@ public class ReservationVO {
 	private MovieInfoVO movieInfoVO;
 	private MovieTimeVO movieTimeVO;
 	private PaymentVO paymentVO;
-	
-	
 
 	
 //	movieInfo join해서 불러올값

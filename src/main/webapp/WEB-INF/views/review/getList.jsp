@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" /><!-- 보안 -->
 
 <c:forEach items="${list}" var="vo">
 
@@ -11,23 +11,31 @@
 			<div class="list_p_content"><!-- 이미지 주소부분 나중에 수정해야함 -->
 				<div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px"> </div>
 				<div class="list_p_contents1">
-					<div class="list_p_contents2 "><span style="font-weight: bold; font-size: x-large; ">${vo.title}</span></div>
+					<div><!-- 제목,삭제버튼 -->
+						<div class="list_p_contents2 td1" style="font-weight: bold; font-size: x-large; ">${vo.title}</div>${vo.num}
+						<div class="td1 hd">
+							<button class="hd_btn" data-num="${vo.num}">
+								<img alt="" src="${pageContext.request.contextPath}/images/btn_del.gif">
+							</button>
+						</div>
+					</div>
+					
 					<div class="br">
 					<div><span>${vo.screenDate} ${vo.screenTime}</span></div>
-					<div><span>${vo.theaterName} ${vo.cinemaName} / ${vo.people}명</span></div>
+					<div><span>${vo.cinemaName} ${vo.theaterName} / ${vo.people}명 </span></div>
 					</div>
 					<div>
 					
 						<!-- Modal 1 Button + 조건-->
-							<c:set var="name" value="${vo.createAt}" />
+					
 							<div id="r${vo.num}">
-								<c:if test="${empty name}">								 
+								<c:if test="${empty vo.createAt}">								 
 								    <button class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}" style="border: 0; background-color: transparent !important;">
 								    	<img alt="" src="${pageContext.request.contextPath}/images/before.JPG">
 								    </button>								    			    				
 								</c:if>
 								
-								<c:if test="${not empty name}">				
+								<c:if test="${not empty vo.createAt}">				
 									<c:if test="${vo.egg eq 1}">										
 										<button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
 											<img alt="" src="${pageContext.request.contextPath}/images/good.JPG">

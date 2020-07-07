@@ -36,9 +36,10 @@
 				var popupBtn2List = document.getElementsByClassName('popupBtn2');
 				
 				for(i=0; i<popupBtn2List.length; i++){
-
+					console.log(popupBtn2List[i].dataset.num);
+					
 					if(popupBtn2List[i].dataset.num == g_num){
-						console.log(popupBtn2List[i].dataset.num);
+						console.log("list.dataset.num : "+popupBtn2List[i].dataset.num);
 						//2번째 모달로 이동
 						//(i번째 2번째모달 이동버튼 클릭)
 						popupBtn2List[i].click();
@@ -62,10 +63,18 @@
 						_csrf : $("#_csrf").val(),
 					},
 					success:function(data){
-						var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
-						
-						$("#"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
-						alert("리뷰가 등록되었습니다.")
+						if(g_egg==1){//egg:1==좋아요 egg:0==싫어요
+							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+									'<img alt="" src="../images/good.JPG"></button>'+
+									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')								
+							alert("리뷰가 등록되었습니다.")
+							
+						}else{
+							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+									'<img alt="" src="../images/bad.JPG"></button>'+
+									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>')
+							alert("리뷰가 등록되었습니다.")
+						}
 					}
 				})
 				
@@ -84,7 +93,7 @@
 		}
 	
 		 });
-	 
+
 //	 ------------------------------------------------------------------------------
 	 
 	 //charmpoint
@@ -153,16 +162,31 @@
 							_csrf : $("#_csrf").val(),
 						},
 						success:function(data){
-							//버튼바꾸기-이벤트위임?
+							if(g_egg==1){//egg:1==좋아요 egg:0==싫어요
+								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+										'<img alt="" src="../images/good.JPG"></button>'+
+										'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')
+								alert("리뷰가 등록되었습니다.")
+								
+							}else{
+								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+										'<img alt="" src="../images/bad.JPG"></button>'+
+										'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>')
+								alert("리뷰가 등록되었습니다.")
+							}
 							
-							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+							//기존 버튼
 							
-							$("#r"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)
+/*							var r = '<button type="button" class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">리뷰쓴후</button>';
+							
+							$("#r"+g_num).html('<button type="button" class="btn btn-danger popupOnlyRead" data-num2="'+g_num+'">리뷰쓴후</button>'+r)*/
 							
 						}
 					})
 					
 					 $("#exit2").click();
+					 
+						
 				}
 			}
 		}
@@ -172,7 +196,7 @@
 	 $("#submitBtn3").click(function(){
 		 $("#exit3").click();
 	 });
-	 
+
 //	 ------------------------------------------------------------------------------
 	 
 /* 
@@ -191,15 +215,25 @@
 */
 	 
 //	 ------------------------------------------------------------------------------
+	 
 	 //reviewMore
-	
-	 
-	 
-		var count=1;	
-		function getList(curPage){//처음 창을 열면 curPage가 안떠있다가("getList?curPage=" 이 형태) 더보기를 누르면 count++된 정보가 curPage에 들어가게 된다.
+		var count=1;
+		
+		getList(count);
+		
+		$("#more").click(function(){
+			count++;
+
+			getList(count);
+		});
+		
+		function getList(curPage){//처음 창을 열면 "getList?curPage=1" 이 형태였다가, 더보기를 누르면 count++되어서 1씩 증가된 정보가 curPage에 들어가게 된다.
 			//ajax
 			$.get("getList?curPage="+curPage, function(result){//getList에서 만들어진 정보를 result(임의의 이름)로 받아와서 #result의 해당태그 내 자식태그의 밑에서 부터 추가된다.
 				$('#result').append(result);
+				//alert($(".l_count:last-child").val());
+				//$("#l_count1").html($(".l_count:last-child").val());
+			
 				
 				//1.첫번째 모달
 				$(".popupBtn1").click(function(){
@@ -224,6 +258,43 @@
 					$(".charmPoint").prop("checked", false);
 					$(".emotionPoint").prop("checked", false);
 				});
+				
+				
+				/* ---------reservation deleteAt=now()삽입---------- */
+				$(".hd_btn").click(function(){
+					g_num=$(this).data("num");
+					
+					if(confirm("내가본영화 목록에서 삭제됩니다.\n삭제하시겠습니까?")== true){
+						//reservation deleteAt
+						$.ajax({
+							type:"GET",
+							url:"./reservation_Delete",
+							data:{
+								num : g_num,
+							},
+							success:function(data){
+								if(data!=null){
+									alert("삭제 되었습니다.");
+									location.reload();
+									
+									//review deleteAt
+									$.ajax({
+										type:"GET",
+										url:"./review_Delete",
+										data:{
+											reservationNum : g_num,
+										},
+										success:function(){
+
+										}
+									})
+								}
+							}
+						})
+
+					}
+				});
+				
 				
 				//3. 세번째 모달
 /*			$(".popupOnlyRead").click(function(){
@@ -254,7 +325,19 @@
 				
 			});
 			
+			//1.현재 getList의 curPage을 받는 function 안쪽에 , 2.getList꾸려주는 ajax 바깥에 쓰기
+			
+			var now = curPage * 10;
+			var total = $("#total").attr("title")*1; //total에 있는 title이라는 속성값 가져오기 (정수로 변환이 안될수도 있으니 *1해주기)
+			if(now>=total){ 
+				$("#l_count1").html("("+total+"/"+total+")");
+			}else {
+				$("#l_count1").html("("+now+"/"+total+")");
+			}
+			
 		}
+		
+		
 			//getList안에 식을 넣으면 "getList(count);"로 인해 자동으로 일단 한번 출력되고
 			// memberReview.jsp의 부모(result)영역의 위임으로 한번더 실행된다. //그러므로 getList에서 빼주어야함
 			
@@ -263,7 +346,7 @@
 				
 				g_num=$(this).data("num2");
 				//g_num=$(this).attr("title");
-				console.log("??"+g_num);
+				console.log(g_num);
 				$.ajax({
 					type:"POST",
 					url:"./review_Select",
@@ -282,24 +365,61 @@
 						
 						$("#sss"+g_num).click();
 						
+						//모달 이미지 변경
+						var d=$("#egg1").html();
+						if(d==1){
+							$("#egg1").html('<table style=\"height:30px;\"><tr>'+
+									'<td style=\"height:30px; width:15px;\"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -20px -50px\" class=\"egg2\"></div></td>'+
+									'<td style=\"height:30px; width:100px;\">좋았어요</td>'+
+									'</tr></table>');
+							}else{
+							$("#egg1").html('<table style=\"height:30px;\"><tr>'+
+									'<td style=\"height:30px; width:15px;\"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -0px -50px\" class=\"egg3\"></div></td>'+
+									'<td style=\"height:30px; width:100px;\">별로예요</td>'+
+									'</tr></table>');
+							}
+						
 						}
 					})
 				
 			});
 			
-			//이벤트위임-버튼 변경
-	
-		
-		getList(count);
-		/* ------------------- */
-		$("#more").click(function(){
-			count++;
-			getList(count);
-		});
 
-		$("#t1").click(function(){
-			alert("dddddd");
+
+
+		/* ---------delete---------- */
+		
+		$("#delete1").click(function(){
+			if(confirm("작성한 평점을 삭제하시겠습니까?")== true){
+				$("#exit3").click();
+				$.ajax({
+					type:"GET",
+					url:"./review_Delete",
+					data:{
+						reservationNum : g_num,
+					},
+					success:function(data){
+						if(data!=null){
+							alert("삭제 완료");
+							location.reload();
+						}
+					}
+				})
+					
+			}
 		});
 		
+
+		
+		/* ---------내 평점 보기---------- */
+		$("#look").click(function(){
+			window.location.href='http://localhost/review/reviewLook';
+		});
+		
+/*		function reviewLook(curPage){
+			$.get("getList?curPage="+curPage, function(result){
+				$('#result').append(result);
+			}
+		}*/
 		
 		

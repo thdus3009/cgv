@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 .mypage_contents3 {
 				width:1050px;
 				margin:0 auto;
@@ -16,14 +18,20 @@
 	font-weight: bold;
 	color: #808080;
 }
-.list_p {
+.list_p {/* getList.jsp */
 
 	height : 180px;
 	width : 800px; 
 	border-bottom: 1px solid #cccccc; 
 	padding: 0 0 20px 0;
 }
+.list_p2 {/* reviewLook.jsp */
 
+	height : 200px;
+	width : 800px; 
+	border-bottom: 1px solid #cccccc; 
+	padding: 20px 0 20px 0;
+}
 
 .list_p_name {
 	padding: 20px 0 13px;
@@ -87,4 +95,91 @@
 	min-width: 1000px;
 }
 
+.egg2 {
+	width: 15px;
+	height: 30px;
+	}
+	
+	
+	
+.hd {
+	float: right;
+}	
 
+.hd_btn {
+	border: 0; 
+	outline: 0;
+}
+
+.td1 {
+	display: inline-block;
+	
+}
+.td2 {
+	float: right;
+	border: 0;
+	outline: 0 !important;
+	background-color: transparent;
+}
+
+.td_image {
+	width: 30px;
+	height: 20px;	
+}
+	
+.egg3 {
+	width: 18px;
+	height: 34px;
+	}
+	
+.egg4 {
+ 	display: inline-block;
+ 	font-size: small;
+ 	vertical-align: middle; /* 수직 정렬 */
+}
+
+#review_update {
+	border: 0;
+	outline: 0;
+	background-color: transparent;
+}
+
+.ud {
+	color: #666666;
+	vertical-align: middle;
+}
+
+#look {
+	float: right;
+	height: 33px;
+	width: 90px;
+	border: 0;
+	outline: 0;
+	background-color: #e71a0f;
+	color: white;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+#more {
+	border-right: 0;
+	border-left: 0;
+	border-top-style: dotted;
+	border-bottom-style: dotted;
+	
+	outline: 0;
+	background-color: transparent;
+	
+	width: 258px;
+	height: 46px;
+	
+	display: block;
+	margin : 0 auto;
+	
+}
+
+.update {
+	font-size: 13px; 
+	font-weight: bolder; 
+	color: #666666;
+}
