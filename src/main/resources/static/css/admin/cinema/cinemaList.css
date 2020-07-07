@@ -95,3 +95,17 @@ main{
 .pager{
 	item-align: center;
 }
+
+.select_top	{
+	display:block;
+}
+
+.container-fluid	{
+	position:relative;
+}
+
+.btn_group	{
+	position:absolute;
+	top:40px;
+	right:40px;
+}

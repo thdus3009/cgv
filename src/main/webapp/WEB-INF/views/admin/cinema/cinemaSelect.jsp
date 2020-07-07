@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<c:import url="../template/head.jsp"></c:import> 
+
 	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 	<link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
 	<link rel="stylesheet" href="/css/admin/cinema/demo.css">
@@ -20,6 +21,9 @@
 	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+	<c:import url="../template/datepicker.jsp"></c:import>
+
+
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -103,8 +107,13 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>${cine.name}</h1>
-		
+					
+					<h1 class="cine_title">${cine.name}</h1>
+					<div class="btn_group">
+						<span id="de" class="btn btn-danger">Delete</span>
+                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+					</div>
+				
 					<div class="card mb-4">
 						<div class="card-body">
 							<p class="mb-0">
@@ -119,6 +128,13 @@
 								<span>주차안내: ${cine.parkingInfo}</span><br> 
 								<span>영화관 소개: ${cine.intro}</span><br>
 							</p>
+							<!-- <div class="calendar">
+								<div class="form-group">
+									<label for="screenDate">날짜 선택 :</label>
+									<input id="datepicker" class="form-control" type="text" name="screenDate">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="table-responsive">
@@ -176,6 +192,14 @@
 										  		<span class="film_title">3D</span><span class="film_color film_3d"></span>
 										  		<span class="film_title">4D</span><span class="film_color film_4d"></span>
 										  	</div>
+										  	<div class="calendar">
+												<div class="form-group">
+													<label for="screenDate">날짜 선택 :</label>
+													<input id="datepicker${i.index}" class="datepicker"  type="text" name="screenDate">
+													<span id="submitBtn${i.index}" name="${vo.num}" class="submitBtn btn btn-primary">검색</span>
+												</div>
+											</div>
+														  	
 										  	<div class="timetable" id="timetable${i.index}" name="${i.index}">
 										  	
 										  	</div>
@@ -186,9 +210,8 @@
 						</table>
 					</div>
 					<div class="">
-						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-primary">Theater Insert</a>
-                    	<span id="de" class="btn btn-danger">Delete</span>
-                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-primary">Insert</a>
+                 
                     </div>
 				</div>
 			</main>
@@ -300,9 +323,59 @@
 			  	      renderer.draw('#'+tid);
 			  	      $(".room-timeline").css("width","100%");
 			  	     
-			  	    
-					
+			  	    alert($(".time-entry").css("left"));
+			  	    var oriLeft = $(".time-entry").css("left");
+			  	    alert(oriLeft.length);
+			  	    var test = (oriLeft.slice(0, oriLeft.length-2));
+			  	    alert(test);
+					var cgLeft = (test*0.94)+'px';
+					alert(cgLeft);
+					$(".time-entry").css("left",cgLeft);
 				}); 
+
+
+				$(".submitBtn").each(function(index){	//0, 1
+					$("#submitBtn"+index).click(function(){
+						var ckDate = $("#datepicker"+index).val();
+						alert(ckDate);
+						$.get(
+								"./theaterTime", {
+									_csrf : $("#_csrf").val(),
+									theaterNum : $(this).attr("name"),
+									checkDate : ckDate
+								}, function(data) {
+									 var timetable = new Timetable();
+
+							  	      timetable.setScope(7,3)
+
+							  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+
+							  	      $(data).each(function(){
+								  	      alert($(this)[0]);
+							  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } }, { onClick: function() {
+								  	        window.alert('. This is an example of a click handler');
+								  	      }} );
+								  	  });
+
+							  	      var renderer = new Timetable.Renderer(timetable);
+							  	      renderer.draw('#'+tid);
+							  	      $(".room-timeline").css("width","100%");
+
+							  	    alert($(".time-entry").css("left"));
+							  	    var oriLeft = $(".time-entry").css("left");
+							  	    alert(oriLeft.length);
+							  	    var test = (oriLeft.slice(0, oriLeft.length-2));
+							  	    alert(test);
+									var cgLeft = (test*0.95)+'px';
+									alert(cgLeft);
+									$(".time-entry").css("left",cgLeft);
+							  	      
+							});
+
+					});
+
+				});
+				
 
 
 			   	
@@ -327,8 +400,65 @@
 			
 		      });
 			
-		
+		    
 		});
+    
+
+  	// datepicker 초기화
+		function initDatePicker() {
+
+			var today = new Date();
+			var year = today.getFullYear(); // 년도
+			var month = today.getMonth() + 1;  // 월
+			var date = today.getDate();  // 날짜
+
+			if(month < 10) {
+				month = "0" + month;
+			}
+			
+			if(date < 10) {
+				date = "0" + date;
+			}
+
+	  	  	
+			<!-- 시작시 기본 날짜 설정은 value를 이용 -->
+			$('.datepicker').val(year + '-' + month + '-' + date);
+			
+			$('.datepicker').datepicker({
+			    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+			    startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+			    endDate: '+45d',	//달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
+			    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+			    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+			    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+			    //datesDisabled : ['2019-06-24','2019-06-26'],//선택 불가능한 일 설정 하는 배열 위에 있는 format 과 형식이 같아야함.
+			    //daysOfWeekDisabled : [0,6],	//선택 불가능한 요일 설정 0 : 일요일 ~ 6 : 토요일
+			    //daysOfWeekHighlighted : [3], //강조 되어야 하는 요일 설정
+			    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+			    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+			    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+			    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
+			    templates : {
+			        leftArrow: '&laquo;',
+			        rightArrow: '&raquo;'
+			    }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
+			    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+			    title: "영화 상영 날짜",	//캘린더 상단에 보여주는 타이틀
+			    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+			    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+			    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
+			    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+			    
+			});//datepicker end
+		}
+		
+		initDatePicker();
+		
+ 
+ 	// submit 버튼 클릭시
+		
+
+
     
     </script>
 
@@ -342,6 +472,8 @@
       ga('create','UA-171485633-1');ga('send','pageview');
 
       $(".room-timeline").css("width","100%");
+
+      
       
     </script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>

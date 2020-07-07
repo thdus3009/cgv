@@ -1,7 +1,12 @@
 package com.tm.cgv.admin;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -242,10 +247,27 @@ public class AdminController {
 	
 	@GetMapping("cinema/theaterTime")
 	@ResponseBody
-	public List<String[]>  theaterTime(int theaterNum) throws Exception {
+	public List<String[]> theaterTime(int theaterNum, String checkDate) throws Exception {
 		System.out.println("들어왓나?");
 		ModelAndView mv = new ModelAndView();
-		List<MovieTimeVO> m = theaterService.theaterMovieTime(theaterNum); /*나중에는 list로 뽑아와야됨!*/
+		
+		
+		
+		String [] day = theaterService.searchTime(checkDate);
+
+		Map<String, Object> d = new HashMap();
+		d.put("startDay", day[0]);
+		d.put("lastDay", day[1]);
+		d.put("theaterNum", theaterNum);
+		
+		System.out.println("mon : " + day[0]);
+		System.out.println("sun : " + day[1]);
+		
+		
+		
+		
+		
+		List<MovieTimeVO> m = theaterService.theaterMovieTime(d); /*나중에는 list로 뽑아와야됨!*/
 		//System.out.println(m.get(0));
 		//System.out.println(m.get(1));
 		//쪼개는 서비스 만들기..theaterService에
@@ -261,10 +283,33 @@ public class AdminController {
 		return totalInfo;
 	}
 	
+	@GetMapping("cinema/searchTime")
+	@ResponseBody
+	public void searchTime(String checkDate) throws Exception {
+		String [] day = theaterService.searchTime(checkDate);
+
+		Map<String, String> d = new HashMap();
+		d.put("startDay", day[0]);
+		d.put("lastDay", day[1]);
+		
+		System.out.println("mon : " + day[0]);
+		System.out.println("sun : " + day[1]);
+		
+		//쿼리문 보내기
+		//
+//		select * from movieTime where screenDate 
+//		between date('2020-07-02') and date('2020-07-05')+1;
+		
+	}
+	
 	
 	@GetMapping("cinema/cinemaInsert")
 	public ModelAndView admincinemaInsert() throws Exception {
 		ModelAndView mv = new ModelAndView();
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setTotalSeat(0);
+		cinemaVO.setTotalTheater(0);
+		mv.addObject("vo", cinemaVO);
 		mv.addObject("path", "Insert");
 		mv.setViewName("admin/cinema/cinemaInsert");
 		return mv;
@@ -352,7 +397,7 @@ public class AdminController {
 	@PostMapping("cinema/theaterInsert")
 	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println("seat : " + theaterVO.getSeatCount());
 		System.out.println("length : " + filmType.length);
 		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
 		

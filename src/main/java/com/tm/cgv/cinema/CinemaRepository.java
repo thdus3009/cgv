@@ -21,8 +21,12 @@ public interface CinemaRepository {
 	//Update
 	public int cinemaUpdate(CinemaVO cinemaVO) throws Exception;
 	
+	public void totalUpdate(CinemaVO cinemaVO) throws Exception;
+	
 	//Delete
 	public int cinemaDelete(int num) throws Exception;
+	
+	public int theaterDelete(TheaterVO theaterVO) throws Exception;
 	
 	//List 지역별로 정렬하기 위해 
 	public List<String> selectLocal() throws Exception;

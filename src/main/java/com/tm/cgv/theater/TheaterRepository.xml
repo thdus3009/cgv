@@ -77,11 +77,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	<select id="theaterMovieTime" parameterType="Integer" resultMap="selectTheater">
+	<select id="theaterMovieTime" parameterType="Map" resultMap="selectTheater">
 		select M.*, F.title, F.runtime from movieTime M 
 		left join movieInfo F
 		on M.movieNum=F.num
-		where theaterNum=#{num}
+		where theaterNum=#{theaterNum} and M.screenDate 
+		between date(#{startDay}) and date(#{lastDay})
 	</select>
+
+	
 
 </mapper>

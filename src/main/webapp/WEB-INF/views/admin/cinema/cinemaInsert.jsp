@@ -57,12 +57,12 @@
 						  
 						  <div class="form-group">
 						   		<label for="totalTheater">TotalTheater:</label>
-						   	 <input type="text" class="form-control" id="totalTheater" name="totalTheater" value="${vo.totalTheater}">
+						   	 <input type="text" class="form-control" id="totalTheater" name="totalTheater" value="${vo.totalTheater}" readonly="readonly">
 						  </div>
 						  
 						  <div class="form-group">
 						   		<label for="totalSeat">TotalSeat:</label>
-						   	 <input type="text" class="form-control" id="totalSeat" name="totalSeat" value="${vo.totalSeat}">
+						   	 <input type="text" class="form-control" id="totalSeat" name="totalSeat" value="${vo.totalSeat}" readonly="readonly">
 						  </div>
 						  
 						  

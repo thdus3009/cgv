@@ -61,6 +61,7 @@
 				<div class="container-fluid">
 					<h1>Cinema List</h1>
 					<ol class="cinema-ol">
+						<li class="breadcrumb-item active"><a href="./cinemaList">전체보기</a></li>
 						<li class="breadcrumb-item active"><a href="#">서울</a></li>
 						<li class="breadcrumb-item active"><a href="#">경기</a></li>
 						<li class="breadcrumb-item active"><a href="#">인천</a></li>

@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tm.cgv.cinema.CinemaRepository;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatRepository;
@@ -34,6 +37,9 @@ public class TheaterService {
 	
 	@Autowired
 	private SeatBookingRepository seatBookingRepository;
+	
+	@Autowired
+	private CinemaRepository cinemaRepository;
 	
 	//List
 	public List<TheaterVO> theaterList()throws Exception{
@@ -111,6 +117,13 @@ public class TheaterService {
 				}
 			}
 		}
+		
+		
+		//cinema table의 totalTheater, totalSeat 수정하기
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(theaterVO.getCinemaNum());
+		cinemaVO.setTotalSeat(theaterVO.getSeatCount());
+		cinemaRepository.totalUpdate(cinemaVO);
 		
 		return result;
 	}
@@ -214,14 +227,17 @@ public class TheaterService {
 	//Delete
 	public int theaterDelete(int num) throws Exception{
 		System.out.println("service : " + num);
+		//cinema table의 totalTheater-1, totalSeat-좌석수 한 후 delete하기
+		TheaterVO theaterVO = theaterRepository.theaterSelect(num);
+		int result =  cinemaRepository.theaterDelete(theaterVO);
 		return theaterRepository.theaterDelete(num);
 	}
 	
 	
 	
 	//MovieTimeInfo
-	public List<MovieTimeVO> theaterMovieTime(int num) throws Exception{
-		List<MovieTimeVO> list = theaterRepository.theaterMovieTime(num);
+	public List<MovieTimeVO> theaterMovieTime(Map<String, Object> d) throws Exception{
+		List<MovieTimeVO> list = theaterRepository.theaterMovieTime(d);
 		
 		return list;
 	}
@@ -330,6 +346,52 @@ public class TheaterService {
 		return totalInfo;
 	}
 	
+	
+	//시작일 마지막일 계산만 여기에서!
+	public String[] searchTime(String checkDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		
+		//날짜 검색이 아닌 기본일때
+		if(checkDate==null) {
+			checkDate = sdf.format(date);
+			System.out.println("현재 날짜 생성 : " +checkDate);
+		}
+		
+		
+		String [] day = new String[2];
+		System.out.println("checkDate : " + checkDate);
+		//받아온 날짜의 주의 시작일, 마지막일을 계산 후 쿼리문에 보내주기......
+		
+		String dataString = checkDate;
+	
+		try {
+			date = sdf.parse(dataString);
+			System.out.println("date : " + date);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		Calendar cal = Calendar.getInstance(Locale.KOREA);
+		cal.setTime(date); //이거 뭐하는거지..?
+		
+		cal.add(Calendar.DATE, 2-cal.get(Calendar.DAY_OF_WEEK));
+		System.out.println("월요일 날짜 : " + sdf.format(cal.getTime()) );
+		String mon =  sdf.format(cal.getTime());
+
+		
+		cal.setTime(date);
+		
+		cal.add(Calendar.DATE, 8-cal.get(Calendar.DAY_OF_WEEK));
+		System.out.println("일요일 날짜 : " + sdf.format(cal.getTime()));
+		String sun = sdf.format(cal.getTime());
+		
+		day[0] = mon;
+		day[1] = sun;
+		
+		return day;
+	}
 
 	
 	
