@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+/*myModal*/
+#myModal {
+	position: fixed;
+	margin-top: -207px;
+	margin-left: -355px;
+	top: 50%;
+	left: 50%;
+	z-index: 200;
+	width: 710px;
+	height: 380px;
+	background-color: #333;
+}
+
+.modal-dialog {
+	padding: 5px;
+}
+
+.modal-header{
+	position: relative;
+}
+
+.modal-title {
+	height: 50px;
+	line-height: 50px;
+	padding-left: 19px;
+	border: 1px solid #707070;
+	color: #f2f0e5;
+	font-weight: 300;
+	font-size: 22px;
+	background-color: #333;
+}
+
+#exit{
+	position: absolute;
+	border: none;
+    top: 16px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    background: url(/images/myPage/sprite_btn.png) no-repeat -72px -62px;
+}
+
+.modal-contents {
+	background-color: #f6f6f4;
+	margin: 5px 0 0 0;
+    height: 253px;
+    padding: 30px 40px;
+}
+
+.modal-contents-title{
+	padding-bottom: 15px!important;
+}
+
+.group_radio{
+	position: relative;
+    height: 75px;
+}
+
+#mContents{
+	box-sizing: border-box;
+	padding: 10px;
+    background: #ffffff;
+    border: 1px solid #999999;
+    width: 100%;
+    resize: none;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+}
+
+.modal-footer{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 5px;
+	line-height: 25px;
+}
+
+#bytes{
+	font-weight: 600;
+}
+
+#submitBtn1{
+	border: 2px solid #e71a0f;
+    background-color: #e71a0f;
+	color: #fff;
+	padding: 2px 5px;
+	border-radius: 0.25rem;
+	font-size: 13px;
+}
+
+/*myModal2*/
+#myModal2 {
+	position: fixed;
+	margin-top: -207px;
+	margin-left: -270px;
+	top: 50%;
+	left: 50%;
+	z-index: 200;
+	width: 535px;
+	height: 520px;
+	background-color: #333;
+}
+
+#exit2{
+	position: absolute;
+	border: none;
+    top: 16px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    background: url(/images/myPage/sprite_btn.png) no-repeat -72px -62px;
+}
+
+.modal-contents2 {
+	background-color: #f6f6f4;
+	margin: 5px 0 0 0;
+	height: 393px;
+	padding: 30px 40px;
+}
+
+.mc2-box{
+	border-top: 1px solid #cccccc;
+	padding: 20px 0;
+}
+
+.mc2-title{
+	font-family: 'CJ+ONLYONE+Medium';
+	font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.modal-label{
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+    width: 32%;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 24px;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+#submitBtn2{
+	border: 2px solid #e71a0f;
+    background-color: #e71a0f;
+	color: #fff;
+	padding: 2px 5px;
+	border-radius: 0.25rem;
+	font-size: 13px;
+	
+}
+
+/* myModal3 */
+#myModal3 {
+	position: fixed;
+	margin-top: -207px;
+	margin-left: -400px;
+	top: 50%;
+	left: 50%;
+	z-index: 200;
+	width: 800px;
+	height: 300px;
+	background-color: #333;
+}
+
+.modal-contents3 {
+	background-color: #f6f6f4;
+	margin: 5px 0 0 0;
+	height: 173px;
+	padding: 30px 40px;
+}
+
+#exit3{
+	position: absolute;
+	border: none;
+    top: 16px;
+    right: 20px;
+    width: 18px;
+    height: 18px;
+    background: url(/images/myPage/sprite_btn.png) no-repeat -72px -62px;
+}
