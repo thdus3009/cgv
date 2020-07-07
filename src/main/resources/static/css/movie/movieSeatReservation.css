@@ -115,12 +115,6 @@ body{
 /*     height: 100%; */
 }
 
-#ticket .section .col-body{
-	width: 100%;
-    position: relative;
-    overflow: hidden;
-    height: 510px;
-}
 
 #ticket .section-numberofpeople .col-body .numberofpeople-select{
 	margin-left: 15px;

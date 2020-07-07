@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.discountInfo.DiscountInfoRepository">
+
+	<insert id="discountInfoInsert" parameterType="DiscountInfoVO">
+		insert into discountInfo values(#{num},#{reservationNum},#{type},#{discountPrice})
+	</insert>
+	
+	<select id="discountInfoSelect" parameterType="Integer" resultType="DiscountInfoVO">
+		select * from discountInfo where reservationNum = #{reservationNum}
+	</select>
+
+</mapper>

@@ -17,8 +17,16 @@ public class MovieTimeService {
 		return movieTimeRepository.remainSeatUpdate(movieTimeVO);
 	}
 	
+
 	public int insert(MovieTimeVO movieTimeVO) throws Exception{
 		
 		return movieTimeRepository.insert(movieTimeVO);
 	}
+
+	public int remainSeatSum(MovieTimeVO movieTimeVO) throws Exception{
+		return movieTimeRepository.remainSeatSum(movieTimeVO);
+	}
+	 
+	
+
 }

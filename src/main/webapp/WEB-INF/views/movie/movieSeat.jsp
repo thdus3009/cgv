@@ -83,8 +83,8 @@
 															<c:forEach begin="1" end="${maxCol}" var="i" >
 																<!--blocked(선택불가)  reserved(이미 예매)  -->
 																<!-- rating_economy(노랑) rating_comfort(초록) rating_prime(빨강)  -->
-																
-																<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}" data-grade="${row.grade}" > 
+																<c:if test="${timeType eq 'mn'}">
+																	<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}" data-grade="0" > 
 																	<a href="#" onclick="return false;"> 
 																		<span class="no">${i}</span>
 																		<span class="sreader"></span>
@@ -92,6 +92,21 @@
 																		<span class="sreader seatNum"></span>
 																	</a>
 																</div>
+																
+																</c:if>
+																<c:if test="${timeType ne 'mn'}">
+																	<div class="seat" style="left:${48+(i*16)}px" data-row="${t.index+1}" data-col="${i}" data-grade="${row.grade}" > 
+																	<a href="#" onclick="return false;"> 
+																		<span class="no">${i}</span>
+																		<span class="sreader"></span>
+																		<span class="sreader mod"></span>
+																		<span class="sreader seatNum"></span>
+																	</a>
+																</div>
+																
+																</c:if>
+																
+																
 															</c:forEach>
 																
 														</div>
@@ -99,6 +114,8 @@
 												</div>
 												<br>
 											</c:forEach>
+											
+											
 											
 										</div>
 									</div>								
@@ -132,8 +149,6 @@
 <script type="text/javascript">
 
 	var seatList = [];
-
-
 
 	<c:forEach items="${seatList}" var="vo">
 		var seatVO = {
@@ -284,7 +299,12 @@
 	var maxCol = `${maxCol}`;
 
 
-	
+	//시간대별 금액 변경 
+	var common_standard = `${timePriceVO.commonPrice}`;
+	var teenager_standard = `${timePriceVO.teenagerPrice}`;
+	console.log("일반 가격 : "+common_standard);
+	console.log("청소년 가격 : "+teenager_standard);
+	console.log("aa: "+`${timePriceVO}`);
 	
 	
 </script>

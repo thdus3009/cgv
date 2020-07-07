@@ -734,19 +734,48 @@ input[type="checkbox"], input[type="radio"]{
 
 
 	
+.tps_wrap .tps_body .summary_box .payment_body dd a{
+	display: block;
+    width: 19px;
+    height: 19px;
+    overflow: hidden;
+    position: absolute;
+    top: 8px;
+    right: 0;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/tps_cancel_payment_btn.png) no-repeat;
+}
+
+.tps_wrap .tps_body .summary_box .payment_body dd a span{
+	display: block;
+    text-indent: 1000px;
+}
 
 
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_body .row {
+    clear: both;
+    height: 24px;
+    line-height: 24px;
+    display: block;
+}
 
+label {
+    cursor: pointer;
+}
 
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_body .row .col {
+    display: block;
+}
 
+.tpm_wrap .tpm_body .tpm_discount .discount_form .form .form_list .list_body .row .col {
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
-
-
-
-
-
-
-
+input[type="checkbox"], input[type="radio"] {
+    vertical-align: middle;
+}
 
 
 

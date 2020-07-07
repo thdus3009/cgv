@@ -23,6 +23,7 @@
 
 </head>
 <body class="sb-nav-fixed">
+	
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- 로고 -->
 		<a href="/admin"><img src="/images/header/h1_cgv.png"
@@ -100,12 +101,38 @@
 				</div>
 			</nav>
 		</div>
-
+				
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
 					<h1>movie List</h1>
+					<!-- 검색바 -->
+					<form
+						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+						<div class="input-group">
+							<input class="form-control" type="text" placeholder="검색어를 입력"
+								aria-label="Search" aria-describedby="basic-addon2" />
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="button" id="admin_search" name="search">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<!-- 정렬바 -->
+						<div class="sect-sorting">
+							<select id="selectA" name="kind">
+								<option title="2" value="date" selected="selected">최신순</option>
+								<option title="1" value="rate" >예매율순</option>
+								<option title="3" value="title">제목순</option>
+							</select>
+							<!-- <input type="button" id="admin_sort" value="go"> -->
+							<button id="admin_sort" type="button" class="round gray">
+								<span>GO</span>
+							</button>
+						</div>
+					
 					<div class="col_detail">
 						<!-- 목록 -->
 						<table class="table table-bordered" id="dataTable" width="100%"
@@ -125,19 +152,19 @@
 							</tr>
 							<!-- 반복 -->
 							<!-- 이름 누르면 상세 페이지로 이동 -->
-							<c:forEach items="" var="vo">
+							<c:forEach items="${list}" var="vo">
 								<tr class="memberList-c">
-									<td>title</td>
-									<td>titleEng</td>
-									<td>runtime</td>
-									<td>director</td>
-									<td>actor</td>
-									<td>genre</td>
-									<td>ageLimit</td>
-									<td>country</td>
-									<td>openDate</td>
-									<td>visitor</td>
-									<td>rate</td>
+									<td> <a href="/admin/movie/movieSelect?num=${vo.num}">${vo.title}</a></td>
+									<td>${vo.titleEng}</td>
+									<td>${vo.runtime}</td>
+									<td>${vo.director}</td>
+									<td>${vo.actor}</td>
+									<td>${vo.ganre}</td>
+									<td>${vo.ageLimit}</td>
+									<td>${vo.country}</td>
+									<td>${vo.openDate}</td>
+									<td>${vo.visitor}</td>
+									<td>${vo.rate}</td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -145,14 +172,14 @@
 						<!-- 페이저 -->
 						<div class="pager">
 							<ul class="pagination">
-								<c:if test="${pager.curBlock>1}">
+								<c:if test="${pager.curBlock gt 1}">
 									<li><a href="#" class="custompager"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 									var="p">
-									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+									<li><a href="./movieList?curPage=${p}&kind=${pager.kind}" class="custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
@@ -161,6 +188,9 @@
 								</c:if>
 							</ul>
 						</div>
+						
+						<!-- 글쓰기 버튼 -->
+						<a href="./movieWrite"><button id="btn-submit" type="button" class="round inred">글쓰기</button></a>
 						
 					</div>
 				</div>
@@ -190,6 +220,35 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../../js/movie/adminList.js"></script>
+	
+	<!-- <script type="text/javascript">
+	
+	$("#admin_sort").click(function(){
+		var kind = $("#selectA").val();
+		console.log(kind+"관리자 정렬");
+		location.href = "./movieList?kind="+kind;
+	});
 
+	$(document).ready(function() {
+		//url로 들어오는 파라미터값 읽어들이기
+		function getParam(sname) {
+
+		    var params = location.search.substr(location.search.indexOf("?") + 1);
+		    var sval = "";
+		    params = params.split("&");
+		    for (var i = 0; i < params.length; i++) {
+		        temp = params[i].split("=");
+		        if ([temp[0]] == sname) { sval = temp[1]; }
+		    }
+		    return sval;
+		}
+		
+		
+		//읽어들인 파라미터값으로 selected값 변경
+		$("select option[value='"+getParam("kind") +"']").attr("selected", true);
+	});
+	
+	</script> -->
 </body>
 </html>

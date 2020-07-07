@@ -141,15 +141,15 @@ span{
 
 	<script type="text/javascript">
 
-	    $('#popupBtn').on("click", function() { //여기서 부터 시작
+// 	    $('#popupBtn').on("click", function() { //여기서 부터 시작
 
-		  	window.open("reviewPopup.html", "reviewPopup" ,"toolbar=yes,menubar=yes,width=500,height=450");
+// 		  	window.open("reviewPopup.html", "reviewPopup" ,"toolbar=yes,menubar=yes,width=500,height=450");
 	
-		});
+// 		});
 
-		function popupOpen(){
-			window.open("review/reviewPopup","","width=900,height=400,")
-			}
+// 		function popupOpen(){
+// 			window.open("review/reviewPopup","","width=900,height=400,")
+// 		}
 
 
 	</script>
