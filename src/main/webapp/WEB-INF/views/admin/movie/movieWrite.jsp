@@ -66,12 +66,13 @@
 																	class="form-control files check" id="files"
 																	placeholder="타이틀 이미지 선택" name="files">
 															</div>
-
-															<c:if test="${path  eq 'Update'}">
-																<p>${vo.movieImageVOs.originName}<i id="${vo.num}"
-																		class="glyphicon glyphicon-remove remove fileDelete"></i>
-																</p>
-															</c:if>
+															
+															<div class="form-group">
+																<label for="files">트레일러:</label> 
+																<img alt="" src="../../images/theater/plus.png" 
+																style="width: 20px; height: 20px;" id="addT"> 
+															</div>
+															
 
 
 															<div class="form-group">
