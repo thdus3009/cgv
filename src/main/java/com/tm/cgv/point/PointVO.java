@@ -10,4 +10,12 @@ public class PointVO {
 	private int price;
 	private String type;
 	
+	private String kind;
+	
+	public String getKind() {
+		if(this.kind == null || this.kind.equals("")) {
+			this.kind = "update";
+		}
+		return this.kind;
+	}
 }

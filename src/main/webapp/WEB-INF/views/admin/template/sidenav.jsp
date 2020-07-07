@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 		<div id="layoutSidenav_nav">
 			<nav class="sb-sidenav accordion sb-sidenav-dark"
 				id="sidenavAccordion">
@@ -22,11 +20,26 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
-						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/cinema/cinemaList">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 극장 관리
-						</a> <a class="nav-link" href="#">
+						</a> 
+						
+
+
+						<a class="nav-link collapsed" href="/admin/cinema/cinemaList" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+								극장 관리	
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin/cinema/cinemaList">극장 리스트</a>
+								<a class="nav-link" href="/admin/cinema/cinemaInsert">극장 등록</a>
+								<a class="nav-link" href="/admin/cinema/theaterInsert">상영관 등록</a>
+							</nav>
+						</div>
+
+						
+						
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리

@@ -9,4 +9,6 @@ public interface PointRepository {
 
 	public List<PointVO> pointSelectList(String memberNum) throws Exception;
 	
+	public int pointDiscountUpdate(PointVO pointVO) throws Exception;
+	
 }

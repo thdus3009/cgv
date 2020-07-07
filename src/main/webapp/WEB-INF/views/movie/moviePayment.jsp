@@ -11,7 +11,7 @@
 			<span class="header">STEP 1. </span> 
 			<a href="#"><span>다시하기</span></a>
 		</h4>
-		<div class="tpm_header">
+		<div class="tpm_header" data-index="-1">
 			<h4>할인쿠폰</h4>
 			<a class="tpmh_btn"><span>펼치기</span></a>
 		</div>
@@ -55,8 +55,10 @@
 							</div>
 							<div class="list_body nano has-scrollbar">
 								<ul class="content" tabindex="-1" style="right: -17px; bottom: -17px;">
-								
+									
 								</ul>
+								
+								
 								<div class="message">사용 가능한 CGV 할인쿠폰이(가) 없습니다.</div>
 								<div class="pane pane-y" style="display: none; opacity: 1; visibility: visible;">
 									<div class="slider slider-y" style="height: 50px;">
@@ -181,7 +183,7 @@
 									<label for="cjOnePointipt">사용할 포인트</label>
 								</dt>
 								<dd>
-									<input class="textBox2 type-n nohan" type="text" id="cjOnePointipt" placeholder="0">원
+									<input class="textBox2 type-n nohan" type="text" id="cjOnePointipt" value="0">원
 								</dd>
 
 								<dt class="secondTit">
@@ -223,7 +225,7 @@
 									<label for="cgvGiftPrePayipt">적용금액</label>
 								</dt>
 								<dd>
-									<input class="textBox2 type-n nohan" type="text" id="cgvGiftPrePayipt" placeholder="0">원
+									<input class="textBox2 type-n nohan" type="text" id="cgvGiftPrePayipt" value="0" >원
 								</dd>
 
 								<dt class="secondTit">
@@ -310,7 +312,6 @@
 
 <div class="ticket_payment_summary">
 	<div class="tps_wrap" style="top: 0px;">
-	<!--<div class="tps_header"><div><span>10분</span> 안에<br/>예매를 완료해 주세요</div></div>-->
 	<div class="tps_body">
 		<div class="summary_box total_box">
 			<div class="payment_header">결제하실 금액</div>
@@ -322,7 +323,9 @@
 		</div>
 		<div class="summary_box discount_box" id="tps_discount_box">
 			<div class="payment_header">할인내역</div>
-			<div class="payment_body" id="summary_discount_list"></div>
+			<div class="payment_body" id="summary_discount_list">
+			
+			</div>
 			<div class="payment_footer">
 				<div class="label">
 					<span>총 할인금액</span>

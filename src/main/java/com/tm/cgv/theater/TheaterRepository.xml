@@ -5,38 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tm.cgv.theater.TheaterRepository">
-	<resultMap type="TheaterVO" id="selectTheater">
+	<resultMap type="MovieTimeVO" id="selectTheater">
 		<id column="num" property="num"></id>
-		<result column="cinemaNum" property="cinemaNum"/>
-		<result column="name" property="name"/>
-		<result column="filmType" property="filmType"/>
-		<result column="seatCount" property="seatCount"/>
-		
-		<association property="seatVOs" javaType="List">
-			<id column="num" property="num"/>
-			<result column="theaterNum" property="theaterNum"/>
-			<result column="row" property="row"/>
-			<result column="col" property="col"/>
-			<result column="grade" property="grade"/>
-		</association>
-		
-	</resultMap>
-	
-	
-	<resultMap type="TheaterVO" id="selectSpace">
-		<id column="num" property="num"></id>
-		<result column="cinemaNum" property="cinemaNum"/>
-		<result column="name" property="name"/>
-		<result column="filmType" property="filmType"/>
-		<result column="seatCount" property="seatCount"/>
-		
-		<association property="seatSpaceVOs" javaType="List">
-		<id column="num" property="num"/>
+		<result column="movieNum" property="movieNum"/>
 		<result column="theaterNum" property="theaterNum"/>
-		<result column="rowOrCol" property="rowOrCol"/>
-		<result column="index" property="index"/>
+		<result column="screenDate" property="screenDate"/>
+		<result column="screenTime" property="screenTime"/>
+		<result column="remainSeat" property="remainSeat"/>
+		
+		<association property="movieInfoVOs" javaType="MovieInfoVO">
+			<id column="num" property="num"/>
+			<result column="title" property="title"/>
+			<result column="runtime" property="runtime"/>
 		</association>
+		
 	</resultMap>
+	
+	
 	
 	
 	
@@ -88,6 +73,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="theaterNum" resultType="Integer">
 		select max(num) from theater
+	</select>
+	
+	
+	
+	<select id="theaterMovieTime" parameterType="Integer" resultMap="selectTheater">
+		select M.*, F.title, F.runtime from movieTime M 
+		left join movieInfo F
+		on M.movieNum=F.num
+		where theaterNum=#{num}
 	</select>
 
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 
@@ -20,6 +21,9 @@ import com.tm.cgv.seatSpace.SeatSpaceVO;
 public class TheaterController {
 	@Autowired
 	private TheaterService theaterService;
+	
+	@Autowired
+	private SeatService SeatService;
 	
 	@ModelAttribute("board")
 	public String getBoard() throws Exception{
@@ -54,16 +58,21 @@ public class TheaterController {
 	
 	//Insert
 	@PostMapping("theaterInsert")
-	public ModelAndView theaterInsert(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
+	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		
-		int result = theaterService.theaterInsert(theaterVO, row, col, grade, row_space, col_space);
+		System.out.println("length : " + filmType.length);
+		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
 		
-		if(result>0) {
-			mv.setViewName("redirect:./theaterList");
-		}else {
-			System.out.println("등록 실패");
-		}
+		
+		
+		int result = theaterService.theaterInsert(theaterVO, filmType, row, col, grade, row_space, col_space);
+//		
+//		if(result>0) {
+//			mv.setViewName("redirect:../admin/cinema/cinemaList");
+//		}else {
+//			System.out.println("등록 실패");
+//		}
 		
 		return mv;
 	}
@@ -79,14 +88,20 @@ public class TheaterController {
 		List<SeatVO> seat = theaterService.theaterSeat(num);
 		List<SeatSpaceVO> space = theaterService.theaterSpace(num);
 		String row = theaterService.selectRow(num); //int값으로
-		int r = Integer.parseInt(row)+65;
-		int col = theaterService.selectCol(num);
-		System.out.println("row : " + r);
-		System.out.println("col : " + col);
 		
+		char c = row.charAt(0);
+		int k = c-64;
+		
+		
+		int col = theaterService.selectCol(num);
+		System.out.println("row : " + k);
+		System.out.println("col : " + col);
+//		System.out.println("ㅠ ㅠ : " + seat.get(0).getGrade());
+//		System.out.println("ㅠ ㅠ : " + seat.get(7).getGrade());
 //		System.out.println(seat.size());
 //		System.out.println(space.size());
-		//mv.addObject("rowIdx", attributeValue)
+		mv.addObject("rowIdx", k);
+		mv.addObject("colIdx",col);
 		mv.addObject("path","Update");
 		mv.addObject("theater",theater);
 		mv.addObject("seat",seat);
@@ -98,17 +113,10 @@ public class TheaterController {
 	
 	
 	//Update
-	@PostMapping("theaterUpdate")
-	public ModelAndView theaterUpdate2(TheaterVO theaterVO, ModelAndView mv)throws Exception{
-
-		int result = theaterService.theaterUpdate(theaterVO);
-			
-		if(result>0) {
-			mv.setViewName("redirect:./theaterList");
-		}else {
-			System.out.println("실패");
-			//mv.setViewName("redirect:./theaterUpdate?num="+theaterVO.getNum());
-		}
+	@PostMapping("cinema/theaterUpdate")
+	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		theaterService.theaterUpdate(theaterVO, row, col, grade, row_space, col_space);
 		
 		
 		return mv;

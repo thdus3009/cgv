@@ -34,6 +34,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
+	<input type="hidden" id = "gTotal" value="${gTotal}">
 	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container" >
 		<div class="c_nav">
@@ -169,6 +170,7 @@
 						<strong>${vo.contents}</strong>
 					</div>
 					
+					<div id="showchart">
 					<div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph sect-graph-emotion" style="margin-top: 40px;">
 						<ul class="graph">
 							<li>
@@ -179,7 +181,6 @@
 								 </div>
 								</div>
 							</li>
-							
 							<li>
 								<strong>연령별 예매 분포</strong>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
@@ -189,6 +190,7 @@
 								</div>
 							</li>
 						</ul>
+					</div>
 					</div>
 					
 					
@@ -261,7 +263,7 @@
 									<div class="box box_golden">
 										<span class="sprite_preegg big great" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -115px -135px;"></span>
 										<span class="desc">GoldenEgg</span>
-										<span class="percent">94%</span>
+										<span class="percent">${vo.errRate}</span>
 										<span class="tooltip">실관람평지수</span>
 									</div>
 								</div>
@@ -295,7 +297,7 @@
 							<p class="desc"><span><em>15,557</em>명의 실관람객이 평가해주셨습니다.</span></p>
 							<div class="wrap_btn">
 								<a class="link-gradewrite" href=""><span>평점작성</span></a>
-								<a class="link-reviewwrite" href=""><span>내 평점</span></a>
+								<a class="link-reviewwrite" href="./review/reviewLook"><span>내 평점</span></a>
 							</div>
 						</div>
 						
@@ -376,11 +378,27 @@
 </div>
 
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+
 <!-- 성별 그래프 1번 -->
 <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
+    var total =${gTotal};
+    console.log(total+"total");
+	var w=${gender}/${gTotal};
+	console.log(w+"w");
+	var M = 1-w;
+
+	$(function() {
+
+	if(!(total>0)) {
+	
+		$("#ctl00_PlaceHolderContent_Section_Chart").prop("style", "display:none;");
+	}
+		
+	});
+	
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
@@ -397,8 +415,8 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['여성', 8],
-          ['남성', 2],
+          ['여성', w],
+          ['남성', M],
          
         ]);
 
@@ -418,20 +436,37 @@
 
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
+	var ageTotal=${ageTotal};
+	console.log(ageTotal+"agetotal");
+	
+	var age10 =${age10}/${ageTotal};
+	console.log(age10+"age10");
+	var age20 =${age20}/${ageTotal};
+	console.log(age20+"age20");
+	var age30 =${age30}/${ageTotal};
+	console.log(age30+"age30");
+	var age40 =${age40}/${ageTotal};
+	console.log(age40+"age40");
+	var age50 =${age50}/${ageTotal};
+	console.log(age50+"age50");
+  
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
+    
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ["Element", "Density", { role: "style" } ],
-        ["10대", 8.94, "#b87333"],
-        ["20대", 10.49, "silver"],
-        ["30대", 19.30, "gold"],
-        ["40대", 21.45, "color: #e5e4e2"]
+        ["10대", ${age10}, "#b87333"],
+        ["20대", ${age20}, "silver"],
+        ["30대", ${age30}, "gold"],
+        ["40대", ${age40}, "color: #e5e4e2"],
+        ["50대", ${age50}, "color: #e5e4e2"],
+        
       ]);
 
       var view = new google.visualization.DataView(data);
       view.setColumns([0, 1,
-                       { calc: "stringify",
+                       { calc: "stringify",	
                          sourceColumn: 1,
                          type: "string",
                          role: "annotation",
@@ -440,28 +475,46 @@
 
       var options = {
         title: "",
-        width: 490,
-        height: 320,
+        width: 530,
+        height: 330,
         backgroundColor : '#fdfcf0',
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" 
+        bar: {groupWidth: "75%"},
+        legend: { position: "none" ,
         },
+        
+        hAxis : {
+        	 gridlines: {
+                 color: 'transparent'
+             },
+             
+        },
+        vAxis: {
+            gridlines: {
+                color: 'transparent'
+            },
+            textPosition:'none',
+        },
+      	
+        
+        
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   }
   </script>
 <!-- 방사형 chart  -->
-<script>
+<script type="text/javascript">
 
+console.log(${cdirector}+"direc");
+console.log(${cstory}+"story");
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
 	type: 'radar',
     data: {
-        labels: ['감독연출', '즐거움', '공감', '배우연기', 'OST'],
+        labels: ['감독연출', '스토리', '영상미', '배우연기', 'OST'],
         datasets: [{
-            label: '',
-            data: [11, 19, 3, 5, 2],
+            label: 'Charm',
+            data: [${cdirector}, ${cstory}, ${cvisual}, ${cactor}, ${cost}],
              backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -489,24 +542,18 @@ var myChart = new Chart(ctx, {
             	gridLines:{
 					 display:false,
 				},
-				
             	ticks:{
 					display:false
-					
                 },
-               
             }],
         	 
             yAxes: [{
 				gridLines:{
 					 display:false,
 				},
-                
                 ticks: {
                     beginAtZero: true,
                     display:false
-                  
-                    
                 }
             }]
         }
@@ -519,10 +566,10 @@ var ctx = document.getElementById('myChart2');
 var myChart = new Chart(ctx, {
 	type: 'radar',
     data: {
-        labels: ['스트레스해소', '스토리', '영상미', '몰입감', '감동'],
+        labels: ['스트레스해소', '즐거움', '긴장감', '몰입감', '감동'],
         datasets: [{
-            label: '',
-            data: [11, 10, 8, 7, 2],
+            label: 'Emotion',
+            data: [${cstr}, ${cfun},${cten},${cimm}, ${cimp}],
             scaleShowLabels : false,
             omitXLabels: true,
              backgroundColor: [

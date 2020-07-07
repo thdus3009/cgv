@@ -8,5 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<insert id="seatBookingInsert" parameterType="SeatBookingVO">
 		insert into seatBooking values(#{num},#{seatNum},#{movieTimeNum},#{reservationNum}) 	
  	</insert>
+ 	
+ 	<delete id="seatBookingDelete" parameterType="Integer">
+ 		delete from seatBooking where reservationNum =#{reservationNum}
+ 	</delete>
 
 </mapper>

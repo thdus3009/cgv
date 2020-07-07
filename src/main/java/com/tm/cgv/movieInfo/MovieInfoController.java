@@ -1,6 +1,7 @@
 package com.tm.cgv.movieInfo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.reservation.ReservationVO;
+import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.MakeCalendar;
 import com.tm.cgv.util.MakeCalendarVO;
 import com.tm.cgv.util.Pager;
@@ -147,22 +150,49 @@ public class MovieInfoController {
 	}
 	
 	@GetMapping("movieSelect")
-	public ModelAndView movieSelect(MovieInfoVO movieInfoVO) throws Exception{
+	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		movieInfoVO = movieInfoService.movieSelect(movieInfoVO);
-		if(movieInfoVO==null) {
+		
+		reservationVO.setMovieNum(num);
+		System.out.println(reservationVO.getMovieNum()+"con");
+		
+		//reservationVO.setReviewVOs(reviewVOs);
+		//reservationVO.setTotal(total);
+		//System.out.println(reservationVO.getTotal());
+		
+		
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO,reservationVO);
+		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");
 		}
 		
-		mv.addObject("vo",movieInfoVO);
+		mv.addObject("vo",map.get("vo"));
+		mv.addObject("gender",map.get("gender"));
+		mv.addObject("gTotal",map.get("gTotal"));
+		mv.addObject("ageTotal",map.get("ageTotal"));
+		mv.addObject("age10",map.get("age10"));
+		mv.addObject("age20",map.get("age20"));
+		mv.addObject("age30",map.get("age30"));
+		mv.addObject("age40",map.get("age40"));
+		mv.addObject("age50",map.get("age50"));
 		mv.addObject("path","Select");
+		mv.addObject("cost",map.get("cost"));
+		mv.addObject("cactor",map.get("cactor"));
+		mv.addObject("cvisual",map.get("cvisual"));
+		mv.addObject("cstory",map.get("cstory"));
+		mv.addObject("cdirector",map.get("cdirector"));
+		mv.addObject("cten",map.get("cten"));
+		mv.addObject("cfun",map.get("cfun"));
+		mv.addObject("cstr",map.get("cstr"));
+		mv.addObject("cimp",map.get("cimp"));
+		mv.addObject("cimm",map.get("cimm"));
 		mv.setViewName("movie/movieSelect");
 		return mv;
 	}
 	
 	@GetMapping("movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO)throws Exception{
-		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO)throws Exception{
+		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO,reservationVO);
 		
 		mv.addObject("vo",movieInfoVO);
 		mv.addObject("path","Update");

@@ -78,7 +78,7 @@ function changeSelect(){
 		 src="../images/login/btn_home.png">	
 		
 		$("#seats_list").append('<div class="seat_row r'+(i+1)+'"><div class="bo">'
-		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="../images/theater/plus.png" id="img"></span>'
+		+'<span class="row_plus" onclick="rowPlus('+i+')"><img src="../../images/theater/plus.png" id="img"></span>'
 		+'<div class="label">'+ch+'</div><div class="seat_group" id="r'+i+'">');
 		
 		
@@ -95,7 +95,7 @@ function changeSelect(){
 				//첫번째 로우라면  버튼 만들기
 				if(i<1){
 				$("#r"+i).find(".c"+j).append(
-				'<span class="col_plus" onclick="colPlus('+j+')"><img src="../images/theater/plus.png" id="img"></span>'+
+				'<span class="col_plus" onclick="colPlus('+j+')"><img src="../../images/theater/plus.png" id="img"></span>'+
 				'<div class="col_label">'+j+'</div>');
 				}	
 
@@ -114,7 +114,8 @@ function changeSelect(){
 
 // seat grade 조정
 function checkSeat(name){
-	
+	console.log("---test---");
+	console.log(name);
 
 	var grade=1; 
 	var ck = $(name).attr("name");
@@ -124,7 +125,7 @@ function checkSeat(name){
 	var cl = ck.substring(1,2); 
 	console.log("rw : " + rw);
 	console.log("cl : " + cl);
-
+	
 	
 	
 	switch(seatColor) {
@@ -135,8 +136,7 @@ function checkSeat(name){
 		
 		if(ck=='del'){
 			$(name).attr("name","");
-			$(name).find("span").css('border','2px solid #ed8c00');
-			$(name).css('background','#666')
+			$(name).addClass("rating_economy")
 
 
 			seatCount += 1;
@@ -144,8 +144,8 @@ function checkSeat(name){
 
 			
 		}else{
-			$(name).find("span").css('border','0');
-			$(name).css('background-color','black');
+	
+			$(name).addClass("rating_delete");
 			// vo.grade=0; (k k 0)
 			//vo의 row가 A, col이 B인 것을 찾아 grade 값 바꾸기
 			$(name).attr("name","del");
@@ -172,8 +172,7 @@ function checkSeat(name){
 		// 테두리 색 맞게 바꾸기
 		// vo.grade = 1
 		if(ck!='del'){
-		$(name).find("span").css('border','2px solid #ed8c00');
-		$(name).css('background','#666')
+		$(name).addClass("rating_economy");
 			for(i=0; i<listLength; i++){
 				if(list[i].row == rw && list[i].col == cl){
 					list[i].grade = 1;
@@ -191,8 +190,8 @@ function checkSeat(name){
 		// 테두리 색 맞게 바꾸기
 		// vo.grade = 2 
 		if(ck!='del'){
-		$(name).find("span").css('border','2px solid #01c73c');
-		$(name).css('background','#666')
+		
+		$(name).addClass("rating_standard");
 		
 			for(i=0; i<listLength; i++){
 				if(list[i].row == rw && list[i].col == cl){
@@ -209,8 +208,8 @@ function checkSeat(name){
 		// 테두리 색 맞게 바꾸기
 		// vo.grade = 3
 		if(ck!='del'){
-		$(name).find("span").css('border','2px solid #f71708');
-		$(name).css('background','#666')
+		//$(name).find("span").css('border','2px solid #f71708');
+		$(name).addClass("rating_prime");
 			for(i=0; i<listLength; i++){
 				if(list[i].row == rw && list[i].col == cl){
 					list[i].grade = 3;
@@ -240,7 +239,7 @@ function rowPlus(i){
 	//
 	
 	$(c).find(".row_plus").attr("onclick","rowMinus("+(i)+");");
-	$(c).find(".row_plus").find("#img").attr("src","../images/theater/minus.png");
+	$(c).find(".row_plus").find("#img").attr("src","/images/theater/minus.png");
 	$(c).find(".row_plus").attr("class","row_minus");
 
 }
@@ -263,7 +262,7 @@ function rowMinus(i){
 
 	var c = ".r"+(i+1);
 	$(c).find(".row_minus").attr("onclick","rowPlus("+i+");");
-	$(c).find(".row_minus").find("#img").attr("src","../images/theater/plus.png");
+	$(c).find(".row_minus").find("#img").attr("src","/images/theater/plus.png");
 	$(c).find(".row_minus").attr("class","row_plus");
 
 	
@@ -276,7 +275,7 @@ function colPlus(j){
 	colList.push(j);
 	console.log(colList);
 	$(c).find(".col_plus").attr("onclick","colMinus("+j+");");
-	$(c).find(".col_plus").find("#img").attr("src","../images/theater/minus.png");
+	$(c).find(".col_plus").find("#img").attr("src","/images/theater/minus.png");
 	$(c).find(".col_plus").attr("class","col_minus");
 
 
@@ -297,7 +296,7 @@ function colMinus(j){
 
 	var c = ".c"+j;
 	$(c).find(".col_minus").attr("onclick","colPlus("+j+");");
-	$(c).find(".col_minus").find("#img").attr("src","../images/theater/plus.png");
+	$(c).find(".col_minus").find("#img").attr("src","/images/theater/plus.png");
 	$(c).find(".col_minus").attr("class","col_plus");
 	
 }
