@@ -140,49 +140,64 @@ public class TheaterService {
 	
 	//Update
 	@Transactional
-	public int theaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception{
+	public int theaterUpdate(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception{
 		//theater update
-		//theaterRepository.theaterUpdate(theaterVO);
+		System.out.println("======필름 타입=======");
+		int film = 0;
+		for(int i:filmType) {
+			film += i;
+		}
+		theaterVO.setFilmType(film);
+		
+		theaterRepository.theaterUpdate(theaterVO);
 //		System.out.println("service");
-//		System.out.println(stop_row.length);
-//		System.out.println(stop_col.length);
-//		System.out.println(stop_col[0]);
+		//System.out.println(stop_row.length);
+		//System.out.println(stop_col.length);
+		//System.out.println(stop_row[0]);
+		//System.out.println(stop_col[0]);
+		
 		//seat update insert
-		int result2=0;
+		//int result2=0;
 		for(int i=0; i<row.length; i++) {
 			SeatVO seatVO = new SeatVO();
 			seatVO.setTheaterNum(theaterVO.getNum());
 			System.out.println("theaterNum : " + seatVO.getTheaterNum());
 			seatVO.setRowIdx(row[i]);
+			System.out.println("row[i] : " + row[i]);
 			seatVO.setColIdx(Integer.parseInt(col[i]));
+			System.out.println("col[i] : " + col[i]);
 			seatVO.setGrade(Integer.parseInt(grade[i]));
-			seatRepository.seatUpdate(seatVO);
+			System.out.println("grade[i] : " + grade[i]);
+			//seatRepository.seatUpdate(seatVO);
 			//싹 업데이트를 하고 나서
 		}
 		
 		//여기서 ..reservation 어쩌구를 하기
-		for(int j=0; j<stop_row.length; j++) {
-			SeatVO seatVO = new SeatVO();
+		if(stop_row!=null) {
+			for(int j=0; j<stop_row.length; j++) {
+				SeatVO seatVO = new SeatVO();
+				
+	//			String str = stop_row[j];  //A
+	//			System.out.println("str : " + str);
+	//			char ch = str.charAt(j);
+	//		
+	//		    int num =  str.charAt(j)+65;
+	//		    System.out.println("num : " + num);
+	//		    
+	//		    
+	//			System.out.println("ch : " + ch);
+	//			String r = String.valueOf(ch);
+	//			
 			
-//			String str = stop_row[j];  //A
-//			System.out.println("str : " + str);
-//			char ch = str.charAt(j);
-//		
-//		    int num =  str.charAt(j)+65;
-//		    System.out.println("num : " + num);
-//		    
-//		    
-//			System.out.println("ch : " + ch);
-//			String r = String.valueOf(ch);
-//			
-		
-			//System.out.println("r : " + r);
-			seatVO.setTheaterNum(theaterVO.getNum());
-			seatVO.setRowIdx(stop_row[j]);	//문자로 바꿔 넣기
-			seatVO.setColIdx(Integer.parseInt(stop_col[j]));
-			SeatVO seat = seatRepository.selectSeatNum(seatVO);
-			//찾아온 seatNum으,로 reservationNum 0으로 바꾸기
-			seatBookingRepository.updateReservationNum(seat.getNum());
+				//System.out.println("r : " + r);
+				seatVO.setTheaterNum(theaterVO.getNum());
+				seatVO.setRowIdx(stop_row[j]);	//문자로 바꿔 넣기
+				seatVO.setColIdx(Integer.parseInt(stop_col[j]));
+				int seatNum = seatRepository.selectSeatNum(seatVO);
+				//찾아온 seatNum으,로 reservationNum 0으로 바꾸기
+				//System.out.println("seatNum : " + seat.getNum());
+				seatBookingRepository.updateReservationNum(seatNum);
+			}
 		}
 		
 		//seatSpace update insert

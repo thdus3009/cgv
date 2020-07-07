@@ -186,6 +186,7 @@
 						</table>
 					</div>
 					<div class="">
+						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-primary">Theater Insert</a>
                     	<span id="de" class="btn btn-danger">Delete</span>
                     	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
                     </div>

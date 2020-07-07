@@ -60,8 +60,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from seat where theaterNum=#{theaterNum}
 	</select>
  
- 	<select id="selectSeatNum" parameterType="SeatVO" resultType="SeatVO">
- 		select * from seat where rowIdx=#{rowIdx} and colIdx=#{colIdx} and theaterNum=#{theaterNum}
+ 	<select id="selectSeatNum" parameterType="Integer" resultType="SeatVO">
+ 		select num from seat where rowIdx=#{rowIdx} and colIdx=#{colIdx} and theaterNum=#{theaterNum}
  	</select>
  	
  	<update id="seatUpdate" parameterType="SeatVO">

@@ -185,7 +185,9 @@
 						</div>
 
 					</div>
-
+					<div class="">
+						<a href="./cinemaInsert" id="up" class="btn btn-primary">Insert</a>
+                    </div>
 				</div>
 			</main>
                 <c:import url="../template/footer.jsp"></c:import>

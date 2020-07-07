@@ -32,7 +32,17 @@
 						  
 						  <div class="form-group">
 						   	 <label for="local">Local:</label>
-						   	 <input type="text" class="form-control" id="local" name="local" value="${vo.local}">
+						   	 <%-- <input type="text" class="form-control" id="local" name="local" value="${vo.local}"> --%>
+						   	 <select class="" id="" name="local">
+						   	 	<option value="서울">서울</option>
+						   	 	<option value="경기">경기</option>
+						   	 	<option value="인천">인천</option>
+						   	 	<option value="대전/충청">대전/충청</option>
+						   	 	<option value="대구">대구</option>
+						   	 	<option value="부산/울산">부산/울산</option>
+						   	 	<option value="경상">경상</option>
+						   	 	<option value="광주/전라/제주">광주/전라/제주</option>
+							 </select>
 						  </div>
 						  
 						  <div class="form-group">

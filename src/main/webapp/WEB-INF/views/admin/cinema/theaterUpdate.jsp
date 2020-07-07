@@ -458,7 +458,12 @@
 					//$(name).attr("name","");
 					$(name).removeClass();
 					$(name).addClass("rating_economy")
-		
+					for(i=0; i<listLength; i++){
+						if(list[i].row == rw && list[i].col == cl){
+							list[i].grade = 1;
+							console.log("-----------:"+list[i].grade);
+						}
+					}
 		
 					seatCount += 1;
 					$("#seatCount").val(seatCount);
@@ -551,7 +556,7 @@
 				//아니면 따로따로 보내서
 				//DB에서 검색 몇관의 몇번시트인지
 				//
-				if(chClass!='rating_delete'){
+				if(chClass!='rating_delete' && chClass!='rating_stop'){
 					//$(name).find("span").css('border','2px solid #f71708');
 					//$(name).removeClass();
 					$(name).addClass("rating_stop");
@@ -567,7 +572,18 @@
 					} 
 					stopList.push(stopVO);
 					console.log(stopList);
-			}
+				}
+				if(chClass!='rating_delete' && chClass=='rating_stop'){
+					$(name).removeClass("rating_stop");
+					//$(name).addClass("rating_economy");
+					for(i=0; i<stopList.length; i++){
+						if(stopList[i].r == rw && stopList[i].c == cl){
+							stopList[i].c=0;
+						}
+					}
+
+					
+				}
 			break; 
 		
 			}
@@ -676,6 +692,13 @@
 		console.log(cnt);
 		list.splice(0,cnt);
 
+
+
+
+
+
+		
+
 		// list - row, col, grade / row_space / col_space -> form 안에 hidden으로 넣기
 		for(i=0; i<list.length; i++){
 			var r = '<input type="hidden" name="row" value="'+list[i].row+'">';
@@ -760,6 +783,29 @@
 		}
 		console.log(cnt);
 		list.splice(0,cnt);
+
+
+
+		// grade가 0인 것 앞쪽으로 정렬 후 list에서 제거
+		stopList.sort(function(a,b) {
+
+			return a["c"] - b["c"];
+		});
+
+		cnt = 0; 
+		
+		for(i=0; i<stopList.length; i++){
+			if(stopList[i].c=="0"){
+				cnt = cnt+1;
+			}
+
+			console.log(stopList[i]);
+		}
+		console.log(cnt);
+		stopList.splice(0,cnt);
+		console.log(stopList)
+
+		
 
 		// list - row, col, grade / row_space / col_space -> form 안에 hidden으로 넣기
 		for(i=0; i<list.length; i++){

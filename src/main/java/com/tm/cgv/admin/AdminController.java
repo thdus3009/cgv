@@ -93,7 +93,7 @@ public class AdminController {
 		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
 		
-		List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
+		//List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
 	
 	
 		//가져온 theater list에 들어있는 filmType을 가져와서 리스트 생성
@@ -122,8 +122,8 @@ public class AdminController {
 		System.out.println("들어왓나?");
 		ModelAndView mv = new ModelAndView();
 		List<MovieTimeVO> m = theaterService.theaterMovieTime(theaterNum); /*나중에는 list로 뽑아와야됨!*/
-		System.out.println(m.get(0));
-		System.out.println(m.get(1));
+		//System.out.println(m.get(0));
+		//System.out.println(m.get(1));
 		//쪼개는 서비스 만들기..theaterService에
 		List<String[]> totalInfo = theaterService.movieTime(m);
 
@@ -148,6 +148,7 @@ public class AdminController {
 	
 	@PostMapping("cinema/cinemaInsert")
 	public ModelAndView cinemaInsert(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
+		System.out.println("입력한 totalseat : " + cinemaVO.getTotalSeat());
 		System.out.println("ㅠ.ㅠ");
 		int result = cinemaService.cinemaInsert(cinemaVO);
 		
@@ -206,9 +207,17 @@ public class AdminController {
 	// theater
 	//==============================
 	@GetMapping("cinema/theaterInsert")
-	public ModelAndView adminTheaterInsert() throws Exception {
+	public ModelAndView adminTheaterInsert(int cinemaNum) throws Exception {
+		System.out.println("cinemaNum : " + cinemaNum);
 		ModelAndView mv = new ModelAndView();
+		if(cinemaNum>0) {
+			//cinemaNum이 존재한다면
+			CinemaVO vo = cinemaService.cinemaSelect(cinemaNum);
+			mv.addObject("cineCheck", vo);
+			System.out.println(vo);
+		}
 		List<CinemaVO> cinemaVO = theaterService.cinemaList();
+		
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("board", "theater");
 		mv.addObject("path", "Insert");
@@ -341,14 +350,14 @@ public class AdminController {
 	}
 	
 	@PostMapping("cinema/theaterUpdate")
-	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception {
+	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(stop_row[0]);
-		System.out.println(stop_col[0]);
+		//System.out.println(stop_row[0]);
+		//System.out.println(stop_col[0]);
 		System.out.println(theaterVO.getName());
-		theaterService.theaterUpdate(theaterVO, row, col, grade, row_space, col_space, stop_row, stop_col);
+		theaterService.theaterUpdate(theaterVO, filmType, row, col, grade, row_space, col_space, stop_row, stop_col);
 		
-		mv.setViewName("admim/cinema/theagerSelect?num="+theaterVO.getNum());
+		mv.setViewName("redirect:./theaterSelect?num="+theaterVO.getNum());
 		return mv;
 	}
 	

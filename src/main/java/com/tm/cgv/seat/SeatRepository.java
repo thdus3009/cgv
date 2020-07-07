@@ -23,7 +23,7 @@ public interface SeatRepository {
 	
 	public List<SeatVO> seatSelect(SeatVO seatVO) throws Exception;
 	
-	public SeatVO selectSeatNum(SeatVO seatVO) throws Exception;
+	public int selectSeatNum(SeatVO seatVO) throws Exception;
 	
 	public void seatUpdate(SeatVO seatVO) throws Exception;
 

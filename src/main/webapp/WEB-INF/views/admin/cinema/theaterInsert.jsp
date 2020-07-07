@@ -25,10 +25,12 @@
 						</c:if>
 						<div class="form-group">
 							<label class="theaterLebel" for="cinemaNum">CinemaNum:</label>
-							<select class="cinemaNum selectcinenum" name="cinemaNum">
+							<select class="cinemaNum selectcinenum" id="cineNum" name="cinemaNum">
+								
 								<c:forEach items="${cine}" var="cnt">
 								<option value="${cnt.num}">${cnt.num} / ${cnt.name}</option>
 								</c:forEach>
+								
  							</select>
 							<br>
 							<label class="theaterLebel lebelname" for="name">Name:</label>
@@ -134,5 +136,14 @@
 	</div>
 	<c:import url="../template/scripts.jsp"></c:import>
 	<script src="/js/theater/theaterInsert.js"></script>
+	<script type="text/javascript">
+
+		<c:if test="${!empty cineCheck}">
+			var n = '${cineCheck.num}';
+			$("#cineNum option[value="+n+"]").prop("selected",true);
+		</c:if>
+
+
+	</script>
 </body>
 </html>

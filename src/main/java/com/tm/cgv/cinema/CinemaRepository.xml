@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="cinemaInsert" parameterType="CinemaVO">
 		insert into cinema (name, local, address, tel, totalTheater, trafficInfo, parkingInfo, intro)
-		values (#{name}, #{local}, #{address}, #{tel}, #{totalTheater}, #{trafficInfo}, #{parkingInfo}, #{intro})
+		values (#{name}, #{local}, #{address}, #{tel}, #{totalTheater}, #{totalSeat}, #{trafficInfo}, #{parkingInfo}, #{intro})
 	</insert>
 
 
