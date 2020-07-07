@@ -60,30 +60,38 @@
 														</colgroup>
 														<tbody>
 
-
+					
 															<div class="form-group">
 																<label for="files">타이틀 이미지:</label> <input type="file"
 																	class="form-control files check" id="files"
 																	placeholder="타이틀 이미지 선택" name="files">
 															</div>
 															
-															<div class="form-group">
-																<label for="files">트레일러:</label> 
+															<div style="float: left;">
+															<div class="form-group"  style="width: 650px; float: left;">
+																<label for="files">트레일러</label> <br>
+																<label for="files">img:</label> 
 																<img alt="" src="../../images/theater/plus.png" 
-																style="width: 20px; height: 20px;" id="addT"> 
+																style="width: 20px; height: 20px;" id="addI"> 
+																<div class="form-group" id="f">
+																	
+																</div>
 															</div>
 															
-
-
-															<div class="form-group">
-																<label for="videolink">예고 영상:</label> <input type="text"
-																	class="form-control videolink check" id="videolink"
-																	placeholder="예고편 영상 링크" name="videolink"
-																	value="${vo.movieVideoVOs.videolink }"
-																	style="padding: 12px;">
+																
+															<div class="form-group" style="width: 650px; float: left; margin-left: 80px;margin-right: 50px;" >
+																<label for="files">트레일러</label> <br>
+																<label for="videolink">video:</label>
+																<img alt="" src="../../images/theater/plus.png" 
+																style="width: 20px; height: 20px;" id="addV"> 
+																<div class="form-group" id="f2">
+																
+																</div>
 															</div>
-															<div class="form-group">
-																<label for="title">제목:</label> <input type="text"
+															</div>
+																
+															<div class="form-group" >
+																<label for="title" >제목:</label> <input type="text"
 																	class="form-control check" id="title" name="title"
 																	value="${vo.title }">
 															</div>
@@ -201,6 +209,52 @@
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../../js/movie/movieWrite.js"></script>
 	
+	<script type="text/javascript">
+
+	var num=0;
+	var count =1;
+	
+	var num2=0;
+	var count2=1;
+	
+	$("#addI").click(function(){
+		if(num<3){
+			$("#f").append('<div><input type="file" multiple="multiple" style="width: 100%; float:left; "'+
+					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
+					'<span class="x"style="float: left;" >X</span></div>');
+			num++;
+			count++;
+			}else{
+				alert("최대 3개까지 가능합니다.")
+			}
+		
+		});	
+
+	$("#addV").click(function(){
+		if(num2<3){
+			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
+					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
+			num2++;
+			count2++;
+			}else{
+				alert("최대 3개까지 가능합니다.")
+			}
+		
+		});	
+
+ 	$("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
+		$(this).parent().remove();
+		num--;
+
+		});
+
+	$("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
+		$(this).parent().remove();
+		num2--;
+
+		});
+	</script>
 	
 </body>
 </html>

@@ -69,7 +69,7 @@
 					<div class="box-image"  >
 					<a href="">
 						<span class="thumb-image">
-							<img  class="box-image" alt="" src="../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
+							<img  class="box-image" alt="" src="../images/movie/movieList/filmCover/${vo.movieImageVOs[0].fileName}">
 							<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 						</span>
 					</a>
@@ -207,11 +207,12 @@
 							<h4>트레일러</h4>
 							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
 						</div>
+						<c:forEach var="ar" items="${ar}">
 						<ul>
 							<li>
 							<div class="box-image">
-								<a href="${vo.movieVideoVOs.videolink }">
-									<img alt="메인예고편" src="../images/movie/movieList/filmCover/rr.JPG" class="box-image">
+								<a href="${ar.movieVideoVOs[0].videolink }">
+									<img alt="메인예고편" src="../images/movie/movieList/filmCover/${ar.fileName}" class="box-image">
 								</a>
 							</div>
 							<div class="box-contents">
@@ -225,6 +226,7 @@
 							</div>
 							</li>
 						</ul>
+						</c:forEach>
 					</div>
 					<!-- 여기까지가 트레일러 -->
 					

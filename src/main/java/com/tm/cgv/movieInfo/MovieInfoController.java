@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.MakeCalendar;
@@ -134,7 +135,7 @@ public class MovieInfoController {
 	}
 	
 	@PostMapping("movieWrite")
-	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
+	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile[] files,String[] videolink) throws Exception{
 		int num = movieInfoVO.getNum();
 		System.out.println("num : " + num);
 		
@@ -150,23 +151,28 @@ public class MovieInfoController {
 	}
 	
 	@GetMapping("movieSelect")
-	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num) throws Exception{
+	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num,MovieImageVO movieImageVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		reservationVO.setMovieNum(num);
 		System.out.println(reservationVO.getMovieNum()+"con");
 		
+		movieImageVO.setMovieNum(num);
+		System.out.println(movieImageVO.getMovieNum()+"이거도 나와야해...");
 		//reservationVO.setReviewVOs(reviewVOs);
 		//reservationVO.setTotal(total);
 		//System.out.println(reservationVO.getTotal());
 		
 		
-		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO,reservationVO);
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO,reservationVO,movieImageVO);
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");
 		}
+		System.out.println(map.get("vo")+"이거 나오니?");
 		
-		mv.addObject("vo",map.get("vo"));
+		mv.addObject("vo",map.get("vo")); //정보+ 사진
+		mv.addObject("ar",map.get("ar"));//사진+영상링크
+		
 		mv.addObject("gender",map.get("gender"));
 		mv.addObject("gTotal",map.get("gTotal"));
 		mv.addObject("ageTotal",map.get("ageTotal"));
@@ -191,8 +197,8 @@ public class MovieInfoController {
 	}
 	
 	@GetMapping("movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO)throws Exception{
-		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO,reservationVO);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO)throws Exception{
+		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO,reservationVO,movieImageVO);
 		
 		mv.addObject("vo",movieInfoVO);
 		mv.addObject("path","Update");

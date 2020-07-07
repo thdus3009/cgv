@@ -76,37 +76,42 @@ public class MovieInfoService {
 	}
 	
 	
-	public long movieWrite(MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
+	public long movieWrite(MovieInfoVO movieInfoVO,MultipartFile[] files,String[] videolink) throws Exception{
 		
 		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
 		//테이블에 넣어
 		
 		long result = movieInfoRepository.movieWrite(movieInfoVO);
-		
-		if(files.getSize()>0) {
-			
-			String fileName = fileManager.saveTransfer(files, file);//이미지 파일 저장
-			MovieImageVO movieImageVO = new MovieImageVO();
-			movieImageVO.setMovieNum(movieInfoVO.getNum());
-			movieImageVO.setFileName(fileName);
-			movieImageVO.setOriginName(files.getOriginalFilename());						
-			
-			//movieImage테이블에 삽입
-			result = movieImageRepository.movieImageInsert(movieImageVO);
+		// 포스터 이미지, 트레일러 영상 이미지들
+		for(MultipartFile file2:files) {
+			if(file2.getSize()>0) {
+				String fileName = fileManager.saveTransfer(file2, file);//이미지 파일, 경로
+				MovieImageVO movieImageVO = new MovieImageVO();
+				movieImageVO.setMovieNum(movieInfoVO.getNum());
+				movieImageVO.setFileName(fileName);
+				movieImageVO.setOriginName(file2.getOriginalFilename());						
+				
+				//movieImage테이블에 삽입
+				result = movieImageRepository.movieImageInsert(movieImageVO);
+			}
 		}
-		
-		if(videolink!=null) {
+		//트레일러 영상 링크
+		for(int i=0;i<videolink.length;i++) {
+			if(videolink!=null) {
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
-			movieVideoVO.setMovieNum(movieInfoVO.getNum());
-			movieVideoVO.setVideolink(videolink);
-			
+			//movieVideoVO.setMovieImageNum(); 이미지의 num이 들어와야함
+			//movieVideoVO.setMovieNum(movieInfoVO.getNum());
+			movieVideoVO.setVideolink(videolink[i]);
+				
 			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
+		
+			}
 		}
 		
 		return result;
 	}
 	
-	public Map<String, Object> movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
+	public Map<String, Object> movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO) throws Exception{
 		
 		System.out.println(reservationVO.getMovieNum()+"uuuu");
 		
@@ -234,9 +239,12 @@ public class MovieInfoService {
 		//=============
 		Map<String, Object> g = new HashMap<>();
 		
-		movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
+		/* movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); */
+		movieInfoVO=movieInfoRepository.mSelect(movieInfoVO);
+		List<MovieImageVO> ar = movieInfoRepository.mSelect2(movieImageVO);
 		
 		g.put("vo", movieInfoVO);
+		g.put("ar", ar);
 		
 		g.put("gender", gender);
 		g.put("gTotal",gTotal);
@@ -292,7 +300,7 @@ public class MovieInfoService {
 		if(videolink!=null ) {
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
 			
-				movieVideoVO.setMovieNum(movieInfoVO.getNum());
+				//movieVideoVO.setMovieNum(movieInfoVO.getNum());
 				movieVideoVO.setVideolink(videolink);
 								
 				result = movieVideoRepository.movieVideoUpdate(movieVideoVO);

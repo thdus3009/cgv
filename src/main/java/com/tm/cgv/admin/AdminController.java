@@ -17,6 +17,7 @@ import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
+import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
@@ -112,7 +113,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieWrite")
-	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
+	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile[] files,String[] videolink) throws Exception{
 		int num = movieInfoVO.getNum();
 		System.out.println("num : " + num);
 		
@@ -128,19 +129,21 @@ public class AdminController {
 	}
 	
 	@GetMapping("movie/movieSelect")
-	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO) throws Exception{
+	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO,MovieImageVO movieImageVO) throws Exception{
 		System.out.println(movieInfoVO.getNum()+"con 무비넘");
 		reservationVO.setMovieNum(movieInfoVO.getNum());// 파라미터가 num인데 reservation에는 movieNum이 영화번호이니까
 														// 영화번호에 num을 넣어줘야지 제대로 돌아감
 		
-		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");
 		}
 		
 		//select 에서 예매율, 리뷰 없어도...
 		
-		mv.addObject("vo",map.get("vo"));
+		mv.addObject("vo",map.get("vo"));//정보+사진
+		mv.addObject("ar",map.get("ar"));//사진+영상링크
+		
 		mv.addObject("gender",map.get("gender"));
 		mv.addObject("gTotal",map.get("gTotal"));
 		mv.addObject("ageTotal",map.get("ageTotal"));
@@ -165,9 +168,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO) throws Exception{
 		reservationVO.setMovieNum(movieInfoVO.getNum());
-		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
 		
 		
 		if(map.get("vo")==null) {

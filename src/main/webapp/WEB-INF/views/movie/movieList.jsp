@@ -80,7 +80,7 @@
 								<strong class="rank">No.${i.index+1}</strong> 
 								<a href="./movieSelect?num=${list.num}"> 
 									<span class="thumb-image"> 
-										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVOs.fileName}">
+										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVOs['0'].fileName}">
 										<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 									</span>
 								</a>

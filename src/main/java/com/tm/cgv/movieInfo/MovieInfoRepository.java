@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.Pager;
@@ -22,6 +23,9 @@ public interface MovieInfoRepository {
 	public long movieWrite(MovieInfoVO movieInfoVO) throws Exception;
 	
 	public MovieInfoVO movieSelect (MovieInfoVO movieInfoVO) throws Exception;
+	public MovieInfoVO mSelect(MovieInfoVO movieInfoVO) throws Exception;
+	public List<MovieImageVO> mSelect2(MovieImageVO movieImageVO) throws Exception;
+	
 	
 	public long movieUpdate(MovieInfoVO movieInfoVO) throws Exception;
 	
