@@ -133,8 +133,27 @@ main {
 	margin: auto;
 }
 
-/**/
+
 #movieTimeInsert {
 	margin: 0 auto;
 	width: 680px;
 }
+
+
+
+.form-control:disabled, .form-control[readonly]{
+	background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

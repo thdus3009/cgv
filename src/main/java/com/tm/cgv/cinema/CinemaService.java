@@ -69,5 +69,8 @@ public class CinemaService {
 		return cinemaRepository.cineList(local);
 	}
 
+	public List<CinemaVO> cinemaTimePriceList(int num) throws Exception{
+		return cinemaRepository.cinemaTimePriceList(num);
+	}
 
 }

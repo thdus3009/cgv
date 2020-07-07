@@ -18,11 +18,35 @@
 		<c:import url="../template/sidenav.jsp"></c:import>
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
+
 			<main>
 				<div class="container-fluid">
 					<h1>Reservation List</h1>
 					<p>예매 내역 목록</p>
-					
+
+					<form action="../reservation/selectList" id="form-Data" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" style="float:right; padding-bottom: 20px;display:flex!important; " >
+						<div class="form-group" style="padding-right: 10px; text-align: right; ">
+							<select class="form-control col-md-12" name="kind">
+								<option class="type" id="title" value="title" selected="selected">제목</option>
+								<option class="type" id="username" value="username">아이디</option>
+								<option class="type" id="all" value="all">제목+아이디</option>
+							</select>
+						</div>
+						
+						
+						<div class="input-group">
+							<input class="form-control" name="search" value="${pager.search}" type="text" placeholder="검색어를 입력" aria-label="Search" aria-describedby="basic-addon2" />
+							<input type="hidden" id="curPage" name="curPage" value="">
+							<input type="hidden" id="sDate" name="sDate" value="">
+							<input type="hidden" id="eDate" name="eDate" value="">
+							 
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
 
 					<!-- 목록 -->
 					<div class="table-responsive" style="clear: both;">

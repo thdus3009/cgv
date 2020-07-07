@@ -118,6 +118,14 @@
 					<div class="">
                     	<span id="de" class="btn btn-danger">Delete</span>
                     	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+                    	
+                    	<c:if test="${empty timePriceList}">
+                    		<a href="./admissionPrice/write?num=${cine.num}" id="admissionPrice" class="btn btn-info">관람가격 등록</a>
+                    	</c:if>
+                    	<c:if test="${not empty timePriceList}">
+                    		<a href="./admissionPrice/selectList?num=${cine.num}" id="admissionPrice" class="btn btn-info">관람가격 조회</a>
+                    	</c:if>
+                    	
                     </div>
 				</div>
 			</main>

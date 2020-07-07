@@ -1,5 +1,9 @@
 package com.tm.cgv.cinema;
 
+import java.util.List;
+
+import com.tm.cgv.timePrice.TimePriceVO;
+
 import lombok.Data;
 
 @Data
@@ -17,6 +21,8 @@ public class CinemaVO {
 	private String intro;
 	
 
+	private List<TimePriceVO> timePriceVOs;
+	
 	public String getLocal() {
 		if(this.local == null || this.local.equals("")) {
 			this.local = "서울";

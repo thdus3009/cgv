@@ -115,7 +115,7 @@ public class CinemaController {
 	
 	
 
-	//지역별 극장 조회
+	//모든 지역별 극장 조회(그룹)
 	@GetMapping("localCinemaSearch")
 	public ModelAndView loalSearch(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -128,5 +128,38 @@ public class CinemaController {
 		return mv;
 	}
 	
+	
+	
+	
+	//cineList - 선택한 지역별 극장 조회
+	@ResponseBody
+	@GetMapping("selectedLocal")
+	public List<CinemaVO> selectedLocal(String local) throws Exception{
+		
+		System.out.println(">>>>>>>> cineController local : "+local);
+		List<CinemaVO> cinemaList = cinemaService.cineList(local);
+		
+		return cinemaList;
+	}
+	
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

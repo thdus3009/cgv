@@ -19,4 +19,12 @@ public class TimePriceService {
 		return timePriceRepository.searchLimit(timePriceVO);
 	}
 	
+	public int timePriceInsert(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceInsert(timePriceVO);
+	}
+	
+	public List<TimePriceVO> timePriceExistCheck(int cinemaNum) throws Exception{
+		return timePriceRepository.timePriceExistCheck(cinemaNum);
+	}
+	 
 }

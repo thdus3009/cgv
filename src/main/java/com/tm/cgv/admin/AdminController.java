@@ -30,6 +30,8 @@ import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
+import com.tm.cgv.timePrice.TimePriceService;
+import com.tm.cgv.timePrice.TimePriceVO;
 import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.util.Pager;
 import com.tm.cgv.reservation.ReservationService;
@@ -63,6 +65,8 @@ public class AdminController {
 	private ReservationService reservationService;
 	@Autowired
 	private PaymentService paymentService;
+	@Autowired
+	private TimePriceService timePriceService;
 	
 	
 	
@@ -239,6 +243,10 @@ public class AdminController {
 		BitFilmType bitFilmType = new BitFilmType();
 		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
+		//timePrice에 해당 cinema가 등록 되어있는지 조회
+		List<TimePriceVO> timePriceList = timePriceService.timePriceExistCheck(num);
+		
+		mv.addObject("timePriceList", timePriceList);
 		
 		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);
@@ -339,6 +347,62 @@ public class AdminController {
 	
 	//극장별 관람가격 (조회/수정/삭제 /삽입)
 	
+	@GetMapping("cinema/admissionPrice/selectList")
+	public ModelAndView admissionPriceSelectList(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//timePrice에 해당 cinema가 등록 되어있는지 조회
+		List<CinemaVO> cinemaList = cinemaService.cinemaTimePriceList(num);
+		
+		mv.addObject("cinemaList", cinemaList);
+		mv.setViewName("admin/timePrice/timePriceList");
+		return mv;
+	}
+	
+	
+	@GetMapping("cinema/admissionPrice/write")
+	public ModelAndView admissionPriceWrite(CinemaVO cinemaVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO.getNum());
+		
+		mv.addObject("cinemaVO", cinemaVO);
+		mv.setViewName("admin/timePrice/cinemaPrice");
+		return mv;
+	}
+	
+	@PostMapping("cinema/admissionPrice/write")
+	public ModelAndView admissionPriceWrite(String[] sTime,String[] eTime,String[] commonPrice,String[] teenagerPrice,String cinemaNum,String filmType) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = 0;
+		
+		for (int i = 0; i < sTime.length; i++) {
+			TimePriceVO timePriceVO = new TimePriceVO();
+			timePriceVO.setCinemaNum(Integer.parseInt(cinemaNum));
+			timePriceVO.setFilmType(Integer.parseInt(filmType));
+			timePriceVO.setSTime(sTime[i]);
+			timePriceVO.setETime(eTime[i]);
+			timePriceVO.setCommonPrice(Integer.parseInt(commonPrice[i]));
+			timePriceVO.setTeenagerPrice(Integer.parseInt(teenagerPrice[i]));
+
+			int type = 0;
+			if(sTime.length > 2) {
+				if(i == 0) {
+					type = 1;
+				}else if(i == sTime.length-1) {
+					type = 2;
+				}
+			}
+			timePriceVO.setType(type);
+			result = timePriceService.timePriceInsert(timePriceVO);
+		}
+		
+		if(result>0) {
+			
+		}
+		mv.setViewName("redirect:../cinemaSelect?num="+Integer.parseInt(cinemaNum));
+		
+		return mv;
+	}
 	
 	
 	

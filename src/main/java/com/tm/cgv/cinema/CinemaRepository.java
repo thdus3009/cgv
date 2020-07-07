@@ -39,5 +39,7 @@ public interface CinemaRepository {
 	//
 	public List<CinemaVO> cineList(String local) throws Exception;
 
+	public List<CinemaVO> cinemaTimePriceList(int num) throws Exception;
+	
 	
 }
