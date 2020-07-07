@@ -389,7 +389,7 @@ ul {
 	vertical-align: middle;
 	font: 0/0 a;
 	zoom: 1;
-    margin-bottom: 3px;
+	margin-bottom: 3px;
 }
 
 /*  ------------------------------------------------------------------------------- 영화 내용(contents) */
@@ -485,7 +485,6 @@ rect {
 	margin-left: 4px;
 	font-weight: 300;
 	line-height: 40px;
-	
 	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
@@ -718,7 +717,6 @@ input, select, img {
 .real-rating .title strong {
 	color: #BF2C1C;
 	font-weight: 600;
-	
 }
 
 .real-rating .desc span {

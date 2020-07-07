@@ -82,22 +82,26 @@
 								<h2>전화번호</h2>
 								<!-- id명 phone / phoneAuth 입력 유효성 검사 필요(전부 숫자만 입력되도록) -->
 								<input id="phone" class="text" type="text" style="display: inline-block;" placeholder="' - ' 없이 입력해 주세요" maxlength="11"  onkeyup=keyinCheck(this.id) name="phone">
-								<button id="phoneBtn" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px; margin-bottom: 0px; margin-right: 200px; 
-	font-family: 'CJ+ONLYONE+Medium+LIGHT';">인증번호 발송</button>
+								<button id="phoneBtn" type="button" style="display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px; margin-bottom: 0px; margin-right: 200px;  font-family: 'CJ+ONLYONE+Medium+LIGHT';">인증번호 발송</button>
 								<input id="phoneAuth" class="text" type="text" style="display: none;" placeholder="인증번호를 입력해주세요" maxlength="6" onkeyup=keyinCheck(this.id)>
 								<button id="phoneAuthBtn" type="button" style="display: none;">인증번호 확인</button>
 								
 								<h2>성별</h2>
-								<input id="genderMale" class="check gender" type="radio" name="gender" value="1">남자
-								<input id="genderFemale" class="check gender" type="radio" name="gender" value="0">여자
-								
-								<h2>이메일</h2>
+									<label class="box-radio-input"> 
+										<input id="genderMale" class="check gender" type="radio" name="gender" value="1" checked="checked">
+										<span>남자</span>
+									</label> 
+									<label class="box-radio-input"> 
+										<input id="genderFemale" class="check gender" type="radio" name="gender" value="0">
+										<span>여자</span>
+									</label>
+
+									<h2>이메일</h2>
 								<input id="email" class="check" type="email" placeholder="선택입력" name="email">
 							</div>
 						
 						</fieldset>
-						<button id="btn" type="submit" style="
-	font-family: 'CJ+ONLYONE+Medium+LIGHT';"><span>가입 신청</span></button>
+						<button id="btn" type="submit" style=" font-family: 'CJ+ONLYONE+Medium+LIGHT';"><span>가입 신청</span></button>
 					</form>
 					
 				</div>
