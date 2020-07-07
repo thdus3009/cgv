@@ -3,20 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> <!-- 얘가 문제 -->
+ <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 얘가 문제
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  
-<div class="container-fluid">
+  --> 
+<div class="container">
 <div class="row">
-	<div class="col-sm-6" style="width:200px; height:100px; background-color: pink;">aa</div>
-	<div class="col-sm-6" style="width:200px; height:100px;">ab</div>
-	<div class="col-sm-6" style="width:200px; height:100px;">ac</div>
-	<div class="col-sm-6" style="width:200px; height:100px;">ad</div>
-	<div class="col-sm-6" style="width:200px; height:100px;">ae</div>
-	<div class="col-sm-6" style="width:200px; height:100px;">af</div>
-	<div class="col-sm-6" style="width:200px; height:100px;">ag</div>
+	<div class="col-sm-6" style="width:400px; height:210px; background-color: pink;">aa</div>
+	<div class="col-sm-6" style="width:400px; height:210px; background-color: yellow;">ab</div>
+	<div class="col-sm-6" style="width:400px; height:210px; background-color: yellow;">ac</div>
+	<div class="col-sm-6" style="width:400px; height:210px; background-color: pink;">ad</div>
+	<div class="col-sm-6" style="width:400px; height:210px; background-color: pink;">ae</div>
+	<div class="col-sm-6" style="width:400px; height:210px; background-color: yellow;">af</div>
 </div>
 </div>
 
@@ -65,7 +64,7 @@
 		</ul>
 	</div>
 	</c:forEach>
-	
+
 <%-- 	<c:forEach items="${review}" var="vo2">
 		<div>${vo2.reservationNum}</div>
 		<div>${vo2.uid}</div>
