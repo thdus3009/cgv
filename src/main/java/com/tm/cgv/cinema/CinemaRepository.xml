@@ -6,36 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.cinema.CinemaRepository">
 	
-	
-	<resultMap type="CinemaVO" id="timePriceList">
-		<id column="cNum" property="num"/>
-		<result column="name" property="name"/>
-		<result column="local" property="local"/>
-		
-		<collection property="timePriceVOs" javaType="List" ofType="TimePriceVO">
-			<id column="num" property="num"/>
-			<result column="cinemaNum" property="cinemaNum"/>
-			<result column="sTime" property="sTime"/>
-			<result column="eTime" property="eTime"/>
-			<result column="filmType" property="filmType"/>
-			<result column="commonPrice" property="commonPrice"/>
-			<result column="teenagerPrice" property="teenagerPrice"/>
-			<result column="type" property="type"/>
-		</collection>
-	</resultMap>
-	
-	<select id="cinemaTimePriceList" parameterType="Integer" resultMap="timePriceList">
-		select * from 
-		(select num as cNum,name,local from cinema) C
-		join
-		(select * from timePrice) T
-		on(C.cNum = T.cinemaNum)
-		where C.cNum = #{num}
-		order by filmType
-	</select>
-
-
-
 	<insert id="cinemaInsert" parameterType="CinemaVO">
 		insert into cinema (name, local, address, tel, totalTheater, trafficInfo, parkingInfo, intro)
 		values (#{name}, #{local}, #{address}, #{tel}, #{totalTheater}, #{trafficInfo}, #{parkingInfo}, #{intro})
@@ -50,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from theater where cinemaNum=#{num}
 	</select>
 	
-
 	
 	<update id="cinemaUpdate" parameterType="CinemaVO">
 		update cinema set address=#{address}, tel=#{tel}, totalTheater=#{totalTheater}, totalSeat=#{totalSeat},
@@ -67,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="cinemaList" resultType="CinemaVO">
-		select * from cinema order by local;
+		select * from cinema order by local
 	</select>
 	
 	<select id="cineList" parameterType="String" resultType="CinemaVO">

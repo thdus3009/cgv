@@ -23,8 +23,8 @@ public class TimePriceService {
 		return timePriceRepository.timePriceInsert(timePriceVO);
 	}
 	
-	public List<TimePriceVO> timePriceExistCheck(int cinemaNum) throws Exception{
-		return timePriceRepository.timePriceExistCheck(cinemaNum);
+	public List<TimePriceVO> timePriceCinemaList(int cinemaNum) throws Exception{
+		return timePriceRepository.timePriceCinemaList(cinemaNum);
 	}
 	 
 }

@@ -227,7 +227,9 @@ public class AdminController {
 	
 	@GetMapping("cinema/cinemaSelect")
 	public ModelAndView adminCinemaSelect(ModelAndView mv, int num) throws Exception {
-		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(num);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
 		
 		//List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
@@ -244,7 +246,7 @@ public class AdminController {
 		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
 		//timePrice에 해당 cinema가 등록 되어있는지 조회
-		List<TimePriceVO> timePriceList = timePriceService.timePriceExistCheck(num);
+		List<TimePriceVO> timePriceList = timePriceService.timePriceCinemaList(num);
 		
 		mv.addObject("timePriceList", timePriceList);
 		
@@ -304,8 +306,9 @@ public class AdminController {
 	@GetMapping("cinema/cinemaUpdate")
 	public ModelAndView adminCinemaUpdate(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(num);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		mv.addObject("path", "Update");
 		mv.addObject("vo", cinemaVO);
 		mv.setViewName("admin/cinema/cinemaInsert");
@@ -346,24 +349,30 @@ public class AdminController {
 	
 	
 	//극장별 관람가격 (조회/수정/삭제 /삽입)
-	
 	@GetMapping("cinema/admissionPrice/selectList")
-	public ModelAndView admissionPriceSelectList(int num) throws Exception{
+	public ModelAndView admissionPriceSelectList(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		//timePrice에 해당 cinema가 등록 되어있는지 조회
-		List<CinemaVO> cinemaList = cinemaService.cinemaTimePriceList(num);
+
+		//극장의 name, local
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		
-		mv.addObject("cinemaList", cinemaList);
+		//timePrice List
+		List<TimePriceVO> timePriceList = timePriceService.timePriceCinemaList(cinemaVO.getNum());
+		
+		mv.addObject("cinemaVO", cinemaVO);
+		mv.addObject("timePriceList", timePriceList);
 		mv.setViewName("admin/timePrice/timePriceList");
 		return mv;
 	}
+	
+	
 	
 	
 	@GetMapping("cinema/admissionPrice/write")
 	public ModelAndView admissionPriceWrite(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		cinemaVO = cinemaService.cinemaSelect(cinemaVO.getNum());
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		
 		mv.addObject("cinemaVO", cinemaVO);
 		mv.setViewName("admin/timePrice/cinemaPrice");
