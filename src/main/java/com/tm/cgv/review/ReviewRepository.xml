@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(M.movieNum = I.movieNum)) M inner join (select * from review) R
 		on(M.num = R.reservationNum)
 		where R.createAt is not null and R.deleteAt is null
-		ORDER BY R.createAt desc
+		ORDER BY R.createAt desc, R.reservationNum desc
 	</select>
 	
 	<select id="search_Count" resultType="Integer"> <!-- 총 영화예매건수 확인 -->
@@ -93,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from(select num,uid,createAt from reservation 
 		where movieNum=#{movieNum} and createAt is not null and deleteAt is null) RE inner join (select * from review) RV
 		on(RV.reservationNum = RE.num)
-		where RV.createAt is not null and RV.deleteAt is null
+		where RV.createAt is not null and RV.deleteAt is null ORDER BY RE.createAt desc, RV.reservationNum desc
 	</select>
 	
 	

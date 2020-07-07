@@ -183,7 +183,7 @@
 							<li>
 								<span class="strong">성별 예매 분포</span>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								 <div id="chart_div">
+								 <div id="chart_div" style="position: absolute; left: -20px;">
 								 	
 								 </div>
 								</div>
@@ -191,7 +191,7 @@
 							<li>
 								<span class="strong">연령별 예매 분포</span>
 								<div id="qplot_sex" class="chart jqplot-target" style="position: relative">
-								<div id="columnchart_values" style="width: 900px; height: 300px; position: absolute; right: -30px;" >
+								<div id="columnchart_values" style="width: 900px; height: 300px; position: absolute; left: -71px;" >
 								
 								</div>
 								</div>
