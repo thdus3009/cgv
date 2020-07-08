@@ -32,5 +32,17 @@ public interface ReviewRepository {
 	
 	public int review_Update2(ReviewVO reviewVO);
 	
-	public List<ReviewVO> movieSelect(int movieNum);
+	public List<ReviewVO> movieSelect2(HashMap<String, Object> pa2);
+	
+	public List<ReviewVO> movieSelect3(HashMap<String, Object> pa2);
+	
+	public int reviewLike(ReviewVO reviewVO);
+	
+	public int checkLike(ReviewVO reviewVO);
+	
+	public Integer checkLike_Select(ReviewVO reviewVO);
+	
+	public long reviewCount(int movieNum);
+	
+	public int review_Modal(ReviewVO reviewVO);
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.member.MemberVO;
+import com.tm.cgv.util.Pager_movieSelect;
 import com.tm.cgv.util.Pager_reviewList;
 
 @Controller
@@ -200,12 +201,48 @@ public class ReviewController {
 		return result;
 	}
 	
-	@GetMapping("movieSelect")
-	public ModelAndView movieSelect(int movieNum)throws Exception {
+//	-------------------------------------------------------------------------------------movieSelect
+	
+	@GetMapping("movieSelect2")
+	public ModelAndView movieSelect2(int movieNum,Long curPage, Pager_movieSelect pager)throws Exception {
 		//reviewLook에서 파라미터 끌어다 쓰는거 찾아보기(movieList.jsp, MovieInfoController.java 참고)
 		System.out.println("movieNum?? "+movieNum);
+		System.out.println("curPage?? "+curPage);
+		pager.setCurPage(curPage);
+		
 		ModelAndView mv = new ModelAndView();
-		List<ReviewVO> reviewList = reviewService.movieSelect(movieNum);
+		
+		List<ReviewVO> reviewList = reviewService.movieSelect2(movieNum, pager);
+		
+		//하나씩 받은 reviewVO를 다시 ArrayList로 보내기 
+		List<ReviewVO> ar = new ArrayList<ReviewVO>();
+
+		for(ReviewVO reviewVO : reviewList) {
+
+			//*처리 해주기 (예시 : th**s3009)
+			String id = reviewVO.getUid();
+			id = id.substring(0, 1)+"**"+id.substring(3);
+			reviewVO.setUid(id);
+
+			//System.out.println(reviewVO.getUid());
+			ar.add(reviewVO);
+		  }
+		mv.addObject("review", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("movie/ajax/ajax_movieSelect");
+		return mv;
+	}
+		
+	@GetMapping("movieSelect3")
+	public ModelAndView movieSelect3(int movieNum,Long curPage, Pager_movieSelect pager)throws Exception {
+		//reviewLook에서 파라미터 끌어다 쓰는거 찾아보기(movieList.jsp, MovieInfoController.java 참고)
+		System.out.println("movieNum?? "+movieNum);
+		System.out.println("curPage?? "+curPage);
+		pager.setCurPage(curPage);
+		
+		ModelAndView mv = new ModelAndView();
+		
+		List<ReviewVO> reviewList = reviewService.movieSelect3(movieNum, pager);
 		
 		//하나씩 받은 reviewVO를 다시 ArrayList로 보내기 
 		List<ReviewVO> ar = new ArrayList<ReviewVO>();
@@ -221,12 +258,27 @@ public class ReviewController {
 			ar.add(reviewVO);
 		  }
 		mv.addObject("review", ar);
+		mv.addObject("pager", pager);
 		mv.setViewName("movie/ajax/ajax_movieSelect");
 		return mv;
 	}
+			
+	@GetMapping("reviewLike")
+	@ResponseBody
+	public int reviewLike(ReviewVO reviewVO)throws Exception {
+	
+		int result = reviewService.reviewLike(reviewVO);
 		
+		return result;
+	}
 	
-	
+	@GetMapping("review_Modal")
+	public int review_Modal(ReviewVO reviewVO)throws Exception {
+		
+		int count = reviewService.review_Modal(reviewVO);
+		System.out.println("count"+count);
+		return count;
+	}
 	// ---------------------------------------------------------------------------------
 	
 	//url?영화번호=00#리뷰페이지

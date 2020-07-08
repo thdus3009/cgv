@@ -155,7 +155,27 @@ div[class^="sect-"] .box-contents li .a {
 }
 
 /*  ------------------------------------------------------------------------------- 상세 이미지 */
+.box-contentss {
+    width: 400px;
+    float: left;
+    position: relative;
+    padding-left: 88px !important;
+    display: block;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
+.writerinfoo {
+	position: relative;
+    height: 24px;
+    float: none;
+    background: none;
+    float: left;
+    margin-bottom: 3px;
+    line-height: 20px!important;
+}
 
 .box-contents {
     width: 400px;
@@ -683,7 +703,7 @@ input, select, img {
 .wrap-movie-detail ul.point_col2 {
     position: relative;
     margin: 0 25px -2px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #ajax_ms {
@@ -761,7 +781,7 @@ input, select, img {
     background: none;
 }
 
-.point_col2 .writerinfo .writer-etc .day {
+.dayy {
     padding-right: 8px;
     margin-right: 6px;
     background: url(../images/common/bg/bg_writeinfo.gif) no-repeat 100% 0;

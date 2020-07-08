@@ -63,8 +63,14 @@
 
 .box-comment{
 	width:250px;
-	height:100px; 
+	height:130px; 
 	position: absolute; 
 	top: 45px;
 	left: 86px;
+	word-break: break-word;
+}
+
+.box-contentss {
+	position: absolute;
+	bottom: -48px;
 }

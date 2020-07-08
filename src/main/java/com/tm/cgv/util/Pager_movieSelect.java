@@ -33,8 +33,8 @@ public class Pager_movieSelect {
 	public void makeBlock(long totalCount) {
 		this.totalCount = totalCount;
 		totalPage = totalCount/ this.perPage;
-		if(totalCount<10) {
-		//if(totalCount % this.perPage != 0) {  //만약 전체글갯수(62개)에서 한페이지당 출력할 갯수(6개)를 나눈만큼 페이지설정을 하는데 나머지가 생긴다면(2개), 
+		//if(totalCount<10) {
+		if(totalCount % this.perPage != 0) {  //만약 전체글갯수(62개)에서 한페이지당 출력할 갯수(6개)를 나눈만큼 페이지설정을 하는데 나머지가 생긴다면(2개), 
 			totalPage++;					  //그나머지가 들어갈 페이지를 하나더 추가시켜 준다. >>but cgv는 나머지 생기면 출력x only6개씩만 출력 (이 설정은 지워준다.)
 		}
 		

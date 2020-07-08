@@ -40,7 +40,7 @@
 	
 	<!-- 컨테이너 -------------------------------------------------------------------------------------->
 	<input type="hidden" id = "gTotal" value="${gTotal}">
-	<input type="hidden" value="${vo.num }" class="num4">
+	<input type="hidden" value="${vo.num}" class="num4">
 	
 	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container" >
@@ -299,7 +299,7 @@
 						</div>
 						<div class="real-rating">
 							<p class="title">관람일 포함 7일 이내 관람평을 남기시면 <span class="strong red">CJ ONE 20P</span>가 적립됩니다.</p>
-							<p class="desc"><span><em>15,557</em>명의 실관람객이 평가해주셨습니다.</span></p>
+							<p class="desc"><span><em id="reviewer"></em>명의 실관람객이 평가해주셨습니다.</span></p>
 							<div class="wrap_btn">
 								<a class="link-gradewrite a" href="javascript:void(0);" onclick="review_Modal();"><span>평점작성</span></a>
 								<a class="link-reviewwrite a" href="../review/reviewLook"><span>내 평점</span></a>
@@ -307,18 +307,21 @@
 						</div>
 						
 						<ul class="sort" id="sortTab">
+							<!-- 최신순 -->
 							<li class="sortTab on" data-order-type="0" id="test">
-								<a href="javascript:void(0);" title="현재선택" class="a">
+								<a href="javascript:void(0);" title="현재선택" class="a newBtn" onclick="newBtn();">
 									최신순
 									<span class="arrow-down"></span>
 								</a>	
 							</li>
+							<!-- 추천순 -->
 							<li class="sortTab" data-order-type="3" >
-								<a href="javascript:void(0);" class="a">
+								<a href="javascript:void(0);" class="a recBtn" onclick="recBtn();">
 									추천순
 									<span class="arrow-down"></span>
 								</a>
 							</li>
+							
 						</ul>
 						
 
@@ -327,6 +330,8 @@
 						
 						
 						</div>
+					<!--  class="active" -->
+
 						<!-- 리뷰 끝 -->
 						
 						<!-- 리뷰 시작 test -->
@@ -372,7 +377,6 @@
 						
 						
 						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-						
 
 							
 						
@@ -398,13 +402,17 @@
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
 
+var page1 = "";
 var num4 = $(".num4").val();
+var uid = "admin"; //아이디 세션값
+
+var select1 = "../review/movieSelect2";
 
 //페이지 들어가면 바로 실행(리뷰리스트)
 window.onload = function () {
 	$.ajax({
 		type:"GET",
-		url:"../review/movieSelect",
+		url:"../review/movieSelect2",
 		data:{
 			movieNum : num4,
 			
@@ -412,13 +420,158 @@ window.onload = function () {
 		success:function(data){
 			//html로 받음
 			$("#ajax_ms").html(data);
+
+			
+			var totalCount = $("#totalCount").val();
+			console.log("토탈:"+totalCount);
+			$("#reviewer").html(totalCount);
+			
+
 		}
 	})
 }
 
+ 
+ //페이지 버튼 > 이벤트 위임
+$("#ajax_ms").on("click",".page1",function(){
+
+	page1 =$(this).attr("data-page1");
+
+	 	$.ajax({
+			type:"GET",
+			url:select1,
+			data:{
+				movieNum : num4,
+				curPage : page1,
+			},
+			success:function(data){
+				$("#ajax_ms").html(data);
+			}
+	
+		})
+		
+}); 
+
+/* ------------------------------------------------ */
+//최신순
+function newBtn(){
+	select1="../review/movieSelect2";
+	aa(select1);
+	
+}
+
+//추천순
+function recBtn(){
+	select1="../review/movieSelect3";
+	aa(select1);
+}
+
+function aa(url){
+	$.ajax({
+		type:"GET",
+		url:url,
+		data:{
+			movieNum : num4,
+			
+		},
+		success:function(data){
+			//html로 받음
+			$("#ajax_ms").html(data);
+
+			
+			var totalCount = $("#totalCount").val();
+			console.log("토탈:"+totalCount);
+			$("#reviewer").html(totalCount);
+
+		}
+	})
+}
+/* ------------------------------------------------ */
+
+
+ //좋아요 버튼 > 이벤트 위임
+$("#ajax_ms").on("click",".date",function(){
+	//좋아요 아이디당 한개만 가능 (좋아요 눌렀을때 현재 session값있는지 확인)
+	
+
+	if(uid!=null){
+		var reservationNum =$(this).attr("data-reservation");
+
+	 	$.ajax({
+			type: "GET",
+			url: "../review/reviewLike",
+			data:{
+				reservationNum : reservationNum,
+				uid : uid,
+				movieNum : num4,
+			},
+			success:function(data){
+				//alert("성공 "+"최신?추천?"+select1+"영화번호?"+num4+"현재페이지?"+page1);
+				//../review/movieSelect3 + 1 + 1
+				
+				if(data>0){
+				alert("등록성공");
+				
+				}else{
+				//alert(data.trim());
+				alert("이미 좋아요를 누르셨습니다.");
+				}
+				
+				$.ajax({
+					type:"GET",
+					url: select1,
+					data:{
+						movieNum : num4,
+						curPage : page1,
+					},
+					success:function(data){
+						$("#ajax_ms").html(data);
+					}
+				}) 
+			}
+		})
+	}else{
+		if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")){
+			alert("로그인 페이지로 이동");
+		}
+	}
+	
+});
+
+
+
+
+
+
 //리뷰 update, write
 function review_Modal(){
-	alert("dd");
+//	alert(uid); //로그인한 session정보 넣기
+//	alert(num4);
+ 	$.ajax({
+		type:"GET",
+		url: "../review/review_Modal",
+		data:{
+			uid : uid,
+			movieNum : num4
+		},
+		success:function(data){
+			
+		}
+	})  
+//ajax로 해당 영화(var num4)의 review > count() 조회
+		
+//success:function(data){}안에 if문
+
+	/* 영화를 보고, 영화 리뷰를 작성하였을 시 > 수정 */
+	//해당영화의 리뷰가 1개만 있을 경우
+	
+	//해당영화의 리뷰가 2개이상 있을 경우
+	confirm("해당 영화의 리뷰를 2개 이상 작성하였으므로 \n제일 마지막 리뷰가 수정됩니다. 리뷰를 수정하시겠습니까? ");
+
+	/* 영화를 보고, 영화 리뷰를 아직 미작성하였을 시  */
+
+	/* 로그인한 아이디가 (httpSession) 해당영화를 아직 보지 않았을 시에(reservation정보가 있어야 review를 쓸 수 있다.) */
+	
 }
 
 

@@ -4,7 +4,7 @@
 
 function CheckByte(obj){//obj=this
 
-		    var maxByte = 280; //최대 입력 바이트 수
+		    var maxByte = 150; //최대 입력 바이트 수
 		    var str = obj.value;
 		    var str_len = str.length;
 		 
@@ -29,7 +29,7 @@ function CheckByte(obj){//obj=this
 		 
 		    if (rbyte > maxByte) {
 		        alert("한글 " + (maxByte / 2) + "자 / 영문 " + maxByte + "자를 초과 입력할 수 없습니다.");
-		        document.getElementById('bytes').innerText = 280;
+		        document.getElementById('bytes').innerText = 150;
 		        
 		        str2 = str.substr(0, rlen); //문자열 자르기
 		        obj.value = str2;

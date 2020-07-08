@@ -44,7 +44,7 @@
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
-							<span id="bytes" style="color: black;">0</span>/280(byte)
+							<span id="bytes" style="color: black;">0</span>/150(byte)
 							&emsp;
 							<input type="button" class="btn btn-danger" id="submitBtn1" value="확인">
 						</div>
