@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/head.jsp"></c:import> 
+<link href="/css/admin/cinema/cinemaList.css" rel="stylesheet" />
 <link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">

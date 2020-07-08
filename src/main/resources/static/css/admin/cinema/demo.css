@@ -3,11 +3,11 @@ body{font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#333;font-size:
 a{text-decoration:none}
 .row-heading{font-weight:500;font-size:.7em;text-transform:uppercase}
 .timetable .time-label{font-size:.8em;font-weight:500}
-.timetable .time-entry.3d-only{background-color:#c490f5;border:1px solid #6a16b8}
-.timetable .time-entry.3d-only:hover{background-color:#ae67f0}
+.timetable .time-entry.only-3d{background-color:#c490f5;border:1px solid #6a16b8}
+.timetable .time-entry.only-3d:hover{background-color:#ae67f0}
 
-.timetable .time-entry.4d-only{background-color:#f5d090;border:1px solid #ffb12b}
-.timetable .time-entry.4d-only:hover{background-color:#f9bb51}
+.timetable .time-entry.only-4d{background-color:#f5d090;border:1px solid #ffb12b}
+.timetable .time-entry.only-4d:hover{background-color:#f9bb51}
 
 
 .filmInfo	{

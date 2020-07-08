@@ -145,8 +145,8 @@
 									<!-- <th>CinemaNum</th> -->
 									<th>Name</th>
 									<th>seatCount</th>
-									<th>filmType</th>
-									<th>Button</th>
+									<th>FilmType</th>
+									<th>MovieTime</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -155,8 +155,8 @@
 									<!-- <th>CinemaNum</th> -->
 									<th>Name</th>
 									<th>seatCount</th>
-									<th>filmType</th>
-									<th>Button</th>
+									<th>FilmType</th>
+									<th>MovieTime</th>
 								</tr>
 							</tfoot>
 							<tbody id="accordion">
@@ -237,56 +237,6 @@
     <script src="/js/theater/timetable.js"></script>
 
     <script>
-/*     	$("#table0").click(function(){
-    		  var timetable = new Timetable();
-
-    	      timetable.setScope(9,3)
-
-    	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-    	      timetable.addEvent('Sightseeing', '월', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-    	      timetable.addEvent('test', '월', new Date(2015,7,17,9,30), new Date(2015,7,17,13,30), { url: '#' });
-    	      timetable.addEvent('Zumba', '화', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
-    	      timetable.addEvent('Zumbu', '화', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
-    	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-    	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-    	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-    	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-    	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-    	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-    	      }});
-    	      
-
-    	      var renderer = new Timetable.Renderer(timetable);
-    	      renderer.draw('#timetable0');
-    	      $(".room-timeline").css("width","100%");
-	
-        });
-
-
-    	$("#table1").click(function(){
-  		  var timetable = new Timetable();
-
-  	      timetable.setScope(9,3)
-
-  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-  	      }});
-  	      
-
-  	      var renderer = new Timetable.Renderer(timetable);
-  	      renderer.draw('#timetable1');
-  	      $(".room-timeline").css("width","100%");
-	
-      }); */
-
-
 		$(".timetable").each(function(){
 
 			var tid = $(this).attr("id");
@@ -297,33 +247,39 @@
 				var theaterNum = $("#td"+name).html();
 				console.log(theaterNum);
 			 	$.get("./theaterTime",{"theaterNum":theaterNum, "_csrf": $("#_csrf").val()},function(data){
-			 		$(".test123").html(data);
+			 		//$(".test123").html(data);
 					
 			  		  var timetable = new Timetable();
 
 			  	      timetable.setScope(7,3)
 
+			  	      
 			  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
 					
 				  	    $(data).each(function(){
-					  	    alert($(this)[12]);
-					  	    alert(typeof($(this)[12]));
-						  	   
+					  	    //alert($(this)[12]);
+					  	    //alert(typeof($(this)[12]));
+						  	
 					  	    if($(this)[12]=='4'){
 					  	    	timetable.addEvent(
 							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: '4d-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event); } });
+								
+					  	    	
 					  	    }else if($(this)[12]=='2'){
 					  	    	timetable.addEvent(
 							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: '3d-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event); } });
 						  	}else if($(this)[12]=='1'){
 						  		timetable.addEvent(
 							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]), { class: '3d-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event); }}    
+							  	);
 							}
+							
 						    
 					  	});
+
 
 			  	   /*    timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
 			  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
@@ -343,12 +299,12 @@
 					$(".time-entry").each(function(){ 
 					    var oriLeft = $(this).css("left");
 				  	    var test = (oriLeft.slice(0, oriLeft.length-2));
-						var cgLeft = (test*0.922)+'px';
+						var cgLeft = (test*0.95)+'px';
 						$(this).css("left",cgLeft);
 
 						var oriWidth = $(this).css("width");
 				  	    var wtest = (oriWidth.slice(0, oriWidth.length-2));
-						var cgWidth = (wtest*0.93)+'px';
+						var cgWidth = (wtest*0.957)+'px';
 						$(this).css("width",cgWidth);
 					});
 			  	    
@@ -373,25 +329,26 @@
 
 							  	    timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
 							  	 
+							  		
 							  	    $(data).each(function(){
-								  	   
 								  	    if($(this)[12]=='4'){
 								  	    	timetable.addEvent(
 										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: '4d-only' }
-										    );
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event); }  });
+											
+								  	    	
 								  	    }else if($(this)[12]=='2'){
 								  	    	timetable.addEvent(
 										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: '3d-only' }
-										    );
-									  	}else{
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event); }  });
+									  	}else if($(this)[12]=='1'){
 									  		timetable.addEvent(
 										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11])
-										    );
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event);
+											  	    	
+											  	        
+											  	    }});
 										}
-									    
 								  	});
 
 							  	    var renderer = new Timetable.Renderer(timetable);
@@ -402,12 +359,12 @@
 							  		$(".time-entry").each(function(){ 
 									    var oriLeft = $(this).css("left");
 								  	    var test = (oriLeft.slice(0, oriLeft.length-2));
-										var cgLeft = (test*0.922)+'px';
+										var cgLeft = (test*0.95)+'px';
 										$(this).css("left",cgLeft);
 
 										var oriWidth = $(this).css("width");
 								  	    var wtest = (oriWidth.slice(0, oriWidth.length-2));
-										var cgWidth = (wtest*0.93)+'px';
+										var cgWidth = (wtest*0.957)+'px';
 										$(this).css("width",cgWidth);
 									});
 							        
@@ -416,32 +373,24 @@
 
 				});
 				
-
-
-			   	
-	/* 	  		  var timetable = new Timetable();
-
-		  	      timetable.setScope(7,3)
-
-		  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-		  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-		  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-		  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-		  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-		  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-		  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-		  	      }});
-		  	      
-
-		  	      var renderer = new Timetable.Renderer(timetable);
-		  	      renderer.draw('#'+tid);
-		  	      $(".room-timeline").css("width","100%"); */
-			
 		      });
 			
 		    
 		});
+
+
+
+
+
+	//movie tile click alert
+	function timeAlert(event){
+		//<a href="#" data-toggle="tooltip" data-placement="right" title="Hooray!">Hover</a>
+		var s = event.startDate.toString();
+    	var startTime = s.substring(16,21);
+    	var e = event.endDate.toString();
+    	var endTime = e.substring(17,21);
+        window.alert(event.name + ' / ' + startTime  +' (' +event.location+ ')' + ' ~ ' + endTime +' (' +event.location+ ')');
+	}
     
 
   	// datepicker 초기화

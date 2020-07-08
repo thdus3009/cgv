@@ -377,7 +377,7 @@ public class AdminController {
 	//==============================
 	@GetMapping("cinema/theaterInsert")
 	public ModelAndView adminTheaterInsert(int cinemaNum) throws Exception {
-		System.out.println("cinemaNum : " + cinemaNum);
+		//System.out.println("cinemaNum : " + cinemaNum);
 		ModelAndView mv = new ModelAndView();
 		if(cinemaNum>0) {
 			//cinemaNum이 존재한다면
@@ -578,6 +578,7 @@ public class AdminController {
 		// for test
 		if(theaterVO.getNum() == 0)
 			theaterVO.setNum(1);
+		
 		
 		List<MovieInfoVO> movieInfoList = movieInfoService.movieList(pager);
 		theaterVO = theaterService.theaterSelect(theaterVO.getNum());
