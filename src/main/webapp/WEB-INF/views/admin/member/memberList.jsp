@@ -11,33 +11,36 @@
 	<c:import url="../template/header.jsp"></c:import>
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
-		
+
 		<div id="layoutSidenav_content">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 			<main>
-				<br>
-				<!-- main contents -->
-				<!-- 검색창 -->
-				<div class="input-group">
-					<select id="searchTag" name="searchTag">
-					    <option value="">검색 태그</option>
-					    <option value="id">아이디</option>
-					    <option value="name">이름</option>
-					    <option value="phone">핸드폰</option>
-					    <option value="email"></option>
-					</select>
-					
-					<input id="searchTxt" class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-					<div class="input-group-append">
-						<button id="searchBtn" class="btn btn-primary" type="button">
-							<i class="fas fa-search"></i>
-						</button>
+				<div class="container-fluid">
+					<h1>Member List</h1>
+					<p>멤버 목록</p>
+
+					<!-- 검색창 -->
+					<div class="input-group">
+						<select id="searchTag" name="searchTag" style="color: #495057; border: 1px solid #ced4da; border-right: none;">
+							<option value="">검색 태그</option>
+							<option value="id">아이디</option>
+							<option value="name">이름</option>
+							<option value="phone">핸드폰</option>
+							<option value="email">이메일</option>
+						</select> <input id="searchTxt" class="form-control" type="text"
+							placeholder="Search for..." aria-label="Search"
+							aria-describedby="basic-addon2" />
+						<div class="input-group-append">
+							<button id="searchBtn" class="btn btn-primary" type="button">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
 					</div>
-				</div>
-				
-				<!-- 테이블 -->
-				<div style="margin: 10px;">
-					<table class="table">
+					<br>
+
+					<!-- 테이블 -->
+					<table class="table table-bordered">
 						<thead class="thead-dark">
 							<tr>
 								<th>아이디</th>
@@ -59,20 +62,18 @@
 									<th>${vo.birth}</th>
 									<th>${vo.phone}</th>
 									<th>${vo.email}</th>
-									<th>
-										<c:if test="${vo.gender eq true}">남</c:if>
-										<c:if test="${vo.gender eq false}">여</c:if>
-									</th>
+									<th><c:if test="${vo.gender eq true}">남</c:if> <c:if
+											test="${vo.gender eq false}">여</c:if></th>
 									<th>${vo.age}</th>
 									<th>${vo.nick}</th>
 									<th>
 										<div id="username" class="btns">
-										<c:if test="${vo.enabled eq 1}">
-											<%-- <a class="btn btn-info updateBtn" href="./memberUpdate?username=${vo.username}">수정</a>
+											<c:if test="${vo.enabled eq 1}">
+												<%-- <a class="btn btn-info updateBtn" href="./memberUpdate?username=${vo.username}">수정</a>
 											<button id="${vo.username}" class="btn btn-danger deleteBtn" type="button">탈퇴</button> --%>
 											활성
 										</c:if>
-										<c:if test="${vo.enabled eq 0}">
+											<c:if test="${vo.enabled eq 0}">
 											탈퇴
 										</c:if>
 										</div>
@@ -81,21 +82,28 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					
+
 					<!-- pager -->
-					<div>
+					<div class="pager">
 						<ul class="pagination">
-							<c:if test="${pager.curBlock gt 1}">
-								<li class="page-item"><a class="page-link" href="./memberList?curPage=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+							<c:if test="${pager.curBlock>1}">
+								<li class="page-item"><a href="#" class="page-link"
+									title="${pager.startNum-1}">이전</a></li>
 							</c:if>
-							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-								<li class="page-item"><a class="page-link" href="./memberList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+								var="p">
+								<li class="page-item"><a href="#" class="page-link"
+									title="${p}">${p}</a></li>
 							</c:forEach>
-							<c:if test="${pager.curBlock lt pager.totalBlock}">
-								<li class="page-item"><a class="page-link" href="./memberList?curPage=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+
+							<c:if test="${pager.curBlock<pager.totalBlock}">
+								<li class="page-item"><a href="#" class="page-link"
+									title="${pager.lastNum+1}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>
+
 				</div>
 			</main>
 			<c:import url="../template/footer.jsp"></c:import>

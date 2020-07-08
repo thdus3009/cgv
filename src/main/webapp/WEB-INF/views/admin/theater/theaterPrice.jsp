@@ -82,5 +82,9 @@
 			</main>
 		</div>
 	</div>
+	
+	<!-- 스크립트 -->
+	<c:import url="../template/scripts.jsp"></c:import>
+	
 </body>
 </html>
