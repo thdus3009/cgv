@@ -14,5 +14,7 @@ public interface TimePriceRepository {
 	public int timePriceInsert(TimePriceVO timePriceVO) throws Exception;
 	
 	public List<TimePriceVO> timePriceCinemaList(int cinemaNum) throws Exception;
+	
+	public List<TimePriceVO> timePriceFilmTypeList(TimePriceVO timePriceVO) throws Exception;
 
 }

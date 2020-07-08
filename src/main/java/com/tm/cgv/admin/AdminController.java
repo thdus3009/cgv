@@ -349,6 +349,28 @@ public class AdminController {
 	
 	
 	//극장별 관람가격 (조회/수정/삭제 /삽입)
+	
+	@GetMapping("cinema/admissionPrice/update")
+	public ModelAndView admissionUpdate(TimePriceVO timePriceVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//cinemaNum으로 cinema정보 조회(cinemaTable)
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(timePriceVO.getCinemaNum());
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
+		//cinemaNum filmType으로 정보 조회(timePriceTable)
+		List<TimePriceVO> timePriceList = timePriceService.timePriceFilmTypeList(timePriceVO);
+		
+		mv.addObject("cinemaVO", cinemaVO);
+		mv.addObject("timePriceList", timePriceList);
+		mv.addObject("timePrice", "Update");
+		
+		mv.setViewName("admin/timePrice/cinemaPrice");
+		return mv;
+	}
+	
+	
 	@GetMapping("cinema/admissionPrice/selectList")
 	public ModelAndView admissionPriceSelectList(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -388,20 +410,10 @@ public class AdminController {
 			TimePriceVO timePriceVO = new TimePriceVO();
 			timePriceVO.setCinemaNum(Integer.parseInt(cinemaNum));
 			timePriceVO.setFilmType(Integer.parseInt(filmType));
-			timePriceVO.setSTime(sTime[i]);
 			timePriceVO.setETime(eTime[i]);
 			timePriceVO.setCommonPrice(Integer.parseInt(commonPrice[i]));
 			timePriceVO.setTeenagerPrice(Integer.parseInt(teenagerPrice[i]));
 
-			int type = 0;
-			if(sTime.length > 2) {
-				if(i == 0) {
-					type = 1;
-				}else if(i == sTime.length-1) {
-					type = 2;
-				}
-			}
-			timePriceVO.setType(type);
 			result = timePriceService.timePriceInsert(timePriceVO);
 		}
 		

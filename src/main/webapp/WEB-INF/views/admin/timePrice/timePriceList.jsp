@@ -62,6 +62,7 @@ button{
 
 	var timePriceList = []; 
 	var filmType = 0;
+	var cinemaNum = `${cinemaVO.num}`
 	
 	<c:forEach var="timePriceVO" items="${timePriceList}">
 		var timePriceVO = {
@@ -75,6 +76,15 @@ button{
 		timePriceList.push(timePriceVO);
 	</c:forEach>
 
+	//삭제 버튼 클릭 - 해당 필름 관람가격 전체 삭제
+	
+	//수정버튼 클릭 
+	$("#timePriceTable").on("click",".btnUpdate",function(){
+		var filmType = $(this).parent().data("filmtype");
+
+		location.href = './update?cinemaNum='+cinemaNum+'&filmType='+filmType;
+	});
+	
 
 	//테이블 생성
 	for(i=0;i<timePriceList.length;i++){
@@ -98,8 +108,8 @@ button{
 
 		var tableHTML = '<div class="filmTypeTable" data-filmType="'+ timePriceList[i].filmType +'">' 
 			+ '<h3>' + type + '</h3>'
-			+ '<button class="btn btn-primary">삭제</button>'
-			+ '<button class="btn btn-primary">수정</button>' 
+			+ '<button class="btnDel btn btn-primary">삭제</button>'
+			+ '<button class="btnUpdate btn btn-primary">수정</button>' 
 			+ '<table class="table">'
 			+ '<thead>'
 			+ '<tr>'

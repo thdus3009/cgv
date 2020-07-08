@@ -21,7 +21,7 @@
 			<main>
 				<div class="container-fluid">
 					<h1>Cinema Price</h1>
-					<p>극장별 관람가격 등록</p>
+					<p id="title">극장별 관람가격 등록</p>
 					<div id="selectDatetime" class="container tab-pane fade active show">
 					
 						<form action="./write" method="post">
@@ -33,34 +33,26 @@
 									<div style="display:flex!important;">
 										<div class="form-group" style="width: 40%;">
 											<label for="local">지역</label> 
-<!-- 											<select id="local" class="form-control"> -->
-<!-- 												<option>서울</option> -->
-<!-- 												<option>경기</option> -->
-<!-- 												<option>인천</option> -->
-<!-- 												<option>강원</option> -->
-<!-- 												<option>대전/충청</option> -->
-<!-- 												<option>대구</option> -->
-<!-- 												<option>부산,울산</option> -->
-<!-- 												<option>경상</option> -->
-<!-- 												<option>광주,전라,제주</option> -->
-<!-- 											</select> -->
-												<input type="text" value="${cinemaVO.local}" class="form-control" readonly="readonly">
-
+											<input type="text" value="${cinemaVO.local}" class="form-control" readonly="readonly">
 										</div>
 										<div class="form-group" style="width: 40%;margin-left: 10px;">
 											<label for="cinema">영화관</label> 
-<!-- 											<select id="cinema" class="form-control" name="cinemaNum"> -->
-<!-- 											</select> -->
 											<input type="text" value="${cinemaVO.name}" class="form-control" readonly="readonly">
 											<input type="hidden" name="cinemaNum" value="${cinemaVO.num}">
 										</div>
 										<div class="form-group" style="width: 20%;margin-left: 10px;">
 											<label for="screenType">종류</label> 
-											<select id="screenType" class="form-control" name="filmType">
-												<option value="1">2D</option>
-												<option value="2">3D</option>
-												<option value="4">4D</option>
-											</select>
+											
+											<c:if test="${timePrice eq 'Update'}">
+												<input type="text" id="filmType" class="form-control" name="filmType" value="" readonly="readonly">
+											</c:if>
+											<c:if test="${timePrice ne 'Update'}">
+												<select id="screenType" class="form-control" name="filmType">
+													<option value="1">2D</option>
+													<option value="2">3D</option>
+													<option value="4">4D</option>
+												</select>
+											</c:if>
 										</div>
 									</div>
 									<hr>
@@ -74,10 +66,38 @@
 											<label for="youth-price" style="width: 25%;">청소년가격</label>
 										</div>
 										<div id="underData">
+										
+										<c:if test="${timePrice eq 'Update'}">
+											<c:forEach var="timePriceVO" items="${timePriceList}">
+												<div class="underData" style="display:flex!important;">
+													<div class="form-group" style="width: 45%;">
+														<div style="display:flex!important;">
+															<input type="text" name="sTime" value="${timePriceVO.getSTime()}" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+															 ~ 
+															<input type="text" name="eTime" value="${timePriceVO.getETime()}" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+														</div>
+													</div>
+													
+													<div class="form-group" style="width: 25%;">
+														<input type="text" name="commonPrice" value="${timePriceVO.commonPrice}" class="commonPrice form-control inputbox" required="required"
+															style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+													</div>
+													
+													<div class="form-group" style="width: 25%; margin-left: 10px;">
+														<input type="text" name="teenagerPrice" value="${timePriceVO.teenagerPrice}" class="teenagerPrice form-control inputbox" required="required"
+															style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+													</div>
+													<div><button class="btn delBtn" type="button" style="width: 5%;">&nbsp;X</button></div>
+													
+												</div>
+											</c:forEach>										
+										</c:if>
+										<c:if test="${timePrice ne 'Update'}">
+											<!-- 시작값 -->
 											<div class="underData" style="display:flex!important;">
 												<div class="form-group" style="width: 45%;">
 													<div style="display:flex!important;">
-														<input type="text" name="sTime" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+														<input type="text" name="sTime" class="sTime form-control timeBox" value="06:00" readonly="readonly" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
 														 ~ 
 														<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
 													</div>
@@ -94,6 +114,54 @@
 												</div>
 												<div style="width: 5%;">&nbsp;</div>
 											</div>
+											
+											<!-- DEFAULT 값 -->
+											<div class="underData" id="default" style="display:flex!important;">
+												<div class="form-group" style="width: 45%;">
+													<div style="display:flex!important;">
+														<input type="text" name="sTime" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" style="width: 45%;  margin: 0 auto"/>
+														 ~ 
+														<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+													</div>
+												</div>
+												
+												<div class="form-group" style="width: 25%;">
+													<input type="text" name="commonPrice" class="commonPrice form-control inputbox" required="required"
+														style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+												</div>
+												
+												<div class="form-group" style="width: 25%; margin-left: 10px;">
+													<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"
+														style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+												</div>
+												<div style="width: 5%;">&nbsp;</div>
+											</div>
+											
+											<!-- 마감값 -->
+											<div class="underData" style="display:flex!important;">
+												<div class="form-group" style="width: 45%;">
+													<div style="display:flex!important;">
+														<input type="text" name="sTime" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+														 ~ 
+														<input type="text" name="eTime" class="eTime form-control timeBox" value="02:00"  style="width: 45%;  margin: 0 auto" readonly="readonly"/>
+													</div>
+												</div>
+												
+												<div class="form-group" style="width: 25%;">
+													<input type="text" name="commonPrice" class="commonPrice form-control inputbox" required="required"
+														style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+												</div>
+												
+												<div class="form-group" style="width: 25%; margin-left: 10px;">
+													<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"
+														style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+												</div>
+												<div style="width: 5%;">&nbsp;</div>
+											</div>
+										</c:if>
+											
+											
+											
 										</div>
 										
 										<div class="text-center" style="float: right; margin: 20px 0;">
@@ -113,8 +181,29 @@
 	</div>
 
 	
-
 	<script type="text/javascript">
+
+		var timePrice = `${timePrice}`;
+		var filmType = `${timePriceList[0].filmType}`;
+		console.log("a"+timePrice);
+
+		if(timePrice == 'Update'){
+			$("#title").text("극장별 관람가격 수정")
+		}
+
+		var filmTypeStr = "2D";
+		switch(filmType){
+		case 2:
+			filmTypeStr = "3D";
+			break;
+		case 4:
+			filmTypeStr = "4D";
+			break;
+		}
+		console.log(filmTypeStr)
+		$("#filmType").val(filmTypeStr);
+
+		//Update End -------------------------------------------------
 
 		//HH:MM 형식 생성
 		function inputTimeColon(time) {
@@ -134,9 +223,9 @@
 	            }
 	
 	            // 두 변수의 시간과 분을 합쳐 입력한 시간이 24시가 넘는지를 체크한다.
-	            if(hours + minute > 2400) {
+	            if(hours + minute > 2459) {
 	                alert("시간은 24시를 넘길 수 없습니다.");
-	                time.value = "24:00";
+	                time.value = "24:59";
 	                return false;
 	            }
 	
@@ -173,7 +262,7 @@
 			});
 		});
 
-		var count = 1;
+		var count = 3;
 		//하단부 정보 추가 버튼 클릭
 		$("#addUnderDataBtn").click(function(){
 			//var copyHTML = $(".underData:first").clone();
@@ -193,12 +282,11 @@
 			+ '<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"'
 			+ 'style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
 			+ '</div>'
-			+ '<div><button class="btn delBtn" type="button" style="width: 5%;">&nbsp;X</button>'
-			+ '</div>';
+			+ '<div><button class="btn delBtn" type="button" style="width: 5%;">&nbsp;X</button></div>';
 			
 			count += 1;
-			if(count <= 5){
-				$("#underData").append(html);
+			if(count <= 6){
+				$("#default").after(html);
 			}
 			
 		});
@@ -210,50 +298,7 @@
 		});
 		
 		
-		//등록 버튼 클릭
-// 		$("#submitBtn").click(function(){
-
-// 			var timeAndPriceList = [];
-// 			var cinemaNum = $("#cinema option:selected").val();
-// 			var filmType = $("#screenType option:selected").val();  //1, 2, 4
-
-// 			console.log("영화관 : "+cinema);
-// 			console.log("스크린 타입 : "+filmType);
-			
-// 			//하단부에 등록되어있는 정보 리스트로 생성
-// 			$(".underData").each(function(){
-// 				var sTime = $(this).find(".sTime").val();
-// 				var eTime = $(this).find(".eTime").val();
-// 				var commonPrice = $(this).find(".commonPrice").val();
-// 				var teenagerPrice = $(this).find(".teenagerPrice").val();
-
-// 				console.log("sTime : "+sTime);
-// 				console.log("eTime : "+eTime);
-// 				console.log("commonPrice : "+commonPrice);
-// 				console.log("teenagerPrice : "+teenagerPrice);
-
-// 				var str = {
-// 					sTime : sTime,
-// 					eTime : eTime,
-// 					commonPrice : commonPrice,
-// 					teenagerPrice : teenagerPrice
-// 				}
-// 				timeAndPriceList.push(str)
-// 			});
-// 			console.log(timeAndPriceList)
-
-// 			var data = {
-// 				cinemaNum : cinemaNum,
-// 				filmType : filmType,
-// 				timeAndPriceList : timeAndPriceList
-// 			}
-
-// 			$.ajax({
-
-
-// 				})
-			
-// 		});
+	
 
 
 		

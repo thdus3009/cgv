@@ -7,19 +7,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.timePrice.TimePriceRepository">
 	
 	<select id="timePriceSelect" parameterType="TimePriceVO" resultType="TimePriceVO">
-		select * from timePrice where cinemaNum=#{cinemaNum} and filmType=#{filmType} and time(#{time}) between sTime and eTime
+		select * from timePrice where cinemaNum = #{cinemaNum} and filmType=#{filmType} and eTime = (
+	select min(eTime) from timePrice where cinemaNum= #{cinemaNum} and filmType=#{filmType} and time(#{time}) <![CDATA[<=]]> eTime)
 	</select>
 	
 	<select id="searchLimit" parameterType="TimePriceVO" resultType="TimePriceVO">
-		select distinct sTime,eTime,type from timePrice where cinemaNum = #{cinemaNum} and type=1 or type=2 order by type
+		select min(eTime) as morning,max(eTime) as night,filmType from timePrice where cinemaNum = #{cinemaNum} group by filmType order by filmType
 	</select>
 	
 	<insert id="timePriceInsert" parameterType="TimePriceVO">
-		insert into timePrice values(0,#{cinemaNum},#{sTime},#{eTime},#{filmType},#{commonPrice},#{teenagerPrice},#{type})
+		insert into timePrice values(0,#{cinemaNum},#{eTime},#{filmType},#{commonPrice},#{teenagerPrice})
 	</insert>
 	
 	<select id="timePriceCinemaList" parameterType="Integer" resultType="TimePriceVO">
 		select * from timePrice where cinemaNum = #{cinemaNum}
+	</select>
+	
+	<select id="timePriceFilmTypeList" parameterType="TimePriceVO" resultType="TimePriceVO">
+		select * from timePrice where cinemaNum = #{cinemaNum} and filmType = #{filmType}
 	</select>
 	
 	

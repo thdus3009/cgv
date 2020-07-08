@@ -82,6 +82,7 @@
 		});
 		var sTimeList;
 		var eTimeList;
+		var timeLimitList = [];
 		
 		//해당극장의 조조,심야시간 구해오기
 		function search_time_limit(selected_cinema){
@@ -93,11 +94,19 @@
 					cinemaNum : selected_cinema
 				},
 				success : function(result){
-					sTimeList = result[0].etime.split(":");
-					eTimeList = result[1].stime.split(":");
 					
-					console.log(sTimeList)
-					console.log(eTimeList)
+					for(i=0;i<result.length;i++){
+						var list = [];
+						
+						sTime = result[i].morning.replace(/:/gi,",");
+						eTime = result[i].night.replace(/:/gi,",");
+						
+						list.push(sTime);
+						list.push(eTime);
+						
+						timeLimitList.push(list);
+					}
+					console.log(timeLimitList);
 					
 				}
 			});
@@ -177,8 +186,6 @@ function ajaxLoad(){
 						$(this).removeClass("dimmed");
 						
 						$li = $(this);
-						console.log("aaaaa>>>");
-						console.log($(this));
 						$("#movie-list-content").prepend($li);
 					}
 					
@@ -405,22 +412,51 @@ function timeMake(result){
 	//위 처럼 만드는 시간이 심야 또는 조조이면 addClass로 클래스 추가 해주면 끝 
 	$(".time-list ul li").each(function(){
 		var timeList =  $(this).data("time").split(":");
-		
+		var filmType = $(this).parent().parent().data("name");
 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>t : "+timeList)
+		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>t : "+filmType)
 		
-		if(eTimeList[0] == '00'){
-			eTimeList[0] = '24';
+		//filmType에 따라서 맞는 list의 값을 사용
+		//1, 2, 4 일대 구분 - timeLimitList(읽어온 조조/심야 시간값 존재)
+		
+		var morning;
+		var night;
+		
+		switch (filmType) {
+		case 1: 
+			morning = timeLimitList[0][0];
+			night = timeLimitList[0][1];
+			break;
+		case 2:	
+			morning = timeLimitList[0][0];
+			night = timeLimitList[0][1];
+			break;
+		case 4:
+			morning = timeLimitList[0][0];
+			night = timeLimitList[0][1];
+			break;
 		}
 		
-		var t1 = new Date(0,0,0,sTimeList[0],00); //조조
-		var t2 = new Date(0,0,0,eTimeList[0],01); //심야
+		console.log("morning"+morning)
+		console.log("night"+night)
+		morningList = morning.split(",");
+		nightList = night.split(",");
 		
+		
+		var t1 = new Date(0,0,0,morningList[0],morningList[1]); //조조
+		var t2 = new Date(0,0,0,nightList[0],nightList[1]); //심야
 		var t3 = new Date(0,0,0,timeList[0],timeList[1]); //비교시간
+		
+		console.log("조조 : "+t1);
+		console.log("심야 : "+t2)
+		console.log("비교 : "+t3)
+		
 		
 		
 		//비교시간이 10 > x || 23 < x
 		if(timeList[0] > 23){
 			//심야
+			console.log("심야=================");
 			var gap = t3.getTime() - t2.getTime();
 			var hh_gap = Math.floor(gap/1000/60/60);
 			
@@ -435,6 +471,7 @@ function timeMake(result){
 		}else if(timeList[0] < 11){
 			//조조
 			
+			console.log("조조=================");
 			var gap = t1.getTime() - t3.getTime();
 			var hh_gap = Math.floor(gap/1000/60/60);
 			if(hh_gap > 0){

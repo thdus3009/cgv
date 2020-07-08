@@ -26,5 +26,10 @@ public class TimePriceService {
 	public List<TimePriceVO> timePriceCinemaList(int cinemaNum) throws Exception{
 		return timePriceRepository.timePriceCinemaList(cinemaNum);
 	}
+	
+	public List<TimePriceVO> timePriceFilmTypeList(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceFilmTypeList(timePriceVO);
+	}
+	
 	 
 }
