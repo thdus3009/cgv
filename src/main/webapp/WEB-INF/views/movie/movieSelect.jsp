@@ -516,7 +516,8 @@ $("#ajax_ms").on("click",".date",function(){
 				//alert(data.trim());
 				alert("이미 좋아요를 누르셨습니다.");
 				}
-				
+
+
 				$.ajax({
 					type:"GET",
 					url: select1,
@@ -527,7 +528,8 @@ $("#ajax_ms").on("click",".date",function(){
 					success:function(data){
 						$("#ajax_ms").html(data);
 					}
-				}) 
+				})
+				 
 			}
 		})
 	}else{
