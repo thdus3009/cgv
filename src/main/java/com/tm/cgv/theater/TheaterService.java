@@ -253,11 +253,11 @@ public class TheaterService {
 		
 		List<String[]> totalInfo = new ArrayList<>();
 		//String [] info = new String[12];
-		// 제목 / 요일 / 년 / 월 / 일 / 시 / 분 / 년 / 월 / 일 / 시 / 분
-		// 0    1    2   3   4  5   6   7   8   9  10  11
+		// 제목 / 요일 / 년 / 월 / 일 / 시 / 분 / 년 / 월 / 일 / 시 / 분  / 필름타입
+		// 0    1    2   3   4  5   6   7   8   9  10  11    12
 		
 		for(int i=0; i<list.size(); i++) {
-			String [] info = new String[12];
+			String [] info = new String[13];
 			//영화 제목
 			String title = list.get(i).getMovieInfoVOs().getTitle();
 			info[0] = title;
@@ -338,6 +338,8 @@ public class TheaterService {
 			info[10] = endH;
 			info[11] = endM;
 	
+			info[12] = String.valueOf(list.get(i).getSelectedFilm());
+			System.out.println("FilmType : " + info[12]);
 			totalInfo.add(info);
 			
 		}

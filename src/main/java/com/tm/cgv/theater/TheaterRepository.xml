@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="screenDate" property="screenDate"/>
 		<result column="screenTime" property="screenTime"/>
 		<result column="remainSeat" property="remainSeat"/>
+		<result column="selectedFilm" property="selectedFilm"/>
 		
 		<association property="movieInfoVOs" javaType="MovieInfoVO">
 			<id column="num" property="num"/>

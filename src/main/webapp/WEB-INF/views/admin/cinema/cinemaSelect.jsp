@@ -304,11 +304,26 @@
 			  	      timetable.setScope(7,3)
 
 			  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-			  	      $(data).each(function(){
-				  	      alert($(this)[0]);
-			  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11])/* , { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } } */);
-				  	  });
+					
+				  	    $(data).each(function(){
+					  	    alert($(this)[12]);
+					  	    alert(typeof($(this)[12]));
+						  	   
+					  	    if($(this)[12]=='4'){
+					  	    	timetable.addEvent(
+							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: '4d-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+					  	    }else if($(this)[12]=='2'){
+					  	    	timetable.addEvent(
+							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: '3d-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+						  	}else if($(this)[12]=='1'){
+						  		timetable.addEvent(
+							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]), { class: '3d-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+							}
+						    
+					  	});
 
 			  	   /*    timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
 			  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
@@ -323,14 +338,21 @@
 			  	      renderer.draw('#'+tid);
 			  	      $(".room-timeline").css("width","100%");
 			  	     
-			  	    alert($(".time-entry").css("left"));
-			  	    var oriLeft = $(".time-entry").css("left");
-			  	    alert(oriLeft.length);
-			  	    var test = (oriLeft.slice(0, oriLeft.length-2));
-			  	    alert(test);
-					var cgLeft = (test*0.94)+'px';
-					alert(cgLeft);
-					$(".time-entry").css("left",cgLeft);
+			  	    //alert($(".time-entry").css("left"));
+			  	    
+					$(".time-entry").each(function(){ 
+					    var oriLeft = $(this).css("left");
+				  	    var test = (oriLeft.slice(0, oriLeft.length-2));
+						var cgLeft = (test*0.922)+'px';
+						$(this).css("left",cgLeft);
+
+						var oriWidth = $(this).css("width");
+				  	    var wtest = (oriWidth.slice(0, oriWidth.length-2));
+						var cgWidth = (wtest*0.93)+'px';
+						$(this).css("width",cgWidth);
+					});
+			  	    
+			  	 
 				}); 
 
 
@@ -344,34 +366,52 @@
 									theaterNum : $(this).attr("name"),
 									checkDate : ckDate
 								}, function(data) {
-									 var timetable = new Timetable();
+									
+									var timetable = new Timetable();
 
-							  	      timetable.setScope(7,3)
+							  	    timetable.setScope(7,3)
 
-							  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+							  	    timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+							  	 
+							  	    $(data).each(function(){
+								  	   
+								  	    if($(this)[12]=='4'){
+								  	    	timetable.addEvent(
+										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: '4d-only' }
+										    );
+								  	    }else if($(this)[12]=='2'){
+								  	    	timetable.addEvent(
+										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: '3d-only' }
+										    );
+									  	}else{
+									  		timetable.addEvent(
+										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11])
+										    );
+										}
+									    
+								  	});
 
-							  	      $(data).each(function(){
-								  	      alert($(this)[0]);
-							  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } }, { onClick: function() {
-								  	        window.alert('. This is an example of a click handler');
-								  	      }} );
-								  	  });
+							  	    var renderer = new Timetable.Renderer(timetable);
+							  	    renderer.draw('#'+tid);
+							  	    $(".room-timeline").css("width","100%");
 
-							  	      var renderer = new Timetable.Renderer(timetable);
-							  	      renderer.draw('#'+tid);
-							  	      $(".room-timeline").css("width","100%");
+							  	 
+							  		$(".time-entry").each(function(){ 
+									    var oriLeft = $(this).css("left");
+								  	    var test = (oriLeft.slice(0, oriLeft.length-2));
+										var cgLeft = (test*0.922)+'px';
+										$(this).css("left",cgLeft);
 
-							  	    alert($(".time-entry").css("left"));
-							  	    var oriLeft = $(".time-entry").css("left");
-							  	    alert(oriLeft.length);
-							  	    var test = (oriLeft.slice(0, oriLeft.length-2));
-							  	    alert(test);
-									var cgLeft = (test*0.95)+'px';
-									alert(cgLeft);
-									$(".time-entry").css("left",cgLeft);
-							  	      
+										var oriWidth = $(this).css("width");
+								  	    var wtest = (oriWidth.slice(0, oriWidth.length-2));
+										var cgWidth = (wtest*0.93)+'px';
+										$(this).css("width",cgWidth);
+									});
+							        
 							});
-
 					});
 
 				});

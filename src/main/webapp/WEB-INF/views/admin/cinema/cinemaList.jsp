@@ -5,6 +5,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<c:import url="../template/head.jsp"></c:import>
+	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
@@ -12,7 +14,7 @@
 	<link rel="stylesheet" href="/css/styles.css" />
 	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 	<link rel="stylesheet" crossorigin="anonymous" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
-	<c:import url="../template/head.jsp"></c:import>
+	
 	<title>관리자 페이지</title>
 </head>
 <body class="sb-nav-fixed">

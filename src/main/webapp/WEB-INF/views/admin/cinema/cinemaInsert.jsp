@@ -7,6 +7,11 @@
 	<meta charset="UTF-8">
 	<c:import url="../template/head.jsp"></c:import> 
 	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<style type="text/css">
+		.form-control	{
+			width:500px;
+		}
+	</style>
 </head>
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
@@ -83,7 +88,7 @@
 						  </div>
 			
 
-						  <button type="submit" class="btn btn-default">Submit</button>
+						  <button type="submit" class="round inred">등록</button>
 						</form>
 					
 						<c:if test="${path eq 'Update'}">
