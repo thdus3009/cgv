@@ -91,17 +91,17 @@
 						<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
-									<li><a href="#" class="custompager"
+									<li class="page-item"><a href="#" class="page-link"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 									var="p">
-									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+									<li class="page-item"><a href="#" class="page-link" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
+									<li class="page-item"><a href="#" class="page-link"
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>

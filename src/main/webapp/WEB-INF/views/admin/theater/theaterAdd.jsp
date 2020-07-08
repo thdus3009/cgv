@@ -7,11 +7,10 @@
 <meta charset="UTF-8">
 <link href="../../css/bbs/bbsLayout.css" rel="stylesheet" type="text/css">
 <link href="../../css/layout.css" rel="stylesheet" type="text/css">
-<link href="../../css/Admin/AdminNoticeList.css" rel="stylesheet"
-	type="text/css">
-<link href="../../css/member/memberMyPage.css" rel="stylesheet"
-	type="text/css">
+<link href="../../css/Admin/AdminNoticeList.css" rel="stylesheet" type="text/css">
+<link href="../../css/member/memberMyPage.css" rel="stylesheet" type="text/css">
 <link href="../../css/admin/theater/theaterAddMod.css" rel="stylesheet" type="text/css">
+<link href="../../css/admin/movie/movieAdd.css" rel="stylesheet" type="text/css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
