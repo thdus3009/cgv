@@ -80,6 +80,10 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리
+						</a><a class="nav-link" href="/admin/event/eventList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 이벤트 관리
 						</a>
 					</div>
 				</div>

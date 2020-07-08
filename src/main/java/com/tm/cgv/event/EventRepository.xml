@@ -3,4 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tm.cgv.event.EventRepository">
+	<select id="eventList" resultType="EventVO">
+		select * from event
+	</select>
+	
+	<insert id="eventInsert" parameterType="EventVO">
+		insert into event (category, title, startDate, endDate, contents) 
+		values (#{category}, #{title}, #{startDate}, #{endDate}, #{contents})
+	</insert>
+	
+	<select id="eventSelect" parameterType="Integer" resultType="EventVO">
+		select * from event where num=#{num}
+	</select>
+	
 </mapper>

@@ -40,6 +40,9 @@
  		<typeAlias type="com.tm.cgv.theater.TheaterVO" alias="TheaterVO"/>
  		<typeAlias type="com.tm.cgv.movieImage.MovieImageVO" alias="MovieImageVO"/>
  		<typeAlias type="com.tm.cgv.movieVideo.MovieVideoVO" alias="MovieVideoVO"/>
+ 		
+ 		<typeAlias type="com.tm.cgv.event.EventVO" alias="EventVO"/>
+ 		<typeAlias type="com.tm.cgv.eventImage.EventImageVO" alias="EventImageVO"/>
 
  	</typeAliases>
  </configuration>

@@ -1,12 +1,8 @@
 package com.tm.cgv.admin;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.event.EventService;
+import com.tm.cgv.event.EventVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -61,6 +59,9 @@ public class AdminController {
 	
 	@Autowired
 	private MovieTimeService movieTimeService;
+	
+	@Autowired
+	private EventService eventService;
 	
 	@GetMapping("/")
 	public String admin() throws Exception {
@@ -603,5 +604,53 @@ public class AdminController {
 		int result = movieTimeService.insert(movieTimeVO);
 		return result;
 	}
+	
+	
+	
+	//==============================
+	// event
+	//==============================
+	@GetMapping("event/eventList")
+	public ModelAndView eventList() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<EventVO> list = eventService.eventList();
+		
+		mv.addObject("list", list);
+		mv.setViewName("admin/event/eventList");
+		
+		return mv;
+	}
+	
+	@GetMapping("event/eventInsert")
+	public ModelAndView eventInsert(ModelAndView mv) throws Exception {
+		mv.addObject("path", "Insert");
+		mv.setViewName("admin/event/eventInsert");
+		return mv;
+	}
+	
+	@PostMapping("event/eventInsert")
+	public ModelAndView eventInsert(EventVO eventVO, List<MultipartFile> files) throws Exception{
+		System.out.println(">.<");
+		ModelAndView mv = new ModelAndView();
+		
+		int result = eventService.eventInsert(eventVO, files);
+		
+		mv.setViewName("redirect:admin/event/eventList");
+		return mv;
+	}
+	
+	@GetMapping("event/eventSelect")
+	public ModelAndView eventSelect(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		EventVO eventVO = eventService.eventSelect(num);
+		
+		mv.addObject("vo", eventVO);
+		mv.setViewName("admin/event/eventSelect");
+		
+		return mv;
+	}
+	
 
 }

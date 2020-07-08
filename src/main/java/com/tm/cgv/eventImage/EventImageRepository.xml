@@ -3,4 +3,8 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tm.cgv.eventImage.EventImageRepository">
+	<insert id="insertImage">
+		insert into eventImage (eventNum, fileName, originName, type)
+		values (#{eventNum}, #{fileName}, #{originName}, #{type})
+	</insert>
 </mapper>
