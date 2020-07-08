@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="age" column="age"/>
 		<result property="nick" column="nick"/>
 		<result property="fileName" column="fileName"/>
-		<result property="enable" column="enable"/>
+		<result property="enabled" column="enabled"/>
 		
 		<collection property="authVOs" javaType="List" ofType="AuthVO">
 			<result column="username" property="username"/>
@@ -92,4 +92,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE member SET enabled = 0 WHERE username = #{username}
 	</update>
  
+ 	<update id="memberEdit" parameterType="MemberBasicVO">
+ 		UPDATE member SET username=#{username}, password=#{password}, name=#{name},
+ 			birth=#{birth}, phone=#{phone}, email=#{email}, gender=#{gender}, age=#{age},
+ 		    nick=#{nick, jdbcType=VARCHAR}, fileName=#{fileName, jdbcType=VARCHAR}, enabled=#{enabled}
+ 		WHERE username = #{username}
+ 	</update>
 </mapper>

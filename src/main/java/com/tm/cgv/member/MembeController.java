@@ -184,7 +184,7 @@ class MemberController {
     
     @PostMapping("edit")
     @ResponseBody
-    public int memberEdit(MultipartFile[] files) throws Exception{
+    public int memberEdit(MultipartFile[] files, MemberBasicVO memberBasicVO, HttpSession session) throws Exception{
     	
     	System.out.println("edit");
     	for (MultipartFile file : files) {
@@ -193,7 +193,9 @@ class MemberController {
     		System.out.println("upload File Size : "+file.getSize());
 		}
     	
-    	return 1;
+    	System.out.println(memberBasicVO.getNick());
+    	
+    	return memberService.memberEdit(memberBasicVO, files, session);
     }
     
     // 회원탈퇴

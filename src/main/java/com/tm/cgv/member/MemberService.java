@@ -1,18 +1,26 @@
 package com.tm.cgv.member;
 
+import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tm.cgv.auth.AuthRepository;
 import com.tm.cgv.auth.AuthVO;
 import com.tm.cgv.auth.RoleEnum;
+import com.tm.cgv.movieImage.MovieImageVO;
+import com.tm.cgv.util.FileManager;
+import com.tm.cgv.util.FilePathGenerator;
 import com.tm.cgv.util.GenerateAuthNumber;
 import com.tm.cgv.util.MemberInfoMaker;
 import com.tm.cgv.util.Pager;
@@ -37,6 +45,15 @@ public class MemberService implements UserDetailsService {
 
 	@Autowired
 	RedisTemplate<String, Object> redisTemplate;
+	
+	@Autowired
+	private FilePathGenerator filePathGenerator;
+	
+	@Autowired
+	private FileManager fileManager;
+	
+	@Value("${board.member.filePath}")
+	private String filePath;
 
     @Override
     public MemberVO loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -47,6 +64,7 @@ public class MemberService implements UserDetailsService {
     	MemberBasicVO memberBasicVO = null;
 		try {
 			memberBasicVO = memberRepository.read(username);
+			System.out.println(memberBasicVO.getEnabled());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}       
@@ -148,7 +166,6 @@ public class MemberService implements UserDetailsService {
  	
  	// memberList 띄우기
  	public List<MemberBasicVO> memberList(Pager pager) throws Exception {
- 		System.out.println("asdasdas");
  		System.out.println("startNum : "+pager.getStartNum());
  		System.out.println("perpage : "+pager.getPerPage());
  		long totalNum = memberRepository.memberCount(pager);
@@ -161,5 +178,38 @@ public class MemberService implements UserDetailsService {
  	public int memberDelete(MemberBasicVO memberBasicVO) throws Exception {
  		
  		return memberRepository.memberDelete(memberBasicVO);
+ 	}
+ 	
+ 	// member 수정
+ 	public int memberEdit(MemberBasicVO memberBasicVO, MultipartFile[] files, HttpSession session) throws Exception{
+ 	
+ 		// 파일 저장
+ 		String path = FilePathGenerator.addTimePath("")+"\\";
+ 		String extendPath = FilePathGenerator.addTimePath(filePath);
+ 		File file = filePathGenerator.getUseClassPathResource(extendPath);
+ 		System.out.println(session.getServletContext().getRealPath(extendPath));
+ 		
+ 		MemberBasicVO findMemberVO = (MemberBasicVO)session.getAttribute("memberVO");
+ 		
+ 		// 기존 이미지 삭제 (defaultProfile.png가 아니라면)
+ 		if(!findMemberVO.getFileName().equals("defaultProfile.png")) {
+ 			
+ 			String fileName = findMemberVO.getFileName().substring(11);
+ 			System.out.println(fileName);
+ 			int result = fileManager.deleteFile(fileName, file);
+ 		}
+
+ 		if(files.length>0) {
+			
+ 			// 1번 들어올 for문, multipartFile[] 을 쓰는 이유는 다음번에 참고용으로 사용하기 위함
+			for (MultipartFile multipartFile : files) {
+				String fileName = fileManager.saveTransfer(multipartFile, file); //이미지 파일 저장
+				findMemberVO.setFileName(path+fileName);							
+			}
+		}
+ 		
+ 		// 테이블 수정
+ 		System.out.println(findMemberVO.toString());
+ 		return memberRepository.memberEdit(findMemberVO);
  	}
 }

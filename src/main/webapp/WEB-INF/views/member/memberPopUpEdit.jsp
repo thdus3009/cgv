@@ -33,14 +33,14 @@
 			<dt>프로필이미지</dt>
 			<dd>
 				<div class="profile-box">
-					<img id="user_image" name="user_image" alt="" src="/images/member/${sessionScope.memberVO.fileName}.png">
+					<img id="user_image" name="user_image" alt="" src="/images/member/${sessionScope.memberVO.fileName}">
 					<button type="button" id="delete_image" class="btn-del">프로필이미지 삭제</button>
 				</div>
 				<p class="img-condition">JPG, GIF, BMP 파일만 등록 가능합니다.(최대 3M)</p>
 				<!-- 위 : 다중 / 아래 : 단일     파일 전송용 -->
-				<!-- <input id="profile_upload_file" type="file" name="profile_upload_file" title="프로필사진 업로드" multiple/> -->
-				<input id="profile_upload_file" type="file" name="profile_upload_file" title="프로필사진 업로드" accept="image/*" multiple/>
-				<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<!-- <input type="file" id="profile_upload_file" name="profile_upload_file" title="프로필사진 업로드" accept="image/*" multiple/> -->
+				<input type="file" id="profile_upload_file" name="profile_upload_file" title="프로필사진 업로드" accept="image/*"/>
+				<input type="hidden" id="_csrf" value="${_csrf.token}" />
 			</dd>
 		</dl>
 	</div>
@@ -126,6 +126,7 @@
 			formData.append("files", files[i]);
 		}
 
+		formData.append("nick", $("#nick-name").val());
 		formData.append("_csrf", $("#_csrf").val());
 
 		$.ajax({
@@ -135,8 +136,11 @@
 			data: formData,
 			type: 'post',
 			success: function(result) {
-				if(result>0)
+				if(result>0) {
 					alert("수정이 완료되었습니다");
+					opener.editCallback(result);
+					window.close();
+				}
 			}
 		});
 	});

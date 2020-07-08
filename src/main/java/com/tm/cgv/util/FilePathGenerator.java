@@ -1,6 +1,8 @@
 package com.tm.cgv.util;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 
@@ -15,6 +17,7 @@ public class FilePathGenerator {
 
 	@Autowired
 	private ResourceLoader resourceLoader;
+	
 	@Autowired
 	private ServletContext servletContext;
 	
@@ -82,6 +85,12 @@ public class FilePathGenerator {
 		return file;
 	}
 
+	public static String addTimePath(String filePath) throws Exception{
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String extendPath = sdf.format(new Date());
+		return filePath + extendPath.replace("-", File.separator);
+	}
 }
 
 

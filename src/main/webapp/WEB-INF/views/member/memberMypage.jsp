@@ -43,7 +43,7 @@
 						<div class="sect-person-info">
 							<div class="box-image">
 								<span class="thumb-image"> <img alt=""
-									src="../images/myPage/default_profile.gif"> <span
+									src="/images/member/${memberVO.fileName}"> <span
 									class="profile-mask"></span>
 								</span>
 							</div>
@@ -232,6 +232,14 @@
 		$("#go_edit_page").click(function() {
 			window.open("./edit", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
 		});
+
+		//정보 수정 팝업창 callback (redirect 위함)
+		function editCallback(result) {
+
+			if(result>0) {
+				location.href="./myPage";
+			}
+		}
 
 		//자주가는 CGV 팝업창
 		/* $("#go_edit_page") .click(

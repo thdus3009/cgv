@@ -34,7 +34,7 @@ CREATE TABLE `member` (
   `age` int(11) DEFAULT NULL,
   `nick` varchar(20) DEFAULT NULL,
   `fileName` varchar(255) DEFAULT NULL,
-  `enabled` tinyint(1) default 1,
+  `enabled` int(11) default 1,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -235,7 +235,36 @@ CREATE TABLE `point` (
   PRIMARY KEY (`num`),
   INDEX `point_memberNum_FK_idx` (`memberNum` ASC) VISIBLE,
   CONSTRAINT `point_memberNum_FK` FOREIGN KEY (`memberNum`) REFERENCES `cgv`.`member` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `checkLike` (
+  `num` INT NOT NULL AUTO_INCREMENT,
+  `reservationNum` int(11) DEFAULT NULL,
+  `uid` VARCHAR(45) DEFAULT NULL,
+  `movieNum` int(11) DEFAULT NULL,
+  PRIMARY KEY (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `event` (
+  `num` INT NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(50) NULL,
+  `title` VARCHAR(50) NULL,
+  `contents` VARCHAR(200) NULL,
+  `startDate` Date NULL,
+  `endDate` Date NULL,
+  PRIMARY KEY (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `eventImage` (
+  `num` INT NOT NULL AUTO_INCREMENT,
+  `eventNum` int NULL,
+  `fileName` VARCHAR(200) NULL,
+  `originName` VARCHAR(200) NULL,
+  `type` int NULL,
+  PRIMARY KEY (`num`),
+  INDEX `eventImage_eventNum_FK_idx` (`eventNum` ASC) VISIBLE,
+  CONSTRAINT `eventImage_eventNum_FK` FOREIGN KEY (`eventNum`) REFERENCES `cgv`.`event` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- memberSQL
 
@@ -266,3 +295,13 @@ WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;m
 
 SELECT count(username) FROM member
 WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;
+
+UPDATE cgv.member SET username='user02', password='$2a$10$sItIeE21V0vZ1589W4F/4.SwCEWm8HE2XEBubnhYSk2jcwrTY1i.C', 
+name='user02', birth='1992/02/08', phone='01024856675', email='test@naver.com', gender=1, age=29, 
+nick='', fileName='f8ab7ae3-e129-44be-8068-f9bc5f1fdf15_back.jpg', enabled=1 WHERE username='user02';
+
+SELECT * FROM 
+		(SELECT * FROM member WHERE username = 'user02') M
+		LEFT OUTER JOIN 
+		(SELECT * FROM auth) A
+		ON(M.username = A.username);

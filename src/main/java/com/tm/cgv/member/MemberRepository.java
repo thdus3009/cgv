@@ -31,4 +31,7 @@ public interface MemberRepository {
 	
 	// 멤버 하나 지우기
 	public int memberDelete(MemberBasicVO memberBasicVO) throws Exception;
+	
+	// 멤버 edit
+	public int memberEdit(MemberBasicVO memberBasicVO) throws Exception;
 }

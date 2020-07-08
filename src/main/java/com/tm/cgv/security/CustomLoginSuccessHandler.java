@@ -48,9 +48,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		HttpSession session = request.getSession();
 		session.setAttribute("memberVO", memberVO.getMemberBasicVO());
 		
-		
+		// default로 "/" 경로
 		String loc = (String)request.getParameter("loc");
-	    System.out.println(loc);
 	        
 		request.setAttribute("msg", "로그인 성공");
         request.setAttribute("path",loc);
