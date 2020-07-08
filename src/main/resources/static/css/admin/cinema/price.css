@@ -97,6 +97,22 @@ main {
 	item-align: center;
 }
 
+/* search-form */
+
+.search-f{
+	display: flex;
+	padding-bottom: 10px;
+}
+
+.form-control{
+	border-radius: 0rem;
+	width: 50%;
+}
+
+.btn{
+	border-radius: 0rem;
+}
+
 /* price */
 .container-box {
 	width: 600px;
