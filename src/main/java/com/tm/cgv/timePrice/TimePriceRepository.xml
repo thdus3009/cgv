@@ -27,6 +27,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from timePrice where cinemaNum = #{cinemaNum} and filmType = #{filmType}
 	</select>
 	
+	<update id="timePriceUpdate" parameterType="TimePriceVO">
+		update timePrice set eTime=#{eTime},commonPrice=#{commonPrice},teenagerPrice=#{teenagerPrice} where num =#{num} 
+	</update>
 	
+	<delete id="timePriceDeleteSelect" parameterType="Integer">
+		delete from timePrice where num = #{num}
+	</delete>
+	
+	<delete id="timePriceDeleteFilm" parameterType="TimePriceVO">
+		delete from timePrice where cinemaNum=#{cinemaNum} and filmType=#{filmType}
+	</delete>
 	
 </mapper>
+
+
+
+
+

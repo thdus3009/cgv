@@ -31,5 +31,18 @@ public class TimePriceService {
 		return timePriceRepository.timePriceFilmTypeList(timePriceVO);
 	}
 	
+	public int timePriceUpdate(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceUpdate(timePriceVO);
+	}
+	
+	public int timePriceDeleteSelect(int num) throws Exception{
+		return timePriceRepository.timePriceDeleteSelect(num);
+	}
+	
+	public int timePriceDeleteFilm(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceDeleteFilm(timePriceVO);
+	}
+	
+ 	
 	 
 }

@@ -350,6 +350,28 @@ public class AdminController {
 	
 	//극장별 관람가격 (조회/수정/삭제 /삽입)
 	
+	@GetMapping("cinema/admissionPrice/deleteFilm")
+	public ModelAndView admissionDeleteFilm(TimePriceVO timePriceVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		int result = timePriceService.timePriceDeleteFilm(timePriceVO);
+		
+		mv.setViewName("redirect:../../cinemaSelect?num="+timePriceVO.getCinemaNum());
+		
+		return mv;
+	}
+	
+	
+	@ResponseBody
+	@GetMapping("cinema/admissionPrice/deleteSelect")
+	public int admissionDeleteSelect(int num) throws Exception{
+		int result = 0;
+		result = timePriceService.timePriceDeleteSelect(num);
+		
+		return result;
+	}
+	
+	
 	@GetMapping("cinema/admissionPrice/update")
 	public ModelAndView admissionUpdate(TimePriceVO timePriceVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -364,9 +386,37 @@ public class AdminController {
 		
 		mv.addObject("cinemaVO", cinemaVO);
 		mv.addObject("timePriceList", timePriceList);
-		mv.addObject("timePrice", "Update");
+		mv.addObject("timePrice", "update");
 		
 		mv.setViewName("admin/timePrice/cinemaPrice");
+		return mv;
+	}
+	
+	@PostMapping("cinema/admissionPrice/update")
+	public ModelAndView admissionUpdate2(String[] eTime,String[] commonPrice,String[] teenagerPrice,String[] num,String cinemaNum) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//배열로 받아와서 for문 돌려서 일일이 업데이트
+		for (int i = 0; i < eTime.length; i++) {
+			TimePriceVO timePriceVO = new TimePriceVO();
+			
+			timePriceVO.setNum(Integer.parseInt(num[i]));
+			String[] time = eTime[i].split(":");
+			int chTime = Integer.parseInt(time[0]);
+			if(chTime < 6) {
+				chTime+=24;
+			}
+			timePriceVO.setETime(chTime+":"+time[1]);
+			timePriceVO.setCommonPrice(Integer.parseInt(commonPrice[i]));
+			timePriceVO.setTeenagerPrice(Integer.parseInt(teenagerPrice[i]));
+
+			//업데이트 실행
+			
+			timePriceService.timePriceUpdate(timePriceVO);
+		}
+		
+		mv.setViewName("redirect:./selectList?num="+cinemaNum);
+		
 		return mv;
 	}
 	
@@ -397,29 +447,34 @@ public class AdminController {
 		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		
 		mv.addObject("cinemaVO", cinemaVO);
+		mv.addObject("timePrice", "write");
 		mv.setViewName("admin/timePrice/cinemaPrice");
 		return mv;
 	}
 	
 	@PostMapping("cinema/admissionPrice/write")
-	public ModelAndView admissionPriceWrite(String[] sTime,String[] eTime,String[] commonPrice,String[] teenagerPrice,String cinemaNum,String filmType) throws Exception{
+	public ModelAndView admissionPriceWrite(String[] eTime,String[] commonPrice,String[] teenagerPrice,String cinemaNum,String filmType) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = 0;
 		
-		for (int i = 0; i < sTime.length; i++) {
+		for (int i = 0; i < eTime.length; i++) {
 			TimePriceVO timePriceVO = new TimePriceVO();
 			timePriceVO.setCinemaNum(Integer.parseInt(cinemaNum));
 			timePriceVO.setFilmType(Integer.parseInt(filmType));
-			timePriceVO.setETime(eTime[i]);
+			
+			String[] time = eTime[i].split(":");
+			System.out.println("time : "+time[0]);
+			int chTime = Integer.parseInt(time[0]);
+			if(chTime < 6) {
+				chTime+=24;
+			}
+			System.out.println("chTime : "+chTime);
+			timePriceVO.setETime(chTime+":"+time[1]);
 			timePriceVO.setCommonPrice(Integer.parseInt(commonPrice[i]));
 			timePriceVO.setTeenagerPrice(Integer.parseInt(teenagerPrice[i]));
 
-			result = timePriceService.timePriceInsert(timePriceVO);
+			timePriceService.timePriceInsert(timePriceVO);
 		}
 		
-		if(result>0) {
-			
-		}
 		mv.setViewName("redirect:../cinemaSelect?num="+Integer.parseInt(cinemaNum));
 		
 		return mv;

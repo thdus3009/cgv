@@ -784,7 +784,6 @@ $("#movie-list-content").scroll(function () {
 
 	$(".movie-list .slider").css("top",height);
 	console.log(height);
-
 });
 
 		
