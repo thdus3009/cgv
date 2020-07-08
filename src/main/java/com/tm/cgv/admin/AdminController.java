@@ -446,6 +446,12 @@ public class AdminController {
 		
 		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		
+		//timePriceList-filmType group 조회
+		List<TimePriceVO> filmTypeGroup = timePriceService.timePriceCinemaGroupList(cinemaVO.getNum());
+		if(filmTypeGroup != null) {
+			mv.addObject("filmTypeGroup", filmTypeGroup);
+		}
+		
 		mv.addObject("cinemaVO", cinemaVO);
 		mv.addObject("timePrice", "write");
 		mv.setViewName("admin/timePrice/cinemaPrice");

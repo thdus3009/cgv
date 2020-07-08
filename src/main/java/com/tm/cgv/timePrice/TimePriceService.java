@@ -43,6 +43,10 @@ public class TimePriceService {
 		return timePriceRepository.timePriceDeleteFilm(timePriceVO);
 	}
 	
+	public List<TimePriceVO> timePriceCinemaGroupList(int cinemaNum) throws Exception{
+		return timePriceRepository.timePriceCinemaGroupList(cinemaNum);
+	}
+	
  	
 	 
 }

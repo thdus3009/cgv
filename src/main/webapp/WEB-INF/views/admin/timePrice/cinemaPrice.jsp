@@ -142,12 +142,38 @@
 	
 <script type="text/javascript">
 
-	//insert , update고용
+	//insert , update 공용
 	var timePrice = `${timePrice}`;
 	var filmType = `${timePriceList[0].filmType}`;
-
 	var count = 4;
 
+
+	
+	//write일때 이미 등록되어 있는 filmType 감지
+	var filmTypeGroup = `${filmTypeGroup}`;
+
+	if(filmTypeGroup != null){
+		<c:forEach var="fimTypeVO" items="${filmTypeGroup}">
+			//console.log(typeof ${fimTypeVO.filmType})
+			var groupItem = ${fimTypeVO.filmType};
+			typeMatch(groupItem);
+			
+		</c:forEach>
+	}
+
+	function typeMatch(num){
+		$("#screenType option").each(function(){
+			if($(this).val() == num){
+				$(this).remove();
+			}
+			
+		});
+	}
+	
+	
+	
+
+	
 	//HH:MM 형식 생성
 	function inputTimeColon(time) {
         // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
@@ -197,14 +223,6 @@
 	})	
 
 
-	if(timePrice == 'write'){
-
-		
-		
-	}
-	
-
-	
 	if(timePrice == 'update'){
 
 		//sTime 값 생성 및 글자 출려값 변경
@@ -262,7 +280,6 @@
 			filmTypeStr = "4D";
 			break;
 		}
-		console.log(filmTypeStr)
 		$("#filmType").val(filmTypeStr);
 
 

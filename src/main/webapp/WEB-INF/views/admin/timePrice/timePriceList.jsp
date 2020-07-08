@@ -47,7 +47,7 @@ td, th{
 					<div id="selectDatetime" class="container tab-pane fade active show">
 						<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />	
 						<div class="container">
-						<button class="btn btn-info" onclick="">추가</button>
+						<button id="btn-add" class="btn btn-info" onclick="">추가</button>
 							<h2>${cinemaVO.local} - ${cinemaVO.name}</h2>
 							<hr>
 							<div id="timePriceTable">
@@ -123,6 +123,9 @@ td, th{
 
 
 	//추가 버튼 클릭 
+	$("#btn-add").click(function(){
+		location.href="./write?num="+cinemaNum;
+	});
 		
 		
 	//삭제 버튼 클릭 - 해당 필름 관람가격 전체 삭제

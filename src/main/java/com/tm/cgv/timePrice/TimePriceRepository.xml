@@ -23,6 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from timePrice where cinemaNum = #{cinemaNum}
 	</select>
 	
+	<select id="timePriceCinemaGroupList" parameterType="Integer" resultType="TimePriceVO">
+		select filmType from timePrice where cinemaNum = #{cinemaNum} group by filmType
+	</select>
+	
 	<select id="timePriceFilmTypeList" parameterType="TimePriceVO" resultType="TimePriceVO">
 		select * from timePrice where cinemaNum = #{cinemaNum} and filmType = #{filmType}
 	</select>

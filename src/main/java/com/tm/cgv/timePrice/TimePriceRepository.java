@@ -22,4 +22,6 @@ public interface TimePriceRepository {
 	public int timePriceDeleteSelect(int num) throws Exception;
 	
 	public int timePriceDeleteFilm(TimePriceVO timePriceVO) throws Exception;
+	
+	public List<TimePriceVO> timePriceCinemaGroupList(int cinemaNum) throws Exception;
 }
