@@ -11,7 +11,7 @@
 	</select>
 
 	<insert id="movieImageInsert" parameterType="MovieImageVO" useGeneratedKeys="true" keyProperty="num">
-		insert into movieImage(num,movieNum,fileName,originName,type) values (#{num},#{movieNum},#{fileName},#{originName},#{type})
+		insert into movieImage(num,movieNum,fileName,originName,type) values (0,#{movieNum},#{fileName},#{originName},#{type})
 	</insert>
 	
 	<select id="movieImageSelect" parameterType="MovieImageVO" resultType="MovieImageVO">

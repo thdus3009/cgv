@@ -75,39 +75,72 @@ public class MovieInfoService {
 		return movieInfoRepository.movieList(pager);
 	}
 	
-	
-	public long movieWrite(MovieInfoVO movieInfoVO,MultipartFile[] files,String[] videolink) throws Exception{
+	public long movieWrite(MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
 		
-		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
+		String path = FilePathGenerator.addTimePath("")+"\\";
+		System.out.println(path+"path!!!!");
+		String extendPath = FilePathGenerator.addTimePath(filePath);
+	    File file = filePathGenerator.getUseClassPathResource(extendPath);
+	    
 		//테이블에 넣어
 		
 		long result = movieInfoRepository.movieWrite(movieInfoVO);
 		// 포스터 이미지, 트레일러 영상 이미지들
-		for(MultipartFile file2:files) {
-			if(file2.getSize()>0) {
-				String fileName = fileManager.saveTransfer(file2, file);//이미지 파일, 경로
-				MovieImageVO movieImageVO = new MovieImageVO();
-				movieImageVO.setMovieNum(movieInfoVO.getNum());
-				movieImageVO.setFileName(fileName);
-				movieImageVO.setOriginName(file2.getOriginalFilename());						
-				
-				//movieImage테이블에 삽입
-				result = movieImageRepository.movieImageInsert(movieImageVO);
-			}
-		}
-		//트레일러 영상 링크
-		for(int i=0;i<videolink.length;i++) {
-			if(videolink!=null) {
+		System.out.println("======================================");
+		System.out.println("size : "+files.size());
+		
+		if(files.size()==0)
+			return 0;
+		
+		// ======공통작업=====
+		MovieImageVO movieImageVO = new MovieImageVO();
+		movieImageVO.setMovieNum(movieInfoVO.getNum());
+
+		// ========썸네일 관련 작업========
+		MultipartFile tmp = files.remove(0);
+		System.out.println(tmp.getOriginalFilename());
+		
+		String fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+		movieImageVO.setType(1);//썸네일1개는 무조건 1
+		movieImageVO.setFileName(path+fileName);
+		movieImageVO.setOriginName(tmp.getOriginalFilename());
+		result = movieImageRepository.movieImageInsert(movieImageVO);
+		
+		System.out.println("tCnt : "+trailerCount);
+		
+		// =======트레일러========
+		for(int i=0; i<trailerCount; i++) {
+			
+			tmp = files.remove(0);
+			System.out.println(tmp.getOriginalFilename());
+
+			fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+			movieImageVO.setType(2);//트레일러는 2번
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
+			
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
-			//movieVideoVO.setMovieImageNum(); 이미지의 num이 들어와야함
-			//movieVideoVO.setMovieNum(movieInfoVO.getNum());
+			
+			movieVideoVO.setMovieImageNum(movieImageVO.getNum()); //이미지의 num이 들어와야함
 			movieVideoVO.setVideolink(videolink[i]);
-				
 			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
-		
-			}
 		}
 		
+		
+		// ==========스틸컷=========
+		for(int i=0; i<steelCutCount; i++) {
+			
+			tmp = files.remove(0);
+			System.out.println(tmp.getOriginalFilename());
+			
+			fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+			movieImageVO.setType(3);//스틸컷은 3번
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
+		}
+		System.out.println("======================================");
 		return result;
 	}
 	
@@ -316,5 +349,7 @@ public class MovieInfoService {
 		long result= movieInfoRepository.movieDelete(movieInfoVO);
 		return result;
 	}
+	
+	
 	
 }

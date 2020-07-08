@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		and title like concat('%',#{search},'%') order by
  		<choose>
 			<when test="kind == 'date'">
-				openDate desc
+				openDate asc,createAt desc
 				
 			</when>
 			<when test="kind == 'title'">

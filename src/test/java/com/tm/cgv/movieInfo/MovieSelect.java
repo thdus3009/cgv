@@ -52,7 +52,7 @@ class MovieSelect {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void video() throws Exception{
 		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
 		//테이블에 넣어
@@ -72,11 +72,11 @@ class MovieSelect {
 				result = movieImageRepository.movieImageInsert(movieImageVO);
 			}
 			if (result>0) {
-				int num = movieImageRepository.movieGet();
+				//int num = movieImageRepository.movieGet();
 				
 				if(videolink[i]!=null) {
 				MovieVideoVO movieVideoVO = new MovieVideoVO();
-				movieVideoVO.setMovieImageNum(num);
+				//movieVideoVO.setMovieImageNum(num);
 				movieVideoVO.setVideolink(videolink[i]);
 					
 				result = movieVideoRepository.movieVideoInsert(movieVideoVO);

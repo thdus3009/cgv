@@ -28,7 +28,7 @@
 					<div class="box-image"  >
 					<a href="">
 						<span class="thumb-image">
-							<img  class="box-image" alt="" src="../../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
+							<img  class="box-image" alt="" src="../../images/movie/movieList/filmCover/${vo.movieImageVOs[0].fileName}">
 							<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 						</span>
 					</a>

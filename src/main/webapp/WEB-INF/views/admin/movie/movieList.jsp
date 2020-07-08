@@ -84,7 +84,7 @@
 						<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock gt 1}">
-									<li><a href="#" class="custompager"
+									<li><a href="./movieList?curPage=${pager.startNum-1}&kind=${pager.kind}" class="custompager"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
@@ -94,7 +94,7 @@
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
+									<li><a href="./movieList?curPage=${pager.lastNum+1}&kind=${pager.kind}" class="custompager"
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>

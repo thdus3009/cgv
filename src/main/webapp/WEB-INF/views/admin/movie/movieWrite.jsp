@@ -42,7 +42,8 @@
 										<form action="./movie${path}" method="post" enctype="multipart/form-data">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<fieldset>
-
+												<input type="hidden" id="trailerCount" value="0" name="trailerCount"><!-- 카운트 값이 들어옴 -->
+												<input type="hidden" id="steelCutCount" value="0" name="steelCutCount">
 												<div class="tbl_write">
 
 													<input type="hidden" value="${vo.movieImageVOs.num}"
@@ -59,7 +60,7 @@
 															<col style="width: 320px;">
 														</colgroup>
 														<tbody>
-
+															
 					
 															<div class="form-group">
 																<label for="files">타이틀 이미지:</label> <input type="file"
@@ -89,6 +90,8 @@
 																</div>
 															</div>
 															</div>
+															
+															
 																
 															<div class="form-group" >
 																<label for="title" >제목:</label> <input type="text"
@@ -130,6 +133,16 @@
 																	class="form-control check" id="country" name="country"
 																	value="${vo.country }">
 															</div>
+															
+															<div class="form-group" style="width: 650px; " >
+																<label for="files">스틸컷</label> <br>
+																<img alt="" src="../../images/theater/plus.png" 
+																style="width: 20px; height: 20px;" id="addS"> 
+																<div class="form-group" id="st">
+																
+																</div>
+															</div>
+															
 															<div class="form-group">
 																<label for="openDate">개봉일:</label> <input type="date"
 																	class="form-control check" id="openDate" name="openDate"
@@ -213,10 +226,17 @@
 
 	var num=0;
 	var count =1;
+	var tcount =0;
+	var trailerCount = $("#trailerCount").val();
 	
 	var num2=0;
 	var count2=1;
-	
+
+	var numS =0;
+	var countS=1;
+	var scount =0;
+	var steelCutCount = $("#steelCutCount").val();
+	//트레일러 이미지
 	$("#addI").click(function(){
 		if(num<3){
 			$("#f").append('<div><input type="file" multiple="multiple" style="width: 100%; float:left; "'+
@@ -224,12 +244,18 @@
 					'<span class="x"style="float: left;" >X</span></div>');
 			num++;
 			count++;
+			
+			tcount = count-1; //트레일러 이미지 type을 위해 count하는 값
+			trailerCount=tcount;
+		
+			$("#trailerCount").val(trailerCount);
+			
 			}else{
 				alert("최대 3개까지 가능합니다.")
 			}
 		
 		});	
-
+	//트레일러 영상 링크
 	$("#addV").click(function(){
 		if(num2<3){
 			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
@@ -243,6 +269,25 @@
 		
 		});	
 
+	// 스틸컷 이미지
+	$("#addS").click(function(){
+		if(numS<5){
+			$("#st").append('<div><input type="file" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="스틸컷 이미지 " name="files"'+
+					'style=" width: 1500px;"> <span class="xS">X</span></div>');
+			numS++;
+			countS++;
+
+			scount = countS-1;
+			steelCutCount=scount;
+			$("#steelCutCount").val(steelCutCount);
+			
+			}else{
+				alert("최대 5개까지 가능합니다.")
+				}
+		
+		});
+	
  	$("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
 		$(this).parent().remove();
 		num--;
@@ -254,6 +299,12 @@
 		num2--;
 
 		});
+	$("#st").on("click",".xS",function(){
+		$(this).parent().remove();
+		numS--;
+		});
+
+	
 	</script>
 	
 </body>

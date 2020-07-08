@@ -106,6 +106,7 @@ public class AdminController {
 	
 	@GetMapping("movie/movieWrite")
 	public ModelAndView movieWrite(ModelAndView mv)throws Exception{
+
 		mv.addObject("vo",new MovieInfoVO());
 		mv.addObject("path","Write");
 		mv.setViewName("admin/movie/movieWrite");
@@ -113,12 +114,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieWrite")
-	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile[] files,String[] videolink) throws Exception{
+	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
 		int num = movieInfoVO.getNum();
 		System.out.println("num : " + num);
 		
-		
-		long result = movieInfoService.movieWrite(movieInfoVO, files,videolink);
+		long result = movieInfoService.movieWrite(movieInfoVO, files,videolink,trailerCount,steelCutCount);
 		if(result>0) {
 			mv.setViewName("redirect:./movieList?kind=date");
 		}else {
@@ -129,11 +129,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("movie/movieSelect")
-	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO,MovieImageVO movieImageVO) throws Exception{
+	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO,MovieImageVO movieImageVO,int num) throws Exception{
 		System.out.println(movieInfoVO.getNum()+"con 무비넘");
 		reservationVO.setMovieNum(movieInfoVO.getNum());// 파라미터가 num인데 reservation에는 movieNum이 영화번호이니까
 														// 영화번호에 num을 넣어줘야지 제대로 돌아감
-		
+		movieImageVO.setMovieNum(num);
+		System.out.println(movieImageVO.getMovieNum()+"con num2");
 		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");

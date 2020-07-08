@@ -135,12 +135,12 @@ public class MovieInfoController {
 	}
 	
 	@PostMapping("movieWrite")
-	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile[] files,String[] videolink) throws Exception{
+	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
 		int num = movieInfoVO.getNum();
 		System.out.println("num : " + num);
 		
 		
-		long result = movieInfoService.movieWrite(movieInfoVO, files,videolink);
+		long result = movieInfoService.movieWrite(movieInfoVO, files,videolink,trailerCount,steelCutCount);
 		if(result>0) {
 			mv.setViewName("redirect:movieList");
 		}else {

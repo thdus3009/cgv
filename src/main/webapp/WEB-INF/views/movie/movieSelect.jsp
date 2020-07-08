@@ -219,7 +219,7 @@
 								<a href="">
 									<strong class="title">
 										<span class="ico-trailer hd">HD</span>
-										메인 예고편 영상
+										예고편 영상
 									</strong>
 								</a>
 								
@@ -238,6 +238,23 @@
 								21건
 							</span>
 						</div>
+						<c:forEach var="ar" items="${ar}">
+						<ul>
+							<li>
+							<div class="box-image">
+								<img alt="스틸컷" src="../images/movie/movieList/filmCover/${ar.fileName}" class="box-image">
+							</div>
+							<div class="box-contents">
+								<a href="">
+									<strong class="title">
+										스틸컷
+									</strong>
+								</a>
+								
+							</div>
+							</li>
+						</ul>
+						</c:forEach>
 						
 						<div class="slider-wrap">
 						
