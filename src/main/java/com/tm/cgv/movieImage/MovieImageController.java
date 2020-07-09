@@ -16,8 +16,9 @@ public class MovieImageController {
 	@PostMapping("movieImageDelete")
 	@ResponseBody
 	public int movieImageDelete(MovieImageVO movieImageVO)throws Exception{
-		int result = movieImageService.movieImageDelete(movieImageVO);//null
-		System.out.println(result+"result controller");
+		System.out.println(movieImageVO.getNum());
+		int result = movieImageService.movieImageDelete(movieImageVO);
+		System.out.println(result+"result controller");//x
 		return result;
 	}
 	

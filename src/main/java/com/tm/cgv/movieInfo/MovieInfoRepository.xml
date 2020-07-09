@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		
  		
  		<collection property="movieImageVOs" javaType="List" ofType="MovieImageVO">
- 			<id column="num" property="num"/>
+ 			<id column="imageNum" property="num"/>
  			<result column="movieNum" property="movieNum"/>
  			<result column="fileName" property="fileName"/>
  			<result column="originName" property="originName"/>
@@ -34,36 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</collection>
  	</resultMap>
  	
- 	<!-- <resultMap type="MovieInfoVO" id="movieJoin">
- 		<id column="num" property="num"/>
- 		<result column="title" property="title"/>
- 		<result column="titleEng" property="titleEng"/>
- 		<result column="runtime" property="runtime"/>
- 		<result column="director" property="director"/>
- 		<result column="actor" property="actor"/>
- 		<result column="ganre" property="ganre"/>
- 		<result column="ageLimit" property="ageLimit"/>
- 		<result column="country" property="country"/>
- 		<result column="openDate" property="openDate"/>
- 		<result column="contents" property="contents"/>
- 		<result column="visitor" property="visitor"/>
- 		<result column="rate" property="rate"/>
- 		<result column="errRate" property="errRate"/>
- 		<result column="createAt" property="createAt"/>
- 		
- 		<collection property="movieImageVOs" javaType="List" ofType="MovieImageVO">
- 			<id column="imageNum" property="num"/>
- 			<result column="movieNum" property="movieNum"/>
- 			<result column="fileName" property="fileName"/>
- 			<result column="originName" property="originName"/>
- 		</collection>
- 		
- 		 <collection property="movieVideoVOs" javaType="List" ofType="MovieVideoVO">
- 			<id column="videoNum" property="num"/>
- 			<result column="movieNum" property="movieNum"/>
- 			<result column="videolink" property="videolink"/>
- 		</collection>  
- 	</resultMap> -->
+ 	
  	
  	<resultMap type="MovieImageVO" id="IVjoin">
  		<id column="num" property="num"/>
@@ -151,26 +122,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	values(#{num},#{title},#{titleEng},#{runtime},#{director},#{actor},#{ganre},#{ageLimit},#{country},#{openDate},#{contents},0,0.0,100.0,#{createAt})
  	 </insert>
  	 <!-- =========================================================================== -->
- 	 <!-- <select id="movieSelect" parameterType="MovieInfoVO" resultMap="movieJoin">
-		select * from 
-		(select * from 
-		(select * from movieInfo) MI
-		join 
-		(select num as imageNum,fileName,originName,movieNum from movieImage) ME
-		on (MI.num = ME.movieNum)) A
-		join
-		(select num as videoNum,movieNum,videolink  from movieVideo) MV
-		on(A.num = MV.movieNum)
-		where A.num=#{num} and deleteAt is null;
- 	 </select> -->
  	 
  	 <!-- 정보랑 사진 -->
  	 <select id="mSelect" parameterType="MovieInfoVO" resultMap="listResult">
- 	 	select MM.*,MK.fileName,MK.originName,MK.movieNum,MK.type from
+ 	 	select MM.*,MK.* from
 		(select * from movieInfo where deleteAt is null) as MM
-		left join movieImage as MK
+		left join 
+		(select num as imageNum,fileName,movieNum,originName,type from movieImage) as MK
 		on(MM.num=MK.movieNum)
-		where MK.type=1 and MM.num=${num};
+		where MK.type=1 and MM.num=${num}
  	 </select>
  	 <!-- 사진이랑 영상 링크 -->
  	 <select id="mSelect2" parameterType="MovieImageVO" resultMap="IVjoin">
@@ -178,9 +138,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select * from movieImage )  as MI
 		left join movieVideo as MV
 		on(MI.num=MV.movieImageNum)
-		where MI.movieNum=#{movieNum} and type != 1; 
+		where MI.movieNum=#{movieNum} and type != 1
  	 </select>
  	 
+ 	
  	 <!-- =========================================================================== -->
  	<update id="movieUpdate" parameterType="MovieInfoVO">
  		update movieInfo set title=#{title},titleEng=#{titleEng},runtime=#{runtime},director=#{director},actor=#{actor},ganre=#{ganre},ageLimit=#{ageLimit},

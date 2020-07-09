@@ -36,8 +36,13 @@ public class MovieImageService {
 	public int movieImageDelete(MovieImageVO movieImageVO)throws Exception{
 		File dest = filePathGenerator.getUseClassPathResource(filePath);
 		
+		System.out.println(dest+" : 경로");
+		System.out.println(movieImageVO.getNum()+"서비스 num");
+		System.out.println(movieImageVO.getFileName()+"서비스 fileName");
+		
 		int result = fileManager.deleteFile(movieImageVO.getFileName(),dest);
 		
+		System.out.println(result+"서비스 result");
 		if(result>0) {
 			result = movieImageRepository.movieImageDelete(movieImageVO);
 			System.out.println(result+"result service");

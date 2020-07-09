@@ -74,7 +74,7 @@
 																<label for="files">img:</label> 
 																<img alt="" src="../../images/theater/plus.png" 
 																style="width: 20px; height: 20px;" id="addI"> 
-																<div class="form-group" id="f">
+																<div class="form-group"  id="f">
 																	
 																</div>
 															</div>

@@ -207,7 +207,9 @@
 							<h4>트레일러</h4>
 							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
 						</div>
+						
 						<c:forEach var="ar" items="${ar}">
+						<c:if test="${ar.type eq 2 }">
 						<ul>
 							<li>
 							<div class="box-image">
@@ -226,7 +228,9 @@
 							</div>
 							</li>
 						</ul>
+						</c:if>
 						</c:forEach>
+						
 					</div>
 					<!-- 여기까지가 트레일러 -->
 					
@@ -239,6 +243,7 @@
 							</span>
 						</div>
 						<c:forEach var="ar" items="${ar}">
+						<c:if test="${ar.type eq 3 }">
 						<ul>
 							<li>
 							<div class="box-image">
@@ -246,14 +251,13 @@
 							</div>
 							<div class="box-contents">
 								<a href="">
-									<strong class="title">
-										스틸컷
-									</strong>
+									
 								</a>
 								
 							</div>
 							</li>
 						</ul>
+						</c:if>
 						</c:forEach>
 						
 						<div class="slider-wrap">

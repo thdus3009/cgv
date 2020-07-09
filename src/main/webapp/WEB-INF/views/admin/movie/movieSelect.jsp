@@ -103,10 +103,10 @@
 					<div class="bbs_btn">
 						
 									
-							<c:if test="${bbsVO.writer eq memberVO.id }">
+						
 								<a href="./movieDelete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
 								<a href="./movieUpdate?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
-							</c:if>
+							
 									
 					</div>	
 				</div>

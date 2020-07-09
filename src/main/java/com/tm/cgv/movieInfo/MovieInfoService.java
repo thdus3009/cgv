@@ -98,8 +98,9 @@ public class MovieInfoService {
 
 		// ========썸네일 관련 작업========
 		MultipartFile tmp = files.remove(0);
-		System.out.println(tmp.getOriginalFilename());
+		System.out.println(tmp.getOriginalFilename()+"썸네일");
 		
+		fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
 		String fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
 		movieImageVO.setType(1);//썸네일1개는 무조건 1
 		movieImageVO.setFileName(path+fileName);
@@ -112,7 +113,7 @@ public class MovieInfoService {
 		for(int i=0; i<trailerCount; i++) {
 			
 			tmp = files.remove(0);
-			System.out.println(tmp.getOriginalFilename());
+			System.out.println(tmp.getOriginalFilename()+"트레일러");
 
 			fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
 			movieImageVO.setType(2);//트레일러는 2번
@@ -132,7 +133,7 @@ public class MovieInfoService {
 		for(int i=0; i<steelCutCount; i++) {
 			
 			tmp = files.remove(0);
-			System.out.println(tmp.getOriginalFilename());
+			System.out.println(tmp.getOriginalFilename()+"스틸컷");
 			
 			fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
 			movieImageVO.setType(3);//스틸컷은 3번
@@ -303,41 +304,63 @@ public class MovieInfoService {
 		
 	}
 	
-	public long movieUpdate(MovieInfoVO movieInfoVO,MultipartFile files, String videolink)throws Exception{
-		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
+	public long movieUpdate(MovieInfoVO movieInfoVO,List<MultipartFile> files, String[] videolink,int trailerCount,int steelCutCount)throws Exception{
+		String path = FilePathGenerator.addTimePath("")+"\\";
+		System.out.println(path+"path!!!!");
+		String extendPath = FilePathGenerator.addTimePath(filePath);
+	    File file = filePathGenerator.getUseClassPathResource(extendPath);
 		
 		long result = movieInfoRepository.movieUpdate(movieInfoVO);
 		
-		System.out.println("qqq?????" + movieInfoVO.getNum());
+		System.out.println("Update getNum : " + movieInfoVO.getNum());
 		
-		if(files !=null) {
-			System.out.println("updateIn");
-			if(files.getSize()>0) {
-				String fileName = fileManager.saveTransfer(files, file);//파일, 경로
-				MovieImageVO movieImageVO = new MovieImageVO();
-				System.out.println(movieInfoVO.getNum()+"?????");
-				
-				movieImageVO.setMovieNum(movieInfoVO.getNum());
-				movieImageVO.setFileName(fileName);
-				movieImageVO.setOriginName(files.getOriginalFilename());
-				//movieImage테이블에 삽입
-				result = movieImageRepository.movieImageInsert(movieImageVO);
-			}
+		if(files.size()==0) {
+			return 0;
 		}
 		
-		System.out.println("링크값 : "+videolink);	
-		//같으면 업데이트x
-		//다르면 업데이트를 하고
-		String same = videolink;
+		//공통작업
+		MovieImageVO movieImageVO = new MovieImageVO();
+		movieImageVO.setMovieNum(movieInfoVO.getNum());
 		
-		if(videolink!=null ) {
+		//썸네일 관련 작업
+		MultipartFile tmp = files.remove(0);
+		fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
+		String fileName = fileManager.saveTransfer(tmp, file);
+		movieImageVO.setType(1);
+		movieImageVO.setFileName(path+fileName);
+		movieImageVO.setOriginName(tmp.getOriginalFilename());
+		result = movieImageRepository.movieImageInsert(movieImageVO);
+		
+		//트레일러
+		
+		System.out.println(trailerCount+"tcount");
+		for(int i=0;i<trailerCount;i++) {
+			tmp = files.remove(0);
+			
+			fileName = fileManager.saveTransfer(tmp, file);
+			movieImageVO.setType(2);
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
+			
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
+			movieVideoVO.setMovieImageNum(movieImageVO.getNum());
+			movieVideoVO.setVideolink(videolink[i]);
+			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
 			
-				//movieVideoVO.setMovieNum(movieInfoVO.getNum());
-				movieVideoVO.setVideolink(videolink);
-								
-				result = movieVideoRepository.movieVideoUpdate(movieVideoVO);
+		}
+		
+		//스틸컷
+		
+		System.out.println(steelCutCount+"scount");
+		for(int  i=0;i<steelCutCount;i++) {
+			tmp = files.remove(0);
 			
+			fileName = fileManager.saveTransfer(tmp, file);
+			movieImageVO.setType(3);
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
 			
 		}
 		

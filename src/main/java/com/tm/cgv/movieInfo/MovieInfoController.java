@@ -195,7 +195,7 @@ public class MovieInfoController {
 		mv.setViewName("movie/movieSelect");
 		return mv;
 	}
-	
+	/*
 	@GetMapping("movieUpdate")
 	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO)throws Exception{
 		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO,reservationVO,movieImageVO);
@@ -215,7 +215,7 @@ public class MovieInfoController {
 		mv.setViewName("redirect:./movieList");
 		
 		return mv;
-	}
+	}*/
 	
 	@GetMapping("movieDelete")
 	public ModelAndView movieDelete(ModelAndView mv,MovieInfoVO movieInfoVO) throws Exception{

@@ -169,16 +169,20 @@ public class AdminController {
 	}
 	
 	@GetMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO) throws Exception{
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO,int num) throws Exception{
 		reservationVO.setMovieNum(movieInfoVO.getNum());
-		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
+		movieImageVO.setMovieNum(num);
 		
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
 		
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:./error/404");
 		}
-		System.out.println(map.get(0)+"뭐가 나와");
+	
+		MovieInfoVO tmp = (MovieInfoVO)map.get("vo");//.movieImageVOs[0].num
+		System.out.println("라라라라라 : "+tmp.getMovieImageVOs().get(0).getNum());
 		mv.addObject("vo",map.get("vo"));
+		mv.addObject("ar",map.get("ar"));
 		mv.addObject("path","Update");
 		mv.setViewName("admin/movie/movieUpdate");
 		
@@ -186,8 +190,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
-		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount);
 		
 		mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		return mv;
@@ -195,7 +199,9 @@ public class AdminController {
 	
 	@GetMapping("movie/movieDelete")
 	public ModelAndView movieDelete(ModelAndView mv, MovieInfoVO movieInfoVO) throws Exception{
+		System.out.println(movieInfoVO.getNum()+"delete");
 		long result = movieInfoService.movieDelete(movieInfoVO);
+		System.out.println(movieInfoVO.getNum()+"delete2");
 		mv.setViewName("redirect:./movieList?kind=date");
 		return mv;
 	}
