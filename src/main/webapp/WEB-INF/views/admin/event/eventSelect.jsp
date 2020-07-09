@@ -174,24 +174,39 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>${cine.name}</h1>
-					<!--  <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"><a href="#">서울</li></a>
-                            <li class="breadcrumb-item active">경기</li>
-                            <li class="breadcrumb-item active">인천</li>
-                            <li class="breadcrumb-item active">강원</li>
-                            <li class="breadcrumb-item active">대전/충청</li>
-                            <li class="breadcrumb-item active">대구</li>
-                            <li class="breadcrumb-item active">부산/울산</li>
-                            <li class="breadcrumb-item active">경상</li>
-                            <li class="breadcrumb-item active">광주/전라/제주</li>
-                        </ol> -->
+					<h1>Event Info</h1>
+					<div class="" style="float:right; margin-top:-50px;">
+						<a href="./eventUpdate?num=${vo.num}" id="up" class="btn btn-primary">Update</a>
+                    	<span id="de" class="btn btn-danger">Delete</span>
+                    </div>
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr class="admin-tr">
+								<th style="width:200px">${vo.num}</th>
+								<th style="width:200px">${vo.category}</th>
+								<th>${vo.title}</th>
+								<th style="width:200px">시작일 : ${vo.startDate}</th>
+								<th style="width:200px">종료일 : ${vo.endDate}</th>
+							</tr>
+						</thead>
+					</table>
+                        
+                     
 					<div class="card mb-4">
 						<div class="card-body">
-							<p class="mb-0">
-								<code>Event Info</code>
-								<br>분류 : <span>${vo.category}</span><br>제목 : <span>${vo.title}</span><br>
-								시작일 : <span>${vo.startDate}</span><br> 종료일 : <span>${vo.endDate}</span><br>
+							<p class="mb-0" style="display:inline-block; width:50%; float:left;">
+								<code>배너 이미지</code><br>
+								<span style="width:100%"><img src="/images/event/eventList/eventImage/${vo.eventImageVOs[0].fileName}"/></span>
+								<br>
+								<br>
+								<code>이벤트 상세 내용</code><br>
+								<span>${vo.contents}</span>
+								
+							
+							</p>
+							<p class="mb-0" style="display:inline-block; width:50%; float:left;">
+								<code>콘텐츠 이미지</code><br>
+								<span><img src="/images/event/eventList/eventImage/${vo.eventImageVOs[1].fileName}" style="width:100%"/></span>
 							
 							</p>
 						</div>

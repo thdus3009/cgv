@@ -11,4 +11,6 @@ public interface EventRepository {
 	public int eventInsert(EventVO eventVO) throws Exception;
 	
 	public EventVO eventSelect(int num) throws Exception;
+	
+	public int eventUpdate(EventVO eventVO) throws Exception;
 }

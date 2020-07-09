@@ -18,6 +18,8 @@ import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.event.EventService;
 import com.tm.cgv.event.EventVO;
+import com.tm.cgv.eventImage.EventImageService;
+import com.tm.cgv.eventImage.EventImageVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -62,6 +64,10 @@ public class AdminController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private EventImageService eventImageService;
+	
 	
 	@GetMapping("/")
 	public String admin() throws Exception {
@@ -652,5 +658,37 @@ public class AdminController {
 		return mv;
 	}
 	
+	@GetMapping("event/eventUpdate")
+	public ModelAndView eventUpdate(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("tttttttest");
+		EventVO eventVO = eventService.eventSelect(num);
+		
+		mv.addObject("vo", eventVO);
+		mv.addObject("path", "Update");
+		mv.setViewName("admin/event/eventInsert");
+		return mv;
+	}
 
+	@PostMapping("event/eventUpdate")
+	public ModelAndView eventUpdate(EventVO eventVO, List<MultipartFile> files, String type) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(files.size());
+		System.out.println("type : " + type);
+		eventService.eventUpdate(eventVO, files, type);
+		mv.setViewName("redirect:admin/event/eventList");
+		return mv;
+	}
+	
+	@GetMapping("event/fileDelete")
+	@ResponseBody
+	public int fileDelete(EventImageVO eventImageVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("ㅠ.ㅠ");
+		System.out.println(eventImageVO.getNum());
+		System.out.println(eventImageVO.getFileName());
+		int result = eventImageService.fileDelete(eventImageVO);
+		System.out.println(result);
+		return result;
+	}
 }

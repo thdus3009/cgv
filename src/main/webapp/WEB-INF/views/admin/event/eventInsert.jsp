@@ -23,6 +23,15 @@
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
 
+<style type="text/css">
+	.minus	{
+		width:16px;
+		height:16px;
+		margin-left:7px;
+	}
+	
+
+</style>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -126,12 +135,14 @@
 										</div>
 
 										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-										<form action="./event${path}" method="post" enctype="multipart/form-data">
+										<form action="./event${path}" method="post" enctype="multipart/form-data" id="fo">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+										<c:if test="${path eq 'Update'}">
+											<input type="hidden" name="num" value="${vo.num}"> 
+										</c:if>
 											<fieldset>
 
 												<div class="tbl_write">
-
 													<!-- imgaeVO의 AI인 num -->
 													<%-- <input type="hidden" value="${vo.num}" name="num"> 
 													<input type="hidden" value="${vo.movieImageVOs.fileName}" id="fileName"> --%>
@@ -142,15 +153,8 @@
 															<col style="width: 320px;">
 														</colgroup>
 														<tbody>
-
-															<c:if test="${path  eq 'Update'}">
-																<p>${vo.movieImageVOs.originName}<i id="${vo.num}"
-																		class="glyphicon glyphicon-remove remove fileDelete"></i>
-																</p>
-															</c:if>
 															<div class="form-group">
 														   	 <label for="local">분류:</label>
-														   	 <%-- <input type="text" class="form-control" id="local" name="local" value="${vo.local}"> --%>
 														   	 <select class="" id="" name="category">
 														   	 	<option value="스페셜이벤트">스페셜이벤트</option>
 														   	 	<option value="제휴/할인">제휴/할인</option>
@@ -162,19 +166,57 @@
 
 															<div class="form-group">
 																<label for="title">제목:</label>
-																<input type="text" class="form-control" id="title" name="title" value="${vo.title }">
+																<input type="text" class="form-control" id="title" name="title" value="${vo.title}">
 															</div>
 															
 															<div class="form-group">
-																<label for="files">배너 이미지:</label> <input type="file"
-																	class="form-control files" id="files"
-																	placeholder="타이틀 이미지 선택" name="files">
+																<label for="files">배너 이미지:</label> 
+																<span>
+																<span>
+																	<c:if test="${path  eq 'Insert'}">
+																		<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">
+																	</c:if>
+																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[0].type eq 0}">
+																		<input type="text" class="form-control files" value="${vo.eventImageVOs[0].originName}" placeholder="배너 이미지 선택" name="files">
+																		
+																		<i id="${vo.eventImageVOs[0].num}" class="glyphicon glyphicon-remove remove fileDelete fd0"  data-type="0" name="${vo.eventImageVOs[0].fileName}">
+																	    		<img alt="" class="minus" src="/images/theater/minus.png">
+																	    </i>
+																	</c:if>
+																</span>
+																</span>
 															</div>
 															
+														<%-- 	<div class="form-group">
+																<label for="files">배너 이미지:</label> <input type="text"
+																	class="form-control files" value="${vo.eventImageVOs[0].originName}" 
+																	placeholder="배너 이미지 선택" name="files"><img alt="" class="minus" src="/images/theater/minus.png">
+																	<c:if test="${path  eq 'Update' and !empty vo.eventImageVOs[0]}">
+																	    <p style="margin-left:110px;">${vo.eventImageVOs[0].originName}
+																	    	<i id="${vo.eventImageVOs[0].num}" class="glyphicon glyphicon-remove remove fileDelete fd0"
+																	    	name="${vo.eventImageVOs[0].fileName}">
+																	    		<img alt="" class="minus" src="/images/theater/minus.png">
+																	    	</i>
+																		</p>
+																	</c:if>
+															</div> --%>
+															
 															<div class="form-group">
-																<label for="files">내용 이미지:</label> <input type="file"
-																	class="form-control files" id="files"
-																	placeholder="타이틀 이미지 선택" name="files">
+																<label for="files">컨텐츠 이미지:</label>
+																<span>
+																<span>
+																	<c:if test="${path  eq 'Insert'}">
+																		<input type="file" class="form-control files" id="files" placeholder="컨텐츠 이미지 선택" name="files" data-type="1">
+																	</c:if>
+																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[1].type eq 1}">
+																		<input type="text" class="form-control files" value="${vo.eventImageVOs[1].originName}" placeholder="배너 이미지 선택" name="files">
+																		
+																		<i id="${vo.eventImageVOs[1].num}" class="glyphicon glyphicon-remove remove fileDelete fd1"  data-type="1" name="${vo.eventImageVOs[1].fileName}">
+																	    		<img alt="" class="minus" src="/images/theater/minus.png">
+																	    </i>
+																	</c:if>
+																</span>
+																</span>
 															</div>
 															
 															
@@ -209,7 +251,7 @@
 															<div class="form-group">
 																<label for="contents">Contents:</label>
 																<textarea rows="" cols="" class="form-control"
-																	id="contents" name="contents">${vo.contents }</textarea>
+																	id="contents" name="contents">${vo.contents}</textarea>
 
 															</div>
 
@@ -225,6 +267,7 @@
 													<button id="btn" type="submit" class="round inred">
 														<span>등록하기</span>
 													</button>
+													<span class="test" id="test1">●●●●●</span>
 												</div>
 											</fieldset>
 										</form>
@@ -262,6 +305,49 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	
+		$(".fileDelete").each(function(index){
+			$(this).click(function(){
+
+				
+				
+				//var test = 
+			  	var check = confirm("파일을 삭제하시겠습니까?");
+
+				if(check){
+					var s = $(".fd"+index);
+					var tp = s.data("type");
+					alert("tp :" + tp)
+					
+					
+					$.get("./fileDelete",{num:$(this).attr("id"),fileName:$(this).attr("name")}, function(data){
+						alert(data);
+						
+						if(data>0){
+							alert("성공");
+							alert(data);
+							s.parent().find('input').remove();
+							s.parent().parent().html('<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">');
+							$("#fo").append('<input type="hidden" name="type" value="'+ tp +'">');
+						
+						}else{
+							alert(data);
+							alert("파일 삭제 실패ㅠㅠ");
+						}
+					});
+				}  
+				
+			});
+		});
+
+		$("#test1").click(function(){
+			$("#fo").append('<input type="text" value=">.<">');
+		})
+
+		
+
+	</script>
 
 </body>
 </html>
