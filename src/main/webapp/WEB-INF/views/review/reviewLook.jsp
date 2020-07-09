@@ -9,14 +9,20 @@
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 <link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
 <link href="../css/template/modal.css" rel="stylesheet" type="text/css">
-
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
 <body>
 
 	<div class="root">
@@ -37,7 +43,6 @@
 				</div>
 			</div>
 
-
 			<div class="contents">
 				<div class="col_content">
 					<!----------------- contents aside -->
@@ -50,8 +55,7 @@
 								</a></li>
 								<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
 								<li><a href="">예매 영화 관리<i></i></a></li>
-								<li><a href="../review/reviewPopup"
-									style="background-color: black; color: white;">내가 본 영화<i></i></a></li>
+								<li><a href="../member/memberReivew">내가 본 영화<i></i></a></li>
 							</ul>
 
 						</div>
@@ -71,90 +75,130 @@
 
 					<!------contents detail -->
 					<div class="col_detail">
-
-						<!-- Modal -->
-						<div class="container">
-							<!-- top bar -->
-							<div class="top-bar">
-								<h4>내가 본 영화</h4>
-								<div class="td1" id="total" title="${m_count}">
-									<c:out value="${m_count}" />
-									건
-								</div>
-								<!-- el태그 -->
-								<button id="look">내 평점 보기</button>
-							</div>
-
-							<!-- Write Modal 1,2 -->
-							<c:import url="../template/modal.jsp"></c:import>
-
-							<!-- 읽기 전용 OnlyRead Modal -->
-							<div class="modal" id="myModal3" style="display: none;">
-								<div class="modal-dialog">
-									<div class="modal-content">
-
-										<!-- Modal Header -->
-										<div class="modal-header" style="background-color: #333;">
-											<h4 class="modal-title" style="color: #F2F0E5; font-size: X-large;">평점 보기</h4>
-											<button id="exit3" type="button" class="close" data-dismiss="modal"></button>
+						<!-- 내 평점 모아보기 -->
+						<h1>내가 쓴 평점</h1>
+						<div id="result">
+							<c:forEach items="${look}" var="vo">
+								<div class="list_p2">
+									<!-- dd -->
+									<div class="list_p_content">
+										<!-- 이미지 주소부분 나중에 수정해야함 -->
+										<div class="list_p_photo">
+											<img alt=""
+												src="${pageContext.request.contextPath}/images/${vo.fileName}">
 										</div>
-
-										<!-- Modal body -->
-										<div class="modal-contents3">
-											<div class="modal-body">
-
-												<div id="photo" class="list_p_photo11">
-													<!-- reviewSubmit.js에서 ajax로 review_Select에서 json형태의 데이터값을 $("#read").html()형태로 가져온다. (아이디값이 read라서 이 div밑으로 값이 꾸려진다.)-->
-												</div>
-
-												<div class="list_p_contents11">
-													<div id="title1"></div>
-													<div id="egg1">
-														<!-- c:set의 value값이 1,0(int값넣기) -->
-													</div>
-													<div id="contents"></div>
-													<br> <span id="uid"></span> | <span id="createAt"></span>
-													|
-													<button id="delete1"
-														style="border: 0; outline: 0; background-color: transparent !important;">삭제</button>
-												</div>
+										<div class="list_p_contents1">
+											<!-- 타이틀(제목)/리뷰삭제 -->
+											<div>
+												<div class="td1">${vo.title}</div>
+												<!-- 제목 -->
+												<button class="td1 td2 delete2"
+													data-num3="${vo.reservationNum}">
+													<!-- x 표시 -->
+													<div class="td_image"
+														style="background: url('../images/movie/movieList/sprite_icon.png') no-repeat -195px -40px"></div>
+												</button>
+												<!-- 예약번호 -->
+												<span class="check" style="display: none;">${vo.reservationNum}</span>
 											</div>
 
-											<!-- Modal footer -->
-											<div class="modal-footer">
-												<input type="button" class="btn btn-danger" id="submitBtn3"
-													value="확인">
-											</div>
+											<!-- egg/uid/날짜 -->
+											<c:if test="${vo.egg eq 1}">
+												<div class="egg3 egg4"
+													style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -47px"></div>
+											</c:if>
+											<c:if test="${vo.egg eq 0}">
+												<div class="egg3 egg4"
+													style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -45px"></div>
+											</c:if>
+											<div class="egg4">${vo.uid}</div>
+											<div class="egg4">| ${vo.createAt}</div>
+
+											<!-- 컨텐츠(내용) -->
+											<div class="review-contents">${vo.contents}</div>
+
+											<!-- 수정하기/like -->
+											<!-- data-toggle="modal" data-target="#myModal" -->
+
+											<button id="review_update" data-num3="${vo.reservationNum}"
+												data-title="${vo.title}" data-contents="${vo.contents}"
+												data-egg="${vo.egg}" class="ud update Up_popupBtn1">수정하기</button>
+											<span class="ud"> ㆍ </span> <img class="ud" alt=""
+												src="${pageContext.request.contextPath}/images/like.png">
+											<span class="ud">&nbsp; ${vo.like1}</span>
+
+											<!-- Modal 2 Button-->
+											<!-- data-toggle="modal" data-target="#myModal2"  -->
+											<button type="button" class="Up_popupBtn2"
+												data-toggle="modal" data-target="#myModal2"
+												style="display: none;" data-num3="${vo.reservationNum}"></button>
 										</div>
 									</div>
 								</div>
-							</div>
-
-
-							<!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
-							<div id="result"></div>
-							<button id="more">
-								<img alt=""
-									src="${pageContext.request.contextPath}/images/more.JPG">
-								<span id="more-plus">더보기</span> <span id="l_count1"></span>
-								<!-- 가져오는 정보의 갯수 -->
-							</button>
+							</c:forEach>
+							<c:import url="../template/modal.jsp"></c:import>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- 푸터 -->
-		<c:import url="../template/footer.jsp"></c:import>
-
-		<!-- 사이드바 -->
-		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
 
-	<!-- 스크립트 -->
+	<!-- Modal ------------------------------------------------------------------------------------->
+
+	<!-- 푸터 -------------------------------------------------------------------------------------->
+	<c:import url="../template/footer.jsp"></c:import>
+
+	<!-- 사이드바 ---------------------------------------------------------------------------------------------->
+	<c:import url="../template/sidebar.jsp"></c:import>
+
+
+	<!-- 스크립트 ------------------------------------------------------------------------->
+
+	<!-- 리뷰 삭제 -->
+	<script type="text/javascript">
+		var g_num = 0;
+
+		$(".delete2")
+				.click(
+						function() {
+							g_num = $(this).data("num3");
+							console.log(g_num);
+
+							if (confirm("작성한 관람평을 삭제하시겠습니까?") == true) {
+								$
+										.ajax({
+											type : "GET",
+											url : "./review_Delete",
+											data : {
+												reservationNum : g_num,
+											},
+											success : function(data) {
+												if (data != null) {
+													if (confirm("삭제가 완료되었습니다.\n새로 작성하시겠습니까?") == true) {
+														window.location.href = 'http://localhost/review/reviewList';
+													} else {
+														location.reload();
+													}
+												}
+											},
+											error : function() {
+												alert("삭제권한이 없습니다.")
+											}
+
+										})
+
+							}
+						});
+	</script>
+
+
+	<!-- 리뷰수정 -->
+	<script type="text/javascript" src="../js/review/reviewUpdate.js"></script>
+
+	<!-- 글자 byte 체크 -->
 	<script type="text/javascript" src="../js/review/checkByte.js"></script>
-	<script type="text/javascript" src="../js/review/reviewSubmit.js"></script>
+
 
 </body>
 </html>

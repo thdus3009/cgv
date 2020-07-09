@@ -63,7 +63,7 @@
 						<button type="button" class="search-btn"></button>
 					</form>
 				</div>
-				
+
 				<!-- 극장별 영화 관람가격 -->
 				<div class="timetable">
 					<!-- 2D -->
@@ -127,24 +127,9 @@
 							</tr>
 							<!-- 반복 -->
 							<tr class="time-tr">
-								<td>asd</td>
-								<td>asd</td>
-								<td>sd</td>
-							</tr>
-							<tr class="time-tr">
-								<td>asd</td>
-								<td>asd</td>
-								<td>sd</td>
-							</tr>
-							<tr class="time-tr">
-								<td>asd</td>
-								<td>asd</td>
-								<td>sd</td>
-							</tr>
-							<tr class="time-tr">
-								<td>asd</td>
-								<td>asd</td>
-								<td>sd</td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</table>
 					</div>
