@@ -12,8 +12,6 @@ $(".del-td").click(function(){
 			console.log("result : "+result);
 			if(result > 0){
 				alert("삭제 성공");
-				//var curPage = getUrlParameter('curPage');
-				//location.href="./selectList?curPage="+curPage;
 				
 				location.reload();
 				
@@ -38,13 +36,10 @@ $(".custompager").click(function(){
 
 
 //검색 분야 설정
-
 var type = "";
 $(".type").click(function(){
-	console.log("aaaa")
 	if($(this).prop("checked") == true){
 		type = $(this).val();
-		console.log("type : "+type);
 	}
 });
 
@@ -108,10 +103,6 @@ function show(num){
 		$("#apply_num").text(result.apply_num);
 		
 	});
-	
-	
-	
-	
 	
 	 $("#myModal").modal('show');
 }

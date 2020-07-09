@@ -1,9 +1,10 @@
 package com.tm.cgv.util;
 
-public class makeSerialCode {
+public class MakeSerialCode {
 	
+	//16자리 - 숫자,영어
 	public String makeSerial(int num) {
-		String str = "";
+		String serial = "";
 		for (int i = 0; i < num; i++) {
 			int rnd = (int)Math.floor(Math.random()*36);
 						
@@ -15,17 +16,27 @@ public class makeSerialCode {
 			}
 			char a = (char)result;
 					
-			str += a;
+			serial += a;
 		}
-		return str;
+		
+		return serial;
 	}
 	
+	//6자리 -  숫자
+	public int makeNumber() {
+		return (int)(Math.random()*1000000);
+	}
+	
+	
+	
 //	public static void main(String[] args) {
-//		makeSerialCode code = new makeSerialCode();
+//		MakeSerialCode code = new MakeSerialCode();
+//		
 //		for (int i = 0; i < 5; i++) {
 //			String str = code.makeSerial(16);
 //			System.out.println(str);
 //		}
+//		System.out.println(code.makeNumber());
 //	}
 	
 }

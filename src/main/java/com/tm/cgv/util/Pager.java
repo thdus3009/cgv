@@ -21,24 +21,30 @@ public class Pager {
 	
 	private String search;
 	private String kind;
-	private String sDate;
-	private String eDate;
+	private String startDate;
+	private String endDate;
 	
 	
-	public String getsDate() {
-		return sDate;
+	public String getStartDate() {
+		if (this.startDate == null) {
+			this.startDate = "";
+		}
+		return startDate;
 	}
 
-	public void setsDate(String sDate) {
-		this.sDate = sDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 
-	public String geteDate() {
-		return eDate;
+	public String getEndDate() {
+		if (this.endDate == null) {
+			this.endDate = "";
+		}
+		return endDate;
 	}
 
-	public void seteDate(String eDate) {
-		this.eDate = eDate;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public void makeRow() {

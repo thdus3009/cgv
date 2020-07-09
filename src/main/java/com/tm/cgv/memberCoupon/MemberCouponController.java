@@ -15,6 +15,8 @@ public class MemberCouponController {
 	@Autowired
 	private MemberCouponService memberCuponService;
 	
+	
+	//해당 멤버의 쿠폰 리스트를 불러옴
 	@ResponseBody
 	@GetMapping("memberCuponSelect")
 	public List<MemberCouponVO> memberCuponSelect(MemberCouponVO memberCouponVO) throws Exception{

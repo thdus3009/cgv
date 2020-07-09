@@ -11,8 +11,7 @@ public class MemberCouponVO {
 	private String uid;
 	private int couponInfoNum;
 	
-	private CouponInfoVO couponInfoVO;
-	
 	private String kind;
 	
+	private CouponInfoVO couponInfoVO;
 }

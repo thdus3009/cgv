@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.couponInfo.CouponInfoService;
+import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -42,6 +44,7 @@ import com.tm.cgv.timePrice.TimePriceVO;
 import com.tm.cgv.util.BitFilmType;
 
 import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.MakeSerialCode;
 import com.tm.cgv.reservation.ReservationService;
 
 
@@ -75,6 +78,8 @@ public class AdminController {
 	private PaymentService paymentService;
 	@Autowired
 	private TimePriceService timePriceService;
+	@Autowired
+	private CouponInfoService couponInfoService;
 	
 	
 	
@@ -730,8 +735,122 @@ public class AdminController {
 	//==============================
 	// coupon
 	//==============================
-	
 	//쿠폰 정보 (조회/삭제/수정/삽입)
+	
+	@ResponseBody
+	@GetMapping("admin/coupon/makeSerial")
+	public ArrayList<String> makeSerial(String type) throws Exception{
+		int typed = Integer.parseInt(type);
+		MakeSerialCode serialCode = new MakeSerialCode();
+		ArrayList<String> list = new ArrayList<String>(); 
+		
+		if(typed == 1) {
+			//시리얼16+비번6
+			String serial = serialCode.makeSerial(16);
+			String pwd = serialCode.makeNumber()+"";
+			list.add(serial);
+			list.add(pwd);
+		}else if(typed == 2) {
+			//시리얼6
+			String pwd = serialCode.makeNumber()+"";
+			list.add(pwd);
+		}
+		
+		return list;
+	}
+	
+	@GetMapping("admin/coupon/couponDelete")
+	public ModelAndView couponDelete(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = couponInfoService.couponInfoDelete(couponInfoVO);
+		if(result>0) {
+			
+		}else {
+			System.out.println("삭제 실패");
+		}
+		
+		mv.setViewName("redirect:./couponList");
+		
+		return mv;
+	}
+	
+	@GetMapping("admin/coupon/couponUpdate")
+	public ModelAndView couponUpdate(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		couponInfoVO = couponInfoService.couponInfoSelect(couponInfoVO);
+		
+		mv.addObject("couponInfoVO", couponInfoVO);
+		mv.addObject("path", "couponUpdate");
+		mv.setViewName("admin/coupon/couponForm");
+		
+		return mv;
+	}
+	
+	@PostMapping("admin/coupon/couponUpdate")
+	public ModelAndView couponUpdate2(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = couponInfoService.couponInfoUpdate(couponInfoVO);
+		if(result>0) {
+			
+		}else {
+			System.out.println("수정 실패");
+		}
+		mv.setViewName("redirect:./couponList");
+		
+		return mv;
+	}
+	
+	@PostMapping("admin/coupon/couponInsert")
+	public ModelAndView couponInsert(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("쿠폰 삽입 post");
+		
+		int result = couponInfoService.couponInfoInsert(couponInfoVO);
+		if(result > 0) {
+			
+		}else {
+			System.out.println("등록 실패");
+		}
+		
+		mv.setViewName("redirect:./couponList");
+		return mv;
+	}
+	
+	@GetMapping("admin/coupon/couponInsert")
+	public ModelAndView couponInsert() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("path", "couponInsert");
+		mv.setViewName("admin/coupon/couponForm");
+		return mv;
+	}
+	
+	
+	@GetMapping("admin/coupon/couponList")
+	public ModelAndView couponList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("sDate : "+pager.getStartDate());
+		
+		List<CouponInfoVO> couponList = couponInfoService.couponInfoList(pager);
+		
+		mv.addObject("pager", pager);
+		mv.addObject("couponList", couponList);
+		mv.setViewName("admin/coupon/couponList");
+		return mv;
+	}
+
+			
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -739,3 +858,18 @@ public class AdminController {
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

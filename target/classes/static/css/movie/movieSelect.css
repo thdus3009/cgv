@@ -996,8 +996,10 @@ div[class^="sect-"] .box-contents li a {
 .point_col2 .writerinfo li {
     margin-bottom: 3px;
     line-height: 20px!important;
-
-
+    /*padding-right: 8px;
+    margin-right: 6px;
+    background: url(../images/common/bg/bg_writeinfo.gif) no-repeat 100% 0;
+    */
 }
 
 /*버튼*/

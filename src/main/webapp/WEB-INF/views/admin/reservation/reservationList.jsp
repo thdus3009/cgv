@@ -204,7 +204,6 @@
 	<!-- 스크립트 -->
 	<c:import url="../template/scripts.jsp"></c:import>
 
-	
 	<script type="text/javascript" src="/js/admin/reservation/reservation.js"></script>
 	<script type="text/javascript">
 
