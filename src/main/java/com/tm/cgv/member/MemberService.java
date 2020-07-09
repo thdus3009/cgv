@@ -1,6 +1,7 @@
 package com.tm.cgv.member;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tm.cgv.auth.AuthRepository;
 import com.tm.cgv.auth.AuthVO;
 import com.tm.cgv.auth.RoleEnum;
-import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.util.FileManager;
 import com.tm.cgv.util.FilePathGenerator;
 import com.tm.cgv.util.GenerateAuthNumber;
@@ -183,33 +183,38 @@ public class MemberService implements UserDetailsService {
  	// member 수정
  	public int memberEdit(MemberBasicVO memberBasicVO, MultipartFile[] files, HttpSession session) throws Exception{
  	
+ 		MemberBasicVO findMemberVO = (MemberBasicVO)session.getAttribute("memberVO");
+
+ 		// 기존 이미지 삭제 (defaultProfile.png가 아니라면) && 이미지가 새로 들어왔다면
+ 	 	if(!findMemberVO.getFileName().equals("defaultProfile.png") && files.length != 0) {
+ 	 		
+ 	 		String delPath = filePath + findMemberVO.getFileName().substring(0, findMemberVO.getFileName().lastIndexOf("\\")+1);
+ 	 		String fileName = findMemberVO.getFileName().substring(11);
+ 	 		File delFile = filePathGenerator.getUseClassPathResource(delPath);
+ 	 		int result = fileManager.deleteFile(fileName, delFile);
+ 	 	}
+ 		
  		// 파일 저장
  		String path = FilePathGenerator.addTimePath("")+"\\";
  		String extendPath = FilePathGenerator.addTimePath(filePath);
  		File file = filePathGenerator.getUseClassPathResource(extendPath);
  		System.out.println(session.getServletContext().getRealPath(extendPath));
  		
- 		MemberBasicVO findMemberVO = (MemberBasicVO)session.getAttribute("memberVO");
- 		
- 		// 기존 이미지 삭제 (defaultProfile.png가 아니라면)
- 		if(!findMemberVO.getFileName().equals("defaultProfile.png")) {
- 			
- 			String fileName = findMemberVO.getFileName().substring(11);
- 			System.out.println(fileName);
- 			int result = fileManager.deleteFile(fileName, file);
- 		}
-
  		if(files.length>0) {
 			
  			// 1번 들어올 for문, multipartFile[] 을 쓰는 이유는 다음번에 참고용으로 사용하기 위함
 			for (MultipartFile multipartFile : files) {
+				if(!(multipartFile.getSize()>0))
+					continue;
+				//System.out.println("service syso : "+multipartFile.getInputStream());
+				fileManager.onResizeFunction(200);	// 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
 				String fileName = fileManager.saveTransfer(multipartFile, file); //이미지 파일 저장
 				findMemberVO.setFileName(path+fileName);							
 			}
 		}
  		
  		// 테이블 수정
- 		System.out.println(findMemberVO.toString());
+ 		findMemberVO.setNick(memberBasicVO.getNick());
  		return memberRepository.memberEdit(findMemberVO);
  	}
 }

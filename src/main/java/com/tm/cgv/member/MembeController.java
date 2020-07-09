@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.memberCoupon.MemberCouponService;
+import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.point.PointService;
 import com.tm.cgv.point.PointVO;
 
@@ -162,13 +163,13 @@ class MemberController {
     	PointVO pointVO = new PointVO();
     	pointVO.setUsername(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
     	int cjPoint = pointService.getCjPoint(pointVO);
-    	System.out.println(cjPoint);
     	
-//    	MemberCouponVO memberCouponVO = new MemberCouponVO();
-//    	memberCouponVO.setUid(memberBasicVO.getUsername());
-//    	memberCouponVO = 
+    	MemberCouponVO memberCouponVO = new MemberCouponVO();
+    	memberCouponVO.setUid(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
+    	Integer couponNum = memberCouponService.memberCouponCount(memberCouponVO);
     	
     	mv.addObject("cjPoint", cjPoint);
+    	mv.addObject("couponNum", couponNum);
     	mv.setViewName("member/memberMypage");
     	return mv;
     }
@@ -186,14 +187,13 @@ class MemberController {
     @ResponseBody
     public int memberEdit(MultipartFile[] files, MemberBasicVO memberBasicVO, HttpSession session) throws Exception{
     	
-    	System.out.println("edit");
-    	for (MultipartFile file : files) {
-    		System.out.println("==========================");
-    		System.out.println("upload File Name : "+file.getOriginalFilename());
-    		System.out.println("upload File Size : "+file.getSize());
-		}
-    	
-    	System.out.println(memberBasicVO.getNick());
+//    	System.out.println("edit");
+//    	for (MultipartFile file : files) {
+//    		System.out.println("==========================");
+//    		System.out.println("upload File Name : "+file.getOriginalFilename());
+//    		System.out.println("upload File Size : "+file.getSize());
+//		}
+//    	System.out.println(memberBasicVO.getNick());
     	
     	return memberService.memberEdit(memberBasicVO, files, session);
     }

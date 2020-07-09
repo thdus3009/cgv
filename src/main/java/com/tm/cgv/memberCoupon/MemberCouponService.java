@@ -18,4 +18,8 @@ public class MemberCouponService {
 	public int memberCuponUpdate(MemberCouponVO memberCouponVO) throws Exception{
 		return memberCuponeRepository.memberCuponUpdate(memberCouponVO);
 	}
+	
+	public Integer memberCouponCount(MemberCouponVO memberCouponVO) throws Exception{
+		return memberCuponeRepository.memberCouponCount(memberCouponVO);
+	}
 }

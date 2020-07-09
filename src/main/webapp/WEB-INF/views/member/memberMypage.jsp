@@ -67,7 +67,7 @@
 								<h3>MY COUPON</h3>
 								<ul>
 									<li><strong>CGV VIP에 도전하세요!</strong> <span></span></li>
-									<li><strong>CGV 할인쿠폰</strong> <span><em>4</em> 개</span></li>
+									<li><strong>CGV 할인쿠폰</strong> <span><em>${couponNum}</em> 개</span></li>
 									<li><strong>영화관람권</strong> <span><em>0</em> 개</span></li>
 								</ul>
 							</div>

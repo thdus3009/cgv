@@ -82,7 +82,7 @@ CREATE TABLE `movieVideo` (
   `videolink` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `MOVIEVIDEO_MOVIEIMAGENUM_FK_idx` (`movieImageNum`),
-  CONSTRAINT `MOVIEVIDEO_MOVIEIMAGENUM_FK` FOREIGN KEY (`movieImageNum`) REFERENCES `movieImage` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `MOVIEVIDEO_MOVIEIMAGENUM_FK` FOREIGN KEY (`movieImageNum`) REFERENCES `movieImage` (`num`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `review` (
@@ -95,6 +95,8 @@ CREATE TABLE `review` (
   `emotionPoint` tinyint(4) DEFAULT NULL,
   `createAt` date DEFAULT NULL,
   `deleteAt` date DEFAULT NULL,
+  `spoiler` int(11) DEFAULT NULL,
+  `swearword` int(11) DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `REVIEW_RESERVATIONNUM_FK_idx` (`reservationNum`),
   CONSTRAINT `REVIEW_RESERVATIONNUM_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -239,9 +241,10 @@ CREATE TABLE `point` (
 
 CREATE TABLE `checkLike` (
   `num` INT NOT NULL AUTO_INCREMENT,
-  `reservationNum` int(11) DEFAULT NULL,
+  `reviewNum` int(11) DEFAULT NULL,
   `uid` VARCHAR(45) DEFAULT NULL,
   `movieNum` int(11) DEFAULT NULL,
+  `check1` int(11) DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -265,6 +268,31 @@ CREATE TABLE `eventImage` (
   INDEX `eventImage_eventNum_FK_idx` (`eventNum` ASC) VISIBLE,
   CONSTRAINT `eventImage_eventNum_FK` FOREIGN KEY (`eventNum`) REFERENCES `cgv`.`event` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `couponInfo` (
+  `num` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `serialNum` varchar(32) DEFAULT NULL,
+  `pwd` varchar(10) DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `type` int DEFAULT NULL,
+  `count` int DEFAULT NULL,
+  `sIssuance` date DEFAULT NULL,
+  `eIssuance` date DEFAULT NULL,
+  PRIMARY KEY (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `memberCoupon` (
+  `num` int NOT NULL AUTO_INCREMENT,
+  `uid` varchar(50) DEFAULT NULL,
+  `couponInfoNum` int DEFAULT NULL,
+  PRIMARY KEY (`num`),
+  KEY `MEMBERCOUPON_COUPONINFONUM_FK_IDX` (`couponInfoNum`),
+  KEY `MEMBERCOUPON_UID_FK_IDX` (`uid`),
+  CONSTRAINT `MEMBERCOUPON_COUPONINFONUM_FK` FOREIGN KEY (`couponInfoNum`) REFERENCES `couponInfo` (`num`),
+  CONSTRAINT `MEMBERCOUPON_UID_FK` FOREIGN KEY (`uid`) REFERENCES `member` (`username`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 -- memberSQL
 
