@@ -1,3 +1,4 @@
+
 var all = document.getElementById("all");
 var h_all = document.getElementById("h_all");
 var ch1 = document.getElementsByClassName("ch1");
@@ -40,6 +41,9 @@ $("#btn").click(function() {
 		alert("필수 조건에 동의해야 가입이 가능합니다!");
 	}
 });
+
+
+
 
 
 

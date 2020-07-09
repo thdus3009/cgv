@@ -39,7 +39,7 @@ public class CouponInfoController {
 			int price = cuponInfoVO.getPrice();
 			
 			PointVO pointVO = new PointVO();
-			pointVO.setMemberNum(memberVO.getUsername());
+			pointVO.setUsername(memberVO.getUsername());
 			pointVO.setPrice(price);
 			pointVO.setType("cgvGiftPrePayipt");
 			pointVO.setKind("sum");

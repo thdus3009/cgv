@@ -9,19 +9,22 @@
 </head>
 <body class="sb-nav-fixed">
 
+
 	<c:import url="../template/header.jsp"></c:import>
 
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
 
 		<c:import url="../template/sidenav.jsp"></c:import>
-		
+
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
 					<h1>movie List</h1>
+
 					<p>영화 목록</p>
+
 
 					<!-- 검색바 -->
 					<form
@@ -48,6 +51,10 @@
 								<span>GO</span>
 							</button>
 						</div>
+					
+
+					<p>영화 목록</p>
+
 					<div class="col_detail">
 						<!-- 목록 -->
 						<table class="table table-bordered" id="dataTable" width="100%"

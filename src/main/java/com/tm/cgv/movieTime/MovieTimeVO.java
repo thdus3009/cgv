@@ -15,4 +15,7 @@ public class MovieTimeVO {
 	private int selectedFilm;
 
 	private MovieInfoVO movieInfoVOs; //movieNum의 title, runtime
+
+
+	
 }

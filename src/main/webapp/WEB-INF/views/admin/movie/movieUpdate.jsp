@@ -8,9 +8,11 @@
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
+
 
 </head>
 <body class="sb-nav-fixed">
@@ -26,17 +28,20 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
+
 					<h1>Movie Update</h1>
 					<p>영화 등록</p>
+
 					<div>
 						<div class="contents">
 							<div>
 								<div class="col_content">
 									<div class="col_detail">
-										<form action="./${board}${path}" method="post"
-											enctype="multipart/form-data">
+
+
 										<form action="./movieUpdate" method="post" enctype="multipart/form-data">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 											<fieldset>
 												<div class="tbl_write">
 												<input type="hidden" value="${vo.movieImageVOs.num}" id="num1" > <!-- imgaeVO의 AI인 num -->
@@ -67,9 +72,13 @@
 																	class="form-control" id="title" name="title" value="${vo.title}">
 															</div>
 															<div class="form-group">
+
+
 																<label for="titleEng">영문제목:</label> <input
 																	type="text" class="form-control" id="titleEng"
 																	name="titleEng" value="${vo.titleEng}">
+
+
 															</div>
 															<div class="form-group">
 																<label for="runtime">러닝타임:</label> <input type="text"
@@ -128,8 +137,12 @@
 
 												</div>
 												<div class="btn_s">
+
+
 													<a href="./movieSelect?num=${vo.num}" class="round gray" id="cancle"> 
 														<span>취소</span>
+
+
 													</a>
 													<button id="btn" type="submit" class="round inred">
 														<span>등록하기</span>

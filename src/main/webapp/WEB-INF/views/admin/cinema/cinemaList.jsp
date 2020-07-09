@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 </head>
@@ -15,7 +16,7 @@
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
 
-		<!-- 내용 -->
+
 		<div id="layoutSidenav_content">
 			<input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
@@ -110,8 +111,11 @@
 					</div>
 
 				</div>
+
 			</main>
 			<c:import url="../template/footer.jsp"></c:import>
+
+
 		</div>
 	</div>
 	<c:import url="../template/scripts.jsp"></c:import>

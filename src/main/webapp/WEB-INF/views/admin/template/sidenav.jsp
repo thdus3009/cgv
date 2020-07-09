@@ -39,7 +39,7 @@
 
 						
 						
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/reservation/selectList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리

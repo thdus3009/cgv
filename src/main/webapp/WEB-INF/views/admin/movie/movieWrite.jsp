@@ -22,8 +22,12 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
+
 					<h1>Movie ${path}</h1>
-					<p>영화 정보 수정</p>
+					
+
+
+
 					<div>
 
 						<div class="contents">

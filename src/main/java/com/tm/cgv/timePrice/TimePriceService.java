@@ -19,4 +19,34 @@ public class TimePriceService {
 		return timePriceRepository.searchLimit(timePriceVO);
 	}
 	
+	public int timePriceInsert(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceInsert(timePriceVO);
+	}
+	
+	public List<TimePriceVO> timePriceCinemaList(int cinemaNum) throws Exception{
+		return timePriceRepository.timePriceCinemaList(cinemaNum);
+	}
+	
+	public List<TimePriceVO> timePriceFilmTypeList(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceFilmTypeList(timePriceVO);
+	}
+	
+	public int timePriceUpdate(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceUpdate(timePriceVO);
+	}
+	
+	public int timePriceDeleteSelect(int num) throws Exception{
+		return timePriceRepository.timePriceDeleteSelect(num);
+	}
+	
+	public int timePriceDeleteFilm(TimePriceVO timePriceVO) throws Exception{
+		return timePriceRepository.timePriceDeleteFilm(timePriceVO);
+	}
+	
+	public List<TimePriceVO> timePriceCinemaGroupList(int cinemaNum) throws Exception{
+		return timePriceRepository.timePriceCinemaGroupList(cinemaNum);
+	}
+	
+ 	
+	 
 }

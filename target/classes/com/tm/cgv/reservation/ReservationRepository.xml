@@ -71,9 +71,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<select id="reservationSelectList" parameterType="Pager" resultMap="reservationResult">
+		select * from 
+		(select * from 
+		(select * from reservation) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum)
+		<choose>
+			<when test="kind == 'username'">
+				where uid like concat('%',#{search},'%')
+			</when>
+			<when test="kind == 'all'">
+				where title like concat('%',#{search},'%') or uid like concat('%',#{search},'%')
+			</when>
+			<otherwise>
+				where title like concat('%',#{search},'%')
+			</otherwise>
+		</choose>
+		order by num desc limit #{startRow}, #{perPage}
+	</select>
+	
+	<select id="reservationNumCount" parameterType="Pager" resultType="Long">
+		select count(num) from 
+		(select * from 
+		(select * from reservation) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum)
+		<choose>
+			<when test="kind == 'username'">
+				where uid like concat('%',#{search},'%')
+			</when>
+			<when test="kind == 'all'">
+				where title like concat('%',#{search},'%') or uid like concat('%',#{search},'%')
+			</when>
+			<otherwise>
+				where title like concat('%',#{search},'%')
+			</otherwise>
+		</choose>
+	</select>
+	
+	
 	<delete id="reservationDelete" parameterType="ReservationVO">
 		delete from reservation where num=#{num}
 	</delete>
+	
+	
+	
 
 
 </mapper>
