@@ -39,4 +39,8 @@ public class ReservationService{
 		return reservationRepository.reservationSelectList(pager);
 	}
 	
+	public List<ReservationVO> pointAccumlate(ReservationVO reservationVO) throws Exception{
+		return reservationRepository.pointAccumlate(reservationVO);
+	}
+	
 }

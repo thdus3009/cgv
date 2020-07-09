@@ -118,6 +118,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 	
+	<select id="pointAccumlate" parameterType="ReservationVO" resultType="ReservationVO">
+		select uid,totalPrice from reservation where createAt = #{createAt}
+	</select>
+	
 	
 	<delete id="reservationDelete" parameterType="ReservationVO">
 		delete from reservation where num=#{num}

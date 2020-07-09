@@ -19,4 +19,8 @@ public class PointService {
 		return pointRepository.pointDiscountUpdate(pointVO);
 	}
 	
+	public int pointInsert(PointVO pointVO) throws Exception{
+		return pointRepository.pointInsert(pointVO);
+	}
+	
 }

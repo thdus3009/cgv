@@ -20,5 +20,7 @@ public interface ReservationRepository {
 	public List<ReservationVO> reservationSelectList(Pager pager) throws Exception;
 	
 	public long reservationNumCount(Pager pager) throws Exception;
+	
+	public List<ReservationVO> pointAccumlate(ReservationVO reservationVO) throws Exception;
  	
 }

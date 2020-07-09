@@ -24,7 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where username=#{username} and type=#{type}
 	</update>
 	
-	
+	<insert id="pointInsert" parameterType="PointVO">
+		insert into point values(0,#{username},#{price},#{type})
+	</insert>
 	
 
 </mapper>
