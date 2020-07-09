@@ -36,13 +36,25 @@ public interface ReviewRepository {
 	
 	public List<ReviewVO> movieSelect3(HashMap<String, Object> pa2);
 	
+	
+	
 	public int reviewLike(ReviewVO reviewVO);
-	
 	public int checkLike(ReviewVO reviewVO);
-	
 	public Integer checkLike_Select(ReviewVO reviewVO);
 	
+	public int reviewSpoiler(ReviewVO reviewVO);
+	public int checkSpoiler(ReviewVO reviewVO);
+	public int checkSpoiler_Select(ReviewVO reviewVO);
+	
+	public int reviewSwearWord(ReviewVO reviewVO);
+	public int checkSwearWord(ReviewVO reviewVO);
+	public int checkSwearWord_Select(ReviewVO reviewVO);	
+	
+	
+	
+	//해당 영화의 리뷰 총 갯수
 	public long reviewCount(int movieNum);
 	
+	//리뷰 모달창 띄우기
 	public int review_Modal(ReviewVO reviewVO);
 }

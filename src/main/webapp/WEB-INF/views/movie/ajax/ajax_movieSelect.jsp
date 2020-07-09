@@ -17,16 +17,39 @@
 				</div>
 						
 				<!-- 계란,아이디 -->								
-				<div class="writer-name" style="position: relative;">										 
+				<ul class="writer-name" style="position: relative;">										 
 						<c:if test="${vo2.egg eq 1}">
-						<div class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px;"></div>   
+						<li class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px;"></li>   
 						</c:if>
 						<c:if test="${vo2.egg eq 0}">
-						<div class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -45px;"></div>   
+						<li class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -0px -45px;"></li>   
 						</c:if>
 						
-						<div class="id id_name">${vo2.uid}</div>
-				</div>
+						<li class="id id_name">${vo2.uid}</li>
+						<!-- 신고 -->
+						
+						<li style="position: absolute; left: 322px; top:-74px;">
+							<a href="javascript:void(0);" class="ico btn_notify" data-reservation="${vo2.reservationNum}" style="background: url('../images/ico_btn_edit.png') no-repeat 50% 50%;">스포일러, 욕설/비방 신고</a>
+							
+							<div class="notify_wrap" id="btn${vo2.reservationNum}" style="background: url('../images/br_bg_l.png'); no-repeat -2px 0;">
+								<ul>
+									<li class="lii1" data-reservation="${vo2.reservationNum}">
+										<a href="javascript:return false;" class="ico ico_spoiler" data-commentidx="30178866" data-ismyspoiler="false" data-spoilercnt="0" 
+										style="background: url('../images/accusation/ico_spoiler.png') no-repeat 2px 0px;">
+											<span style="font-size: small; padding-left: 22px;">스포일러 신고</span>
+										</a>
+									</li>
+									<li class="lii2" data-reservation="${vo2.reservationNum}">
+										<a href="javascript:return false;" class="ico ico_swearword" data-commentidx="30178866" data-ismyspoiler="false" data-spoilercnt="0" 
+										style="background: url('../images/accusation/ico_swearword.png') no-repeat 15px 1px;">
+											<span style="padding-left: 35px; font-size: small;">욕설/비방 신고</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+							
+						</li>
+				</ul>
 				
 				<!-- 리뷰 컨텐츠 -->	
 				<div class="box-comment" style="padding-top: 20px; ">
@@ -55,7 +78,7 @@
 
 <input type="hidden" id="totalCount" value="${pager.totalCount}"/>
 <!-- pager -->
- <ul class="pagination">
+ <ul class="paging">
 
  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
  	<li class="page1" id="page1${i}" name="${i}" data-page1="${i}"><a href="javascript:void(0);">${i}</a></li>

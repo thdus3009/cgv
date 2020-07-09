@@ -25,13 +25,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="review_Write1" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
-		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt) 
-		VALUES (#{reservationNum},#{contents},0,#{egg},0,0,now())
+		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt,spoiler,swearword) 
+		VALUES (#{reservationNum},#{contents},0,#{egg},0,0,now(),0,0)
 	</insert> 
 	
 	<insert id="review_Write2" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
-		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt) 
-		VALUES (#{reservationNum},#{contents},0,#{egg},#{charmPoint},#{emotionPoint},now())
+		insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt,spoiler,swearword) 
+		VALUES (#{reservationNum},#{contents},0,#{egg},#{charmPoint},#{emotionPoint},now(),0,0)
 	</insert> 
 	
 	<select id="reviewSelect" parameterType="ReviewVO" resultType="ReviewVO">
@@ -107,31 +107,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	
+	
+	
 	<update id="reviewLike" parameterType="ReviewVO">
 		update review set like1 = like1+ 1 where reservationNum = #{reservationNum} and createAt is not null and deleteAt is null 
 	</update>
 	
 	<insert id="checkLike" parameterType="ReviewVO">
-		insert into checkLike (reservationNum, uid, movieNum) 
-		values (#{reservationNum},#{uid},#{movieNum})
+		insert into checkLike (reviewNum, uid, movieNum, check1) 
+		values ((select num from review where reservationNum=#{reservationNum} and createAt is not null and deleteAt is null),#{uid},#{movieNum},1);
 	</insert>
 	
 	<select id="checkLike_Select" parameterType="ReviewVO" resultType="Integer">
-		select COUNT(num) from checkLike where reservationNum=#{reservationNum} and uid=#{uid} and movieNum=#{movieNum}
+		 select COUNT(num) from checkLike where reviewNum=(select num from review where reservationNum=#{reservationNum} and createAt is not null and deleteAt is null)
+		 and uid=#{uid} and movieNum=#{movieNum} and check1=1
 	</select>
 	
- 	<select id="reviewCount" parameterType="Integer" resultType="Long">
-		select count(RV.reservationNum) from
+	
+	
+	<insert id="reviewSpoiler" parameterType="ReviewVO">
+		update review set spoiler = spoiler+ 1 where reservationNum = #{reservationNum} and createAt is not null and deleteAt is null 
+	</insert>	
+	
+	<insert id="checkSpoiler" parameterType="ReviewVO">
+		insert into checkLike (reviewNum, uid, movieNum, check1) 
+		values ((select num from review where reservationNum=#{reservationNum} and createAt is not null and deleteAt is null),#{uid},#{movieNum},2);
+	</insert>
+
+	<select id="checkSpoiler_Select" parameterType="ReviewVO" resultType="Integer">
+		select COUNT(num) from checkLike where reviewNum=(select num from review where reservationNum=#{reservationNum} and createAt is not null and deleteAt is null)
+		 and uid=#{uid} and movieNum=#{movieNum} and check1=2
+	</select>
+	
+	
+	
+	<insert id="reviewSwearWord" parameterType="ReviewVO">
+		update review set swearword = swearword+ 1 where reservationNum = #{reservationNum} and createAt is not null and deleteAt is null
+	</insert>
+	
+	<insert id="checkSwearWord" parameterType="ReviewVO">
+		insert into checkLike (reviewNum, uid, movieNum, check1) 
+		values ((select num from review where reservationNum=#{reservationNum} and createAt is not null and deleteAt is null),#{uid},#{movieNum},3);
+	</insert>
+
+	<select id="checkSwearWord_Select" parameterType="ReviewVO" resultType="Integer">
+		select COUNT(num) from checkLike where reviewNum=(select num from review where reservationNum=#{reservationNum} and createAt is not null and deleteAt is null)
+		 and uid=#{uid} and movieNum=#{movieNum} and check1=3
+	</select>
+	
+	
+	
+	
+	
+ 	<select id="reviewCount" parameterType="Integer" resultType="Long"> <!-- 해당 영화의 총 리뷰갯수 -->
+		select count(num) from
 		(select reservationNum from review where createAt is not null and deleteAt is null) RV 
 		left join (select num from reservation where movieNum=#{movieNum} and createAt is not null and deleteAt is null) RE 
-		on(RV.reservationNum = RE.num)
+		on(RV.reservationNum = RE.num) where num=reservationNum
 	</select> 
 	
-	<select id="review_Modal" parameterType="ReviewVO" resultType="Integer">
+	<select id="review_Modal" parameterType="ReviewVO" resultType="Integer"> <!-- 해당 영화에 대한 '로그인한 아이디'의 총 리뷰갯수 -->
 		select count(*) from
-		(select * from review where createAt is not null and deleteAt is null) RV left join (select num from reservation where uid=${uid} and movieNum=#{movieNum}) RE
-		on(RV.reservationNum = RE.num);
+		(select reservationNum from review where createAt is not null and deleteAt is null) RV 
+		left join (select num from reservation where uid=${uid} and movieNum=${movieNum} and createAt is not null and deleteAt is null) RE
+		on(RV.reservationNum = RE.num) where num=reservationNum;
 	</select>
+	
+	
+	
+	
+	
 	
 	<!-- ........................................................................................... -->
 

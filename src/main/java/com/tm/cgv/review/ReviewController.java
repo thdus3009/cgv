@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.member.MemberVO;
 import com.tm.cgv.util.Pager_movieSelect;
@@ -32,12 +33,14 @@ public class ReviewController {
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(HttpSession session, ModelAndView mv)throws Exception {
 		//아직 회원가입, 로그인 쪽 안되니까 session은 나중에 적용하기
-		//MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		//String id = memberVO.getId(); 
-		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
+		MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
+		String uid = memberVO.getUsername(); 
+		System.out.println("id1: "+uid);
+		//String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
 		
 		/* 내가 본 영화 총 건 수 */
 		int movie_count=reviewService.search_Count(uid);
+		System.out.println("movie_count: "+movie_count);
 		mv.addObject("m_count", movie_count);
 		mv.setViewName("member/memberReview");
 
@@ -50,10 +53,10 @@ public class ReviewController {
 	@GetMapping("getList")
 	public  void getList(HttpSession session, Pager_reviewList pager, Model model) throws Exception{
 		//아직 회원가입, 로그인 쪽 안되니까 session은 나중에 적용하기
-		//MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		//String id = memberVO.getId();  
-		
-		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
+		MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
+		String uid = memberVO.getUsername(); 
+		System.out.println("id2: "+uid);
+		//String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
 		
 		
 		//예매번호 list
@@ -149,9 +152,10 @@ public class ReviewController {
 	
 	//내가 쓴 평점 모아보기
 	@GetMapping("reviewLook")
-	public ModelAndView reviewLook(ModelAndView mv)throws Exception {
-		
-		String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
+	public ModelAndView reviewLook(HttpSession session, ModelAndView mv)throws Exception {
+		MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
+		String uid = memberVO.getUsername(); 
+		//String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
 
 		List<ReviewVO> reviewLook = reviewService.reviewLook(uid);//10개씩 끊어서 가져와야 하니까 List로 받아준다.
 		
@@ -268,6 +272,24 @@ public class ReviewController {
 	public int reviewLike(ReviewVO reviewVO)throws Exception {
 	
 		int result = reviewService.reviewLike(reviewVO);
+		
+		return result;
+	}
+	
+	@GetMapping("reviewSpoiler")
+	@ResponseBody
+	public int reviewSpoiler(ReviewVO reviewVO)throws Exception {
+	
+		int result = reviewService.reviewSpoiler(reviewVO);
+		
+		return result;
+	}
+	
+	@GetMapping("reviewSwearWord")
+	@ResponseBody
+	public int reviewSwearWord(ReviewVO reviewVO)throws Exception {
+	
+		int result = reviewService.reviewSwearWord(reviewVO);
 		
 		return result;
 	}

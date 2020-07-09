@@ -42,6 +42,9 @@
 	<input type="hidden" id = "gTotal" value="${gTotal}">
 	<input type="hidden" value="${vo.num}" class="num4">
 	
+	<input type="hidden" value="${uid}" class="username">
+	<%-- <input type="hidden" value="${sessionScope.memberBasicVO.username}" class="username"> --%>
+	
 	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<div class="container" >
 		<div class="c_nav">
@@ -403,10 +406,12 @@
 <script type="text/javascript">
 
 var page1 = "";
-var num4 = $(".num4").val();
-var uid = "admin"; //아이디 세션값
+var num4 = $(".num4").val(); //영화번호
+var uid = $(".username").val(); //아이디 세션값
 
 var select1 = "../review/movieSelect2";
+var reservationNum = 0;
+
 
 //페이지 들어가면 바로 실행(리뷰리스트)
 window.onload = function () {
@@ -436,7 +441,7 @@ window.onload = function () {
 $("#ajax_ms").on("click",".page1",function(){
 
 	page1 =$(this).attr("data-page1");
-
+	
 	 	$.ajax({
 			type:"GET",
 			url:select1,
@@ -451,6 +456,7 @@ $("#ajax_ms").on("click",".page1",function(){
 		})
 		
 }); 
+ 
 
 /* ------------------------------------------------ */
 //최신순
@@ -486,16 +492,103 @@ function aa(url){
 		}
 	})
 }
+
+
+/* ------------------------------------------------ */
+//... 버튼을 클릭하면 신고버튼 켜짐
+var btn_delete = true;
+
+ $("#ajax_ms").on("click",".btn_notify",function(){
+
+	reservationNum =$(this).attr("data-reservation");
+	var reservationNum1 = String(reservationNum); //숫자>문자
+
+	if(btn_delete){
+		$('#btn'+reservationNum).addClass('btn_on');
+		btn_delete=false;	
+	}else{
+		$('#btn'+reservationNum).removeClass('btn_on');
+		btn_delete=true;
+	}
+}); 
+
+/* ------------------------------------------------ */
+//checkLike > 1.like 2.spoiler 3.swearword
+//스포일러 신고
+$("#ajax_ms").on("click",".lii1",function(){
+	reservationNum =$(this).attr("data-reservation");
+
+	if(uid!=""){
+		if(confirm("평점 내용에 스포일러가 포함되어 있습니까?")){
+			$.ajax({
+				type: "GET",
+				url: "../review/reviewSpoiler",
+				data:{
+					reservationNum : reservationNum,
+					uid : uid,
+					movieNum : num4,
+				},
+				success:function(data){
+					if(data>0){
+						alert("신고가 성공적으로 접수되었습니다.");
+					
+					}else{
+					//alert(data.trim());
+						alert("이미 스포일러 신고를 누르셨습니다.");
+					}
+	
+				 }
+			})	
+		}		
+	}else{
+		if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")){
+			window.location.href='http://localhost/member/login';
+		}
+	}
+});
+
+//욕설,비방 신고
+$("#ajax_ms").on("click",".lii2",function(){
+	reservationNum =$(this).attr("data-reservation");
+
+	if(uid!=""){
+		if(confirm("평점 내용에 욕설/비방성 내용이 포함되어 있습니까?")){
+			$.ajax({
+				type: "GET",
+				url: "../review/reviewSwearWord",
+				data:{
+					reservationNum : reservationNum,
+					uid : uid,
+					movieNum : num4,
+				},
+				success:function(data){
+					if(data>0){
+						alert("신고가 성공적으로 접수되었습니다.");
+					
+					}else{
+					//alert(data.trim());
+						alert("이미 욕설/비방 신고를 누르셨습니다.");
+					}
+	
+				 }
+			})	
+		}
+	}else{
+		if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")){
+			window.location.href='http://localhost/member/login';
+		}
+	}
+});
+
 /* ------------------------------------------------ */
 
-
- //좋아요 버튼 > 이벤트 위임
+//좋아요 버튼 > 이벤트 위임
 $("#ajax_ms").on("click",".date",function(){
 	//좋아요 아이디당 한개만 가능 (좋아요 눌렀을때 현재 session값있는지 확인)
 	
 
-	if(uid!=null){
-		var reservationNum =$(this).attr("data-reservation");
+	if(uid!=""){
+		reservationNum =$(this).attr("data-reservation");
 
 	 	$.ajax({
 			type: "GET",
@@ -534,22 +627,23 @@ $("#ajax_ms").on("click",".date",function(){
 		})
 	}else{
 		if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")){
-			alert("로그인 페이지로 이동");
+			window.location.href='http://localhost/member/login';
 		}
 	}
 	
 });
 
 
-
+/* ------------------------------------------------ */
 
 
 
 //리뷰 update, write
 function review_Modal(){
-//	alert(uid); //로그인한 session정보 넣기
-//	alert(num4);
- 	$.ajax({
+	alert(uid); //로그인한 session정보 넣기
+	alert(num4); //영화번호
+	
+/*  	$.ajax({
 		type:"GET",
 		url: "../review/review_Modal",
 		data:{
@@ -559,7 +653,8 @@ function review_Modal(){
 		success:function(data){
 			
 		}
-	})  
+	})  */ 
+	
 //ajax로 해당 영화(var num4)의 review > count() 조회
 		
 //success:function(data){}안에 if문

@@ -114,6 +114,28 @@ public class ReviewService {
 		return reviewRepository.reviewLike(reviewVO); //좋아요 +1추가
 	}
 	
+	
+	public int reviewSpoiler(ReviewVO reviewVO)throws Exception {
+		
+		int result = reviewRepository.checkSpoiler_Select(reviewVO);
+		if(result > 0)
+			return 0;
+		
+		int a = reviewRepository.checkSpoiler(reviewVO);
+		return reviewRepository.reviewSpoiler(reviewVO);
+	}
+	
+	public int reviewSwearWord(ReviewVO reviewVO)throws Exception {
+		
+		int result = reviewRepository.checkSwearWord_Select(reviewVO);
+		if(result > 0)
+			return 0;
+		
+		int a = reviewRepository.checkSwearWord(reviewVO);	
+		return reviewRepository.reviewSwearWord(reviewVO);
+	}
+	
+	
 	public int review_Modal(ReviewVO reviewVO)throws Exception {
 		
 		return reviewRepository.review_Modal(reviewVO);
