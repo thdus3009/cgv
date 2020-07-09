@@ -72,6 +72,8 @@
 															<div id="tra" style="float: left;">
 															<div class="form-group" style="float: left; width: 650px;">
 																<label for="files">트레일러 img:</label>
+																<input type="button" id="addI" value="추가">
+																
 																	<c:forEach var="ar" items="${ar}" varStatus="i">
 																		<c:if test="${ar.type eq 2 }">
 																		<label for="files"></label> <input type="file"
@@ -83,17 +85,25 @@
 																			</p>
 																		</c:if>
 																	</c:forEach>
+																	<div class="form-group"  id="f">
+																	
+																	</div>
 															</div>
 															
 															
 															<div class="form-group" style="float: left; width: 650px; margin-left: 80px;margin-right: 50px;">
 																<c:forEach var="ar" items="${ar}" >
 																	<c:if test="${ar.type eq 2 }">
-																		<label for="videolink">예고 영상:</label> <input type="text"
+																		<label for="videolink">예고 영상:</label>
+																		<input type="button" id="addV" value="추가">
+																		 <input type="text"
 																			class="form-control videolink check " id="videolink"
 																			placeholder="예고편 영상 링크" name="videolink" value="${ar.movieVideoVOs[0].videolink}"><br>
 																	</c:if>	
 																</c:forEach>
+																<div class="form-group"  id="f2">
+																	
+																	</div>
 															</div>
 															
 															</div>
@@ -255,6 +265,8 @@
 			}
 
 		});
+
+
 	// ====트레일러 =====
 	
 	var count =1;
@@ -287,6 +299,58 @@
 			}
 
 		});
+	/*
+	//이미지 추가
+	var tt =$("#trailerCount").val();
+	console.log(tt+"입력되있던 사진 삭제 클릭시 증가");
+	var num = 0;
+	var countp=1;
+	
+	$("#addI").click(function(){
+		if(num<3){
+			$("#f").append('<div><input type="file" multiple="multiple" style="width: 100%; float:left; "'+
+					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
+					'<span class="x"style="float: left;" >X</span></div>');
+			num++;
+			countp++;
+			
+			var ttnum = tt+num;
+			console.log(ttnum +"삭제+추가 클릭수 합한값");
+			
+			}else{
+				alert("최대 3개까지 가능합니다.")
+			}
+		
+		});	
+
+	$("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
+		$(this).parent().remove();
+		num--;
+
+		});
+
+	var numv=0;
+	var countv=1;
+	//영상링크 추가
+	$("#addV").click(function(){
+		if(numv<3){
+			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
+					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
+			numv++;
+			countv++;
+			}else{
+				alert("최대 3개까지 가능합니다.")
+			}
+		
+		});	
+	$("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
+		$(this).parent().remove();
+		num2--;
+
+		});
+	*/
+	
 	//=== 스틸컷 ====
 	var count2 = 1;
 	var scount =0;

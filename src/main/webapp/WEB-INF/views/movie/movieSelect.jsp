@@ -157,13 +157,13 @@
 							<a title="현재 선택됨" href="">주요정보</a>
 						</li>
 						<li>
-							<a href="" >트레일러</a>
+							<a href="javascript:window.scrollTo(0,1000);" >트레일러</a>
 						</li>
 						<li>
-							<a href="">스틸컷</a>
+							<a href="javascript:window.scrollTo(0,1400);">스틸컷</a>
 						</li>
 						<li>
-							<a href="">평점/리뷰</a>
+							<a href="javascript:window.scrollTo(0,2300);">평점/리뷰</a>
 						</li>
 						<li class="last">
 							<a href="">상영시간표</a>
