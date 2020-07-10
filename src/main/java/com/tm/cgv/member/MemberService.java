@@ -21,7 +21,7 @@ import com.tm.cgv.auth.AuthVO;
 import com.tm.cgv.auth.RoleEnum;
 import com.tm.cgv.util.FileManager;
 import com.tm.cgv.util.FilePathGenerator;
-import com.tm.cgv.util.GenerateAuthNumber;
+import com.tm.cgv.util.GenerateRandomNumber;
 import com.tm.cgv.util.MemberInfoMaker;
 import com.tm.cgv.util.Pager;
 import com.tm.cgv.util.SmsSender;
@@ -130,7 +130,7 @@ public class MemberService implements UserDetailsService {
  		
  		// 해당되는 유저가 없다면, sms 인증 진행
  		// 인증번호 생성, redis에 key : value 형태로 (phone:authCode) 저장 
-    	GenerateAuthNumber authMaker = new GenerateAuthNumber();
+    	GenerateRandomNumber authMaker = new GenerateRandomNumber();
         //String authCode = authMaker.excuteGenerate();
         String authCode = "137955";
         

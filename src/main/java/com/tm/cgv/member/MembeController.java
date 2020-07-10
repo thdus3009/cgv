@@ -164,7 +164,7 @@ class MemberController {
     	pointVO.setUsername(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
     	int cjPoint = pointService.getCjPoint(pointVO);
     	
-    	MemberCouponVO memberCouponVO = new MemberCouponVO();
+    	MemberCouponVO memberCouponVO = MemberCouponVO.builder().build();
     	memberCouponVO.setUid(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
     	Integer couponNum = memberCouponService.memberCouponCount(memberCouponVO);
     	

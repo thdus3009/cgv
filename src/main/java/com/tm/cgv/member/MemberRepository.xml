@@ -56,6 +56,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM member WHERE phone = #{phone} AND enabled=1
 	</select>
  
+ 	<select id="memberTotalCount" resultType="Long">
+ 		SELECT COUNT(username) FROM member
+ 	</select>
+ 
 	<select id="memberCount" resultType="Long">
 		SELECT COUNT(username) FROM member
 		<where>

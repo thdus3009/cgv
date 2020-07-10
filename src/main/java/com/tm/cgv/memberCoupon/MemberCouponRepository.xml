@@ -26,6 +26,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</resultMap>
 
+	<insert id="memberCouponInsert" parameterType="MemberCouponVO">
+		INSERT INTO memberCoupon VALUES(
+			0, #{uid}, #{couponInfoNum}, null
+		)
+	</insert>
 
 	<select id="memberCouponSelect" parameterType="MemberCouponVO" resultMap="memberCouponList">
 		select * from

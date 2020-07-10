@@ -22,6 +22,13 @@ DROP TABLE `seat`;
 DROP TABLE `seatSpace`;
 DROP TABLE `seatBooking`;
 DROP TABLE `point`;
+DROP TABLE `checkLike`;
+DROP TABLE `event`;
+DROP TABLE `eventImage`;
+DROP TABLE `couponInfo`;
+DROP TABLE `memberCoupon`;
+DROP TABLE `pointHistory`;
+DROP TABLE `guest`;
 
 CREATE TABLE `member` (
   `username` varchar(50),
@@ -250,7 +257,7 @@ CREATE TABLE `checkLike` (
 
 CREATE TABLE `event` (
   `num` INT NOT NULL AUTO_INCREMENT,
-  `category` VARCHAR(50) NULL,
+  `kind` VARCHAR(50) NULL,
   `title` VARCHAR(50) NULL,
   `contents` VARCHAR(200) NULL,
   `startDate` Date NULL,
@@ -259,15 +266,15 @@ CREATE TABLE `event` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `eventImage` (
-  `num` INT NOT NULL AUTO_INCREMENT,
-  `eventNum` int NULL,
-  `fileName` VARCHAR(200) NULL,
-  `originName` VARCHAR(200) NULL,
-  `type` int NULL,
+  `num` int NOT NULL AUTO_INCREMENT,
+  `eventNum` int DEFAULT NULL,
+  `fileName` varchar(200) DEFAULT NULL,
+  `originName` varchar(200) DEFAULT NULL,
+  `type` int DEFAULT NULL,
   PRIMARY KEY (`num`),
-  INDEX `eventImage_eventNum_FK_idx` (`eventNum` ASC) VISIBLE,
-  CONSTRAINT `eventImage_eventNum_FK` FOREIGN KEY (`eventNum`) REFERENCES `cgv`.`event` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+  KEY `eventImage_eventNum_FK_idx` (`eventNum`),
+  CONSTRAINT `eventImage_eventNum_FK` FOREIGN KEY (`eventNum`) REFERENCES `event` (`num`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `couponInfo` (
   `num` int NOT NULL AUTO_INCREMENT,
@@ -280,19 +287,40 @@ CREATE TABLE `couponInfo` (
   `sIssuance` date DEFAULT NULL,
   `eIssuance` date DEFAULT NULL,
   PRIMARY KEY (`num`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `memberCoupon` (
   `num` int NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) DEFAULT NULL,
   `couponInfoNum` int DEFAULT NULL,
+  `deleteAt` DATE DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `MEMBERCOUPON_COUPONINFONUM_FK_IDX` (`couponInfoNum`),
   KEY `MEMBERCOUPON_UID_FK_IDX` (`uid`),
-  CONSTRAINT `MEMBERCOUPON_COUPONINFONUM_FK` FOREIGN KEY (`couponInfoNum`) REFERENCES `couponInfo` (`num`),
+  CONSTRAINT `MEMBERCOUPON_COUPONINFONUM_FK` FOREIGN KEY (`couponInfoNum`) REFERENCES `couponInfo` (`num`) ON DELETE CASCADE,
   CONSTRAINT `MEMBERCOUPON_UID_FK` FOREIGN KEY (`uid`) REFERENCES `member` (`username`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `pointHistory` (
+  `num` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `inputPrice` int DEFAULT NULL,
+  `outputPrice` int DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `createAt` date DEFAULT NULL,
+  PRIMARY KEY (`num`),
+  KEY `POINTHISTORY_USERNAME_FK_idx` (`username`),
+  CONSTRAINT `POINTHISTORY_USERNAME_FK` FOREIGN KEY (`username`) REFERENCES `member` (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `guest` (
+  `reservationNum` int DEFAULT NULL,
+  `birth` date DEFAULT NULL,
+  `phone` varchar(13) DEFAULT NULL,
+  `pwd` varchar(20) DEFAULT NULL,
+  KEY `guest_reservationNum_FK_idx` (`reservationNum`),
+  CONSTRAINT `guest_reservationNum_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- memberSQL
 
