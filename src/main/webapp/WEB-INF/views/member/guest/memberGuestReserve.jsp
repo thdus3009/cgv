@@ -25,7 +25,7 @@
 
 	<div class="root">
 		<!-- 헤더 -------------------------------------------------------------------------------------->
-		<c:import url="../template/header.jsp"></c:import>
+		<c:import url="../../template/header.jsp"></c:import>
 		<!-- 컨테이너 -------------------------------------------------------------------------------------->
 		<div class="container" style="height: 1000px;">
 			<div class="c_nav">
@@ -51,63 +51,80 @@
 					<div class="guest_guide">
 						<div class="guest_guide-box">
 							<h3>개인정보(휴대폰번호,법정생년월일,비밀번호) 입력</h3>
-							<p>개인정보를 잘못 입력하시면 예매내역 확인/취소 및 티켓 발권이 어려울 수 있으니, 입력하신 정보를 다시
-								한번 확인해주시기 바랍니다.</p>
+							<p>개인정보를 잘못 입력하시면 예매내역 확인/취소 및 티켓 발권이 어려울 수 있으니, 입력하신 정보를 다시 한번 확인해주시기 바랍니다.</p>
 							<div class="guest-box">
 								<div class="guest-chk">
 									<strong class="g-title">개인정보 입력</strong>
-									<form action="" method="post" enctype="" class="guest-form"
-										style="width: 858px; height: 380px;">
+									
+									
+									
+									<form action="./guestSession" method="post" enctype="" class="guest-form"	style="width: 858px; height: 380px;">
+										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 										<table style="width: 100%;">
 											<caption>모든 항목은 필수 입력사항입니다.</caption>
+											
 											<tr class="tr-box">
 												<th style="border-top: none;">법정생년월일</th>
 												<td style="border-top: none;">
-												<input type="text" class="input-box birthday"
-													maxlength="6"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-													<span style="font-size: 20px;">- <input type="text"
-														class="input-box birth" maxlength="1" style="width: 10px;"
+													<input type="text" name="birth" class="input-box birthday" maxlength="6"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+													<span style="font-size: 20px;">
+													- 
+													<input type="text" class="input-box birth" maxlength="1" style="width: 10px;"
 														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">******
-												</span></td>
+													</span>
+												</td>
 											</tr>
+											
+											
 											<tr class="tr-box phone">
 												<th>휴대폰번호</th>
-												<td><select class="input-box">
+												<td>
+													<input type="hidden" id="phone" name="phone" value="">
+													
+													<select class="input-box" id="phone1">
 														<option>010</option>
 														<option>011</option>
 														<option>016</option>
 														<option>017</option>
 														<option>018</option>
 														<option>019</option>
-												</select> - <input type="text" class="input-box phone-front"
-													style="width: 75px;" maxlength="4"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-													- <input type="text"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-													class="input-box phone-back" style="width: 75px;"
-													maxlength="4">
-													<button class="num-chk">인증번호 받기</button></td>
-													<div class="countdown">카운트다운</div>
+													</select> 
+													- 
+													<input type="text" id="phone2" class="input-box phone-front" style="width: 75px;" maxlength="4"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+													- 
+													<input type="text" id="phone3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+														class="input-box phone-back" style="width: 75px;" maxlength="4">
+													<button type="button" id="btnCertification" class="num-chk">인증번호 받기</button>
+												</td>
+												<div class="countdown">카운트다운</div>
 											</tr>
+											
+											
 											<tr class="tr-box">
-												<th>인증번호(4자리)</th>
-												<td><input type="text" class="input-box chk-num"
-													maxlength="4"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-													<input type="button" value="인증확인" class="num-chk"></td>
+												<th>인증번호(6자리)</th>
+												<td>
+													<input type="text" id="certificationNum" class="input-box chk-num" maxlength="6"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+													<input type="button" id="btnCertificationCheck" value="인증확인" class="num-chk">
+												</td>
 											</tr>
+											
+											
 											<tr class="tr-box">
 												<th>비밀번호(4자리)</th>
-												<td><input type="text" class="input-box pwd"
-													maxlength="4"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+												<td>
+													<input type="text" class="input-box pwd" maxlength="4"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+												</td>
 											</tr>
 											<tr class="tr-box">
 												<th>비밀번호확인</th>
-												<td><input type="text" class="input-box pwd-chk"
-													maxlength="4"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+												<td>
+													<input type="password" name="pwd" class="input-box pwd-chk" maxlength="4"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+												</td>
 											</tr>
 										</table>
 										<div style="display: flex; justify-content: center;">
@@ -117,6 +134,9 @@
 								</div>
 							</div>
 						</div>
+
+
+
 
 						<div class="coupon-notice">
 							<div style="background-color: #f9f7ec;">
@@ -150,12 +170,10 @@
 
 
 		<!-- 푸터 -------------------------------------------------------------------------------------->
-		<c:import url="../template/footer.jsp"></c:import>
-
-
+		<c:import url="../../template/footer.jsp"></c:import>
 
 		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
-		<c:import url="../template/sidebar.jsp"></c:import>
+		<c:import url="../../template/sidebar.jsp"></c:import>
 	</div>
 
 	<!-- 스크립트 -->
@@ -163,10 +181,68 @@
 		//남은시간 띄우기
 		var time = "<span></span>";
 		var notice = "<span>인증번호 유효기간이 초과되었습니다. 인증번호를 다시 요청해주세요.</span>";
+
+
 		
-		$(".").click(function(){
-			$(".countdown").append();
+		//받은 인증번호를 담을 변수
+		var certificationNum = "";
+		var check = false;
+		console.log("certificationNum : "+certificationNum);
+
+
+		
+		//인증번호 전송하기
+		$("#btnCertification").click(function(){
+			var phone1 = $("#phone1").val();
+			var phone2 = $("#phone2").val();
+			var phone3 = $("#phone3").val();
+
+			if(phone2 == "" || phone3 ==""){
+				alert("휴대폰 번호를 입력해 주세요");
+			}else{
+				var phoneNumber = phone1+""+phone2+""+phone3;
+				$.ajax({
+					url : './guestCertification',
+					type : 'post',
+					data : {
+						phoneNumber : phoneNumber,
+						_csrf : $("#_csrf").val()
+					},
+					success : function(result){
+						if(result>0){
+							alert("인증 메일이 전송되었습니다.");
+							certificationNum = result;
+							$("#phone").val(phoneNumber);
+							
+							console.log(certificationNum);
+						}else{
+							alert("인증 메일 전송 실패");
+						}
+					}
+				});
+			}
+			
 		});
+
+		//인증 번호 체크
+		$("#btnCertificationCheck").click(function(){
+			if(certificationNum == ''){
+				alert("인증이 필요합니다.");
+			}else{
+				if($("#certificationNum").val() == certificationNum){
+					check = true;
+					alert("인증되었습니다.");
+				}else{
+					alert("인증 번호가 다릅니다.");
+				}
+			}
+			
+		});
+		
+
+
+
+
 		
 		//유효성 검사
 		$(".red-btn").click(function(e) {
@@ -200,20 +276,9 @@
 			} else if ($(".pwd").val() != $(".pwd-chk").val()) {
 				alert("비밀번호확인이 일치하지 않습니다!");
 				e.preventDefault();
-						
-			} else {
-				//ajax
-				$.ajax({
-					url : '',
-					type : 'post',
-					data : {},
-					dataType : '',
-					done : function(response) {
-					},
-					fail : function(error) {
-						e.preventDefault();
-					}
-				});
+			} else if(!check){
+				alert("휴대폰 인증이 필요합니다.");
+				e.preventDefault();
 			}
 		});
 	</script>

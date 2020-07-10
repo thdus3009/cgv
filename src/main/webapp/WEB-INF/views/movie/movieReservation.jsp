@@ -413,8 +413,8 @@
 			
 				</div>
 				<div class="linkbar">
-					<a href="/member/memberTerms" class="join_member">회원가입</a>
-					<a href="#" class="join_guest">비회원 예매</a>
+					<a href="../member/memberTerms" class="join_member">회원가입</a>
+					<a href="../guest/guestReservation" class="join_guest">비회원 예매</a>
 					<a href="#" class="id_find">아이디찾기</a>
 					<a href="#" class="pw_find">비밀번호찾기</a>
 				</div>
@@ -639,7 +639,21 @@
 
 	var data;
 	var memberId = `${memberVO.username}`;
-	var beMemberVO = `${beMemberVO.uid}`;
+	var beMemberVO = `${beMemberVO}`;
+	//beMemberVO = "login";
+	
+	console.log("memberID : "+memberId);
+	console.log("beMemberVO : "+beMemberVO);
+
+	var guestVO = {
+		reservationNum : `${beMemberVO.reservationNum}`,
+		birth : `${beMemberVO.birth}`,
+		phone : `${beMemberVO.phone}`,
+		pwd : `${beMemberVO.pwd}`,
+		_csrf : $("#_csrf").val()
+	}
+
+	console.log(guestVO);
 
 
 	//결제완료 페이지로 이동

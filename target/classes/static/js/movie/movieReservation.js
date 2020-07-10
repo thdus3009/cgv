@@ -634,8 +634,7 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 			}
 		});
 		
-		
-		if(memberId == ''){
+		if(memberId == '' && beMemberVO==''){
 			console.log("로그인 필요");
 			$(".ft_layer_popup.popup_login").css("display","block");
 			$(".blackscreen").css("display","block");

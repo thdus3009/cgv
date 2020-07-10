@@ -14,6 +14,8 @@ import com.tm.cgv.couponInfo.CouponInfoService;
 import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.discountInfo.DiscountInfoService;
 import com.tm.cgv.discountInfo.DiscountInfoVO;
+import com.tm.cgv.guest.GuestService;
+import com.tm.cgv.guest.GuestVO;
 import com.tm.cgv.memberCoupon.MemberCouponService;
 import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -63,7 +65,8 @@ public class ResevationController {
 	private CouponInfoService cuponInfoService;
 	@Autowired
 	private TimePriceService timePriceService;
-	
+	@Autowired
+	private GuestService guestService;
 	
 	
 	//예매 취소
@@ -156,7 +159,6 @@ public class ResevationController {
 			}
 		}
 		
-		
 		mv.addObject("endTime", endTime);
 		mv.addObject("reservationVO", reservationVO);
 		mv.addObject("discountInfoList", discountInfoList);
@@ -173,12 +175,14 @@ public class ResevationController {
 		int result = 0;
 		int seatCheck = 0;
 		
-		System.out.println("할인 타입(0없음/1쿠폰/2포인트) : "+type);
+		System.out.println("할인 타입(0없음/1쿠폰/2포인트/3비회원) : "+type);
 		System.out.println("선택한 쿠폰 번호 : "+couponNum);
 		
 		//예매 번호 등록 - Reservation
 		result = reservationService.reservationInsert(reservationVO);
 		result = reservationVO.getNum();
+		
+		
 		
 		if(type != 0) {
 			//할인정보 추가

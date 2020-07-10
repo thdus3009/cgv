@@ -32,6 +32,7 @@
 		<typeAlias type="com.tm.cgv.couponInfo.CouponInfoVO" alias="CouponInfoVO"/>
 		<typeAlias type="com.tm.cgv.memberCoupon.MemberCouponVO" alias="MemberCouponVO"/>
 		<typeAlias type="com.tm.cgv.timePrice.TimePriceVO" alias="TimePriceVO"/>
+		<typeAlias type="com.tm.cgv.guest.GuestVO" alias="GuestVO"/>
 
 
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>

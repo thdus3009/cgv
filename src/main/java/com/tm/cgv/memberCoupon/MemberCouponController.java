@@ -13,16 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MemberCouponController {
 	
 	@Autowired
-	private MemberCouponService memberCuponService;
+	private MemberCouponService memberCouponService;
 	
 	
 	//해당 멤버의 쿠폰 리스트를 불러옴
 	@ResponseBody
-	@GetMapping("memberCuponSelect")
-	public List<MemberCouponVO> memberCuponSelect(MemberCouponVO memberCouponVO) throws Exception{
-		List<MemberCouponVO> memberCuponList = memberCuponService.memberCuponSelect(memberCouponVO);
+	@GetMapping("memberCouponSelect")
+	public List<MemberCouponVO> memberCouponSelect(MemberCouponVO memberCouponVO) throws Exception{
 		
-		return memberCuponList;
+		List<MemberCouponVO> memberCouponList = memberCouponService.memberCouponSelect(memberCouponVO);
+		
+		
+		for (MemberCouponVO vo : memberCouponList) {
+			System.out.println(vo.getCouponInfoVO().getName());
+		}
+		
+		return memberCouponList;
 	}
 
 }

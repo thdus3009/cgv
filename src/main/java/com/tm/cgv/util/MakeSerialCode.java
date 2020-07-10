@@ -1,5 +1,8 @@
 package com.tm.cgv.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MakeSerialCode {
 	
 	//16자리 - 숫자,영어

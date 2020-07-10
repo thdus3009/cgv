@@ -11,11 +11,11 @@ public class MemberCouponService {
 	@Autowired
 	private MemberCouponRepository memberCuponeRepository;
 	
-	public List<MemberCouponVO> memberCuponSelect(MemberCouponVO memberCouponVO)throws Exception{
-		return memberCuponeRepository.memberCuponSelect(memberCouponVO);
+	public List<MemberCouponVO> memberCouponSelect(MemberCouponVO memberCouponVO)throws Exception{
+		return memberCuponeRepository.memberCouponSelect(memberCouponVO);
 	}
 	
 	public int memberCuponUpdate(MemberCouponVO memberCouponVO) throws Exception{
-		return memberCuponeRepository.memberCuponUpdate(memberCouponVO);
+		return memberCuponeRepository.memberCouponUpdate(memberCouponVO);
 	}
 }
