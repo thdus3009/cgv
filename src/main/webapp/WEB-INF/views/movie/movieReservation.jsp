@@ -635,36 +635,41 @@
 		});
 	}
 
-
 	console.log($(".theater-area-list > ul > li").length);
-	
-	
-		
-
 
 	var data;
+	var memberVO = `${memberVO}`;
+	var beMemberVO = `${beMemberVO}`;
 
-	//회원가입 되어있을때 - 비회원 예매일때 구분 필요 !!============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<
-	var memberID = `${memberVO.name}`;
 
-	console.log("MemberID : "+memberID);
-	
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
-			
-			//결제 작업을 위한 값 - 이니시스 
+		//결제 작업을 위한 값 - 이니시스 
+		
+		if(memberVO != ''){
 			data = {
-					tel : `${memberVO.phone}`,
-					email : `${memberVO.email}`,
-					name : `${memberVO.name}`,
-					//amount : lastPrice
-					amount : '100'
+				tel : `${memberVO.phone}`,
+				email : `${memberVO.email}`,
+				name : `${memberVO.username}`,
+				//amount : lastPrice
+				amount : '100'
 			}
-			//이니시스 실행
-			//payment_inicis(data);
-			
-			//test 결제 없이 바로 예매 - 좌석예매 진행
-			reservation_save(2);
+		}else if(beMemberVO != ''){
+			data = {
+				tel : `${beMemberVO.phone}`,
+				email : 'cgv@naver.com',
+				name : '비회원',
+				//amount : lastPrice
+				amount : '100'
+			}
+		}
+		
+		
+		//이니시스 실행
+		//payment_inicis(data);
+		
+		//test 결제 없이 바로 예매 - 좌석예매 진행
+		reservation_save(2);
 	});
 
 
