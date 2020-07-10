@@ -313,29 +313,17 @@ var submitStop = function() {
 }
 
 function chk() {
-	// 이름
+	// 이름 작성 여부
 	if ($("#name").val() == '') {
 		alert("이름을 입력해주세요!");
 		$("#frm").on('submit', submitStop);
 	}
-	// 타입
+	
+	// 타입 체크 여부
 	var check = true;
 	$('.ckfm').each(function(i) {
-		console.log([ i ] + "d");
-		if ($("#" + [ i ] + "d").is(':checked')) {
-			check = true;
-			return false;
-		} else {
-			check = false;
-		}
-
-		if (check == true) {
-			return;
-		}
+		
 	});
-	if (check == false) {
-		alert("타입을 체크해주세요!");
-		$("#frm").on('submit', submitStop);
-	}
-	//좌석
+	
+	//좌석 생성 여부
 }

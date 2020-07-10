@@ -62,9 +62,8 @@
 											<caption>모든 항목은 필수 입력사항입니다.</caption>
 											<tr class="tr-box">
 												<th style="border-top: none;">법정생년월일</th>
-												<td style="border-top: none;">
-												<input type="text" class="input-box birthday"
-													maxlength="6"
+												<td style="border-top: none;"><input type="text"
+													class="input-box birthday" maxlength="6"
 													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 													<span style="font-size: 20px;">- <input type="text"
 														class="input-box birth" maxlength="1" style="width: 10px;"
@@ -87,8 +86,8 @@
 													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 													class="input-box phone-back" style="width: 75px;"
 													maxlength="4">
-													<button class="num-chk">인증번호 받기</button></td>
-													<div class="countdown">카운트다운</div>
+													<button class="num-chk" type="button">인증번호 받기</button>
+													<strong id="countdown" style="display: inline;"> </strong></td>
 											</tr>
 											<tr class="tr-box">
 												<th>인증번호(4자리)</th>
@@ -161,13 +160,27 @@
 	<!-- 스크립트 -->
 	<script type="text/javascript">
 		//남은시간 띄우기
-		var time = "<span></span>";
-		var notice = "<span>인증번호 유효기간이 초과되었습니다. 인증번호를 다시 요청해주세요.</span>";
-		
-		$(".").click(function(){
-			$(".countdown").append();
-		});
-		
+		$(".num-chk") .click(
+			function() {
+				var time = 180;
+				var min = "";
+				var sec = "";
+
+				var countdown = setInterval(
+					function() {
+						min = parseInt(time / 60);
+						sec = time % 60;
+
+						document.getElementById("countdown").innerHTML = min + "분" + " " + sec + "초";
+						time--;
+										
+						if (time < 0) {
+						clearInterval(countdown);
+						document.getElementById("countdown").innerHTML = "기한이 종료되었습니다. 새로운 인증번호를 받아주세요.";
+						}
+					}, 1000);
+				});
+
 		//유효성 검사
 		$(".red-btn").click(function(e) {
 			if ($(".birthday").val() == '') {
@@ -176,7 +189,7 @@
 			} else if ($(".bitrh").val() == '') {
 				alert("생년월일을 똑바로 입력해주세요!");
 				e.preventDefault();
-				
+
 			} else if ($(".phone-front").val() == '') {
 				alert("핸드폰번호 앞자리를 입력해주세요!");
 				e.preventDefault();
@@ -188,19 +201,19 @@
 			} else if ($(".chk-num").val() == '') {
 				alert("인증번호를 입력해주세요!");
 				e.preventDefault();
-				
+
 			} else if ($(".pwd").val() == '') {
 				alert("비밀번호를 입력해주세요!");
 				e.preventDefault();
-				
+
 			} else if ($(".pwd-chk").val() == '') {
 				alert("비밀번호확인을 입력해주세요!");
 				e.preventDefault();
-				
+
 			} else if ($(".pwd").val() != $(".pwd-chk").val()) {
 				alert("비밀번호확인이 일치하지 않습니다!");
 				e.preventDefault();
-						
+
 			} else {
 				//ajax
 				$.ajax({

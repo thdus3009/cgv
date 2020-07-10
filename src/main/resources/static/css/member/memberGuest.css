@@ -512,5 +512,174 @@ table {
 	border-radius: 0.25rem;
 	border: 2px solid #e71a0f;
 	padding: 5px 10px;
-	margin-left: 10px;
+	margin: 0 10px;
+}
+
+/* 게스트 예매 내역 */
+.top-bar>h4 {
+	color: #000;
+	margin-bottom: 5px;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+}
+
+.top-bar>p {
+	padding: 8.5px;
+	color: #fff;
+	background-color: #000;
+	color: #fff;
+}
+
+.lst-item {
+	padding: 30px;
+	border-bottom: 1px solid #d6d4ca;
+}
+
+.reserve-num>strong {
+	color: #000;
+	margin-left: 15px;
+	font-weight: 600;
+	font-family: verdana, sans-serif;
+	font-weight: 600;
+}
+
+.reserve-info {
+	position: relative;
+}
+
+/* 영화 정보 */
+.movie-info {
+	display: flex;
+	margin-top: 20px;
+}
+
+.movie-info>img {
+	width: 90px;
+	height: 140px;
+	margin-right: 30px;
+}
+
+.movie-info-ul>li {
+	margin-top: 8px;
+}
+
+.movie-info-ul>li>a {
+	font-weight: 600;
+	margin-bottom: 18px;
+}
+
+.movie-info-ul>li>p {
+	display: inline-block;
+	font-style: normal;
+	margin-right: 10px;
+	width: 46px;
+	font-style: normal;
+}
+
+.movie-info-ul>li>strong {
+	font-size: 13px;
+	font-weight: 600;
+}
+
+/* 결제 정보*/
+.payment-info {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 259px;
+	padding-top: 25px;
+	background: url("/images/myPage/bg_account_top.gif") no-repeat 0 0;
+}
+
+.payment-info-ul {
+	width: 205px;
+	padding: 0 30px 20px 24px;
+	background: url(/images/myPage/bg_account_btm.gif) no-repeat 0 100%;
+}
+
+.payment-info-ul > li{
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 10px;
+}
+
+.payment-info-ul > li:last-child{
+	padding-bottom: 0px;
+	padding-top: 10px;
+	border-top: 1px solid #aaa9a2;
+}
+
+.payment-info-ul > li> strong{
+	font-weight: 600;
+	font-family: verdana, sans-serif;
+}
+
+.payment-info-ul > li:last-child> strong{
+	color: #369;
+}
+
+/* 삭제 버튼*/
+.cancle-btn{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	border-radius: 0.25rem;
+	border: 2px solid #000;
+	padding: 2.5px 5px;
+	background-color: transparent;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+}
+
+/* 테이블 */
+.cancle-table{
+	margin-top: 40px;
+}
+
+.member-table {
+	padding: 0;
+	border-top: 1px solid #b8b6aa;
+	border-bottom: 1px solid #b8b6aa;
+	margin: 5px 0;
+}
+
+.member-thead {
+	background-color: #e2e2e0;
+	font-size: 13px;
+}
+
+.member-tr>th {
+	height: 34px;
+	padding-left: 12px;
+	background-color: #e2e2e0;
+	font-size: 13px;
+	line-height: 34px;
+	text-align: left;
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+}
+
+.member-tr>td {
+	height: 34px;
+	padding-left: 12px;
+	background-color: #fdfcf0;
+	font-size: 13px;
+	line-height: 34px;
+	text-align: left;
+}
+
+.member-td > td{
+	padding: 8px 12px;
+	border-bottom: 1px solid #e2e2e0;
+}
+
+.member-td:last-child > td{
+	border-bottom: none;
+}
+
+#countdown{
+	color: #000;
+	font-weight: 600;
+	
 }
