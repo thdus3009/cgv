@@ -41,7 +41,7 @@
 					<p>방문하시려는 웹 페이지의 주소가 잘못 입력되었거나 변경 또는 삭제되어 요청하신 페이지를 찾을 수 없습니다.<br>
 						입력하신 주소가 정확한지 다시 한 번 확인해 주시기 바랍니다. 감사합니다.</p>
 					<div>
-						<a href="" class="error-btn" onclick="history.back()"><span>이전 페이지 이동</span></a> 
+						<a href="#" class="error-btn" onclick="history.back()"><span>이전 페이지 이동</span></a> 
 						<a href="#" class="error-btn"><span>고객센터(1544-1122)</span></a>
 						<a href="${pageContext.request.contextPath}/" class="red-button"><span>CGV 첫 화면 이동</span></a>
 					</div>

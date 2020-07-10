@@ -110,9 +110,9 @@
 											
 										</ul>
 										
-										<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
+										<!-- <div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
 											<div class="slider slider-y" style="height: 50px; top: 0px;"></div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -148,9 +148,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>
+														</div> -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="경기">
@@ -164,9 +164,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div> -->	
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="인천">
@@ -180,9 +180,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>
+														</div> -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="강원">
@@ -196,9 +196,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>
+														</div> -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="대전/충청">
@@ -212,9 +212,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div>	 -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="대구">
@@ -228,9 +228,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div> -->	
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="부산/울산">
@@ -244,9 +244,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div> -->	
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="경상">
@@ -339,9 +339,9 @@
 										</c:forEach>
 										
 									</ul>
-									<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
+									<!-- <div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
 										<div class="slider slider-y" style="height: 50px; top: 0px;"></div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -413,7 +413,7 @@
 			
 				</div>
 				<div class="linkbar">
-					<a href="#" class="join_member">회원가입</a>
+					<a href="/member/memberTerms" class="join_member">회원가입</a>
 					<a href="#" class="join_guest">비회원 예매</a>
 					<a href="#" class="id_find">아이디찾기</a>
 					<a href="#" class="pw_find">비밀번호찾기</a>

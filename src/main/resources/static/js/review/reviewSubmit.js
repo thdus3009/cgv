@@ -368,14 +368,14 @@
 						//모달 이미지 변경
 						var d=$("#egg1").html();
 						if(d==1){
-							$("#egg1").html('<table style=\"height:30px;\"><tr>'+
-									'<td style=\"height:30px; width:15px;\"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -20px -50px\" class=\"egg2\"></div></td>'+
-									'<td style=\"height:30px; width:100px;\">좋았어요</td>'+
+							$("#egg1").html('<table class="p-div"><tr>'+
+									'<td style="width: 10px;"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -20px -50px\" class=\"egg2\"></div></td>'+
+									'<td style="font-weight: 600;">&nbsp;좋았어요</td>'+
 									'</tr></table>');
 							}else{
-							$("#egg1").html('<table style=\"height:30px;\"><tr>'+
-									'<td style=\"height:30px; width:15px;\"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -0px -50px\" class=\"egg3\"></div></td>'+
-									'<td style=\"height:30px; width:100px;\">별로예요</td>'+
+							$("#egg1").html('<table class="p-div"><tr>'+
+									'<td style="width: 10px;"><div style=\"background: url(\'../images/movie/movieList/sprite_egg.png\') no-repeat -0px -50px\" class=\"egg3\"></div></td>'+
+									'<td style="font-weight: 600;">&nbsp;별로예요</td>'+
 									'</tr></table>');
 							}
 						

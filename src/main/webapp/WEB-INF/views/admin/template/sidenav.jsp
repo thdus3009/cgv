@@ -37,7 +37,13 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리
-						</a> <a class="nav-link" href="#">
+						</a> 
+						<a class="nav-link" href="/admin/coupon/couponList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 쿠폰 관리
+						</a>
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
