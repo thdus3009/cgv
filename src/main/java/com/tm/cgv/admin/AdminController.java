@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,26 +26,21 @@ import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.payment.PaymentService;
 import com.tm.cgv.payment.PaymentVO;
+import com.tm.cgv.pointHistory.PointHistoryService;
+import com.tm.cgv.pointHistory.PointHistoryVO;
+import com.tm.cgv.reservation.ReservationService;
 import com.tm.cgv.reservation.ReservationVO;
-
-import com.tm.cgv.reservation.ResevationController;
-import com.tm.cgv.theater.TheaterService;
-import com.tm.cgv.theater.TheaterVO;
-
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
-
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
 import com.tm.cgv.timePrice.TimePriceService;
 import com.tm.cgv.timePrice.TimePriceVO;
 import com.tm.cgv.util.BitFilmType;
-
-import com.tm.cgv.util.Pager;
 import com.tm.cgv.util.MakeSerialCode;
-import com.tm.cgv.reservation.ReservationService;
+import com.tm.cgv.util.Pager;
 
 
 @Controller
@@ -80,7 +75,10 @@ public class AdminController {
 	private TimePriceService timePriceService;
 	@Autowired
 	private CouponInfoService couponInfoService;
-	
+	@Autowired
+	private PointHistoryService pointHistoryService;
+	@Autowired
+    RedisTemplate<String, Object> redisTemplate;
 	
 	
 	@GetMapping("/")
@@ -843,6 +841,59 @@ public class AdminController {
 		return mv;
 	}
 
+	
+	
+	//==============================
+	// point
+	//==============================
+	//포인트 사용 내역 정보 (조회)
+	
+	@GetMapping("admin/point/pointHistoryList")
+	public ModelAndView pointUsedList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//포인트 사용 내역 조회
+		List<PointHistoryVO> pointHistoryList = pointHistoryService.pointHistoryList(pager);
+		
+		mv.addObject("pager", pager);
+		mv.addObject("pointHistoryList", pointHistoryList);
+		mv.setViewName("admin/point/pointList");
+		
+		return mv;
+	}
+	
+	//포인트 적립 금액 변경 (redies사용)
+	@GetMapping("admin/point/accumulateManagement")
+	public ModelAndView pointAccumulateManagement() throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		Integer rate = (Integer)redisTemplate.opsForValue().get("cjDiscountRate");
+		System.out.println(rate);
+		
+		if(rate == null) {
+			redisTemplate.opsForValue().set("cjDiscountRate", 0);
+			rate = 0;
+		}
+
+		mv.addObject("rate",rate);
+		mv.setViewName("admin/point/pointForm");
+		return mv;
+	}
+
+	@ResponseBody
+	@PostMapping("admin/point/accumulateManagement")
+	public int pointAccumulateManagement(int rate) throws Exception{
+		int result = 0;
+		redisTemplate.opsForValue().set("cjDiscountRate", rate);
+		
+		//변경 유무 확인
+		Integer changeRate = (Integer)redisTemplate.opsForValue().get("cjDiscountRate");
+		if (changeRate == rate && changeRate !=null){
+			result = rate;
+        }
+		
+		return result;
+	}
 			
 	
 	

@@ -27,6 +27,7 @@
  		<typeAlias type="com.tm.cgv.seatSpace.SeatSpaceVO" alias="SeatSpaceVO"/>
  		<typeAlias type="com.tm.cgv.payment.PaymentVO" alias="PaymentVO"/>
  		<typeAlias type="com.tm.cgv.point.PointVO" alias="PointVO"/>
+ 		<typeAlias type="com.tm.cgv.pointHistory.PointHistoryVO" alias="PointHistoryVO"/>
  		<typeAlias type="com.tm.cgv.discountInfo.DiscountInfoVO" alias="DiscountInfoVO"/>
 		<typeAlias type="com.tm.cgv.couponInfo.CouponInfoVO" alias="CouponInfoVO"/>
 		<typeAlias type="com.tm.cgv.memberCoupon.MemberCouponVO" alias="MemberCouponVO"/>

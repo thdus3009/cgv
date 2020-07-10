@@ -54,7 +54,9 @@ label{
 					
 					<form action="./${path}" method="post" id="coupon-form" style="width: 500px; margin: 0 auto;">
 						<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
-						<input type="hidden" name="num" value="${couponInfoVO.num}" />
+						<c:if test="${path ne 'couponInsert'}">
+							<input type="hidden" name="num" value="${couponInfoVO.num}" />
+						</c:if>
 						<select id="selectBox" name="type">
 							<option value="2" selected="selected">CGV 할인쿠폰</option>
 							<option value="1">CGV 기프티콘</option>

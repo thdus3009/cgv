@@ -643,7 +643,11 @@
 
 
 	var data;
-	var memberID = `${memberVO.username}`;
+
+	//회원가입 되어있을때 - 비회원 예매일때 구분 필요 !!============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<
+	var memberID = `${memberVO.name}`;
+
+	console.log("MemberID : "+memberID);
 	
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){

@@ -1,11 +1,10 @@
 package com.tm.cgv.schedule;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +20,8 @@ public class Schedule {
 	private ReservationService reservationService;
 	@Autowired
 	private PointService pointService;
+	@Autowired
+    RedisTemplate<String, Object> redisTemplate;
 	
 //	@Scheduled(cron ="50 * * * * *")
 	public void cronSchedule() throws Exception{
@@ -32,6 +33,7 @@ public class Schedule {
 	
 	//자정에 결제금액에 해당하는 일정 포인트 지급 - (resevationTable이용)
 	@Scheduled(cron ="0 0 0 * * *")
+	//@Scheduled(cron ="* * * * * *")
 	public void pointSchedule() throws Exception{
 		Calendar cal = Calendar.getInstance();
 		String year = cal.get(Calendar.YEAR)+"";
@@ -51,11 +53,15 @@ public class Schedule {
 		reservationVO.setCreateAt(nowDate);
 		List<ReservationVO> reservationList = reservationService.pointAccumlate(reservationVO);
 		
+		//할인율 읽어와야됨 - redies
+		Integer rate = (Integer)redisTemplate.opsForValue().get("cjDiscountRate");
+		double changeRate = rate*0.01;
+		
 		int result = 0;
 		for (ReservationVO vo : reservationList) {
 			String uid = vo.getUid();
 			int totalPrice = vo.getTotalPrice();
-			int accumulatePoint = (int)(totalPrice * 0.02);
+			int accumulatePoint = (int)(totalPrice * changeRate);
 			
 			PointVO pointVO = new PointVO();
 			pointVO.setKind("sum");

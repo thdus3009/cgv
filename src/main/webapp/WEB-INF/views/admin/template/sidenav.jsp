@@ -50,7 +50,8 @@
 						<div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="/admin/coupon/couponList">쿠폰</a>
-								<a class="nav-link" href="/admin/point/pointList">포인트</a>
+								<a class="nav-link" href="/admin/point/pointHistoryList">포인트 사용내역</a>
+								<a class="nav-link" href="/admin/point/accumulateManagement">포인트 적립관리</a>
 							</nav>
 						</div>
 						<a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/bannerManage">
