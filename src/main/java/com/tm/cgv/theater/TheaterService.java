@@ -204,15 +204,15 @@ public class TheaterService {
 				seatSpaceRepository.seatSpaceInsert(seatSpaceVO);
 			}
 		}
-//		if(col_space!=null) {
-//			for(int i=0; i<col_space.length; i++) {
-//				System.out.println("i : " + i);
-//				seatSpaceVO.setRowOrCol(1);
-//				System.out.println("col : " + seatSpaceVO.getRowOrCol());
-//				seatSpaceVO.setIndex(Integer.parseInt(row_space[i]));
-//				seatSpaceRepository.seatSpaceInsert(seatSpaceVO);
-//			}
-//		}
+		if(col_space!=null) {
+			for(int i=0; i<col_space.length; i++) {
+				System.out.println("i : " + i);
+				seatSpaceVO.setRowOrCol(1);
+				System.out.println("col : " + seatSpaceVO.getRowOrCol());
+				seatSpaceVO.setIndex(Integer.parseInt(row_space[i]));
+				seatSpaceRepository.seatSpaceInsert(seatSpaceVO);
+			}
+		}
 		
 		
 		System.out.println("??????????");
@@ -240,7 +240,13 @@ public class TheaterService {
 				int seatNum = seatRepository.selectSeatNum(seatVO);
 				
 				//seatNum으로 seatBooking에 존재하는지 확인 후
+				//select movieNum from movieTime where theaterNum=2;
+				//1 4 5
 				//없으면 insert, 있으면 모두 업데이트
+				//insert into seatBooking (movieNum, reservationNum) values (5 ,0);
+				List<Integer> list = seatBookingRepository.selectMovieNum(theaterVO.getNum());
+				
+				
 				SeatBookingVO seatBookingVO = new SeatBookingVO();
 				seatBookingVO.setSeatNum(seatNum);
 				seatBookingVO.setReservationNum(0);
