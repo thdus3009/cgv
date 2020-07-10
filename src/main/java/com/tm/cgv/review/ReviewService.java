@@ -137,8 +137,17 @@ public class ReviewService {
 	
 	
 	public int review_Modal(ReviewVO reviewVO)throws Exception {
-		
+		//해당영화 봤는지 체크
+		int result = reviewRepository.reservationCheck(reviewVO);
+		if(result == 0) //해당 영화를 안봤다면
+			return 1000000;
+		//봤다면
 		return reviewRepository.review_Modal(reviewVO);
+	}
+	
+	public ReviewVO movieSelect_reviewUpdate(ReviewVO reviewVO)throws Exception {
+		
+		return reviewRepository.movieSelect_reviewUpdate(reviewVO);
 	}
 	
 }

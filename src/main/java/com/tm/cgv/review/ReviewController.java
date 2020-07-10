@@ -183,7 +183,7 @@ public class ReviewController {
 
 	@GetMapping("review_Update1")
 	@ResponseBody
-	public int review_Update1(ReviewVO reviewVO, ModelAndView mv)throws Exception {
+	public int review_Update1(ReviewVO reviewVO)throws Exception {
 		System.out.println(reviewVO.getReservationNum());
 		int result=0;
 		result = reviewService.review_Update1(reviewVO);
@@ -295,12 +295,28 @@ public class ReviewController {
 	}
 	
 	@GetMapping("review_Modal")
+	@ResponseBody
 	public int review_Modal(ReviewVO reviewVO)throws Exception {
-		
+
 		int count = reviewService.review_Modal(reviewVO);
-		System.out.println("count"+count);
+		System.out.println("count: "+count); //count: 1000000 > 리뷰작성불가 / count: 0 > 작성가능 / count: 1 > 수정가능 / count: 2~ > 가장 최신리뷰로 수정가능
 		return count;
 	}
+	
+	
+	@GetMapping("movieSelect_reviewUpdate")
+	@ResponseBody
+	public ReviewVO movieSelect_reviewUpdate(ReviewVO reviewVO)throws Exception {
+		
+		reviewVO = reviewService.movieSelect_reviewUpdate(reviewVO);
+		System.out.println("????? "+reviewVO.getReservationNum());
+		System.out.println("????? "+reviewVO.getTitle());
+		System.out.println("????? "+reviewVO.getEgg());
+		System.out.println("????? "+reviewVO.getContents());
+		return reviewVO;
+	}
+	
+	
 	// ---------------------------------------------------------------------------------
 	
 	//url?영화번호=00#리뷰페이지

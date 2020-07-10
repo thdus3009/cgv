@@ -11,6 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/movie/movieSelect2.css" rel="stylesheet" type="text/css"><!-- review -->
 
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
+<link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- chart CDN -->
@@ -82,7 +83,7 @@
 					</div>
 					<div class="box-contents">
 						<div class="title">
-							<span id="title">${vo.title}</span>
+							<span id="title1">${vo.title}</span>
 							<em class="round lightblue">
 								<span>현재 상영중</span>
 							</em>
@@ -333,56 +334,12 @@
 						
 						
 						</div>
-					<!--  class="active" -->
 
-						<!-- 리뷰 끝 -->
-						
-						<!-- 리뷰 시작 test -->
-<!-- 						<div class="wrap-persongrade">
-							<ul id="movie_point_list_container" class="point_col2">
-								<li class="liCommentFirst" data-spoilercnt="0" data-reportcnt="0">
-									<a href="" class="screen_spoiler">&nbsp;</a>
-									
-									리뷰 이미지 (movieSelect2.css참고)
-									<div class="box-image2">
-									
-									</div>
-											
-									계란,아이디								
-									<div class="writer-name" style="position: relative;">										 
-											<div class="id id_image" style="background: url('../images/movie/movieList/sprite_egg.png') no-repeat -20px -45px;"></div>   
-											<div class="id id_name">admin</div>
-									</div>
-									
-									리뷰 컨텐츠	
-									<div class="box-comment" style="padding-top: 20px;">
-										<p>좋아요 재밌어요!!</p>
-									</div>
-									
-									날짜, 좋아요
- 									<div class="box-contents"> 									
-										<ul class="writerinfo">											
-											<li class="writer-etc">
-												<span class="day">
-													<span class="date"> 2020-06-23</span> &ensp;|&ensp; <img class="date" alt="" src="../../images/like.png">
-												</span>
-												<span class="like1">0</span>
-											</li>
-										</ul>
-									</div> 
-									
-								</li>
-							</ul>
-						</div> -->
-						<!-- 리뷰 끝 -->
-						
+
+
 					</div>
 						
-						
-						<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
 
-							
-						
 					</div>
 				</div>
 			
@@ -390,7 +347,10 @@
 		</div>
 	</div>
 	
-	
+		
+	<!-- Modal ------------------------------------------------------------------------------------->
+	<c:import url="../template/modal.jsp"></c:import>	
+
 	<!-- 푸터 -------------------------------------------------------------------------------------->
 	<c:import url="../template/footer.jsp"></c:import>
 	
@@ -401,6 +361,8 @@
 
 <!-- 스크립트 모음 ---------------------------------------------------------------------------------------------->
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
+<!-- 글자 byte 체크 -->
+<script type="text/javascript" src="../js/review/checkByte.js"></script>
 
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
@@ -411,6 +373,11 @@ var uid = $(".username").val(); //아이디 세션값
 
 var select1 = "../review/movieSelect2";
 var reservationNum = 0;
+
+var g_num = 0;
+var g_title = "";
+var g_egg = 0;
+var g_contents = "";
 
 
 //페이지 들어가면 바로 실행(리뷰리스트)
@@ -640,36 +607,231 @@ $("#ajax_ms").on("click",".date",function(){
 
 //리뷰 update, write
 function review_Modal(){
-	alert(uid); //로그인한 session정보 넣기
-	alert(num4); //영화번호
-	
-/*  	$.ajax({
-		type:"GET",
-		url: "../review/review_Modal",
-		data:{
-			uid : uid,
-			movieNum : num4
-		},
-		success:function(data){
-			
-		}
-	})  */ 
-	
-//ajax로 해당 영화(var num4)의 review > count() 조회
+	//0. 로그인 확인
+	if(uid!=""){
+	//1. 이영화를 봤는지 확인(아이디와 영화번호에 해당하는 "reservation 정보"가 있는지 먼저 확인)
+	//2. 해당 영화를 봤다면 리뷰가 한개이상인지 확인 (리뷰>0 = 수정 , 리뷰=0 = 작성)
+ 	 	$.ajax({
+			type:"GET",
+			url: "../review/review_Modal",
+			data:{
+				uid : uid,
+				movieNum : num4
+			},
+			success:function(data){
+				if(data==1000000){ //해당 영화를 보지 않았을 경우에
+					if(confirm("실관람객에 한하여 관람평 작성이 가능합니다.\n실관람객 등록 페이지로 이동하시겠습니까?")){
+						window.location.href='http://localhost/review/reviewList';
+					}
+				//가장 최신쓴 "리뷰"의 reservationNum구하기(createAt은 notnull deleteAt은 null) 
+				//data가 0이면 작성, 숫자나오면 수정
+				}else if(data>=1){
+					if(confirm("이미 관람평 작성을 완료하셨습니다. 관람평을 수정하시겠습니까?\n(해당 영화의 리뷰를 2개 이상 작성하였을 시 가장 최신예매순의 리뷰가 수정됩니다.)")){
+				 	 	$.ajax({
+							type:"GET",
+							url: "../review/movieSelect_reviewUpdate",
+							data:{
+								uid : uid,
+								movieNum : num4
+							},
+							success:function(data){
+								 //console.log(data);
+								 //alert(data.contents);
+								 g_num = data.reservationNum
+								 g_title = data.title;
+								 g_egg = data.egg;
+								 g_contents = data.contents;
+
+								 document.getElementById("title").innerHTML =g_title; 
+								 document.getElementById("mContents").value =g_contents;
+								 if(g_egg==1){
+									 $('input:radio[name="egg"][value=1]').prop('checked', true);
+								 }else{
+								 	 $('input:radio[name="egg"][value=0]').prop('checked', true);
+								 }
+								//글자 byte조회
+								CheckByte(document.getElementById("mContents"));
+								 
+								$("#myModal").modal({backdrop: 'static', keyboard: false});
+							}	
+						})
+					}	
+				}else if(data==0){
+					//어떤 번호의 reservation의 num에다 review를 쓸건지(가장 최신순)
+					
+				}
+			}
+		})  
+
 		
-//success:function(data){}안에 if문
+	}else{
+		if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?")){
+			window.location.href='http://localhost/member/login';
+		}
+	}	
 
-	/* 영화를 보고, 영화 리뷰를 작성하였을 시 > 수정 */
-	//해당영화의 리뷰가 1개만 있을 경우
+}
+
+
+//모달 수정 >>> 첫번째 모달 확인버튼 클릭시
+$("#submitBtn1").click(function(e){
+var mContents = document.getElementById("mContents");
+g_contents = mContents.value;
+
+var eggList = document.getElementsByClassName("egg");
+for(i=0; i<eggList.length; i++){
+	if(eggList[i].checked == true){
+		g_egg = eggList[i].value;
+		console.log("egg:"+g_egg);
+		break;
+	}
+}
+
+if(mContents.value.length>=10){
 	
-	//해당영화의 리뷰가 2개이상 있을 경우
-	confirm("해당 영화의 리뷰를 2개 이상 작성하였으므로 \n제일 마지막 리뷰가 수정됩니다. 리뷰를 수정하시겠습니까? ");
+	if(confirm("관람평이 수정되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
 
-	/* 영화를 보고, 영화 리뷰를 아직 미작성하였을 시  */
+		var Up_popupBtn2List = document.getElementsByClassName('Up_popupBtn2');
+		
+		for(i=0; i<Up_popupBtn2List.length; i++){
+			if(Up_popupBtn2List[i].dataset.num3 == g_num){
+				console.log("list.dataset.num : "+Up_popupBtn2List[i].dataset.num3);
+				//2번째 모달로 이동
+				//(i번째 2번째모달 이동버튼 클릭)
+				Up_popupBtn2List[i].click();
+				break;
+			} 
+		}
+		
+	}else{
+		//여기서는 reservationNum, contents, egg정보만을 넘겨준다.
+		
+		console.log("아니오");
+		
+		$.ajax({
 
-	/* 로그인한 아이디가 (httpSession) 해당영화를 아직 보지 않았을 시에(reservation정보가 있어야 review를 쓸 수 있다.) */
+			type:"GET",
+			url:"../review/review_Update1",
+			data:{
+				reservationNum : g_num,
+				egg : g_egg,
+				contents : g_contents,
+				_csrf : $("#_csrf").val(),
+			},
+			success:function(data){
+				alert("수정이 완료되었습니다.");
+				location.reload();
+				
+			}
+		})
+		
+	}
+	
+	//팝업창 닫히고 내용 초기화(mContents, data-dismiss="modal")
+
+	
+	$("#exit").click();
+
+						
+}else{
+	alert("문자를 포함하여 10자 이상(공백 제외) 작성하셔야 등록됩니다.");
+	e.preventDefault();
 	
 }
+
+ });
+
+//모달 수정22 >>> 2번째 모달들어갈때 checked초기화
+$(".Up_popupBtn2").click(function(){
+	
+	// init
+	$(".charmPoint").prop("checked", false);
+	$(".emotionPoint").prop("checked", false);
+});
+
+var g_emotionPoint = 0;
+var g_charmPoint = 0;
+//3. 두 번째 모달
+	 $("#submitBtn2").click(function(e){
+	 //null값
+	 g_charmPoint = getCharmPoint();
+	 g_emotionPoint = getEmotionPoint();
+	 
+	if(g_charmPoint!=null && g_emotionPoint!=null){
+	
+		if(g_charmPoint==0){
+			alert("매력포인트를 1개 이상 선택해주세요.")	
+		} else{
+			if(g_emotionPoint==0){
+				alert("감정포인트를 1개 이상 선택해주세요.")
+			}else {
+				//여기서는 reservationNum, contents, egg, emotionPoint, charmPoint 정보를 넘겨준다.
+
+					$.ajax({
+
+					type:"GET",
+					url:"../review/review_Update2",
+					data:{
+						reservationNum : g_num,
+						egg : g_egg,
+						contents : g_contents,
+						charmPoint: g_charmPoint,
+						emotionPoint: g_emotionPoint,
+						_csrf : $("#_csrf").val(),
+					},
+					success:function(data){
+						alert("수정이 완료되었습니다.");
+						location.reload();
+						
+					}
+				}) 
+				
+				 $("#exit2").click();
+				 
+					
+			}
+		}
+	}
+ });
+
+
+		
+//	 ------------------------------------------------------------------------------
+	 
+	 //charmpoint
+	 function getCharmPoint() {
+		 
+		var charmPoint = 0;
+		 
+		var values = document.getElementsByClassName("charmPoint");
+		 
+		for(var i=0; i<values.length; i++) {
+			if(values[i].checked){
+					
+			charmPoint += values[i].dataset.charm * 1;
+			}					
+		}
+		
+		return charmPoint;
+	 }
+	 
+	 //emotionpoint
+	 function getEmotionPoint() {
+		 
+			var emotionPoint = 0;
+			 
+			var values = document.getElementsByClassName("emotionPoint");
+			 
+			for(var i=0; i<values.length; i++) {
+				if(values[i].checked){
+				emotionPoint += values[i].dataset.emotion * 1;
+				}					
+			}
+			return emotionPoint;
+		 }
+	 
+	 
+//	 ------------------------------------------------------------------------------
 
 
 </script>

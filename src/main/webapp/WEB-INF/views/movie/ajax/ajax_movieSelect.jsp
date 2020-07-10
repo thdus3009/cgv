@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
  <div class="container1" >
 <div class="row" style="width: 800px; height: 630px;">
 	<c:forEach items="${review}" var="vo2">
@@ -72,6 +73,9 @@
 			</li>
 		</ul>
 	</div>
+	<!-- Modal 2 Button-->
+<!-- data-toggle="modal" data-target="#myModal2"  -->
+<button type="button" class="Up_popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num3="${vo2.reservationNum}"></button>
 	</c:forEach>
 </div>
 </div> 
@@ -85,6 +89,8 @@
  </c:forEach>
  
 
+ 
+ <!-- ------------------------------------------------------------------------------- -->
  
  
  </ul>

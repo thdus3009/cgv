@@ -55,6 +55,10 @@ public interface ReviewRepository {
 	//해당 영화의 리뷰 총 갯수
 	public long reviewCount(int movieNum);
 	
+	//해당 영화 봤는지 체크
+	public int reservationCheck(ReviewVO reviewVO);
 	//리뷰 모달창 띄우기
 	public int review_Modal(ReviewVO reviewVO);
+	
+	public ReviewVO movieSelect_reviewUpdate(ReviewVO reviewVO);
 }
