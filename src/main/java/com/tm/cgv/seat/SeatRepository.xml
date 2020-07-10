@@ -53,19 +53,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select max(colIdx) from seat where theaterNum = #{theaterNum}
  	</select>
  	
- 	
- 	
-	
 	<select id="seatSelect" parameterType="SeatVO" resultType="SeatVO">
 		select * from seat where theaterNum=#{theaterNum}
 	</select>
  
- 	<select id="selectSeatNum" parameterType="Integer" resultType="SeatVO">
+ 	<select id="selectSeatNum" parameterType="SeatVO" resultType="Integer">
  		select num from seat where rowIdx=#{rowIdx} and colIdx=#{colIdx} and theaterNum=#{theaterNum}
  	</select>
  	
  	<update id="seatUpdate" parameterType="SeatVO">
- 		update seat set rowIdx=#{rowIdx}, colIdx=#{colIdx}, grade=#{grade} where theaterNum=#{theaterNum}
+ 		update seat set rowIdx=#{rowIdx}, colIdx=#{colIdx}, grade=#{grade} where num=#{num}
  	</update>
  	
 

@@ -183,7 +183,7 @@
 						<thead>
 							<tr class="admin-tr">
 								<th style="width:200px">${vo.num}</th>
-								<th style="width:200px">${vo.category}</th>
+								<th style="width:200px">${vo.kind}</th>
 								<th>${vo.title}</th>
 								<th style="width:200px">시작일 : ${vo.startDate}</th>
 								<th style="width:200px">종료일 : ${vo.endDate}</th>
@@ -227,6 +227,17 @@
 			</footer>
 		</div>
 	</div>
+	<script type="text/javascript">
+		//delete submit
+		$("#de").click(function(){
+			//정말 삭제할 거냐고 묻는 alert창
+			var check = confirm("삭제하시겠습니까?");
+			if(check){
+				alert(${vo.num});
+				location.href="./eventDelete?num="+${vo.num};
+			}
+		});
+	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 		crossorigin="anonymous"></script>
 	<script

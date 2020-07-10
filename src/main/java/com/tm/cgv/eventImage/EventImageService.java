@@ -23,25 +23,26 @@ public class EventImageService {
 	
 	
 	public int fileDelete(EventImageVO eventImageVO) throws Exception {
-		//DB가서 정보 지우고 HDD 파일 지우기
-		//System.out.println("num : " + num);
-		FileManager fileManager = new FileManager();
 
-		System.out.println(eventImageVO.getNum() + "...");
-		int result = eventImageRepository.deleteImage(eventImageVO.getNum());
+		FileManager fileManager = new FileManager();
+		filePath = "images/event/eventList/eventImage/";
+
 		
+		//HDD삭제
+		System.out.println(filePathGenerator);
+		System.out.println("........"+filePath);
 		
-		if(result>0) {
-			//HDD삭제
-			System.out.println("........");
-			//String extendPath = FilePathGenerator.addTimePath(filePath);
-			File dest = filePathGenerator.getUseClassPathResource(filePath);
-			System.out.println("dest : " + dest);
-			System.out.println(eventImageVO.getFileName());
-			result = fileManager.deleteFile(eventImageVO.getFileName(), dest);
-			
-		}
+		File dest = filePathGenerator.getUseClassPathResource(filePath);
+		System.out.println("dest : " + dest);
+		System.out.println(eventImageVO.getFileName());
+		int result = fileManager.deleteFile(eventImageVO.getFileName(), dest);
+		
 		
 		return result;
+	}
+	
+	public EventImageVO selectImage(int num) throws Exception {
+		System.out.println("num : " + num);
+		return eventImageRepository.selectImage(num);
 	}
 }

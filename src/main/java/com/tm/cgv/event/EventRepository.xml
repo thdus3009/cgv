@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.event.EventRepository">
 	<resultMap type="EventVO" id="selectList">
 		<id column="num" property="num"></id>
-		<result column="category" property="category"/>
+		<result column="kind" property="kind"/>
 		<result column="title" property="title"/>
 		<result column="startDate" property="startDate"/>
 		<result column="endDate" property="endDate"/>
@@ -21,13 +21,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 
-	<select id="eventList" resultType="EventVO">
-		select * from event
+	<select id="eventList" parameterType="Pager" resultType="EventVO">
+		select * from event where 
+ 		title like concat('%',#{search},'%')
+ 		<if test="kind != ''">
+ 		<choose>
+ 			<when test="kind=='special'">	
+ 				and kind='special'
+ 			</when>
+ 			<when test="kind=='pub'">
+ 				and kind='pub'
+ 			</when>
+ 			<when test="kind=='discount'">
+ 				and kind='discount'
+ 			</when>
+ 			<otherwise>
+ 				and kind='membership'
+ 			</otherwise>
+ 		</choose>
+ 		</if>
+ 		order by num desc
+ 		limit #{startRow},#{perPage}
 	</select>
 	
 	<insert id="eventInsert" parameterType="EventVO" useGeneratedKeys="true" keyProperty="num">
-		insert into event (num, category, title, startDate, endDate, contents) 
-		values (#{num}, #{category}, #{title}, #{startDate}, #{endDate}, #{contents})
+		insert into event (num, kind, title, startDate, endDate, contents) 
+		values (#{num}, #{kind}, #{title}, #{startDate}, #{endDate}, #{contents})
 	</insert>
 	
 	<select id="eventSelect" parameterType="Integer" resultMap="selectList">
@@ -41,9 +60,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="eventUpdate" parameterType="EventVO">
-		update event set category=#{category}, title=#{title}, 
+		update event set kind=#{kind}, title=#{title}, 
 		startDate=#{startDate}, endDate=#{endDate}, contents=#{contents}
 		where num=#{num}
 	</update>
+	
+	<select id="eventCount" resultType="Integer">
+		select count(num) from event where 
+ 		title like concat('%',#{search},'%')
+ 		<if test="kind != ''">
+ 		<choose>
+ 			<when test="kind=='special'">	
+ 				and kind='special'
+ 			</when>
+ 			<when test="kind=='pub'">
+ 				and kind='pub'
+ 			</when>
+ 			<when test="kind=='discount'">
+ 				and kind='discount'
+ 			</when>
+ 			<otherwise>
+ 				and kind='membership'
+ 			</otherwise>
+ 		</choose>
+ 		</if>
+ 		order by num desc
+ 		
+	</select>
+	
+	<delete id="eventDelete" parameterType="Integer">
+		delete from event where num=#{num}
+	</delete>
+	
+	
 	
 </mapper>

@@ -155,7 +155,7 @@
 														<tbody>
 															<div class="form-group">
 														   	 <label for="local">분류:</label>
-														   	 <select class="" id="" name="category">
+														   	 <select class="" id="" name="kind">
 														   	 	<option value="스페셜이벤트">스페셜이벤트</option>
 														   	 	<option value="제휴/할인">제휴/할인</option>
 														   	 	<option value="멤버십">멤버십</option>
@@ -306,6 +306,9 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
+
+		var deleteImage = [];
+
 	
 		$(".fileDelete").each(function(index){
 			$(this).click(function(){
@@ -321,7 +324,7 @@
 					alert("tp :" + tp)
 					
 					
-					$.get("./fileDelete",{num:$(this).attr("id"),fileName:$(this).attr("name")}, function(data){
+				/* 	$.get("./fileDelete",{num:$(this).attr("id"),fileName:$(this).attr("name")}, function(data){
 						alert(data);
 						
 						if(data>0){
@@ -335,7 +338,14 @@
 							alert(data);
 							alert("파일 삭제 실패ㅠㅠ");
 						}
-					});
+					}); */
+					s.parent().find('input').remove();
+					s.parent().parent().html('<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">');
+					
+					deleteImage.push(s.attr('id'));
+					alert(deleteImage);
+					$("#fo").append('<input type="hidden" name="delNum" value="'+ deleteImage[deleteImage.length-1] +'">');
+					
 				}  
 				
 			});

@@ -18,7 +18,7 @@ public class FilePathGenerator {
    @Autowired
    private ResourceLoader resourceLoader;
    
-   @Autowired
+   //@Autowired
    private ServletContext servletContext;
    
    
@@ -47,6 +47,7 @@ public class FilePathGenerator {
    
    
    public File getUseClassPathResource(String path) throws Exception{
+	   System.out.println("ㅠㅠㅠㅠㅠㅠ");
       //ClassPathResource
       //classes 경로를 받아 오기 위해서 사용
       //ResourceLoader와 같지만 

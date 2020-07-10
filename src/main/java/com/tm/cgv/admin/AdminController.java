@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
 import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_eventList;
 
 @Controller
 @RequestMapping("/admin/**")
@@ -526,14 +528,16 @@ public class AdminController {
 	}
 	
 	@PostMapping("cinema/theaterUpdate")
-	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_row, String [] stop_col) throws Exception {
+	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_rc, String [] stop_idx, int cinemaNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("-------update-------");
+		//System.out.println("cinemaNum : " + cinemaNum);
 		//System.out.println(stop_row[0]);
 		//System.out.println(stop_col[0]);
 		System.out.println(theaterVO.getName());
-		theaterService.theaterUpdate(theaterVO, filmType, row, col, grade, row_space, col_space, stop_row, stop_col);
+		theaterService.theaterUpdate(theaterVO, filmType, row, col, grade, row_space, col_space, stop_rc, stop_idx);
 		
-		mv.setViewName("redirect:./theaterSelect?num="+theaterVO.getNum());
+		mv.setViewName("redirect:./theaterSelect?num="+theaterVO.getNum()+"&cinemaNum="+cinemaNum);
 		return mv;
 	}
 	
@@ -617,13 +621,36 @@ public class AdminController {
 	// event
 	//==============================
 	@GetMapping("event/eventList")
-	public ModelAndView eventList() throws Exception {
+	public ModelAndView eventList(Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<EventVO> list = eventService.eventList();
+		List<EventVO> list = eventService.eventList(pager);
+		System.out.println("----test----");
+		System.out.println(pager.getKind() + " - kind");
+		if(list !=null) {
+			
+			System.out.println("---controller---");
+			System.out.println(pager.getStartNum());
+			System.out.println(pager.getLastNum());
+			mv.addObject("pager", pager);
+			mv.addObject("list", list);
+			mv.setViewName("admin/event/eventList");
+		}
 		
+		return mv;
+	}
+	
+	@PostMapping("event/selectKind")
+	@ResponseBody
+	public ModelAndView selectKind(String kind, Pager_eventList pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<EventVO> list = eventService.eventList(pager);
+		System.out.println(list.size() + " :: size");
+		
+		mv.addObject("pager", pager);
 		mv.addObject("list", list);
-		mv.setViewName("admin/event/eventList");
+		mv.setViewName("admin/event/ajax/selectKind");
 		
 		return mv;
 	}
@@ -638,6 +665,7 @@ public class AdminController {
 	@PostMapping("event/eventInsert")
 	public ModelAndView eventInsert(EventVO eventVO, List<MultipartFile> files) throws Exception{
 		System.out.println(">.<");
+		System.out.println(eventVO.getKind());
 		ModelAndView mv = new ModelAndView();
 		
 		int result = eventService.eventInsert(eventVO, files);
@@ -671,24 +699,39 @@ public class AdminController {
 	}
 
 	@PostMapping("event/eventUpdate")
-	public ModelAndView eventUpdate(EventVO eventVO, List<MultipartFile> files, String type) throws Exception {
+	public ModelAndView eventUpdate(EventVO eventVO, List<MultipartFile> files, String [] delNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(files.size());
-		System.out.println("type : " + type);
-		eventService.eventUpdate(eventVO, files, type);
+		System.out.println("fileSize : " + files.size());
+		System.out.println("delNum : " + delNum[0]);
+	
+		eventService.eventUpdate(eventVO, files, delNum);
+		
+		
 		mv.setViewName("redirect:admin/event/eventList");
 		return mv;
 	}
 	
-	@GetMapping("event/fileDelete")
-	@ResponseBody
-	public int fileDelete(EventImageVO eventImageVO) throws Exception {
+	@GetMapping("event/eventDelete")
+	public ModelAndView eventDelete(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("ㅠ.ㅠ");
-		System.out.println(eventImageVO.getNum());
-		System.out.println(eventImageVO.getFileName());
-		int result = eventImageService.fileDelete(eventImageVO);
-		System.out.println(result);
-		return result;
+		System.out.println("num : " + num);
+		int result = eventService.eventDelete(num);
+		if(result>0) {
+			mv.setViewName("redirect:admin/event/eventList");
+		}
+		return mv;
 	}
+	
+	
+//	@GetMapping("event/fileDelete")
+//	@ResponseBody
+//	public int fileDelete(EventImageVO eventImageVO) throws Exception {
+//		ModelAndView mv = new ModelAndView();
+//		System.out.println("ㅠ.ㅠ");
+//		System.out.println(eventImageVO.getNum());
+//		System.out.println(eventImageVO.getFileName());
+//		int result = eventImageService.fileDelete(eventImageVO);
+//		System.out.println(result);
+//		return result;
+//	}
 }

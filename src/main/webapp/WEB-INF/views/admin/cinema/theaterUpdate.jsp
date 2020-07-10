@@ -25,6 +25,7 @@
 						<div class="form-group">
 							<label class="theaterLebel" for="cinemaNum">CinemaNum:</label>
 							<input type="text" class="form-control selectcinenum" id="name" value="${cine.num} / ${cine.name}" readonly="readonly">
+							<input type="hidden" name="cinemaNum" value="${cine.num}">
 							<br>
 							<label class="theaterLebel lebelname" for="name">Name:</label>
 							<input type="text" class="form-control selectcinenum" id="name" name="name" value="${theater.name}">
@@ -721,8 +722,8 @@
 
 		for(n=0; n<stopList.length; n++){
 			console.log(stopList[n])
-			var r = '<input type="hidden" name="stop_row" value="'+stopList[n].r+'">';
-			r = r + '<input type="hidden" name="stop_col" value="'+stopList[n].c+'">';
+			var r = '<input type="hidden" name="stop_rc" value="'+stopList[n].r+'">';
+			r = r + '<input type="hidden" name="stop_idx" value="'+stopList[n].c+'">';
 			$("#frm").append(r);
 			
 		}

@@ -1,6 +1,5 @@
 package com.tm.cgv.eventImage;
 
-import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,5 +12,7 @@ public interface EventImageRepository {
 	public int deleteImage(int num) throws Exception;
 	
 	public int updateImage(EventImageVO eventImageVO) throws Exception;
+	
+	public EventImageVO selectImage(int num) throws Exception; 
 	
 }

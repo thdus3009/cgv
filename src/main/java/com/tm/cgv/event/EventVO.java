@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class EventVO {
 	private int num;
-	private String category;
+	private String kind;
 	private String title;
 	private String contents;
 	private Date startDate;

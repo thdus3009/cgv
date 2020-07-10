@@ -1,7 +1,6 @@
 package com.tm.cgv.event;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.eventImage.EventImageRepository;
+import com.tm.cgv.eventImage.EventImageService;
 import com.tm.cgv.eventImage.EventImageVO;
 import com.tm.cgv.util.FileManager;
 import com.tm.cgv.util.FilePathGenerator;
+import com.tm.cgv.util.Pager_eventList;
 
 @Service
 public class EventService {
@@ -27,13 +29,36 @@ public class EventService {
 	@Value("${board.event.filePath}")
 	private String filePath;
 	
+	@Autowired
+	private FilePathGenerator filePathGenerator;
 	
-	public List<EventVO> eventList() throws Exception {
-		return eventRepository.eventList();
+	@Autowired
+	private EventImageService eventImageService;
+	
+	public List<EventVO> eventList(Pager_eventList pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		pager.makeRow();
+		System.out.println("----service----");
+		System.out.println(pager.getKind());
+		long totalCount = eventRepository.eventCount(pager);
+		pager.makeBlock(totalCount);
+		
+		System.out.println("block");
+		System.out.println(pager.getTotalBlock());
+		System.out.println("startNum : " + pager.getStartNum());
+		System.out.println("lastNum : " + pager.getLastNum());
+		List<EventVO> list = eventRepository.eventList(pager);
+		
+		
+		
+		return list;
 	}
 
 	@Transactional
 	public int eventInsert(EventVO eventVO, List<MultipartFile> files) throws Exception {
+		System.out.println("filePath : " + filePath);
+		
 		//받아온 EventVO Event table에 삽입
 		int result = eventRepository.eventInsert(eventVO);
 		//System.out.println(result);
@@ -72,13 +97,36 @@ public class EventService {
 		return result;
 	}
 	
+	private EventImageVO selectImage(int num) throws Exception {
+		System.out.println("num : " + num);
+		return eventImageRepository.selectImage(num);
+	}
+	
+	private int fileDelete(EventImageVO eventImageVO) throws Exception {
+
+		FileManager fileManager = new FileManager();
+		filePath = "images/event/eventList/eventImage/";
+
+		
+		//HDD삭제
+		System.out.println(filePathGenerator);
+		System.out.println("........"+filePath);
+		
+		File dest = filePathGenerator.getUseClassPathResource(filePath);
+		System.out.println("dest : " + dest);
+		System.out.println(eventImageVO.getFileName());
+		int result = fileManager.deleteFile(eventImageVO.getFileName(), dest);
+		
+		
+		return result;
+	}
 	
 	
 	public EventVO eventSelect(int num) throws Exception {
 		return eventRepository.eventSelect(num);
 	}
 	
-	public int eventUpdate(EventVO eventVO, List<MultipartFile> files, String type) throws Exception {
+	public int eventUpdate(EventVO eventVO, List<MultipartFile> files, String [] delNum) throws Exception {
 		
 		System.out.println("service");
 		System.out.println(eventVO.getTitle());
@@ -86,6 +134,14 @@ public class EventService {
 		int result = eventRepository.eventUpdate(eventVO); //event table update
 		
 		
+		//이벤트 테이블은 그대로 업데이트
+		//받아온 delNum을 읽은 후
+		//일단 그것들의 파일을 삭제 후 다시 삽입 > 테이블까지 업데이트
+
+		//두 개 다 삭제 후 다시 삽입 > 그대로 
+		//하나만 삭제 후 다시 삽입 > 받아온 delNum으로 그거만 삭제 후 넣기
+		
+		//
 		FilePathGenerator filePathGenerator = new FilePathGenerator();
 		String path = FilePathGenerator.addTimePath("")+"\\";
 	    System.out.println(path+"path!!!!");
@@ -94,39 +150,67 @@ public class EventService {
 		FileManager fileManager = new FileManager();
 		EventImageVO eventImageVO = new EventImageVO();
 		
+		//
+		
 		
 		if(files.size()==2) {
 			//두 사진 모두 변경했을 경우
 			//첫번째 파일 저장
 			System.out.println("파일 2개 변경시");
+			EventImageVO vo = this.selectImage(Integer.parseInt(delNum[0]));
+			this.fileDelete(vo);  //기존의 파일 삭제
+			
+			
 			MultipartFile tmp = files.remove(0);
+			
 			eventImageVO.setEventNum(eventVO.getNum());
-	    	String fileName = fileManager.saveFileCopy(tmp, file);
-	    	eventImageVO.setType(0);
+	    	String fileName = fileManager.saveFileCopy(tmp, file);	//다시 저장
+	    	eventImageVO.setNum(Integer.parseInt(delNum[0]));
 	    	eventImageVO.setFileName(path+fileName);
 	    	eventImageVO.setOriginName(tmp.getOriginalFilename());
-		    eventImageRepository.insertImage(eventImageVO);
+	    	
+	    	System.out.println("새 파일 네임 : " + eventImageVO.getFileName());
+		    eventImageRepository.updateImage(eventImageVO);	//테이블 업데이트
 		    
 		    //두번째 파일 저장
-		    fileName = fileManager.saveFileCopy(files.get(0), file);
-		    eventImageVO.setType(1);
+			vo = this.selectImage(Integer.parseInt(delNum[1]));
+			this.fileDelete(vo);  //기존의 파일 삭제
+			
+		    fileName = fileManager.saveFileCopy(files.get(0), file);	//다시 저장
+		    
+		    eventImageVO.setNum(Integer.parseInt(delNum[1]));
 	    	eventImageVO.setFileName(path+fileName);
 	    	eventImageVO.setOriginName(files.get(0).getOriginalFilename());
-		    eventImageRepository.insertImage(eventImageVO);
+	    	
+	    	eventImageRepository.updateImage(eventImageVO);	//테이블 업데이트
+		    
+		    
+		    
 		}else if(files.size()==1) {
 			//이미지 하나만 바뀐 경우
 			System.out.println("파일 1개 변경시");
+			
+			EventImageVO vo = this.selectImage(Integer.parseInt(delNum[0]));
+			this.fileDelete(vo);  //기존의 파일 삭제
+			
 			String fileName = fileManager.saveFileCopy(files.get(0), file);
-			eventImageVO.setEventNum(eventVO.getNum());
-		    eventImageVO.setType(Integer.parseInt(type));
+			eventImageVO.setNum(Integer.parseInt(delNum[0]));
 	    	eventImageVO.setFileName(path+fileName);
 	    	eventImageVO.setOriginName(files.get(0).getOriginalFilename());
-		    eventImageRepository.insertImage(eventImageVO);
+	    	
+	    	System.out.println("변경하는 이미지 넘 : " + Integer.parseInt(delNum[0]));
+	    	System.out.println("새 파일 네임 : " + eventImageVO.getFileName());
+	    	eventImageRepository.updateImage(eventImageVO);	//테이블 업데이트
 		}
-		
-		
-		
 		
 		return result;
 	}
+	
+	
+	
+	public int eventDelete(int num) throws Exception {
+		return eventRepository.eventDelete(num);
+		
+	}
+	
 }

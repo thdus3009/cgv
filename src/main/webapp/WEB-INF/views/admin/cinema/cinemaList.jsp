@@ -166,6 +166,7 @@
 
 				$.post("./cinemaList",{"local":local, "_csrf": $("#_csrf").val()},function(data){
 					$("#tb").html(data);
+					console.log(data);
 				});
             }); 
 		</script>

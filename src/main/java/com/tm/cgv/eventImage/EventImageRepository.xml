@@ -8,12 +8,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{eventNum}, #{fileName}, #{originName}, #{type})
 	</insert>
 	
-	<delete id="deleteImage" parameterType="Integer">
+<!-- 	<delete id="deleteImage" parameterType="Integer">
 		delete from eventImage where num=#{num}
-	</delete>
+	</delete> -->
 	
 	<update id="updateImage" parameterType="EventImageVO">
 		update eventImage set fileName=#{fileName}, originName=#{originName}
-		where eventNum=#{eventNum} and type=#{type}
+		where num=#{num}
 	</update>
+	
+	<select id="selectImage" parameterType="Integer" resultType="EventImageVO">
+		select * from eventImage where num=#{num}
+	</select>
 </mapper>

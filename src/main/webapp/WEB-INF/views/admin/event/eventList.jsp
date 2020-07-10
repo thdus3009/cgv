@@ -63,10 +63,11 @@
 				<div class="container-fluid">
 					<h1>Event List</h1>
 					<ol class="cinema-ol">
-						<li class="breadcrumb-item active"><a href="./cinemaList">전체보기</a></li>
-						<li class="breadcrumb-item active"><a href="#">SPECIAL</a></li>
-						<li class="breadcrumb-item active"><a href="#">영화/예매</a></li>
-						<li class="breadcrumb-item active"><a href="#">멤버십/CLUB</a></li>
+						<li class="breadcrumb-item active"><a href="./eventList">전체보기</a></li>
+						<li class="breadcrumb-item active"><a href="#" class="kind" id="special">SPECIAL</a></li>
+						<li class="breadcrumb-item active"><a href="#" class="kind" id="discount">제휴/할인</a></li>
+						<li class="breadcrumb-item active"><a href="#" class="kind" id="membership">멤버십/CLUB</a></li>
+						<li class="breadcrumb-item active"><a href="#" class="kind" id="pub">PUB이벤트</a></li>
 					</ol>
 
 
@@ -95,7 +96,7 @@
 								<c:forEach items="${list}" var="vo">
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>
-										<td class="ate-center">${vo.category}</td>
+										<td class="ate-center">${vo.kind}</td>
 										<td class="ate-center">
 											<a href="../event/eventSelect?num=${vo.num}">${vo.title}</a>
 										</td>
@@ -116,9 +117,8 @@
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-									var="p">
-									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+									<li><a href="./eventList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
@@ -142,13 +142,20 @@
         	
         	console.log("ㅎㅎ");
         	var local = '';
-         	$(".breadcrumb-item>a").click(function(){
-				local = $(this).text();
+         	$(".kind").click(function(){
+             	alert($(this).attr("id"))
+				kind = $(this).attr("id");
 
-				$.post("./cinemaList",{"local":local, "_csrf": $("#_csrf").val()},function(data){
+				$.post("./selectKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){
+					console.log(data);
 					$("#tb").html(data);
 				});
             }); 
+
+
+			
+
+            
 		</script>
 		
 		<script src="js/scripts.js"></script>
