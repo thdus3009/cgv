@@ -638,15 +638,15 @@
 	console.log($(".theater-area-list > ul > li").length);
 
 	var data;
-	var memberVO = `${memberVO}`;
-	var beMemberVO = `${beMemberVO}`;
+	var memberId = `${memberVO.username}`;
+	var beMemberVO = `${beMemberVO.uid}`;
 
 
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
 		//결제 작업을 위한 값 - 이니시스 
 		
-		if(memberVO != ''){
+		if(memberId != ''){
 			data = {
 				tel : `${memberVO.phone}`,
 				email : `${memberVO.email}`,
