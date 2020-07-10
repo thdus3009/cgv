@@ -413,7 +413,7 @@
 			
 				</div>
 				<div class="linkbar">
-					<a href="#" class="join_member">회원가입</a>
+					<a href="/member/memberTerms" class="join_member">회원가입</a>
 					<a href="#" class="join_guest">비회원 예매</a>
 					<a href="#" class="id_find">아이디찾기</a>
 					<a href="#" class="pw_find">비밀번호찾기</a>
