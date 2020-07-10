@@ -150,4 +150,9 @@ public class ReviewService {
 		return reviewRepository.movieSelect_reviewUpdate(reviewVO);
 	}
 	
+	public ReviewVO movieSelect_reviewWrite(ReviewVO reviewVO)throws Exception {
+		
+		return reviewRepository.movieSelect_reviewWrite(reviewVO);
+	}
+	
 }

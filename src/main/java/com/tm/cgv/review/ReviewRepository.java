@@ -61,4 +61,6 @@ public interface ReviewRepository {
 	public int review_Modal(ReviewVO reviewVO);
 	
 	public ReviewVO movieSelect_reviewUpdate(ReviewVO reviewVO);
+	
+	public ReviewVO movieSelect_reviewWrite(ReviewVO reviewVO);
 }

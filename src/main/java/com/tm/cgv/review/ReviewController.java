@@ -316,6 +316,15 @@ public class ReviewController {
 		return reviewVO;
 	}
 	
+	@GetMapping("movieSelect_reviewWrite")
+	@ResponseBody
+	public ReviewVO movieSelect_reviewWrite(ReviewVO reviewVO)throws Exception {
+		
+		reviewVO = reviewService.movieSelect_reviewWrite(reviewVO);
+
+		return reviewVO;
+	}
+	
 	
 	// ---------------------------------------------------------------------------------
 	

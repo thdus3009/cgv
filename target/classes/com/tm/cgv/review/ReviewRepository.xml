@@ -194,7 +194,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where A.rownum = 1
 	</select>
 	
-	
+	<select id="movieSelect_reviewWrite" parameterType="ReviewVO" resultType="ReviewVO">
+		select A.num,A.title from 
+		(select @ROWNUM:=@ROWNUM+1 as rownum, RE.* 
+		from (select R.*,M.title from
+		(select * from reservation where createAt is not null and deleteAt is null and uid=#{uid} and movieNum=#{movieNum} order by num desc) R 
+		inner join (select num, title from movieInfo) M
+		on(M.num = R.movieNum)) RE, (select @ROWNUM:=0) RO 
+		) A 
+		where A.rownum = 1
+	</select>
 	
 	<!-- ........................................................................................... -->
 

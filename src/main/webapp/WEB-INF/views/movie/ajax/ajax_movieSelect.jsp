@@ -73,9 +73,9 @@
 			</li>
 		</ul>
 	</div>
-	<!-- Modal 2 Button-->
-<!-- data-toggle="modal" data-target="#myModal2"  -->
+<!-- Modal2 Update Button-->
 <button type="button" class="Up_popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num3="${vo2.reservationNum}"></button>
+
 	</c:forEach>
 </div>
 </div> 
@@ -87,12 +87,11 @@
  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
  	<li class="page1" id="page1${i}" name="${i}" data-page1="${i}"><a href="javascript:void(0);">${i}</a></li>
  </c:forEach>
- 
 
- 
- <!-- ------------------------------------------------------------------------------- -->
- 
- 
  </ul>
+ 
+ <!-- Modal2 Write Button-->
+<button type="button" id="popupBtn2" data-toggle="modal" data-target="#myModall2" style="display: none;"></button>
+ 
  
  

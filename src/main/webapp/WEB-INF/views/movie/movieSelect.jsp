@@ -350,7 +350,8 @@
 		
 	<!-- Modal ------------------------------------------------------------------------------------->
 	<c:import url="../template/modal.jsp"></c:import>	
-
+	<c:import url="../template/modal2.jsp"></c:import>
+	
 	<!-- 푸터 -------------------------------------------------------------------------------------->
 	<c:import url="../template/footer.jsp"></c:import>
 	
@@ -363,6 +364,7 @@
 <script type="text/javascript" src="../js/bbsWrite.js"></script>
 <!-- 글자 byte 체크 -->
 <script type="text/javascript" src="../js/review/checkByte.js"></script>
+<script type="text/javascript" src="../js/review/checkByte2.js"></script>
 
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
@@ -372,12 +374,15 @@ var num4 = $(".num4").val(); //영화번호
 var uid = $(".username").val(); //아이디 세션값
 
 var select1 = "../review/movieSelect2";
-var reservationNum = 0;
+var reservationNum = 0; //나머지 
 
-var g_num = 0;
+var g_num = 0; //리뷰 수정,작성 (=reservationNum)
 var g_title = "";
 var g_egg = 0;
 var g_contents = "";
+
+var g_emotionPoint = 0;
+var g_charmPoint = 0;
 
 
 //페이지 들어가면 바로 실행(리뷰리스트)
@@ -657,7 +662,34 @@ function review_Modal(){
 						})
 					}	
 				}else if(data==0){
-					//어떤 번호의 reservation의 num에다 review를 쓸건지(가장 최신순)
+					//해당 영화의 가장 최근 reservation num에다 review작성(가장 최신순)
+					alert("해당 영화의 예매내역이 2건 이상 있는 경우 가장 최근예매순으로 리뷰가 작성됩니다.");
+					$.ajax({
+						type:"GET",
+						url: "../review/movieSelect_reviewWrite",
+						data:{
+							uid : uid,
+							movieNum : num4
+						},
+						success:function(data){
+							g_num = data.num; //reservationNum
+							g_title = data.title;
+
+							console.log("dddddddd "+g_num);
+							console.log("dddddddd "+g_title);
+							
+							
+							document.getElementById("title2").innerHTML =g_title; 
+							//egg초기화
+							$('input:radio[name="egg2"][value=1]').prop('checked', true);
+							//contents초기화
+							document.getElementById("mContents2").value ="";
+							//글자 byte조회
+							CheckByte(document.getElementById("mContents2"));
+							
+							$("#myModall").modal({backdrop: 'static', keyboard: false});
+						}
+					})
 					
 				}
 			}
@@ -673,6 +705,149 @@ function review_Modal(){
 }
 
 
+
+// 리뷰작성 시작============================================================================
+	 $("#submitBtn11").click(function(e){
+
+		 var mContents = document.getElementById("mContents2");
+		 g_contents = mContents.value;
+		 console.log("??? "+g_contents);
+		var eggList = document.getElementsByClassName("egg2");
+		for(i=0; i<eggList.length; i++){
+			
+			if(eggList[i].checked == true){
+				g_egg = eggList[i].value;
+				console.log("egg:"+g_egg);
+				break;
+			}
+		}
+		
+		if(mContents.value.length>=10){
+			
+			if(confirm("관람평이 등록되었습니다.\n관람하신 영화의 관람 포인트를\n선택하시겠습니까?")== true){
+
+				$("#popupBtn2").click();
+				
+			}else{
+				//여기서는 reservationNum, contents, egg정보만을 넘겨준다.
+				
+				console.log("아니오");
+
+				$.ajax({
+
+					type:"POST",
+					url:"../review/review_Write1",
+					data:{
+						reservationNum : g_num,
+						egg : g_egg,
+						contents : g_contents,
+						_csrf : $("#_csrf").val(),
+					},
+					success:function(data){
+						location.reload();
+					}
+				})
+				
+			}
+
+			$("#exitt").click();
+					
+		}else{
+			alert("문자를 포함하여 10자 이상(공백 제외) 작성하셔야 등록됩니다.");
+			e.preventDefault();
+			
+		}
+	
+		 });
+
+
+	 $("#submitBtn22").click(function(e){
+		 //null값
+		 g_charmPoint = getCharmPoint2(); //function이름
+		 g_emotionPoint = getEmotionPoint2(); //function이름
+
+		 console.log("g_charmPoint: "+g_charmPoint);
+		 console.log("g_emotionPoint: "+g_emotionPoint);
+		 
+		if(g_charmPoint!=null && g_emotionPoint!=null){
+		
+			if(g_charmPoint==0){
+				alert("매력포인트를 1개 이상 선택해주세요.")	
+			} else{
+				if(g_emotionPoint==0){
+					alert("감정포인트를 1개 이상 선택해주세요.")
+				}else {
+					//여기서는 reservationNum, contents, egg, emotionPoint, charmPoint 정보를 넘겨준다.
+					
+					$.ajax({
+
+						type:"POST",
+						url:"../review/review_Write2",
+						data:{
+							reservationNum : g_num,
+							egg : g_egg,
+							contents : g_contents,
+							charmPoint: g_charmPoint,
+							emotionPoint: g_emotionPoint,
+							_csrf : $("#_csrf").val(),
+						},
+						success:function(data){
+							alert("등록이 완료되었습니다.");
+							location.reload();
+						}
+					})
+					
+					 $("#exitt2").click();
+					 
+						
+				}
+			}
+		}
+	 });
+
+
+//	 ------------------------------------------------------------------------------
+	 
+	 //charmpoint
+	 function getCharmPoint2() {
+		 
+		var charmPoint = 0;
+		 
+		var values = document.getElementsByClassName("charmPoint2");
+		 
+		for(var i=0; i<values.length; i++) {
+			if(values[i].checked){
+					
+			charmPoint += values[i].dataset.charm * 1;
+			}					
+		}
+		
+		return charmPoint;
+	 }
+	 
+	 //emotionpoint
+	 function getEmotionPoint2() {
+		 
+			var emotionPoint = 0;
+			 
+			var values = document.getElementsByClassName("emotionPoint2");
+			 
+			for(var i=0; i<values.length; i++) {
+				if(values[i].checked){
+				emotionPoint += values[i].dataset.emotion * 1;
+				}					
+			}
+			return emotionPoint;
+		 }
+	 
+	 
+//	 ------------------------------------------------------------------------------
+	 
+// 리뷰작성 끝============================================================================
+	
+	
+// 리뷰수정 시작============================================================================
+	
 //모달 수정 >>> 첫번째 모달 확인버튼 클릭시
 $("#submitBtn1").click(function(e){
 var mContents = document.getElementById("mContents");
@@ -741,6 +916,8 @@ if(mContents.value.length>=10){
 
  });
 
+
+
 //모달 수정22 >>> 2번째 모달들어갈때 checked초기화
 $(".Up_popupBtn2").click(function(){
 	
@@ -749,8 +926,6 @@ $(".Up_popupBtn2").click(function(){
 	$(".emotionPoint").prop("checked", false);
 });
 
-var g_emotionPoint = 0;
-var g_charmPoint = 0;
 //3. 두 번째 모달
 	 $("#submitBtn2").click(function(e){
 	 //null값
@@ -832,7 +1007,7 @@ var g_charmPoint = 0;
 	 
 	 
 //	 ------------------------------------------------------------------------------
-
+// 리뷰수정 끝===========================================================================
 
 </script>
 
