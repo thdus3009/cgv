@@ -575,7 +575,7 @@ $("#ajax_ms").on("click",".date",function(){
 				//../review/movieSelect3 + 1 + 1
 				
 				if(data>0){
-				alert("등록성공");
+				alert("추천하였습니다.");
 				
 				}else{
 				//alert(data.trim());
