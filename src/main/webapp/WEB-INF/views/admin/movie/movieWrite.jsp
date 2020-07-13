@@ -62,38 +62,38 @@
 														<tbody>
 															
 					
-															<div class="form-group">
+															<div class="form-group" >
 																<label for="files">타이틀 이미지:</label> <input type="file"
 																	class="form-control files check" id="files"
 																	placeholder="타이틀 이미지 선택" name="files">
 															</div>
 															
-															<div style="float: left;">
-															<div class="form-group"  style="width: 650px; float: left;">
-																<label for="files">트레일러</label> <br>
-																<label for="files">img:</label> 
-																<img alt="" src="../../images/theater/plus.png" 
-																style="width: 20px; height: 20px;" id="addI"> 
-																<div class="form-group"  id="f">
+															
+																<div class="form-group"  style="width: 650px;" id="d1">
+																	<label for="files">트레일러</label>
+																	<img alt="" src="../../images/theater/plus.png" 
+																	style="width: 20px; height: 20px;" id="addI"> 
+																<div id="tt" >
+																	<div class="form-group"  id="f" style="float: left;" >
+																	
+																	</div>
 																	
 																</div>
-															</div>
+																 </div>
 															
 																
-															<div class="form-group" style="width: 650px; float: left; margin-left: 80px;margin-right: 50px;" >
-																<label for="files">트레일러</label> <br>
-																<label for="videolink">video:</label>
-																<img alt="" src="../../images/theater/plus.png" 
-																style="width: 20px; height: 20px;" id="addV"> 
-																<div class="form-group" id="f2">
-																
-																</div>
-															</div>
-															</div>
+																<!-- <div class="form-group" style="width: 650px; float: left; margin-left: 80px;margin-right: 50px;" id="d2">
+																	<label for="files">트레일러</label> <br>
+																	<label for="videolink">video:</label>
+																	 <img alt="" src="../../images/theater/plus.png" 
+																	style="width: 20px; height: 20px;" id="addV">
+																	
+																</div> -->
+														
 															
 															
-																
-															<div class="form-group" >
+															<br><br><br>
+															<div class="form-group"  style="clear: both;">
 																<label for="title" >제목:</label> <input type="text"
 																	class="form-control check" id="title" name="title"
 																	value="${vo.title }">
@@ -164,7 +164,7 @@
 															</c:if>
 
 															<div class="form-group">
-																<label for="contents">Contents:</label>
+																<label for="contents" >Contents:</label>
 																<textarea rows="" cols="" class="form-control check"
 																	id="contents" name="contents">${vo.contents }</textarea>
 
@@ -239,9 +239,19 @@
 	//트레일러 이미지
 	$("#addI").click(function(){
 		if(num<3){
-			$("#f").append('<div><input type="file" multiple="multiple" style="width: 100%; float:left; "'+
+			//이미지
+			$("#f").append(
+					'<div class="group1">'+
+					'<input type="file" multiple="multiple" style="width:45%!important; float:left;"'+
 					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
-					'<span class="x"style="float: left;" >X</span></div>');
+					'<input type="text" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
+					'style="padding: 12px; width: 45%!important;display: inline-block;">'+
+					'<span class="x" style="width: 10%!important;">X</span>'+
+					'</div>');
+
+		
+		
 			num++;
 			count++;
 			
@@ -249,6 +259,8 @@
 			trailerCount=tcount;
 		
 			$("#trailerCount").val(trailerCount);
+			console.log(trailerCount);
+			
 			
 			}else{
 				alert("최대 3개까지 가능합니다.")
@@ -256,6 +268,7 @@
 		
 		});	
 	//트레일러 영상 링크
+	/*
 	$("#addV").click(function(){
 		if(num2<3){
 			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
@@ -267,7 +280,7 @@
 				alert("최대 3개까지 가능합니다.")
 			}
 		
-		});	
+		});	*/
 
 	// 스틸컷 이미지
 	$("#addS").click(function(){
@@ -287,18 +300,19 @@
 				}
 		
 		});
+
 	
  	$("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
 		$(this).parent().remove();
-		num--;
-
+ 		num--;
+ 		 
 		});
 
-	$("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
+   $("#f2").on("click",".x",function(){ //추가된 비디오링크 필요없을 시 삭제
 		$(this).parent().remove();
 		num2--;
 
-		});
+		});   
 	$("#st").on("click",".xS",function(){
 		$(this).parent().remove();
 		numS--;

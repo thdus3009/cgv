@@ -38,7 +38,8 @@ public class FileManager {
       } else {
          // 썸네일로 저장
          thumbnail = new FileOutputStream(resizeDest);
-         Thumbnailator.createThumbnail(inputStream, thumbnail, widthPix, heightPix);
+        // Thumbnailator.createThumbnail(inputStream, thumbnail, widthPix, heightPix);
+         Thumbnailator.createThumbnail(inputStream,thumbnail,widthPix,heightPix);
          thumbnail.close();
       }
       

@@ -69,8 +69,9 @@
 																</p>
 															</c:if>
 															<!-- ============== -->
-															<div id="tra" style="float: left;">
-															<div class="form-group" style="float: left; width: 650px;">
+															
+															<div style="float: left;" id="tra">
+															<div class="form-group" style="float: left; width: 650px;" id="1d">
 																<label for="files">트레일러 img:</label>
 																<input type="button" id="addI" value="추가">
 																
@@ -91,11 +92,11 @@
 															</div>
 															
 															
-															<div class="form-group" style="float: left; width: 650px; margin-left: 80px;margin-right: 50px;">
-																<c:forEach var="ar" items="${ar}" >
-																	<c:if test="${ar.type eq 2 }">
-																		<label for="videolink">예고 영상:</label>
-																		<input type="button" id="addV" value="추가">
+															<div class="form-group" style="float: left; width: 650px; margin-left: 80px;margin-right: 50px;" id="2d">
+																<label for="videolink">예고 영상:</label>
+																	
+																	<c:forEach var="ar" items="${ar}" >
+																		<c:if test="${ar.type eq 2 }">
 																		 <input type="text"
 																			class="form-control videolink check " id="videolink"
 																			placeholder="예고편 영상 링크" name="videolink" value="${ar.movieVideoVOs[0].videolink}"><br>
@@ -103,7 +104,7 @@
 																</c:forEach>
 																<div class="form-group"  id="f2">
 																	
-																	</div>
+																</div>
 															</div>
 															
 															</div>
@@ -147,6 +148,7 @@
 															
 															<div class="form-group" >
 																<label for="files">스틸컷:</label>
+																<input type="button" id="addS" value="추가">
 																	<c:forEach var="ar" items="${ar}" varStatus="i">
 																		<c:if test="${ar.type eq 3 }">
 																		<label for="files"></label> <input type="file"
@@ -158,6 +160,9 @@
 																			</p>
 																		</c:if>
 																	</c:forEach>
+																	<div class="form-group" id="st">
+																
+																</div>
 															</div>
 															
 															
@@ -245,13 +250,10 @@
 		var check = confirm("삭제하시겠습니까?");
 		if(check){
 			var s = $("#num1").val();
-			console.log(s+"썸네일");
+			console.log(s+"썸네일 num");
 			var fileName1=$("#fileName1").val();
 			console.log(fileName1 +"썸 파일이름")
 			
-			console.log(s);//o
-			console.log(fileName1);//o
-
 			$.post("../../movieImage/movieImageDelete",{num:s,fileName:fileName1,_csrf : $("#_csrf").val()},function(data){
 				console.log(data+"dd");//null
 				
@@ -268,21 +270,21 @@
 
 
 	// ====트레일러 =====
-	
+	//기존 파일
 	var count =1;
 	var tcount =0;
 	var trailerCount = $("#trailerCount").val();
+	
 	$(".fileDeleteT").click(function(){
 		var check = confirm("삭제하시겠습니까?");
 		if(check){
 			var numt = $("#numT").val();
-			console.log(numt+"썸네일");
 			var fileNameT=$("#fileNameT").val();
-			console.log(fileNameT +"썸 파일이름")
 			
 			count++;
 			tcount =count-1;
-			trailerCount=tcount;
+			console.log(tcount+"tcount값");//1증가 tcount=1;
+			trailerCount=tcount;//
 			$("#trailerCount").val(trailerCount);
 			
 
@@ -299,57 +301,74 @@
 			}
 
 		});
-	/*
-	//이미지 추가
-	var tt =$("#trailerCount").val();
-	console.log(tt+"입력되있던 사진 삭제 클릭시 증가");
-	var num = 0;
-	var countp=1;
-	
+
+
+	//추가버튼 클릭시
 	$("#addI").click(function(){
-		if(num<3){
+		var numT=$("#trailerCount").val();
+		console.log(numT+"numT");//삭제 카운트
+		
+		
+		if(trailerCount<3){
 			$("#f").append('<div><input type="file" multiple="multiple" style="width: 100%; float:left; "'+
 					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
 					'<span class="x"style="float: left;" >X</span></div>');
-			num++;
-			countp++;
 			
-			var ttnum = tt+num;
-			console.log(ttnum +"삭제+추가 클릭수 합한값");
+			count++;
+			tcount =count-1;
+			console.log(tcount+"tcount값");//1증가 tcount=1;
+			trailerCount=tcount;//
+			$("#trailerCount").val(trailerCount);
 			
-			}else{
-				alert("최대 3개까지 가능합니다.")
-			}
-		
-		});	
-
-	$("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
-		$(this).parent().remove();
-		num--;
-
-		});
-
-	var numv=0;
-	var countv=1;
-	//영상링크 추가
-	$("#addV").click(function(){
-		if(numv<3){
+			console.log(trailerCount +"삭제+추가 클릭수 합한값");
+			//영상링크
 			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
 					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
 					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
-			numv++;
-			countv++;
+			
 			}else{
 				alert("최대 3개까지 가능합니다.")
 			}
 		
 		});	
+
+	 $("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
+		$(this).parent().remove();
+		trailerCount--;
+		$("#trailerCount").val(trailerCount);
+		}); 
+
+	
+	
+	/*
+	//영상링크 추가
+	$("#addV").click(function(){
+		var numV=$("#trailerCount").val();
+		console.log(numV+"numV");//삭제 카운트
+		var cv=numV;
+		console.log(cv);
+		var cc =0;
+		
+		if(cv<3){
+			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
+					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
+			cc++;
+			cv=cv+cc;
+			//tcount =count-1;
+			//console.log(tcount+"tcount값");//1증가 tcount=1;
+			//trailerCount=tcount;//
+			}else{
+				alert("최대 3개까지 가능합니다.")
+			}
+		
+		});	*/
 	$("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
 		$(this).parent().remove();
 		num2--;
 
 		});
-	*/
+	
 	
 	//=== 스틸컷 ====
 	var count2 = 1;
@@ -382,7 +401,31 @@
 			}
 
 		});
-	
+	var numS =0;
+	var countS=1;
+	var scount =0;
+	var steelCutCount = $("#steelCutCount").val();
+	$("#addS").click(function(){
+		if(numS<5){
+			$("#st").append('<div><input type="file" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="스틸컷 이미지 " name="files"'+
+					'style=" width: 1500px;"> <span class="xS">X</span></div>');
+			numS++;
+			countS++;
+
+			scount = countS-1;
+			steelCutCount=scount;
+			$("#steelCutCount").val(steelCutCount);
+			
+			}else{
+				alert("최대 5개까지 가능합니다.")
+				}
+		
+		});
+	$("#st").on("click",".xS",function(){
+		$(this).parent().remove();
+		numS--;
+		});
 
 
 </script>

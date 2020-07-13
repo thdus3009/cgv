@@ -140,8 +140,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(MI.num=MV.movieImageNum)
 		where MI.movieNum=#{movieNum} and type != 1
  	 </select>
- 	 
- 	
+ 	  
+ 	<select id="tc" resultType="Integer" parameterType="MovieImageVO">
+ 		SELECT COUNT(num)as cc FROM movieImage WHERE movieNum=#{movieNum} and type = 2;
+ 	</select>
  	 <!-- =========================================================================== -->
  	<update id="movieUpdate" parameterType="MovieInfoVO">
  		update movieInfo set title=#{title},titleEng=#{titleEng},runtime=#{runtime},director=#{director},actor=#{actor},ganre=#{ganre},ageLimit=#{ageLimit},

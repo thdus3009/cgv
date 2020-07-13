@@ -86,8 +86,8 @@
 								<dt>&nbsp;/ 기본 : &nbsp;</dt>
 								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime}분,&nbsp;${vo.country}</dd>
 								<br>
-								<dt>개봉 : &nbsp;</dt>
-								<dd class="on">${vo.openDate}</dd>
+								<dt class="yo" style="position: absolute; top: 200px;">개봉 : &nbsp;</dt>
+								<dd class="on" style="position: absolute; left:35px;">${vo.openDate}</dd>
 							</dl>
 						</div>
 						<span class="screentype">
