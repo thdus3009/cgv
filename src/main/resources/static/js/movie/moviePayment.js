@@ -668,7 +668,6 @@ function reservation_save(result){
 					guestVO.reservationNum = result2;
 					console.log(guestVO)
 					
-					
 					non_MemberInfoInsert(guestVO);
 				}
 				
@@ -700,11 +699,11 @@ function reservation_result(data){
 
 
 //비회원 정보 저장
-function non_MemberInfoInsert(data){
+function non_MemberInfoInsert(guestVO2){
 	$.ajax({
 		url :'../guest/guestInsert',
 		type : 'post',
-		data : data,
+		data : guestVO2,
 		success : function(result3){
 			console.log("비회원 저장 결과 값 : "+result3);
 		}

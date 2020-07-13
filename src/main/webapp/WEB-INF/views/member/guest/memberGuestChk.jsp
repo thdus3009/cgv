@@ -25,7 +25,7 @@
 
 	<div class="root">
 		<!-- 헤더 -------------------------------------------------------------------------------------->
-		<c:import url="../template/header.jsp"></c:import>
+		<c:import url="../../template/header.jsp"></c:import>
 		<!-- 컨테이너 -------------------------------------------------------------------------------------->
 		<div class="container" style="height: 900px;">
 			<div class="c_nav">
@@ -43,8 +43,8 @@
 			<div class="contents">
 				<div class="wrap_login">
 					<ul class="tab_menu_round">
-						<li><a class="lo" href="./login">로그인</a></li>
-						<li><a href="#">비회원 예매확인</a></li>
+						<li><a class="lo" href="../member/login">로그인</a></li>
+						<li><a href="./reservationInfo">비회원 예매확인</a></li>
 					</ul>
 
 
@@ -55,7 +55,9 @@
 							<div class="guest-box">
 								<div class="guest-chk">
 									<strong class="g-title">비회원 예매확인</strong>
-									<form action="" method="post" enctype="" class="guest-form">
+									<form action="./reservationInfo" method="post" class="guest-form" id="form-Data">
+										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+										<input type="hidden" id="phone" name="phone" value="" />
 										<table>
 											<caption>모든 항목은 필수 입력사항입니다.</caption>
 											<tr class="tr-box">
@@ -68,33 +70,37 @@
 											</tr>
 											<tr class="tr-box phone">
 												<th>휴대폰번호</th>
-												<td><select class="input-box">
-														<option>010</option>
+												<td>
+													<select id="phone1" class="input-box">
+														<option selected="selected">010</option>
 														<option>011</option>
 														<option>016</option>
 														<option>017</option>
 														<option>018</option>
 														<option>019</option>
-												</select> - <input type="text" class="input-box phone-front"
-													style="width: 75px;" maxlength="4"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-													- <input type="text"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
-													class="input-box phone-back" style="width: 75px;"
-													maxlength="4"></td>
+													</select> 
+													- 
+													<input id="phone2" type="text" class="input-box phone-front" style="width: 75px;" maxlength="4"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+													- 
+													<input id="phone3" type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
+														class="input-box phone-back" style="width: 75px;" maxlength="4">
+												</td>
 											</tr>
 											<tr class="tr-box">
 												<th>비밀번호(4자리)</th>
-												<td><input type="text" class="input-box pwd"
-													maxlength="4"
-													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+												<td>
+													<input type="text" class="input-box pwd" maxlength="4"
+														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+												</td>
 											</tr>
 										</table>
 										<div style="display: flex; justify-content: center;">
-											<button type="button" class="red-btn">비회원 예매확인</button>
+											<button id="btnSubmit" type="button" class="red-btn">비회원 예매확인</button>
 										</div>
 									</form>
 								</div>
+
 
 								<div class="guest-msg" style="border-left: 1px solid #e8e8dd;">
 									<strong class="g-title">비회원예매 비밀번호 찾기</strong>
@@ -138,16 +144,30 @@
 
 
 		<!-- 푸터 -------------------------------------------------------------------------------------->
-		<c:import url="../template/footer.jsp"></c:import>
+		<c:import url="../../template/footer.jsp"></c:import>
 
 
 
 		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
-		<c:import url="../template/sidebar.jsp"></c:import>
+		<c:import url="../../template/sidebar.jsp"></c:import>
 	</div>
 
 	<!-- 스크립트 -->
 	<script type="text/javascript">
+
+		//비회원 예매 확인버튼 클릭
+		$("#btnSubmit").click(function(){
+			//전화번호 합치기 
+			var phoneStr = $("#phone1").val()+""+$("#phone2").val()+""+$("#phone3").val();
+			$("#phone").val(phoneStr);
+			$("#form-Data").submit();
+		});
+
+
+
+
+
+	
 		//유효성 검사
 		$(".red-btn").click(function() {
 			if ($(".birthday").val() == '') {

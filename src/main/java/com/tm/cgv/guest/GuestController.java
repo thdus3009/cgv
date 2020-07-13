@@ -25,6 +25,30 @@ public class GuestController {
 	private MakeSerialCode makeSerialCode;
 	
 	
+	
+	//비회원 예매 정보 확인 - 조회
+	@PostMapping("reservationInfo")
+	public ModelAndView guestReservationCheck() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//생년월일, 전화번호, 비밀번호 일치 확인
+		
+		
+		
+		return mv;
+	}
+	
+	
+	//비회원 예매 확인 페이지 이동
+	@GetMapping("reservationInfo")
+	public ModelAndView guestReservationInfo() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("member/guest/memberGuestChk");
+		return mv;
+	}
+
+	
 	//sessionVO생성해서 임시 아이디로 예매 가능하게 해줌
 	@PostMapping("guestSession")
 	public ModelAndView guestSession(GuestVO guestVO,HttpSession session) throws Exception{
@@ -38,6 +62,7 @@ public class GuestController {
 		return mv;
 	}
 	
+	//에매 완료시 guest 테이블에 정보 저장
 	@ResponseBody
 	@PostMapping("guestInsert")
 	public int guestInsert(GuestVO guestVO) throws Exception{
@@ -46,6 +71,7 @@ public class GuestController {
 		
 		return result;
 	}
+	
 	
 	
 	

@@ -82,7 +82,7 @@ public class ResevationController {
 		result = seatBookingService.seatBookingDelete(reservationVO.getNum());
 		System.out.println("좌석예약 : "+result);
 		
-		//movieTime DB업데이트 - 잔여좌석 (인원 파악해야됨)
+		//movieTime DB업데이트 - 잔여좌석 수정
 		int totalCount = reservationVO.getCommon() + reservationVO.getTeenager() + reservationVO.getPreference();
 		MovieTimeVO movieTimeVO = new MovieTimeVO();
 		movieTimeVO.setNum(reservationVO.getMovieTimeNum());
@@ -119,12 +119,12 @@ public class ResevationController {
 		}
 		
 		//결제 DB삭제 -> 예매 삭제 -> 할인정보 삭제(cascade)
-		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
-		System.out.println("결제 : "+result);
+		//result = paymentService.paymentDelete(reservationVO.getPaymentNum());
+		//System.out.println("결제 : "+result);
 		
-		//예매 DB삭제 - 할 필요 X
-		//result = reservationService.reservationDelete(reservationVO);
-		//System.out.println("예매정보 : "+result);
+		//예매 DB삭제 - 결제 삭제시 casecade 할 필요 X (테스트용으로 필요)
+		result = reservationService.reservationDelete(reservationVO);
+		System.out.println("예매정보 : "+result);
 				
 		return result;
 	}

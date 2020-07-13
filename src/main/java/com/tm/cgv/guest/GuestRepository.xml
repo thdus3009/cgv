@@ -7,7 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.guest.GuestRepository">
 
 	<insert id="guestInsert" parameterType="GuestVO">
-		insert into guest values(null,#{birth},#{phone},#{pwd})
+		insert into guest values(#{reservationNum},#{birth},#{phone},#{pwd})
 	</insert>
+
+	<select id="guestReservationCheck" parameterType="GuestVO" resultType="GuestVO"></select>
 
 </mapper>
