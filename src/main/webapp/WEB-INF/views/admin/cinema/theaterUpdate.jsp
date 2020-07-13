@@ -300,8 +300,17 @@
 	    console.log(list.length);
 
 
-	    
-
+	    //stop_list에 값 넣기
+	    <c:forEach items="${stopSeat}" var="vo">
+	    		alert("testttt");
+	  		  var vo = {
+				"r":'${vo.rowIdx}',
+				"c":${vo.colIdx}
+			}
+	    	stopList.push(vo);
+		    	alert(stopList);
+	    </c:forEach>
+		
 
 		//seat color
 		//grade가 ?라면 ?클래스주기
@@ -328,7 +337,14 @@
 			
 		}
 		
+		//stop color
+		for(i=0; i<stopList.length; i++){
+			alert(">.<!!");
+			var com = stopList[i].r + stopList[i].c;
+			console.log("test : " + com);
 
+			$("#"+com).addClass("rating_stop");
+		}
 
 
 
@@ -441,6 +457,7 @@
 			var chName = $(name).attr("name");
 			var chClass = $(name).attr("class");
 			//console.log("ck : " + ck);
+			alert(chClass)
 		
 			var rw = chName.substring(0,1);
 			var cl = chName.substring(1,2); 
@@ -558,7 +575,12 @@
 				//아니면 따로따로 보내서
 				//DB에서 검색 몇관의 몇번시트인지
 				//
-				if(chClass!='rating_delete' && chClass!='rating_stop'){
+		 		
+
+				
+				if(chClass!='rating_delete' && !$(name).hasClass('rating_stop')){
+					//alert(chClass)
+					console.log(chClass);
 					//$(name).find("span").css('border','2px solid #f71708');
 					//$(name).removeClass();
 					$(name).addClass("rating_stop");
@@ -573,9 +595,11 @@
 						"c":cl
 					} 
 					stopList.push(stopVO);
+					console.log(",,,")
 					console.log(stopList);
-				}
-				if(chClass!='rating_delete' && chClass=='rating_stop'){
+				}else if($(name).hasClass('rating_stop')){
+					//alert("name : " + name)
+					//alert("yes")
 					$(name).removeClass("rating_stop");
 					//$(name).addClass("rating_economy");
 					for(i=0; i<stopList.length; i++){
@@ -583,16 +607,17 @@
 							stopList[i].c=0;
 						}
 					}
-
+					console.log(stopList);
 					
 				}
+			
 			break; 
 		
 			}
 		}
 
 
-
+	
 	// space 조정 + - 버튼
 	function rowPlus(i){
 		alert(i);
@@ -830,8 +855,8 @@
 
 		for(n=0; n<stopList.length; n++){
 			console.log(stopList[n])
-			var r = '<input type="hidden" name="stop_row" value="'+stopList[n].r+'">';
-			r = r + '<input type="hidden" name="stop_col" value="'+stopList[n].c+'">';
+			var r = '<input type="hidden" name="stop_rc" value="'+stopList[n].r+'">';
+			r = r + '<input type="hidden" name="stop_idx" value="'+stopList[n].c+'">';
 			$("#frm").append(r);
 			
 		}

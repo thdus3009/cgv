@@ -18,14 +18,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
 
 	<insert id="insertReservationNum" parameterType="SeatBookingVO">
-		insert into seatBooking (seatNum, reservationNum) values seatNum=#{seatNum}, reservationNum=#{reservationNum} 
+		insert into seatBooking (seatNum, movieTimeNum, reservationNum) values(#{seatNum}, #{movieTimeNum}, #{reservationNum}) 
 	</insert>
 	
 	<update id="updateReservationNum" parameterType="SeatBookingVO">
 		update seatBooking set reservationNum=#{reservationNum} where seatNum=#{seatNum}
 	</update>
 	
+	<delete id="deleteReservationNum" parameterType="Integer">
+		delete from seatBooking where seatNum=#{seatNum} and reservationNum=0
+	</delete>
+	
+	
 	<select id="selectMovieNum" parameterType="Integer" resultType="Integer">
 		select movieNum from movieTime where theaterNum=#{theaterNum}
+	</select>
+	
+	<select id="selectCheckExist" parameterType="SeatBookingVO" resultType="Integer">
+		select num from seatBooking where seatNum=#{seatNum} and movieTimeNum=#{movieTimeNum}
 	</select>
 </mapper>

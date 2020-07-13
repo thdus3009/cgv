@@ -25,5 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update movieTime set remainSeat = remainSeat + #{remainSeat} where num =#{num}
  	</update>
  
+ 	<select id="movieTimeList" parameterType="Integer" resultType="Integer">
+ 		select num from movieTime where theaterNum=#{theaterNum}
+ 	</select>
 
 </mapper>

@@ -27,5 +27,6 @@ public interface SeatRepository {
 	
 	public void seatUpdate(SeatVO seatVO) throws Exception;
 
+	public List<SeatVO> selectStopSeat(int num) throws Exception;
 
 }

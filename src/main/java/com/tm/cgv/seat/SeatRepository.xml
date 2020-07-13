@@ -65,5 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update seat set rowIdx=#{rowIdx}, colIdx=#{colIdx}, grade=#{grade} where num=#{num}
  	</update>
  	
+ 	<select id="selectStopSeat" parameterType="Integer" resultType="SeatVO">
+ 		select * from seat where num in (select seatNum from seatBooking where movieTimeNum in
+ 		(select num from movieTime where theaterNum=#{num} and reservationNum=0))
+ 	</select>
+ 	
 
 </mapper>

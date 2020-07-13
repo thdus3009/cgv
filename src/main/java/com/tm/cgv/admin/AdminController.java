@@ -460,6 +460,13 @@ public class AdminController {
 		BitFilmType bitFilmType = new BitFilmType();
 		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
+		//중단된 좌석 목록..ㅎㅎ
+		//theaterNum을 받아서 
+		List<SeatVO> stopSeat = seatService.selectStopSeat(num);
+		System.out.println("test : " + stopSeat.size());
+		
+		mv.addObject("stopSeat", stopSeat);
+		
 		mv.addObject("filmType", filmType);
 	
 		mv.addObject("rowList", rowList);
@@ -511,6 +518,16 @@ public class AdminController {
 		BitFilmType bitFilmType = new BitFilmType();
 		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
+		
+		
+		//중단된 좌석 목록..ㅎㅎ
+		//theaterNum을 받아서 
+		List<SeatVO> stopSeat = seatService.selectStopSeat(num);
+		System.out.println("test : " + stopSeat.size());
+		
+		mv.addObject("stopSeat", stopSeat);
+		
+		
 		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("rowList", rowList);
@@ -532,7 +549,8 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("-------update-------");
 		//System.out.println("cinemaNum : " + cinemaNum);
-		//System.out.println(stop_row[0]);
+		//System.out.println(stop_rc[0]);
+		//System.out.println(stop_idx[0]);
 		//System.out.println(stop_col[0]);
 		System.out.println(theaterVO.getName());
 		theaterService.theaterUpdate(theaterVO, filmType, row, col, grade, row_space, col_space, stop_rc, stop_idx);

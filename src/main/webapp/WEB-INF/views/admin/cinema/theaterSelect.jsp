@@ -161,7 +161,19 @@
 		};
 		seatSpaceList.push(seatSpaceVO);
 	</c:forEach>
-	
+
+	var stopList = [];
+    //stop_list에 값 넣기
+    <c:forEach items="${stopSeat}" var="vo">
+    	  //alert("testttt");
+  		  var vo = {
+			"r":'${vo.rowIdx}',
+			"c":${vo.colIdx}
+		}
+    	stopList.push(vo);
+	    console.log(stopList);
+    </c:forEach>
+
 
 
 	$(".seats .seat").each(function(){
@@ -186,6 +198,28 @@
 		}else if($(this).data("grade")==3){
 			//prime
 			$(this).addClass("rating_prime");
+		}
+
+
+
+
+		//stop color
+		for(i=0; i<stopList.length; i++){
+			//alert(">.<!!");
+			var r = stopList[i].r;
+			console.log("r : " + r);
+			var c = stopList[i].c;
+			console.log("c : " + c);
+			var rn = r.charCodeAt(0)-64;
+			console.log("rn : " + rn);
+			//alert("rn : " + rn);
+			//r = A = 1 변환
+			if($(this).data("row")==rn && $(this).data("col")==c){
+				$(this).removeClass();
+				$(this).addClass("seat");
+				$(this).addClass("rating_stop");
+			}
+			
 		}
 	});
 

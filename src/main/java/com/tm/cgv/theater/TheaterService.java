@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tm.cgv.cinema.CinemaRepository;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.movieTime.MovieTimeRepository;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatRepository;
 import com.tm.cgv.seat.SeatVO;
@@ -42,6 +43,9 @@ public class TheaterService {
 	
 	@Autowired
 	private CinemaRepository cinemaRepository;
+	
+	@Autowired
+	private MovieTimeRepository movieTimeRepository;
 	
 	//List
 	public List<TheaterVO> theaterList()throws Exception{
@@ -209,59 +213,109 @@ public class TheaterService {
 				System.out.println("i : " + i);
 				seatSpaceVO.setRowOrCol(1);
 				System.out.println("col : " + seatSpaceVO.getRowOrCol());
-				seatSpaceVO.setIndex(Integer.parseInt(row_space[i]));
+				seatSpaceVO.setIndex(Integer.parseInt(col_space[i]));
 				seatSpaceRepository.seatSpaceInsert(seatSpaceVO);
 			}
 		}
 		
 		
 		System.out.println("??????????");
+		List<SeatVO> stopSeat = seatRepository.selectStopSeat(theaterVO.getNum());
 		//여기서 ..reservation 어쩌구를 하기
 		if(stop_rc!=null) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>test1");
 			for(int j=0; j<stop_rc.length; j++) {
 				SeatVO seatVO = new SeatVO();
+				System.out.println(">>>>>>>>>>>>>>>>>>>test2");
+				System.out.println(stop_rc.length);
+				//select stop seat
+				//가져온 stop seat은 2개, 새로 넘어온 stop seat은 1개
 				
-	//			String str = stop_row[j];  //A
-	//			System.out.println("str : " + str);
-	//			char ch = str.charAt(j);
-	//		
-	//		    int num =  str.charAt(j)+65;
-	//		    System.out.println("num : " + num);
-	//		    
-	//		    
-	//			System.out.println("ch : " + ch);
-	//			String r = String.valueOf(ch);
-	//			
-			
 				//System.out.println("r : " + r);
 				seatVO.setTheaterNum(theaterVO.getNum());
 				seatVO.setRowIdx(stop_rc[j]);	//문자로 바꿔 넣기
 				seatVO.setColIdx(Integer.parseInt(stop_idx[j]));
 				int seatNum = seatRepository.selectSeatNum(seatVO);
+				System.out.println("seatNum : " + seatNum);
+	//			
+
+//				if(count==0) {
+//					int result = seatBookingRepository.deleteReservationNum(seatNum);
+//					if(result>0) {
+//						System.out.println("개별 삭제 성공");
+//					}
+//				}
 				
-				//seatNum으로 seatBooking에 존재하는지 확인 후
-				//select movieNum from movieTime where theaterNum=2;
-				//1 4 5
-				//없으면 insert, 있으면 모두 업데이트
-				//insert into seatBooking (movieNum, reservationNum) values (5 ,0);
-				List<Integer> list = seatBookingRepository.selectMovieNum(theaterVO.getNum());
+
+
 				
-				
+				//좌석 중단
+				//theaterNum으로 movieTime 검색해오기 > List
+				//List 돌려서 seatBooking에 해당 seatNum, movieTimeNum이 있는지 확인
+				//있다고 뜨면 update로 reservationNum 넣어주기, 
+				//없다고 뜨면 insert로 seatNum, movieTimeNum, reservationNum=0 삽입해주기
+				List<Integer> movieTimeNum = movieTimeRepository.movieTimeList(theaterVO.getNum());
+				System.out.println("size : " + movieTimeNum.size());
 				SeatBookingVO seatBookingVO = new SeatBookingVO();
-				seatBookingVO.setSeatNum(seatNum);
-				seatBookingVO.setReservationNum(0);
-				int checkNum = seatBookingRepository.selectCheckReservationNum(seatNum);
-				if(checkNum>0) {
-					seatBookingRepository.insertReservationNum(seatBookingVO);
-				}else {
-					seatBookingRepository.updateReservationNum(seatBookingVO);
+				for(Integer i:movieTimeNum) {
+					System.out.println("i : " + i);
+					System.out.println(">>>>>>>>>>>>>>>>>>>test3");
+					seatBookingVO.setSeatNum(seatNum);
+					seatBookingVO.setMovieTimeNum(i);
+					Integer result = seatBookingRepository.selectCheckExist(seatBookingVO);
+					if(result!=null) {
+						//update
+						seatBookingVO.setReservationNum(0);
+						seatBookingRepository.updateReservationNum(seatBookingVO);
+					}else {
+						//insert
+						seatBookingVO.setReservationNum(0);
+						seatBookingRepository.insertReservationNum(seatBookingVO);
+					}
 				}
 				
-//				//찾아온 seatNum으,로 reservationNum 0으로 바꾸기
-//				//System.out.println("seatNum : " + seat.getNum());
-//				System.out.println("seatNum : " + seatNum);
-//				seatBookingRepository.updateReservationNum(seatNum);
+				int count=0;
+				for(SeatVO k:stopSeat) {
+					if(!(k.getRowIdx().equals(stop_rc[j]) && k.getColIdx()==Integer.parseInt(stop_idx[j]))){
+						System.out.println("..");
+						count= count+1;
+					
+					}
+					System.out.println("===========delete==========");
+					System.out.println("1. " + k.getRowIdx());
+					System.out.println("2. " + stop_rc[j]);
+				
+					System.out.println("3. " + k.getColIdx());
+					System.out.println("4. " + stop_idx[j]);
+			
+					System.out.println("count : " + count);
+				}
+				if(count==0) {
+					System.out.println("count : " + count);
+					int result = seatBookingRepository.deleteReservationNum(seatNum);
+					if(result>0) {
+						System.out.println("개별 삭제 성공");
+					}
+				}
+
+
 			}
+		}else {
+			//비어서 오면
+			int result = 0;
+			for(SeatVO k:stopSeat) {
+				SeatVO seatVO = new SeatVO();
+				seatVO.setRowIdx(k.getRowIdx());
+				seatVO.setColIdx(k.getColIdx());
+				seatVO.setTheaterNum(theaterVO.getNum());
+				int seatNum = seatRepository.selectSeatNum(seatVO);
+				result = seatBookingRepository.deleteReservationNum(seatNum);
+			}
+			
+			if(result>0) {
+				System.out.println("삭제 성공");
+			}
+			
 		}
 		
 		//seatSpace update insert

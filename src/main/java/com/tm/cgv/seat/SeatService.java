@@ -26,4 +26,8 @@ public class SeatService {
 	public List<SeatVO> seatSelect(SeatVO seatVO) throws Exception{
 		return seatRepository.seatSelect(seatVO);
 	}
+	
+	public List<SeatVO> selectStopSeat(int num) throws Exception {
+		return seatRepository.selectStopSeat(num);
+	}
 }
