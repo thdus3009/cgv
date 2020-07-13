@@ -205,6 +205,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where A.rownum = 1
 	</select>
 	
+	<select id="adminReview" parameterType="Pager" resultType="ReviewVO">
+		select A.num, A.reservationNum, A.title, A.uid, A.contents, A.createAt, A.spoiler, A.swearword from 
+		(select @ROWNUM:=@ROWNUM+1 as rownum, RE.*
+		from (select R.*, M.title from 
+		(select R1.*,R2.movieNum,R2.uid from
+		(select * from review where createAt is not null and deleteAt is null) R1 
+		left join (select num,uid,movieNum from reservation where createAt is not null and deleteAt is null) R2
+		on(R1.reservationNum = R2.num) where R2.num=R1.reservationNum) R inner join (select num, title from movieInfo) M
+		on(M.num = R.movieNum)) RE, (select @ROWNUM:=0) RO
+		) A where A.spoiler>0 or A.swearword>0 limit #{startRow},#{perPage}
+	</select>
+		
+	<select id="movieNumCount" resultType="Long">
+		select count(num) from review where createAt is not null and deleteAt is null and (spoiler>0 or swearword>0)
+	</select>
+	
+	<update id="adminReviewDelete" parameterType="ReviewVO">
+		update review set deleteAt=now() where reservationNum=#{reservationNum}
+	</update>
+	
 	<!-- ........................................................................................... -->
 
 	<!-- 받아온 num으로 join하여 정보출력 -->
@@ -223,5 +243,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getList" parameterType="Pager" resultType="TestVO">
 		select * from test limit #{startRow},#{perPage}
 	</select>
+
 	
 </mapper>

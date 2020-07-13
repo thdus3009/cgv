@@ -25,6 +25,8 @@ import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.reservation.ReservationVO;
 
 import com.tm.cgv.reservation.ResevationController;
+import com.tm.cgv.review.ReviewService;
+import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
 
@@ -62,6 +64,9 @@ public class AdminController {
 	@Autowired
 	private MovieTimeService movieTimeService;
 	
+	@Autowired
+	private ReviewService reviewService;
+	
 	@GetMapping("/")
 	public String admin() throws Exception {
 		return "admin/adminIndex";
@@ -70,16 +75,6 @@ public class AdminController {
 	//==============================
 	// movieInfo
 	//==============================
-	@GetMapping("movie/movieList")
-	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
-		List<MovieInfoVO> list = movieInfoService.movieList(pager);
-		
-		if(list !=null) {
-			mv.addObject("list",list);
-			mv.setViewName("admin/movie/movieList");
-		}
-		return mv;
-	}
 	
 	@GetMapping("movie/movieListSort")
 	public ModelAndView movieListSort(ModelAndView mv,MovieInfoVO movieInfoVO) throws Exception{
@@ -89,6 +84,18 @@ public class AdminController {
 		
 		mv.addObject("list",list);
 		mv.setViewName("admin/movie/ajax/movieListSort");
+		return mv;
+	}
+	
+	
+	@GetMapping("movie/movieList")
+	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
+		List<MovieInfoVO> list = movieInfoService.movieList(pager);
+		
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/movie/movieList");
+		}
 		return mv;
 	}
 	
@@ -103,7 +110,6 @@ public class AdminController {
 		}
 		return mv;
 	}
-	
 	@GetMapping("movie/movieWrite")
 	public ModelAndView movieWrite(ModelAndView mv)throws Exception{
 		mv.addObject("vo",new MovieInfoVO());
@@ -509,6 +515,39 @@ public class AdminController {
 		
 		int result = movieTimeService.insert(movieTimeVO);
 		return result;
+	}
+	
+	//==============================
+	// review
+	//==============================
+	@GetMapping("review/adminReview")
+	public ModelAndView adminReview(ModelAndView mv,Pager pager)throws Exception {
+		System.out.println("reviewAdminSearch");
+		System.out.println(pager.getCurPage());
+		System.out.println(pager.getKind());
+		System.out.println(pager.getSearch());
+		
+		List<ReviewVO> list = reviewService.adminReview(pager);
+		mv.addObject("list", list);
+		mv.addObject("pager", pager);
+		mv.setViewName("admin/review/adminReview");
+		return mv;
+	}
+	
+
+	@GetMapping("review/adminReviewDelete")
+	@ResponseBody
+	public int adminReviewDelete(ReviewVO reviewVO)throws Exception {
+		System.out.println("dddddddddddddddd");
+		System.out.println(reviewVO.getReservationNum());
+		int result = reviewService.adminReviewDelete(reviewVO);
+		return result;
+	}
+	
+	@GetMapping("review/adminReviewSearch")
+	public ModelAndView adminReviewSearch(ModelAndView mv)throws Exception {
+		
+		return mv;
 	}
 
 }

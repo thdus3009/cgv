@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tm.cgv.util.Pager;
 import com.tm.cgv.util.Pager_reviewList;
 
 @Mapper
@@ -63,4 +64,10 @@ public interface ReviewRepository {
 	public ReviewVO movieSelect_reviewUpdate(ReviewVO reviewVO);
 	
 	public ReviewVO movieSelect_reviewWrite(ReviewVO reviewVO);
+	
+	public List<ReviewVO> adminReview(Pager pager);
+	
+	public int adminReviewDelete(ReviewVO reviewVO);
+	
+	public long movieNumCount(Pager pager);
 }

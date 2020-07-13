@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tm.cgv.movieInfo.MovieInfoRepository;
+import com.tm.cgv.util.Pager;
 import com.tm.cgv.util.Pager_movieSelect;
 import com.tm.cgv.util.Pager_reviewList;
 
@@ -16,7 +18,6 @@ public class ReviewService {
 
 	@Autowired
 	private ReviewRepository reviewRepository;
-
 	
 	public List<ReviewVO> reviewList(String uid, Pager_reviewList pager)throws Exception {
 		pager.makeRow();
@@ -153,6 +154,18 @@ public class ReviewService {
 	public ReviewVO movieSelect_reviewWrite(ReviewVO reviewVO)throws Exception {
 		
 		return reviewRepository.movieSelect_reviewWrite(reviewVO);
+	}
+	
+//	admin - review Search
+	public List<ReviewVO> adminReview(Pager pager)throws Exception {
+		pager.makeRow();
+		long totalCount = reviewRepository.movieNumCount(pager);
+		pager.makeBlock(totalCount);
+		return reviewRepository.adminReview(pager);
+	}
+	
+	public int adminReviewDelete(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.adminReviewDelete(reviewVO);
 	}
 	
 }
