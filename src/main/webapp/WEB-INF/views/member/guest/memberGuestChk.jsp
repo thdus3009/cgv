@@ -55,15 +55,14 @@
 							<div class="guest-box">
 								<div class="guest-chk">
 									<strong class="g-title">비회원 예매확인</strong>
-									<form action="./reservationInfo" method="post" class="guest-form" id="form-Data">
+									<form class="guest-form" id="form-Data">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
-										<input type="hidden" id="phone" name="phone" value="" />
 										<table>
 											<caption>모든 항목은 필수 입력사항입니다.</caption>
 											<tr class="tr-box">
 												<th>법정생년월일<br>(6자리)
 												</th>
-												<td><input type="text" class="input-box birthday"
+												<td><input name="birth" id="birth" type="text" class="input-box birthday"
 													maxlength="6"
 													onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 													<span style="font-size: 20px;">- ******</span></td>
@@ -90,7 +89,7 @@
 											<tr class="tr-box">
 												<th>비밀번호(4자리)</th>
 												<td>
-													<input type="text" class="input-box pwd" maxlength="4"
+													<input name="pwd" id="pwd" type="text" class="input-box pwd" maxlength="4"
 														onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 												</td>
 											</tr>
@@ -106,7 +105,7 @@
 									<strong class="g-title">비회원예매 비밀번호 찾기</strong>
 									<div class="guest-form">
 										<p>비회원 예매 시, 입력한 휴대폰번호로 SMS인증을 하면 비회원 예매 비밀번호를 찾으실수 있습니다.</p>
-										<button onclick="location.href='./memberGuestChk'" class="">휴대폰 SMS인증으로 찾기</button>
+										<button onclick="location.href='./memberGuestPwd'" class="">휴대폰 SMS인증으로 찾기</button>
 									</div>
 								</div>
 							</div>
@@ -156,12 +155,30 @@
 	<script type="text/javascript">
 
 		//비회원 예매 확인버튼 클릭
-		$("#btnSubmit").click(function(){
+		function btnSubmit(){
 			//전화번호 합치기 
 			var phoneStr = $("#phone1").val()+""+$("#phone2").val()+""+$("#phone3").val();
-			$("#phone").val(phoneStr);
-			$("#form-Data").submit();
-		});
+			
+			var formData = {
+				birth : $("#birth").val(),
+				phone : phoneStr,
+				pwd : $("#pwd").val(),
+				_csrf : $("#_csrf").val()
+			}
+
+			$.ajax({
+				url: './guestCheck',
+				type : 'post',
+				data : formData,
+				success : function(reservationNum){
+					if(reservationNum > 0){
+						location.href="./reservationSelect?reservationNum="+reservationNum;
+					}else{
+						alert("일치하는 정보가 없습니다.");
+					}
+				}
+			});
+		};
 
 
 
@@ -169,34 +186,21 @@
 
 	
 		//유효성 검사
-		$(".red-btn").click(function() {
+		$(".red-btn").click(function(e) {
 			if ($(".birthday").val() == '') {
 				alert("법정생년월일(6자리)를 입력해주세요!");
+				e.preventDefault();
 			} else if ($(".phone-front").val() == '') {
 				alert("핸드폰번호 앞자리를 입력해주세요!");
-
+				e.preventDefault();
 			} else if ($(".phone-back").val() == '') {
 				alert("핸드폰번호 뒷자리를 입력해주세요!");
-
+				e.preventDefault();
 			} else if ($(".pwd").val() == '') {
 				alert("비밀번호를 입력해주세요!");
-
-			} else {
-				//ajax
-				$.ajax({
-					url : '',
-					type : 'post',
-					data : {},
-					dataType : '',
-					done : function(response) {
-						//정보 alert창으로..?
-						alert("예매정보");
-					},
-					fail : function(error) {
-						//입력하신 정보와 일치하는내용 X
-						alert("입력하신 정보와 일치하는 예매내역이 없습니다.");
-					}
-				});
+				e.preventDefault();
+			}else{
+				btnSubmit();
 			}
 		});
 	</script>

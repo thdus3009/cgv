@@ -116,6 +116,13 @@
 							</tbody>
 						</table>
 						
+						
+						<button class="btn btn-primary" id="btnExcel">EXCEL</button>
+						<script type="text/javascript">
+							$("#btnExcel").click(function(){
+								location.href="../../reservation/makeExcel";
+							});
+						</script>
 
 
 						<!-- 페이저 -->

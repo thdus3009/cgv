@@ -29,7 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="createAt" property="createAt"/>
 		<result column="deleteAt" property="deleteAt"/>
 		
-		
 		<association property="movieInfoVO" javaType="MovieInfoVO">
 			<id column="miNum" property="num"/>
 			<result column="title" property="title"/>
@@ -49,7 +48,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	
-
 	<select id="reservationResultSelectOne" parameterType="Integer" resultMap="reservationResult">
 		select * from 
 		(select * from 
@@ -116,6 +114,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				where title like concat('%',#{search},'%')
 			</otherwise>
 		</choose>
+	</select>
+	
+	
+	<resultMap type="ReservationVO" id="guestReservationListResult">
+		<id column="num" property="num"/>
+
+		<association property="movieInfoVO" javaType="MovieInfoVO">
+			<result column="runtime" property="runtime"/>
+		</association>
+		
+		<association property="movieTimeVO" javaType="MovieTimeVO">
+			<result column="screenTime" property="screenTime"/>
+			<result column="screenDate" property="screenDate"/>
+		</association>
+	</resultMap>
+	
+	
+	<select id="guestReservationList" resultMap="guestReservationListResult">
+		select num,runTime,screenTime,screenDate from 
+		(select * from 
+		(select num,movieNum,movieTimeNum from reservation where uid='비회원') R
+		join
+		(select num as miNum,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum)
+		where screenDate <![CDATA[<]]> sysdate()
 	</select>
 	
 	<select id="pointAccumlate" parameterType="ReservationVO" resultType="ReservationVO">

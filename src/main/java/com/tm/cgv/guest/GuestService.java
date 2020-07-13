@@ -12,5 +12,18 @@ public class GuestService {
 	public int guestInsert(GuestVO guestVO) throws Exception{
 		return guestRepository.guestInsert(guestVO);
 	}
+	
+	public GuestVO guestReservationCheck(GuestVO guestVO) throws Exception{
+		return guestRepository.guestReservationCheck(guestVO);
+	}
+	
+	public GuestVO guestFindPwd(GuestVO guestVO) throws Exception{
+		return guestRepository.guestFindPwd(guestVO);
+	}
+	
+	public int guestDelete(int reservationNum) throws Exception{
+		return guestRepository.guestDelete(reservationNum);
+	}
+	
 
 }

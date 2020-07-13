@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.tm.cgv.guest.GuestService;
 import com.tm.cgv.point.PointService;
 import com.tm.cgv.point.PointVO;
 import com.tm.cgv.reservation.ReservationService;
@@ -22,8 +23,11 @@ public class Schedule {
 	private PointService pointService;
 	@Autowired
     RedisTemplate<String, Object> redisTemplate;
+	@Autowired
+	private GuestService guestService;
 	
-//	@Scheduled(cron ="50 * * * * *")
+	
+//	@Scheduled(cron ="50 * * * * *") - 예제
 	public void cronSchedule() throws Exception{
 		System.out.println(Thread.currentThread().getName());
 		Calendar cal = Calendar.getInstance();
@@ -31,9 +35,24 @@ public class Schedule {
 	}
 	
 	
+	//자정에 이미 상영이 마친 예매에 해당하는 guest Table 컬럼 삭제
+	@Scheduled(cron ="0 0 0 * * *")
+	public void guestDeleteSchedule() throws Exception{
+		//비회원으로 당일 기준 상영이 종료된 테이블 리스트 조회
+		List<ReservationVO> guestReservationList = reservationService.guestReservationList();
+		
+		//조회한 값을 이용해서 guest Table값 삭제
+		if(guestReservationList != null) {
+			for (ReservationVO reservationVO : guestReservationList) {
+				guestService.guestDelete(reservationVO.getNum());
+			}
+		}
+	}
+	
+	
+	
 	//자정에 결제금액에 해당하는 일정 포인트 지급 - (resevationTable이용)
 	@Scheduled(cron ="0 0 0 * * *")
-	//@Scheduled(cron ="* * * * * *")
 	public void pointSchedule() throws Exception{
 		Calendar cal = Calendar.getInstance();
 		String year = cal.get(Calendar.YEAR)+"";

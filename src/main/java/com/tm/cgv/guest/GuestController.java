@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.reservation.ReservationService;
+import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.util.MakeSerialCode;
 import com.tm.cgv.util.SmsSender;
 
@@ -23,18 +25,66 @@ public class GuestController {
 	private SmsSender smsSender;
 	@Autowired
 	private MakeSerialCode makeSerialCode;
+	@Autowired
+	private ReservationService reservationService;
 	
 	
 	
-	//비회원 예매 정보 확인 - 조회
-	@PostMapping("reservationInfo")
-	public ModelAndView guestReservationCheck() throws Exception{
+	
+	//비회원 정보 비밀번호 찾기페이지로 이동
+	@GetMapping("memberGuestPwd")
+	public ModelAndView memberGuestPwd() throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		mv.setViewName("member/guest/memberGuestPwd");
+		return mv;
+	}
+	
+	//비밀번호 존재 엽우 확인
+	@ResponseBody
+	@PostMapping("guestFindPwd")
+	public int guestFindPwd(GuestVO guestVO) throws Exception{
+		int result = 0;
+		
+		guestVO = guestService.guestFindPwd(guestVO);
+		if(guestVO != null) {
+			result = Integer.parseInt(guestVO.getPwd());
+		}
+		return result;
+	}
+	
+	
+	
+	//비회원 등록 정보가 일치하는지 확인
+	@ResponseBody
+	@PostMapping("guestCheck")
+	public int guestReservationcheck(GuestVO guestVO) throws Exception{
+		System.out.println("INNNNNNNNNNNN><<>>>>>>>>>>>>>>>>>>");
+		
 		//생년월일, 전화번호, 비밀번호 일치 확인
+		int result = 0;
 		
+		guestVO = guestService.guestReservationCheck(guestVO);
+		if(guestVO != null) {
+			result = guestVO.getReservationNum();
+		}
 		
+		return result;
+	}
+	
+	
+	//비회원 예매 정보  조회
+	@GetMapping("reservationSelect")
+	public ModelAndView guestReservationSelect(int reservationNum) throws Exception{
+		ModelAndView mv = new ModelAndView();
 		
+		//예매번호로 예매 정보 조회 - reservationTable
+		ReservationVO reservationVO = new ReservationVO();
+		reservationVO = reservationService.reservationResultSelectOne(reservationNum);
+		
+		mv.addObject("reservationVO", reservationVO);
+		
+		mv.setViewName("member/guest/memberGuestList");
 		return mv;
 	}
 	

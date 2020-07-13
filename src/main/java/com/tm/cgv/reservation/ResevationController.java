@@ -125,7 +125,7 @@ public class ResevationController {
 		//예매 DB삭제 - 결제 삭제시 casecade 할 필요 X (테스트용으로 필요)
 		result = reservationService.reservationDelete(reservationVO);
 		System.out.println("예매정보 : "+result);
-				
+		
 		return result;
 	}
 	
