@@ -6,6 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.reservation.ReservationRepository">
 
+	<select id="reservationAllList" resultType="ReservationVO">
+		select * from reservation
+	</select>
+
+
 	<insert id="reservationInsert" parameterType="ReservationVO" useGeneratedKeys="true" keyProperty="num">
 		insert into reservation values(#{num},#{movieNum},#{paymentNum},#{movieTimeNum},#{uid},#{filmType},
 		#{cinemaName},#{theaterName},#{seats},#{totalPrice},#{common},#{teenager},#{preference},sysdate(),null)

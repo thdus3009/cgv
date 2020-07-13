@@ -1,7 +1,14 @@
 package com.tm.cgv.reservation;
 
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,6 +74,9 @@ public class ResevationController {
 	private TimePriceService timePriceService;
 	@Autowired
 	private GuestService guestService;
+	
+	
+	
 	
 	
 	//예매 취소

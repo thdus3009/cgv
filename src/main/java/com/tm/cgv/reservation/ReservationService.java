@@ -47,4 +47,8 @@ public class ReservationService{
 		return reservationRepository.guestReservationList();
 	}
 	
+	public List<ReservationVO> reservationAllList() throws Exception{
+		return reservationRepository.reservationAllList();
+	}
+	
 }
