@@ -6,11 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.cgv.reservation.ReservationRepository">
 
-	<select id="reservationAllList" resultType="ReservationVO">
-		select * from reservation
-	</select>
-
-
 	<insert id="reservationInsert" parameterType="ReservationVO" useGeneratedKeys="true" keyProperty="num">
 		insert into reservation values(#{num},#{movieNum},#{paymentNum},#{movieTimeNum},#{uid},#{filmType},
 		#{cinemaName},#{theaterName},#{seats},#{totalPrice},#{common},#{teenager},#{preference},sysdate(),null)
@@ -48,9 +43,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<association property="paymentVO" javaType="paymentVO">
 			<id column="pNum" property="num"/>
+			<result column="imp_uid" property="imp_uid"/>
+			<result column="merchant_uid" property="merchant_uid"/>
+			<result column="pg" property="pg"/>
 			<result column="pay_method" property="pay_method"/>
+			<result column="apply_num" property="apply_num"/>
 		</association>	
 	</resultMap>
+	
+	<select id="reservationAllList" resultMap="reservationResult">
+		select * from 
+		(select * from 
+		(select * from 
+		(select * from reservation) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum))B
+		join
+		(select num as pNum,imp_uid,merchant_uid,pg,pay_method,apply_num from payment) P
+		on(B.paymentNum = P.pNum)
+		order by num desc
+	</select>
 	
 	
 	<select id="reservationResultSelectOne" parameterType="Integer" resultMap="reservationResult">

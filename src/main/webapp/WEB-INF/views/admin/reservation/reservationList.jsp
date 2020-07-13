@@ -117,10 +117,10 @@
 						</table>
 						
 						
-						<button class="btn btn-primary" id="btnExcel">EXCEL</button>
+						<button class="btn btn-primary" id="btnExcel" style="float: right;">EXCEL DOWN</button>
 						<script type="text/javascript">
 							$("#btnExcel").click(function(){
-								location.href="../../stat.xls";
+								location.href="../../reservation.xls";
 							});
 						</script>
 

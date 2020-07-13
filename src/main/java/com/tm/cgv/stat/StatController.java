@@ -17,32 +17,30 @@ public class StatController {
 	
 	@Autowired
 	private ReservationService reservationService;
+
+
+	//xls를 다운 받고자 하는 경로마다 GetMapping 함수 지정 -> 조회한 값을 model로 각자 맞는 Component에게 전송
 	
-	private void populateModel(Model model) throws Exception {
-        List<ReservationVO> rows = new ArrayList<>();
+	
+	
+	
+	
+	
+	
+    @GetMapping("/reservation.xls")
+    public String getExcelByReservation(Model model)throws Exception {
+    	
+    	List<ReservationVO> rows = new ArrayList<>();
         rows = reservationService.reservationAllList();
         model.addAttribute("rows", rows);
+        
+        return "reservationListStat";
     }
-
-
-    @GetMapping("/stat")
-    public String get(Model model) throws Exception{
-        populateModel(model);
-        return "stat";
-    }
-
-
-
-    @GetMapping("/stat.xls")
-    public String getExcelByExt(Model model)throws Exception {
-        populateModel(model);
-        return "statXls";
-    }
-
-
+    
+    //form으로 받을 때 주소에.xls를 하지 않아도 이런식으로 받을 수 있음
     @GetMapping(path = "/stat", params = "format=xls")
     public String getExcelByParam(Model model) throws Exception {
-        populateModel(model);
+        this.getExcelByReservation(model);
         return "statXls";
     }
 }
