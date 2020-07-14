@@ -302,13 +302,13 @@
 
 	    //stop_list에 값 넣기
 	    <c:forEach items="${stopSeat}" var="vo">
-	    		alert("testttt");
+	    		//alert("testttt");
 	  		  var vo = {
 				"r":'${vo.rowIdx}',
 				"c":${vo.colIdx}
 			}
 	    	stopList.push(vo);
-		    	alert(stopList);
+		    console.log(stopList);
 	    </c:forEach>
 		
 
@@ -339,7 +339,6 @@
 		
 		//stop color
 		for(i=0; i<stopList.length; i++){
-			alert(">.<!!");
 			var com = stopList[i].r + stopList[i].c;
 			console.log("test : " + com);
 
@@ -372,7 +371,7 @@
 			//행띄우기
 			if(type == 0){
 				var c = '.r'+index;	//r1
-				alert(c);
+				//alert(c);
 				$(c).after('<p class="row_space rs'+index+'"></p>');
 				rowList.push(index);
 	
@@ -457,7 +456,7 @@
 			var chName = $(name).attr("name");
 			var chClass = $(name).attr("class");
 			//console.log("ck : " + ck);
-			alert(chClass)
+			console.log(chClass)
 		
 			var rw = chName.substring(0,1);
 			var cl = chName.substring(1,2); 
@@ -473,7 +472,6 @@
 				
 				
 				if(chClass=='rating_delete'){
-					alert("우앙");
 					//$(name).attr("name","");
 					$(name).removeClass();
 					$(name).addClass("rating_economy")
@@ -789,6 +787,26 @@
 			$("#frm").append(r);
 			
 		}
+
+		stopList.sort(function(a,b) {
+
+			return a["c"] - b["c"];
+		});
+
+		cnt = 0; 
+		
+		for(i=0; i<stopList.length; i++){
+			if(stopList[i].c=="0"){
+				cnt = cnt+1;
+			}
+
+			console.log(stopList[i]);
+		}
+		console.log(cnt);
+		stopList.splice(0,cnt);
+		console.log(stopList)
+
+		
 	});
 
 
@@ -854,6 +872,7 @@
 		}
 
 		for(n=0; n<stopList.length; n++){
+			alert(stopList[n]);
 			console.log(stopList[n])
 			var r = '<input type="hidden" name="stop_rc" value="'+stopList[n].r+'">';
 			r = r + '<input type="hidden" name="stop_idx" value="'+stopList[n].c+'">';

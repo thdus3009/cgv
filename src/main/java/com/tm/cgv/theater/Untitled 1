@@ -6,11 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,7 @@ import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatRepository;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatBooking.SeatBookingRepository;
+import com.tm.cgv.seatBooking.SeatBookingVO;
 import com.tm.cgv.seatSpace.SeatSpaceRepository;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.util.BitFilmType;
@@ -171,7 +170,6 @@ public class TheaterService {
 		theaterRepository.theaterUpdate(theaterVO);
 		
 		
-		
 		//seat update insert
 		for(int i=0; i<row.length; i++) {
 
@@ -221,74 +219,92 @@ public class TheaterService {
 		
 		System.out.println("=============END space");
 		
+		List<SeatVO> stopSeat = seatRepository.selectStopSeat(theaterVO.getNum());
+		//여기서 ..reservation 어쩌구를 하기
 		if(stop_rc!=null) {
-			List<SeatVO> stopSeat = seatRepository.selectStopSeat(theaterVO.getNum());
-			System.out.println(stopSeat.size());
-			System.out.println(stop_rc.length);
-			
-			if(stopSeat.size() > stop_rc.length) {
-				System.out.println("A 루트");
-			} else {
-				System.out.println("B 루트");
-			}
-			
-			
-			
-			// 윗값을 기준으로 로직 전개
-			Set<String> stopSeatSet = new HashSet<String>();
-			
-			for (SeatVO seatVO : stopSeat) {
-				stopSeatSet.add(seatVO.getRowIdx()+seatVO.getColIdx()); // ex) "A1"
-			}
-			
-			System.out.println("stopSeatSet view");
-			for (String string : stopSeatSet) {
-				System.out.println(string);
-			}
-			
-			System.out.println("dododododododododo");
-			for(int i=0; i<stop_rc.length; i++) {
-				
-				String compSeat = stop_rc[i] + stop_idx[i];
-				System.out.println(compSeat);
-				
-				if(stopSeatSet.contains(compSeat))
-					stopSeatSet.remove(compSeat);
-			}
-			
-			int result = 0;
-			System.out.println("stopSeatSet view2");
-			for (String string : stopSeatSet) {
-				System.out.println(string);
-				String rc = string.substring(0,1);
-				System.out.println("rc : " + rc);
-				String idx = string.substring(1,2);
-				System.out.println("idx : " + idx);
+			//System.out.println(">>>>>>>>>>>>>>>>>>>test1");
+			for(int j=0; j<stopSeat.size(); j++) {
 				SeatVO seatVO = new SeatVO();
-				seatVO.setRowIdx(rc);
+				//System.out.println(">>>>>>>>>>>>>>>>>>>test2");
+				//System.out.println(stop_rc.length);
+				//select stop seat
+				//가져온 stop seat은 2개, 새로 넘어온 stop seat은 1개
 				
-				seatVO.setColIdx(Integer.parseInt(idx));
+				//System.out.println("r : " + r);
 				seatVO.setTheaterNum(theaterVO.getNum());
+				seatVO.setRowIdx(stop_rc[j]);	
+				seatVO.setColIdx(Integer.parseInt(stop_idx[j]));
 				int seatNum = seatRepository.selectSeatNum(seatVO);
-				result = seatBookingRepository.deleteReservationNum(seatNum);
+				System.out.println("업데이트 할   시트번호  : " + seatNum);
+
+
 				
+				//좌석 중단
+				//theaterNum으로 movieTime 검색해오기 > List
+				//List 돌려서 seatBooking에 해당 seatNum, movieTimeNum이 있는지 확인
+				//있다고 뜨면 update로 reservationNum 넣어주기, 
+				//없다고 뜨면 insert로 seatNum, movieTimeNum, reservationNum=0 삽입해주기
+				List<Integer> movieTimeNum = movieTimeRepository.movieTimeList(theaterVO.getNum());
+				System.out.println("size : " + movieTimeNum.size());
+				SeatBookingVO seatBookingVO = new SeatBookingVO();
+//				if(movieTimeNum.isEmpty()) {
+//					seatBookingVO.setSeatNum(seatNum);
+//					seatBookingVO.setMovieTimeNum(0);
+//					seatBookingVO.setReservationNum(0);
+//					seatBookingRepository.insertReservationNum(seatBookingVO);
+//				}
+				
+				System.out.println("==>>>>>>> ");
+				for(Integer i:movieTimeNum) {
+					//System.out.println("movieTimeNum : " + i);
+					//System.out.println(">>>>>>>>>>>>>>>>>>>test3");
+					seatBookingVO.setSeatNum(seatNum);
+					seatBookingVO.setMovieTimeNum(i);
+					Integer result = seatBookingRepository.selectCheckExist(seatBookingVO);
+					System.out.println("seatBooking에 존재여부 : "+result);
+					
+					if(result!=null) {
+						//update
+						//seatBookingVO.setReservationNum(0);
+						//seatBookingRepository.updateReservationNum(seatBookingVO);
+					}else {
+						//insert
+						seatBookingVO.setReservationNum(0);
+						seatBookingRepository.insertReservationNum(seatBookingVO);
+					}
+				}
+				
+				stopSeat = seatRepository.selectStopSeat(theaterVO.getNum());
+				
+				int count=0;
+				for(SeatVO k:stopSeat) {
+					System.out.println("===========delete==========");
+					System.out.println("DB " + k.getRowIdx()+k.getColIdx());
+					System.out.println("UI " + stop_rc[j]+stop_idx[j]);
+					
+					String db = k.getRowIdx()+k.getColIdx();
+					String ui = stop_rc[j]+stop_idx[j];
+					
+					if(db.equals(ui)){
+						count= count+1;
+						System.out.println("c: "+count);
+					}
+					
+				}
+				
+				
+				System.out.println("countEnd : "+count);
+				if(count == 0) {
+					System.out.println("ㅠ.ㅠ");
+					int result = seatBookingRepository.deleteReservationNum(seatNum);
+					if(result>0) {
+						System.out.println("개별 삭제 성공");
+					}
+				}
 			}
-			
-			if(result>0) {
-				System.out.println("성공");
-			}
-			
-			
-			
-			
-			
-			
-			
-			
 		}else {
-			//null이면 해당 theaterNum의 seayBooking 0인 거 모두 삭제
 			//비어서 오면
-			List<SeatVO> stopSeat = seatRepository.selectStopSeat(theaterVO.getNum());
+		
 			int result = 0;
 			for(SeatVO k:stopSeat) {
 				SeatVO seatVO = new SeatVO();
@@ -304,6 +320,10 @@ public class TheaterService {
 			}
 			
 		}
+		
+		//seatSpace update insert
+		//해당 theaterNum 다 삭제하고 다시 넣기
+		
 		
 		
 		
