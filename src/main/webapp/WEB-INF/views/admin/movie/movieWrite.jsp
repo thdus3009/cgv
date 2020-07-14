@@ -267,20 +267,7 @@
 			}
 		
 		});	
-	//트레일러 영상 링크
-	/*
-	$("#addV").click(function(){
-		if(num2<3){
-			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
-					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
-					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
-			num2++;
-			count2++;
-			}else{
-				alert("최대 3개까지 가능합니다.")
-			}
-		
-		});	*/
+	
 
 	// 스틸컷 이미지
 	$("#addS").click(function(){

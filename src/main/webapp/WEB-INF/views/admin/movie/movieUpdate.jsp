@@ -304,8 +304,6 @@
 				console.log("init Count : "+count);
 				$("#trailerCount").val(count);
 				
-				//console.log(tcount+"tcount값");//1증가 tcount=1;
-				
 
 				var th = $(this);
 				
@@ -319,16 +317,7 @@
 			}
 		});
 	});
-	/* 
-	var cc = 0;
-	var tt = 0;
-	var numT=$("#trailerCount").val();
-	var nn =Number(numT); */
-	
-	
-	
-	/* var cc = 0;
-	var tt = 0; */
+
 	 
 	//추가버튼 클릭시
 	$("#addI").click(function(){
@@ -346,16 +335,7 @@
 					'style="padding: 12px; width: 45%!important;display: inline-block;">'+
 					'<span class="x" style="width: 10%!important;" >X</span>' +
 					'</div>');
-			
-			/* cc++;
-			console.log(cc+"추가하고 나서");
-			
-			trailerCount = nn + cc;//trailer+cc
-			console.log(nn+"numT");
-			console.log(trailerCount+"추가한 카운트"); */
-
-			/* trailerCount=count;
-			count++; */
+		
 
 			$("#trailerCount").val(count);
 			count++;
@@ -364,12 +344,6 @@
 			console.log(count+"count");
 			$("#trailerCount").val(count);
 			
-		
-			
-			//영상링크
-/* 			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
-					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
-					'style="padding: 12px; width: 100%;"> </div>'); */
 			}else{
 				alert("최대 3개까지 가능합니다.")
 			}
@@ -385,37 +359,6 @@
 		
 	}); 
 
-	
-	
-	/*
-	//영상링크 추가
-	$("#addV").click(function(){
-		var numV=$("#trailerCount").val();
-		console.log(numV+"numV");//삭제 카운트
-		var cv=numV;
-		console.log(cv);
-		var cc =0;
-		
-		if(cv<3){
-			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
-					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
-					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
-			cc++;
-			cv=cv+cc;
-			//tcount =count-1;
-			//console.log(tcount+"tcount값");//1증가 tcount=1;
-			//trailerCount=tcount;//
-			}else{
-				alert("최대 3개까지 가능합니다.")
-			}
-		
-		});	*/
-	/* $("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
-		$(this).parent().remove();
-		num2--;
-
-		}); */
-	
 	
 	//=== 스틸컷 ====
 
