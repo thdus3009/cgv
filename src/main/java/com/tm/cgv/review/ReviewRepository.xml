@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tm.cgv.review.ReviewRepository">
-
+	
 	<!-- 해당 조건의 num 받아오기 +egg-->
 	<select id="reviewList" parameterType="java.util.Map" resultType="ReviewVO">
 		select L.num, L.movieNum, L.title, L.fileName, L.theaterName, L.cinemaName, L.movieTimeNum, L.screenDate, L.screenTime, L.common, L.teenager, L.preference, L.createAt, R.egg
@@ -206,19 +206,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="adminReview" parameterType="Pager" resultType="ReviewVO">
-		select A.num, A.reservationNum, A.title, A.uid, A.contents, A.createAt, A.spoiler, A.swearword from 
-		(select @ROWNUM:=@ROWNUM+1 as rownum, RE.*
-		from (select R.*, M.title from 
+	select num, reservationNum, title, uid, contents, createAt, spoiler, swearword from 
+		(select R.*, M.title from 
 		(select R1.*,R2.movieNum,R2.uid from
 		(select * from review where createAt is not null and deleteAt is null) R1 
 		left join (select num,uid,movieNum from reservation where createAt is not null and deleteAt is null) R2
 		on(R1.reservationNum = R2.num) where R2.num=R1.reservationNum) R inner join (select num, title from movieInfo) M
-		on(M.num = R.movieNum)) RE, (select @ROWNUM:=0) RO
-		) A where A.spoiler>0 or A.swearword>0 limit #{startRow},#{perPage}
+		on(M.num = R.movieNum)) R
+		where 
+		(spoiler<![CDATA[>]]>0 or swearword<![CDATA[>]]>0)
+		<if test="kind == 'title'">
+			and title LIKE concat('%',#{search},'%')
+		</if>
+		<if test="kind == 'uid'">
+			and uid LIKE concat('%',#{search},'%')
+		</if>
+		<if test="kind == 'contents'">
+			and contents LIKE concat('%',#{search},'%')
+		</if>
+		
+		limit #{startRow},#{perPage}
 	</select>
 		
-	<select id="movieNumCount" resultType="Long">
-		select count(num) from review where createAt is not null and deleteAt is null and (spoiler>0 or swearword>0)
+	<select id="movieNumCount" parameterType="Pager" resultType="Long"> <!-- count는 list와 같은식을 쓴다.(count(num)부분만 다름) -->
+		select count(P.num) from
+		(select num from (select R.*, M.title from 
+		(select R1.*,R2.movieNum,R2.uid from 
+		(select * from review where createAt is not null and deleteAt is null) R1 
+		left join 
+		(select num,uid,movieNum from reservation where createAt is not null and deleteAt is null) R2 
+		on(R1.reservationNum = R2.num) where R2.num=R1.reservationNum) R inner join (select num, title from movieInfo) M 
+		on(M.num = R.movieNum)) R
+		where ((spoiler<![CDATA[>]]>0 or swearword<![CDATA[>]]>0)
+		<if test="kind == 'title'">
+			and title LIKE concat('%',#{search},'%')
+		</if>
+		<if test="kind == 'uid'">
+			and uid LIKE concat('%',#{search},'%')
+		</if>
+		<if test="kind == 'contents'">
+			and contents LIKE concat('%',#{search},'%')
+		</if>
+		)) P
 	</select>
 	
 	<update id="adminReviewDelete" parameterType="ReviewVO">

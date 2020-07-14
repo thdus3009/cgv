@@ -47,6 +47,7 @@
 							cellspacing="0">
 							<thead>
 								<tr class="admin-tr"> <!-- 8개 -->
+									<th><input type="checkbox" id="d1"></th>
 									<th>No.(리뷰번호)</th>
 									<th>예매번호</th> 
 									<th>영화제목</th>
@@ -62,9 +63,11 @@
 							<tbody id="tb">
 								 <c:forEach items="${list}" var="vo"> 
 									<tr class="admin-tr-each">
-
+										<td class="ate-center" style="width: 3%;">
+											<input style="width:100%;" type="checkbox" class="c1" data-num="${vo.reservationNum}">
+										</td>
 										<td class="ate-center" style="width: 8%;">${vo.num}</td>
-										<td class="ate-center" style="width: 8%;">${vo.reservationNum}</td>
+										<td class="ate-center" style="width: 6%;">${vo.reservationNum}</td>
 										<td class="ate-center" style="width: 15%;">${vo.title}</td>
 										<td class="ate-center" style="width: 10%;">${vo.uid}</td>
 										<td class="ate-center">${vo.contents}</td>
@@ -137,6 +140,25 @@
 			var searchTxt = $("#searchTxt").val();
 			location.href = "./adminReview?curPage=&kind="+searchTag+"&search="+searchTxt;
 		});
+
+		//전체선택
+		$("#d1").click(function(){
+			$(".c1").prop("checked", $("#d1").prop("checked")); //prop("checked",true)
+		});
+
+		//부분선택
+		$(".c1").click(function(){
+			var result = true;
+
+			$(".c1").each(function(){
+				if(!$(this).prop("checked")){
+					result=false;
+				}
+			});
+
+			$("#d1").prop("checked",result);
+		});
+		
 	</script>
 	
 </body>
