@@ -1,7 +1,6 @@
 package com.tm.cgv.admin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,24 +30,16 @@ import com.tm.cgv.pointHistory.PointHistoryService;
 import com.tm.cgv.pointHistory.PointHistoryVO;
 import com.tm.cgv.reservation.ReservationService;
 import com.tm.cgv.reservation.ReservationVO;
-
-import com.tm.cgv.review.ReviewService;
-import com.tm.cgv.review.ReviewVO;
-
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
-
 import com.tm.cgv.timePrice.TimePriceService;
 import com.tm.cgv.timePrice.TimePriceVO;
 import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.util.MakeSerialCode;
-
-import com.tm.cgv.util.BitFilmType;
-
 import com.tm.cgv.util.Pager;
 
 
@@ -90,9 +81,6 @@ public class AdminController {
     RedisTemplate<String, Object> redisTemplate;
 	
 	
-	@Autowired
-	private ReviewService reviewService;
-	
 	@GetMapping("/")
 	public String admin() throws Exception {
 		return "admin/adminIndex";
@@ -101,6 +89,16 @@ public class AdminController {
 	//==============================
 	// movieInfo
 	//==============================
+	@GetMapping("movie/movieList")
+	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
+		List<MovieInfoVO> list = movieInfoService.movieList(pager);
+		
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/movie/movieList");
+		}
+		return mv;
+	}
 	
 	@GetMapping("movie/movieListSort")
 	public ModelAndView movieListSort(ModelAndView mv,MovieInfoVO movieInfoVO) throws Exception{
@@ -110,18 +108,6 @@ public class AdminController {
 		
 		mv.addObject("list",list);
 		mv.setViewName("admin/movie/ajax/movieListSort");
-		return mv;
-	}
-	
-	
-	@GetMapping("movie/movieList")
-	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
-		List<MovieInfoVO> list = movieInfoService.movieList(pager);
-		
-		if(list !=null) {
-			mv.addObject("list",list);
-			mv.setViewName("admin/movie/movieList");
-		}
 		return mv;
 	}
 	
@@ -136,6 +122,7 @@ public class AdminController {
 		}
 		return mv;
 	}
+	
 	@GetMapping("movie/movieWrite")
 	public ModelAndView movieWrite(ModelAndView mv)throws Exception{
 		mv.addObject("vo",new MovieInfoVO());
@@ -699,7 +686,6 @@ public class AdminController {
 		return result;
 	}
 	
-
 	
 	//==============================
 	// reservation 
@@ -921,63 +907,6 @@ public class AdminController {
 	
 	
 	
-
-	//==============================
-	// review
-	//==============================
-	@GetMapping("review/adminReview")
-	public ModelAndView adminReview(ModelAndView mv,Pager pager)throws Exception {
-		System.out.println("reviewAdminSearch");
-		System.out.println(pager.getCurPage());
-		System.out.println(pager.getKind());
-		System.out.println(pager.getSearch());
-		
-		List<ReviewVO> list = reviewService.adminReview(pager);
-		mv.addObject("list", list);
-		mv.addObject("pager", pager);
-		mv.setViewName("admin/review/adminReview");
-		return mv;
-	}
-	
-
-	@GetMapping("review/adminReviewDelete")
-	@ResponseBody
-	public int adminReviewDelete(ReviewVO reviewVO)throws Exception {
-		System.out.println("dddddddddddddddd");
-		System.out.println(reviewVO.getReservationNum());
-		int result = reviewService.adminReviewDelete(reviewVO);
-		return result;
-	}
-	
-	//전체삭제
-	@GetMapping("review/allDelete")
-	@ResponseBody
-	public int allDelete()throws Exception {
-		int result = reviewService.allDelete();
-		return result;
-	}
-	
-	//부분삭제
-	@GetMapping("review/partDelete")
-	@ResponseBody
-	public int partDelete(Integer[] num)throws Exception {
-		//배열 > arraylist로 바꾸기
-		ArrayList<Integer> ar = new ArrayList<>(Arrays.asList(num));
-		int result = 0;
-		for (Integer reservationNum : ar) {
-			//System.out.println(integer);
-			result = reviewService.partDelete(reservationNum);
-		}
-		
-		return result;
-	}
-	
-	@GetMapping("review/adminReviewSearch")
-	public ModelAndView adminReviewSearch(ModelAndView mv)throws Exception {
-		
-		return mv;
-	}
-
 
 }
 
