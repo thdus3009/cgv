@@ -107,7 +107,7 @@
 							</div>
 						</div>
 						
-						<!-- 임시 action주소 사용 - 수정해야됨 -->
+						<!-- 비밀번호 출력 페이지로 이동 -->
 						<form action="./pwdFindResult" method="post" id="pwdSubmit">
 							<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input type="hidden" id="pwd" name="pwd" value="">

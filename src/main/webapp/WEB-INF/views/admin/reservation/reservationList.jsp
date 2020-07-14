@@ -194,8 +194,10 @@
 									</div>
 
 								</div>
+								<form action="../../"></form>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal"></button>
+									<input type="file" name="file"> 
 								</div>
 							</div>
 
