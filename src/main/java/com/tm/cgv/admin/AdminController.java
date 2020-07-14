@@ -653,6 +653,8 @@ public class AdminController {
 	@GetMapping("movieTime/insert")
 	public ModelAndView movieTimeInsert(Pager pager, TheaterVO theaterVO) throws Exception {
 		
+		
+		
 		ModelAndView mv = new ModelAndView();
 		
 		pager.setPerPage(12);		// 12개씩 영화 보여주기 위함
