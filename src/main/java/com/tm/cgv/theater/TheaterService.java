@@ -23,6 +23,7 @@ import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.seat.SeatRepository;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatBooking.SeatBookingRepository;
+import com.tm.cgv.seatBooking.SeatBookingVO;
 import com.tm.cgv.seatSpace.SeatSpaceRepository;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
 import com.tm.cgv.util.BitFilmType;
@@ -225,6 +226,39 @@ public class TheaterService {
 			List<SeatVO> stopSeat = seatRepository.selectStopSeat(theaterVO.getNum());
 			System.out.println(stopSeat.size());
 			System.out.println(stop_rc.length);
+			
+			List<Integer> movieTimeNum = movieTimeRepository.movieTimeList(theaterVO.getNum());
+			System.out.println("size : " + movieTimeNum.size());
+			
+			for(int j=0; j<stop_rc.length; j++) {
+				SeatVO seatVO = new SeatVO();
+				seatVO.setTheaterNum(theaterVO.getNum());
+				seatVO.setRowIdx(stop_rc[j]);	
+				seatVO.setColIdx(Integer.parseInt(stop_idx[j]));
+				int seatNum = seatRepository.selectSeatNum(seatVO);
+				
+				SeatBookingVO seatBookingVO = new SeatBookingVO();
+				for(Integer i:movieTimeNum) {
+					//System.out.println("movieTimeNum : " + i);
+					//System.out.println(">>>>>>>>>>>>>>>>>>>test3");
+					seatBookingVO.setSeatNum(seatNum);
+					seatBookingVO.setMovieTimeNum(i);
+					Integer result = seatBookingRepository.selectCheckExist(seatBookingVO);
+					System.out.println("seatBooking에 존재여부 : "+result);
+					
+					if(result!=null) {
+						//update
+						seatBookingVO.setReservationNum(0);
+						seatBookingRepository.updateReservationNum(seatBookingVO);
+					}else {
+						//insert
+						seatBookingVO.setReservationNum(0);
+						seatBookingRepository.insertReservationNum(seatBookingVO);
+					}
+				}
+			}
+			
+			
 			
 			if(stopSeat.size() > stop_rc.length) {
 				System.out.println("A 루트");
