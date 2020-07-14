@@ -69,7 +69,7 @@
 								 <c:forEach items="${list}" var="vo"> 
 									<tr class="admin-tr-each">
 										<td class="ate-center" style="width: 3%;">
-											<input style="width:100%;" type="checkbox" class="c1" data-num="${vo.reservationNum}">
+											<input style="width:13px;" type="checkbox" class="c1" data-num="${vo.reservationNum}">
 										</td>
 										<td class="ate-center" style="width: 8%;">${vo.num}</td>
 										<td class="ate-center" style="width: 6%;">${vo.reservationNum}</td>
@@ -120,24 +120,6 @@
 	
 	<!-- 스크립트 -->
 	<script type="text/javascript">
-		/* 리뷰 삭제 */
-		$(".review_delete").click(function(){
-			var reservationNum = $(this).attr("data-delete_num");
-			console.log("reservationNum: "+reservationNum);
-			$.ajax ({
-				type:"GET",
-				url:"./adminReviewDelete",
-				data:{
-					reservationNum : reservationNum,
-				},
-				success:function(data){
-					alert("리뷰삭제 완료");
-					location.reload();
-					
-				}
-			})
-		})
-		
 		/* 검색 기능 */
 		$("#searchBtn").click(function() {
 
@@ -164,6 +146,7 @@
 			$("#d1").prop("checked",result);
 		});
 
+		
 		/* 전체 삭제 */
 		$("#allDelete").click(function(){
 			if(confirm("신고된 모든 리뷰를 삭제 하시겠습니까?")){
@@ -182,11 +165,56 @@
 		});
 
 		/* 부분 삭제 */
-		$("#partDelete").click(function(){
+		$("#partDelete").click(function(item){
+			var result=0;
+			var result2 = [];
+
 			if(confirm("선택한 리뷰를 삭제 하시겠습니까?")){
-				
+				$(".c1").each(function(){
+					if($(this).prop("checked")){
+						result = $(this).attr("data-num");
+						//console.log(typeof result); 
+						result2.push(result); //배열
+					}
+				});
+
+ 				$.ajax ({
+					type:"GET",
+					url:"./partDelete",
+					traditional: true,
+					data:{
+						num : result2,
+					},
+					success:function(data){
+						alert("리뷰삭제 완료");
+						location.reload();
+						
+					}
+				})	 
 			}
 		});
+
+		/* 리뷰 1개 삭제 */
+		$(".review_delete").click(function(){
+			if(confirm("정말 삭제하시겠습니까?")){
+			var reservationNum = $(this).attr("data-delete_num");
+			console.log("reservationNum: "+reservationNum);
+			$.ajax ({
+				type:"GET",
+				url:"./adminReviewDelete",
+				data:{
+					reservationNum : reservationNum,
+				},
+				success:function(data){
+					alert("리뷰삭제 완료");
+					location.reload();
+					
+				}
+			})
+			}
+		})
+		
+		
 		
 	</script>
 	

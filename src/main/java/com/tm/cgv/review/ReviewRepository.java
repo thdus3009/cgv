@@ -1,5 +1,6 @@
 package com.tm.cgv.review;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,6 +71,8 @@ public interface ReviewRepository {
 	public int adminReviewDelete(ReviewVO reviewVO);
 	
 	public int allDelete();
+	
+	public int partDelete(int reservationNum);
 	
 	public long movieNumCount(Pager pager);
 }

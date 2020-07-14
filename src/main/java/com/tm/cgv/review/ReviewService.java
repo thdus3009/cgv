@@ -1,6 +1,7 @@
 package com.tm.cgv.review;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -170,6 +171,10 @@ public class ReviewService {
 	
 	public int allDelete()throws Exception {
 		return reviewRepository.allDelete();
+	}
+	
+	public int partDelete(int reservationNum)throws Exception {
+		return reviewRepository.partDelete(reservationNum);
 	}
 	
 }
