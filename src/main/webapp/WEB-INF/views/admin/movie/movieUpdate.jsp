@@ -29,8 +29,9 @@
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<fieldset>
 												<div class="tbl_write">
-												<input type="text" id="trailerCount" value="0" name="trailerCount"><!-- 카운트 값이 들어옴 -->
-												<input type="text" id="steelCutCount" value="0" name="steelCutCount">
+												
+												<input type="text" id="trailerCount" value="${tco}" name="trailerCount"><!-- 카운트 값이 들어옴 -->
+												<input type="text" id="steelCutCount" value="${sco}" name="steelCutCount">
 												
 												
 												<input type="hidden" value="${vo.num}" id="num" name="num">
@@ -77,13 +78,17 @@
 																
 																	<c:forEach var="ar" items="${ar}" varStatus="i">
 																		<c:if test="${ar.type eq 2 }">
-																		<label for="files"></label> <input type="file"
-																	class="form-control files check" id="files"
-																	placeholder="타이틀 이미지 선택" name="files">
-																			<p>${ar.originName}
+																		<div>
+																		<label for="files"></label> 
+																		<input type="file"
+																		class="form-control files check" id="files${i.index}"
+																		placeholder="타이틀 이미지 선택" name="files">
+																		<p>${ar.originName}
 																			<img alt="" src="../../images/movie/movieList/x.png"
-																			style="width: 20px; height: 20px;" id="${ar.num}" class="fileDeleteT" > <!-- 트레일러  num -->
-																			</p>
+																			data-imgpath ="${ar.fileName}"
+																			style="width: 20px; height: 20px;" data-imagenum="${ar.num}" class="fileDeleteT" > <!-- 트레일러  num -->
+																		</p>
+																		</div>
 																		</c:if>
 																	</c:forEach>
 																	<div class="form-group"  id="f">
@@ -95,10 +100,10 @@
 															<div class="form-group" style="float: left; width: 650px; margin-left: 80px;margin-right: 50px;" id="2d">
 																<label for="videolink">예고 영상:</label>
 																	
-																	<c:forEach var="ar" items="${ar}" >
+																	<c:forEach var="ar" items="${ar}" varStatus="i" >
 																		<c:if test="${ar.type eq 2 }">
 																		 <input type="text"
-																			class="form-control videolink check " id="videolink"
+																			class="form-control videolink check " id="videolink${i.index}"
 																			placeholder="예고편 영상 링크" name="videolink" value="${ar.movieVideoVOs[0].videolink}"><br>
 																	</c:if>	
 																</c:forEach>
@@ -151,13 +156,17 @@
 																<input type="button" id="addS" value="추가">
 																	<c:forEach var="ar" items="${ar}" varStatus="i">
 																		<c:if test="${ar.type eq 3 }">
-																		<label for="files"></label> <input type="file"
-																	class="form-control files check" id="files"
-																	placeholder="타이틀 이미지 선택" name="files">
-																			<p>${ar.originName}
+																		<div>
+																		<label for="files"></label> 
+																		<input type="file"
+																			class="form-control files check" id="files"
+																			placeholder="타이틀 이미지 선택" name="files">
+																		<p>${ar.originName}
 																			<img alt="" src="../../images/movie/movieList/x.png"
-																			style="width: 20px; height: 20px;" class="fileDeleteS"> <!-- 삭제할 id를 뭘로 주지... -->
-																			</p>
+																			data-imgpaths ="${ar.fileName}"
+																			style="width: 20px; height: 20px;" class="fileDeleteS" data-imagenums="${ar.num}"> <!-- 삭제할 id를 뭘로 주지... -->
+																		</p>
+																		</div>
 																		</c:if>
 																	</c:forEach>
 																	<div class="form-group" id="st">
@@ -271,72 +280,110 @@
 
 	// ====트레일러 =====
 	//기존 파일
-	var count =1;
-	var tcount =0;
-	var trailerCount = $("#trailerCount").val();
+	//var count = 0; //삭제버튼 카운트
+	var count = $("#trailerCount").val();
+	console.log(count+" :현재 1");
+
 	
-	$(".fileDeleteT").click(function(){
-		var check = confirm("삭제하시겠습니까?");
-		if(check){
-			var numt = $("#numT").val();
-			var fileNameT=$("#fileNameT").val();
-			
-			count++;
-			tcount =count-1;
-			console.log(tcount+"tcount값");//1증가 tcount=1;
-			trailerCount=tcount;//
-			$("#trailerCount").val(trailerCount);
-			
-
-			$.post("../../movieImage/movieImageDelete",{num:numt,fileName:fileNameT,_csrf : $("#_csrf").val()},function(data){
-				console.log(data+"dd");//null
+	$(".fileDeleteT").each(function(index){
+		$(this).click(function(){
+			var check = confirm("삭제하시겠습니까?");
+			if(check){
+				var numt = $(this).data("imagenum");	
+				var fileNameT=$(this).data("imgpath");
+				console.log(fileNameT+"파일이름");
 				
-				if(data>0){
-					$(".fileDeleteT").parent().remove();
-					
+				var img = $(this).parent().prev().attr('id');
+				console.log(img);
+				
+				var vi=$("#videolink"+index);
+				console.log(vi);
+				vi.remove();
+				
+				count--;
+				console.log("init Count : "+count);
+				$("#trailerCount").val(count);
+				
+				//console.log(tcount+"tcount값");//1증가 tcount=1;
+				
 
+				var th = $(this);
+				
+				$.post("../../movieImage/movieImageDelete",{num:numt,fileName:fileNameT,_csrf : $("#_csrf").val()},function(data){
+					console.log(data+"dd");//null
+					
+					if(data>0){
+						th.parent().parent().remove();	
 					}
 				});
-
 			}
-
 		});
-
-
+	});
+	/* 
+	var cc = 0;
+	var tt = 0;
+	var numT=$("#trailerCount").val();
+	var nn =Number(numT); */
+	
+	
+	
+	/* var cc = 0;
+	var tt = 0; */
+	 
 	//추가버튼 클릭시
 	$("#addI").click(function(){
-		var numT=$("#trailerCount").val();
-		console.log(numT+"numT");//삭제 카운트
+	 	var numT=$("#trailerCount").val();
+		var nn =Number(numT); 
+
 		
 		
-		if(trailerCount<3){
-			$("#f").append('<div><input type="file" multiple="multiple" style="width: 100%; float:left; "'+
+		if(count <3){
+			$("#f").append('<div class="group2">'+
+					'<input type="file" multiple="multiple" style="width: 45%!important; float:left; "'+
 					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
-					'<span class="x"style="float: left;" >X</span></div>');
-			
-			count++;
-			tcount =count-1;
-			console.log(tcount+"tcount값");//1증가 tcount=1;
-			trailerCount=tcount;//
-			$("#trailerCount").val(trailerCount);
-			
-			console.log(trailerCount +"삭제+추가 클릭수 합한값");
-			//영상링크
-			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
+					'<input type="text" class="form-control videolink check form-control2" '+
 					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
-					'style="padding: 12px; width: 100%;"> <span class="x2">X</span></div>');
+					'style="padding: 12px; width: 45%!important;display: inline-block;">'+
+					'<span class="x" style="width: 10%!important;" >X</span>' +
+					'</div>');
 			
+			/* cc++;
+			console.log(cc+"추가하고 나서");
+			
+			trailerCount = nn + cc;//trailer+cc
+			console.log(nn+"numT");
+			console.log(trailerCount+"추가한 카운트"); */
+
+			/* trailerCount=count;
+			count++; */
+
+			$("#trailerCount").val(count);
+			count++;
+			console.log("init Count : "+count);
+
+			console.log(count+"count");
+			$("#trailerCount").val(count);
+			
+		
+			
+			//영상링크
+/* 			$("#f2").append('<div><input type="text" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
+					'style="padding: 12px; width: 100%;"> </div>'); */
 			}else{
 				alert("최대 3개까지 가능합니다.")
 			}
 		
 		});	
-
+	
 	 $("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
 		$(this).parent().remove();
-		trailerCount--;
-		$("#trailerCount").val(trailerCount);
-		}); 
+
+		count--;
+		console.log(count+"count");
+		$("#trailerCount").val(count);
+		
+	}); 
 
 	
 	
@@ -363,59 +410,60 @@
 			}
 		
 		});	*/
-	$("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
+	/* $("#f2").on("click",".x2",function(){ //추가된 파일 필요없을 시 삭제
 		$(this).parent().remove();
 		num2--;
 
-		});
+		}); */
 	
 	
 	//=== 스틸컷 ====
-	var count2 = 1;
-	var scount =0;
-	var steelCutCount =$("#steelCutCount").val();
-	$(".fileDeleteS").click(function(){
-		var check = confirm("삭제하시겠습니까?");
-		if(check){
-			var nums = $("#numS").val();
-			console.log(nums+"썸네일");
-			var fileNameS=$("#fileNameS").val();
-			console.log(fileNameS +"썸 파일이름")
-			
-			count2++;
 
-			scount = count2-1;
-			steelCutCount=scount;
-			$("#steelCutCount").val(steelCutCount);
-
-			$.post("../../movieImage/movieImageDelete",{num:nums,fileName:fileNameS,_csrf : $("#_csrf").val()},function(data){
-				console.log(data+"dd");//null
+	var counts =$("#steelCutCount").val();
+	console.log(counts+"counts");
+		
+	$(".fileDeleteS").each(function(index){
+		$(this).click(function(){
+			var check = confirm("삭제하시겠습니까?");
+			if(check){
+				var nums = $(this).data("imagenums");	
+				console.log(nums+"썸네일");
+				var fileNameS=$(this).data("imgpaths");
+				console.log(fileNameS+"파일이름");
 				
-				if(data>0){
-					$(".fileDeleteS").parent().remove();
+				counts--;
+				console.log("init Count : "+counts);
+				$("#steelCutCount").val(counts);
+				
+				var thi = $(this);
+				
+				$.post("../../movieImage/movieImageDelete",{num:nums,fileName:fileNameS,_csrf : $("#_csrf").val()},function(data){
+					console.log(data+"dd");//null
 					
+					if(data>0){
+						thi.parent().parent().remove();
+						
+						}
+					});
+				}
+			});
+	});
 
-					}
-				});
-
-			}
-
-		});
-	var numS =0;
-	var countS=1;
-	var scount =0;
-	var steelCutCount = $("#steelCutCount").val();
+	
 	$("#addS").click(function(){
-		if(numS<5){
+		if(counts<5){
 			$("#st").append('<div><input type="file" class="form-control videolink check form-control2" '+
 					'id="videolink" placeholder="스틸컷 이미지 " name="files"'+
 					'style=" width: 1500px;"> <span class="xS">X</span></div>');
-			numS++;
-			countS++;
+			
+			
+			$("#steelCutCount").val(counts);
+			counts++;
+			console.log("init Count : "+counts);
 
-			scount = countS-1;
-			steelCutCount=scount;
-			$("#steelCutCount").val(steelCutCount);
+			console.log(counts+"count");
+			$("#steelCutCount").val(counts);
+
 			
 			}else{
 				alert("최대 5개까지 가능합니다.")
@@ -424,7 +472,11 @@
 		});
 	$("#st").on("click",".xS",function(){
 		$(this).parent().remove();
-		numS--;
+		
+		counts--;
+		console.log(counts+"counts");
+		$("#steelCutCount").val(counts);
+		
 		});
 
 

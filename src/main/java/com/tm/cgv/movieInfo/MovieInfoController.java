@@ -173,6 +173,7 @@ public class MovieInfoController {
 		mv.addObject("vo",map.get("vo")); //정보+ 사진
 		mv.addObject("ar",map.get("ar"));//사진+영상링크
 		
+		mv.addObject("tco",map.get("tco"));
 		mv.addObject("gender",map.get("gender"));
 		mv.addObject("gTotal",map.get("gTotal"));
 		mv.addObject("ageTotal",map.get("ageTotal"));

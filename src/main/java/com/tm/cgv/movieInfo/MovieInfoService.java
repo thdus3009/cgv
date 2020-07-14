@@ -269,7 +269,30 @@ public class MovieInfoService {
 			  movieInfoVO.setVisitor(visitor);
 			  movieInfoRepository.visiUpdate(movieInfoVO);
 		  }
-		
+		// ====트레일러 카운트 값======
+		  Map<String, Object> mapt=movieInfoRepository.tco(movieImageVO);
+		  Iterator<String> mmt=mapt.keySet().iterator();
+			
+		  while(mmt.hasNext()) {
+				String key = mmt.next();
+				System.out.println(key+" : key");//o
+		 }
+		  
+			long tco = (long)mapt.get("cc");
+			System.out.println(tco +" : tco");
+			
+		// ====스틸컷 카운트 값======
+			 Map<String, Object> maps=movieInfoRepository.sco(movieImageVO);
+			 Iterator<String> mms=maps.keySet().iterator();
+				
+			 while(mms.hasNext()) {
+				String key = mms.next();
+				System.out.println(key+" : key");//o
+			 }
+			  
+			long sco = (long)maps.get("cs");
+			System.out.println(sco +" : sco");	
+			
 		//=============
 		Map<String, Object> g = new HashMap<>();
 		
@@ -280,6 +303,8 @@ public class MovieInfoService {
 		g.put("vo", movieInfoVO);
 		g.put("ar", ar);
 		
+		g.put("tco", tco);
+		g.put("sco", sco);
 		g.put("gender", gender);
 		g.put("gTotal",gTotal);
 		g.put("ageTotal", ageTotal2);

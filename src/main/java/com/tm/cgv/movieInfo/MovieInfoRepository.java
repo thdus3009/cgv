@@ -26,7 +26,8 @@ public interface MovieInfoRepository {
 	public MovieInfoVO mSelect(MovieInfoVO movieInfoVO) throws Exception;
 	public List<MovieImageVO> mSelect2(MovieImageVO movieImageVO) throws Exception;
 	
-	public int tc(MovieImageVO movieImageVO) throws Exception;
+	public Map<String, Object> tco(MovieImageVO movieImageVO) throws Exception;//트레일러 카운트 값 가져오기
+	public Map<String, Object> sco(MovieImageVO movieImageVO) throws Exception;//스틸컷 카운트 값 가져오기
 	
 	public long movieUpdate(MovieInfoVO movieInfoVO) throws Exception;
 	

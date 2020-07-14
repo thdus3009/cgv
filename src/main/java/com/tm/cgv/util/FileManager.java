@@ -61,21 +61,28 @@ public class FileManager {
    
    // fileDelete
    public int deleteFile(String fileName, File dest)throws Exception{
-      
-      
-      File file = new File(dest, fileName);
-      
-      boolean check=false;
-      int result=0;
-      if(file.exists()) {
-         check = file.delete();
-      }
-      if(check) {
-         result=1;
-      }
-      
-      return result;
-   }
+	   
+	   	System.out.println("dest : "+dest);
+	   	System.out.println("fileName : "+fileName);
+	      File file = new File(dest, fileName);
+	      
+	      
+	     System.out.println("file : "+file);
+	      boolean check=false;
+	      int result=0;
+	      
+	      if(file.exists()) {
+	    	  System.out.println("deleteFile IN");
+	         check = file.delete();
+	         System.out.println("check : "+check);
+	      }
+	      if(check) {
+	         result=1;
+	      }
+	      
+	      System.out.println(result+"d result");
+	      return result;
+	   }
    
    // img인지 체크
    private boolean checkImageType(File file) throws Exception{

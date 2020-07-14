@@ -34,7 +34,9 @@ public class MovieImageService {
 	
 	//업로드된 대표사진 지우기
 	public int movieImageDelete(MovieImageVO movieImageVO)throws Exception{
-		File dest = filePathGenerator.getUseClassPathResource(filePath);
+		//String path = FilePathGenerator.addTimePath("")+"\\";
+		//String path = FilePathGenerator.addTimePath(filePath);
+	    File dest = filePathGenerator.getUseClassPathResource(filePath);
 		
 		System.out.println(dest+" : 경로");
 		System.out.println(movieImageVO.getNum()+"서비스 num");

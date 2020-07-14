@@ -141,8 +141,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where MI.movieNum=#{movieNum} and type != 1
  	 </select>
  	  
- 	<select id="tc" resultType="Integer" parameterType="MovieImageVO">
+ 	<select id="tco"  parameterType="MovieImageVO" resultType="java.util.Map">
  		SELECT COUNT(num)as cc FROM movieImage WHERE movieNum=#{movieNum} and type = 2;
+ 	</select>
+ 	<select id="sco"  parameterType="MovieImageVO" resultType="java.util.Map">
+ 		SELECT COUNT(num)as cs FROM movieImage WHERE movieNum=#{movieNum} and type = 3;
  	</select>
  	 <!-- =========================================================================== -->
  	<update id="movieUpdate" parameterType="MovieInfoVO">

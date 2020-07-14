@@ -139,14 +139,14 @@ public class AdminController {
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");
 		}
-		
+		System.out.println(map.get("tco")+"tco 출력");
 		
 		//select 에서 예매율, 리뷰 없어도...
 		
 		mv.addObject("vo",map.get("vo"));//정보+사진
 		mv.addObject("ar",map.get("ar"));//사진+영상링크
 		
-		
+		mv.addObject("tco",map.get("tco"));
 		mv.addObject("gender",map.get("gender"));
 		mv.addObject("gTotal",map.get("gTotal"));
 		mv.addObject("ageTotal",map.get("ageTotal"));
@@ -181,12 +181,12 @@ public class AdminController {
 			mv.setViewName("redirect:./error/404");
 		}
 		
-		
 		MovieInfoVO tmp = (MovieInfoVO)map.get("vo");//.movieImageVOs[0].num
 		System.out.println("라라라라라 : "+tmp.getMovieImageVOs().get(0).getNum());
 		mv.addObject("vo",map.get("vo"));
 		mv.addObject("ar",map.get("ar"));
-		
+		mv.addObject("tco",map.get("tco"));
+		mv.addObject("sco",map.get("sco"));
 		mv.addObject("path","Update");
 		mv.setViewName("admin/movie/movieUpdate");
 		
