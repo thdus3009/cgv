@@ -69,5 +69,7 @@ public interface ReviewRepository {
 	
 	public int adminReviewDelete(ReviewVO reviewVO);
 	
+	public int allDelete();
+	
 	public long movieNumCount(Pager pager);
 }

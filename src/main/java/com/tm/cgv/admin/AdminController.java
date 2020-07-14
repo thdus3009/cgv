@@ -544,6 +544,23 @@ public class AdminController {
 		return result;
 	}
 	
+	//전체삭제
+	@GetMapping("review/allDelete")
+	@ResponseBody
+	public int allDelete()throws Exception {
+		int result = reviewService.allDelete();
+		return result;
+	}
+	
+	//부분삭제
+	@GetMapping("review/partDelete")
+	@ResponseBody
+	public int partDelete(ReviewVO reviewVO)throws Exception {
+		System.out.println(reviewVO.getReservationNum());
+		int result = reviewService.adminReviewDelete(reviewVO);
+		return result;
+	}
+	
 	@GetMapping("review/adminReviewSearch")
 	public ModelAndView adminReviewSearch(ModelAndView mv)throws Exception {
 		

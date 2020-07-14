@@ -254,6 +254,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update review set deleteAt=now() where reservationNum=#{reservationNum}
 	</update>
 	
+	<update id="allDelete">
+		update review set deleteAt = now() 
+		where createAt is not null and deleteAt is null 
+		and (spoiler<![CDATA[>]]>0 or swearword<![CDATA[>]]>0)
+	</update>
+	
 	<!-- ........................................................................................... -->
 
 	<!-- 받아온 num으로 join하여 정보출력 -->

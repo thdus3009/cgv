@@ -168,4 +168,8 @@ public class ReviewService {
 		return reviewRepository.adminReviewDelete(reviewVO);
 	}
 	
+	public int allDelete()throws Exception {
+		return reviewRepository.allDelete();
+	}
+	
 }

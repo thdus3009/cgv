@@ -24,7 +24,7 @@
 					<h1>Review Accusation</h1>
 					<!-- 검색 -->
 					<p>
-					<div class="input-group" style="width: 400px;">
+					<div class="input-group" style="width: 400px; position: unset;">
 						<select id="searchTag" name="searchTag">
 						    <option value="title">영화제목</option>
 						    <option value="uid">아이디</option>
@@ -38,7 +38,12 @@
 								<i class="fas fa-search"></i><!-- 돋보기 아이콘 -->
 							</button>
 						</div>
+						
+						<div style="position: absolute; right: 183px;"><button class="btn btn-danger" id="allDelete">전체삭제</button></div>
+						<div style="position: absolute; right: 93px;"><button class="btn btn-info" id="partDelete">부분삭제</button></div>
 					</div>
+					
+					
 					</p>
 					
 					<!-- 목록 -->
@@ -157,6 +162,30 @@
 			});
 
 			$("#d1").prop("checked",result);
+		});
+
+		/* 전체 삭제 */
+		$("#allDelete").click(function(){
+			if(confirm("신고된 모든 리뷰를 삭제 하시겠습니까?")){
+				$.ajax ({
+					type:"GET",
+					url:"./allDelete",
+					data:{
+					},
+					success:function(data){
+						alert("리뷰삭제 완료");
+						location.reload();
+						
+					}
+				})
+			}
+		});
+
+		/* 부분 삭제 */
+		$("#partDelete").click(function(){
+			if(confirm("선택한 리뷰를 삭제 하시겠습니까?")){
+				
+			}
 		});
 		
 	</script>
