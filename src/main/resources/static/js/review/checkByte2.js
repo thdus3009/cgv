@@ -35,7 +35,7 @@ function CheckByte(obj){//obj=this
 		        obj.value = str2;
 		        fnChkByte(obj, maxByte);
 		    } else {
-		        document.getElementById('bytes').innerText = rbyte;
+		        document.getElementById('bytes2').innerText = rbyte;
 
 		    }
 

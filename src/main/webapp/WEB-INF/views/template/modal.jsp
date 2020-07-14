@@ -7,6 +7,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 
+
 			<!-- Modal Header -->
 			<form id="form" name="form" method="post"
 				action="./review/review_Write">
@@ -36,6 +37,13 @@
 									class="text_position">흠~좀 별로였어요;;;</span>
 								</label>
 							</div>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<span id="bytes" style="color: black;">0</span>/150(byte)
+							&emsp;
+							<input type="button" class="btn btn-danger" id="submitBtn1" value="확인">
+
 						</div>
 
 						<!-- 나중에 여기에 session으로 정보불러와서 같이 보내기 -->

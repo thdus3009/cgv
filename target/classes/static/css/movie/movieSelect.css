@@ -140,6 +140,7 @@ body {
     -moz-border-radius: 3px;
     border-radius: 3px;
     margin-left: 6px;
+    
 }
 
 div[class^="sect-"] .box-contents li .a {
@@ -170,10 +171,32 @@ div[class^="sect-"] .box-contents li .a {
 }
 
 /*  ------------------------------------------------------------------------------- 상세 이미지 */
+.box-contentss {
+    width: 400px;
+    float: left;
+    position: relative;
+    padding-left: 88px !important;
+    display: block;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 
 a {
 	color: inherit;
 	text-decoration: none;
+
+.writerinfoo {
+	position: relative;
+    height: 24px;
+    float: none;
+    background: none;
+    float: left;
+    margin-bottom: 3px;
+    line-height: 20px!important;
+
 }
 
 .box-contents {
@@ -195,7 +218,7 @@ a {
 	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
-#title {
+#title1 {
 	color: #1a1919;
     font-size: 22px;
     vertical-align: middle;
@@ -861,9 +884,10 @@ input, select, img {
 }
 
 .wrap-movie-detail ul.point_col2 {
-	position: relative;
-	margin: 0 25px -2px;
-	overflow: hidden;
+
+    position: relative;
+    margin: 0 25px -2px;
+    /* overflow: hidden; */
 }
 
 .sect-grade .wrap-persongrade>ul {
@@ -984,10 +1008,11 @@ div[class^="sect-"] .box-contents li a {
 	line-height: 20px !important;
 }
 
-.point_col2 .writerinfo .writer-etc .day {
-	padding-right: 8px;
-	margin-right: 6px;
-	background: url(/images/common/bg/bg_writeinfo.gif) no-repeat 100% 0;
+
+.dayy {
+    padding-right: 8px;
+    margin-right: 6px;
+    background: url(../images/common/bg/bg_writeinfo.gif) no-repeat 100% 0;
 }
 
 

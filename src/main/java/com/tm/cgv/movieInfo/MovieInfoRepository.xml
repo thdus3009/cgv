@@ -141,16 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 </insert>
  	 
  	 <select id="movieSelect" parameterType="MovieInfoVO" resultMap="movieJoin">
-		select * from 
-		(select * from 
-		(select * from movieInfo) MI
-		join 
-		(select num as imageNum,fileName,originName,movieNum from movieImage) ME
-		on (MI.num = ME.movieNum)) A
-		join
-		(select num as videoNum,movieNum,videolink  from movieVideo) MV
-		on(A.num = MV.movieNum)
-		where A.num=#{num} and deleteAt is null;
+		select * from movieInfo where num=#{num}
  	 </select>
  	 
  	<update id="movieUpdate" parameterType="MovieInfoVO">

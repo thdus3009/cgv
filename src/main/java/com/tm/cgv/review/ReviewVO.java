@@ -16,6 +16,8 @@ public class ReviewVO {
 	private int charmPoint;
 	private int emotionPoint;
 	private String createAt;
+	private int spoiler;
+	private int swearword;
 	
 // --------------------------------------------	
 //reservation (reviewList)	
