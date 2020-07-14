@@ -48,7 +48,7 @@ label{
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>Coupon ${path}</h1>
+					<h1>${path}</h1>
 					<p id="title">쿠폰  정보 수정</p>
 
 					
