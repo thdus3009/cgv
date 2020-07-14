@@ -552,6 +552,7 @@ public class AdminController {
 	@GetMapping("review/partDelete")
 	@ResponseBody
 	public int partDelete(Integer[] num)throws Exception {
+		//배열 > arraylist로 바꾸기
 		ArrayList<Integer> ar = new ArrayList<>(Arrays.asList(num));
 		int result = 0;
 		for (Integer reservationNum : ar) {
