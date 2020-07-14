@@ -47,13 +47,17 @@
 				   	 	<option value="2">4D</option>
 				   	 </select> -->
 
-							<label class="ckfm"> <input type="checkbox"
-								name="filmType" value="1"> 2D <span class="checkmark"></span>
-							</label> <label class="ckfm"> <input type="checkbox"
-								name="filmType" value="2"> 3D <span class="checkmark"></span>
-							</label> <label class="ckfm"> <input type="checkbox"
-								name="filmType" value="4"> 4D <span class="checkmark"></span>
-							</label> <br> <label class="theaterLebel" for="seat">좌석:</label>
+							<label class="ckfm"> <input type="checkbox" id="checkbox0"
+								name="filmType" value="1">  <span class="checkmark">2D</span>
+							</label> 
+							<label class="ckfm"> <input type="checkbox" id="checkbox1"
+								name="filmType" value="2">  <span class="checkmark">3D</span>
+							</label> 
+							<label class="ckfm"> <input type="checkbox" id="checkbox2"
+								name="filmType" value="4">  <span class="checkmark">4D</span>
+							</label> 
+							<br> 
+							<label class="theaterLebel" for="seat">좌석:</label>
 							<div class="seat_box">
 								<div class="seat_header">
 									<div class="header_btn">
@@ -124,7 +128,7 @@
 
 							<div class="btn_s">
 								<input type="button" id="btn_insert" class="btn btn-default"
-									value="생성" style="background-color: #eff2f8;" onclick="chk()">
+									value="생성" style="background-color: #eff2f8;">
 							</div>
 						</div>
 					</form>
