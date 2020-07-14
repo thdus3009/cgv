@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="MemberCouponVO" id="memberCouponList">
 		<id property="num" column="mNum"/>
 		<result property="uid" column="uid"/>
-		<result property="cuponInfoNum" column="cuponInfoNum"/>
+		<result property="couponInfoNum" column="couponInfoNum"/>
 		<result property="deleteAt" column="deleteAt"/>
 	
 		<association property="couponInfoVO" javaType="CouponInfoVO">
@@ -23,16 +23,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result property="sIssuance" column="sIssuance"/>
 			<result property="eIssuance" column="eIssuance"/>
 		</association>		
-		
 	</resultMap>
 
 
 	<select id="memberCouponSelect" parameterType="MemberCouponVO" resultMap="memberCouponList">
 		select * from
-		(select num as mNum,uid,cuponInfoNum,deleteAt from memberCoupon where deleteAt is null) MC
+		(select num as mNum,uid,couponInfoNum,deleteAt from memberCoupon where deleteAt is null) MC
 		join
-		(select * from cuponInfo) CI
-		on(MC.cuponInfoNum = CI.num)
+		(select * from couponInfo) CI
+		on(MC.couponInfoNum = CI.num)
 		where uid = #{uid}
 	</select>
 	
@@ -46,11 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				deleteAt = sysdate()
 			</otherwise>
 		</choose> 
-		 where uid=#{uid} and cuponInfoNum=#{cuponInfoNum}
+		where uid=#{uid} and couponInfoNum=#{couponInfoNum}
 	</update>
 	
-	
-	
+		
 	
 </mapper>
 

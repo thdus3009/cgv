@@ -17,9 +17,8 @@ public class CinemaService {
 	
 	
 	//Select
-	public CinemaVO cinemaSelect(int num) throws Exception {
-	
-		return cinemaRepository.cinemaSelect(num);
+	public CinemaVO cinemaSelect(CinemaVO cinemaVO) throws Exception {
+		return cinemaRepository.cinemaSelect(cinemaVO);
 	}
 	
 	public List<TheaterVO> selectTheaterList(int num) throws Exception {
@@ -36,8 +35,6 @@ public class CinemaService {
 	
 	//Update
 	public int cinemaUpdate(CinemaVO cinemaVO) throws Exception {
-		System.out.println("service : " + cinemaVO.getAddress());
-		
 		return cinemaRepository.cinemaUpdate(cinemaVO);
 	}
 	

@@ -1,7 +1,14 @@
 package com.tm.cgv.reservation;
 
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +21,8 @@ import com.tm.cgv.couponInfo.CouponInfoService;
 import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.discountInfo.DiscountInfoService;
 import com.tm.cgv.discountInfo.DiscountInfoVO;
+import com.tm.cgv.guest.GuestService;
+import com.tm.cgv.guest.GuestVO;
 import com.tm.cgv.memberCoupon.MemberCouponService;
 import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -63,6 +72,10 @@ public class ResevationController {
 	private CouponInfoService cuponInfoService;
 	@Autowired
 	private TimePriceService timePriceService;
+	@Autowired
+	private GuestService guestService;
+	
+	
 	
 	
 	
@@ -79,7 +92,7 @@ public class ResevationController {
 		result = seatBookingService.seatBookingDelete(reservationVO.getNum());
 		System.out.println("좌석예약 : "+result);
 		
-		//movieTime DB업데이트 - 잔여좌석 (인원 파악해야됨)
+		//movieTime DB업데이트 - 잔여좌석 수정
 		int totalCount = reservationVO.getCommon() + reservationVO.getTeenager() + reservationVO.getPreference();
 		MovieTimeVO movieTimeVO = new MovieTimeVO();
 		movieTimeVO.setNum(reservationVO.getMovieTimeNum());
@@ -106,7 +119,7 @@ public class ResevationController {
 				pointVO.setKind("sum");
 				pointVO.setType(vo.getType());
 				pointVO.setPrice(vo.getDiscountPrice());
-				pointVO.setMemberNum(reservationVO.getUid());
+				pointVO.setUsername(reservationVO.getUid());
 				
 				result = pointService.pointDiscountUpdate(pointVO);
 				System.out.println("포인트 : "+result);
@@ -116,13 +129,13 @@ public class ResevationController {
 		}
 		
 		//결제 DB삭제 -> 예매 삭제 -> 할인정보 삭제(cascade)
-		result = paymentService.paymentDelete(reservationVO.getPaymentNum());
-		System.out.println("결제 : "+result);
+		//result = paymentService.paymentDelete(reservationVO.getPaymentNum());
+		//System.out.println("결제 : "+result);
 		
-		//예매 DB삭제 - 할 필요 X
-		//result = reservationService.reservationDelete(reservationVO);
-		//System.out.println("예매정보 : "+result);
-				
+		//예매 DB삭제 - 결제 삭제시 casecade 할 필요 X (테스트용으로 필요)
+		result = reservationService.reservationDelete(reservationVO);
+		System.out.println("예매정보 : "+result);
+		
 		return result;
 	}
 	
@@ -156,7 +169,6 @@ public class ResevationController {
 			}
 		}
 		
-		
 		mv.addObject("endTime", endTime);
 		mv.addObject("reservationVO", reservationVO);
 		mv.addObject("discountInfoList", discountInfoList);
@@ -173,12 +185,14 @@ public class ResevationController {
 		int result = 0;
 		int seatCheck = 0;
 		
-		System.out.println("할인 타입(0없음/1쿠폰/2포인트) : "+type);
+		System.out.println("할인 타입(0없음/1쿠폰/2포인트/3비회원) : "+type);
 		System.out.println("선택한 쿠폰 번호 : "+couponNum);
 		
 		//예매 번호 등록 - Reservation
 		result = reservationService.reservationInsert(reservationVO);
 		result = reservationVO.getNum();
+		
+		
 		
 		if(type != 0) {
 			//할인정보 추가
@@ -202,7 +216,7 @@ public class ResevationController {
 				if(type == 2) {
 					//할인금액 point에 적용(빼기)
 					PointVO pointVO = new PointVO();
-					pointVO.setMemberNum(reservationVO.getUid());
+					pointVO.setUsername(reservationVO.getUid());
 					pointVO.setType(arr[0]);
 					pointVO.setPrice(Integer.parseInt(arr[1]));
 						

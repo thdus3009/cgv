@@ -317,4 +317,3 @@ $("#btn_insert").click(function(){
 	}
 
 });
-

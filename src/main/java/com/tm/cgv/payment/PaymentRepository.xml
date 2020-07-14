@@ -14,5 +14,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from payment where num=#{num}
 	</delete>
 	
+	<select id="paymentSelectOne" parameterType="PaymentVO" resultType="PaymentVO">
+		select * from payment where num=#{num}
+	</select>
+	
 
 </mapper>

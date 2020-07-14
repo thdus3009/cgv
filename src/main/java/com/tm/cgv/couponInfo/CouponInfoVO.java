@@ -12,9 +12,10 @@ public class CouponInfoVO {
 	private String serialNum;
 	private String pwd;
 	private int price;
-	private int type;
+	private int type; //1: cgvGiftPrePayipt(CGV기프티콘),  2: cgvCoupon(CGV할인쿠폰)
 	private int count;
-	private Date sIssuance;
-	private Date eIssuance;
+	private String sIssuance;
+	private String eIssuance;
+
 	
 }

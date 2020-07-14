@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,32 +16,38 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
+import com.tm.cgv.couponInfo.CouponInfoService;
+import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
 import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.payment.PaymentService;
+import com.tm.cgv.payment.PaymentVO;
+import com.tm.cgv.pointHistory.PointHistoryService;
+import com.tm.cgv.pointHistory.PointHistoryVO;
+import com.tm.cgv.reservation.ReservationService;
 import com.tm.cgv.reservation.ReservationVO;
-
-import com.tm.cgv.reservation.ResevationController;
-import com.tm.cgv.theater.TheaterService;
-import com.tm.cgv.theater.TheaterVO;
-
 import com.tm.cgv.seat.SeatService;
 import com.tm.cgv.seat.SeatVO;
 import com.tm.cgv.seatSpace.SeatSpaceService;
 import com.tm.cgv.seatSpace.SeatSpaceVO;
+import com.tm.cgv.theater.TheaterService;
+import com.tm.cgv.theater.TheaterVO;
+import com.tm.cgv.timePrice.TimePriceService;
+import com.tm.cgv.timePrice.TimePriceVO;
 import com.tm.cgv.util.BitFilmType;
-
+import com.tm.cgv.util.MakeSerialCode;
 import com.tm.cgv.util.Pager;
+
 
 @Controller
 @RequestMapping("/admin/**")
 public class AdminController {
 
 	@Autowired
-
 	private CinemaService cinemaService;
 	
 	@Autowired
@@ -61,6 +67,19 @@ public class AdminController {
 	
 	@Autowired
 	private MovieTimeService movieTimeService;
+	@Autowired
+	private ReservationService reservationService;
+	@Autowired
+	private PaymentService paymentService;
+	@Autowired
+	private TimePriceService timePriceService;
+	@Autowired
+	private CouponInfoService couponInfoService;
+	@Autowired
+	private PointHistoryService pointHistoryService;
+	@Autowired
+    RedisTemplate<String, Object> redisTemplate;
+	
 	
 	@GetMapping("/")
 	public String admin() throws Exception {
@@ -220,7 +239,9 @@ public class AdminController {
 	
 	@GetMapping("cinema/cinemaSelect")
 	public ModelAndView adminCinemaSelect(ModelAndView mv, int num) throws Exception {
-		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(num);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
 		
 		//List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
@@ -236,6 +257,10 @@ public class AdminController {
 		BitFilmType bitFilmType = new BitFilmType();
 		List<List<Byte>> filmType = bitFilmType.getState(values);
 		
+		//timePrice에 해당 cinema가 등록 되어있는지 조회
+		List<TimePriceVO> timePriceList = timePriceService.timePriceCinemaList(num);
+		
+		mv.addObject("timePriceList", timePriceList);
 		
 		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);
@@ -293,8 +318,9 @@ public class AdminController {
 	@GetMapping("cinema/cinemaUpdate")
 	public ModelAndView adminCinemaUpdate(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		CinemaVO cinemaVO = cinemaService.cinemaSelect(num);
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(num);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		mv.addObject("path", "Update");
 		mv.addObject("vo", cinemaVO);
 		mv.setViewName("admin/cinema/cinemaInsert");
@@ -330,6 +356,152 @@ public class AdminController {
 
 		return mv;
 	}
+	
+	
+	
+	
+	//극장별 관람가격 (조회/수정/삭제 /삽입)
+	
+	@GetMapping("cinema/admissionPrice/deleteFilm")
+	public ModelAndView admissionDeleteFilm(TimePriceVO timePriceVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		int result = timePriceService.timePriceDeleteFilm(timePriceVO);
+		
+		mv.setViewName("redirect:../../cinemaSelect?num="+timePriceVO.getCinemaNum());
+		
+		return mv;
+	}
+	
+	
+	@ResponseBody
+	@GetMapping("cinema/admissionPrice/deleteSelect")
+	public int admissionDeleteSelect(int num) throws Exception{
+		int result = 0;
+		result = timePriceService.timePriceDeleteSelect(num);
+		
+		return result;
+	}
+	
+	
+	@GetMapping("cinema/admissionPrice/update")
+	public ModelAndView admissionUpdate(TimePriceVO timePriceVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//cinemaNum으로 cinema정보 조회(cinemaTable)
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(timePriceVO.getCinemaNum());
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
+		//cinemaNum filmType으로 정보 조회(timePriceTable)
+		List<TimePriceVO> timePriceList = timePriceService.timePriceFilmTypeList(timePriceVO);
+		
+		mv.addObject("cinemaVO", cinemaVO);
+		mv.addObject("timePriceList", timePriceList);
+		mv.addObject("timePrice", "update");
+		
+		mv.setViewName("admin/timePrice/cinemaPrice");
+		return mv;
+	}
+	
+	@PostMapping("cinema/admissionPrice/update")
+	public ModelAndView admissionUpdate2(String[] eTime,String[] commonPrice,String[] teenagerPrice,String[] num,String cinemaNum) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//배열로 받아와서 for문 돌려서 일일이 업데이트
+		for (int i = 0; i < eTime.length; i++) {
+			TimePriceVO timePriceVO = new TimePriceVO();
+			
+			timePriceVO.setNum(Integer.parseInt(num[i]));
+			String[] time = eTime[i].split(":");
+			int chTime = Integer.parseInt(time[0]);
+			if(chTime < 6) {
+				chTime+=24;
+			}
+			timePriceVO.setETime(chTime+":"+time[1]);
+			timePriceVO.setCommonPrice(Integer.parseInt(commonPrice[i]));
+			timePriceVO.setTeenagerPrice(Integer.parseInt(teenagerPrice[i]));
+
+			//업데이트 실행
+			
+			timePriceService.timePriceUpdate(timePriceVO);
+		}
+		
+		mv.setViewName("redirect:./selectList?num="+cinemaNum);
+		
+		return mv;
+	}
+	
+	
+	@GetMapping("cinema/admissionPrice/selectList")
+	public ModelAndView admissionPriceSelectList(CinemaVO cinemaVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		//극장의 name, local
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
+		//timePrice List
+		List<TimePriceVO> timePriceList = timePriceService.timePriceCinemaList(cinemaVO.getNum());
+		
+		mv.addObject("cinemaVO", cinemaVO);
+		mv.addObject("timePriceList", timePriceList);
+		mv.setViewName("admin/timePrice/timePriceList");
+		return mv;
+	}
+	
+	
+	
+	
+	@GetMapping("cinema/admissionPrice/write")
+	public ModelAndView admissionPriceWrite(CinemaVO cinemaVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
+		//timePriceList-filmType group 조회
+		List<TimePriceVO> filmTypeGroup = timePriceService.timePriceCinemaGroupList(cinemaVO.getNum());
+		if(filmTypeGroup != null) {
+			mv.addObject("filmTypeGroup", filmTypeGroup);
+		}
+		
+		mv.addObject("cinemaVO", cinemaVO);
+		mv.addObject("timePrice", "write");
+		mv.setViewName("admin/timePrice/cinemaPrice");
+		return mv;
+	}
+	
+	@PostMapping("cinema/admissionPrice/write")
+	public ModelAndView admissionPriceWrite(String[] eTime,String[] commonPrice,String[] teenagerPrice,String cinemaNum,String filmType) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		for (int i = 0; i < eTime.length; i++) {
+			TimePriceVO timePriceVO = new TimePriceVO();
+			timePriceVO.setCinemaNum(Integer.parseInt(cinemaNum));
+			timePriceVO.setFilmType(Integer.parseInt(filmType));
+			
+			String[] time = eTime[i].split(":");
+			System.out.println("time : "+time[0]);
+			int chTime = Integer.parseInt(time[0]);
+			if(chTime < 6) {
+				chTime+=24;
+			}
+			System.out.println("chTime : "+chTime);
+			timePriceVO.setETime(chTime+":"+time[1]);
+			timePriceVO.setCommonPrice(Integer.parseInt(commonPrice[i]));
+			timePriceVO.setTeenagerPrice(Integer.parseInt(teenagerPrice[i]));
+
+			timePriceService.timePriceInsert(timePriceVO);
+		}
+		
+		mv.setViewName("redirect:../cinemaSelect?num="+Integer.parseInt(cinemaNum));
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
 	
 	//==============================
 	// theater
@@ -513,5 +685,242 @@ public class AdminController {
 		int result = movieTimeService.insert(movieTimeVO);
 		return result;
 	}
+	
+	
+	//==============================
+	// reservation 
+	//==============================
+	//예매내역 (조회/삭제)
+	@GetMapping("reservation/selectList")
+	public ModelAndView reservationSelectList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<ReservationVO> reservationList = reservationService.reservationSelectList(pager);
+		
+		mv.addObject("reservationList", reservationList);
+		mv.setViewName("admin/reservation/reservationList");
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@GetMapping("reservation/delete")
+	public int reservationDelete(ReservationVO reservationVO) throws Exception{
+		int result = 0;
+		result = reservationService.reservationDelete(reservationVO);
+		
+		return result;
+	}
+	
+	
+	
+	//==============================
+	// payment  
+	//==============================
+	//결제내역 (조회)
+	@ResponseBody
+	@GetMapping("payment/SelectOne")
+	public PaymentVO paymentSelectOne(PaymentVO paymentVO) throws Exception{
+		paymentVO = paymentService.paymentSelectOne(paymentVO);
+
+		return paymentVO; 
+	}
+	
+	
+	
+	
+	
+	//==============================
+	// coupon
+	//==============================
+	//쿠폰 정보 (조회/삭제/수정/삽입)
+	
+	@ResponseBody
+	@GetMapping("admin/coupon/makeSerial")
+	public ArrayList<String> makeSerial(String type) throws Exception{
+		int typed = Integer.parseInt(type);
+		MakeSerialCode serialCode = new MakeSerialCode();
+		ArrayList<String> list = new ArrayList<String>(); 
+		
+		if(typed == 1) {
+			//시리얼16+비번6
+			String serial = serialCode.makeSerial(16);
+			String pwd = serialCode.makeNumber()+"";
+			list.add(serial);
+			list.add(pwd);
+		}else if(typed == 2) {
+			//시리얼6
+			String pwd = serialCode.makeNumber()+"";
+			list.add(pwd);
+		}
+		
+		return list;
+	}
+	
+	@GetMapping("admin/coupon/couponDelete")
+	public ModelAndView couponDelete(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = couponInfoService.couponInfoDelete(couponInfoVO);
+		if(result>0) {
+			
+		}else {
+			System.out.println("삭제 실패");
+		}
+		
+		mv.setViewName("redirect:./couponList");
+		
+		return mv;
+	}
+	
+	@GetMapping("admin/coupon/couponUpdate")
+	public ModelAndView couponUpdate(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		couponInfoVO = couponInfoService.couponInfoSelect(couponInfoVO);
+		
+		mv.addObject("couponInfoVO", couponInfoVO);
+		mv.addObject("path", "couponUpdate");
+		mv.setViewName("admin/coupon/couponForm");
+		
+		return mv;
+	}
+	
+	@PostMapping("admin/coupon/couponUpdate")
+	public ModelAndView couponUpdate2(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = couponInfoService.couponInfoUpdate(couponInfoVO);
+		if(result>0) {
+			
+		}else {
+			System.out.println("수정 실패");
+		}
+		mv.setViewName("redirect:./couponList");
+		
+		return mv;
+	}
+	
+	@PostMapping("admin/coupon/couponInsert")
+	public ModelAndView couponInsert(CouponInfoVO couponInfoVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("쿠폰 삽입 post");
+		
+		int result = couponInfoService.couponInfoInsert(couponInfoVO);
+		if(result > 0) {
+			
+		}else {
+			System.out.println("등록 실패");
+		}
+		
+		mv.setViewName("redirect:./couponList");
+		return mv;
+	}
+	
+	@GetMapping("admin/coupon/couponInsert")
+	public ModelAndView couponInsert() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("path", "couponInsert");
+		mv.setViewName("admin/coupon/couponForm");
+		return mv;
+	}
+	
+	
+	@GetMapping("admin/coupon/couponList")
+	public ModelAndView couponList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("sDate : "+pager.getStartDate());
+		
+		List<CouponInfoVO> couponList = couponInfoService.couponInfoList(pager);
+		
+		mv.addObject("pager", pager);
+		mv.addObject("couponList", couponList);
+		mv.setViewName("admin/coupon/couponList");
+		return mv;
+	}
+
+	
+	
+	//==============================
+	// point
+	//==============================
+	//포인트 사용 내역 정보 (조회)
+	
+	@GetMapping("admin/point/pointHistoryList")
+	public ModelAndView pointUsedList(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//포인트 사용 내역 조회
+		List<PointHistoryVO> pointHistoryList = pointHistoryService.pointHistoryList(pager);
+		
+		mv.addObject("pager", pager);
+		mv.addObject("pointHistoryList", pointHistoryList);
+		mv.setViewName("admin/point/pointList");
+		
+		return mv;
+	}
+	
+	//포인트 적립 금액 변경 (redies사용)
+	@GetMapping("admin/point/accumulateManagement")
+	public ModelAndView pointAccumulateManagement() throws Exception{
+		ModelAndView mv = new ModelAndView();
+
+		Integer rate = (Integer)redisTemplate.opsForValue().get("cjDiscountRate");
+		System.out.println(rate);
+		
+		if(rate == null) {
+			redisTemplate.opsForValue().set("cjDiscountRate", 0);
+			rate = 0;
+		}
+
+		mv.addObject("rate",rate);
+		mv.setViewName("admin/point/pointForm");
+		return mv;
+	}
+
+	@ResponseBody
+	@PostMapping("admin/point/accumulateManagement")
+	public int pointAccumulateManagement(int rate) throws Exception{
+		int result = 0;
+		redisTemplate.opsForValue().set("cjDiscountRate", rate);
+		
+		//변경 유무 확인
+		Integer changeRate = (Integer)redisTemplate.opsForValue().get("cjDiscountRate");
+		if (changeRate == rate && changeRate !=null){
+			result = rate;
+        }
+		
+		return result;
+	}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

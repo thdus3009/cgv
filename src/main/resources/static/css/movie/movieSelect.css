@@ -269,11 +269,13 @@ strong {
 }
 
 .score .egg-gage {
+
 	margin-top: -8px;
 	margin-left: 2px;
 	padding-left: 6px;
 	background: url(/images/movie/movieList/bg_writeinfo.gif) 0 12px
 		no-repeat;
+
 }
 
 .egg-gage small .egg great {
@@ -994,6 +996,10 @@ div[class^="sect-"] .box-contents li a {
 .point_col2 .writerinfo li {
     margin-bottom: 3px;
     line-height: 20px!important;
+    /*padding-right: 8px;
+    margin-right: 6px;
+    background: url(../images/common/bg/bg_writeinfo.gif) no-repeat 100% 0;
+    */
 }
 
 /*버튼*/
@@ -1009,3 +1015,4 @@ div[class^="sect-"] .box-contents li a {
 	top:570px;
 	
 	}
+

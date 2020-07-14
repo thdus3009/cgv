@@ -255,52 +255,30 @@
 	//클릭
 	$(".seats .seat").click(function(){
 		if($(this).hasClass("selected") && ($(this).next().hasClass("selected") || $(this).prev().hasClass("selected"))){
+			console.log("붙임자리")
 			//붙은 자리일때 경고 문구 띄워주고 yes일 시 지움
 			var check = confirm("붙임좌석으로 선택한 좌석입니다.\n정말로 취소하시겠습니까?");
 			if(check){
 				//왼쪽에 있는지 오른쪽에 있는지 파악
 				if($(this).hasClass("selected") && $(this).next().hasClass("selected")){
 					//오른쪽 삭제
-					
 					$(this).next().removeClass("selected");
-//					console.log("next : "+$(this).next().parent().parent().prev().text()+"-"+$(this).next().find(".no").text());
-//					console.log("index : "+selectedSeatList.indexOf($(this).next().parent().parent().prev().text()+"-"+$(this).next().find(".no").text()));
 					selectedSeatList.splice(selectedSeatList.indexOf($(this).next().parent().parent().prev().text()+""+$(this).next().find(".no").text()),1);
-					
-//					console.log("remove next() Grade : "+ $(this).data("grade"));
-//					console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
-					
-//					selectedSeatGrade.splice(selectedSeatGrade.indexOf($(this).next().data("grade")),1);
 					
 				}else if($(this).hasClass("selected") && $(this).prev().hasClass("selected")){
 					//왼쪽 삭제
-					
 					$(this).prev().removeClass("selected");
-//					console.log("prev : "+$(this).prev().parent().parent().prev().text()+"-"+$(this).prev().find(".no").text());
-//					console.log("index : "+selectedSeatList.indexOf($(this).prev().parent().parent().prev().text()+"-"+$(this).prev().find(".no").text()));
 					selectedSeatList.splice(selectedSeatList.indexOf($(this).prev().parent().parent().prev().text()+""+$(this).prev().find(".no").text()),1);
-
-//					console.log("remove prev() Grade : "+ $(this).data("grade"));
-//					console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
-//					selectedSeatGrade.splice(selectedSeatGrade.indexOf($(this).prev().data("grade")),1);
 				}
 				
 				$(this).removeClass("selected");
 				selectedCount = selectedCount - 2;
-//				console.log("this : "+$(this).parent().parent().prev().text()+"-"+$(this).find(".no").text());
-//				console.log("index : "+selectedSeatList.indexOf($(this).parent().parent().prev().text()+"-"+$(this).find(".no").text()));
 				selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+""+$(this).find(".no").text()),1);
-				
-//				console.log("remove basic() Grade : "+ $(this).data("grade"));
-//				console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
-			
-//				selectedSeatGrade.splice(selectedSeatGrade.indexOf($(this).data("grade")),1);
 				
 				//삭제후 화면 출력값 갱신
 				console.log(selectedSeatList);
 				$("#select_Seat").text(selectedSeatList.join(","));
 				
-//				console.log(selectedSeatGrade);
 				var gradeText = gradeTextMake(selectedSeatGrade);
 				$("#select_seat_grade").text(gradeText);
 				
@@ -317,8 +295,6 @@
 				
 				textInput();
 				
-				
-				
 			}
 				
 		}else if($(this).hasClass("selected")){
@@ -326,14 +302,23 @@
 			$(this).removeClass("selected");
 			selectedCount = selectedCount - 1;
 			selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+""+$(this).find(".no").text()),1);
-//			console.log(selectedSeatList);
 			$("#select_Seat").text(selectedSeatList.join(","));
 			
-//			console.log("remove basic() Grade : "+ $(this).data("grade"));
-//			console.log("remove index grade : "+ selectedSeatGrade.indexOf($(this).data("grade")));
-//			console.log(selectedSeatGrade);
 			var gradeText = gradeTextMake(selectedSeatGrade);
 			$("#select_seat_grade").text(gradeText);
+			
+			console.log("한자리 지움")
+			
+			amountCommon = commonCount;
+			amountTeenager = teenagerCount;
+			amountPreference = preferenceCount;
+			
+			$(".row.payment-adult").css("display","none");
+			$(".row.payment-youth").css("display","none"); 
+			$(".row.payment-special").css("display","none"); 
+			$(".row.payment-final").css("display","none"); 
+			
+			textInput();
 				
 		}else{
 			//좌석 추가

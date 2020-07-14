@@ -23,7 +23,9 @@ public class CouponInfoController {
 	
 	
 		
-	//CGV 기프티카드 포인트 쿠폰 등록
+	
+	
+	//CGV 기프티콘 등록 - 멤버 해당 포인트 증가
 	@ResponseBody
 	@PostMapping("cuponeEnrollment")
 	public int cuponeEnrollment(CouponInfoVO cuponInfoVO,HttpSession session)throws Exception{
@@ -39,7 +41,7 @@ public class CouponInfoController {
 			int price = cuponInfoVO.getPrice();
 			
 			PointVO pointVO = new PointVO();
-			pointVO.setMemberNum(memberVO.getUsername());
+			pointVO.setUsername(memberVO.getUsername());
 			pointVO.setPrice(price);
 			pointVO.setType("cgvGiftPrePayipt");
 			pointVO.setKind("sum");
