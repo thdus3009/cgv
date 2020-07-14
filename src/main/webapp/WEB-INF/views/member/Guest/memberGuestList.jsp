@@ -12,7 +12,7 @@
 	type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!--  -->
+	<!-- 비회원 예매내역 확인 -->
 <title>나의 예매내역 | 영화 그 이상의 감동. CGV</title>
 </head>
 <body>
@@ -44,15 +44,7 @@
 						<div class="col_aside">
 							<div class="snb">
 								<ul>
-									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
-									<li><a
-										href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보
-											수정<i></i>
-									</a></li>
-									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
-									<li><a href="">예매 영화 관리<i></i></a></li>
-									<li><a href="../review/reviewList"
-										style="background-color: black; color: white;">내가 본 영화<i></i></a></li>
+									<li class="on"><a href="">예매확인/취소<i></i></a></li>
 								</ul>
 
 							</div>
