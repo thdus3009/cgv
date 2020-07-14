@@ -3,6 +3,7 @@
 
 use cgv;
 commit;
+rollback;
 
 -- DDL
 
@@ -161,6 +162,7 @@ CREATE TABLE `movieTime` (
   `screenTime` varchar(5) DEFAULT NULL,
   `remainSeat` int(11) DEFAULT NULL,
   `selectedFirm` int(11) DEFAULT NULL,
+  `deleteAt` date DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `MOVIETIME_MOVIENUM_FK_idx` (`movieNum`),
   KEY `MOVIETIME_THEATERNUM_FK_idx` (`theaterNum`),
@@ -322,42 +324,18 @@ CREATE TABLE `guest` (
   CONSTRAINT `guest_reservationNum_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- memberSQL
+-- procedule
+delimiter //
+DROP PROCEDURE IF EXISTS seatBookingFindOrInsert; 
+CREATE PROCEDURE seatBookingFindOrInsert( 
+	IN inMovieTimeNum INT
+)
+BEGIN
+	DECLARE i INT;
+	DECLARE selectedTheaterNum INT;
+    DECLARE countSeatBookingReservationZero INT DEFAULT (SELECT COUNT(DISTINCT movieTimeNum) FROM seatBooking WHERE reservationNum = 0);
+   
+    SELECT theaterNum FROM movieTime WHERE num = 8;
+END //
 
-SELECT * FROM 
-(SELECT * FROM member) M
-LEFT OUTER JOIN 
-(SELECT * FROM auth) A
-ON(M.num = A.memberNum);
-
-select * from 
-(select num as mNum,title from movieInfo) M
-join
-(select num as tNum, movieNum, theaterNum,screenDate,screenTime  from movieTime) T
-on(M.mNum = T.movieNum);
-  
-SELECT * FROM 
-(SELECT * FROM user WHERE username = 'admin') M
-LEFT OUTER JOIN 
-(SELECT * FROM auth2) A
-ON(M.username = A.username);
-  
-SELECT * FROM cinema WHERE local = "서울" limit 2,2;
-
-SELECT * FROM member WHERE username = 'user94' AND enabled=1;
-
-SELECT * FROM member
-WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;movieTime
-
-SELECT count(username) FROM member
-WHERE username LIKE '%user8%' AND enabled=1 ORDER BY username DESC LIMIT 0, 10;
-
-UPDATE cgv.member SET username='user02', password='$2a$10$sItIeE21V0vZ1589W4F/4.SwCEWm8HE2XEBubnhYSk2jcwrTY1i.C', 
-name='user02', birth='1992/02/08', phone='01024856675', email='test@naver.com', gender=1, age=29, 
-nick='', fileName='f8ab7ae3-e129-44be-8068-f9bc5f1fdf15_back.jpg', enabled=1 WHERE username='user02';
-
-SELECT * FROM 
-		(SELECT * FROM member WHERE username = 'user02') M
-		LEFT OUTER JOIN 
-		(SELECT * FROM auth) A
-		ON(M.username = A.username);
+CALL insertSeatBookingByMovieTimeInsert(1);

@@ -5,12 +5,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tm.cgv.seatBooking.SeatBookingRepository">
 
+	<select id="selectListByReservationNumZero" resultType="SeatBookingVO">
+		SELECT DISTINCT seatNum FROM seatBooking WHERE movieTimeNum IN 
+		(SELECT num FROM movieTime WHERE theaterNum = #{theaterNum}) AND reservationNum = 0;
+	</select>
+
  	<insert id="seatBookingInsert" parameterType="SeatBookingVO">
 		insert into seatBooking values(#{num},#{seatNum},#{movieTimeNum},#{reservationNum}) 	
  	</insert>
  	
  	<delete id="seatBookingDelete" parameterType="Integer">
- 		delete from seatBooking where reservationNum =#{reservationNum}
+ 		delete from seatBooking where reservationNum=#{reservationNum}
  	</delete>
 
+	<delete id="deletesByMovieTimeNum" parameterType="SeatBookingVO">
+		DELETE FROM seatBooking WHERE movieTimeNum = #{movieTimeNum} 
+	</delete>
+	
 </mapper>

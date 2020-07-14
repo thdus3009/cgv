@@ -15,6 +15,10 @@ import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberRepository;
 import com.tm.cgv.memberCoupon.MemberCouponRepository;
 import com.tm.cgv.memberCoupon.MemberCouponVO;
+import com.tm.cgv.movieTime.MovieTimeRepository;
+import com.tm.cgv.movieTime.MovieTimeVO;
+import com.tm.cgv.seatBooking.SeatBookingRepository;
+import com.tm.cgv.seatBooking.SeatBookingVO;
 import com.tm.cgv.util.GenerateRandomNumber;
 import com.tm.cgv.util.Pager;
 
@@ -31,27 +35,74 @@ public class Schedule {
 	@Autowired
 	private MemberCouponRepository memberCouponRepository;
 	
+	@Autowired
+	private MovieTimeRepository movieTimeRepository;
+	
+	@Autowired
+	private SeatBookingRepository seatBookingRepository;
+	
 	private final String BIRTH_COUPON_NAME = "생일축하쿠폰_";
 	private final int COUPON_EXFIRE_MONTH = 3;
-	
-	// movieTime 시간 지났을때, 관련 필드 삭제 (새벽 4시쯤 자동으로 될수있도록)
+	private final int MOVIETIME_EXFIRE_DATE = 1;
+	private final String TEST_CRON = "0 * * * * *";
 	// movieTime Insert시, seatBooking 테이블 건드려야함 블럭걸려있는 시트 추가
-	// 매 자정 쿠폰 만료된 것들 삭제
 	// admin 계정 로그인 관련 추가
 	// remember 추가?
 	// 배포?
 	
-	// 매 자정에 해줘야하는 기능들
-	@Scheduled(cron = "0 * * * * *")
-	public void birthCouponSchedule() throws Exception{
+	//@Scheduled(cron = TEST_CRON)
+	//@Scheduled(cron = "0 0 4 * * *")
+	public void schedule_4AM() throws Exception{
 		
-		this.deleteExpireCoupon();
-		//this.createBirthCoupon();
-		//this.issueBirthCoupon();
+		// movieTime 관련
+		List<Integer> movieTimeNumList = deleteExpiredMovieTime();
+		
+		// seatBooking 관련
+		deleteExpiredSeatBooking(movieTimeNumList);
+	}
+	
+	// 매 자정에 해줘야하는 기능들
+	//@Scheduled(cron = TEST_CRON)
+	//@Scheduled(cron = "0 0 0 * * *")
+	public void schedule_0AM() throws Exception{
+		
+		// coupon 관련
+		this.deleteExpiredCoupon();
+		this.createBirthCoupon();
+		this.issueBirthCoupon();
+	}
+	
+	// movieTime 의 screenDate 지난거 찾아서 delete
+	private List<Integer> deleteExpiredMovieTime() throws Exception{
+		
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+		Calendar time = Calendar.getInstance();
+		time.add(Calendar.DATE, -MOVIETIME_EXFIRE_DATE);
+		String exfireDay = format.format(time.getTime());
+		System.out.println(exfireDay);
+		
+		MovieTimeVO movieTimeVO = new MovieTimeVO();
+		movieTimeVO.setScreenDate(exfireDay);
+		
+		//지워질 movieTime num List 가져오기
+		List<Integer> list = movieTimeRepository.selectNumByScreenDate(movieTimeVO);
+		movieTimeRepository.updateDeleteAtByScreenDate(movieTimeVO);
+		
+		return list;
+	}
+	
+	// 지워진 movieTimeNum에 해당하는 예약좌석 테이블 삭제
+	private void deleteExpiredSeatBooking(List<Integer> movieTimeNumList) throws Exception{
+		
+		SeatBookingVO seatBookingVO = new SeatBookingVO();
+		for (Integer num : movieTimeNumList) {
+			seatBookingVO.setMovieTimeNum(num);
+			seatBookingRepository.deletesByMovieTimeNum(seatBookingVO);
+		}
 	}
 	
 	// 매 자정마다 기간만료된 생일 쿠폰 삭제 X 전체 쿠폰으로 기간만료 후 3개월
-	private void deleteExpireCoupon() throws Exception{
+	private void deleteExpiredCoupon() throws Exception{
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 		Calendar time = Calendar.getInstance();
