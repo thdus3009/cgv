@@ -26,10 +26,9 @@
 				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a> <a
-						class="dropdown-item" href="#">관리자 설정</a>
+					<a class="dropdown-item" href="/">메인 페이지로</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
 				</div></li>
 		</ul>
 	</nav>

@@ -10,9 +10,8 @@ public class MemberCouponVO {
 	private int num;
 	private String uid;
 	private int couponInfoNum;
-	
-	private CouponInfoVO couponInfoVO;
-	
+	private String deleteAt;
 	private String kind;
 	
+	private CouponInfoVO couponInfoVO;
 }

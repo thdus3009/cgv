@@ -147,7 +147,7 @@ tr>th {
 
 /*pager*/
 .pager {
-	item-align: center;
+	text-align: center;
 }
 
 /* 버튼 */

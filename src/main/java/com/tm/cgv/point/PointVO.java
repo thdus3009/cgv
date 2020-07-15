@@ -6,9 +6,9 @@ import lombok.Data;
 public class PointVO {
 
 	private int num;
-	private String memberNum;
+	private String username;
 	private int price;
-	private String type;
+	private String type; //CGV포인트(cgvGiftPrePayipt) ,CJ포인트(cjOnePointipt)
 	
 	private String kind;
 	

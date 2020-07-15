@@ -8,25 +8,34 @@
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+
 </head>
 <body class="sb-nav-fixed">
 	<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
+
+
 		<c:import url="../template/sidenav.jsp"></c:import>
 
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
+
 					<h1>Movie Update</h1>
+					<p>영화 등록</p>
+
 					<div>
 						<div class="contents">
 							<div>
 								<div class="col_content">
 									<div class="col_detail">
+
+
 										<form action="./movieUpdate" method="post" enctype="multipart/form-data">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 											<fieldset>
 												<div class="tbl_write">
 												
@@ -121,9 +130,13 @@
 																	class="form-control check" id="title" name="title" value="${vo.title}">
 															</div>
 															<div class="form-group">
+
+
 																<label for="titleEng">영문제목:</label> <input
 																	type="text" class="form-control check" id="titleEng"
 																	name="titleEng" value="${vo.titleEng}">
+
+
 															</div>
 															<div class="form-group">
 																<label for="runtime">러닝타임:</label> <input type="text"
@@ -184,7 +197,8 @@
 															<c:set var="sysYear">
 																<fmt:formatDate value="${now}" pattern="yyyy" />
 															</c:set>
-															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="i" />
+															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"
+																var="i" />
 
 															<c:if test="${path eq 'Write' }">
 																<div class="form-group">
@@ -207,8 +221,12 @@
 
 												</div>
 												<div class="btn_s">
+
+
 													<a href="./movieSelect?num=${vo.num}" class="round gray" id="cancle"> 
 														<span>취소</span>
+
+
 													</a>
 													<button id="btn" type="submit" class="round inred">
 														<span>등록하기</span>
@@ -230,28 +248,7 @@
 	</div>
 
 	<!-- 스크립트 -->
-	<script src="js/scripts.js"></script>
-	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script src="assets/demo/chart-area-demo.js"></script>
-	<script src="assets/demo/datatables-demo.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<c:import url="../template/scripts.jsp"></c:import>
 	<script type="text/javascript">
 	
 	// ====썸네일 =====

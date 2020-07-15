@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium';
+	src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+
+@font-face {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+body {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+}
+
+h1 {
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+code {
+	font-family: 'CJ+ONLYONE+Medium';
+	font-weight: 600;
+}
+
+.active {
+	font-weight: 600;
+}
+
+.nav-link {
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
+}
+
+#layoutSidenav_content {
+	background-color: #f8f9fa;
+}
+
+main {
+	margin: 50px;
+	background-color: #fff;
+	border: 1px solid #ebeef1;
+}
+
+.btn-primary {
+	border: none;
+	background-color: #e71a0f;
+	color: #fff;
+	font-weight: 500;
+	font-size: 11px;
+	line-height: 24px;
+	text-align: center;
+}
+
+.container-fluid {
+	padding: 40px;
+}
+
+.admin-logo {
+	height: 40px;
+	padding: 0 10px;
+}
+
+.admin-tr {
+	background-color: #f8f9fa;
+	border-top: 1px solid #d3dae0;
+	border-bottom: 1px solid #d3dae0;
+}
+
+.admin-tr>th {
+	padding: 10px;
+	width: auto;
+	font-size: 15px;
+	text-align: center;
+}
+
+.admin-tr-each {
+	border-top: 1px solid #d3dae0;
+	border-bottom: 1px solid #d3dae0;
+}
+
+.ate-center {
+	text-align: center;
+}
+
+.cinema-ol {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0.75rem 1rem;
+	margin-bottom: 1rem;
+	list-style: none;
+	background-color: #e9ecef;
+}
+
+/*pager*/
+.pager {
+	item-align: center;
+}
+
+/* search-form */
+
+.search-f{
+	display: flex;
+	padding-bottom: 10px;
+}
+
+.form-control{
+	border-radius: 0rem;
+	width: 50%;
+}
+
+.btn{
+	border-radius: 0rem;
+}
+
+/* price */
+.container-box {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.time-table {
+	margin: 20px 0;
+}
+
+.time-table>strong {
+	text-align: left;
+	color: #00;
+	font-weight: 600;
+	font-family: 'CJ+ONLYONE+Medium';
+}
+
+.time-tr>th {
+	width: 200px;
+	text-align: center;
+	border-bottom: 1px solid #000;
+}
+
+.time-tr>th:first-child {
+	border-right: 1px solid #000;
+}
+
+.time-tr>th:last-child {
+	border-left: 1px solid #000;
+}
+
+.time-tr>td {
+	width: 200px;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.time-tr>td:first-child {
+	border-right: 1px solid #000;
+}
+
+.time-tr>td:last-child {
+	border-left: 1px solid #000;
+}

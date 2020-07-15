@@ -324,6 +324,7 @@
 						alert("인증번호를 발송했습니다");
 						$("#phoneAuth").attr("style","display: inline-block;");
 						$("#phoneAuthBtn").attr("style","display: inline-block; color:#ffffff; height:38px; width: 85px; margin-top: 0px;margin-right: 200px;");
+						$(".box_login").attr("style","height: 870px;");
 					}
 				});
 		});

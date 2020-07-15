@@ -110,9 +110,9 @@
 											
 										</ul>
 										
-										<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
+										<!-- <div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
 											<div class="slider slider-y" style="height: 50px; top: 0px;"></div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -148,9 +148,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>
+														</div> -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="경기">
@@ -164,9 +164,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div> -->	
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="인천">
@@ -180,9 +180,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>
+														</div> -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="강원">
@@ -196,9 +196,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>
+														</div> -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="대전/충청">
@@ -212,9 +212,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div>	 -->
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="대구">
@@ -228,9 +228,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div> -->	
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="부산/울산">
@@ -244,9 +244,9 @@
 																<!-- 여기에 극장값 추가 li append -->
 																
 														</ul>
-														<div class="pane pane-y">
+														<!-- <div class="pane pane-y">
 															<div class="slider slider-y"></div>
-														</div>	
+														</div> -->	
 													</div>		
 												</li>
 												<li class="" data-index="0" data-local="경상">
@@ -339,9 +339,9 @@
 										</c:forEach>
 										
 									</ul>
-									<div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
+									<!-- <div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
 										<div class="slider slider-y" style="height: 50px; top: 0px;"></div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -413,8 +413,8 @@
 			
 				</div>
 				<div class="linkbar">
-					<a href="#" class="join_member">회원가입</a>
-					<a href="#" class="join_guest">비회원 예매</a>
+					<a href="../member/memberTerms" class="join_member">회원가입</a>
+					<a href="../guest/guestReservation" class="join_guest">비회원 예매</a>
 					<a href="#" class="id_find">아이디찾기</a>
 					<a href="#" class="pw_find">비밀번호찾기</a>
 				</div>
@@ -635,32 +635,55 @@
 		});
 	}
 
-
 	console.log($(".theater-area-list > ul > li").length);
-	
-	
-		
-
 
 	var data;
-	var memberID = `${memberVO.username}`;
+	var memberId = `${memberVO.username}`;
+	var beMemberVO = `${beMemberVO}`;
+	//beMemberVO = "login";
 	
+	console.log("memberID : "+memberId);
+	console.log("beMemberVO : "+beMemberVO);
+
+	var guestVO = {
+		reservationNum : `${beMemberVO.reservationNum}`,
+		birth : `${beMemberVO.birth}`,
+		phone : `${beMemberVO.phone}`,
+		pwd : `${beMemberVO.pwd}`,
+		_csrf : $("#_csrf").val()
+	}
+
+	console.log(guestVO);
+
+
 	//결제완료 페이지로 이동
 	$(".tnb_container").on("click",".tnb.step3 .btn-right",function(){
-			
-			//결제 작업을 위한 값 - 이니시스 
+		//결제 작업을 위한 값 - 이니시스 
+		
+		if(memberId != ''){
 			data = {
-					tel : `${memberVO.phone}`,
-					email : `${memberVO.email}`,
-					name : `${memberVO.name}`,
-					//amount : lastPrice
-					amount : '100'
+				tel : `${memberVO.phone}`,
+				email : `${memberVO.email}`,
+				name : `${memberVO.username}`,
+				//amount : lastPrice
+				amount : '100'
 			}
-			//이니시스 실행
-			//payment_inicis(data);
-			
-			//test 결제 없이 바로 예매 - 좌석예매 진행
-			reservation_save(6);
+		}else if(beMemberVO != ''){
+			data = {
+				tel : `${beMemberVO.phone}`,
+				email : 'cgv@naver.com',
+				name : '비회원',
+				//amount : lastPrice
+				amount : '100'
+			}
+		}
+		
+		
+		//이니시스 실행
+		//payment_inicis(data);
+		
+		//test 결제 없이 바로 예매 - 좌석예매 진행
+		reservation_save(1);
 	});
 
 

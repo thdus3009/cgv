@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.pager {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+	display: inline-flex;
+	vertical-align: top;
+}
+
+.pagination > li{
+	margin: 0;	
+}

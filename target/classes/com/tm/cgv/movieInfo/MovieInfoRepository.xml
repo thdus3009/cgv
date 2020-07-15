@@ -124,6 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <!-- =========================================================================== -->
  	 
 
+
  	 <!-- 정보랑 사진 -->
  	 <select id="mSelect" parameterType="MovieInfoVO" resultMap="listResult">
  	 	select MM.*,MK.* from
@@ -132,6 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select num as imageNum,fileName,movieNum,originName,type from movieImage) as MK
 		on(MM.num=MK.movieNum)
 		where MK.type=1 and MM.num=${num}
+
  	 </select>
  	 <!-- 사진이랑 영상 링크 -->
  	 <select id="mSelect2" parameterType="MovieImageVO" resultMap="IVjoin">

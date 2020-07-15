@@ -3,8 +3,6 @@ package com.tm.cgv.movieInfo;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.member.MemberBasicVO;
-
 import com.tm.cgv.movieImage.MovieImageVO;
-
 import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.MakeCalendar;
@@ -158,8 +154,8 @@ public class MovieInfoController {
 	@GetMapping("movieSelect")
 
 	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num,MovieImageVO movieImageVO) throws Exception{
-
 		ModelAndView mv = new ModelAndView();
+
 
 		reservationVO.setMovieNum(num);
 		System.out.println(reservationVO.getMovieNum()+"con");
@@ -200,7 +196,7 @@ public class MovieInfoController {
 		mv.addObject("cstr",map.get("cstr"));
 		mv.addObject("cimp",map.get("cimp"));
 		mv.addObject("cimm",map.get("cimm"));
-		
+
 		mv.setViewName("movie/movieSelect");
 		return mv;
 	}

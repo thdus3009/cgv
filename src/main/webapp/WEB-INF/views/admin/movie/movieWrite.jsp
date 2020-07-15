@@ -10,16 +10,23 @@
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 </head>
 <body class="sb-nav-fixed">
+\
 	<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
 
+\
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
+
 					<h1>Movie ${path}</h1>
+					
+
+
+
 					<div>
 
 						<div class="contents">
@@ -30,13 +37,6 @@
 									<!----------------------------------------------------------------------------------------------------- contents detail -->
 
 									<div class="col_detail">
-
-										<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
-										<div class="customer_top">
-											<!-- 뭐하는 부분일까요..? -->
-											
-											
-										</div>
 
 										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
 										<form action="./movie${path}" method="post" enctype="multipart/form-data">
@@ -199,6 +199,7 @@
 	</div>
 
 	<!-- 스크립트 -->
+
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
@@ -304,6 +305,7 @@
 		$(this).parent().remove();
 		numS--;
 		});
+
 
 	
 	</script>

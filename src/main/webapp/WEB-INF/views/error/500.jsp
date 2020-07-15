@@ -41,9 +41,9 @@
 					<p>서버에 문제가 발생했습니다.<br>
 						빠른시일내에 문제를 해결하겠습니다. 감사합니다.</p>
 					<div>
-						<a href="" class="error-btn" onclick="history.back()"><span>이전 페이지 이동</span></a> 
+						<a href="#" class="error-btn" onclick="history.back()"><span>이전 페이지 이동</span></a> 
 						<a href="" class="error-btn"><span>고객센터(1544-1122)</span></a>
-						<a href="" class="red-button"><span>CGV 첫 화면 이동</span></a>
+						<a href="${pageContext.request.contextPath}/" class="red-button"><span>CGV 첫 화면 이동</span></a>
 					</div>
 				</div>
 			</div>

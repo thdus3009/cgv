@@ -95,3 +95,18 @@ main{
 .pager{
 	item-align: center;
 }
+
+.page-item{
+	margin: 0;
+}
+
+/*검색 */
+.input-group{
+	padding: 10px 0;
+}
+
+#searchTag{
+    border: 1px solid #ced4da;
+    border-right: none;
+    padding: 0 5px;
+}

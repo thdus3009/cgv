@@ -33,6 +33,7 @@
 	border-radius:5px;
 	padding-left:2px;
 	margin-top:2px;
+	font-weight: 600;
 }	
 
 .seat_box .seat_header .header_btn button	{
@@ -312,12 +313,13 @@
 /*정리*/
 
 .form-group	{
-	margin-top:30px;
+	margin-top:20px;
 	
 }
 
 .theaterLebel	{
-	margin-bottom:30px;
+	/* margin-bottom:30px; */
+	font-weight: 600;
 }
 
 .selectcinenum	{	/* cinema select box */
@@ -328,7 +330,7 @@
 }
 
 .lebelname	{
-	margin-bottom:40px;
+	/* margin-bottom:40px; */
 }
 
 .ckfm	{

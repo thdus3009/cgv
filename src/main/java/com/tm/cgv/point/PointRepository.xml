@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.point.PointRepository">
 	
 	<select id="pointSelectList" parameterType="String" resultType="PointVO">
-		select * from point where memberNum=#{memberNum}
+		select * from point where username=#{username}
 	</select>
 	
 	
@@ -21,10 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				price=price - #{price}			
 			</otherwise>
 		</choose>
-		where memberNum=#{memberNum} and type=#{type}
+		where username=#{username} and type=#{type}
 	</update>
 	
-	
+	<insert id="pointInsert" parameterType="PointVO">
+		insert into point values(0,#{username},#{price},#{type})
+	</insert>
 	
 
 </mapper>

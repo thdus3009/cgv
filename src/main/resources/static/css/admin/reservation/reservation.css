@@ -9,6 +9,11 @@
   src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
 }
 
+
+a:hover{
+	font-weight: bold;
+}
+
 body{
   font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }

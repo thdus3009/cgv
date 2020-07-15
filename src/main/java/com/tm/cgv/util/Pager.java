@@ -21,8 +21,32 @@ public class Pager {
 	
 	private String search;
 	private String kind;
+	private String startDate;
+	private String endDate;
 	
 	
+	public String getStartDate() {
+		if (this.startDate == null) {
+			this.startDate = "";
+		}
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		if (this.endDate == null) {
+			this.endDate = "";
+		}
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 	public void makeRow() {
 		this.startRow = (this.getCurPage()-1)*this.getPerPage(); //0 10 20
 		this.lastRow = this.getCurPage() * this.getPerPage(); //10 20 30
@@ -125,7 +149,7 @@ public class Pager {
 		this.lastNum = lastNum;
 	}
 	public String getSearch() {
-		if(this.search == null) {
+		if(this.search == null || this.search.equals("")) {
 			this.search ="";
 		}
 		return search;
