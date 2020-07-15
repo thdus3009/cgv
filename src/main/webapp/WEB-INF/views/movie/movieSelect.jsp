@@ -39,7 +39,7 @@
 
 <div class="root">
    <!-- 헤더 -------------------------------------------------------------------------------------->
-   <c:import url="../template/header.jsp"></c:import>
+   <c:import url="../template/header2.jsp"></c:import>
    
    <!-- 컨테이너 -------------------------------------------------------------------------------------->
    <input type="hidden" id = "gTotal" value="${gTotal}">
@@ -654,7 +654,7 @@ var myChart = new Chart(ctx, {
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
 
-var page1 = "";
+var page1 = 0;
 var num4 = $(".num4").val(); //영화번호
 var uid = $(".username").val(); //아이디 세션값
 
@@ -668,7 +668,6 @@ var g_contents = "";
 
 var g_emotionPoint = 0;
 var g_charmPoint = 0;
-
 
 //페이지 들어가면 바로 실행(리뷰리스트)
 window.onload = function () {
@@ -698,7 +697,7 @@ window.onload = function () {
 $("#ajax_ms").on("click",".page1",function(){
 
    page1 =$(this).attr("data-page1");
-   
+	
        $.ajax({
          type:"GET",
          url:select1,
@@ -713,7 +712,6 @@ $("#ajax_ms").on("click",".page1",function(){
       })
       
 }); 
- 
 
 /* ------------------------------------------------ */
 //최신순
@@ -890,6 +888,8 @@ $("#ajax_ms").on("click",".date",function(){
    
 });
 
+
+console.log("curPage: "+curPage);
 
 /* ------------------------------------------------ */
 

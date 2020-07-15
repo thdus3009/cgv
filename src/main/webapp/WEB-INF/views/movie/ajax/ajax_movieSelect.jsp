@@ -85,7 +85,7 @@
  <ul class="paging">
 
  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-    <li class="page1" id="page1${i}" name="${i}" data-page1="${i}"><a href="javascript:void(0);">${i}</a></li>
+    <li class="page1" id="page1${i}" name="${i}" data-page1="${i}"><a href="javascript:void(0);" style="color: #333333;">${i}</a></li>
  </c:forEach>
 
  </ul>

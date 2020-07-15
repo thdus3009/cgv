@@ -10,15 +10,15 @@
                <!-- Modal Header -->
                <form id="form2" name="form2" method="post"
                   action="./review/review_Write">
-                  <div class="modal-header" style="background-color: #333;">
+                  <div class="modal-header" style="background-color: #333; position: relative;">
                      <h4 class="modal-title"
                         style="color: #F2F0E5; font-size: X-large;">평점작성</h4>
-                     <button id="exitt" type="button" class="close" data-dismiss="modal">&times;</button>
+                     <button id="exitt" type="button" class="close modal4_exit" data-dismiss="modal" style="background: url('../images/myPage/sprite_btn.png') no-repeat -72px -62px;"></button>
                   </div>
 
                   <!-- Modal body -->
                   <div class="modal-body">
-                     <div id="title2"></div>   <!-- reviewSubmit.js / reviewMore / $(".popupBtn1").click 참고 -->
+                     <div id="title2" class="modal4_title2"></div>   <!-- reviewSubmit.js / reviewMore / $(".popupBtn1").click 참고 -->
                      <br>
                      <div style="text-align: center;">
                      
@@ -39,7 +39,7 @@
                      <!-- 나중에 여기에 session으로 정보불러와서 같이 보내기 -->
                      <textarea id="mContents2" name="contents2" rows="5" cols="70" onkeyup="CheckByte(this)"
                         placeholder="운영원칙에 어긋나는 게시물로 판단되는 글은 제재 조치를 받을 수 있습니다." 
-                        style="font-size: small;"></textarea>   <!-- textarea에서 키보드를 누르면 CheckByte.js의 해당내용(this)의 함수실행 -->
+                        style="font-size: small; margin: 0 0 0 20px;"></textarea>   <!-- textarea에서 키보드를 누르면 CheckByte.js의 해당내용(this)의 함수실행 -->
                   </div>
 
                   <!-- Modal footer -->
@@ -66,10 +66,10 @@
                <!-- Modal Header -->
                <form id="form2" name="form2" method="post"
                   action="./review/review_Write">
-                  <div class="modal-header" style="background-color: #333;">
+                  <div class="modal-header" style="background-color: #333; position: relative;">
                      <h4 class="modal-title"
                         style="color: #F2F0E5; font-size: X-large;">관람 포인트 선택</h4>
-                     <button id="exitt2" type="button" class="close" data-dismiss="modal">&times;</button>
+                     <button id="exitt2" type="button" class="close modal4_exit" data-dismiss="modal" style="background: url('../images/myPage/sprite_btn.png') no-repeat -72px -62px;"></button>
                   </div>
 
                   <!-- Modal body -->
@@ -79,8 +79,8 @@
                      
                      <!-- label과 id가 같으면 글씨만 클릭해도 체크박스를 클릭할수 있다. -->
                      
-                     <div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">매력 포인트</div>
-                        <div style="font-weight: lighter;">
+                     <div style="border-top: 1px solid #cccccc; margin-left: 20px; margin-right: 20px;"><div style="font-weight: bold; padding: 15px 0; font-size: large; margin-left: 10px;">매력 포인트</div>
+                        <div style="font-weight: lighter; margin-left: 15px;">
                         <input type="checkbox" value="감독연출" id="a1" class="charmPoint2" data-charm="1"> <label for="a">감독연출</label> &emsp; &emsp; &emsp; &emsp;
                         <input type="checkbox" value="스토리" id="b1" class="charmPoint2" data-charm="2"> <label for="b">스토리</label> &emsp; &emsp; &emsp; &emsp;
                         <input type="checkbox" value="영상미" id="c1" class="charmPoint2" data-charm="4"> <label for="c">영상미</label>
@@ -91,8 +91,8 @@
                         </div>
                      </div>
                      
-                     <div style="border-top: 1px solid #cccccc;"><div style="font-weight: bold; padding: 15px 0;">감정 포인트</div>
-                        <div style="font-weight: lighter;">
+                     <div style="border-top: 1px solid #cccccc; margin-left: 20px; margin-right: 20px;"><div style="font-weight: bold; padding: 15px 0; font-size: large; margin-left: 10px;">감정 포인트</div>
+                        <div style="font-weight: lighter; margin-left: 15px;">
                         <input type="checkbox" value="몰입감" id="f1" class="emotionPoint2" data-emotion="1"> <label for="f">몰입감</label> &emsp; &emsp; &emsp; &emsp; &ensp;
                         <input type="checkbox" value="감동" id="g1" class="emotionPoint2" data-emotion="2"> <label for="g">감동</label> &emsp; &emsp; &emsp; &emsp; &ensp;
                         <input type="checkbox" value="스트레스 해소" id="h1" class="emotionPoint2" data-emotion="4"> <label for="h">스트레스 해소</label>
