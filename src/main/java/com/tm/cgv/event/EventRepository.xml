@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="contents" property="contents"/>
 	
 		<collection property="eventImageVOs" javaType="List" ofType="EventImageVO">
-			<id column="imageNum" property="num"></id>
+			<!-- <id column="imageNum" property="num"></id> -->
 			<result column="fileName" property="fileName"/>
 			<result column="originName" property="originName"/>
 			<result column="type" property="type"/> 
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 
-	<select id="eventList" parameterType="Pager" resultType="EventVO">
+	<select id="eventList" parameterType="Pager" resultMap="selectList">
  		select E.*, I.fileName, I.originName, I.type from 
  		(
  		select * from event where title like concat('%','','%')

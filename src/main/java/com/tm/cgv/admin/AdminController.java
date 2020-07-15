@@ -1147,7 +1147,7 @@ public class AdminController {
 	@GetMapping("event/eventList")
 	public ModelAndView eventList(Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		pager.setkind("");
 		List<EventVO> list = eventService.eventList(pager);
 		System.out.println("----test----");
 		System.out.println(pager.getkind() + " - kind");

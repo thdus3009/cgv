@@ -25,7 +25,23 @@ public class Eventcontroller {
 		pager.setPerPage(9);
 		List<EventVO> list = eventService.eventList(pager);
 		System.out.println("curPage : " + pager.getCurPage());
+	
+		
+		System.out.println("list=============");
+		for (EventVO eventVO : list) {
+			System.out.println(eventVO.getTitle());
+			
+			//System.out.println("aa : "+eventVO.getEventImageVOs().);
+//			for(int i = 0;i<eventVO.getEventImageVOs().size();i++) {
+//				System.out.println(eventVO.getEventImageVOs().get(i).getFileName());
+//			}
+//			
+		}
+		
+		
+		
 		mv.addObject("list", list);
+		//System.out.println(list.get(0).getEventImageVOs().get(0).getFileName());
 		mv.addObject("pager", pager);
 		mv.setViewName("event/eventList");
 		return mv;

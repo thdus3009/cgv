@@ -323,23 +323,7 @@
 					var s = $(".fd"+index);
 					var tp = s.data("type");
 					alert("tp :" + tp)
-					
-					
-				/* 	$.get("./fileDelete",{num:$(this).attr("id"),fileName:$(this).attr("name")}, function(data){
-						alert(data);
-						
-						if(data>0){
-							alert("성공");
-							alert(data);
-							s.parent().find('input').remove();
-							s.parent().parent().html('<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">');
-							$("#fo").append('<input type="hidden" name="type" value="'+ tp +'">');
-						
-						}else{
-							alert(data);
-							alert("파일 삭제 실패ㅠㅠ");
-						}
-					}); */
+
 					s.parent().find('input').remove();
 					s.parent().parent().html('<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">');
 					

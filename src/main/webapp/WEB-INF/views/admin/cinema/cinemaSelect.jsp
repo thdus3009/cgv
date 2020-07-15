@@ -161,6 +161,10 @@
 													<span id="submitBtn${i.index}" name="${vo.num}" class="submitBtn btn btn-primary">검색</span>
 												</div>
 											</div>
+											
+											<div class="movieTime" style="float:right;">
+												<input type="button" value="상영 시간 등록" class="btn btn-primary">
+											</div>
 														  	
 										  	<div class="timetable" id="timetable${i.index}" name="${i.index}">
 										  	
@@ -174,9 +178,7 @@
 					<div class="">
 
 						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-primary">Insert</a>
-                    	<span id="de" class="btn btn-danger">Delete</span>
-                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
-                    	
+
                     	<c:if test="${empty timePriceList}">
                     		<a href="./admissionPrice/write?num=${cine.num}" id="admissionPrice" class="btn btn-info">관람가격 등록</a>
                     	</c:if>

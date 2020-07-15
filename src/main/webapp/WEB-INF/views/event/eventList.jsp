@@ -84,9 +84,12 @@
 							<ul class="cf"  id="tb">
 								<c:forEach items="${list}" var="vo" varStatus="i">
 									<li>
-										<a id="tile_${i}" href="">
+										<a id="title_${i.index}" href="">
 											<div class="evt-thumb">
-												<img alt="" src="/images/event/eventList/eventImage/${vo.eventImageVOs.fileName}">
+												<c:forEach var="eventImageVO" items="${vo.eventImageVOs}">
+													<img alt="" src="../images/event/eventList/eventImage/${eventImageVO.fileName}">
+												</c:forEach>
+												
 											</div>
 											<div class="evt-desc">
 												<p class="txt1">${vo.title}</p>
@@ -152,18 +155,23 @@
 
 <script type="text/javascript" src="../js/movie/movieList.js"></script>
 <script type="text/javascript">
+
+
 	var totalPage= '${pager.totalPage}';
 	$(".kind").click(function(){
-		$(".btn-item-more").show();
+		
 		$("#curPage").val(1);
 		$(this).parent().parent().find("li>a").removeClass("on");
      	$(this).addClass("on");
 		kind = $(this).attr("id");
-		console.log("kind : " + kind);
+
+
 
 		$.post("./eventKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){
 			$("#tb").html(data);
 		});
+
+
     }); 
 
 	$(".btn-item-more").click(function(){
@@ -175,10 +183,11 @@
 			$("#tb").append(data);
 			var cur = $("#curPage").val();
 			$("#curPage").val(parseInt(cur)+1);
-			if($("#curPage").val()==$("#totalPage"
-					).val()){
+		/* 	if($("#curPage").val()==$("#totalPage").val()){
 				$(".btn-item-more").hide();
-			}
+			} */
+
+
 			
 		})
 	});
