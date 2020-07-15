@@ -46,7 +46,7 @@
 						<a class="lo" href="">로그인</a>
 					</li>
 					<li>
-						<a href="#">비회원 예매확인</a>
+						<a href="../guest/reservationInfo">비회원 예매확인</a>
 					</li>
 				</ul>
 				<div class="box_login">

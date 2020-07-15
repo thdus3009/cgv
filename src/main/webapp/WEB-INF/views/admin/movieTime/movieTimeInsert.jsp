@@ -7,22 +7,22 @@
 	<c:import url="../template/head.jsp"></c:import>
 	<c:import url="../template/datepicker.jsp"></c:import>
 	<c:import url="../template/timepicker.jsp"></c:import>
-   
     <link rel="stylesheet" href="/css/admin/movieTime/insert.css">
-	
 </head>
 <body class="sb-nav-fixed">
+
 	<c:import url="../template/header.jsp"></c:import>
+	
+	<!-- 사이드바 -->
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
-
+		
+		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
-				<br>
-				<!-- main contents -->
-				<div class="container">
-					
-					<h2>영화 상영시간 등록</h2> <br>
+				<div class="container-fluid" style=" padding: 40px;">
+					<h1>Movie Time Insert</h1>
+					<p>영화 상영시간 등록</p>
 					
 					<!-- Tab -->
 					<ul class="nav nav-tabs">
@@ -36,14 +36,14 @@
 							
 							<!-- 영화 선택 -->
 							<div id="selectMovie" class="container tab-pane active">
-								<br>
+								
 								<!-- 검색창 -->
 								<div class="input-group">
 									<select id="searchTag" name="searchTag">
 									    <option value="title">영화명</option>
 									</select>
 									
-									<input id="searchTxt" class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+									<input id="searchTxt" class="form-control" type="text" placeholder="검색어를 입력해주세요." aria-label="Search" aria-describedby="basic-addon2" />
 									<div class="input-group-append">
 										<button id="searchBtn" class="btn btn-primary" type="button">
 											<i class="fas fa-search"></i>
@@ -52,10 +52,11 @@
 								</div>
 								
 								<!-- 영화리스트 출력 -->
-								<div id="movieListDiv" style="margin: 10px;"></div>
+								<div id="movieListDiv" style="margin: 10px;">
+								</div>
 								
 								<!-- pager -->
-								<div>
+								<div class="pager">
 									<ul class="pagination">
 										<c:if test="${pager.curBlock gt 1}">
 											<li class="page-item"><a class="page-link" href="./insert?theaterNum=${theaterVO.num}&curPage=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
@@ -74,7 +75,7 @@
 							<div id="selectDatetime" class="container tab-pane fade">
 							
 								<div class="container">
-									<br>
+									
 									<div id="movieTimeInsert">
 										<input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 										<input id="movieNum" type="hidden" name="movieNum"/>
@@ -98,7 +99,9 @@
 											<label for="screenTime">시간 선택 :</label>
 											<input id="timepicker" class="form-control" type="text" name="screenTime" />
 										</div>
-										<button id="submitBtn" type="button" class="btn btn-primary">영화 상영시간 등록</button>
+										<div class="text-center">
+											<button id="submitBtn" type="button" class="btn btn-primary">영화 상영시간 등록</button>
+										</div>
 									</div>
 								</div>
 							</div>

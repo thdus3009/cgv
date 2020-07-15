@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.movieInfo.MovieInfoRepository">
+ 	
+ 	<resultMap type="MovieInfoVO" id="listResult">
+ 		<id column="num" property="num"/>
+ 		<result column="title" property="title"/>
+ 		<result column="titleEng" property="titleEng"/>
+ 		<result column="runtime" property="runtime"/>
+ 		<result column="director" property="director"/>
+ 		<result column="actor" property="actor"/>
+ 		<result column="ganre" property="ganre"/>
+ 		<result column="ageLimit" property="ageLimit"/>
+ 		<result column="country" property="country"/>
+ 		<result column="openDate" property="openDate"/>
+ 		<result column="contents" property="contents"/>
+ 		<result column="visitor" property="visitor"/>
+ 		<result column="rate" property="rate"/>
+ 		<result column="errRate" property="errRate"/>
+ 		<result column="createAt" property="createAt"/>
+ 		
+ 		
+ 		<association property="movieImageVOs" javaType="MovieImageVO">
+ 			<id column="num" property="num"/>
+ 			<result column="movieNum" property="movieNum"/>
+ 			<result column="fileName" property="fileName"/>
+ 			<result column="originName" property="originName"/>
+ 			
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<resultMap type="MovieInfoVO" id="movieJoin">
+ 		<id column="num" property="num"/>
+ 		<result column="title" property="title"/>
+ 		<result column="titleEng" property="titleEng"/>
+ 		<result column="runtime" property="runtime"/>
+ 		<result column="director" property="director"/>
+ 		<result column="actor" property="actor"/>
+ 		<result column="ganre" property="ganre"/>
+ 		<result column="ageLimit" property="ageLimit"/>
+ 		<result column="country" property="country"/>
+ 		<result column="openDate" property="openDate"/>
+ 		<result column="contents" property="contents"/>
+ 		<result column="visitor" property="visitor"/>
+ 		<result column="rate" property="rate"/>
+ 		<result column="errRate" property="errRate"/>
+ 		<result column="createAt" property="createAt"/>
+ 		
+ 		
+ 		<association property="movieImageVOs" javaType="MovieImageVO">
+ 			<id column="imageNum" property="num"/>
+ 			<result column="movieNum" property="movieNum"/>
+ 			<result column="fileName" property="fileName"/>
+ 			<result column="originName" property="originName"/>
+ 			
+ 		</association>
+ 		
+ 		<association property="movieVideoVOs" javaType="MovieVideoVO">
+ 			<id column="videoNum" property="num"/>
+ 			<result column="movieNum" property="movieNum"/>
+ 			<result column="videolink" property="videolink"/>
+ 			
+ 		 
+ 		</association>
+ 	</resultMap>
+ 	
+	
+ 	<select id="movieNumCount" resultType="Long">
+ 		select count(num) from movieInfo where deleteAt is null 
+ 		and title like concat('%',#{search},'%') order by
+ 		<choose>
+			<when test="kind == 'date'">
+				openDate desc
+				
+			</when>
+			<when test="kind == 'title'">
+				title asc
+				
+			</when>
+			<otherwise>
+				rate desc
+				
+			</otherwise>
+		</choose>
+ 	</select>
+ 
+ 	
+ 
+ 	<select id="movieList" parameterType="Pager" resultMap="listResult">
+ 		select MM.* , MK.fileName,MK.originName,MK.movieNum from
+ 		(select * from
+ 		
+ 		(select * from movieInfo where title like concat('%',#{search},'%') 
+ 		and deleteAt is null
+ 		order by
+		<choose>
+			<when test="kind == 'date'">
+				createAt desc,openDate asc
+				
+			</when>
+			<when test="kind == 'title'">
+				title asc
+				
+			</when>
+			<otherwise>
+				rate desc
+				
+			</otherwise>
+		</choose>
+		limit #{startRow},#{perPage}) as PP ) as MM
+		left join movieImage as MK
+		on(MM.num = MK.movieNum)
+
+ 	</select>
+ 	
+ 	<select id="movieListAll" parameterType="MovieInfoVO" resultType="MovieInfoVO">
+ 		select * from movieInfo
+ 		where deleteAt is null
+ 		ORDER by 
+ 			<choose>
+ 				<when test="kind == 'date'">
+ 					createAt desc,openDate asc
+ 				</when>
+ 				<when test="kind == 'title'">
+ 					title asc
+ 				</when>
+ 				<otherwise>
+ 					rate
+ 				</otherwise>
+ 			</choose>
+ 			
+ 	 	</select>
+
+ 	 <insert id="movieWrite" parameterType="MovieInfoVO" useGeneratedKeys="true" keyProperty="num"> 
+ 	 	insert into movieInfo (num,title,titleEng,runtime,director,actor,ganre,ageLimit,country,openDate,contents,visitor,rate,errRate,createAt)
+ 	 	values(#{num},#{title},#{titleEng},#{runtime},#{director},#{actor},#{ganre},#{ageLimit},#{country},#{openDate},#{contents},0,0.0,100.0,#{createAt})
+ 	 </insert>
+ 	 
+ 	 <select id="movieSelect" parameterType="MovieInfoVO" resultMap="movieJoin">
+		select * from 
+		(select * from 
+		(select * from movieInfo) MI
+		join 
+		(select num as imageNum,fileName,originName,movieNum from movieImage) ME
+		on (MI.num = ME.movieNum)) A
+		join
+		(select num as videoNum,movieNum,videolink  from movieVideo) MV
+		on(A.num = MV.movieNum)
+		where A.num=#{num} and deleteAt is null;
+ 	 </select>
+ 	 
+ 	<update id="movieUpdate" parameterType="MovieInfoVO">
+ 		update movieInfo set title=#{title},titleEng=#{titleEng},runtime=#{runtime},director=#{director},actor=#{actor},ganre=#{ganre},ageLimit=#{ageLimit},
+ 		country=#{country},openDate=#{openDate},contents=#{contents} where num=#{num}
+ 	</update>
+ 	
+ 	<update id="movieDelete" parameterType="MovieInfoVO">
+ 		update movieInfo set deleteAt=now() where num=#{num}
+ 	</update>
+ 	
+
+ 	<select id="movieSelectOne" parameterType="Integer" resultType="MovieInfoVO">
+ 		select * from movieInfo where num = #{num}
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="errRate2" parameterType="ReservationVO" resultType="java.util.Map"> 
+ 		select count(egg)as total,(select count(egg)  from review 
+ 		where reservationNum  in (select num from reservation where movieNum=#{movieNum}) and createAt is not null and deleteAt is null and egg=1) as good from review 
+		where reservationNum  in (select num from reservation where movieNum=#{movieNum}) and createAt is not null and deleteAt is null
+ 	</select>
+	
+	<update id="errUpdate" parameterType="MovieInfoVO">
+		update movieInfo set errRate=#{errRate} where num=#{num}
+	</update>
+ 	
+ 	 
+ 	<select id="rate" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select sum(person) as totalTicket,(select sum(person) from
+		(select common+teenager+preference as person from reservation where movieNum=#{movieNum}) as person)as movieOne from
+		(select common+teenager+preference as person from reservation) as person;
+ 		
+ 	</select>
+ 	
+ 	<update id="rateUpdate" parameterType="MovieInfoVO">
+ 		update movieInfo set rate=#{rate} where num=#{num}
+ 	</update>
+ 	
+ 	<select id="gender2" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select count(uu.gender) as cgender from
+		(select username,gender from member where username in (select uid from reservation where movieNum=#{movieNum} )) as uu 
+		where gender=1 
+ 	</select>
+ 	
+ 	<select id="gTotal" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select count(total.gender) as gTotal from
+		(select username,gender from member where username in (select uid from reservation where movieNum=#{movieNum})) as total ;
+ 	</select>
+ 	
+ 	<select id="age" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select count(age1.age)as age10,(select count(age2.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 20 and 30) as age2)as age20,(select count(age3.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 30 and 40) as age3)as age30,(select count(age4.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 40 and 50) as age4)as age40,(select count(age5.age)from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 50 and 60) as age5)as age50,
+		(select count(age) from member where username in (select uid from reservation where movieNum=#{movieNum}))as total from
+		(select age from member where username in (select uid from reservation where movieNum=#{movieNum}) and age between 10 and 20) as age1;
+ 			
+ 	</select>
+ 	
+ 	<select id="charmPoint" parameterType="ReservationVO" resultType="Integer">
+ 		select charmPoint  from review where reservationNum in (select num from reservation where movieNum=#{movieNum});
+ 	</select>
+ 	
+ 	<select id="emotionPoint" parameterType="ReservationVO" resultType="Integer">
+ 		select emotionPoint as emotion from review where reservationNum in (select num from reservation where movieNum=#{movieNum});
+ 	</select>
+ 	
+ 	<select id="visitor2" parameterType="ReservationVO" resultType="java.util.Map">
+ 		select sum(person) as visitor2 from
+		(select common+teenager+preference as person from reservation where movieNum=#{movieNum} and deleteAt is null) as person;
+ 	</select>
+ 	
+ </mapper>

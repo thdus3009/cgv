@@ -119,6 +119,7 @@ body{
 }
 
 .box_login{
+	padding-bottom: 30px;
 	margin: 0 auto;
 	border-top: 2px solid #898987;
 	border-bottom: 4px solid #898987;
@@ -250,6 +251,33 @@ body{
 	border: 2px solid red;
 	
 }
+
+/* gender */
+
+
+.box-radio-input input[type="radio"]{
+	display:none;
+}
+
+.box-radio-input input[type="radio"] + span{
+	display:inline-block;
+	background:none;
+    border: 2px solid #b5b5b5; 
+	padding:0px 10px;
+	text-align:center;
+	height:35px;
+	line-height:33px;
+	font-weight:500;
+	cursor:pointer;
+    width: 138px;
+}
+
+.box-radio-input input[type="radio"]:checked + span{
+	border: 2px solid #f07469;
+	background:#e71a0f;
+	color:#fff;
+}
+ 
 
 
 

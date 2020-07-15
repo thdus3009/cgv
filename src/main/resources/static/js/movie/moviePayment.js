@@ -11,6 +11,21 @@ var usePrice = 0;
 
 var discountList;
 
+
+
+//비회원 로그인이면 폼 수정
+//최종 결제하기 부분만 출력되어야함
+if(beMemberVO != '' && memberId == ''){
+	$("#discCoupon").css("display","none");
+	$("#payPoints").css("display","none");
+	$(".ts3_titlebar.ts3_t1 .header").text("STEP .");
+}
+
+
+
+
+
+
 //info payment-ticket - 아래 바의 결제 부분 감추기
 $(".info.payment-ticket").css("display","none");
 
@@ -118,7 +133,7 @@ function discount_select(selected,other){
 function discount_cupon_ajax(){
 	var memberNum = $("#memberId").val();
 	$.ajax({
-		url : '../memberCupon/memberCuponSelect',
+		url : '../memberCupon/memberCouponSelect',
 		type : 'get',
 		data : {
 			uid : memberNum
@@ -130,13 +145,15 @@ function discount_cupon_ajax(){
 				$("#cgvCoupon .form_list .list_body .message").css("display","none");
 			}
 			
+			console.log(result);
+			
 			for(i=0;i<result.length;i++){
-				var name = result[i].cuponInfoVO.name;
-				var couponNum = result[i].cuponInfoNum;
-				var serialNum = result[i].cuponInfoVO.serialNum;
-				var eIssuance = result[i].cuponInfoVO.eissuance;
-				var count = result[i].cuponInfoVO.count;
-				var price = result[i].cuponInfoVO.price;
+				var name = result[i].couponInfoVO.name;
+				var couponNum = result[i].couponInfoNum;
+				var serialNum = result[i].couponInfoVO.serialNum;
+				var eIssuance = result[i].couponInfoVO.eissuance;
+				var count = result[i].couponInfoVO.count;
+				var price = result[i].couponInfoVO.price;
 				
 				var arr = eIssuance.split("-");
 				eIssuance = arr[0]+"."+arr[1]+"."+arr[2];
@@ -442,15 +459,6 @@ function discount_detail_list(){
 
 
 
-
-
-
-
-
-
-
-
-
 //포인트 및 기타 결제 수단 출력 내용 변경 
 $("#discCoupon .discount_list li").click(function(){
 	$("#discCoupon .discount_list li").removeClass("selected");
@@ -616,6 +624,11 @@ function reservation_save(result){
 		discount_type = 0;
 	}
 	
+	//회원 비회원 구분
+	var memberType = 1; //회원
+	if(beMemberVO != ''){
+		memberType = 0; //비회원
+	}
 	
 	var aa = { 
 			movieNum : $("#movieNum").val(),
@@ -644,11 +657,22 @@ function reservation_save(result){
 		url : '../reservation/reservationInsert',
 		type : 'post',
 		data : aa,
-		success : function(data){
-			if(data > 0){
-				console.log("예매 번호 : "+data);
-				reservation_result(data);
+		success : function(result2){
+			if(result2 > 0){
+				console.log("예매 번호 : "+ result2);
 				
+				if(beMemberVO != ''){
+					//비회원 테이블에  비회원 정보 저장
+					console.log("비회원 예매 정보 -----------------------저장~~~")
+					console.log(guestVO)
+					guestVO.reservationNum = result2;
+					console.log(guestVO)
+					
+					non_MemberInfoInsert(guestVO);
+				}
+				
+				//예매 결과 페이지
+				reservation_result(result2);
 			}else{
 				console.log(">>>예매 테이블 등록 실패");
 			}
@@ -674,6 +698,17 @@ function reservation_result(data){
 }
 
 
+//비회원 정보 저장
+function non_MemberInfoInsert(guestVO2){
+	$.ajax({
+		url :'../guest/guestInsert',
+		type : 'post',
+		data : guestVO2,
+		success : function(result3){
+			console.log("비회원 저장 결과 값 : "+result3);
+		}
+	})
+}
 
 
 

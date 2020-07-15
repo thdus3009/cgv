@@ -7,6 +7,7 @@
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/stylesMovieAdmin.css" />
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
+
 <link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -14,6 +15,7 @@
 <c:import url="../template/header.jsp"></c:import>	
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
+
 		<c:import url="../template/sidenav.jsp"></c:import>
 				
 		<!-- 내용 -->
@@ -21,7 +23,9 @@
 			<main>
 				<div class="container-fluid">
 					<h1>movie Select</h1>
+
 					<input type="hidden" value="${vo.num}">
+
 					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					
 				<div class="sect-base-movie">
@@ -117,28 +121,7 @@
 	</div>
 
 	<!-- 스크립트 -->
-	<script src="js/scripts.js"></script>
-	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script src="assets/demo/chart-area-demo.js"></script>
-	<script src="assets/demo/datatables-demo.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script type="text/javascript" src="../../js/movie/adminList.js"></script>
+	<c:import url="../template/scripts.jsp"></c:import>
 	
 	<!-- <script type="text/javascript">
 	

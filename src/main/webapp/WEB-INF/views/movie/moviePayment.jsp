@@ -250,7 +250,7 @@
 	
 	
 	<!-- 최종결제 -->
-	<div id="lastPayMethod">
+	<div id="lastPayMethod" style="min-height: 500px;">
 		<h4 class="ts3_titlebar ts3_t1">
 			<span class="header">STEP 4. </span> 
 			<span class="title">최종결제 수단</span>

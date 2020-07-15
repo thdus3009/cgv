@@ -21,9 +21,6 @@
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 영화 관리
 						</a> 
-						
-
-
 						<a class="nav-link collapsed" href="/admin/cinema/cinemaList" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
 							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
 								극장 관리	
@@ -36,18 +33,34 @@
 								<a class="nav-link" href="/admin/cinema/theaterInsert">상영관 등록</a>
 							</nav>
 						</div>
-
-						
-						
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/reservation/selectList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 예매 관리
-						</a> <a class="nav-link" href="#">
+						</a> 
+						<a class="nav-link" href="/admin/coupon/couponList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 쿠폰 관리
+						</a>
+						<a class="nav-link" href="#">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 리뷰 관리
-						</a> <a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/bannerManage">
+						</a> 
+						<a class="nav-link collapsed" href="/admin/cinema/cinemaList" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
+							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+								쿠폰 & 포인트
+							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+						</a>
+						<div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav">
+								<a class="nav-link" href="/admin/coupon/couponList">쿠폰</a>
+								<a class="nav-link" href="/admin/point/pointHistoryList">포인트 사용내역</a>
+								<a class="nav-link" href="/admin/point/accumulateManagement">포인트 적립관리</a>
+							</nav>
+						</div>
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/bannerManage">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리

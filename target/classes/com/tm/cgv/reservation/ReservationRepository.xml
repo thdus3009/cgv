@@ -29,7 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="createAt" property="createAt"/>
 		<result column="deleteAt" property="deleteAt"/>
 		
-		
 		<association property="movieInfoVO" javaType="MovieInfoVO">
 			<id column="miNum" property="num"/>
 			<result column="title" property="title"/>
@@ -44,12 +43,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<association property="paymentVO" javaType="paymentVO">
 			<id column="pNum" property="num"/>
+			<result column="imp_uid" property="imp_uid"/>
+			<result column="merchant_uid" property="merchant_uid"/>
+			<result column="pg" property="pg"/>
 			<result column="pay_method" property="pay_method"/>
+			<result column="apply_num" property="apply_num"/>
 		</association>	
 	</resultMap>
 	
+	<select id="reservationAllList" resultMap="reservationResult">
+		select * from 
+		(select * from 
+		(select * from 
+		(select * from reservation) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum))B
+		join
+		(select num as pNum,imp_uid,merchant_uid,pg,pay_method,apply_num from payment) P
+		on(B.paymentNum = P.pNum)
+		order by num desc
+	</select>
 	
-
+	
 	<select id="reservationResultSelectOne" parameterType="Integer" resultMap="reservationResult">
 		select * from 
 		(select * from 
@@ -71,9 +90,92 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<select id="reservationSelectList" parameterType="Pager" resultMap="reservationResult">
+		select * from 
+		(select * from 
+		(select * from reservation) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum)
+		<choose>
+			<when test="kind == 'username'">
+				where uid like concat('%',#{search},'%')
+			</when>
+			<when test="kind == 'all'">
+				where title like concat('%',#{search},'%') or uid like concat('%',#{search},'%')
+			</when>
+			<otherwise>
+				where title like concat('%',#{search},'%')
+			</otherwise>
+		</choose>
+		order by num desc limit #{startRow}, #{perPage}
+	</select>
+	
+	<select id="reservationNumCount" parameterType="Pager" resultType="Long">
+		select count(num) from 
+		(select * from 
+		(select * from reservation) R
+		join
+		(select num as miNum,title,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum)
+		<choose>
+			<when test="kind == 'username'">
+				where uid like concat('%',#{search},'%')
+			</when>
+			<when test="kind == 'all'">
+				where title like concat('%',#{search},'%') or uid like concat('%',#{search},'%')
+			</when>
+			<otherwise>
+				where title like concat('%',#{search},'%')
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<resultMap type="ReservationVO" id="guestReservationListResult">
+		<id column="num" property="num"/>
+
+		<association property="movieInfoVO" javaType="MovieInfoVO">
+			<result column="runtime" property="runtime"/>
+		</association>
+		
+		<association property="movieTimeVO" javaType="MovieTimeVO">
+			<result column="screenTime" property="screenTime"/>
+			<result column="screenDate" property="screenDate"/>
+		</association>
+	</resultMap>
+	
+	
+	<select id="guestReservationList" resultMap="guestReservationListResult">
+		select num,runTime,screenTime,screenDate from 
+		(select * from 
+		(select num,movieNum,movieTimeNum from reservation where uid='비회원') R
+		join
+		(select num as miNum,runtime from movieInfo) MN
+		on(R.movieNum = MN.miNum))A
+		join
+		(select num as mtNum,screenTime,screenDate from movieTime) MT
+		on(A.movieTimeNum = MT.mtNum)
+		where screenDate <![CDATA[<]]> sysdate()
+	</select>
+	
+	<select id="pointAccumlate" parameterType="ReservationVO" resultType="ReservationVO">
+		select uid,totalPrice from reservation where createAt = #{createAt}
+	</select>
+	
+	
 	<delete id="reservationDelete" parameterType="ReservationVO">
 		delete from reservation where num=#{num}
 	</delete>
+	
+	
+	
 
 
 </mapper>

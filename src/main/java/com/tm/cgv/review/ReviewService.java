@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_reviewList;
 
 @Service
 public class ReviewService {
@@ -17,7 +17,7 @@ public class ReviewService {
 	private ReviewRepository reviewRepository;
 
 	
-	public List<ReviewVO> reviewList(String uid, Pager pager)throws Exception {
+	public List<ReviewVO> reviewList(String uid, Pager_reviewList pager)throws Exception {
 		pager.makeRow();
 		HashMap<String, Object> pa = new HashMap<String, Object>(); //HashMap<String, Object> //<key,value>
 		pa.put("uid", uid);
@@ -40,5 +40,34 @@ public class ReviewService {
 	public ReviewVO reviewSelect(ReviewVO reviewVO)throws Exception {
 		
 		return reviewRepository.reviewSelect(reviewVO);
+	}
+	
+	public int review_Delete(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.review_Delete(reviewVO);
+	}
+	
+	public int reservation_Delete(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.reservation_Delete(reviewVO);
+	}
+	
+	
+	public List<ReviewVO> reviewLook(String uid)throws Exception {
+		return reviewRepository.reviewLook(uid);
+	}
+	
+	public int search_Count(String uid)throws Exception {
+		return reviewRepository.search_Count(uid);
+	}
+	
+	public int review_Update1(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.review_Update1(reviewVO);
+	}
+	
+	public int review_Update2(ReviewVO reviewVO)throws Exception {
+		return reviewRepository.review_Update2(reviewVO);
+	}
+	
+	public List<ReviewVO> movieSelect(int movieNum)throws Exception {
+		return reviewRepository.movieSelect(movieNum);
 	}
 }

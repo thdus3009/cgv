@@ -9,4 +9,7 @@ public interface PaymentRepository {
 	
 	public int paymentDelete(int num) throws Exception;
 
+	public PaymentVO paymentSelectOne(PaymentVO paymentVO) throws Exception;
+	
+	
 }

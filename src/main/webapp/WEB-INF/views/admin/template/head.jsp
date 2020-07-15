@@ -10,6 +10,7 @@
 <title>관리자 페이지</title>
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/admin/admin.css" rel="stylesheet" />
+<link href="/css/admin/pager.css" rel="stylesheet"/>
 
 <!-- bootstrap 4 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +22,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <!-- etc -->
-<script src="/js/scripts.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+<!-- summernote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>

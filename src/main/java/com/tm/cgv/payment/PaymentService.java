@@ -16,5 +16,9 @@ public class PaymentService {
 	public int paymentDelete(int num) throws Exception{
 		return paymentRepository.paymentDelete(num);
 	}
+	
+	public PaymentVO paymentSelectOne(PaymentVO paymentVO) throws Exception{
+		return paymentRepository.paymentSelectOne(paymentVO);
+	}
 
 }

@@ -275,12 +275,12 @@ body{
 .section-movie .movie-list{
 	float: left;
 	widows: 254px;
-	margin-top: 3px;
+	margin: 3px;
 	height: 84%;
 }
 
 .movie-list > ul{
-	width: 280px;
+	width: 250px;
 /* 	border: 1px solid black; */
 }
 
@@ -481,7 +481,7 @@ body{
 }
 
 #ticket .section-theater .col-body .theater-select .theater-list .area_theater_list ul{
-	width: 154px;
+	width: 107px;
 }
 
 
@@ -547,7 +547,7 @@ body{
 }
 
 #ticket .section-date .col-body .date-list ul{
-	width: 104px;
+	width: 75px;
 }
 
 #ticket .section-date .col-body .date-list ul li.month{
@@ -1310,7 +1310,22 @@ button {
 }
 
 
-
+/* 스크롤 */
+.scroll-y::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-y::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scroll-y::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: gray;
+  max-height: 15px;
+}
+.scroll-y::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
 
 
 

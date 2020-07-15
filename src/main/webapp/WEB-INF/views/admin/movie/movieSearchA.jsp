@@ -12,6 +12,7 @@
 <c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
+
 		<c:import url="../template/sidenav.jsp"></c:import>
 				
 		<!-- 내용 -->
@@ -19,6 +20,8 @@
 			<main>
 				<div class="container-fluid">
 					<h1>movie List</h1>
+					<p>영화 목록</p>
+					
 					<!-- 검색바 -->
 					<form
 						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -72,18 +75,18 @@
 						<!-- 페이저 -->
 						<div class="pager">
 							<ul class="pagination">
-								<c:if test="${pager.curBlock gt 1}">
-									<li><a href="#" class="custompager"
+								<c:if test="${pager.curBlock>1}">
+									<li class="page-item"><a href="#" class="page-link"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 									var="p">
-									<li><a href="./movieList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
+									<li class="page-item"><a href="#" class="page-link" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
+									<li class="page-item"><a href="#" class="page-link"
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>
@@ -97,6 +100,7 @@
 	</div>
 
 	<!-- 스크립트 -->
+
 	<script src="js/scripts.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
@@ -119,5 +123,8 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../../js/movie/adminList.js"></script>
+
+	<c:import url="../template/scripts.jsp"></c:import>
+
 </body>
 </html>
