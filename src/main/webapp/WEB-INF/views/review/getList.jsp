@@ -6,7 +6,7 @@
 
 <c:forEach items="${list}" var="vo">
 
-      <div class="list_p">
+      <div class="list_p" style="position: relative;">
 
          <div class="list_p_content"><!-- 이미지 주소부분 나중에 수정해야함 -->
             <div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px"> </div>
