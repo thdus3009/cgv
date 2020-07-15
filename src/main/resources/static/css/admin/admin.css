@@ -95,7 +95,7 @@ main {
 /* 포스트 */
 ul {
 	list-style: none;
-	display: flex;
+	/* display: flex; */
 	padding: 0;
 	margin: 0;
 }

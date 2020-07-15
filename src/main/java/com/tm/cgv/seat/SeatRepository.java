@@ -22,6 +22,11 @@ public interface SeatRepository {
 	public int colCount(SeatVO seatVO) throws Exception;
 	
 	public List<SeatVO> seatSelect(SeatVO seatVO) throws Exception;
+	
+	public Integer selectSeatNum(SeatVO seatVO) throws Exception;
+	
+	public void seatUpdate(SeatVO seatVO) throws Exception;
 
+	public List<SeatVO> selectStopSeat(int num) throws Exception;
 
 }

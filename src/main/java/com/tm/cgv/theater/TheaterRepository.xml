@@ -12,25 +12,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="screenDate" property="screenDate"/>
 		<result column="screenTime" property="screenTime"/>
 		<result column="remainSeat" property="remainSeat"/>
+		<result column="selectedFilm" property="selectedFilm"/>
 		
 		<association property="movieInfoVOs" javaType="MovieInfoVO">
 			<id column="num" property="num"/>
 			<result column="title" property="title"/>
 			<result column="runtime" property="runtime"/>
 		</association>
-		
 	</resultMap>
-	
-	
-	
-	
-	
 	
 	<select id="theaterList" resultType="TheaterVO">
 		select * from theater
 	</select>
 	
-	<insert id="theaterInsert" parameterType="TheaterVO">
+	<insert id="theaterInsert" parameterType="TheaterVO" useGeneratedKeys="true" keyProperty="num">
 		insert into theater(cinemaNum,name,seatCount,filmType) values(#{cinemaNum},#{name},#{seatCount},#{filmType})
 	</insert>
 	
@@ -39,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectRow" parameterType="Integer" resultType="String">
-		select max(rowIdx) from seat where theaterNum=20;
+		select max(rowIdx) from seat where theaterNum=#{num};
 	</select>
 	
 	<select id="selectCol" parameterType="Integer" resultType="Integer">
@@ -77,11 +72,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	<select id="theaterMovieTime" parameterType="Integer" resultMap="selectTheater">
+	<select id="theaterMovieTime" parameterType="Map" resultMap="selectTheater">
 		select M.*, F.title, F.runtime from movieTime M 
 		left join movieInfo F
 		on M.movieNum=F.num
-		where theaterNum=#{num}
+		where theaterNum=#{theaterNum} and M.screenDate 
+		between date(#{startDay}) and date(#{lastDay})
 	</select>
+
+	
 
 </mapper>

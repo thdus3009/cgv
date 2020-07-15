@@ -4,11 +4,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="../template/head.jsp"></c:import>
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<meta charset="UTF-8">
+	<c:import url="../template/head.jsp"></c:import> 
+
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
+	<link rel="stylesheet" href="/css/admin/cinema/demo.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<title>관리자 페이지</title>
+	
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+	<c:import url="../template/datepicker.jsp"></c:import>
+
 
 </head>
 <body class="sb-nav-fixed">
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- 로고 -->
+		<a href="/admin"><img src="/images/header/h1_cgv.png"
+			class="admin-logo" /></a>
+		<!-- 검색 바-->
+		<form
+			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="검색어를 입력"
+					aria-label="Search" aria-describedby="basic-addon2" />
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="button">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+		<!-- 로그인-->
+		<ul class="navbar-nav ml-auto ml-md-0">
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" id="userDropdown" href="#"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+				<div class="dropdown-menu dropdown-menu-right"
+					aria-labelledby="userDropdown">
+					<a class="dropdown-item" href="/">메인 페이지로</a> 
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
+				</div>
+			</li>
+		</ul>
+	</nav>
 
 	<c:import url="../template/header.jsp"></c:import>
 	
@@ -20,8 +69,13 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>${cine.name}</h1>
-					<p>영화관 정보</p>
+					
+					<h1 class="cine_title">${cine.name}</h1>
+					<div class="btn_group">
+						<span id="de" class="btn btn-danger">Delete</span>
+                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+					</div>
+				
 					<div class="card mb-4">
 						<div class="card-body">
 							<p class="mb-0">
@@ -36,19 +90,25 @@
 								<span>주차안내: ${cine.parkingInfo}</span><br> 
 								<span>영화관 소개: ${cine.intro}</span><br>
 							</p>
+							<!-- <div class="calendar">
+								<div class="form-group">
+									<label for="screenDate">날짜 선택 :</label>
+									<input id="datepicker" class="form-control" type="text" name="screenDate">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
 							<thead>
 								<tr>
 									<th>Num</th>
 									<!-- <th>CinemaNum</th> -->
 									<th>Name</th>
 									<th>seatCount</th>
-									<th>filmType</th>
-									<th>Button</th>
+									<th>FilmType</th>
+									<th>MovieTime</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -57,41 +117,32 @@
 									<!-- <th>CinemaNum</th> -->
 									<th>Name</th>
 									<th>seatCount</th>
-									<th>filmType</th>
-									<th>Button</th>
+									<th>FilmType</th>
+									<th>MovieTime</th>
 								</tr>
 							</tfoot>
 							<tbody id="accordion">
 								<c:forEach items="${theaterList}" var="vo" varStatus="i">
 									<tr class="theaterList-c">
-										<td><a href="./theaterSelect?num=${vo.num}" id="td${i.index}">${vo.num}</a></td>
+										<td><a href="./theaterSelect?num=${vo.num}&cinemaNum=${cinemaNum}" id="td${i.index}">${vo.num}</a></td>
 										<%-- <td>${vo.cinemaNum}</td> --%>
 										<td>${vo.name}</td>
 										<td>${vo.seatCount}</td>
-						
 										<td>
-										
-									 	<c:forEach items="${filmType}" begin="${i.index}" end="${i.index}" var="f">
-											
-											<c:forEach items="${f}" var="m">
-												<c:if test="${m eq 1}">
-													2D
-												</c:if>
-												<c:if test="${m eq 2}">
-													3D
-												</c:if>
-												<c:if test="${m eq 4}">
-													4D
-												</c:if>
+										 	<c:forEach items="${filmType}" begin="${i.index}" end="${i.index}" var="f">
+												<c:forEach items="${f}" var="m">
+													<c:if test="${m eq 1}">
+														2D
+													</c:if>
+													<c:if test="${m eq 2}">
+														3D
+													</c:if>
+													<c:if test="${m eq 4}">
+														4D
+													</c:if>
+												</c:forEach>
 											</c:forEach>
-											
-										</c:forEach>
-										
 										</td>
-										
-										
-										
-										<%-- <td><input class="time_block" name="tb${i.index}" type="button" value="▼"></td> --%>
 										<td>
 											<a class="collapsed card-link" id="table${i.index}" data-toggle="collapse" href="#tb${i.index}">▼</a>
 										</td>
@@ -103,18 +154,26 @@
 										  		<span class="film_title">3D</span><span class="film_color film_3d"></span>
 										  		<span class="film_title">4D</span><span class="film_color film_4d"></span>
 										  	</div>
-										  <div class="timetable" id="timetable${i.index}" name="${i.index}">
+										  	<div class="calendar">
+												<div class="form-group">
+													<label for="screenDate">날짜 선택 :</label>
+													<input id="datepicker${i.index}" class="datepicker"  type="text" name="screenDate">
+													<span id="submitBtn${i.index}" name="${vo.num}" class="submitBtn btn btn-primary">검색</span>
+												</div>
+											</div>
+														  	
+										  	<div class="timetable" id="timetable${i.index}" name="${i.index}">
 										  	
-										  </div>
+										  	</div>
 											<div class="test123"></div>
 										</td>
 									</tr>
 								</c:forEach>
-
-							</tbody>
 						</table>
 					</div>
 					<div class="">
+
+						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-primary">Insert</a>
                     	<span id="de" class="btn btn-danger">Delete</span>
                     	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
                     	
@@ -124,88 +183,32 @@
                     	<c:if test="${not empty timePriceList}">
                     		<a href="./admissionPrice/selectList?num=${cine.num}" id="admissionPrice" class="btn btn-info">관람가격 조회</a>
                     	</c:if>
-                    	
+
                     </div>
 				</div>
 			</main>
-                <c:import url="../template/footer.jsp"></c:import>
+            <c:import url="../template/footer.jsp"></c:import>
             </div>
-        </div>
-        <c:import url="../template/scripts.jsp"></c:import>
-        <script type="text/javascript">
-			//delete submit
-			$("#de").click(function(){
-				//정말 삭제할 거냐고 묻는 alert창
-				var check = confirm("삭제하시겠습니까?");
-				if(check){
-					location.href="./cinemaDelete?num="+${cine.num};
-				}
-			});
-
-			
-			//update submit
-			$("#up").click(function(){		
-				location.href="./cinemaUpdate?num="+${cine.num};
-			});
+    </div>
+    <c:import url="../template/scripts.jsp"></c:import>
+    <script type="text/javascript">
+		//delete submit
+		$("#de").click(function(){
+			//정말 삭제할 거냐고 묻는 alert창
+			var check = confirm("삭제하시겠습니까?");
+			if(check){
+				location.href="./cinemaDelete?num="+${cine.num};
+			}
+		});
 
 
-			//time block 스르륵
+		//time block 스르륵
 
-        </script>
+    </script>
         
-         <script src="/js/theater/timetable.js"></script>
+    <script src="/js/theater/timetable.js"></script>
 
     <script>
-/*     	$("#table0").click(function(){
-    		  var timetable = new Timetable();
-
-    	      timetable.setScope(9,3)
-
-    	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-    	      timetable.addEvent('Sightseeing', '월', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-    	      timetable.addEvent('test', '월', new Date(2015,7,17,9,30), new Date(2015,7,17,13,30), { url: '#' });
-    	      timetable.addEvent('Zumba', '화', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
-    	      timetable.addEvent('Zumbu', '화', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
-    	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-    	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-    	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-    	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-    	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-    	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-    	      }});
-    	      
-
-    	      var renderer = new Timetable.Renderer(timetable);
-    	      renderer.draw('#timetable0');
-    	      $(".room-timeline").css("width","100%");
-	
-        });
-
-
-    	$("#table1").click(function(){
-  		  var timetable = new Timetable();
-
-  	      timetable.setScope(9,3)
-
-  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
-
-  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-  	      }});
-  	      
-
-  	      var renderer = new Timetable.Renderer(timetable);
-  	      renderer.draw('#timetable1');
-  	      $(".room-timeline").css("width","100%");
-	
-      }); */
-
-
 		$(".timetable").each(function(){
 
 			var tid = $(this).attr("id");
@@ -216,18 +219,39 @@
 				var theaterNum = $("#td"+name).html();
 				console.log(theaterNum);
 			 	$.get("./theaterTime",{"theaterNum":theaterNum, "_csrf": $("#_csrf").val()},function(data){
-			 		$(".test123").html(data);
+			 		//$(".test123").html(data);
 					
 			  		  var timetable = new Timetable();
 
 			  	      timetable.setScope(7,3)
 
+			  	      
 			  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+					
+				  	    $(data).each(function(){
+					  	    //alert($(this)[12]);
+					  	    //alert(typeof($(this)[12]));
+						  	
+					  	    if($(this)[12]=='4'){
+					  	    	timetable.addEvent(
+							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event); } });
+								
+					  	    	
+					  	    }else if($(this)[12]=='2'){
+					  	    	timetable.addEvent(
+							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event); } });
+						  	}else if($(this)[12]=='1'){
+						  		timetable.addEvent(
+							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event); }}    
+							  	);
+							}
+							
+						    
+					  	});
 
-			  	      $(data).each(function(){
-				  	      alert($(this)[0]);
-			  	    	timetable.addEvent($(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]), new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11])/* , { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } } */);
-				  	  });
 
 			  	   /*    timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
 			  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
@@ -241,36 +265,161 @@
 			  	      var renderer = new Timetable.Renderer(timetable);
 			  	      renderer.draw('#'+tid);
 			  	      $(".room-timeline").css("width","100%");
-			  	      $(".time-entry").css("width","11.8%");
-			  	    $(".time-entry").css("left","38.9%");
-					
+			  	     
+			  	    //alert($(".time-entry").css("left"));
+			  	    
+					$(".time-entry").each(function(){ 
+					    var oriLeft = $(this).css("left");
+				  	    var test = (oriLeft.slice(0, oriLeft.length-2));
+						var cgLeft = (test*0.95)+'px';
+						$(this).css("left",cgLeft);
+
+						var oriWidth = $(this).css("width");
+				  	    var wtest = (oriWidth.slice(0, oriWidth.length-2));
+						var cgWidth = (wtest*0.957)+'px';
+						$(this).css("width",cgWidth);
+					});
+			  	    
+			  	 
 				}); 
 
 
-			   	
-	/* 	  		  var timetable = new Timetable();
+				$(".submitBtn").each(function(index){	//0, 1
+					$("#submitBtn"+index).click(function(){
+						var ckDate = $("#datepicker"+index).val();
+						alert(ckDate);
+						$.get(
+								"./theaterTime", {
+									_csrf : $("#_csrf").val(),
+									theaterNum : $(this).attr("name"),
+									checkDate : ckDate
+								}, function(data) {
+									
+									var timetable = new Timetable();
 
-		  	      timetable.setScope(7,3)
+							  	    timetable.setScope(7,3)
 
-		  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+							  	    timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
+							  	 
+							  		
+							  	    $(data).each(function(){
+								  	    if($(this)[12]=='4'){
+								  	    	timetable.addEvent(
+										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event); }  });
+											
+								  	    	
+								  	    }else if($(this)[12]=='2'){
+								  	    	timetable.addEvent(
+										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event); }  });
+									  	}else if($(this)[12]=='1'){
+									  		timetable.addEvent(
+										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event);
+											  	    	
+											  	        
+											  	    }});
+										}
+								  	});
 
-		  	      timetable.addEvent('Lasergaming', '목', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-		  	      timetable.addEvent('All-you-can-eat grill', '금', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-		  	      timetable.addEvent('Hackathon', '일', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-		  	      timetable.addEvent('Hackathon Livestream', '수', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-		  	      timetable.addEvent('Lunch', '토', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-		  	        window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-		  	      }});
-		  	      
+							  	    var renderer = new Timetable.Renderer(timetable);
+							  	    renderer.draw('#'+tid);
+							  	    $(".room-timeline").css("width","100%");
 
-		  	      var renderer = new Timetable.Renderer(timetable);
-		  	      renderer.draw('#'+tid);
-		  	      $(".room-timeline").css("width","100%"); */
-			
+							  	 
+							  		$(".time-entry").each(function(){ 
+									    var oriLeft = $(this).css("left");
+								  	    var test = (oriLeft.slice(0, oriLeft.length-2));
+										var cgLeft = (test*0.95)+'px';
+										$(this).css("left",cgLeft);
+
+										var oriWidth = $(this).css("width");
+								  	    var wtest = (oriWidth.slice(0, oriWidth.length-2));
+										var cgWidth = (wtest*0.957)+'px';
+										$(this).css("width",cgWidth);
+									});
+							        
+							});
+					});
+
+				});
+				
 		      });
 			
-		
+		    
 		});
+
+
+
+
+
+	//movie tile click alert
+	function timeAlert(event){
+		//<a href="#" data-toggle="tooltip" data-placement="right" title="Hooray!">Hover</a>
+		var s = event.startDate.toString();
+    	var startTime = s.substring(16,21);
+    	var e = event.endDate.toString();
+    	var endTime = e.substring(17,21);
+        window.alert(event.name + ' / ' + startTime  +' (' +event.location+ ')' + ' ~ ' + endTime +' (' +event.location+ ')');
+	}
+    
+
+  	// datepicker 초기화
+		function initDatePicker() {
+
+			var today = new Date();
+			var year = today.getFullYear(); // 년도
+			var month = today.getMonth() + 1;  // 월
+			var date = today.getDate();  // 날짜
+
+			if(month < 10) {
+				month = "0" + month;
+			}
+			
+			if(date < 10) {
+				date = "0" + date;
+			}
+
+	  	  	
+			<!-- 시작시 기본 날짜 설정은 value를 이용 -->
+			$('.datepicker').val(year + '-' + month + '-' + date);
+			
+			$('.datepicker').datepicker({
+			    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+			    startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+			    endDate: '+45d',	//달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
+			    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+			    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+			    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+			    //datesDisabled : ['2019-06-24','2019-06-26'],//선택 불가능한 일 설정 하는 배열 위에 있는 format 과 형식이 같아야함.
+			    //daysOfWeekDisabled : [0,6],	//선택 불가능한 요일 설정 0 : 일요일 ~ 6 : 토요일
+			    //daysOfWeekHighlighted : [3], //강조 되어야 하는 요일 설정
+			    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+			    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+			    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+			    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
+			    templates : {
+			        leftArrow: '&laquo;',
+			        rightArrow: '&raquo;'
+			    }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
+			    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+			    title: "영화 상영 날짜",	//캘린더 상단에 보여주는 타이틀
+			    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+			    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+			    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
+			    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+			    
+			});//datepicker end
+		}
+		
+		initDatePicker();
+		
+ 
+ 	// submit 버튼 클릭시
+		
+
+
     
     </script>
 
@@ -284,26 +433,19 @@
       ga('create','UA-171485633-1');ga('send','pageview');
 
       $(".room-timeline").css("width","100%");
+
+      
       
     </script>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 	<script src="assets/demo/chart-area-demo.js"></script>
 	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
-    </body>
-
+</body>
+</html>
 

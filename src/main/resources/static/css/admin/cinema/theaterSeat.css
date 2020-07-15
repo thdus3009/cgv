@@ -150,6 +150,16 @@
     border: solid 2px #f71708;
 }
 
+
+.theater .seats .roww .seat.rating_stop a .no{
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
+    border: solid 2px 000;
+    background: #000;
+}
+
+
     .theater .seats .roww .seat.selected a .no{
 	background-color: #ad1712;
     background-position: 0 0;

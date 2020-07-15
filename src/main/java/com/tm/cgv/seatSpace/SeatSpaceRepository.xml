@@ -12,6 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="seatSpaceSelect" parameterType="SeatSpaceVO" resultType="SeatSpaceVO">
 		select * from seatSpace where theaterNum = #{theaterNum};
 	</select>
+	
+	<delete id="seatSpaceDelete" parameterType="Integer">
+		delete from seatSpace where theaterNum=#{num}
+	</delete>
+	
  
 
 </mapper>
