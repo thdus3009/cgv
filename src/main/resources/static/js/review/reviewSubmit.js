@@ -64,13 +64,13 @@
 					},
 					success:function(data){
 						if(g_egg==1){//egg:1==좋아요 egg:0==싫어요
-							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0; height: 27px;">'+
 									'<img alt="" src="../images/good.JPG"></button>'+
 									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')								
 							alert("리뷰가 등록되었습니다.")
 							
 						}else{
-							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+							$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0; height: 27px;">'+
 									'<img alt="" src="../images/bad.JPG"></button>'+
 									'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>')
 							alert("리뷰가 등록되었습니다.")
@@ -163,13 +163,13 @@
 						},
 						success:function(data){
 							if(g_egg==1){//egg:1==좋아요 egg:0==싫어요
-								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0; height: 27px;">'+
 										'<img alt="" src="../images/good.JPG"></button>'+
 										'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">좋았어요</div>')
 								alert("리뷰가 등록되었습니다.")
 								
 							}else{
-								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0;">'+
+								$("#r"+g_num).html('<button class="popupOnlyRead" data-num2="'+g_num+'" title="'+g_num+'" style="border: 0; height: 27px;">'+
 										'<img alt="" src="../images/bad.JPG"></button>'+
 										'<div class="sss" id="sss'+g_num+'"  data-toggle="modal" data-target="#myModal3" data-num2="'+g_num+'">별로예요</div>')
 								alert("리뷰가 등록되었습니다.")

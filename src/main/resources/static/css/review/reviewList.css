@@ -50,6 +50,7 @@ body {
    width: 800px;
    border-bottom: 1px solid #cccccc;
    padding: 20px 0 20px 0;
+   position: relative;
 }
 
 .list_p_name {
@@ -151,6 +152,9 @@ body {
    border: 0;
    outline: 0 !important;
    background-color: transparent;
+   position: absolute;
+   right: 0;
+   top: 20px;
 }
 
 .td_image {

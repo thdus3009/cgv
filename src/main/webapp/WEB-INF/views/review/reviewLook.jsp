@@ -50,12 +50,11 @@
                   <div class="snb">
                      <ul>
                         <li class="on"><a href="">MY CGV HOME<i></i></a></li>
-                        <li><a href="./memberUpdate?id=${memberVO.username}">회원정보
-                              수정<i></i>
+                        <li><a href="../member/memberUpdate?id=${memberVO.username}">회원정보 수정<i></i>
                         </a></li>
                         <li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
                         <li><a href="">예매 영화 관리<i></i></a></li>
-                        <li><a href="../member/memberReivew">내가 본 영화<i></i></a></li>
+                        <li><a href="../review/reviewList">내가 본 영화<i></i></a></li>
                      </ul>
 
                   </div>
