@@ -46,28 +46,25 @@
 					<form action="./" method="get" enctype="">
 						<!-- 지역 -->
 						<select id="search-local">
-							<option>서울</option>
-							<option>경기</option>
-							<option>인천</option>
-							<option>강원</option>
-							<option>대전/충청</option>
-							<option>대구</option>
-							<option>부산,울산</option>
-							<option>경상</option>
-							<option>광주,전라,제주</option>
+							<option value="서울" selected="selected">서울</option>
+							<option value="경기">경기</option>
+							<option value="인천">인천</option>
+							<option value="강원">강원</option>
 						</select>
 						<!-- 영화관 -->
 						<select id="search-cinema">
-							<option></option>
+
 						</select>
-						<button type="button" class="search-btn"></button>
+						<button id="btnSearch" type="button" class="search-btn"></button>
 					</form>
 				</div>
 
 				<!-- 극장별 영화 관람가격 -->
 				<div class="timetable">
+				
+					<!-- for문 반복 -->
 					<!-- 2D -->
-					<div class="time-table">
+					<div class="time-table" style="border-left: 1px solid #ab9c8f;" >
 						<strong>&nbsp;&nbsp;&nbsp;■ 2D</strong>
 						<table>
 							<colgroup>
@@ -88,52 +85,9 @@
 							</tr>
 						</table>
 					</div>
-					<!-- 3D -->
-					<div class="time-table"
-						style="border-right: 1px solid #ab9c8f; border-left: 1px solid #ab9c8f;">
-						<strong>&nbsp;&nbsp;&nbsp;■ 3D</strong>
-						<table>
-							<colgroup>
-								<col style="width: 200px;">
-								<col style="width: 75px;">
-								<col style="width: 75px;">
-							</colgroup>
-							<tr class="time-tr">
-								<th scope="row">시간대</th>
-								<th scope="row">일반</th>
-								<th scope="row">청소년</th>
-							</tr>
-							<!-- 반복 -->
-							<tr class="time-tr">
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</div>
-					<!-- 4D -->
-					<div class="time-table">
-						<strong>&nbsp;&nbsp;&nbsp;■ 4D</strong>
-						<table>
-							<colgroup>
-								<col style="width: 200px;">
-								<col style="width: 75px;">
-								<col style="width: 75px;">
-							</colgroup>
-							<tr class="time-tr">
-								<th scope="row">시간대</th>
-								<th scope="row">일반</th>
-								<th scope="row">청소년</th>
-							</tr>
-							<!-- 반복 -->
-							<tr class="time-tr">
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</div>
-				</div>
+					
+					<!-- for문 반복  END -->
+					
 			</div>
 		</div>
 
@@ -148,42 +102,46 @@
 
 	<script type="text/javascript" src="../js/movie/movieList.js"></script>
 
+	<script type="text/javascript">
 
+		//초기 selectBox의 값 설정
+		localSearchAjax('서울');
+
+		console.log($("#search-local option:selected").val());
+		
+		//지역 클릭시 ajax호출
+		$("#search-local").change(function(){
+			var local = $(this).val();
+			localSearchAjax(local);
+			
+		});
+		
+		//지역선택시 해당 지역의 영화관들 출력
+		function localSearchAjax(local){
+			$("#search-cinema").empty();
+			$.ajax({
+				url: './selectLocalCinemaNameList',
+				type: 'get',
+				data : {
+					local : local
+				},
+				success : function(result){
+					console.log(result);
+					for(i=0;i<result.length;i++){
+						
+						$("#search-cinema").append('<option value="'+ result[i] +'">'+ result[i] +'</option>');
+					}
+				} 
+			});
+		}
+
+		
+
+	</script>
 
 
 </body>
 </html>
-
-
-<%-- <table class="table table-hover">
-							<tr>
-								<td>Num</td>
-								<td>Name</td>
-								<td>Local</td>
-								<td>Address</td>
-								<td>Tel</td>
-								<td>totalTheater</td>
-								<td>totalSeat</td>
-								<td>TrafficInfo</td>
-								<td>ParkingInfo</td>
-							</tr>
-							<c:forEach var="list" items="${list}">
-								<tr>
-									<td>${list.num}</td>
-									<td><a href="./cinemaUpdate?num=${list.num}">${list.name}</a></td>
-									<td>${list.local}</td>
-									<td>${list.address}</td>
-									<td>${list.tel}</td>
-									<td>${list.totalTheater}</td>
-									<td>${list.totalSeat}</td>
-									<td>${list.trafficInfo}</td>
-									<td>${list.parkingInfo}</td>
-								</tr>
-							</c:forEach>
-						</table> --%>
-
-
-
 
 
 

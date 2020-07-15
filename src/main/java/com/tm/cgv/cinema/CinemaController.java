@@ -31,7 +31,6 @@ public class CinemaController {
 		return mv;
 	}
 	
-	
 	//Insert
 	@GetMapping("cinemaInsert")
 	public ModelAndView cinemaInsert(ModelAndView mv) throws Exception{
@@ -53,7 +52,6 @@ public class CinemaController {
 		}else {
 			System.out.println("삽입 실패");
 		}
-		
 		return mv;
 	}
 	
@@ -119,7 +117,6 @@ public class CinemaController {
 	@GetMapping("localCinemaSearch")
 	public ModelAndView loalSearch(CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
 		List<CinemaVO> cinemaList = cinemaService.cinemaList();
 		
 		mv.addObject("cinemaList", cinemaList);
@@ -128,16 +125,11 @@ public class CinemaController {
 		return mv;
 	}
 	
-	
-	
-	
 	//cineList - 선택한 지역별 극장 조회
 	@ResponseBody
-	@GetMapping("selectedLocal")
-	public List<CinemaVO> selectedLocal(String local) throws Exception{
-		
-		System.out.println(">>>>>>>> cineController local : "+local);
-		List<CinemaVO> cinemaList = cinemaService.cineList(local);
+	@GetMapping("selectLocalCinemaNameList")
+	public List<String> selectedLocal(String local) throws Exception{
+		List<String> cinemaList = cinemaService.selectLocalCinemaNameList(local);
 		
 		return cinemaList;
 	}

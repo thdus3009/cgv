@@ -116,7 +116,7 @@
 							</tbody>
 						</table>
 						
-						
+						<input type="file" name="file"> 
 						<button class="btn btn-primary" id="btnExcel" style="float: right;">EXCEL DOWN</button>
 						<script type="text/javascript">
 							$("#btnExcel").click(function(){
@@ -143,9 +143,7 @@
 								
 							</ul>
 						</div>
-
 					</div>
-					
 					
 					
 					<div class="payment-List">
@@ -197,7 +195,6 @@
 								<form action="../../"></form>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal"></button>
-									<input type="file" name="file"> 
 								</div>
 							</div>
 

@@ -51,8 +51,12 @@ public class CinemaService {
 	public List<String> selectLocal() throws Exception {
 		return cinemaRepository.selectLocal();
 	}
-	
 
+	//지역당 극장 조회
+	public List<String> selectLocalCinemaNameList(String local) throws Exception{
+		return cinemaRepository.selectLocalCinemaNameList(local);
+	}
+	
 	//지역 조회
 	public List<CinemaVO> cinemaLocalList() throws Exception{
 		return cinemaRepository.cinemaLocalList();
@@ -63,10 +67,6 @@ public class CinemaService {
 		return cinemaRepository.cinemaList();
 	}
 	
-	//
-	public List<CinemaVO> cineList(String local) throws Exception {
-		return cinemaRepository.cineList(local);
-	}
 	
 	public List<CinemaVO> adminCinemaList(Pager_cinemaList pager) throws Exception	{
 		//pager 처리
