@@ -6,7 +6,7 @@
 
 <c:forEach items="${list}" var="vo">
 
-      <div class="list_p">
+      <div class="list_p" style="position: relative;">
 
          <div class="list_p_content"><!-- 이미지 주소부분 나중에 수정해야함 -->
             <div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px"> </div>
@@ -37,13 +37,13 @@
                         
                         <c:if test="${not empty vo.createAt}">            
                            <c:if test="${vo.egg eq 1}">                              
-                              <button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
+                              <button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0; height: 27px;">
                                  <img alt="" src="${pageContext.request.contextPath}/images/good.JPG">
                               </button>
                               <div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">좋았어요</div>
                             </c:if>
                             <c:if test="${vo.egg eq 0}">                               
-                              <button class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
+                              <button class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}" style="border: 0; height: 27px;">
                                  <img alt="" src="${pageContext.request.contextPath}/images/bad.JPG">
                               </button>
                               <div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">별로예요</div>

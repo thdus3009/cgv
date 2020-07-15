@@ -134,6 +134,10 @@ body {
 .hd_btn {
    border: 0;
    outline: 0;
+   height: 27px;
+   position: absolute;
+   right: 10px;
+   top: 20px;
 }
 
 .td1 {
