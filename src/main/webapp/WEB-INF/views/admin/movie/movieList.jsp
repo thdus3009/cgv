@@ -87,15 +87,21 @@
 							<ul class="pagination">
 
 								<c:if test="${pager.curBlock gt 1}">
-									<li><a href="./movieList?curPage=${pager.startNum-1}&kind=${pager.kind}" class="custompager page-link" title="${pager.startNum-1}">이전</a></li>
+									<li><a href="./movieList?curPage=${pager.startNum-1}&kind=${pager.kind}" class="custompager"
+
+										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
-									<li class="page-item"><a href="./movieList?curPage=${p}&kind=${pager.kind}" class="page-link" title="${p}">${p}</a></li>
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+									var="p">
+									<li class="page-item"><a href="#" class="page-link" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="./movieList?curPage=${pager.lastNum+1}&kind=${pager.kind}" class="custompager page-link" title="${pager.lastNum+1}">다음</a></li>
+
+									<li><a href="./movieList?curPage=${pager.lastNum+1}&kind=${pager.kind}" class="custompager"
+
+										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>
 							<!-- 글쓰기 버튼 -->
@@ -112,7 +118,6 @@
 
 	<!-- 스크립트 -->
 	<c:import url="../template/scripts.jsp"></c:import>
-	<script type="text/javascript" src="/js/movie/adminList.js"></script>
 	
 	<!-- <script type="text/javascript">
 	

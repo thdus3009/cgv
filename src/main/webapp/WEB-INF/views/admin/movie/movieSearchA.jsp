@@ -58,7 +58,7 @@
 							<!-- 이름 누르면 상세 페이지로 이동 -->
 							<c:forEach items="${searchA}" var="vo">
 								<tr class="memberList-c">
-									<td><a href="/admin/movie/movieSelect?num=${vo.num}">${vo.title}</td>
+									<td>${vo.title}</td>
 									<td>${vo.titleEng}</td>
 									<td>${vo.runtime}</td>
 									<td>${vo.director}</td>
