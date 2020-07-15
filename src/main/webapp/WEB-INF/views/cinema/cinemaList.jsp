@@ -62,31 +62,6 @@
 				<!-- 극장별 영화 관람가격 -->
 				<div class="timetable">
 				
-					<!-- for문 반복 -->
-					<!-- 2D -->
-					<div class="time-table" style="border-left: 1px solid #ab9c8f;" >
-						<strong>&nbsp;&nbsp;&nbsp;■ 2D</strong>
-						<table>
-							<colgroup>
-								<col style="width: 200px;">
-								<col style="width: 75px;">
-								<col style="width: 75px;">
-							</colgroup>
-							<tr class="time-tr">
-								<th scope="row">시간대</th>
-								<th scope="row">일반</th>
-								<th scope="row">청소년</th>
-							</tr>
-							<!-- 반복 -->
-							<tr class="time-tr">
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</table>
-					</div>
-					
-					<!-- for문 반복  END -->
 					
 			</div>
 		</div>
@@ -101,19 +76,16 @@
 
 
 	<script type="text/javascript" src="../js/movie/movieList.js"></script>
-
+	<script type="text/javascript" src="/js/template/common.js"></script>
 	<script type="text/javascript">
 
 		//초기 selectBox의 값 설정
 		localSearchAjax('서울');
-
-		console.log($("#search-local option:selected").val());
 		
 		//지역 클릭시 ajax호출
 		$("#search-local").change(function(){
 			var local = $(this).val();
 			localSearchAjax(local);
-			
 		});
 		
 		//지역선택시 해당 지역의 영화관들 출력
@@ -126,15 +98,121 @@
 					local : local
 				},
 				success : function(result){
-					console.log(result);
+					//console.log(result);
 					for(i=0;i<result.length;i++){
-						
-						$("#search-cinema").append('<option value="'+ result[i] +'">'+ result[i] +'</option>');
+						$("#search-cinema").append('<option class="cinemaOpt" value="'+ result[i].num +'">'+ result[i].name +'</option>');
 					}
+					//영화관에 맞는 TimePrice리스트 자동 설정
+					var cinema = $("#search-cinema option:selected").val();
+					cinemaTimePrieListAjax(cinema);
 				} 
 			});
 		}
 
+		//선택된 영화관에따른 TimePrice리스트 호출
+		$("#search-cinema").change(function(){
+			var cinema = $(this).val();
+			cinemaTimePrieListAjax(cinema);
+		});
+
+		//TimePrice리스트 호출
+		function cinemaTimePrieListAjax(cinema){
+			//기존 리스트 초기화
+			$(".timetable").empty();
+			checkFilmType = 0;
+			
+			$.ajax({
+				url: '../timePrice/timePriceCinemaList',
+				type: 'get',
+				data: {
+					cinemaNum : cinema
+				},
+				success : function(result){
+					makeTimePriceTable(result);
+				}
+				
+			});
+
+			
+		}
+
+		var checkFilmType = 0;
+		function makeTimePriceTable(result){
+
+			for(i=0;i<result.length;i++){
+				var filmType = result[i].filmType;
+				var time = result[i].etime;
+				var commonPrice = addComma(result[i].commonPrice);
+				var teenagerPrice = addComma(result[i].teenagerPrice);
+
+				if(checkFilmType != filmType){
+					checkFilmType = filmType;
+					var trHTML = makeTr(time,commonPrice,teenagerPrice);
+					
+					var str = filmTypeForm(filmType);
+					var tableHTML = makeTable(str,trHTML);
+					
+					$(".timetable").append(tableHTML);
+				}else{
+					var trHTML = makeTr(time,commonPrice,teenagerPrice);
+					$(".timePriceTable:last").append(trHTML);
+				}
+
+				//맨처음 table CSS삭제
+				$(".time-table:first").css("border","none");
+			}
+			
+		}
+
+		//필름 타입 폼 변경
+		function filmTypeForm(filmType){
+			var filmTypeForm = "";
+			switch(filmType){
+			case 1 :
+				filmTypeForm = '2D';
+				break;
+			case 2 :
+				filmTypeForm = '3D'; 
+				break;
+			case 4 : 
+				filmTypeForm = '4D';
+				break;
+			}
+
+			return filmTypeForm;
+		}
+
+		function makeTr(time,commonPrice,teenagerPrice){
+			var sTime = sTimeMake(time)
+			
+			var trHTML = '	<tr class="time-tr">'
+			+'		<td>'+ sTime + '~' + time +'</td>'
+			+'		<td>'+ commonPrice +'</td>'		
+			+'		<td>'+ teenagerPrice +'</td>';
+			+'	</tr>'
+			return trHTML;
+		}
+		
+		function makeTable(str,trHTML){
+			var tableHTML = '<div class="time-table" style="border-left: 1px solid #ab9c8f;" >' 
+				+'<strong>&nbsp;&nbsp;&nbsp;■ 일반('+ str +')</strong>'
+				+'<table class="timePriceTable">'
+				+'	<colgroup>'
+				+'		<col style="width: 200px;">'
+				+'		<col style="width: 75px;">'
+				+'		<col style="width: 75px;">'
+				+'	</colgroup>'
+				+'	<tr class="time-tr">'
+				+'		<th scope="row">시간대</th>'
+				+'		<th scope="row">일반</th>'
+				+'		<th scope="row">청소년</th>'
+				+'	</tr>'	
+				+ trHTML		
+				+'</table>'
+				+'</div>';
+
+			return tableHTML;
+		}
 		
 
 	</script>

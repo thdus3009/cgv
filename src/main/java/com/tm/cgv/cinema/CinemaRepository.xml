@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from theater where cinemaNum=#{num}
 	</select>
 	
-	<select id="selectLocalCinemaNameList" parameterType="String" resultType="String">
-		select name from cinema where local=#{local};
+	<select id="selectLocalCinemaNameList" parameterType="String" resultType="CinemaVO">
+		select num,name from cinema where local=#{local};
 	</select>
 	
 	

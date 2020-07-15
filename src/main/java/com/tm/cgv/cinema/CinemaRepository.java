@@ -41,7 +41,7 @@ public interface CinemaRepository {
 	public List<CinemaVO> cinemaList() throws Exception;
 	
 	//지역당 극장 조회
-	public List<String> selectLocalCinemaNameList(String local) throws Exception;
+	public List<CinemaVO> selectLocalCinemaNameList(String local) throws Exception;
 	
 	
 	

@@ -228,8 +228,8 @@
 		//sTime 값 생성 및 글자 출려값 변경
 		$(".eTime").each(function(){
 			var sTime = $(this).val();
-			sTime = sTime.split(":");
 
+			sTime = sTime.split(":");
 			var t1 = new Date(0,0,0,sTime[0],sTime[1]);
 			t1.setMinutes(t1.getMinutes()+1);
 

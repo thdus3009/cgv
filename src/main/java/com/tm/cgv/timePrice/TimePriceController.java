@@ -23,6 +23,13 @@ public class TimePriceController {
 		
 		return timePriceList;
 	}
-	
-	
+
+	@ResponseBody
+	@GetMapping("timePriceCinemaList")
+	public List<TimePriceVO> timePriceCinemaList(int cinemaNum) throws Exception{
+		List<TimePriceVO> timePriceList = timePriceService.timePriceCinemaList(cinemaNum);
+		
+		return timePriceList;
 	}
+	
+}

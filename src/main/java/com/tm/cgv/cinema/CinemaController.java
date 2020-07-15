@@ -128,8 +128,8 @@ public class CinemaController {
 	//cineList - 선택한 지역별 극장 조회
 	@ResponseBody
 	@GetMapping("selectLocalCinemaNameList")
-	public List<String> selectedLocal(String local) throws Exception{
-		List<String> cinemaList = cinemaService.selectLocalCinemaNameList(local);
+	public List<CinemaVO> selectedLocal(String local) throws Exception{
+		List<CinemaVO> cinemaList = cinemaService.selectLocalCinemaNameList(local);
 		
 		return cinemaList;
 	}
