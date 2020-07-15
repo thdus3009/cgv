@@ -650,6 +650,7 @@ var myChart = new Chart(ctx, {
 
 </script>
 
+<!-- ========================================================= -->
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
 
@@ -1294,6 +1295,7 @@ $(".Up_popupBtn2").click(function(){
 // 리뷰수정 끝===========================================================================
 
 </script>
+
 
 </body>
 </html>
