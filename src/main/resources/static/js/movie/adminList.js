@@ -7,7 +7,6 @@
 		var kind = $("#selectA").val();
 		console.log(kind+"관리자 정렬");
 		
-		
 		location.href = "./movieList?kind="+kind;
 	});
 	
