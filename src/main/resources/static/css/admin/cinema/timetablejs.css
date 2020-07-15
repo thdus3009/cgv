@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.timetable{display:flex;align-items:stretch;width:100%;max-width:100%;box-sizing:border-box}
+.timetable{display:flex;align-items:stretch;width:100%;max-width:1365px;overflow:hidden;box-sizing:border-box}
 .timetable *{box-sizing:inherit}
 .timetable li,.timetable ul{list-style-type:none;margin:0}
 .timetable li,.timetable ul{padding:0}
@@ -9,7 +9,7 @@
 .timetable>aside .row-heading{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal}
 .timetable>aside:before{content:"";display:block;background-color:#fff;height:46px;position:relative;margin-top:-46px;top:0}
 .timetable aside li,.timetable time li{height:46px}
-.timetable>section{flex:3 0 auto;padding:0!important;}
+.timetable>section{padding:0!important;}
 .timetable>section time{display:block;width:100%;}
 .timetable>section>header{position:relative;top:0;z-index:3;width:100%;overflow:hidden;background-color:#fff;transform-style:preserve-3d}
 .timetable>section>header ul{display:flex;height:46px;align-items:center}

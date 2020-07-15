@@ -3,14 +3,19 @@ body{font-family:Helvetica Neue,Helvetica,Arial,sans-serif;color:#333;font-size:
 a{text-decoration:none}
 .row-heading{font-weight:500;font-size:.7em;text-transform:uppercase}
 .timetable .time-label{font-size:.8em;font-weight:500}
-.timetable .time-entry.vip-only{background-color:#c490f5;border:1px solid #6a16b8}
-.timetable .time-entry.vip-only:hover{background-color:#ae67f0}
+.timetable .time-entry.only-3d{background-color:#c490f5;border:1px solid #6a16b8}
+.timetable .time-entry.only-3d:hover{background-color:#ae67f0}
+
+.timetable .time-entry.only-4d{background-color:#f5d090;border:1px solid #ffb12b}
+.timetable .time-entry.only-4d:hover{background-color:#f9bb51}
+
+
 .filmInfo	{
 	display:inline-block;
-	width:100%;
-	height:100%;
-	margin-left:45px;
+	margin:8px 45px 0 45px;
+	float:left;
 }
+
 
 .filmInfo .film_title	{
 	display:inline-block;
@@ -23,6 +28,7 @@ a{text-decoration:none}
 	height:15px;
 	float:left;
 	margin:3px 10px 0 3px;
+	line-height:50px;
 }
 
 .filmInfo .film_2d	{
@@ -36,4 +42,9 @@ a{text-decoration:none}
 .filmInfo .film_4d	{
 	background:#f5d090;
 }
+
+.calendar	{
+	float:left;
+}
+
 
