@@ -37,13 +37,13 @@
                         
                         <c:if test="${not empty vo.createAt}">            
                            <c:if test="${vo.egg eq 1}">                              
-                              <button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
+                              <button class="popupOnlyRead" data-num2="${vo.num}" title="${vo.num}" style="border: 0; height: 27px;">
                                  <img alt="" src="${pageContext.request.contextPath}/images/good.JPG">
                               </button>
                               <div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">좋았어요</div>
                             </c:if>
                             <c:if test="${vo.egg eq 0}">                               
-                              <button class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}" style="border: 0;">
+                              <button class="popupOnlyRead"  data-num2="${vo.num}" title="${vo.num}" style="border: 0; height: 27px;">
                                  <img alt="" src="${pageContext.request.contextPath}/images/bad.JPG">
                               </button>
                               <div class="sss" id="sss${vo.num}"  data-toggle="modal" data-target="#myModal3" data-num2="${vo.num}">별로예요</div>
