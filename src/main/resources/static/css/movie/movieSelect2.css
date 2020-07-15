@@ -1,24 +1,24 @@
 @charset "UTF-8";
 
 #myChartTest{
-	width: 250px;
-	height: 250px;
-	margin: 0 auto;
+   width: 250px;
+   height: 250px;
+   margin: 0 auto;
 }
 
 #myChartTest2{
-	width: 250px;
-	height: 250px;
+   width: 250px;
+   height: 250px;
 }
 
 /* soyeon */
 
 .box-image2 {
-	width: 62px;
-	height: 62px;
-	border-radius: 50%;
-	background-image: url("../../images/profile.gif");
-	background-size: 62px 62px;
+   width: 62px;
+   height: 62px;
+   border-radius: 50%;
+   background-image: url("../../images/profile.gif");
+   background-size: 62px 62px;
 }
 
 .point_col2 .writerinfo .writer-etc { /* 날짜 */
@@ -28,43 +28,106 @@
     padding: 0 !important;
 }
 .writer-name {
-	line-height: 0;
-	font-weight: bold;
-	color: #666666;
+   line-height: 0;
+   font-weight: bold;
+   color: #666666;
 }
 
 .writer-etc{
-	position: absolute; 
-	top:65px;
+   position: absolute; 
+   top:65px;
 }
 .date {
-	font-weight: bold;
-	color: #666666
+   font-weight: bold;
+   color: #666666
 }
 
 .id , .date{
-	display: inline-block;
-	vertical-align: middle; 
+   display: inline-block;
+   vertical-align: middle; 
 }
 
 .id_image{
-	width: 18px;
-	height: 34px;
-	position: absolute; 
-	left: 84px; 
-	top:-66px;
+   width: 18px;
+   height: 34px;
+   position: absolute; 
+   left: 84px; 
+   top:-66px;
 }
 
 .id_name{
-	position: absolute; 
-	left: 110px;
-	top : -48px;
+   position: absolute; 
+   left: 110px;
+   top : -48px;
 }
 
 .box-comment{
-	width:250px;
-	height:100px; 
-	position: absolute; 
-	top: 45px;
-	left: 86px;
+   width:250px;
+   height:130px; 
+   position: absolute; 
+   top: 45px;
+   left: 86px;
+   word-break: break-word;
+}
+
+.box-contentss {
+   position: absolute;
+   bottom: -48px;
+}
+
+.paging {
+   text-align: center;
+   margin-top: 25px;
+}
+
+.paging li { /* 페이지 버튼 */
+   display: inline-block;
+   padding: 0 8px;
+   color: #333333;
+   font-family: Verdana, Geneva, sans-serif;
+   font-size: 14px;
+   font-weight: bold;
+   line-height: 28px;
+}
+
+.btn_notify { /* ... 버튼 */
+   display: block;
+   font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    text-indent: -9999px;
+}
+    
+.ico { /* 기존 설정값 초기화(글씨 효과>퍼렁이, 밑줄..) */
+   color: inherit;
+    text-decoration: none;
+}    
+
+.notify_wrap { /* 신고 박스 */
+   position: absolute;
+   width:142px;
+   height: 86px;
+   left: -150px;
+   top:-7px;
+   color: #edece2;
+   /* display: block !important; */
+   display: none; /*>클릭했을때 위에있는것으로 바뀌어야함*/ 
+   z-index: 1;
+}
+
+ .btn_on {
+   display: block !important;
+} 
+
+.lii1 {
+    float: none;
+    line-height: 40px!important;
+    text-align: right;
+    padding-right: 48px!important;
+    padding-bottom: 19px!important;
+    margin-bottom: 0;
+    width: 164px;
 }

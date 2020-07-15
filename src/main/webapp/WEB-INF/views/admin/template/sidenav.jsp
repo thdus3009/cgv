@@ -43,11 +43,11 @@
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 쿠폰 관리
 						</a>
-						<a class="nav-link" href="#">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 리뷰 관리
-						</a> 
+						 <a class="nav-link" href="${pageContext.request.contextPath}/admin/review/adminReview">
+		                     <div class="sb-nav-link-icon">
+		                        <i class="fas fa-tachometer-alt"></i>
+		                     </div> 리뷰 관리
+	                  	</a> 
 						<a class="nav-link collapsed" href="/admin/cinema/cinemaList" data-toggle="collapse" data-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts2">
 							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
 								쿠폰 & 포인트

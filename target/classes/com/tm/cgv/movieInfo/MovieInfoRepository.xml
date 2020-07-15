@@ -124,7 +124,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <!-- =========================================================================== -->
  	 
 
-
  	 <!-- 정보랑 사진 -->
  	 <select id="mSelect" parameterType="MovieInfoVO" resultMap="listResult">
  	 	select MM.*,MK.* from
