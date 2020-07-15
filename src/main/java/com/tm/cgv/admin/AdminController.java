@@ -623,6 +623,8 @@ public class AdminController {
 		return mv;
 	}
 	
+	
+	
 	@PostMapping("cinema/theaterInsert")
 	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, int cinemaNum) throws Exception{	
 		ModelAndView mv = new ModelAndView();
@@ -1228,8 +1230,8 @@ public class AdminController {
 	@PostMapping("event/eventUpdate")
 	public ModelAndView eventUpdate(EventVO eventVO, List<MultipartFile> files, String [] delNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("fileSize : " + files.size());
-		System.out.println("delNum : " + delNum[0]);
+		//System.out.println("fileSize : " + files.size());
+		//System.out.println("delNum : " + delNum[0]);
 	
 		eventService.eventUpdate(eventVO, files, delNum);
 		

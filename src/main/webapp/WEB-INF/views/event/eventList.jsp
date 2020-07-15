@@ -102,13 +102,15 @@
 							</ul>
 						</div>
 						
-						<c:if test="${pager.totalCount > 9}">
+						
+						<input type="hidden" id="totalPage" value="${pager.totalPage}">
+						
 						
 						<button type="button" class="btn-item-more" id="btnMoreData" name="${list[0].kind}"><strong>더보기</strong></button>
-						<input type="text" id="curPage" value="${pager.curPage}">
+						<input type="hidden" id="curPage" value="${pager.curPage}">
 						
 						
-						</c:if>
+					
 					</div>
 					<div class="cols-aside">
 						<div class="col-aside">
@@ -151,16 +153,15 @@
 <script type="text/javascript" src="../js/movie/movieList.js"></script>
 <script type="text/javascript">
 	var totalPage= '${pager.totalPage}';
-	alert("test : " + totalPage);
-	//alert("..")
 	$(".kind").click(function(){
+		$(".btn-item-more").show();
+		$("#curPage").val(1);
 		$(this).parent().parent().find("li>a").removeClass("on");
      	$(this).addClass("on");
 		kind = $(this).attr("id");
 		console.log("kind : " + kind);
 
 		$.post("./eventKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){
-			//console.log(data);
 			$("#tb").html(data);
 		});
     }); 
@@ -168,16 +169,20 @@
 	$(".btn-item-more").click(function(){
 		var kind = $(this).attr("name");
 		var curPage = $("#curPage").val();
-		//alert(curPage)
 		$.post("./eventKind",{"kind":kind, "curPage":parseInt(curPage)+1, "_csrf": $("#_csrf").val()},function(data){
 			console.log(data);
+			
 			$("#tb").append(data);
-			alert($(this).attr("name"));
 			var cur = $("#curPage").val();
 			$("#curPage").val(parseInt(cur)+1);
+			if($("#curPage").val()==$("#totalPage"
+					).val()){
+				$(".btn-item-more").hide();
+			}
 			
 		})
 	});
+
 
 </script>
 	
