@@ -28,7 +28,7 @@
 							<select class="cinemaNum selectcinenum" id="cineNum" name="cinemaNum">
 								
 								<c:forEach items="${cine}" var="cnt">
-								<option value="${cnt.num}">${cnt.num} / ${cnt.name}</option>
+								<option value="${cnt.num}" name="cinemaNum">${cnt.num} / ${cnt.name}</option>
 								</c:forEach>
 								
  							</select>

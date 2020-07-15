@@ -65,6 +65,7 @@
 					<ol class="cinema-ol">
 						<li class="breadcrumb-item active"><a href="./eventList">전체보기</a></li>
 						<li class="breadcrumb-item active"><a href="#" class="kind" id="special">SPECIAL</a></li>
+						<li class="breadcrumb-item active"><a href="#" class="kind" id="movie">영화/예매</a></li>
 						<li class="breadcrumb-item active"><a href="#" class="kind" id="discount">제휴/할인</a></li>
 						<li class="breadcrumb-item active"><a href="#" class="kind" id="membership">멤버십/CLUB</a></li>
 						<li class="breadcrumb-item active"><a href="#" class="kind" id="pub">PUB이벤트</a></li>
@@ -72,7 +73,7 @@
 
 
 					<!-- 목록 -->
-					<div class="table-responsive">
+					<div class="table-responsive" id="tb">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<thead>
 								<tr class="admin-tr">
@@ -92,7 +93,8 @@
 									<th style="width:200px">마감일</th>
 								</tr>
 							</tfoot>
-							<tbody id="tb">
+							
+							<tbody>
 								<c:forEach items="${list}" var="vo">
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>
@@ -105,11 +107,11 @@
 							
 									</tr>
 								</c:forEach>
+								<!-- 페이저 -->
+								
 							</tbody>
+							
 						</table>
-
-
-						<!-- 페이저 -->
 						<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
@@ -127,7 +129,6 @@
 								</c:if>
 							</ul>
 						</div>
-
 					</div>
 					<div class="">
 						<a href="./eventInsert" id="up" class="btn btn-primary">Insert</a>
@@ -141,9 +142,8 @@
 	<script type="text/javascript">
         	
         	console.log("ㅎㅎ");
-        	var local = '';
          	$(".kind").click(function(){
-             	alert($(this).attr("id"))
+             	//alert($(this).attr("id"))
 				kind = $(this).attr("id");
 
 				$.post("./selectKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){

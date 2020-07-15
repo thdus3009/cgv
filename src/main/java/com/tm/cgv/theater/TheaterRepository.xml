@@ -19,19 +19,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="title" property="title"/>
 			<result column="runtime" property="runtime"/>
 		</association>
-		
 	</resultMap>
-	
-	
-	
-	
-	
 	
 	<select id="theaterList" resultType="TheaterVO">
 		select * from theater
 	</select>
 	
-	<insert id="theaterInsert" parameterType="TheaterVO">
+	<insert id="theaterInsert" parameterType="TheaterVO" useGeneratedKeys="true" keyProperty="num">
 		insert into theater(cinemaNum,name,seatCount,filmType) values(#{cinemaNum},#{name},#{seatCount},#{filmType})
 	</insert>
 	

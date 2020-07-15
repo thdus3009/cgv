@@ -77,7 +77,7 @@
 
 
 					<!-- 목록 -->
-					<div class="table-responsive">
+					<div class="table-responsive" id="tb">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<thead>
 								<tr class="admin-tr">
@@ -107,7 +107,7 @@
 									<th>소개</th>
 								</tr>
 							</tfoot>
-							<tbody id="tb">
+							<tbody>
 								<c:forEach items="${list}" var="vo">
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>
@@ -137,7 +137,7 @@
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 									var="p">
-									<li><a href="#" class="custompager" title="${p}">${p}</a></li>
+									<li><a href="./cinemaList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">

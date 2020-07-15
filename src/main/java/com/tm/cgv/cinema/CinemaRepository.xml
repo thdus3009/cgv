@@ -49,14 +49,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cinema order by local;
 	</select>
 	
-	<select id="cineList" parameterType="String" resultType="CinemaVO">
-		select * from cinema
+	<select id="adminCinemaList" parameterType="Pager" resultType="CinemaVO">
+		select * from cinema 		
 		<where>
 		<if test="local != ''">
 			local=#{local}
 		</if>
 		</where>
-		order by num
+		order by num desc limit #{startRow}, #{perPage}
+	</select>
+	
+	<select id="adminCinemaCount" parameterType="Pager_cinema" resultType="Integer">
+		select count(num) from cinema 		
+		<where>
+		<if test="local != ''">
+			local=#{local}
+		</if>
+		</where>
 	</select>
 	
 	<update id="theaterDelete" parameterType="TheaterVO">

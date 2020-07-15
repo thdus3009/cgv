@@ -57,19 +57,19 @@
 				<div class="evt-nav-area">
 					<ul class="evt-tab-manu">
 						<li>
-							<a href="#" title="" class="on">SPECIAL</a>
+							<a href="#" title="" class="kind on" id="special">SPECIAL</a>
 						</li>
 						<li>
-							<a href="#" title="" class="">영화/예매</a>
+							<a href="#" title="" class="kind" id="movie">영화/예매</a>
 						</li>
 						<li>
-							<a href="#" title="" class="">멤버십/CLUB</a>
+							<a href="#" title="" class="kind" id="membership">멤버십/CLUB</a>
 						</li>
 						<li>
-							<a href="#" title="" class="">CGV 극장별</a>
+							<a href="#" title="" class="kind" id="discount">제휴/할인</a>
 						</li>
 						<li>
-							<a href="#" title="" class="">제휴/할인</a>
+							<a href="#" title="" class="kind" id="pub">PUB이벤트</a>
 						</li>
 					</ul>
 					<div class="submenu">
@@ -81,12 +81,12 @@
 				<div class="cols-content" style=" display: flex;">
 					<div class="cols-detail event">
 						<div class="sect-evt-item-list">
-							<ul class="cf">
+							<ul class="cf"  id="tb">
 								<c:forEach items="${list}" var="vo" varStatus="i">
 									<li>
 										<a id="tile_${i}" href="">
 											<div class="evt-thumb">
-												<img alt="" src="">
+												<img alt="" src="/images/event/eventList/eventImage/${vo.eventImageVOs.fileName}">
 											</div>
 											<div class="evt-desc">
 												<p class="txt1">${vo.title}</p>
@@ -101,7 +101,14 @@
 								</c:forEach>
 							</ul>
 						</div>
-						<button type="button" class="btn-item-more" id="btnMoreData"><strong>더보기</strong></button>
+						
+						<c:if test="${pager.totalCount > 9}">
+						
+						<button type="button" class="btn-item-more" id="btnMoreData" name="${list[0].kind}"><strong>더보기</strong></button>
+						<input type="text" id="curPage" value="${pager.curPage}">
+						
+						
+						</c:if>
 					</div>
 					<div class="cols-aside">
 						<div class="col-aside">
@@ -142,7 +149,37 @@
 
 
 <script type="text/javascript" src="../js/movie/movieList.js"></script>
+<script type="text/javascript">
+	var totalPage= '${pager.totalPage}';
+	alert("test : " + totalPage);
+	//alert("..")
+	$(".kind").click(function(){
+		$(this).parent().parent().find("li>a").removeClass("on");
+     	$(this).addClass("on");
+		kind = $(this).attr("id");
+		console.log("kind : " + kind);
 
+		$.post("./eventKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){
+			//console.log(data);
+			$("#tb").html(data);
+		});
+    }); 
+
+	$(".btn-item-more").click(function(){
+		var kind = $(this).attr("name");
+		var curPage = $("#curPage").val();
+		//alert(curPage)
+		$.post("./eventKind",{"kind":kind, "curPage":parseInt(curPage)+1, "_csrf": $("#_csrf").val()},function(data){
+			console.log(data);
+			$("#tb").append(data);
+			alert($(this).attr("name"));
+			var cur = $("#curPage").val();
+			$("#curPage").val(parseInt(cur)+1);
+			
+		})
+	});
+
+</script>
 	
 
 

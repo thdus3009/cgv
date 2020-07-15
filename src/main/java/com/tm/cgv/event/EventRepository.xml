@@ -22,12 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="eventList" parameterType="Pager" resultType="EventVO">
-		select * from event where 
- 		title like concat('%',#{search},'%')
+ 		select E.*, I.fileName, I.originName, I.type from 
+ 		(
+ 		select * from event where title like concat('%','','%')
  		<if test="kind != ''">
  		<choose>
  			<when test="kind=='special'">	
  				and kind='special'
+ 			</when>
+ 			<when test="kind=='movie'">
+ 				and kind='movie'
  			</when>
  			<when test="kind=='pub'">
  				and kind='pub'
@@ -40,8 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			</otherwise>
  		</choose>
  		</if>
- 		order by num desc
- 		limit #{startRow},#{perPage}
+ 		) as E
+		left join eventImage I
+		on E.num = I.eventNum
+		where I.type=0
+		order by E.num desc limit #{startRow},#{perPage}
 	</select>
 	
 	<insert id="eventInsert" parameterType="EventVO" useGeneratedKeys="true" keyProperty="num">
@@ -72,6 +79,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<choose>
  			<when test="kind=='special'">	
  				and kind='special'
+ 			</when>
+ 			<when test="kind=='movie'">
+ 				and kind='movie'
  			</when>
  			<when test="kind=='pub'">
  				and kind='pub'

@@ -1,7 +1,7 @@
 package com.tm.cgv.util;
 
 
-public class Pager_eventList {
+public class Pager_cinemaList {
 
 	private Long curPage; //현재페이지
 	private Integer perPage; //출력할 갯수
@@ -20,7 +20,7 @@ public class Pager_eventList {
 	private long lastNum;
 	
 	private String search;
-	private String kind;
+	private String local;
 	
 	
 	public void makeRow() {
@@ -133,14 +133,14 @@ public class Pager_eventList {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-	public String getkind() {
-		if(this.kind == null) {
-			this.kind ="special";
+	public String getlocal() {
+		if(this.local == null) {
+			this.local ="";
 		}
-		return kind;
+		return local;
 	}
-	public void setkind(String kind) {
-		this.kind = kind;
+	public void setlocal(String local) {
+		this.local = local;
 	}
 
 	public long getTotalCount() {

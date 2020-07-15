@@ -156,10 +156,11 @@
 															<div class="form-group">
 														   	 <label for="local">분류:</label>
 														   	 <select class="" id="" name="kind">
-														   	 	<option value="스페셜이벤트">스페셜이벤트</option>
-														   	 	<option value="제휴/할인">제휴/할인</option>
-														   	 	<option value="멤버십">멤버십</option>
-														   	 	<option value="PUB이벤트">PUB이벤트</option>
+														   	 	<option value="special">스페셜이벤트</option>
+														   	 	<option value="movie">영화/예매</option>
+														   	 	<option value="discount">제휴/할인</option>
+														   	 	<option value="membership">멤버십</option>
+														   	 	<option value="pub">PUB이벤트</option>
 															 </select>
 														  	</div>
 

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tm.cgv.theater.TheaterVO;
+import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_cinemaList;
 
 @Mapper
 public interface CinemaRepository {
@@ -42,6 +44,10 @@ public interface CinemaRepository {
 	
 	//
 	public List<CinemaVO> cineList(String local) throws Exception;
+	
+	public List<CinemaVO> adminCinemaList(Pager_cinemaList pager) throws Exception;
+	
+	public int adminCinemaCount(Pager_cinemaList pager) throws Exception;
 
 	
 }

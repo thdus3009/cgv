@@ -40,10 +40,10 @@ public class EventService {
 		
 		pager.makeRow();
 		System.out.println("----service----");
-		System.out.println(pager.getKind());
+		System.out.println(pager.getkind());
 		long totalCount = eventRepository.eventCount(pager);
 		pager.makeBlock(totalCount);
-		
+		System.out.println("totalCount : " + totalCount);
 		System.out.println("block");
 		System.out.println(pager.getTotalBlock());
 		System.out.println("startNum : " + pager.getStartNum());

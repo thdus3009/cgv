@@ -36,6 +36,7 @@ import com.tm.cgv.theater.TheaterService;
 import com.tm.cgv.theater.TheaterVO;
 import com.tm.cgv.util.BitFilmType;
 import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_cinemaList;
 import com.tm.cgv.util.Pager_eventList;
 
 @Controller
@@ -207,19 +208,23 @@ public class AdminController {
 	// cinemaPart
 	//==============================
 	@GetMapping("cinema/cinemaList")
-	public ModelAndView adminCinemaList(ModelAndView mv) throws Exception {
-		List<CinemaVO> list = cinemaService.cinemaList();
+	public ModelAndView adminCinemaList(ModelAndView mv, Pager_cinemaList pager) throws Exception {
+		List<CinemaVO> list = cinemaService.adminCinemaList(pager);
+		System.out.println("test : " + pager.getTotalCount());
 		mv.addObject("list", list);
+		mv.addObject("pager", pager);
 		mv.setViewName("admin/cinema/cinemaList");
 		return mv;
 	}
 	
 	@PostMapping("cinema/cinemaList")
 	@ResponseBody
-	public ModelAndView adminCinemaList(ModelAndView mv, String local) throws Exception {
+	public ModelAndView adminCinemaList(ModelAndView mv, String local, Pager_cinemaList pager) throws Exception {
 		System.out.println(local);
-		List<CinemaVO> list = cinemaService.cineList(local);
+		pager.setlocal(local);
+		List<CinemaVO> list = cinemaService.adminCinemaList(pager);
 		System.out.println(list.size());
+		mv.addObject("pager", pager);
 		mv.addObject("list", list);
 		mv.setViewName("admin/cinema/ajax/cineList");
 		return mv;
@@ -404,7 +409,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("cinema/theaterInsert")
-	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception{	
+	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, int cinemaNum) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		System.out.println("seat : " + theaterVO.getSeatCount());
 		System.out.println("length : " + filmType.length);
@@ -415,7 +420,7 @@ public class AdminController {
 		int result = theaterService.theaterInsert(theaterVO, filmType, row, col, grade, row_space, col_space);
 		
 		if(result>0) {
-			mv.setViewName("redirect:../admin/cinema/cinemaList");
+			mv.setViewName("redirect:../admin/cinema/cinemaSelect?num="+cinemaNum);
 		}else {
 			System.out.println("등록 실패");
 		}
@@ -644,7 +649,7 @@ public class AdminController {
 		
 		List<EventVO> list = eventService.eventList(pager);
 		System.out.println("----test----");
-		System.out.println(pager.getKind() + " - kind");
+		System.out.println(pager.getkind() + " - kind");
 		if(list !=null) {
 			
 			System.out.println("---controller---");
