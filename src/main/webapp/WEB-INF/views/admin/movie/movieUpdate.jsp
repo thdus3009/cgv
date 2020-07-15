@@ -125,7 +125,7 @@
 															<!-- ============== -->
 															
 															
-															<div class="form-group" >
+															<div class="form-group" style="clear: both;">
 																<label for="title" style="position: absolute;">제목:</label> 
 																<input type="text" class="form-control check" id="title" name="title" value="${vo.title}">
 															</div>
