@@ -5,102 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-
-<!-- movieWrite -->
-<title>관리자 페이지</title>
-
-<link rel="stylesheet" href="/css/styles.css" />
+<c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-
 </head>
 <body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
-		<a href="/admin"><img src="/images/header/h1_cgv.png"
-			class="admin-logo" /></a>
-		<!-- 검색 바-->
-		<form
-			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="검색어를 입력"
-					aria-label="Search" aria-describedby="basic-addon2" />
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-		<!-- 로그인-->
-		<ul class="navbar-nav ml-auto ml-md-0">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="userDropdown" href="#"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a> <a
-						class="dropdown-item" href="#">관리자 설정</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
-				</div></li>
-		</ul>
-	</nav>
-
+	<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 공지사항
-						</a>
-						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 회원 관리
-						</a> <a class="nav-link" href="./admin/movie/movieWrite">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 영화 관리
-						</a> <a class="nav-link" href="./admin/cinema/cinemaList">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 극장 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 예매 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 리뷰 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 배너 관리
-						</a>
-					</div>
-				</div>
-			</nav>
-		</div>
+		<c:import url="../template/sidenav.jsp"></c:import>
 
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
@@ -129,14 +42,16 @@
 										<form action="./movie${path}" method="post" enctype="multipart/form-data">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<fieldset>
-
+												<input type="hidden" id="trailerCount" value="0" name="trailerCount"><!-- 카운트 값이 들어옴 -->
+												<input type="hidden" id="steelCutCount" value="0" name="steelCutCount">
 												<div class="tbl_write">
 
-													<input type="text" value="${vo.movieImageVOs.num}"
+													<input type="hidden" value="${vo.movieImageVOs.num}"
 														id="num1">
 													<!-- imgaeVO의 AI인 num -->
-													<input type="text" value="${vo.num}" name="num"> <input
-														type="text" value="${vo.movieImageVOs.fileName}"
+													<input type="hidden" value="${vo.num}" name="num"> 
+													<input
+														type="hidden" value="${vo.movieImageVOs.fileName}"
 														id="fileName">
 
 													<table class="tbl_bbs_write">
@@ -145,71 +60,92 @@
 															<col style="width: 320px;">
 														</colgroup>
 														<tbody>
-
-
-															<div class="form-group">
+															
+					
+															<div class="form-group" >
 																<label for="files">타이틀 이미지:</label> <input type="file"
-																	class="form-control files" id="files"
+																	class="form-control files check" id="files"
 																	placeholder="타이틀 이미지 선택" name="files">
 															</div>
-
-															<c:if test="${path  eq 'Update'}">
-																<p>${vo.movieImageVOs.originName}<i id="${vo.num}"
-																		class="glyphicon glyphicon-remove remove fileDelete"></i>
-																</p>
-															</c:if>
-
-
-															<div class="form-group">
-																<label for="videolink">예고 영상:</label> <input type="text"
-																	class="form-control videolink" id="videolink"
-																	placeholder="예고편 영상 링크" name="videolink"
-																	value="${vo.movieVideoVOs.videolink }"
-																	style="padding: 12px;">
-															</div>
-															<div class="form-group">
-																<label for="title">제목:</label> <input type="text"
-																	class="form-control" id="title" name="title"
+															
+															
+																<div class="form-group"  style="width: 650px;" id="d1">
+																	<label for="files">트레일러</label>
+																	<img alt="" src="../../images/theater/plus.png" 
+																	style="width: 20px; height: 20px;" id="addI"> 
+																<div id="tt" >
+																	<div class="form-group"  id="f" style="float: left;" >
+																	
+																	</div>
+																	
+																</div>
+																 </div>
+															
+																
+																<!-- <div class="form-group" style="width: 650px; float: left; margin-left: 80px;margin-right: 50px;" id="d2">
+																	<label for="files">트레일러</label> <br>
+																	<label for="videolink">video:</label>
+																	 <img alt="" src="../../images/theater/plus.png" 
+																	style="width: 20px; height: 20px;" id="addV">
+																	
+																</div> -->
+														
+															
+															
+															<br><br><br>
+															<div class="form-group"  style="clear: both;">
+																<label for="title" >제목:</label> <input type="text"
+																	class="form-control check" id="title" name="title"
 																	value="${vo.title }">
 															</div>
 															<div class="form-group">
 																<label for="titleEng">영문제목:</label> <input
-																	type="text" class="form-control" id="titleEng"
+																	type="text" class="form-control check"  id="titleEng"
 																	name="titleEng" value="${vo.titleEng }">
 															</div>
 															<div class="form-group">
 																<label for="runtime">러닝타임:</label> <input type="text"
-																	class="form-control" id="runtime" name="runtime"
+																	class="form-control check" id="runtime" name="runtime"
 																	value="${vo.runtime }">
 															</div>
 															<div class="form-group">
 																<label for="director">감독:</label> <input type="text"
-																	class="form-control" id="director" name="director"
+																	class="form-control check" id="director" name="director"
 																	value="${vo.director }">
 															</div>
 															<div class="form-group">
 																<label for="actor">출연 배우:</label> <input type="text"
-																	class="form-control" id="actor" name="actor"
+																	class="form-control check" id="actor" name="actor"
 																	value="${vo.actor }">
 															</div>
 															<div class="form-group">
 																<label for="ganre">장르:</label> <input type="text"
-																	class="form-control" id="ganre" name="ganre"
+																	class="form-control check" id="ganre" name="ganre"
 																	value="${vo.ganre }">
 															</div>
 															<div class="form-group">
 																<label for="ageLimit">연령제한:</label> <input type="text"
-																	class="form-control" id="ageLimit" name="ageLimit"
+																	class="form-control check" id="ageLimit" name="ageLimit"
 																	value="${vo.ageLimit }">
 															</div>
 															<div class="form-group">
 																<label for="country">국가:</label> <input type="text"
-																	class="form-control" id="country" name="country"
+																	class="form-control check" id="country" name="country"
 																	value="${vo.country }">
 															</div>
+															
+															<div class="form-group" style="width: 650px; " >
+																<label for="files">스틸컷</label> <br>
+																<img alt="" src="../../images/theater/plus.png" 
+																style="width: 20px; height: 20px;" id="addS"> 
+																<div class="form-group" id="st">
+																
+																</div>
+															</div>
+															
 															<div class="form-group">
 																<label for="openDate">개봉일:</label> <input type="date"
-																	class="form-control" id="openDate" name="openDate"
+																	class="form-control check" id="openDate" name="openDate"
 																	value="${vo.openDate}">
 															</div>
 
@@ -228,8 +164,8 @@
 															</c:if>
 
 															<div class="form-group">
-																<label for="contents">Contents:</label>
-																<textarea rows="" cols="" class="form-control"
+																<label for="contents" >Contents:</label>
+																<textarea rows="" cols="" class="form-control check"
 																	id="contents" name="contents">${vo.contents }</textarea>
 
 															</div>
@@ -258,6 +194,7 @@
 					</div>
 				</div>
 			</main>
+			<c:import url="../template/footer.jsp"></c:import>
 		</div>
 	</div>
 
@@ -283,6 +220,93 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../../js/movie/movieWrite.js"></script>
+	
+	<script type="text/javascript">
 
+	var num=0;
+	var count =1;
+	var tcount =0;
+	var trailerCount = $("#trailerCount").val();
+	
+	var num2=0;
+	var count2=1;
+
+	var numS =0;
+	var countS=1;
+	var scount =0;
+	var steelCutCount = $("#steelCutCount").val();
+	//트레일러 이미지
+	$("#addI").click(function(){
+		if(num<3){
+			//이미지
+			$("#f").append(
+					'<div class="group1">'+
+					'<input type="file" multiple="multiple" style="width:45%!important; float:left;"'+
+					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
+					'<input type="text" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
+					'style="padding: 12px; width: 45%!important;display: inline-block;">'+
+					'<span class="x" style="width: 10%!important;">X</span>'+
+					'</div>');
+
+		
+		
+			num++;
+			count++;
+			
+			tcount = count-1; //트레일러 이미지 type을 위해 count하는 값
+			trailerCount=tcount;
+		
+			$("#trailerCount").val(trailerCount);
+			console.log(trailerCount);
+			
+			
+			}else{
+				alert("최대 3개까지 가능합니다.")
+			}
+		
+		});	
+	
+
+	// 스틸컷 이미지
+	$("#addS").click(function(){
+		if(numS<5){
+			$("#st").append('<div><input type="file" class="form-control videolink check form-control2" '+
+					'id="videolink" placeholder="스틸컷 이미지 " name="files"'+
+					'style=" width: 1500px;"> <span class="xS">X</span></div>');
+			numS++;
+			countS++;
+
+			scount = countS-1;
+			steelCutCount=scount;
+			$("#steelCutCount").val(steelCutCount);
+			
+			}else{
+				alert("최대 5개까지 가능합니다.")
+				}
+		
+		});
+
+	
+ 	$("#f").on("click",".x",function(){ //추가된 파일 필요없을 시 삭제
+		$(this).parent().remove();
+ 		num--;
+ 		 
+		});
+
+   $("#f2").on("click",".x",function(){ //추가된 비디오링크 필요없을 시 삭제
+		$(this).parent().remove();
+		num2--;
+
+		});   
+	$("#st").on("click",".xS",function(){
+		$(this).parent().remove();
+		numS--;
+		});
+
+	
+	</script>
+	
 </body>
 </html>

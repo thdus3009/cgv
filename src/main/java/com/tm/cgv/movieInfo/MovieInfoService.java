@@ -54,8 +54,6 @@ public class MovieInfoService {
 	}
 	
 	
-	
-	
 	public List<MovieInfoVO> movieListAll(MovieInfoVO movieVO) throws Exception{
 		return movieInfoRepository.movieListAll(movieVO);
 	}
@@ -77,51 +75,99 @@ public class MovieInfoService {
 		return movieInfoRepository.movieList(pager);
 	}
 	
-	
-	public long movieWrite(MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
+	public long movieWrite(MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
 		
-		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
+		String path = FilePathGenerator.addTimePath("")+"\\";
+		System.out.println(path+"path!!!!");
+		String extendPath = FilePathGenerator.addTimePath(filePath);
+	    File file = filePathGenerator.getUseClassPathResource(extendPath);
+	    
 		//테이블에 넣어
 		
 		long result = movieInfoRepository.movieWrite(movieInfoVO);
+		// 포스터 이미지, 트레일러 영상 이미지들
+		System.out.println("======================================");
+		System.out.println("size : "+files.size());
 		
-		if(files.getSize()>0) {
+		if(files.size()==0)
+			return 0;
+		
+		// ======공통작업=====
+		MovieImageVO movieImageVO = new MovieImageVO();
+		movieImageVO.setMovieNum(movieInfoVO.getNum());
+
+		// ========썸네일 관련 작업========
+		MultipartFile tmp = files.remove(0);
+		System.out.println(tmp.getOriginalFilename()+"썸네일");
+		
+		fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
+		String fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+		movieImageVO.setType(1);//썸네일1개는 무조건 1
+		movieImageVO.setFileName(path+fileName);
+		movieImageVO.setOriginName(tmp.getOriginalFilename());
+		result = movieImageRepository.movieImageInsert(movieImageVO);
+		
+		System.out.println("tCnt : "+trailerCount);
+		
+		// =======트레일러========
+		for(int i=0; i<trailerCount; i++) {
 			
-			String fileName = fileManager.saveTransfer(files, file);//이미지 파일 저장
-			MovieImageVO movieImageVO = new MovieImageVO();
-			movieImageVO.setMovieNum(movieInfoVO.getNum());
-			movieImageVO.setFileName(fileName);
-			movieImageVO.setOriginName(files.getOriginalFilename());						
-			
-			//movieImage테이블에 삽입
+			tmp = files.remove(0);
+			System.out.println(tmp.getOriginalFilename()+"트레일러");
+
+			fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+			movieImageVO.setType(2);//트레일러는 2번
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
 			result = movieImageRepository.movieImageInsert(movieImageVO);
-		}
-		
-		if(videolink!=null) {
-			MovieVideoVO movieVideoVO = new MovieVideoVO();
-			movieVideoVO.setMovieNum(movieInfoVO.getNum());
-			movieVideoVO.setVideolink(videolink);
 			
+			MovieVideoVO movieVideoVO = new MovieVideoVO();
+			
+			movieVideoVO.setMovieImageNum(movieImageVO.getNum()); //이미지의 num이 들어와야함
+			movieVideoVO.setVideolink(videolink[i]);
 			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
 		}
 		
+		
+		// ==========스틸컷=========
+		for(int i=0; i<steelCutCount; i++) {
+			
+			tmp = files.remove(0);
+			System.out.println(tmp.getOriginalFilename()+"스틸컷");
+			
+			fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+			movieImageVO.setType(3);//스틸컷은 3번
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
+		}
+		System.out.println("======================================");
 		return result;
 	}
 	
-	public Map<String, Object> movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
+	public Map<String, Object> movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO) throws Exception{
 		
 		System.out.println(reservationVO.getMovieNum()+"uuuu");
 		
 		//vo에  total과 good을 받아줄 변수명이 없으므로 map으로 받아서 가지고 옴
-		//eggRate계산
-		Map< String , Object> map = movieInfoRepository.errRate2(reservationVO);
-		Iterator<String> mm = map.keySet().iterator();
 		
-		long total = (long)map.get("total");
-		long good = (long)map.get("good");
+		//===eggRate계산//리뷰====
+		Map< String , Object> map=null;
+		long total = 0;
+		long good=0;
 		
-		double total2 = Double.valueOf(total);
-		double good2 = Double.valueOf(good);
+		if (movieInfoVO.getErrRate()!=100.0) {
+			map = movieInfoRepository.errRate2(reservationVO);
+			Iterator<String> mm = map.keySet().iterator();
+			
+			 total = (long)map.get("total");
+			 good = (long)map.get("good");
+			
+		}
+		
+			double total2 = Double.valueOf(total);//==null?0.0:Double.valueOf(total)
+			double good2 = Double.valueOf(good);//==null?0.0:Double.valueOf(good);
+		
 		
 		if(total2>0) { //작성된 리뷰가 1개 이상일 경우 계산해서 errRate를 업데이트
 			double errRate =(double)(good2/total2)*100;				
@@ -133,7 +179,7 @@ public class MovieInfoService {
 		
 		}
 		
-		//예매율 계산
+		//===예매율 계산====
 		Map<String, Object> map2 = movieInfoRepository.rate(reservationVO);
 		Iterator<String> mm2 = map2.keySet().iterator();
 		
@@ -150,7 +196,7 @@ public class MovieInfoService {
 			movieInfoRepository.rateUpdate(movieInfoVO);
 		
 		}
-		//성별 계산	
+		//=====성별 계산 =====
 		Map<String, Object> map3 = movieInfoRepository.gender2(reservationVO);
 		Iterator<String> mm3 = map3.keySet().iterator();
 		
@@ -167,7 +213,7 @@ public class MovieInfoService {
 		long gTotal =(long)map4.get("gTotal");
 		System.out.println(gTotal+"gTotal");
 		
-		//연령대 계산
+		//====연령대 계산=====
 		Map<String, Object> mapAge = movieInfoRepository.age(reservationVO);
 		Iterator<String> mmAge = mapAge.keySet().iterator();
 			
@@ -185,9 +231,7 @@ public class MovieInfoService {
 		double age40_2 = Double.valueOf(age40);
 		double age50_2 = Double.valueOf(age50);
 		
-		//매력포인트
-	
-	
+		//=====매력포인트=====
 		List<Integer> values = movieInfoRepository.charmPoint(reservationVO);
 		for(int i=0;i<values.size();i++) {
 			System.out.println(values.get(i)+" :  번 charm");
@@ -201,7 +245,7 @@ public class MovieInfoService {
 		System.out.println(charm.get(1)+"숫자2");
 		
 		
-		//감정 포인트
+		//===감정 포인트====
 		List<Integer> values2 = movieInfoRepository.emotionPoint(reservationVO);
 		for(int i=0;i<values2.size();i++) {
 			System.out.println(values2.get(i)+" :  번 emotion");
@@ -211,17 +255,56 @@ public class MovieInfoService {
 		List<Integer> emotion = bb2.getState2(values2);
  		
 		
-		//관객수
-		/*
-		 * Map<String, Object> mapV = movieInfoRepository.visitor2(reservationVO);
-		 * Iterator<String> mmV = mapV.keySet().iterator();
-		 * 
-		 * while(mmV.hasNext()) { String keyv = mmV.next();
-		 * System.out.println("관람객"+keyv); }
-		 */
-		//
-		movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); 
+		//===관객수======
+		 Map<String, Object> mapV=null;
+		 int visitor=0;
+		if(movieInfoVO.getVisitor()!=0 ) {
+			mapV = movieInfoRepository.visitor2(reservationVO);
+			visitor = ((BigDecimal)mapV.get("visitor")).intValue();
+		}
+		
+		  System.out.println(visitor+"명");
+
+		  if(visitor>0) {
+			  movieInfoVO.setVisitor(visitor);
+			  movieInfoRepository.visiUpdate(movieInfoVO);
+		  }
+		// ====트레일러 카운트 값======
+		  Map<String, Object> mapt=movieInfoRepository.tco(movieImageVO);
+		  Iterator<String> mmt=mapt.keySet().iterator();
+			
+		  while(mmt.hasNext()) {
+				String key = mmt.next();
+				System.out.println(key+" : key");//o
+		 }
+		  
+			long tco = (long)mapt.get("cc");
+			System.out.println(tco +" : tco");
+			
+		// ====스틸컷 카운트 값======
+			 Map<String, Object> maps=movieInfoRepository.sco(movieImageVO);
+			 Iterator<String> mms=maps.keySet().iterator();
+				
+			 while(mms.hasNext()) {
+				String key = mms.next();
+				System.out.println(key+" : key");//o
+			 }
+			  
+			long sco = (long)maps.get("cs");
+			System.out.println(sco +" : sco");	
+			
+		//=============
 		Map<String, Object> g = new HashMap<>();
+		
+		/* movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); */
+		movieInfoVO=movieInfoRepository.mSelect(movieInfoVO);
+		List<MovieImageVO> ar = movieInfoRepository.mSelect2(movieImageVO);
+		
+		g.put("vo", movieInfoVO);
+		g.put("ar", ar);
+		
+		g.put("tco", tco);
+		g.put("sco", sco);
 		g.put("gender", gender);
 		g.put("gTotal",gTotal);
 		g.put("ageTotal", ageTotal2);
@@ -230,7 +313,7 @@ public class MovieInfoService {
 		g.put("age30", age30_2);
 		g.put("age40", age40_2);
 		g.put("age50", age50_2);
-		g.put("vo", movieInfoVO);
+		
 		g.put("cost", charm.get(0));
 		g.put("cactor", charm.get(1));
 		g.put("cvisual", charm.get(2));
@@ -241,45 +324,68 @@ public class MovieInfoService {
 		g.put("cstr", emotion.get(2));//스트레스
 		g.put("cimp", emotion.get(3));//감동
 		g.put("cimm", emotion.get(4));//몰입감
+		
 		return g ;
 		
 	}
 	
-	public long movieUpdate(MovieInfoVO movieInfoVO,MultipartFile files, String videolink)throws Exception{
-		File file = filePathGenerator.getUseClassPathResource(filePath);//movieList/filmCover 경로
+	public long movieUpdate(MovieInfoVO movieInfoVO,List<MultipartFile> files, String[] videolink,int trailerCount,int steelCutCount)throws Exception{
+		String path = FilePathGenerator.addTimePath("")+"\\";
+		System.out.println(path+"path!!!!");
+		String extendPath = FilePathGenerator.addTimePath(filePath);
+	    File file = filePathGenerator.getUseClassPathResource(extendPath);
 		
 		long result = movieInfoRepository.movieUpdate(movieInfoVO);
 		
-		System.out.println("qqq?????" + movieInfoVO.getNum());
+		System.out.println("Update getNum : " + movieInfoVO.getNum());
 		
-		if(files !=null) {
-			System.out.println("updateIn");
-			if(files.getSize()>0) {
-				String fileName = fileManager.saveTransfer(files, file);//파일, 경로
-				MovieImageVO movieImageVO = new MovieImageVO();
-				System.out.println(movieInfoVO.getNum()+"?????");
-				
-				movieImageVO.setMovieNum(movieInfoVO.getNum());
-				movieImageVO.setFileName(fileName);
-				movieImageVO.setOriginName(files.getOriginalFilename());
-				//movieImage테이블에 삽입
-				result = movieImageRepository.movieImageInsert(movieImageVO);
-			}
+		if(files.size()==0) {
+			return 0;
 		}
 		
-		System.out.println("링크값 : "+videolink);	
-		//같으면 업데이트x
-		//다르면 업데이트를 하고
-		String same = videolink;
+		//공통작업
+		MovieImageVO movieImageVO = new MovieImageVO();
+		movieImageVO.setMovieNum(movieInfoVO.getNum());
 		
-		if(videolink!=null ) {
+		//썸네일 관련 작업
+		MultipartFile tmp = files.remove(0);
+		fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
+		String fileName = fileManager.saveTransfer(tmp, file);
+		movieImageVO.setType(1);
+		movieImageVO.setFileName(path+fileName);
+		movieImageVO.setOriginName(tmp.getOriginalFilename());
+		result = movieImageRepository.movieImageInsert(movieImageVO);
+		
+		//트레일러
+		
+		System.out.println(trailerCount+"tcount");
+		for(int i=0;i<trailerCount;i++) {
+			tmp = files.remove(0);
+			
+			fileName = fileManager.saveTransfer(tmp, file);
+			movieImageVO.setType(2);
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
+			
 			MovieVideoVO movieVideoVO = new MovieVideoVO();
+			movieVideoVO.setMovieImageNum(movieImageVO.getNum());
+			movieVideoVO.setVideolink(videolink[i]);
+			result = movieVideoRepository.movieVideoInsert(movieVideoVO);
 			
-				movieVideoVO.setMovieNum(movieInfoVO.getNum());
-				movieVideoVO.setVideolink(videolink);
-								
-				result = movieVideoRepository.movieVideoUpdate(movieVideoVO);
+		}
+		
+		//스틸컷
+		
+		System.out.println(steelCutCount+"scount");
+		for(int  i=0;i<steelCutCount;i++) {
+			tmp = files.remove(0);
 			
+			fileName = fileManager.saveTransfer(tmp, file);
+			movieImageVO.setType(3);
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			result = movieImageRepository.movieImageInsert(movieImageVO);
 			
 		}
 		
@@ -291,5 +397,6 @@ public class MovieInfoService {
 		long result= movieInfoRepository.movieDelete(movieInfoVO);
 		return result;
 	}
+	
 	
 }

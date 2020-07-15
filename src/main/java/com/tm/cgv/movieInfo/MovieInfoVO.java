@@ -1,6 +1,7 @@
 package com.tm.cgv.movieInfo;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.movieVideo.MovieVideoVO;
@@ -27,11 +28,12 @@ public class MovieInfoVO {
 	private Date createAt;
 	private String kind;
 	
+	//이미지, 영상 주소 list로 받아오기
+	private List<MovieImageVO> movieImageVOs;//영화 이미지 파일
 	
-	private MovieImageVO movieImageVOs;//영화 이미지 파일
-	
-	private MovieVideoVO movieVideoVOs;//영화 영상 링크 주소
-	
+	/*
+	 * private List<MovieVideoVO> movieVideoVOs;//영화 영상 링크 주소
+	 */	
 	
 
 	

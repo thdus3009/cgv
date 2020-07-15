@@ -76,7 +76,7 @@
 					<div class="box-image"  >
 					<a href="" class="a">
 						<span class="thumb-image">
-							<img  class="box-image" alt="" src="../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
+							<img  class="box-image" alt="" src="../images/movie/movieList/filmCover/${vo.movieImageVOs[0].fileName}">
 							<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 						</span>
 					</a>
@@ -164,13 +164,14 @@
 							<a title="현재 선택됨" href="" class="a">주요정보</a>
 						</li>
 						<li>
-							<a href="" class="a">트레일러</a>
+
+							<a href="javascript:window.scrollTo(0,1000);" >트레일러</a>
 						</li>
 						<li>
-							<a href="" class="a">스틸컷</a>
+							<a href="javascript:window.scrollTo(0,1400);">스틸컷</a>
 						</li>
 						<li>
-							<a href="" class="a">평점/리뷰</a>
+							<a href="javascript:window.scrollTo(0,2300);">평점/리뷰</a>
 						</li>
 						<li class="last">
 							<a href="" class="a">상영시간표</a>
@@ -214,24 +215,33 @@
 							<span class="hh">&ensp; 트레일러</span>
 							<span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
 						</div>
+						
+						<c:forEach var="ar" items="${ar}">
+						<c:if test="${ar.type eq 2 }">
 						<ul>
 							<li>
 							<div class="box-image">
-								<a href="${vo.movieVideoVOs.videolink }" class="a">
-									<img alt="메인예고편" src="../images/movie/movieList/filmCover/rr.JPG" class="box-image">
+
+								<a href="${ar.movieVideoVOs[0].videolink }">
+									<img alt="메인예고편" src="../images/movie/movieList/filmCover/${ar.fileName}" class="box-image">
 								</a>
 							</div>
 							<div class="box-contents">
 								<a href="" class="a">
 									<span class="strong title">
 										<span class="ico-trailer hd">HD</span>
-										메인 예고편 영상
-									</span>
+
+										예고편 영상
+									</strong>
+
 								</a>
 								
 							</div>
 							</li>
 						</ul>
+						</c:if>
+						</c:forEach>
+						
 					</div>
 					<!-- 여기까지가 트레일러 -->
 					
@@ -243,6 +253,23 @@
 								21건
 							</span>
 						</div>
+						<c:forEach var="ar" items="${ar}">
+						<c:if test="${ar.type eq 3 }">
+						<ul>
+							<li>
+							<div class="box-image">
+								<img alt="스틸컷" src="../images/movie/movieList/filmCover/${ar.fileName}" class="box-image">
+							</div>
+							<div class="box-contents">
+								<a href="">
+									
+								</a>
+								
+							</div>
+							</li>
+						</ul>
+						</c:if>
+						</c:forEach>
 						
 						<div class="slider-wrap">
 						
@@ -333,11 +360,17 @@
 						<div id="ajax_ms">
 						
 						
-						</div>
 
-
-
-					</div>
+								<%-- <div class="bbs_btn">
+									<button type="button" class="round inblack" id="btn-list"><span>목록으로</span></button>
+									
+									<c:if test="${bbsVO.writer eq memberVO.id }">
+										<a href="./${board}Delete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
+										<a href="./${board}Update?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
+									</c:if>
+									
+								</div> --%>
+							
 						
 
 					</div>

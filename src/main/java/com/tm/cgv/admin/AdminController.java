@@ -18,6 +18,7 @@ import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
+import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeService;
@@ -71,6 +72,19 @@ public class AdminController {
 	//==============================
 	// movieInfo
 	//==============================
+
+	@GetMapping("movie/movieList")
+	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
+		List<MovieInfoVO> list = movieInfoService.movieList(pager);
+		if(pager.getKind()==null || pager.getKind().equals("")) {
+			pager.setKind("date"); //최신순으로 설정
+		}
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/movie/movieList");
+		}
+		return mv;
+	}
 	
 	@GetMapping("movie/movieListSort")
 	public ModelAndView movieListSort(ModelAndView mv,MovieInfoVO movieInfoVO) throws Exception{
@@ -97,9 +111,12 @@ public class AdminController {
 	
 	
 	@GetMapping("movie/movieSearchA")
-	public ModelAndView movieSearchA(ModelAndView mv,Pager pager) throws Exception{
+	public ModelAndView movieSearchA(ModelAndView mv,Pager pager,String search) throws Exception{
 		
 		List<MovieInfoVO> searchA = movieInfoService.movieList(pager);
+		System.out.println(pager.getSearch()+"search++++");
+		System.out.println(search+"이거요거저거");
+		
 		if(searchA !=null) {
 			mv.addObject("searchA",searchA);
 			mv.setViewName("admin/movie/movieSearchA");
@@ -108,6 +125,7 @@ public class AdminController {
 	}
 	@GetMapping("movie/movieWrite")
 	public ModelAndView movieWrite(ModelAndView mv)throws Exception{
+
 		mv.addObject("vo",new MovieInfoVO());
 		mv.addObject("path","Write");
 		mv.setViewName("admin/movie/movieWrite");
@@ -115,12 +133,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieWrite")
-	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
+	public ModelAndView movieWrite(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
 		int num = movieInfoVO.getNum();
 		System.out.println("num : " + num);
 		
-		
-		long result = movieInfoService.movieWrite(movieInfoVO, files,videolink);
+		long result = movieInfoService.movieWrite(movieInfoVO, files,videolink,trailerCount,steelCutCount);
 		if(result>0) {
 			mv.setViewName("redirect:./movieList?kind=date");
 		}else {
@@ -131,18 +148,24 @@ public class AdminController {
 	}
 	
 	@GetMapping("movie/movieSelect")
-	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO) throws Exception{
+	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO,MovieImageVO movieImageVO,int num) throws Exception{
 		System.out.println(movieInfoVO.getNum()+"con 무비넘");
 		reservationVO.setMovieNum(movieInfoVO.getNum());// 파라미터가 num인데 reservation에는 movieNum이 영화번호이니까
 														// 영화번호에 num을 넣어줘야지 제대로 돌아감
-		
-		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
+		movieImageVO.setMovieNum(num);
+		System.out.println(movieImageVO.getMovieNum()+"con num2");
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");
 		}
+		System.out.println(map.get("tco")+"tco 출력");
 		
+		//select 에서 예매율, 리뷰 없어도...
 		
-		mv.addObject("vo",map.get("vo"));
+		mv.addObject("vo",map.get("vo"));//정보+사진
+		mv.addObject("ar",map.get("ar"));//사진+영상링크
+		
+		mv.addObject("tco",map.get("tco"));
 		mv.addObject("gender",map.get("gender"));
 		mv.addObject("gTotal",map.get("gTotal"));
 		mv.addObject("ageTotal",map.get("ageTotal"));
@@ -167,12 +190,22 @@ public class AdminController {
 	}
 	
 	@GetMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO) throws Exception{
-		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO,int num) throws Exception{
+		reservationVO.setMovieNum(movieInfoVO.getNum());
+		movieImageVO.setMovieNum(num);
+		
+		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO, reservationVO,movieImageVO);
+		
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:./error/404");
 		}
+		
+		MovieInfoVO tmp = (MovieInfoVO)map.get("vo");//.movieImageVOs[0].num
+		System.out.println("라라라라라 : "+tmp.getMovieImageVOs().get(0).getNum());
 		mv.addObject("vo",map.get("vo"));
+		mv.addObject("ar",map.get("ar"));
+		mv.addObject("tco",map.get("tco"));
+		mv.addObject("sco",map.get("sco"));
 		mv.addObject("path","Update");
 		mv.setViewName("admin/movie/movieUpdate");
 		
@@ -180,16 +213,18 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,MultipartFile files,String videolink) throws Exception{
-		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount);
 		
-		mv.setViewName("redirect:admin/movie/movieSelect?num="+movieInfoVO.getNum());
+		mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		return mv;
 	}
 	
 	@GetMapping("movie/movieDelete")
 	public ModelAndView movieDelete(ModelAndView mv, MovieInfoVO movieInfoVO) throws Exception{
+		System.out.println(movieInfoVO.getNum()+"delete");
 		long result = movieInfoService.movieDelete(movieInfoVO);
+		System.out.println(movieInfoVO.getNum()+"delete2");
 		mv.setViewName("redirect:./movieList?kind=date");
 		return mv;
 	}

@@ -11,7 +11,7 @@
 	</select>
 
 	<insert id="movieImageInsert" parameterType="MovieImageVO" useGeneratedKeys="true" keyProperty="num">
-		insert into movieImage(num,movieNum,fileName,originName) values (#{num},#{movieNum},#{fileName},#{originName})
+		insert into movieImage(num,movieNum,fileName,originName,type) values (0,#{movieNum},#{fileName},#{originName},#{type})
 	</insert>
 	
 	<select id="movieImageSelect" parameterType="MovieImageVO" resultType="MovieImageVO">
@@ -21,5 +21,9 @@
 	<delete id="movieImageDelete" parameterType="MovieImageVO">
 		delete from movieImage where num=#{num}
 	</delete>
+	
+	<select id="movieGet"  resultType="Integer">
+		select max(num) from movieImage 
+	</select>
 
 </mapper>

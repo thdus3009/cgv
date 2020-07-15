@@ -110,6 +110,11 @@ li {
 	width: 610px;
 	padding: 2px 5px;
 }
+.title2 {
+	border-radius: 0.25rem;
+	width: 610px;
+	padding: 2px 5px;
+}
 
 .label {
 	width: 60px;
