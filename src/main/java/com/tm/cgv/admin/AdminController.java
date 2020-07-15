@@ -98,13 +98,19 @@ public class AdminController {
 
 	@GetMapping("movie/movieList")
 	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
-		List<MovieInfoVO> list = movieInfoService.movieList(pager);
+		
 		if(pager.getKind()==null || pager.getKind().equals("")) {
 			pager.setKind("date"); //최신순으로 설정
 		}
+		
+		List<MovieInfoVO> list = movieInfoService.movieList(pager);
+		
+		System.out.println(pager.getKind()+"getKind");
+		
 
 		if(list !=null) {
 			mv.addObject("list",list);
+			mv.addObject("pager",pager);
 			mv.setViewName("admin/movie/movieList");
 		}
 		return mv;
