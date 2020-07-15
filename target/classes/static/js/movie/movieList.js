@@ -6,7 +6,7 @@
 		var kind = $("#select").val();
 		var startRow = $("#startRow").val();
 		var search=$("#search").val();
-		console.log(startRow);
+		console.log(startRow+"startRow");
 		
 		$.get("./movieListMore?startRow="+(startRow)+7+"&kind="+kind,function(result){
 

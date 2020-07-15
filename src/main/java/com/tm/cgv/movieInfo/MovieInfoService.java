@@ -101,10 +101,16 @@ public class MovieInfoService {
 		System.out.println(tmp.getOriginalFilename()+"썸네일");
 		
 		fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
+		System.out.println("ddkddkdkddkdkkdk");
+		
 		String fileName = fileManager.saveTransfer(tmp, file);//이미지 파일, 경로
+		System.out.println("resiziong filname : " +fileName );
+		
 		movieImageVO.setType(1);//썸네일1개는 무조건 1
 		movieImageVO.setFileName(path+fileName);
 		movieImageVO.setOriginName(tmp.getOriginalFilename());
+		
+		System.out.println("리사이징 끝");
 		result = movieImageRepository.movieImageInsert(movieImageVO);
 		
 		System.out.println("tCnt : "+trailerCount);

@@ -160,16 +160,7 @@ public class MovieInfoController {
 	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num,MovieImageVO movieImageVO) throws Exception{
 
 		ModelAndView mv = new ModelAndView();
-		String uid ="";
-		
-		MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
-		System.out.println("dddddddddddd");
-		if(memberVO!=null) {
-			uid = memberVO.getUsername();
-		}
-		
-		System.out.println("fffffffffff");
-		
+
 		reservationVO.setMovieNum(num);
 		System.out.println(reservationVO.getMovieNum()+"con");
 		
@@ -209,8 +200,6 @@ public class MovieInfoController {
 		mv.addObject("cstr",map.get("cstr"));
 		mv.addObject("cimp",map.get("cimp"));
 		mv.addObject("cimm",map.get("cimm"));
-		
-		mv.addObject("uid", uid);
 		
 		mv.setViewName("movie/movieSelect");
 		return mv;

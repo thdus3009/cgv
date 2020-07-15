@@ -34,14 +34,18 @@ public class FileManager {
       
       // resizeOption을 안켰거나, imgType이 아니라면, 일반 저장 
       if(!this.resizeFlag || !checkImageType(originDest)) {
+    	 System.out.println("섬네일 실패");
          file.transferTo(originDest);
       } else {
+    	  System.out.println("섬네일 저장");
          // 썸네일로 저장
          thumbnail = new FileOutputStream(resizeDest);
         // Thumbnailator.createThumbnail(inputStream, thumbnail, widthPix, heightPix);
          Thumbnailator.createThumbnail(inputStream,thumbnail,widthPix,heightPix);
          thumbnail.close();
       }
+      
+      System.out.println("fileMAnger :fileName : "+fileName);
       
       return fileName;
    }
@@ -88,7 +92,7 @@ public class FileManager {
    private boolean checkImageType(File file) throws Exception{
       
       String contentType = Files.probeContentType(file.toPath());
-      System.out.println(contentType);
+      System.out.println("파일타입 : "+contentType);
       return contentType.startsWith("image");
    }
    

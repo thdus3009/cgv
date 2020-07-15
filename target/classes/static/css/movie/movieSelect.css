@@ -135,7 +135,7 @@ div[class^="sect-"] .box-contents li .a {
     overflow: hidden;
 }
 
-.tab-menu li .a {
+.tab-menu li a {
     display: inline-block;
     position: relative;
     height: 39px;

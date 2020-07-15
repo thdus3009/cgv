@@ -98,16 +98,6 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("movie/movieList")
-	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
-		List<MovieInfoVO> list = movieInfoService.movieList(pager);
-		
-		if(list !=null) {
-			mv.addObject("list",list);
-			mv.setViewName("admin/movie/movieList");
-		}
-		return mv;
-	}
 	
 	
 	@GetMapping("movie/movieSearchA")
