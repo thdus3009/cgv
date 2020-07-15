@@ -29,8 +29,8 @@
 						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
 								<a class="nav-link" href="/admin/cinema/cinemaList">극장 리스트</a>
-								<a class="nav-link" href="/admin/cinema/cinemaInsert">극장 등록</a>
-								<a class="nav-link" href="/admin/cinema/theaterInsert">상영관 등록</a>
+								<!-- <a class="nav-link" href="/admin/cinema/cinemaInsert">극장 등록</a> -->
+								<a class="nav-link" href="/admin/cinema/theaterInsert?cinemaNum=0">상영관 등록</a>
 							</nav>
 						</div>
 						<a class="nav-link" href="${pageContext.request.contextPath}/admin/reservation/selectList">
@@ -64,6 +64,11 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 배너 관리
+						</a>
+						<a class="nav-link" href="${pageContext.request.contextPath}/admin/event/eventList">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 이벤트 관리
 						</a>
 					</div>
 				</div>

@@ -608,7 +608,9 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		if(cinemaNum>0) {
 			//cinemaNum이 존재한다면
-			CinemaVO vo = cinemaService.cinemaSelect(cinemaNum);
+			CinemaVO vo = new CinemaVO();
+			vo.setNum(cinemaNum);
+			vo = cinemaService.cinemaSelect(vo);
 			mv.addObject("cineCheck", vo);
 			System.out.println(vo);
 		}
@@ -646,7 +648,10 @@ public class AdminController {
 		System.out.println("num : " +num);
 		ModelAndView mv = new ModelAndView();
 		TheaterVO theaterVO = theaterService.theaterSelect(num);
-		CinemaVO cinemaVO = cinemaService.cinemaSelect(cinemaNum);
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(cinemaNum);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
 		//theaterSelect
 		//상영관 정보
 		//좌석배치도
@@ -718,7 +723,9 @@ public class AdminController {
 		char c = row.charAt(0);
 		int k = c-64;
 		int col = theaterService.selectCol(num);
-		CinemaVO cinemaVO = cinemaService.cinemaSelect(cinemaNum);
+		CinemaVO cinemaVO = new CinemaVO();
+		cinemaVO.setNum(cinemaNum);
+		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		
 		
 		
