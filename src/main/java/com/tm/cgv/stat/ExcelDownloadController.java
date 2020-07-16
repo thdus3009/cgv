@@ -13,28 +13,18 @@ import com.tm.cgv.reservation.ReservationService;
 import com.tm.cgv.reservation.ReservationVO;
 
 @Controller
-public class StatController {
+public class ExcelDownloadController {
 	
 	@Autowired
 	private ReservationService reservationService;
 
-	//업로드
-	@GetMapping("/reservation.upl")
-	public void getUpload() throws Exception{
-		
-		
-	}
-	
-	
-	
-	
 	//다운로드
 	//xls를 다운 받고자 하는 경로마다 GetMapping 함수 지정 -> 조회한 값을 model로 각자 맞는 Component에게 전송
     @GetMapping("/reservation.xls")
     public String getExcelByReservation(Model model)throws Exception {
-    	List<ReservationVO> rows = new ArrayList<>();
-        rows = reservationService.reservationAllList();
-        model.addAttribute("rows", rows);
+    	List<ReservationVO> reservationList = new ArrayList<>();
+    	reservationList = reservationService.reservationAllList();
+        model.addAttribute("reservationList", reservationList);
         
         return "reservationListStat";
     }

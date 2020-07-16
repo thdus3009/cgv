@@ -116,10 +116,17 @@
 							</tbody>
 						</table>
 						
-						<input type="file" name="file"> 
-						<button class="btn btn-primary" id="btnExcel" style="float: right;">EXCEL DOWN</button>
+						<!-- DB 업로드/ 다운로드 -->
+						<form action="../../excel/upload" method="post" enctype="multipart/form-data">
+							<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="file" name="file">
+							<input type="submit" value="btnUpload">
+						</form>
+						
+						 
+						<button class="btn btn-primary" id="btnDownload" style="float: right;">EXCEL DOWN</button>
 						<script type="text/javascript">
-							$("#btnExcel").click(function(){
+							$("#btnDownload").click(function(){
 								location.href="../../reservation.xls";
 							});
 						</script>
@@ -145,11 +152,13 @@
 						</div>
 					</div>
 					
-					
+					<!-- 결체 모달창 출력 부분 -->
 					<div class="payment-List">
 					
 					</div>
 
+					
+					<!-- 모달창 -->
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
 
@@ -192,7 +201,6 @@
 									</div>
 
 								</div>
-								<form action="../../"></form>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal"></button>
 								</div>

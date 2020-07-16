@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.document.AbstractXlsView;
 import com.tm.cgv.reservation.ReservationVO;
 
 @Component("reservationListStat")
-public class reservationListXls extends AbstractXlsView {
+public class ReservationListXls extends AbstractXlsView {
 
     @Override
     protected void buildExcelDocument(
@@ -30,7 +30,7 @@ public class reservationListXls extends AbstractXlsView {
         response.setHeader("Content-Disposition", "attachment;filename=\"reservation.xls\"");
         
         //컨트롤러에서 받은 model값 
-        List<ReservationVO> voList = (List<ReservationVO>)model.get("rows");
+        List<ReservationVO> voList = (List<ReservationVO>)model.get("reservationList");
 
         //셀 스타일 지정
         CellStyle numberCellStyle = workbook.createCellStyle();
@@ -39,11 +39,9 @@ public class reservationListXls extends AbstractXlsView {
         
         //시트 생성(시트 제목)
         Sheet sheet = workbook.createSheet("sheet01");
-        
 
         //vo의 크기 만큼 반복하며 각 셀에 값 지정
-        //num,uid,filmType,cinemaName,theaterName,seats,common,teenager,preference,totalPrice,creatAt
-        
+        //reservationVO : num,uid,filmType,cinemaName,theaterName,seats,common,teenager,preference,totalPrice,creatAt
         //movieInfoVO : title,runTime
         //movieTimeVO : screenTime,screenDate,
         //paymentVO : imp_uid,merchant_uid,pg,pay_method,apply_num
