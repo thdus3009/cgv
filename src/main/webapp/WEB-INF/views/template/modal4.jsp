@@ -37,7 +37,7 @@
                      </div><br>
                      
                      <!-- 나중에 여기에 session으로 정보불러와서 같이 보내기 -->
-                     <textarea id="mContents2" name="contents2" rows="5" cols="70" onkeyup="CheckByte(this)"
+                     <textarea id="mContents2" name="contents2" rows="5" cols="70" onkeyup="CheckByte2(this)"
                         placeholder="운영원칙에 어긋나는 게시물로 판단되는 글은 제재 조치를 받을 수 있습니다." 
                         style="font-size: small; margin: 0 0 0 20px;"></textarea>   <!-- textarea에서 키보드를 누르면 CheckByte.js의 해당내용(this)의 함수실행 -->
                   </div>

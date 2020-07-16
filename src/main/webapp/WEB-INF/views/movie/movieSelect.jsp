@@ -888,9 +888,6 @@ $("#ajax_ms").on("click",".date",function(){
    
 });
 
-
-console.log("curPage: "+curPage);
-
 /* ------------------------------------------------ */
 
 
@@ -996,7 +993,7 @@ function review_Modal(){
 
        var mContents = document.getElementById("mContents2");
        g_contents = mContents.value;
-       console.log("??? "+g_contents);
+       console.log("???: "+g_contents);
       var eggList = document.getElementsByClassName("egg2");
       for(i=0; i<eggList.length; i++){
          

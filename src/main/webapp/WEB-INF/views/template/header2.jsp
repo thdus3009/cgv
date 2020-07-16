@@ -21,12 +21,12 @@
 				</c:if>
 				<c:if test="${empty sessionScope.memberVO}">
 					<ul class="gnb">
-						<li><a class="login" style="width: 60px;" href="${pageContext.request.contextPath}/member/login"><span>로그인</span></a></li>
-						<li><a class="join" href="${pageContext.request.contextPath}/member/memberTerms"><span>회원가입</span></a></li>
+						<li><a class="login" style="width: 48px;" href="${pageContext.request.contextPath}/member/login"><span>로그인</span></a></li>
+						<li><a class="join" style="width: 58px;"  href="${pageContext.request.contextPath}/member/memberTerms"><span>회원가입</span></a></li>
 						<li><a class="mycgv" style="width: 56px;" href="${pageContext.request.contextPath}/member/memberMypage"><span>MyCGV</span></a></li>
 						<li><a class="vip_lounge" style="width: 79px;" href="#"><span>VIPLOUNGE</span></a></li>
-						<li><a class="club_service" style="width: 68px;" href="#"><span>Club서비스</span></a></li>
-						<li><a class="customer" style="width: 55px;" href="${pageContext.request.contextPath}/bbs/bbsList"><span>고객센터</span></a></li>
+						<li><a class="club_service" style="width: 71px;" href="#"><span>Club서비스</span></a></li>
+						<li><a class="customer" style="width: 59px;" href="${pageContext.request.contextPath}/bbs/bbsList"><span>고객센터</span></a></li>
 					<li><a class="english_ticketing" href="#" style="width: 122px;"><span>ENGLISHTICKETING</span></a></li>
 				</ul>
 				</c:if>		
