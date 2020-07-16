@@ -248,8 +248,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
-		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount,String[] delNum) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount,delNum);
 		
 		mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		return mv;
