@@ -251,13 +251,13 @@
 
 			var s =$(".fdt");
 			var tp = s.data("type");
-			alert("tp : " +tp);
+			//alert("tp : " +tp);
 
-			s.parent().find('input').remove();
+			$(this).parent().next().remove();
 			s.parent().html('<input type="file" class="form-control files" id="files" placeholder="썸네일 이미지 선택" name="files">');
 			
 			deleteImage.push(s.attr('id'));
-			alert(deleteImage+" : deleteImage num");
+			//alert(deleteImage+" : deleteImage num");
 			$("#fo").append('<input type="text" name="delNum" value="'+ deleteImage[deleteImage.length-1] +'">');
 			
 			/* var s = $("#num1").val();

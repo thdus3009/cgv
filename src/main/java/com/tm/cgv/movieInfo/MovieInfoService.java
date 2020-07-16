@@ -354,6 +354,7 @@ public class MovieInfoService {
 		movieImageVO.setMovieNum(movieInfoVO.getNum());
 		MultipartFile tmp=null;
 		String fileName="";
+		
 		//썸네일 관련 작업
 		if(delNum!=null) {
 			MovieImageVO vo = this.selectImage(Integer.parseInt(delNum[0]));
@@ -369,6 +370,7 @@ public class MovieInfoService {
 			//result = movieImageRepository.movieImageInsert(movieImageVO);
 			result = movieImageRepository.movieImageUpdate(movieImageVO);
 		}
+		
 		//트레일러
 		
 		System.out.println(trailerCount+"tcount");

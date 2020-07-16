@@ -22,7 +22,7 @@
 		delete from movieImage where num=#{num}
 	</delete>
 	
-	<update id="movieImageUpdat" parameterType="MovieImageVO">
+	<update id="movieImageUpdate" parameterType="MovieImageVO">
 		update movieImage set fileName=#{fileName}, originName=#{originName}
 		where num=#{num}
 	</update>
