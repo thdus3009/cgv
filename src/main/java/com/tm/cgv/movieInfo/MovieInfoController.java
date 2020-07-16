@@ -86,7 +86,7 @@ public class MovieInfoController {
 		ModelAndView mv = new ModelAndView();
 		
 		System.out.println("movieTitle : "+movieVO.getTitle());
-		if(!(movieVO.getTitle().equals("") || movieVO.getTitle() == null)) {
+		if(movieVO.getTitle() != null) {
 			mv.addObject("selectedMovieTitle", movieVO.getTitle());
 		}
 		
