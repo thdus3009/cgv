@@ -1268,14 +1268,14 @@ public class AdminController {
 	//==============================
 	// banner
 	//==============================
-	@GetMapping("bannerList")
+	@GetMapping("banner/eventBannerList")
 	public ModelAndView bannerList(Pager pager) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("admin/banner/bannerList");
+		mv.setViewName("admin/banner/eventBannerList");
 		return mv;
 	}
 	
-	@GetMapping("bannerInsert")
+	@GetMapping("banner/bannerInsert")
 	public ModelAndView bannerInsert() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("admin/banner/bannerInsert");
