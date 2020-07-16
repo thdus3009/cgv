@@ -79,8 +79,8 @@
 																		<!-- 썸네일 num -->
 																	</p>
 																</c:if>
-																<input type="text" class="form-control files check"
-																	id="files" placeholder="타이틀 이미지 선택" name="files" value="${vo.movieImageVOs[0].originName}" >
+																<input type="text" class="form-control files check stt"
+																	id="files" placeholder="타이틀 이미지 선택" name="files" value="${vo.movieImageVOs[0].originName}"  readonly="readonly">
 															</div>
 															<!-- ============== -->
 															
@@ -168,13 +168,13 @@
 																	<c:forEach var="ar" items="${ar}" varStatus="i">
 																		<c:if test="${ar.type eq 3 }">
 																		<div style="display: flex; margin-bottom: 10px;">
-																		<input type="file"
-																			class="form-control files check" id="files"
-																			placeholder="타이틀 이미지 선택" name="files">
-																		<p class="mv-p">${ar.originName}
+																		<input type="text"
+																			class="form-control files check stcc" id="files"
+																			placeholder="타이틀 이미지 선택" name="files" value="${ar.originName}" readonly="readonly">
+																		<p class="mv-p">
 																			<img alt="" src="../../images/movie/movieList/x.png"
 																			data-imgpaths ="${ar.fileName}"
-																			style="width: 20px; height: 20px;" class="fileDeleteS" data-imagenums="${ar.num}"> <!-- 삭제할 id를 뭘로 주지... -->
+																			style="width: 20px; height: 20px;" class="fileDeleteS stc" data-imagenums="${ar.num}"> <!-- 삭제할 id를 뭘로 주지... -->
 																		</p>
 																		</div>
 																		</c:if>
@@ -252,7 +252,9 @@
 			var s =$(".fdt");
 			var tp = s.data("type");
 			//alert("tp : " +tp);
-
+			
+			$(".stt").prop("readonly",false);
+			
 			$(this).parent().next().remove();
 			s.parent().html('<input type="file" class="form-control files" id="files" placeholder="썸네일 이미지 선택" name="files">');
 			
@@ -304,13 +306,13 @@
 
 				var th = $(this);
 				
-				$.post("../../movieImage/movieImageDelete",{num:numt,fileName:fileNameT,_csrf : $("#_csrf").val()},function(data){
+			 	$.post("../../movieImage/movieImageDelete",{num:numt,fileName:fileNameT,_csrf : $("#_csrf").val()},function(data){
 					console.log(data+"dd");//null
 					
 					if(data>0){
 						th.parent().parent().remove();	
 					}
-				});
+				}); 
 			}
 		});
 	});
@@ -360,25 +362,27 @@
 		$(this).click(function(){
 			var check = confirm("삭제하시겠습니까?");
 			if(check){
-				var nums = $(this).data("imagenums");	
+				/* var nums = $(this).data("imagenums");	
 				console.log(nums+"썸네일");
 				var fileNameS=$(this).data("imgpaths");
-				console.log(fileNameS+"파일이름");
+				console.log(fileNameS+"파일이름"); */
 				
-				counts--;
+			/* 	counts--;
 				console.log("init Count : "+counts);
-				$("#steelCutCount").val(counts);
+				$("#steelCutCount").val(counts); */
 				
 				var thi = $(this);
+				$(".stcc").attr('type','file');
 				
-				$.post("../../movieImage/movieImageDelete",{num:nums,fileName:fileNameS,_csrf : $("#_csrf").val()},function(data){
+				$(".stcc").prop("readonly",false);
+				/* $.post("../../movieImage/movieImageDelete",{num:nums,fileName:fileNameS,_csrf : $("#_csrf").val()},function(data){
 					console.log(data+"dd");//null
 					
 					if(data>0){
 						thi.parent().parent().remove();
 						
 						}
-					});
+					}); */
 				}
 			});
 	});
