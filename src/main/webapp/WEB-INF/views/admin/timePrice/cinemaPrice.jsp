@@ -236,7 +236,7 @@
 			var minute = t1.getMinutes()+"";
 			var hour = t1.getHours()+"";
 			if(sTime[0] > 24){
-				sTime[0] = "0"+(endTime[0]-24);
+				sTime[0] = "0"+(sTime[0]-24);
 			}
 			if(minute.length < 2){
 				minute = "0"+minute;

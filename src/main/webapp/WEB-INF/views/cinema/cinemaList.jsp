@@ -128,6 +128,7 @@
 					cinemaNum : cinema
 				},
 				success : function(result){
+					sTimeList = [];
 					makeTimePriceTable(result);
 				}
 				
@@ -137,32 +138,69 @@
 		}
 
 		var checkFilmType = 0;
+		var sTime = '';
+		//timePrice테이블 생성
 		function makeTimePriceTable(result){
-
+			
 			for(i=0;i<result.length;i++){
 				var filmType = result[i].filmType;
 				var time = result[i].etime;
+				
 				var commonPrice = addComma(result[i].commonPrice);
 				var teenagerPrice = addComma(result[i].teenagerPrice);
 
 				if(checkFilmType != filmType){
 					checkFilmType = filmType;
-					var trHTML = makeTr(time,commonPrice,teenagerPrice);
+					sTime = '06:00';
+					var trHTML = makeTr(sTime,commonPrice,teenagerPrice);
 					
 					var str = filmTypeForm(filmType);
 					var tableHTML = makeTable(str,trHTML);
 					
 					$(".timetable").append(tableHTML);
 				}else{
-					var trHTML = makeTr(time,commonPrice,teenagerPrice);
+					var trHTML = makeTr(sTime,commonPrice,teenagerPrice);
 					$(".timePriceTable:last").append(trHTML);
 				}
 
+				//앞에 값으로 sTime 설정후 다음에 넣은 sTime값 계산
+				sTime = sTimeMake(time);
+				
 				//맨처음 table CSS삭제
 				$(".time-table:first").css("border","none");
 			}
-			
 		}
+
+		//sTime생성
+		function sTimeMake(eTime){
+			var nextsTimeArr = eTime.split(":");
+			var nextsTime = new Date(0,0,0,nextsTimeArr[0],nextsTimeArr[1],0);
+			nextsTime.setMinutes(nextsTime.getMinutes()+1);
+			
+			var minute = nextsTime.getMinutes()+"";
+			var hour = nextsTime.getHours()+"";
+
+			if(nextsTimeArr[0] > 24){
+				nextsTimeArr[0] = "0"+(nextsTimeArr[0]-24);
+			}
+			if(minute.length < 2){
+				minute = "0"+minute;
+			}
+			if(hour.length < 2){
+				if(hour == 0){
+					hour = '24';
+				}else{
+					hour = "0"+hour;
+				}
+			}
+			
+			nextsTime = hour+":"+minute;
+			
+			return nextsTime;
+		}
+		
+
+		
 
 		//필름 타입 폼 변경
 		function filmTypeForm(filmType){
@@ -178,15 +216,14 @@
 				filmTypeForm = '4D';
 				break;
 			}
-
 			return filmTypeForm;
 		}
 
+
+
 		function makeTr(time,commonPrice,teenagerPrice){
-			var sTime = sTimeMake(time)
-			
 			var trHTML = '	<tr class="time-tr">'
-			+'		<td>'+ sTime + '~' + time +'</td>'
+			+'		<td>' + time +'~</td>'
 			+'		<td>'+ commonPrice +'</td>'		
 			+'		<td>'+ teenagerPrice +'</td>';
 			+'	</tr>'
