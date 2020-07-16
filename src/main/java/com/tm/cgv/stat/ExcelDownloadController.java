@@ -24,6 +24,7 @@ public class ExcelDownloadController {
     public String getExcelByReservation(Model model)throws Exception {
     	List<ReservationVO> reservationList = new ArrayList<>();
     	reservationList = reservationService.reservationAllList();
+    	
         model.addAttribute("reservationList", reservationList);
         
         return "reservationListStat";

@@ -66,6 +66,7 @@ button {
 
 .container {
 	width: 100%;
+	height:580px;
 	background-color: #fdfcf0;
 }
 
@@ -173,8 +174,7 @@ button {
 }
 
 .submenu>ul>li.on>a, .submenu>ul>li>a:hover {
-	background: url("../../images/movie/movieList/ico_arrow07.png")
-		no-repeat 0 3px;
+	background: url("../../images/movie/movieList/ico_arrow07.png") no-repeat 0 3px;
 	color: #e40000;
 }
 
@@ -500,6 +500,11 @@ dl:after, ul:after, li:after {
 	display: block;
 }
 
+.movie-price{
+    padding-top: 40px;
+    text-align: center;
+}
+
 .btn-more {
 	float: right;
 	font-size: 13px;
@@ -522,10 +527,16 @@ dl:after, ul:after, li:after {
 
 /* cinemaList */
 .search-div {
+/* 	position: relative; */
+/* 	border-bottom: 2px solid #ab9c8f; */
+/* 	margin: 40px 212px; */
+/* 	display: inline-flex; */
 	position: relative;
-	border-bottom: 2px solid #ab9c8f;
-	margin: 40px 190px;
-	display: inline-flex;
+    display: inline-block;
+    margin: 0 auto 20px;
+    padding-bottom: 2px;
+    overflow: hidden;
+    border-bottom: 2px solid #ab9c8f;
 }
 
 #search-local {
@@ -553,20 +564,21 @@ dl:after, ul:after, li:after {
 	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
-.search-btn{
-	width: 40px;
-	height: 30px;
-	background-image: url(../../images/search.png);
-	background-size: 40px;
-	border: none;
+.mp_info{
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 30px;
 }
 
 /* timetable */
-
-.timetable{
-	display: flex;
-	font-size: 13px;
+.time-table{
+	text-align: center;
+    font-size: 13px;
+	width: 100%;
+    border-bottom: 1px solid #ab9c8f;
 }
+
+
 
 .time-tr{
 	text-align: center;
@@ -577,3 +589,66 @@ dl:after, ul:after, li:after {
 	text-align: center;
 	padding: 5px;
 }
+
+
+/* 태민 */
+
+.mp_tablebox{
+	overflow: hidden;
+    margin: 40px -20px 0 -20px;
+}
+
+.mp_table_item{
+	float: left;
+    width: 470px;
+    margin: 0 20px;
+}
+
+.mp_tit{
+	display: block;
+    margin: 0 0 5px;
+    padding-left: 17px;
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+    background: url(../../images/cinema/bul_square.png) no-repeat 0 2px;
+}
+
+.mp_table {
+    position: relative;
+    margin: 10px 0 20px;
+    padding-bottom: 45px;
+}
+
+.mp_table table {
+    width: 100%;
+/*     border-bottom: 1px solid #ab9c8f; */
+    text-align: center;
+    font-size: 13px;
+}
+
+.mp_table table thead th {
+    color: #857362;
+    font-weight: normal;
+    font-weight: 300;
+}
+
+.mp_table table th, .mp_table table td {
+    padding: 3px 5px;
+    text-align: center;
+    color: #000;
+}
+
+.mp_section {
+    text-align: left;
+}
+
+tr.fir td{
+	border-top: 1px solid #ab9c8f;
+	
+}
+
+
+
+
+

@@ -117,7 +117,7 @@
 						</table>
 						
 						<!-- DB 업로드/ 다운로드 -->
-						<form action="../../excel/upload" method="post" enctype="multipart/form-data">
+						<form action="../../excel/upload/reservation" method="post" enctype="multipart/form-data">
 							<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input type="file" name="file">
 							<input type="submit" value="btnUpload">

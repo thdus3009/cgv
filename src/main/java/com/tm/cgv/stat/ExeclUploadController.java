@@ -1,8 +1,6 @@
 package com.tm.cgv.stat;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -22,14 +20,14 @@ import com.tm.cgv.reservation.ReservationService;
 import com.tm.cgv.reservation.ReservationVO;
 
 @Controller
-@RequestMapping("/excel/**")
+@RequestMapping("/excel/upload/**")
 public class ExeclUploadController {
 	
 	@Autowired
 	private ReservationService reservationService;
 	
 	
-	@PostMapping("upload")
+	@PostMapping("reservation")
 	public ModelAndView readExcel(MultipartFile file, Model model) throws Exception { // 2
 			ModelAndView mv = new ModelAndView();
 		    String extension = FilenameUtils.getExtension(file.getOriginalFilename()); // 3

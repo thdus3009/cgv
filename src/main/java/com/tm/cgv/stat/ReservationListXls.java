@@ -34,6 +34,7 @@ public class ReservationListXls extends AbstractXlsView {
 
         //셀 스타일 지정
         CellStyle numberCellStyle = workbook.createCellStyle();
+        
         DataFormat numberDataFormat = workbook.createDataFormat();
         numberCellStyle.setDataFormat(numberDataFormat.getFormat("#,##0"));
         
