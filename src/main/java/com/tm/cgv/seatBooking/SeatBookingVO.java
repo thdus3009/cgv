@@ -10,4 +10,5 @@ public class SeatBookingVO {
 	private int movieTimeNum;
 	private int reservationNum;
 	
+	private int theaterNum;	// 테이블에 없고, select용
 }

@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SeatBookingRepository {
 
+	public List<SeatBookingVO> selectListByReservationNumZero(SeatBookingVO seatBookingVO) throws Exception;
+	
 	public int seatBookingInsert(SeatBookingVO seatBookingVO) throws Exception;
 	
 	public int seatBookingDelete(int num) throws Exception;
@@ -23,5 +25,5 @@ public interface SeatBookingRepository {
 
 	public Integer selectCheckExist(SeatBookingVO seatBookingVO) throws Exception;
 	
-	
+	public int deletesByMovieTimeNum(SeatBookingVO seatBookingVO) throws Exception;
 }

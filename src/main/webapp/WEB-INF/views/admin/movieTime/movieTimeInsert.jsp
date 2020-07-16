@@ -355,6 +355,8 @@
 		// main()
 		$(function() {
 
+			console.log("sssssss");
+			
 			// 영화 등록 단계 관련
 			var movieInfoList = getMovieInfoList();
 			var perRow = getPerRow();

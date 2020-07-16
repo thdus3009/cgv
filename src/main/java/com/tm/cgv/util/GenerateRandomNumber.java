@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GenerateAuthNumber {
+public class GenerateRandomNumber {
 
 	private int certNumLength = 6;
     

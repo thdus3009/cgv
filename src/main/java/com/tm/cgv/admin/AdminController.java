@@ -833,7 +833,7 @@ public class AdminController {
 
 		// for test
 		if(theaterVO.getNum() == 0)
-			theaterVO.setNum(1);
+			theaterVO.setNum(31);
 		
 		
 		List<MovieInfoVO> movieInfoList = movieInfoService.movieList(pager);
