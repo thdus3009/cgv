@@ -4,27 +4,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<c:import url="../template/head.jsp"></c:import> 
-<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<meta charset="UTF-8">
+	<c:import url="../template/head.jsp"></c:import> 
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<style type="text/css">
+		.form-control	{
+			width:500px;
+		}
+	</style>
 </head>
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
         <div id="layoutSidenav">
             <c:import url="../template/sidenav.jsp"></c:import>
             <div id="layoutSidenav_content">
-	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<main>
-				<div class="container-fluid">
-					<h1>Cinema Insert</h1>
-					<br>
-					<form action="cinema${path}" method="post" enctype="multipart/form-data">
-                    		<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<main>
+					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<div class="container-fluid">
+						<h1>Cinema Insert</h1>
+						<br>
+						<form action="cinema${path}" method="post" enctype="multipart/form-data">
+	                    	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<c:if test="${path eq 'Update'}">
 								<input type="hidden" name="num" id="num" value="${vo.num}">
 							</c:if>
-
-							
+	
+								
 						  <div class="form-group">
 						   	 <label for="name">Name:</label>
 						   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
@@ -32,7 +37,17 @@
 						  
 						  <div class="form-group">
 						   	 <label for="local">Local:</label>
-						   	 <input type="text" class="form-control" id="local" name="local" value="${vo.local}">
+						   	 <%-- <input type="text" class="form-control" id="local" name="local" value="${vo.local}"> --%>
+						   	 <select class="" id="" name="local">
+						   	 	<option value="서울">서울</option>
+						   	 	<option value="경기">경기</option>
+						   	 	<option value="인천">인천</option>
+						   	 	<option value="대전/충청">대전/충청</option>
+						   	 	<option value="대구">대구</option>
+						   	 	<option value="부산/울산">부산/울산</option>
+						   	 	<option value="경상">경상</option>
+						   	 	<option value="광주/전라/제주">광주/전라/제주</option>
+							 </select>
 						  </div>
 						  
 						  <div class="form-group">
@@ -47,12 +62,12 @@
 						  
 						  <div class="form-group">
 						   		<label for="totalTheater">TotalTheater:</label>
-						   	 <input type="text" class="form-control" id="totalTheater" name="totalTheater" value="${vo.totalTheater}">
+						   	 <input type="text" class="form-control" id="totalTheater" name="totalTheater" value="${vo.totalTheater}" readonly="readonly">
 						  </div>
 						  
 						  <div class="form-group">
 						   		<label for="totalSeat">TotalSeat:</label>
-						   	 <input type="text" class="form-control" id="totalSeat" name="totalSeat" value="${vo.totalSeat}">
+						   	 <input type="text" class="form-control" id="totalSeat" name="totalSeat" value="${vo.totalSeat}" readonly="readonly">
 						  </div>
 						  
 						  
@@ -72,29 +87,20 @@
 						   	 <input type="text" class="form-control" id="intro" name="intro" value="${vo.intro}">
 						  </div>
 			
-						  
-			
-						  <button type="submit" class="btn btn-default">Submit</button>
-			
-					</form>
-					  <c:if test="${path eq 'Update'}">
+
+						  <button type="submit" class="round inred">등록</button>
+						</form>
+					
+						<c:if test="${path eq 'Update'}">
 							<button type="button" id="btn_delete" value="${vo.num}">Delete</button>
-					  </c:if>
+						</c:if>
 
-
-
-				</div>
-			</main>
+					</div>
+				</main>
                 <c:import url="../template/footer.jsp"></c:import>
             </div>
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
-        
-        
-        
-        <script type="text/javascript">
-        	
-		
-        </script>
+
     </body>
 </html>

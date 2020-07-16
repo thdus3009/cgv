@@ -284,58 +284,36 @@ $("#btn_insert").click(function(){
 	var name = document.getElementById("name");
 	var seatCount = document.getElementById("seatCount");
 
-	var nameCheck = true;
-	var seatCheck = true;
+	var nameCheck = false;
+	var seatCheck = false;
 
-/*	if(name.value.length<1){
-		alert("상영관명을 입력해주세요.")
+	if(name.value.length<1){
+		alert("상영관명을 입력해주세요!");
 	}else{
 		nameCheck = true;
 	}
 
-	if(seatCheck<1){
-		alert("좌석을 선택해주세요.");
+	if(seatCount<1){
+		alert("좌석을 선택해주세요!");
 	}else{
 		seatCheck = true;
-	}*/
-
-	if(nameCheck && seatCheck){
-		$("#frm").submit();
+	}
+	
+	//2D, 3D, 4D 체크
+	var chkbox = document.getElementsByName('filmType');
+	
+	var typeCheck = false;
+	
+	for(var i=0; i<chkbox.length; i++){
+		if(chkbox[i].checked){
+			typeCheck = true;
+			break;
 		}
+	}
+	
+	//submit
+	if(nameCheck && seatCheck && typeCheck){
+		$("#frm").submit();
+	}
 
 });
-
-
-/* 유효성 검사	*/
-var submitStop = function() {
-	e.preventDeafault();
-	e.stopPropagation();
-}
-
-function chk() {
-	// 이름
-	if ($("#name").val() == '') {
-		alert("이름을 입력해주세요!");
-		$("#frm").on('submit', submitStop);
-	}
-	// 타입
-	var check = true;
-	$('.ckfm').each(function(i) {
-		console.log([ i ] + "d");
-		if ($("#" + [ i ] + "d").is(':checked')) {
-			check = true;
-			return false;
-		} else {
-			check = false;
-		}
-
-		if (check == true) {
-			return;
-		}
-	});
-	if (check == false) {
-		alert("타입을 체크해주세요!");
-		$("#frm").on('submit', submitStop);
-	}
-	//좌석
-}

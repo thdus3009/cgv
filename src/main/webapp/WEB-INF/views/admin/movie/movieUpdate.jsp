@@ -24,7 +24,7 @@
 				<div class="container-fluid">
 
 					<h1>Movie Update</h1>
-					<p>영화 등록</p>
+					
 
 					<div>
 						<div class="contents">
@@ -39,8 +39,8 @@
 											<fieldset>
 												<div class="tbl_write">
 												
-												<input type="text" id="trailerCount" value="${tco}" name="trailerCount"><!-- 카운트 값이 들어옴 -->
-												<input type="text" id="steelCutCount" value="${sco}" name="steelCutCount">
+												<input type="hidden" id="trailerCount" value="${tco}" name="trailerCount"><!-- 카운트 값이 들어옴 -->
+												<input type="hidden" id="steelCutCount" value="${sco}" name="steelCutCount">
 												
 												
 												<input type="hidden" value="${vo.num}" id="num" name="num">
@@ -80,14 +80,14 @@
 															</c:if>
 															<!-- ============== -->
 															
-															<div style="float: left;" id="tra">
-															<div class="form-group" style="float: left; width: 650px;" id="1d">
+															<div  id="tra" >
+															<div class="form-group"  width: 550px;" id="1d">
 																<label for="files">트레일러 img:</label>
 																<input type="button" id="addI" value="추가">
 																
 																	<c:forEach var="ar" items="${ar}" varStatus="i">
 																		<c:if test="${ar.type eq 2 }">
-																		<div>
+																		<div >
 																		<label for="files"></label> 
 																		<input type="file"
 																		class="form-control files check" id="files${i.index}"
@@ -100,34 +100,33 @@
 																		</div>
 																		</c:if>
 																	</c:forEach>
-																	<div class="form-group"  id="f">
 																	
-																	</div>
-															</div>
-															
-															
-															<div class="form-group" style="float: left; width: 650px; margin-left: 80px;margin-right: 50px;" id="2d">
-																<label for="videolink">예고 영상:</label>
-																	
+																	<!-- 비디오 링크 -->
 																	<c:forEach var="ar" items="${ar}" varStatus="i" >
 																		<c:if test="${ar.type eq 2 }">
-																		 <input type="text"
+																		<div >
+																		 	<input type="text"
 																			class="form-control videolink check " id="videolink${i.index}"
 																			placeholder="예고편 영상 링크" name="videolink" value="${ar.movieVideoVOs[0].videolink}"><br>
-																	</c:if>	
-																</c:forEach>
-																<div class="form-group"  id="f2">
-																	
+																		</div>
+																		</c:if>	
+																	</c:forEach>
+																	<!--  추가   -->
+															</div>
+																<div class="form-group"  id="f">
+																		
 																</div>
 															</div>
 															
-															</div>
+															
+															
+															
 															<!-- ============== -->
 															
 															
-															<div class="form-group">
-																<label for="title">제목:</label> <input type="text"
-																	class="form-control check" id="title" name="title" value="${vo.title}">
+															<div class="form-group" style="clear: both;">
+																<label for="title" style="position: absolute;">제목:</label> 
+																<input type="text" class="form-control check" id="title" name="title" value="${vo.title}">
 															</div>
 															<div class="form-group">
 
@@ -325,12 +324,12 @@
 		
 		if(count <3){
 			$("#f").append('<div class="group2">'+
-					'<input type="file" multiple="multiple" style="width: 45%!important; float:left; "'+
+					'<input type="file" multiple="multiple" style="width: 550px!important; float:left; "'+
 					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
 					'<input type="text" class="form-control videolink check form-control2" '+
 					'id="videolink" placeholder="예고편 영상 링크" name="videolink"'+
-					'style="padding: 12px; width: 45%!important;display: inline-block;">'+
-					'<span class="x" style="width: 10%!important;" >X</span>' +
+					'style="padding: 12px; width: 550px!important; ">'+
+					'<span class="x" style="width: 10px!important;" >X</span>' +
 					'</div>');
 		
 

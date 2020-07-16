@@ -75,10 +75,15 @@ function changeSelect(){
 				'<span class="col_plus" onclick="colPlus('+j+')"><img src="../../images/theater/plus.png" id="img"></span>'+
 				'<div class="col_label">'+j+'</div>');
 				}	
+
 			}
 		$("#seats_list").append('</div></div>');		
 		listLength = list.length;
 	}
+	
+	//마지막 행, 열의 space 조정 버튼 지우기
+	$(".c"+col).find(".col_plus").remove();
+	$(".r"+row).find(".row_plus").remove();
 	
 }
 
@@ -88,11 +93,12 @@ function checkSeat(name){
 	console.log(name);
 
 	var grade=1; 
-	var ck = $(name).attr("name");
-	console.log("ck : " + ck);
+	var chName = $(name).attr("name");
+	var chClass = $(name).attr("class");;
+	//console.log("ck : " + ck);
 
-	var rw = ck.substring(0,1);
-	var cl = ck.substring(1,2); 
+	var rw = chName.substring(0,1);
+	var cl = chName.substring(1,2); 
 	console.log("rw : " + rw);
 	console.log("cl : " + cl);
 	
@@ -100,18 +106,27 @@ function checkSeat(name){
 
 	//좌석 삭제
 	case 0:
-		if(ck=='del'){
-			$(name).attr("name","");
+		
+		if(chClass=='rating_delete'){
+			//$(name).attr("name","");
+			$(name).removeClass();
 			$(name).addClass("rating_economy")
+			for(i=0; i<listLength; i++){
+				if(list[i].row == rw && list[i].col == cl){
+					list[i].grade = 1;
+					console.log("-----------:"+list[i].grade);
+				}
+			}
 
 			seatCount += 1;
 			$("#seatCount").val(seatCount);
 			
 		}else{
+			$(name).removeClass();
 			$(name).addClass("rating_delete");
 			// vo.grade=0; (k k 0)
 			//vo의 row가 A, col이 B인 것을 찾아 grade 값 바꾸기
-			$(name).attr("name","del");
+			//$(name).attr("name","del");
 			for(i=0; i<listLength; i++){
 				if(list[i].row == rw && list[i].col == cl){
 					list[i].grade = 0;
@@ -130,7 +145,8 @@ function checkSeat(name){
 	case 1:
 		// 테두리 색 맞게 바꾸기
 		// vo.grade = 1
-		if(ck!='del'){
+		if(chClass!='rating_delete'){
+		$(name).removeClass();
 		$(name).addClass("rating_economy");
 			for(i=0; i<listLength; i++){
 				if(list[i].row == rw && list[i].col == cl){
@@ -145,8 +161,8 @@ function checkSeat(name){
 	case 2:
 		// 테두리 색 맞게 바꾸기
 		// vo.grade = 2 
-		if(ck!='del'){
-		
+		if(chClass!='rating_delete'){
+		$(name).removeClass();
 		$(name).addClass("rating_standard");
 		
 			for(i=0; i<listLength; i++){
@@ -162,8 +178,9 @@ function checkSeat(name){
 	case 3:
 		// 테두리 색 맞게 바꾸기
 		// vo.grade = 3
-		if(ck!='del'){
+		if(chClass!='rating_delete'){
 		//$(name).find("span").css('border','2px solid #f71708');
+		$(name).removeClass();
 		$(name).addClass("rating_prime");
 			for(i=0; i<listLength; i++){
 				if(list[i].row == rw && list[i].col == cl){
@@ -284,58 +301,36 @@ $("#btn_insert").click(function(){
 	var name = document.getElementById("name");
 	var seatCount = document.getElementById("seatCount");
 
-	var nameCheck = true;
-	var seatCheck = true;
+	var nameCheck = false;
+	var seatCheck = false;
 
-/*	if(name.value.length<1){
-		alert("상영관명을 입력해주세요.")
+	if(name.value.length<1){
+		alert("상영관명을 입력해주세요!");
 	}else{
 		nameCheck = true;
 	}
 
-	if(seatCheck<1){
-		alert("좌석을 선택해주세요.");
+	if(seatCount<1){
+		alert("좌석을 선택해주세요!");
 	}else{
 		seatCheck = true;
-	}*/
-
-	if(nameCheck && seatCheck){
-		$("#frm").submit();
+	}
+	
+	//2D, 3D, 4D 체크
+	var chkbox = document.getElementsByName('filmType');
+	
+	var typeCheck = false;
+	
+	for(var i=0; i<chkbox.length; i++){
+		if(chkbox[i].checked){
+			typeCheck = true;
+			break;
 		}
+	}
+	
+	//submit
+	if(nameCheck && seatCheck && typeCheck){
+		$("#frm").submit();
+	}
 
 });
-
-
-/* 유효성 검사	*/
-var submitStop = function() {
-	e.preventDeafault();
-	e.stopPropagation();
-}
-
-function chk() {
-	// 이름
-	if ($("#name").val() == '') {
-		alert("이름을 입력해주세요!");
-		$("#frm").on('submit', submitStop);
-	}
-	// 타입
-	var check = true;
-	$('.ckfm').each(function(i) {
-		console.log([ i ] + "d");
-		if ($("#" + [ i ] + "d").is(':checked')) {
-			check = true;
-			return false;
-		} else {
-			check = false;
-		}
-
-		if (check == true) {
-			return;
-		}
-	});
-	if (check == false) {
-		alert("타입을 체크해주세요!");
-		$("#frm").on('submit', submitStop);
-	}
-	//좌석
-}

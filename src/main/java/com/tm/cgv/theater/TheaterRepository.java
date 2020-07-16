@@ -1,6 +1,7 @@
 package com.tm.cgv.theater;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,6 +35,6 @@ public interface TheaterRepository {
 	
 	public int theaterNum() throws Exception;
 	
-	public List<MovieTimeVO> theaterMovieTime(int num) throws Exception;
+	public List<MovieTimeVO> theaterMovieTime(Map<String, Object> d) throws Exception;
 
 }

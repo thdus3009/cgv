@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.cinema.CinemaRepository">
 	
 	<insert id="cinemaInsert" parameterType="CinemaVO">
-		insert into cinema (name, local, address, tel, totalTheater, trafficInfo, parkingInfo, intro)
-		values (#{name}, #{local}, #{address}, #{tel}, #{totalTheater}, #{trafficInfo}, #{parkingInfo}, #{intro})
+		insert into cinema (name, local, address, tel, totalTheater, totalSeat, trafficInfo, parkingInfo, intro)
+		values (#{name}, #{local}, #{address}, #{tel}, 0, 0, #{trafficInfo}, #{parkingInfo}, #{intro})
 	</insert>
 
 
@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		trafficInfo=#{trafficInfo}, parkingInfo=#{parkingInfo}, intro=#{intro} where num=#{num}
 	</update>
 	
+
+	<update id="totalUpdate" parameterType="CinemaVO">
+		update cinema set totalTheater=totalTheater+1, totalSeat=totalSeat+#{totalSeat} where num=#{num}
+	</update>
+	
+
 	<delete id="cinemaDelete" parameterType="Integer">
 		delete from cinema where num=#{num}
 	</delete>
@@ -39,15 +45,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from cinema order by local
 	</select>
 	
-	<select id="cineList" parameterType="String" resultType="CinemaVO">
-		select * from cinema
+	<select id="adminCinemaList" parameterType="Pager" resultType="CinemaVO">
+		select * from cinema 		
 		<where>
 		<if test="local != ''">
 			local=#{local}
 		</if>
 		</where>
-		order by num
+		order by num desc limit #{startRow}, #{perPage}
 	</select>
+	
+	<select id="adminCinemaCount" parameterType="Pager_cinema" resultType="Integer">
+		select count(num) from cinema 		
+		<where>
+		<if test="local != ''">
+			local=#{local}
+		</if>
+		</where>
+	</select>
+	
+	<update id="theaterDelete" parameterType="TheaterVO">
+		update cinema set totalTheater=totalTheater-1, totalSeat=totalSeat-#{seatCount} where num=#{cinemaNum}
+	</update>
 	
 	
 

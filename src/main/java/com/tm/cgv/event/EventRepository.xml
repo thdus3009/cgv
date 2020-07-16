@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tm.cgv.event.EventRepository">
+	<resultMap type="EventVO" id="selectList">
+		<id column="num" property="num"></id>
+		<result column="kind" property="kind"/>
+		<result column="title" property="title"/>
+		<result column="startDate" property="startDate"/>
+		<result column="endDate" property="endDate"/>
+		<result column="contents" property="contents"/>
+	
+		<collection property="eventImageVOs" javaType="List" ofType="EventImageVO">
+			<id column="imageNum" property="num"></id>
+			<result column="fileName" property="fileName"/>
+			<result column="originName" property="originName"/>
+			<result column="type" property="type"/> 
+		</collection>
+		
+	</resultMap>
+
+
+	<select id="eventList" parameterType="Pager" resultType="EventVO">
+ 		select E.*, I.fileName, I.originName, I.type from 
+ 		(
+ 		select * from event where title like concat('%','','%')
+ 		<if test="kind != ''">
+ 		<choose>
+ 			<when test="kind=='special'">	
+ 				and kind='special'
+ 			</when>
+ 			<when test="kind=='movie'">
+ 				and kind='movie'
+ 			</when>
+ 			<when test="kind=='pub'">
+ 				and kind='pub'
+ 			</when>
+ 			<when test="kind=='discount'">
+ 				and kind='discount'
+ 			</when>
+ 			<otherwise>
+ 				and kind='membership'
+ 			</otherwise>
+ 		</choose>
+ 		</if>
+ 		) as E
+		left join eventImage I
+		on E.num = I.eventNum
+		where I.type=0
+		order by E.num desc limit #{startRow},#{perPage}
+	</select>
+	
+	<insert id="eventInsert" parameterType="EventVO" useGeneratedKeys="true" keyProperty="num">
+		insert into event (num, kind, title, startDate, endDate, contents) 
+		values (#{num}, #{kind}, #{title}, #{startDate}, #{endDate}, #{contents})
+	</insert>
+	
+	<select id="eventSelect" parameterType="Integer" resultMap="selectList">
+		select E.*, I.* from
+		(select * from event) as E
+		left join
+		(select num as imageNum, eventNum, fileName, originName, type from eventImage) as I
+		on (E.num = I.eventNum)
+		where E.num=#{num}
+
+	</select>
+	
+	<update id="eventUpdate" parameterType="EventVO">
+		update event set kind=#{kind}, title=#{title}, 
+		startDate=#{startDate}, endDate=#{endDate}, contents=#{contents}
+		where num=#{num}
+	</update>
+	
+	<select id="eventCount" resultType="Integer">
+		select count(num) from event where 
+ 		title like concat('%',#{search},'%')
+ 		<if test="kind != ''">
+ 		<choose>
+ 			<when test="kind=='special'">	
+ 				and kind='special'
+ 			</when>
+ 			<when test="kind=='movie'">
+ 				and kind='movie'
+ 			</when>
+ 			<when test="kind=='pub'">
+ 				and kind='pub'
+ 			</when>
+ 			<when test="kind=='discount'">
+ 				and kind='discount'
+ 			</when>
+ 			<otherwise>
+ 				and kind='membership'
+ 			</otherwise>
+ 		</choose>
+ 		</if>
+ 		order by num desc
+ 		
+	</select>
+	
+	<delete id="eventDelete" parameterType="Integer">
+		delete from event where num=#{num}
+	</delete>
+	
+	
+	
+</mapper>
