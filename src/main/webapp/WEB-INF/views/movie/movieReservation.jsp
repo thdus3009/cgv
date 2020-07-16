@@ -680,10 +680,10 @@
 		
 		
 		//이니시스 실행
-		//payment_inicis(data);
+		payment_inicis(data);
 		
 		//test 결제 없이 바로 예매 - 좌석예매 진행
-		reservation_save(1);
+		//reservation_save(1);
 	});
 
 

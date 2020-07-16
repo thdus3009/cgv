@@ -33,7 +33,7 @@
 									<div style="display:flex!important;">
 										<div class="form-group" style="width: 40%;">
 											<label for="local">지역</label> 
-											<input type="text" value="${cinemaVO.local}" class="form-control" readonly="readonly">
+											<input type="text" value="${cinemaVO.local}" class="form-control" readonly="readonly" >
 										</div>
 										<div class="form-group" style="width: 40%;margin-left: 10px;">
 											<label for="cinema">영화관</label> 
@@ -73,9 +73,9 @@
 													<input type="hidden" name="num" value="${timePriceVO.num}">										
 													<div class="form-group" style="width: 45%;">
 														<div style="display:flex!important;">
-															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>
 															 ~ 
-															<input type="text" name="eTime" value="${timePriceVO.getETime()}" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+															<input type="text" name="eTime" value="${timePriceVO.getETime()}" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>
 														</div>
 													</div>
 													
@@ -98,9 +98,9 @@
 												<div class="underData" id="default" style="display:flex!important;">
 													<div class="form-group" style="width: 45%;">
 														<div style="display:flex!important;">
-															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" style="width: 45%;  margin: 0 auto"/>
+															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" style="width: 45%;  margin: 0 auto" required="required"/>
 															 ~ 
-															<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>
+															<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>
 														</div>
 													</div>
 													
@@ -294,9 +294,9 @@
 			var html = '<div class="underData" style="display:flex!important;">'
 			+ '<div class="form-group" style="width: 45%;">'
 			+ '<div style="display:flex!important;">'
-			+ '<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>'
+			+ '<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
 			+ ' ~ ' 
-			+ '<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto"/>'
+			+ '<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
 			+ '</div>'
 			+ '</div>'
 			+ '<div class="form-group" style="width: 25%;">'

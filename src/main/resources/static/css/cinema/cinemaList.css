@@ -645,7 +645,7 @@ dl:after, ul:after, li:after {
 
 tr.fir td{
 	border-top: 1px solid #ab9c8f;
-	
+	padding-top: 13px;
 }
 
 
