@@ -34,7 +34,7 @@
 									<div class="col_detail">
 
 
-										<form action="./movieUpdate" method="post" enctype="multipart/form-data">
+										<form action="./movieUpdate" method="post" enctype="multipart/form-data" id="fo">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 											<fieldset>
@@ -69,16 +69,18 @@
 															<div class="form-group">
 																<label for="files">타이틀 이미지:</label>
 																<c:if test="${path  eq 'Update'}">
-																	<p style="display: inline;">${vo.movieImageVOs[0].originName}
+																	<p style="display: inline;">
 																		<%-- <i id="${vo.num}" class=" fileDelete"></i> --%>
+																		<i class="fileDelete fdt" data-type="1" name="${vo.movieImageVOs[0].fileName}" id="${vo.movieImageVOs[0].num}">
 																		<img alt="" src="../../images/movie/movieList/x.png"
-																			style="width: 20px; height: 20px;" class="fileDelete"
+																			style="width: 20px; height: 20px;" 
 																			id="${vo.movieImageVOs[0].num}">
+																		</i>
 																		<!-- 썸네일 num -->
 																	</p>
 																</c:if>
-																<input type="file" class="form-control files check"
-																	id="files" placeholder="타이틀 이미지 선택" name="files">
+																<input type="text" class="form-control files check"
+																	id="files" placeholder="타이틀 이미지 선택" name="files" value="${vo.movieImageVOs[0].originName}" >
 															</div>
 															<!-- ============== -->
 															
@@ -241,22 +243,34 @@
 	<!-- 스크립트 -->
 	<c:import url="../template/scripts.jsp"></c:import>
 	<script type="text/javascript">
-	
+	var deleteImage =[];
 	// ====썸네일 =====
 	$(".fileDelete").click(function(){
 		var check = confirm("삭제하시겠습니까?");
 		if(check){
-			var s = $("#num1").val();
+
+			var s =$(".fdt");
+			var tp = s.data("type");
+			alert("tp : " +tp);
+
+			s.parent().find('input').remove();
+			s.parent().html('<input type="file" class="form-control files" id="files" placeholder="썸네일 이미지 선택" name="files">');
+			
+			deleteImage.push(s.attr('id'));
+			alert(deleteImage+" : deleteImage num");
+			$("#fo").append('<input type="text" name="delNum" value="'+ deleteImage[deleteImage.length-1] +'">');
+			
+			/* var s = $("#num1").val();
 			console.log(s+"썸네일 num");
 			var fileName1=$("#fileName1").val();
-			console.log(fileName1 +"썸 파일이름")
+			console.log(fileName1 +"썸 파일이름") */
 			
-			$.post("../../movieImage/movieImageDelete",{num:s,fileName:fileName1,_csrf : $("#_csrf").val()},function(data){
+			/* $.post("../../movieImage/movieImageDelete",{num:s,fileName:fileName1,_csrf : $("#_csrf").val()},function(data){
 				console.log(data+"dd");//null
 				if(data>0){
 					$(".fileDelete").parent().remove();
 					}
-				});
+				}); */
 			}
 		});
 

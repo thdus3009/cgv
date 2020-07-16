@@ -335,7 +335,7 @@ public class MovieInfoService {
 		
 	}
 	
-	public long movieUpdate(MovieInfoVO movieInfoVO,List<MultipartFile> files, String[] videolink,int trailerCount,int steelCutCount)throws Exception{
+	public long movieUpdate(MovieInfoVO movieInfoVO,List<MultipartFile> files, String[] videolink,int trailerCount,int steelCutCount,String[] delNum)throws Exception{
 		String path = FilePathGenerator.addTimePath("")+"\\";
 		System.out.println(path+"path!!!!");
 		String extendPath = FilePathGenerator.addTimePath(filePath);
@@ -352,16 +352,23 @@ public class MovieInfoService {
 		//공통작업
 		MovieImageVO movieImageVO = new MovieImageVO();
 		movieImageVO.setMovieNum(movieInfoVO.getNum());
-		
+		MultipartFile tmp=null;
+		String fileName="";
 		//썸네일 관련 작업
-		MultipartFile tmp = files.remove(0);
-		fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
-		String fileName = fileManager.saveTransfer(tmp, file);
-		movieImageVO.setType(1);
-		movieImageVO.setFileName(path+fileName);
-		movieImageVO.setOriginName(tmp.getOriginalFilename());
-		result = movieImageRepository.movieImageInsert(movieImageVO);
-		
+		if(delNum!=null) {
+			MovieImageVO vo = this.selectImage(Integer.parseInt(delNum[0]));
+			this.fileDelete(vo);
+			
+			tmp = files.remove(0);
+			fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
+			fileName = fileManager.saveTransfer(tmp, file);
+			movieImageVO.setNum(Integer.parseInt(delNum[0]));
+			movieImageVO.setType(1);
+			movieImageVO.setFileName(path+fileName);
+			movieImageVO.setOriginName(tmp.getOriginalFilename());
+			//result = movieImageRepository.movieImageInsert(movieImageVO);
+			result = movieImageRepository.movieImageUpdate(movieImageVO);
+		}
 		//트레일러
 		
 		System.out.println(trailerCount+"tcount");
@@ -398,9 +405,18 @@ public class MovieInfoService {
 		return result;
 		
 	}
+	public MovieImageVO selectImage(int num) throws Exception{
+		return movieImageRepository.movieImageSelect(num);
+	}
 	
 	public long movieDelete(MovieInfoVO movieInfoVO)throws Exception{
 		long result= movieInfoRepository.movieDelete(movieInfoVO);
+		return result;
+	}
+	public int fileDelete(MovieImageVO movieImageVO) throws Exception{
+		FileManager fileManager = new FileManager();
+		File dest = filePathGenerator.getUseClassPathResource(filePath);
+		int result = fileManager.deleteFile(movieImageVO.getFileName(), dest);
 		return result;
 	}
 	
