@@ -99,7 +99,7 @@
 							<!-- 쓰기 -->
 							<form action="" method="get" class="diary-form">
 								<!-- 누르면... 영화목록 -->
-								<div class="mv-div" id="mv-m" style="cursor: pointer;">
+								<div class="mv-div" id="mv-m" style="cursor: pointer;" >
 									<img alt="icon" src="/images/review/ico_how_movie.gif" class="mv-con">
 									<span class="mv-span">어떤 영화를 보셨나요?</span>
 									<img alt="열기" src="/images/review/ico_spread.png" class="li-open">
@@ -117,21 +117,21 @@
 												<p style="margin-top: 10px; font-weight: 600;">${vo.screenDate}&emsp;${vo.screenTime}</p>
 												<p>${vo.cinemaName}&ensp;${vo.theaterName}</p>
 											</div>
-											<button type="button" class="go-look mv-c">선택</button>
+											<button type="button" class="go-look mv-c" data-num="${vo.num}">선택</button>
 										</li>
 									</ul>
 								</c:forEach>
 								</div>
 								<div class="mv-div">
 									<img alt="icon" src="/images/review/ico_how_together.gif">
-									<input type="text" placeholder="누구와 함께 영화를 보셨나요?">
+									<input type="text" id="with" placeholder="누구와 함께 영화를 보셨나요?">
 								</div>
 								<div class="mv-div" style="height: 130px;">
 									<img alt="icon" src="/images/review/ico_how_see.gif">
-									<textarea placeholder="영화 어떻게 보셨나요?" rows="6;"></textarea>
+									<textarea placeholder="영화 어떻게 보셨나요?" id="opinion" rows="6;"></textarea>
 								</div>
 								<div class="mv-btn">
-									<button type="submit" class="mv-sub" style="background-color: #e71a0f; color: #fff;">게시</button>
+									<button type="button" class="mv-sub" style="background-color: #e71a0f; color: #fff;">게시</button>
 									<button type="reset" class="mv-can" style="background-color: #7b7b7b; color: #fff;">취소</button>
 								</div>
 							</form>
@@ -153,12 +153,20 @@
 	<script type="text/javascript" src="../js/review/checkByte.js"></script>
 	<script type="text/javascript" src="../js/review/reviewSubmit.js"></script>
 	<script type="text/javascript">
+	var num = 0;
+	var w = "";
+	var o = "";
+	
 	//모달 켜짐
-	$("#mv-m").click(function(){
-		$(".li-open").toggle();
-		$(".li-close").toggle();
-		$(".modal-div").toggle();
-	});
+	   $("#mv-m").click(function(){
+	      if($("#mv-m").children('.mv-li').length!=0){
+	         console.log("stop");
+	      }else{
+	      $(".li-open").toggle();
+	      $(".li-close").toggle();
+	      $(".modal-div").toggle();
+	      }
+	   });
 
 	//모달 꺼짐
 	$(".li-close").click(function(){
@@ -177,6 +185,11 @@
 		$(".mv-con").toggle();
 		$(".mv-c").toggle();
 		$(".mv-span").toggle();
+
+		//커서 변경
+		$('#mv-m').css('cursor', 'default');
+		
+		num = $(this).attr("data-num");
 		
 	});
 	
@@ -188,12 +201,27 @@
 			e.preventDefault();
 		}else{
 			if(confirm("등록하시겠습니까?")){
-				alert("등록되었습니다.");
+				console.log("num: "+num);
+				w = document.getElementById("with").value;
+				o = document.getElementById("opinion").value;
+				console.log(w);
+				console.log(o);
+
+				$.ajax {
+					
+				}
+				//alert("등록되었습니다.");
 			}else{
 				e.preventDefault();
 			}
 		}
 	});
+
+	$(".mv-can").click(function(){
+		//alert($("#mv-m").children('.mv-li').length);
+		location.reload();
+	});
+
 	</script>
 
 </body>
