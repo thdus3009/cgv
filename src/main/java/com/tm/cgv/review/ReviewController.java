@@ -327,14 +327,16 @@ public class ReviewController {
    
    @GetMapping("reviewDiary")
    public ModelAndView reviewDiary(HttpSession session, ModelAndView mv)throws Exception {
+	   
 	   MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
 	   String uid = memberVO.getUsername(); 
-		/*
-		 * List<ReviewVO> reviewDiary = reviewService.reviewDiary(uid);
-		 * 
-		 * mv.addObject("diary", reviewDiary);
-		 */
+		
+	   List<ReviewVO> reviewDiary = reviewService.reviewDiary(uid);
+	  
+	   mv.addObject("diary", reviewDiary);
+		 
 	   mv.setViewName("review/reviewDiary");
+	   
 	   return mv;
    }
    

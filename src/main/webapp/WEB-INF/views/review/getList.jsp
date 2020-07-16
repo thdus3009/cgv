@@ -9,11 +9,13 @@
       <div class="list_p" style="position: relative;">
 
          <div class="list_p_content"><!-- 이미지 주소부분 나중에 수정해야함 -->
-            <div class="list_p_photo"><img alt="" src="${pageContext.request.contextPath}/images/${vo.fileName}" width="110px" height="154.6px"> </div>
+            <div class="list_p_photo" style="position: relative; top: 10px;">
+            	<img alt="" src="${pageContext.request.contextPath}/images/movie/movieList/filmCover/${vo.fileName}" width="110px" height="154.6px"> 
+            </div>
             <div class="list_p_contents1">
                <div><!-- 제목,삭제버튼 -->
                   <div class="list_p_contents2 td1" style="font-weight: bold; font-size: x-large; ">${vo.title}</div>
-                  <span class="titleEng">${vo.num}&ensp; ${vo.titleEng}</span> <!-- reservationNum -->
+                  <span class="titleEng">${vo.num}&ensp; ${vo.titleEng}</span> <!-- reservationNum & titleEng-->
                   <div class="td1 hd">
                      <button class="hd_btn" data-num="${vo.num}">
                         <img alt="" src="${pageContext.request.contextPath}/images/btn_del.gif">
@@ -52,7 +54,7 @@
 
                         </c:if>
                      </div>
-                     <div style="display: inline-block; position: absolute; right:11px; top:123px;" >
+                     <div style="display: inline-block; position: absolute; right:11px; top:121px;" >
 						<a href="./reviewDiary" class="round inblack diaryBtn">
 							<span class="diary">&ensp;무비다이어리 쓰기&ensp;</span>
 						</a>

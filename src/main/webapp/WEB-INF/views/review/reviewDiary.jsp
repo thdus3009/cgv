@@ -107,20 +107,20 @@
 								</div>
 								<!-- 반복, 모달 -->
 								<div class="modal-div">
-								<%-- <c:foreach items="${diary}" var="vo"> --%>
+								<c:forEach items="${diary}" var="vo">
 									<ul>
 										<li class="mv-li">
-											<img alt="프로필 사진" src="/images/fc5f605d-eccc-43bd-b181-89c348728cef_harry1.jpg">
+											<img alt="프로필 사진" src="/images/movie/movieList/filmCover/${vo.fileName}">
 											<div class="mv-li-info">
-												<strong>영화제목</strong>
-												<p>영문제목</p>
-												<p style="margin-top: 10px; font-weight: 600;">날짜</p>
-												<p>영화관정보</p>
+												<strong>${vo.title}</strong>
+												<p>${vo.titleEng}</p>
+												<p style="margin-top: 10px; font-weight: 600;">${vo.screenDate}&emsp;${vo.screenTime}</p>
+												<p>${vo.cinemaName}&ensp;${vo.theaterName}</p>
 											</div>
 											<button type="button" class="go-look mv-c">선택</button>
 										</li>
 									</ul>
-								<%-- </c:foreach> --%>
+								</c:forEach>
 								</div>
 								<div class="mv-div">
 									<img alt="icon" src="/images/review/ico_how_together.gif">

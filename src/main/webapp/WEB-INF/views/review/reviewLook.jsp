@@ -84,7 +84,7 @@
                               <!-- 이미지 주소부분 나중에 수정해야함 -->
                               <div class="list_p_photo">
                                  <img alt=""
-                                    src="${pageContext.request.contextPath}/images/${vo.fileName}">
+                                    src="${pageContext.request.contextPath}/images/movie/movieList/filmCover/${vo.fileName}">
                               </div>
                               <div class="list_p_contents1">
                                  <!-- 타이틀(제목)/리뷰삭제 -->
