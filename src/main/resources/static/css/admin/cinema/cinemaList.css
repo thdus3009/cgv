@@ -97,6 +97,7 @@ main {
 	item-align: center;
 }
 
+
 /* price */
 .container-box {
 	width: 600px;
@@ -109,7 +110,7 @@ main {
 
 .time-table>strong {
 	text-align: left;
-	color: #00;
+	color: #000;
 	font-weight: 600;
 	font-family: 'CJ+ONLYONE+Medium';
 }
@@ -140,4 +141,19 @@ main {
 
 .time-tr>td:last-child {
 	border-left: 1px solid #000;
+}
+
+.select_top	{
+	display:block;
+}
+
+.container-fluid	{
+	position:relative;
+}
+
+.btn_group	{
+	position:absolute;
+	top:40px;
+	right:40px;
+
 }

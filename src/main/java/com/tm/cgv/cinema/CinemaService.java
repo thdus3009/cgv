@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tm.cgv.theater.TheaterVO;
+import com.tm.cgv.util.Pager;
+import com.tm.cgv.util.Pager_cinemaList;
 
 
 @Service
@@ -65,6 +67,16 @@ public class CinemaService {
 	public List<CinemaVO> cineList(String local) throws Exception {
 		return cinemaRepository.cineList(local);
 	}
+	
+	public List<CinemaVO> adminCinemaList(Pager_cinemaList pager) throws Exception	{
+		//pager 처리
+		cinemaRepository.adminCinemaCount(pager);
+		pager.makeRow();
+		int totalCount = cinemaRepository.adminCinemaCount(pager);
+		pager.makeBlock(totalCount);
+		
+		return cinemaRepository.adminCinemaList(pager);
+	} 
 
 
 }

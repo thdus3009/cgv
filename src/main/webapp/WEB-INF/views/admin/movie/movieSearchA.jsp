@@ -6,14 +6,14 @@
 <head>
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
+
+
 </head>
 <body class="sb-nav-fixed">
-
-	<c:import url="../template/header.jsp"></c:import>
-
+<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
-		
+
 		<c:import url="../template/sidenav.jsp"></c:import>
 				
 		<!-- 내용 -->
@@ -28,10 +28,10 @@
 						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 						<div class="input-group">
 							<input class="form-control" type="text" placeholder="검색어를 입력"
-								aria-label="Search" aria-describedby="basic-addon2" />
+								aria-label="Search" aria-describedby="basic-addon2"  id="searchM"/>
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="admin_search">
-									<i class="fas fa-search"></i>
+								<button class="btn btn-primary admin_search" type="button" id="admin_search" name="search">
+									<i class="fas fa-search" ></i>
 								</button>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 							<!-- 이름 누르면 상세 페이지로 이동 -->
 							<c:forEach items="${searchA}" var="vo">
 								<tr class="memberList-c">
-									<td>${vo.title}</td>
+									<td><a href="/admin/movie/movieSelect?num=${vo.num}">${vo.title}</td>
 									<td>${vo.titleEng}</td>
 									<td>${vo.runtime}</td>
 									<td>${vo.director}</td>
@@ -96,10 +96,34 @@
 					</div>
 				</div>
 			</main>
+			<c:import url="../template/footer.jsp"></c:import>
 		</div>
 	</div>
 
 	<!-- 스크립트 -->
-	<c:import url="../template/scripts.jsp"></c:import>
+
+	<script src="js/scripts.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/datatables-demo.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../../js/movie/adminList.js"></script>
+
 </body>
 </html>

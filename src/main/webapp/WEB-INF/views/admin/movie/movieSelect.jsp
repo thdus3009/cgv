@@ -7,15 +7,16 @@
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/movie/stylesMovieAdmin.css" />
 <link rel="stylesheet" href="/css/admin/movie/movie.css" />
-<link rel="stylesheet" href="/css/movie/movieSelect.css" />
+
+<link href="${pageContext.request.contextPath}/css/movie/movieSelect.css" rel="stylesheet" type="text/css">
+
 </head>
 <body class="sb-nav-fixed">
-	
-	<c:import url="../template/header.jsp"></c:import>
-
+<c:import url="../template/header.jsp"></c:import>	
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
-		
+
+
 		<c:import url="../template/sidenav.jsp"></c:import>
 				
 		<!-- 내용 -->
@@ -23,22 +24,22 @@
 			<main>
 				<div class="container-fluid">
 					<h1>movie Select</h1>
-					<p>영화 상세 페이지</p>
-					
-					<input type="text" value="${vo.num}">
+
+					<input type="hidden" value="${vo.num}">
+
 					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					
 				<div class="sect-base-movie">
 					<div class="box-image"  >
 					<a href="">
 						<span class="thumb-image">
-							<img  class="box-image" alt="" src="../../images/movie/movieList/filmCover/${vo.movieImageVOs.fileName}">
+							<img  class="box-image" alt="" src="../../images/movie/movieList/filmCover/${vo.movieImageVOs[0].fileName}">
 							<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 						</span>
 					</a>
 					</div>
 					<div class="box-contents">
-						<div class="title">
+						<div class="title2">
 							<strong id="title">${vo.title}</strong>
 							<em class="round lightblue">
 								<span>현재 상영중</span>
@@ -90,8 +91,8 @@
 								<dt>&nbsp;/ 기본 : &nbsp;</dt>
 								<dd class="">${vo.ageLimit}세 이상,&nbsp;${vo.runtime}분,&nbsp;${vo.country}</dd>
 								<br>
-								<dt>개봉 : &nbsp;</dt>
-								<dd class="on">${vo.openDate}</dd>
+								<dt class="yo" style="position: absolute; top: 200px;">개봉 : &nbsp;</dt>
+								<dd class="on" style="position: absolute; left:35px;">${vo.openDate}</dd>
 							</dl>
 						</div>
 						<span class="screentype">
@@ -107,15 +108,16 @@
 					<div class="bbs_btn">
 						
 									
-							<c:if test="${bbsVO.writer eq memberVO.id }">
+						
 								<a href="./movieDelete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
 								<a href="./movieUpdate?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
-							</c:if>
+							
 									
 					</div>	
 				</div>
 			
 			</main>
+			<c:import url="../template/footer.jsp"></c:import>
 		</div>
 	</div>
 

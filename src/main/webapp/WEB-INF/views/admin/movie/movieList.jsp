@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,12 +9,9 @@
 </head>
 <body class="sb-nav-fixed">
 
-
-	<c:import url="../template/header.jsp"></c:import>
-
+<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
-
 		<c:import url="../template/sidenav.jsp"></c:import>
 
 		<!-- 내용 -->
@@ -23,17 +20,14 @@
 				<div class="container-fluid">
 					<h1>movie List</h1>
 
-					<p>영화 목록</p>
-
-
 					<!-- 검색바 -->
 					<form
 						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 						<div class="input-group">
 							<input class="form-control" type="text" placeholder="검색어를 입력"
-								aria-label="Search" aria-describedby="basic-addon2" />
+								aria-label="Search" aria-describedby="basic-addon2" id="searchM"/>
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="admin_search" name="search">
+								<button class="btn btn-primary admin_search" type="button" id="admin_search" name="search">
 									<i class="fas fa-search"></i>
 								</button>
 							</div>
@@ -42,8 +36,8 @@
 					<!-- 정렬바 -->
 						<div class="sect-sorting">
 							<select id="selectA" name="kind">
-								<option title="2" value="date" selected="selected">최신순</option>
 								<option title="1" value="rate" >예매율순</option>
+								<option title="2" value="date" selected="selected">최신순</option>
 								<option title="3" value="title">제목순</option>
 							</select>
 							<!-- <input type="button" id="admin_sort" value="go"> -->
@@ -51,9 +45,6 @@
 								<span>GO</span>
 							</button>
 						</div>
-					
-
-					<p>영화 목록</p>
 
 					<div class="col_detail">
 						<!-- 목록 -->
@@ -94,19 +85,17 @@
 						<!-- 페이저 -->
 						<div class="pager" style="position: relative;">
 							<ul class="pagination">
-								<c:if test="${pager.curBlock>1}">
-									<li class="page-item"><a href="#" class="page-link"
-										title="${pager.startNum-1}">이전</a></li>
+
+								<c:if test="${pager.curBlock gt 1}">
+									<li><a href="./movieList?curPage=${pager.startNum-1}&kind=${pager.kind}" class="custompager page-link" title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-									var="p">
-									<li class="page-item"><a href="#" class="page-link" title="${p}">${p}</a></li>
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+									<li class="page-item"><a href="./movieList?curPage=${p}&kind=${pager.kind}" class="page-link" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li class="page-item"><a href="#" class="page-link"
-										title="${pager.lastNum+1}">다음</a></li>
+									<li><a href="./movieList?curPage=${pager.lastNum+1}&kind=${pager.kind}" class="custompager page-link" title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>
 							<!-- 글쓰기 버튼 -->
@@ -117,11 +106,13 @@
 					</div>
 				</div>
 			</main>
+			<c:import url="../template/footer.jsp"></c:import>
 		</div>
 	</div>
 
 	<!-- 스크립트 -->
 	<c:import url="../template/scripts.jsp"></c:import>
+	<script type="text/javascript" src="/js/movie/adminList.js"></script>
 	
 	<!-- <script type="text/javascript">
 	

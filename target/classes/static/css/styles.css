@@ -3325,6 +3325,16 @@ input[type=button].btn-block {
   align-items: stretch;
   width: 100%;
 }
+/* .input-group2 {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  position: absolute;
+  top: 185px;
+} */
+
 .input-group > .form-control,
 .input-group > .form-control-plaintext,
 .input-group > .custom-select,

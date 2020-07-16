@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.reservation.ReservationVO;
 import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.Pager;
@@ -22,6 +23,11 @@ public interface MovieInfoRepository {
 	public long movieWrite(MovieInfoVO movieInfoVO) throws Exception;
 	
 	public MovieInfoVO movieSelect (MovieInfoVO movieInfoVO) throws Exception;
+	public MovieInfoVO mSelect(MovieInfoVO movieInfoVO) throws Exception;
+	public List<MovieImageVO> mSelect2(MovieImageVO movieImageVO) throws Exception;
+	
+	public Map<String, Object> tco(MovieImageVO movieImageVO) throws Exception;//트레일러 카운트 값 가져오기
+	public Map<String, Object> sco(MovieImageVO movieImageVO) throws Exception;//스틸컷 카운트 값 가져오기
 	
 	public long movieUpdate(MovieInfoVO movieInfoVO) throws Exception;
 	
@@ -47,4 +53,5 @@ public interface MovieInfoRepository {
 	public List<Integer> emotionPoint(ReservationVO reservationVO) throws Exception;
 	
 	public Map<String, Object> visitor2(ReservationVO reservationVO) throws Exception;
+	public int visiUpdate(MovieInfoVO movieInfoVO) throws  Exception;
  }

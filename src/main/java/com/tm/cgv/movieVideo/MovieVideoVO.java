@@ -6,7 +6,7 @@ import lombok.Data;
 public class MovieVideoVO {
 	
 	private int num;
-	private int movieNum;
+	private int movieImageNum;
 	private String videolink;
 
 }

@@ -30,6 +30,17 @@ public class GuestController {
 	
 	
 	
+	//검색된 비밀번호 출력페이지 이동
+	@PostMapping("pwdFindResult")
+	public ModelAndView pwdFindResult(String pwd) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("pwd", pwd);
+		mv.setViewName("member/guest/memberGuestShowPwd");
+		return mv;
+	}
+	
+	
 	
 	//비회원 정보 비밀번호 찾기페이지로 이동
 	@GetMapping("memberGuestPwd")
@@ -40,7 +51,7 @@ public class GuestController {
 		return mv;
 	}
 	
-	//비밀번호 존재 엽우 확인
+	//비밀번호 존재 여부 확인
 	@ResponseBody
 	@PostMapping("guestFindPwd")
 	public int guestFindPwd(GuestVO guestVO) throws Exception{

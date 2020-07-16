@@ -111,16 +111,7 @@ public class TheaterController {
 		return mv;
 	}
 	
-	
-	//Update
-	@PostMapping("cinema/theaterUpdate")
-	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		theaterService.theaterUpdate(theaterVO, row, col, grade, row_space, col_space);
-		
-		
-		return mv;
-	}
+
 	
 	
 	

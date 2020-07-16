@@ -4,11 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/movieList.css" rel="stylesheet" type="text/css">
-
+<link href="/css/admin/pager.css" rel="stylesheet"/>
+<!-- <link href="/css/styles.css" rel="stylesheet" /> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -65,10 +68,10 @@
 							<!-- 윗 부분 -->
 							<div class="box-image">
 							 
-								<strong class="rank">No.${i.index+1}</strong> 
+								<%-- <strong class="rank">No.${i.index+1}</strong>  --%>
 								<a href="./movieSelect?num=${list.num}"> 
 									<span class="thumb-image"> 
-										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVOs.fileName}">
+										<img alt="이미지"	src="../images/movie/movieList/filmCover/${list.movieImageVOs[0].fileName}">
 										<span class="icon-grade grade-${list.ageLimit}">${list.ageLimit}</span>
 									</span>
 								</a>
@@ -125,9 +128,9 @@
 				</div>
 			
 				<!----------------------------------------------------------------------------------------------------- contents detail paging-->
-						<div class="paging">
+						<div class="paging" style="position: relative;">
 							
-							<c:if test="${pager.curBlock gt 1}">
+							<%-- <c:if test="${pager.curBlock gt 1}">
 								<button id="btn-first" type="button" class="btn_page first"></button>
 								<button id="btn-pre" type="button" class="btn_page pre">이전</button>
 							</c:if>
@@ -144,9 +147,22 @@
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
 								<button id="btn-next" type="button" class="btn_page next">다음</button>
 								<button id="btn-end" type="button" class="btn_page end">끝</button>
-							</c:if>
+							</c:if> --%>
 							
-							
+							<ul class="pagination">
+
+								<c:if test="${pager.curBlock gt 1}">
+									<li><a href="./movieSearch?curPage=${pager.startNum-1}&search=${pager.search}" class="custompager page-link" title="${pager.startNum-1}">이전</a></li>
+								</c:if>
+
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+									<li class="page-item"><a href="./movieSearch?curPage=${p}&search=${pager.search}" class="page-link" title="${p}">${p}</a></li>
+								</c:forEach>
+
+								<c:if test="${pager.curBlock<pager.totalBlock}">
+									<li><a href="./movieSearch?curPage=${pager.lastNum+1}&search=${pager.search}" class="custompager page-link" title="${pager.lastNum+1}">다음</a></li>
+								</c:if>
+							</ul>
 							
 						</div>
 			

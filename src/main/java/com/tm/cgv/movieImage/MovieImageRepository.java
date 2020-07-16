@@ -16,5 +16,6 @@ public interface MovieImageRepository {
 	
 	public int movieImageDelete(MovieImageVO movieImageVO) throws Exception;
 	
+	public List<Integer> movieGet() throws Exception;
 	
 }

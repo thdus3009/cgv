@@ -12,5 +12,7 @@ public interface SeatSpaceRepository {
 	
 
 	public List<SeatSpaceVO> seatSpaceSelect(SeatSpaceVO seatSpaceVO) throws Exception;
+	
+	public void seatSpaceDelete(int num) throws Exception;
 
 }

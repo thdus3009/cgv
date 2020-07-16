@@ -7,13 +7,13 @@
 		var kind = $("#selectA").val();
 		console.log(kind+"관리자 정렬");
 		
-		
 		location.href = "./movieList?kind="+kind;
 	});
 	
 	// 관리자 페이지 영화 리스트 검색 기능
-	$("#admin_search").click(function() {
-		var search=$("#search").val();
+	$(".admin_search").click(function() {
+		console.log("fff");
+		var search=$("#searchM").val();
 		var kind =$("#select").val();
 		console.log(search);
 		location.href = "./movieSearchA?search="+search;
