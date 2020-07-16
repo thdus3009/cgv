@@ -19,6 +19,14 @@ em {
 	font-style: normal;
 }
 
+.snb_menu2 {
+	font-style: normal;
+	font-size: 26px;
+	display: block;
+	margin: 3px 0 10px;
+	font-weight: bold;
+}
+
 .col_detail>h1 {
 	font-size: 36px;
 	font-weight: 500;
@@ -344,8 +352,8 @@ em {
 }
 
 .myinfo>strong {
-	font-weight: 15px;
 	font-weight: 600;
+	font-size: 20px;
 }
 
 .myinfo>em {

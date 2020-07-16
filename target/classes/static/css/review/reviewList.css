@@ -364,3 +364,11 @@ body {
 	border-radius: 5px;
 }
 
+.titleEng {
+	 color: #666666; 
+	 font-weight: bold; 
+	 font-family: 'CJ+ONLYONE+Medium'; 
+	 src: url('../font/CJ+ONLYONE+Medium.ttf');
+	 position: relative;
+	 top: 4px;
+}

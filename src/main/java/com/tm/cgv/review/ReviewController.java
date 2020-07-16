@@ -326,11 +326,19 @@ public class ReviewController {
    }
    
    @GetMapping("reviewDiary")
-   public void reviewDiary()throws Exception {
-	   
-	   
+   public ModelAndView reviewDiary(HttpSession session, ModelAndView mv)throws Exception {
+	   MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
+	   String uid = memberVO.getUsername(); 
+		/*
+		 * List<ReviewVO> reviewDiary = reviewService.reviewDiary(uid);
+		 * 
+		 * mv.addObject("diary", reviewDiary);
+		 */
+	   mv.setViewName("review/reviewDiary");
+	   return mv;
    }
    
+
    // ---------------------------------------------------------------------------------
    
    //url?영화번호=00#리뷰페이지

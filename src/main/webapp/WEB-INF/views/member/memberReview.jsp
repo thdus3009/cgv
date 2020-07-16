@@ -51,24 +51,25 @@
 							<div class="snb_box">
 								<img alt="프로필 사진" src="/images/profile.gif">
 								<div class="myinfo">
-									<strong>이름님</strong>
+									<strong>${memberVO.username}</strong>
 									<a href="" alt="수정버튼"></a>
-									<em>닉네임</em>
+									<em>아이디</em>
 								</div>
 							</div>
-							<div class="snb_box">
+							<div class="snb_box snb_box1">
 								<a href="" class="snb_menu">
-									<em>1</em>
+									<em>0</em>
 									<strong>기대되는 영화</strong>
 								</a>
 							</div>
-							<div class="snb_box">
-								<a href="" class="snb_menu">
-									<em>2</em>
+							<div class="snb_box snb_box2">
+								<a href="" class="snb_menu" style="background-color: #e60000; color: white;">
+									 <span class="snb_menu2"><c:out value="${m_count}" /></span>
+									 <!-- <em>2</em> -->
 									<strong>내가 본 영화</strong>
 								</a>
 							</div>
-							<div class="snb_box">
+							<div class="snb_box snb_box3">
 								<a href="" class="snb_menu">
 									<em>3</em>
 									<strong>무비 다이어리</strong>

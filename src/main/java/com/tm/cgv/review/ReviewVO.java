@@ -38,6 +38,7 @@ public class ReviewVO {
 
    //movieInfo
    private String title;
+   private String titleEng;
 
    //movieTime
    private int movieTimeNum;

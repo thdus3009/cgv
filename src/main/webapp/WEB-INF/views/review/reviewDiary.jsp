@@ -107,6 +107,7 @@
 								</div>
 								<!-- 반복, 모달 -->
 								<div class="modal-div">
+								<%-- <c:foreach items="${diary}" var="vo"> --%>
 									<ul>
 										<li class="mv-li">
 											<img alt="프로필 사진" src="/images/fc5f605d-eccc-43bd-b181-89c348728cef_harry1.jpg">
@@ -119,6 +120,7 @@
 											<button type="button" class="go-look mv-c">선택</button>
 										</li>
 									</ul>
+								<%-- </c:foreach> --%>
 								</div>
 								<div class="mv-div">
 									<img alt="icon" src="/images/review/ico_how_together.gif">
