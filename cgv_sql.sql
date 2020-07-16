@@ -31,6 +31,7 @@ DROP TABLE `couponInfo`;
 DROP TABLE `memberCoupon`;
 DROP TABLE `pointHistory`;
 DROP TABLE `guest`;
+DROP TABLE `reviewDiary`;
 
 CREATE TABLE `member` (
   `username` varchar(50),
@@ -332,6 +333,16 @@ CREATE TABLE `guest` (
   KEY `guest_reservationNum_FK_idx` (`reservationNum`),
   CONSTRAINT `guest_reservationNum_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `reviewDiary` (
+  `num` int NOT NULL AUTO_INCREMENT,
+  `reservationNum` int DEFAULT NULL,
+  `with` varchar(45) DEFAULT NULL,
+  `opinion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`num`),
+  KEY `REVIEWDIARY_RESERVATIONNUM_FK_idx` (`reservationNum`),
+  CONSTRAINT `REVIEWDIARY_RESERVATIONNUM_FK` FOREIGN KEY (`reservationNum`) REFERENCES `reservation` (`num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- procedule
 delimiter //

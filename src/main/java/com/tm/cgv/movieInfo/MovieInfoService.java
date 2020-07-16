@@ -75,6 +75,15 @@ public class MovieInfoService {
 		return movieInfoRepository.movieList(pager);
 	}
 	
+	public List<MovieInfoVO> forMovieTimeInsertList(Pager pager) throws Exception{
+		
+		pager.makeRow();
+		System.out.println(pager.getStartRow()+"StartRow");
+		long totalCount = movieInfoRepository.forMovieTimeInsertCount(pager);
+		pager.makeBlock(totalCount);
+		
+		return movieInfoRepository.forMovieTimeInsertList(pager);
+	}
 	public long movieWrite(MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
 		
 		String path = FilePathGenerator.addTimePath("")+"\\";
@@ -403,6 +412,5 @@ public class MovieInfoService {
 		long result= movieInfoRepository.movieDelete(movieInfoVO);
 		return result;
 	}
-	
 	
 }

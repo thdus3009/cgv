@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 public class MemberCouponService {
 
 	@Autowired
-	private MemberCouponRepository memberCuponeRepository;
+	private MemberCouponRepository memberCouponeRepository;
 	
 	public List<MemberCouponVO> memberCouponSelect(MemberCouponVO memberCouponVO)throws Exception{
-		return memberCuponeRepository.memberCouponSelect(memberCouponVO);
+		return memberCouponeRepository.memberCouponSelect(memberCouponVO);
 	}
 	
 	public int memberCuponUpdate(MemberCouponVO memberCouponVO) throws Exception{
-		return memberCuponeRepository.memberCouponUpdate(memberCouponVO);
+		return memberCouponeRepository.memberCouponUpdate(memberCouponVO);
 	}
 	
 	public Integer memberCouponCount(MemberCouponVO memberCouponVO) throws Exception{
-		return memberCuponeRepository.memberCouponCount(memberCouponVO);
+		return memberCouponeRepository.memberCouponCount(memberCouponVO);
 	}
 }
