@@ -16,6 +16,9 @@
 	<link rel="stylesheet" crossorigin="anonymous" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
 	
 	<title>관리자 페이지</title>
+	<style type="text/css">
+
+	</style>
 </head>
 <body class="sb-nav-fixed">
 	<c:import url="../template/header.jsp"></c:import>
@@ -80,8 +83,8 @@
 									<th style="width:200px">No.</th>
 									<th style="width:200px">분류</th>
 									<th>제목</th>
-									<th style="width:200px">시작일</th>
-									<th style="width:200px">마감일</th>
+									<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
+									<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -89,8 +92,8 @@
 									<th style="width:200px">No.</th>
 									<th style="width:200px">분류</th>
 									<th>제목</th>
-									<th style="width:200px">시작일</th>
-									<th style="width:200px">마감일</th>
+									<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
+									<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
 								</tr>
 							</tfoot>
 							
@@ -103,7 +106,7 @@
 											<a href="../event/eventSelect?num=${vo.num}">${vo.title}</a>
 										</td>
 										<td class="ate-center">${vo.startDate}</td>
-										<td class="ate-center">${vo.endDate}</td>
+										<td class="ate-center endDate">${vo.endDate}</td>
 							
 									</tr>
 								</c:forEach>
@@ -131,7 +134,7 @@
 						</div>
 					</div>
 					<div class="">
-						<a href="./eventInsert" id="up" class="btn btn-primary">Insert</a>
+						<a href="./eventInsert" id="up" class="btn btn-mo">등록</a>
                     </div>
 				</div>
 			</main>
@@ -153,7 +156,18 @@
             }); 
 
 
-			
+    		//현재 날짜보다 시간이 빠르면 css 입힘(가독성용)
+    		var nowDate = new Date();
+    		console.log("now : "+nowDate) 
+    		$(".endDate").each(function(){
+
+    			var date = new Date($(this).text()+ "T23:59:59");
+    			console.log(date)
+    			if(nowDate >= date){
+    				$(this).parent().css("backgroundColor","gray")
+    			}
+
+    		});
 
             
 		</script>

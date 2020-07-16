@@ -629,7 +629,7 @@ public class AdminController {
 	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, int cinemaNum) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		System.out.println("seat : " + theaterVO.getSeatCount());
-		System.out.println("length : " + filmType.length);
+		//System.out.println("length : " + filmType.length);
 		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
 		
 		
@@ -1148,7 +1148,7 @@ public class AdminController {
 	public ModelAndView eventList(Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		pager.setkind("");
-		List<EventVO> list = eventService.eventList(pager);
+		List<EventVO> list = eventService.adminEventList(pager);
 		System.out.println("----test----");
 		System.out.println(pager.getkind() + " - kind");
 		if(list !=null) {
@@ -1263,6 +1263,28 @@ public class AdminController {
 //		System.out.println(result);
 //		return result;
 //	}
+	
+	
+	//==============================
+	// banner
+	//==============================
+	@GetMapping("bannerList")
+	public ModelAndView bannerList(Pager pager) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/banner/bannerList");
+		return mv;
+	}
+	
+	@GetMapping("bannerInsert")
+	public ModelAndView bannerInsert() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/banner/bannerInsert");
+		return mv;
+	}
+	
+	
+	
+	
 }
 
 

@@ -72,8 +72,8 @@
 					
 					<h1 class="cine_title">${cine.name}</h1>
 					<div class="btn_group">
-						<span id="de" class="btn btn-danger">Delete</span>
-                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-primary">Update</a>
+						<span id="de" class="btn btn-danger">삭제</span>
+                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-mo">수정</a>
 					</div>
 				
 					<div class="card mb-4">
@@ -177,7 +177,7 @@
 					</div>
 					<div class="">
 
-						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-primary">Insert</a>
+						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-mo">상영관 등록</a>
 
                     	<c:if test="${empty timePriceList}">
                     		<a href="./admissionPrice/write?num=${cine.num}" id="admissionPrice" class="btn btn-info">관람가격 등록</a>

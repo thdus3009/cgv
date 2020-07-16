@@ -176,8 +176,8 @@
 				<div class="container-fluid">
 					<h1>Event Info</h1>
 					<div class="" style="float:right; margin-top:-50px;">
-						<a href="./eventUpdate?num=${vo.num}" id="up" class="btn btn-primary">Update</a>
-                    	<span id="de" class="btn btn-danger">Delete</span>
+						<a href="./eventUpdate?num=${vo.num}" id="up" class="btn-mo">수정</a>
+                    	<span id="de" class="btn btn-danger">삭제</span>
                     </div>
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>

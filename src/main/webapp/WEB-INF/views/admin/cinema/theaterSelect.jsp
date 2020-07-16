@@ -89,8 +89,8 @@
                     </div>
                     
                     <div class="">
-                    	<span id="de" class="btn btn-danger">Delete</span>
-                    	<a href="./theaterUpdate?num=${theater.num}&cinemaNum=${cine.num}" id="up" class="btn btn-primary">Update</a>
+                    	<span id="de" class="btn btn-danger">삭제</span>
+                    	<a href="./theaterUpdate?num=${theater.num}&cinemaNum=${cine.num}" id="up" class="btn btn-primary">수정</a>
                     </div>
                     </div>
                 </main>

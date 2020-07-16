@@ -178,7 +178,7 @@
 																		<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">
 																	</c:if>
 																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[0].type eq 0}">
-																		<input type="text" class="form-control files" value="${vo.eventImageVOs[0].originName}" placeholder="배너 이미지 선택" name="files">
+																		<input type="text" class="form-control files" value="${vo.eventImageVOs[0].originName}" placeholder="배너 이미지 선택" name="files" readonly="readonly">
 																		
 																		<i id="${vo.eventImageVOs[0].num}" class="glyphicon glyphicon-remove remove fileDelete fd0"  data-type="0" name="${vo.eventImageVOs[0].fileName}">
 																	    		<img alt="" class="minus" src="/images/theater/minus.png">
@@ -210,7 +210,7 @@
 																		<input type="file" class="form-control files" id="files" placeholder="컨텐츠 이미지 선택" name="files" data-type="1">
 																	</c:if>
 																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[1].type eq 1}">
-																		<input type="text" class="form-control files" value="${vo.eventImageVOs[1].originName}" placeholder="배너 이미지 선택" name="files">
+																		<input type="text" class="form-control files" value="${vo.eventImageVOs[1].originName}" placeholder="배너 이미지 선택" name="files" readonly="readonly">
 																		
 																		<i id="${vo.eventImageVOs[1].num}" class="glyphicon glyphicon-remove remove fileDelete fd1"  data-type="1" name="${vo.eventImageVOs[1].fileName}">
 																	    		<img alt="" class="minus" src="/images/theater/minus.png">
@@ -261,15 +261,12 @@
 													</table>
 
 												</div>
-												<div class="btn_s">
 													<a href="./movieList" class="round gray" id="cancle"> 
 														<span>취소</span>
 													</a>
 													<button id="btn" type="submit" class="round inred">
 														<span>등록하기</span>
 													</button>
-													<span class="test" id="test1">●●●●●</span>
-												</div>
 											</fieldset>
 										</form>
 

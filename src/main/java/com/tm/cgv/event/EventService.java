@@ -35,6 +35,28 @@ public class EventService {
 	@Autowired
 	private EventImageService eventImageService;
 	
+	
+	
+	
+	public List<EventVO> adminEventList(Pager_eventList pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		pager.makeRow();
+		System.out.println("----service----");
+		System.out.println(pager.getkind());
+		long totalCount = eventRepository.adminEventCount(pager);
+		pager.makeBlock(totalCount);
+		System.out.println("totalCount : " + totalCount);
+		System.out.println("block");
+		System.out.println(pager.getTotalBlock());
+		System.out.println("startNum : " + pager.getStartNum());
+		System.out.println("lastNum : " + pager.getLastNum());
+		List<EventVO> list = eventRepository.adminEventList(pager);
+		
+		return list;
+	}
+
+	
 	public List<EventVO> eventList(Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
@@ -50,10 +72,27 @@ public class EventService {
 		System.out.println("lastNum : " + pager.getLastNum());
 		List<EventVO> list = eventRepository.eventList(pager);
 		
+		return list;
+	}
+	
+	public List<EventVO> endEventList(Pager_eventList pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		
+		pager.makeRow();
+		System.out.println("----service----");
+		System.out.println(pager.getkind());
+		long totalCount = eventRepository.endEventCount(pager);
+		pager.makeBlock(totalCount);
+		System.out.println("totalCount : " + totalCount);
+		System.out.println("block");
+		System.out.println(pager.getTotalBlock());
+		System.out.println("startNum : " + pager.getStartNum());
+		System.out.println("lastNum : " + pager.getLastNum());
+		List<EventVO> list = eventRepository.endEventList(pager);
 		
 		return list;
 	}
+	
 
 	@Transactional
 	public int eventInsert(EventVO eventVO, List<MultipartFile> files) throws Exception {
@@ -211,6 +250,10 @@ public class EventService {
 	public int eventDelete(int num) throws Exception {
 		return eventRepository.eventDelete(num);
 		
+	}
+	
+	public EventVO eventSelect2(int num) throws Exception {
+		return eventRepository.eventSelect2(num);
 	}
 	
 }

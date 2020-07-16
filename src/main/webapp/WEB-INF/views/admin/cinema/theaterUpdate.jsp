@@ -8,6 +8,7 @@
 <c:import url="../template/head.jsp"></c:import> 
 <link href="/css/admin/cinema/cinemaList.css" rel="stylesheet" />
 <link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
+<link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
@@ -132,14 +133,9 @@
 							<br>
 							<br>
 							<br>
-							<span id="btn_insert2"  class="">SUBMIT</span>
-						<!-- <input type="button" id="btn_insert" class="btn btn-default" value="submit"> -->
-						<input type="button" id="btn_test" class="btn btn-default" value="a">
+							<span id="btn_insert2"  class="btn btn_mo">수정</span>
 						</div>
 					</form>
-					<c:if test="${path eq 'Update'}">
-						<button type="button" id="btn_delete" value="${vo.num}">Delete</button>
-					</c:if>	 
 				</div>
 			</main>
                 <c:import url="../template/footer.jsp"></c:import>

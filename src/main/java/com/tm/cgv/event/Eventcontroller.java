@@ -47,6 +47,18 @@ public class Eventcontroller {
 		return mv;
 	}
 	
+	@GetMapping("endEventList")
+	public ModelAndView endEventList(Pager_eventList pager) throws Exception	{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("12123133132133");
+		List<EventVO> list = eventService.endEventList(pager);
+		
+		mv.addObject("list", list);
+		mv.addObject("pager", pager);
+		mv.setViewName("event/eventEndList");
+		return mv;
+	}
+	
 	@PostMapping("eventKind")
 	public ModelAndView eventKind(Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -57,6 +69,17 @@ public class Eventcontroller {
 		mv.addObject("list", list);
 		mv.addObject("pager", pager);
 		mv.setViewName("event/ajax/selectKind");
+		
+		return mv;
+	}
+	
+	@GetMapping("eventSelect")
+	public ModelAndView eventSelect(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		EventVO eventVO = eventService.eventSelect2(num);
+		
+		mv.addObject("vo", eventVO);
+		mv.setViewName("event/eventSelect");
 		
 		return mv;
 	}
