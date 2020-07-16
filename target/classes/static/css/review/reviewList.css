@@ -153,7 +153,7 @@ body {
    height: 30px;
 }
 
-.hd {
+.a > .hd {
    float: right;
 }
 
@@ -342,3 +342,25 @@ body {
    top: -5px;
    right: 0;
 }
+
+
+.round.inblack {
+	background: #222222;
+    border: 2px solid #222222;
+    color: #ffffff;
+    line-height: 27px;
+    border-radius: 5px;
+	
+	font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle; 
+}
+
+
+.diary {
+	border: 1px solid #5b5b58;
+	padding: 5px;
+	border-radius: 5px;
+}
+

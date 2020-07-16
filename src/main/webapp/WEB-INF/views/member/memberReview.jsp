@@ -9,6 +9,9 @@
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 <link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
 <link href="../css/template/modal.css" rel="stylesheet" type="text/css">
+
+<link href="../css/review/reviewDiary.css" rel="stylesheet" type="text/css">
+
 <!-- member/memberReivew -->
 <title>내가 본 영화 < 무비로그 | 영화 목록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,33 +44,39 @@
          <div class="contents">
             <div class="col_content">
                <!----------------- contents aside -->
-               <div class="col_aside">
-                  <div class="snb">
-                     <ul>
-                        <li class="on"><a href="">MY CGV HOME<i></i></a></li>
-                        <li><a href="../member/memberUpdate?id=${memberVO.username}">회원정보
-                              수정<i></i>
-                        </a></li>
-                        <li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
-                        <li><a href="">예매 영화 관리<i></i></a></li>
-                        <li><a href="../review/reviewList"
-                           style="background-color: black; color: white;">내가 본 영화<i></i></a></li>
-                     </ul>
-
-                  </div>
-                  <div class="ad_area">
-                     <div class="ad_panner_1">
-                        <a href=""> <img alt=""
-                           src="../images/bbsList/200313_160x300.jpg">
-                        </a>
-                     </div>
-                     <div class="ad_panner_2">
-                        <a href=""> <img alt=""
-                           src="../images/bbsList/0325_160x35.png">
-                        </a>
-                     </div>
-                  </div>
-               </div>
+					<!----------------- contents aside -->
+					<div class="col_aside">
+					
+						<div>
+							<div class="snb_box">
+								<img alt="프로필 사진" src="/images/profile.gif">
+								<div class="myinfo">
+									<strong>이름님</strong>
+									<a href="" alt="수정버튼"></a>
+									<em>닉네임</em>
+								</div>
+							</div>
+							<div class="snb_box">
+								<a href="" class="snb_menu">
+									<em>1</em>
+									<strong>기대되는 영화</strong>
+								</a>
+							</div>
+							<div class="snb_box">
+								<a href="" class="snb_menu">
+									<em>2</em>
+									<strong>내가 본 영화</strong>
+								</a>
+							</div>
+							<div class="snb_box">
+								<a href="" class="snb_menu">
+									<em>3</em>
+									<strong>무비 다이어리</strong>
+								</a>
+							</div>						
+						</div>
+						
+					</div>
 
                <!------contents detail -->
                <div class="col_detail">

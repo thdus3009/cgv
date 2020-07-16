@@ -28,7 +28,7 @@
                
                   <!-- Modal 1 Button + 조건-->
                
-                     <div id="r${vo.num}">
+                     <div id="r${vo.num}" style="display: inline-block;">
                         <c:if test="${empty vo.createAt}">                         
                             <button class="popupBtn1" id="${vo.num}" data-toggle="modal" data-target="#myModal" data-num="${vo.num}" data-title="${vo.title}" style="border: 0; background-color: transparent !important;">
                                <img alt="" src="${pageContext.request.contextPath}/images/before.JPG">
@@ -51,6 +51,11 @@
 
                         </c:if>
                      </div>
+                     <div style="display: inline-block; position: absolute; right:11px; top:123px;" >
+						<a href="./reviewDiary" class="round inblack diaryBtn">
+							<span class="diary">&ensp;무비다이어리 쓰기&ensp;</span>
+						</a>
+					 </div>
                   
                   <!-- Modal 2 Button-->
                   <button type="button" class="popupBtn2" data-toggle="modal" data-target="#myModal2" style="display: none;" data-num="${vo.num}"></button>

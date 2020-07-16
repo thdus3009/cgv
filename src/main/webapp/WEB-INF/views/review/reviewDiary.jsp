@@ -44,7 +44,7 @@
 					
 						<div>
 							<div class="snb_box">
-								<img alt="프로필 사진" src="/images/fc5f605d-eccc-43bd-b181-89c348728cef_harry1.jpg">
+								<img alt="프로필 사진" src="/images/profile.gif">
 								<div class="myinfo">
 									<strong>이름님</strong>
 									<a href="" alt="수정버튼"></a>

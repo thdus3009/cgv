@@ -325,6 +325,11 @@ public class ReviewController {
       return reviewVO;
    }
    
+   @GetMapping("reviewDiary")
+   public void reviewDiary()throws Exception {
+	   
+	   
+   }
    
    // ---------------------------------------------------------------------------------
    
