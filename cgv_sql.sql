@@ -9,6 +9,7 @@ rollback;
 
 DROP TABLE `member`;
 DROP TABLE `auth`;
+DROP TABLE `rememberMe`;
 DROP TABLE `movieInfo`;
 DROP TABLE `movieImage`;
 DROP TABLE `movieVideo`;
@@ -49,8 +50,16 @@ CREATE TABLE `member` (
 CREATE TABLE `auth` (
   `username` varchar(50),
   `auth` varchar(50) DEFAULT NULL,
-   KEY `AUTH_USERNAMENUM_FK_idx` (`username`),
+  KEY `AUTH_USERNAMENUM_FK_idx` (`username`),
   CONSTRAINT `AUTH_USERNAME_FK` FOREIGN KEY (`username`) REFERENCES `member` (`username`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `rememberMe` (
+	`series` varchar(64) not null,
+    `username` varchar(64) not null,
+    `token` varchar(64) not null,
+    `last_used` timestamp not null,
+    PRIMARY KEY (`series`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `movieInfo` (

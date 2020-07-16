@@ -54,17 +54,13 @@ public class MemberService implements UserDetailsService {
 	
 	@Value("${board.member.filePath}")
 	private String filePath;
-
+	
     @Override
     public MemberVO loadUserByUsername(String username) throws UsernameNotFoundException {
         
-    	System.out.println("loadUserByUsername");
-    	System.out.println(username);
-    	
     	MemberBasicVO memberBasicVO = null;
 		try {
 			memberBasicVO = memberRepository.read(username);
-			System.out.println(memberBasicVO.getEnabled());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}       
@@ -79,7 +75,7 @@ public class MemberService implements UserDetailsService {
 		 */
         
 		MemberVO user = new MemberVO(memberBasicVO);
-        System.out.println(user.getMemberBasicVO().toString());
+        System.out.println("loadUserByUsername" + user.getMemberBasicVO().toString());
         
         return user;
     }

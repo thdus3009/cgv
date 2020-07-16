@@ -45,7 +45,7 @@ public class Schedule {
 	private final int COUPON_EXFIRE_MONTH = 3;
 	private final int MOVIETIME_EXFIRE_DATE = 1;
 	private final String TEST_CRON = "0 * * * * *";
-	// movieTime Insert시, seatBooking 테이블 건드려야함 블럭걸려있는 시트 추가
+	
 	// admin 계정 로그인 관련 추가
 	// remember 추가?
 	// 배포?
