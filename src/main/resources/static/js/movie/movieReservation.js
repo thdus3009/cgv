@@ -165,8 +165,12 @@
 
 		
 		
+		
+		
 function ajaxLoad(){
 	//영화관 값 출력
+	
+	//console.log("title : "+title);
 	$.ajax({
 		type:'GET',
 		url:'../reserveCheck/reserve',
