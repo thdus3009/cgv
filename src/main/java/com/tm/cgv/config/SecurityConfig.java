@@ -1,8 +1,6 @@
 package com.tm.cgv.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,12 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.tm.cgv.member.MemberService;
@@ -25,6 +20,7 @@ import com.tm.cgv.rememberMe.RememberMeTokenRepository;
 import com.tm.cgv.security.CustomLoginFailureHandler;
 import com.tm.cgv.security.CustomLoginSuccessHandler;
 import com.tm.cgv.security.CustomLogoutHandler;
+import com.tm.cgv.security.CustomRememberMeLoginSuccessHandler;
 
 
 @Configuration
@@ -43,6 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomLogoutHandler logoutHandler;
 
+	@Autowired
+	private CustomRememberMeLoginSuccessHandler rememberMeLoginSuccessHandler;
+	
 	@Autowired
 	private RememberMeTokenRepository persistentTokenRepository;
 	
@@ -87,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.authorizeRequests()
                 // 페이지 권한 설정 (순서 위에서 아래로, 제한할 경로를 위로, 제한 없는 경로를 아래로)
         		//.antMatchers("/admin/**").hasRole("ADMIN")
-        		.antMatchers("/member/info").hasRole("MEMBER")
+        		.antMatchers("/member/myPage").hasRole("MEMBER")
         		//.antMatchers("/member/**").permitAll()
                 .antMatchers("/**").permitAll();
     	
@@ -124,7 +123,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.rememberMeCookieName("remember-me")			// 쿠키이름 설정;
         	.tokenRepository(persistentTokenRepository)		// DB의 token 테이블과 연결된 repository 연결
         	.userDetailsService(memberService)				// remember-me를 이용한 로그인을 하기위해 userDetailService 구현체와 연결?
-        	.rememberMeServices(persistentTokenBasedRememberMeServices());
+        	.rememberMeServices(persistentTokenBasedRememberMeServices())
+        	.authenticationSuccessHandler(rememberMeLoginSuccessHandler);
         	//.useSecureCookie(true);							// http 요청 쿠키 사용
     }
 

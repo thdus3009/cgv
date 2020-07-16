@@ -54,8 +54,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		request.setAttribute("msg", "로그인 성공");
         request.setAttribute("path",loc);
         
-       
- 
         request.getRequestDispatcher("../WEB-INF/views/common/result.jsp").forward(request, response);
 	}
 }
