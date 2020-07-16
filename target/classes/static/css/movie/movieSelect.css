@@ -2,7 +2,7 @@
 
 /*  ------------------------------------------------------------------------------- container */
 
-.container{
+.container2{
    background-color: #fdfcf0;
 }
 
@@ -90,7 +90,8 @@
 }
 
 .sect-base-movie{
-   margin-top: 40px;
+   margin: 40px 0px;
+   display: inline-block;
 }
 
 .box-image {
@@ -528,7 +529,7 @@ input, select, img {
 }
 .sect-stillcut .slider-wrap {
     width: 800px;
-    height: 450px;
+    height: 340px;
 }
  /*  ------------------------------------------------------------------------------트레일러/스틸컷 */
 

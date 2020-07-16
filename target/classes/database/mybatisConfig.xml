@@ -9,6 +9,7 @@
  		<typeAlias type="java.lang.Integer" alias="Integer"/>
  		<typeAlias type="java.lang.Long" alias="Long"/>
  		<typeAlias type="java.util.List" alias="List"/>
+ 		<typeAlias type="java.util.Map" alias="Map"/>
  		 		
  		<typeAlias type="com.tm.cgv.auth.AuthVO" alias="AuthVO"/>
  		<typeAlias type="com.tm.cgv.member.MemberVO" alias="MemberVO"/>
@@ -37,10 +38,14 @@
 
  		<typeAlias type="com.tm.cgv.board.bbsFile.BbsFileVO" alias="BbsFileVO"/>
  		<typeAlias type="com.tm.cgv.util.Pager" alias="Pager"/>
+ 		<typeAlias type="com.tm.cgv.util.Pager_cinemaList" alias="Pager_cinema"/>
 
  		<typeAlias type="com.tm.cgv.theater.TheaterVO" alias="TheaterVO"/>
  		<typeAlias type="com.tm.cgv.movieImage.MovieImageVO" alias="MovieImageVO"/>
  		<typeAlias type="com.tm.cgv.movieVideo.MovieVideoVO" alias="MovieVideoVO"/>
+ 		
+ 		<typeAlias type="com.tm.cgv.event.EventVO" alias="EventVO"/>
+ 		<typeAlias type="com.tm.cgv.eventImage.EventImageVO" alias="EventImageVO"/>
 
  	</typeAliases>
  </configuration>

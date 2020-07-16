@@ -5,121 +5,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+<c:import url="../template/head.jsp"></c:import>
 
 <!-- movieWrite -->
 <title>관리자 페이지</title>
-
-<link rel="stylesheet" href="/css/styles.css" />
-<link rel="stylesheet" href="/css/admin/movie/movie.css" />
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-
 <style type="text/css">
 	.minus	{
 		width:16px;
 		height:16px;
 		margin-left:7px;
 	}
-	
-
 </style>
 </head>
+
 <body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
-		<a href="/admin"><img src="/images/header/h1_cgv.png"
-			class="admin-logo" /></a>
-		<!-- 검색 바-->
-		<form
-			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="검색어를 입력"
-					aria-label="Search" aria-describedby="basic-addon2" />
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-		<!-- 로그인-->
-		<ul class="navbar-nav ml-auto ml-md-0">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="userDropdown" href="#"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a> <a
-						class="dropdown-item" href="#">관리자 설정</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">로그아웃</a>
-				</div></li>
-		</ul>
-	</nav>
+<c:import url="../template/header.jsp"></c:import>
 
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">게시판</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 공지사항
-						</a>
-						<div class="sb-sidenav-menu-heading">관리자 메뉴</div>
-						<a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 회원 관리
-						</a> <a class="nav-link" href="./admin/movie/movieWrite">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 영화 관리
-						</a> <a class="nav-link" href="./admin/cinema/cinemaList">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 극장 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 예매 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 리뷰 관리
-						</a> <a class="nav-link" href="index.html">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 배너 관리
-						</a>
-					</div>
-				</div>
-			</nav>
-		</div>
+		<c:import url="../template/sidenav.jsp"></c:import>
 
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
 					<h1>Event ${path}</h1>
+					
 					<div>
 
 						<div class="contents">
-							<div>
+							<div style="margin: 0 auto; width: 410px;">
 
 								<div class="col_content">
 
@@ -129,9 +45,6 @@
 
 										<!----------------------------------------------------------------------------------------------------- contents detail customer_top-->
 										<div class="customer_top">
-											<!-- 뭐하는 부분일까요..? -->
-											
-											
 										</div>
 
 										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
@@ -155,7 +68,7 @@
 														<tbody>
 															<div class="form-group">
 														   	 <label for="local">분류:</label>
-														   	 <select class="" id="" name="kind">
+														   	 <select class="form-control" id="" name="kind">
 														   	 	<option value="special">스페셜이벤트</option>
 														   	 	<option value="movie">영화/예매</option>
 														   	 	<option value="discount">제휴/할인</option>
@@ -170,21 +83,20 @@
 																<input type="text" class="form-control" id="title" name="title" value="${vo.title}">
 															</div>
 															
-															<div class="form-group">
+															<div class="form-group" style="margin: 0;">
 																<label for="files">배너 이미지:</label> 
-																<span>
-																<span>
+																<span style="position: relative;">
 																	<c:if test="${path  eq 'Insert'}">
 																		<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">
 																	</c:if>
 																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[0].type eq 0}">
 																		<input type="text" class="form-control files" value="${vo.eventImageVOs[0].originName}" placeholder="배너 이미지 선택" name="files">
 																		
-																		<i id="${vo.eventImageVOs[0].num}" class="glyphicon glyphicon-remove remove fileDelete fd0"  data-type="0" name="${vo.eventImageVOs[0].fileName}">
+																		<i id="${vo.eventImageVOs[0].num}" class="glyphicon glyphicon-remove remove fileDelete fd0"  data-type="0" name="${vo.eventImageVOs[0].fileName}"
+																		style="position: relative; top: -31px; left: 375px;">
 																	    		<img alt="" class="minus" src="/images/theater/minus.png">
 																	    </i>
 																	</c:if>
-																</span>
 																</span>
 															</div>
 															
@@ -202,21 +114,20 @@
 																	</c:if>
 															</div> --%>
 															
-															<div class="form-group">
+															<div class="form-group" style="margin: 0;">
 																<label for="files">컨텐츠 이미지:</label>
-																<span>
-																<span>
+																<span style="position: relative;">
 																	<c:if test="${path  eq 'Insert'}">
 																		<input type="file" class="form-control files" id="files" placeholder="컨텐츠 이미지 선택" name="files" data-type="1">
 																	</c:if>
 																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[1].type eq 1}">
 																		<input type="text" class="form-control files" value="${vo.eventImageVOs[1].originName}" placeholder="배너 이미지 선택" name="files">
 																		
-																		<i id="${vo.eventImageVOs[1].num}" class="glyphicon glyphicon-remove remove fileDelete fd1"  data-type="1" name="${vo.eventImageVOs[1].fileName}">
+																		<i id="${vo.eventImageVOs[1].num}" class="glyphicon glyphicon-remove remove fileDelete fd1"  data-type="1" name="${vo.eventImageVOs[1].fileName}"
+																		style="position: relative; top: -31px; left: 375px;">
 																	    		<img alt="" class="minus" src="/images/theater/minus.png">
 																	    </i>
 																	</c:if>
-																</span>
 																</span>
 															</div>
 															
@@ -263,12 +174,12 @@
 												</div>
 												<div class="btn_s">
 													<a href="./movieList" class="round gray" id="cancle"> 
-														<span>취소</span>
+														<span style="font-size: 15px">취소</span>
 													</a>
 													<button id="btn" type="submit" class="round inred">
-														<span>등록하기</span>
+														<span style="font-size: 15px">등록하기</span>
 													</button>
-													<span class="test" id="test1">●●●●●</span>
+													<!-- <span class="test" id="test1">●●●●●</span> -->
 												</div>
 											</fieldset>
 										</form>

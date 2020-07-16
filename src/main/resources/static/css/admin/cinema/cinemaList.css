@@ -10,7 +10,7 @@
 	src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
 }
 
-body {
+body , table {
 	font-family: 'CJ+ONLYONE+Medium+LIGHT';
 }
 
@@ -23,8 +23,15 @@ code {
 	font-weight: 600;
 }
 
+span, a{
+	font-family: 'CJ+ONLYONE+Medium+LIGHT';
+	font-weight: 600;
+	
+}
+
 .active {
 	font-weight: 600;
+	padding: 0!important;
 }
 
 .nav-link {
@@ -156,4 +163,41 @@ main {
 	top:40px;
 	right:40px;
 
+}
+
+/**/
+
+.xS, .x{
+	cursor: pointer;
+    padding: 7px;
+}
+
+.group2{
+	display: flex;
+	margin-bottom: 1rem;
+}
+
+.form-control2{
+	margin-right: 10px;
+}
+
+.thumb-del{
+	    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 9px;
+    left: 340px;
+}
+
+.check{
+	margin-right: 10px;
+}
+
+.mv-p{
+	margin: 5px 0;
+	width: 100%;
+}
+
+input[type="file"]{
+	padding: 2.5px;
 }

@@ -90,7 +90,8 @@
 }
 
 .sect-base-movie{
-   margin-top: 40px;
+   margin: 40px 0px;
+   display: inline-block;
 }
 
 .box-image {

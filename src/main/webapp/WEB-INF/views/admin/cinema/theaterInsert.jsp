@@ -24,7 +24,7 @@
 							<input type="hidden" name="num" id="num" value="${vo.num}">
 						</c:if>
 						<div class="form-group">
-							<label class="theaterLebel" for="cinemaNum">CinemaNum:</label>
+							<label class="theaterLebel" for="cinemaNum">영화관:</label>
 							<select class="cinemaNum selectcinenum" id="cineNum" name="cinemaNum">
 								
 								<c:forEach items="${cine}" var="cnt">
@@ -33,10 +33,10 @@
 								
  							</select>
 							<br>
-							<label class="theaterLebel lebelname" for="name">Name:</label>
+							<label class="theaterLebel lebelname" for="name">이름:</label>
 							<input type="text" class="form-control selectcinenum" id="name" name="name" value="${vo.name}">
 							<br>
-							<label class="theaterLebel" for="filmType">FilmType:</label>
+							<label class="theaterLebel" for="filmType">필름타입:</label>
 							<label class="ckfm"> <input type="checkbox" id="checkbox0"
 								name="filmType" value="1">  <span class="checkmark">2D</span>
 							</label> 
@@ -120,27 +120,6 @@
 								<input type="button" id="btn_insert" class="btn btn-default"
 									value="생성" style="background-color: #eff2f8;">
 							</div>
-										<button class="btn_del" type="button" onclick="changeGrade(0)">좌석 삭제</button>
-										<button class="btn_economy" type="button" onclick="changeGrade(1)">Economy</button>
-										<button class="btn_standard" type="button" onclick="changeGrade(2)">Standard</button>
-										<button class="btn_prime" type="button" onclick="changeGrade(3)">Prime</button>
-								 	</div><!-- end section_btn -->
-							 		<div class="contents">
-							 			<div class="seats" id="seats_list">
-								
-										</div>
-							 		</div>
-								</div><!-- end seat section -->
-							</div><!-- end seat box -->
-							<br>
-							<label for="seatCount">SeatCount:</label>
-	 						<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}">
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-						<input type="button" id="btn_insert" class="btn btn-default" value="submit">
 						</div>
 					</form>
 					<c:if test="${path eq 'Update'}">

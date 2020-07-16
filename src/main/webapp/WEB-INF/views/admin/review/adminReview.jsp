@@ -22,10 +22,11 @@
 			<main>
 				<div class="container-fluid">
 					<h1>Review Accusation</h1>
+					<p>-리뷰 관리 페이지-</p>
 					<!-- 검색 -->
 					<p>
-					<div class="input-group" style="width: 400px; position: unset;">
-						<select id="searchTag" name="searchTag">
+					<div class="input-group" style="width: 400px; position: unset; ">
+						<select id="searchTag" name="searchTag" style="color: #495057; border: 1px solid #ced4da; border-right: none;">
 						    <option value="title">영화제목</option>
 						    <option value="uid">아이디</option>
 						    <option value="contents">내용</option>
@@ -39,8 +40,8 @@
 							</button>
 						</div>
 						
-						<div style="position: absolute; right: 183px;"><button class="btn btn-danger" id="allDelete">전체삭제</button></div>
-						<div style="position: absolute; right: 93px;"><button class="btn btn-info" id="partDelete">부분삭제</button></div>
+						<div style="position: absolute; right: 130px;"><button class="btn btn-danger" id="allDelete">전체삭제</button></div>
+						<div style="position: absolute; right: 40px;"><button class="btn btn-info" id="partDelete">부분삭제</button></div>
 					</div>
 					
 					

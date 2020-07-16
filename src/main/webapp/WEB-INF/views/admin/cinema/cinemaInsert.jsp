@@ -21,9 +21,11 @@
 				<main>
 					<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div class="container-fluid">
-						<h1>Cinema Insert</h1>
+						<h1>Cinema ${path}</h1>
 						<br>
-						<form action="cinema${path}" method="post" enctype="multipart/form-data">
+						<div>
+						<form action="cinema${path}" method="post" enctype="multipart/form-data"
+						style="width: 500px; margin: 0 auto;">
 	                    	<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<c:if test="${path eq 'Update'}">
 								<input type="hidden" name="num" id="num" value="${vo.num}">
@@ -31,14 +33,14 @@
 	
 								
 						  <div class="form-group">
-						   	 <label for="name">Name:</label>
+						   	 <label for="name">이름:</label>
 						   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
 						  </div>
 						  
 						  <div class="form-group">
-						   	 <label for="local">Local:</label>
+						   	 <label for="local">지역:</label>
 						   	 <%-- <input type="text" class="form-control" id="local" name="local" value="${vo.local}"> --%>
-						   	 <select class="" id="" name="local">
+						   	 <select class="form-control" id="" name="local">
 						   	 	<option value="서울">서울</option>
 						   	 	<option value="경기">경기</option>
 						   	 	<option value="인천">인천</option>
@@ -51,49 +53,52 @@
 						  </div>
 						  
 						  <div class="form-group">
-						   	 <label for="address">Address:</label>
+						   	 <label for="address">주소:</label>
 						   	 <input type="text" class="form-control" id="address" name="address" value="${vo.address}">
 						  </div>
 						  
 						  <div class="form-group">
-						   	 <label for="tel">Tel:</label>
+						   	 <label for="tel">전화번호:</label>
 						   	 <input type="text" class="form-control" id="tel" name="tel" value="${vo.tel}">
 						  </div>
 						  
 						  <div class="form-group">
-						   		<label for="totalTheater">TotalTheater:</label>
+						   		<label for="totalTheater">총 관수:</label>
 						   	 <input type="text" class="form-control" id="totalTheater" name="totalTheater" value="${vo.totalTheater}" readonly="readonly">
 						  </div>
 						  
 						  <div class="form-group">
-						   		<label for="totalSeat">TotalSeat:</label>
+						   		<label for="totalSeat">총 좌석수:</label>
 						   	 <input type="text" class="form-control" id="totalSeat" name="totalSeat" value="${vo.totalSeat}" readonly="readonly">
 						  </div>
 						  
 						  
 						  <div class="form-group">
-						   		<label for="trafficInfo">TrafficInfo:</label>
+						   		<label for="trafficInfo">교통정보:</label>
 						   	 <input type="text" class="form-control" id="trafficInfo" name="trafficInfo" value="${vo.trafficInfo}">
 						  </div>
 						  
 						  
 						  <div class="form-group">
-						   		<label for="parkingInfo">ParkingInfo:</label>
+						   		<label for="parkingInfo">주차정보:</label>
 						   	 <input type="text" class="form-control" id="parkingInfo" name="parkingInfo" value="${vo.parkingInfo}">
 						  </div>
 						  
 						  <div class="form-group">
-						   		<label for="intro">Intro:</label>
+						   		<label for="intro">영화관 소개:</label>
 						   	 <input type="text" class="form-control" id="intro" name="intro" value="${vo.intro}">
 						  </div>
-			
 
-						  <button type="submit" class="round inred">등록</button>
+							<div class="btn_s">
+								<button type="submit" class="round inred btn-danger btn" 
+								style="margin-right: 10px;">등록</button>
+								<c:if test="${path eq 'Update'}">
+									<button type="button" class="btn-warning btn" id="btn_delete" value="${vo.num}">삭제</button>
+								</c:if>
+							</div>
+
 						</form>
-					
-						<c:if test="${path eq 'Update'}">
-							<button type="button" id="btn_delete" value="${vo.num}">Delete</button>
-						</c:if>
+						</div>
 
 					</div>
 				</main>
