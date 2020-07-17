@@ -3,9 +3,7 @@
 		var title ="";
 		var theater = "";
 		var date = "";
-		
 		var time="";
-	
 	
 		//class selected값 변경
 		$(".sortmenu a").click(function() {
@@ -13,26 +11,24 @@
 			$(this).addClass("selected");
 		});
 		
-		
-		
 		//영화제목 선택  =영화 이미지, 제목, 연령제한
 		$(".movie-list").on("click","#movie-list-content li",function() {
 			if($(this).hasClass("dimmed") === true){
 				alert("선택할수 없습니다.");
 			}else{
 				
-					$("#movie-list-content li").removeClass("selected");
-					$(this).addClass("selected");
+				$("#movie-list-content li").removeClass("selected");
+				$(this).addClass("selected");
 					
-					$("#select_title").text($(this).data("title"));
-					$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
-					$("#select_ageLimit").text($(this).data("age_limit"));
-					$("#movieNum").val($(this).data("index"));
-					title = $(this).data("title");
+				$("#select_title").text($(this).data("title"));
+				$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+				$("#select_ageLimit").text($(this).data("age_limit"));
+				$("#movieNum").val($(this).data("index"));
+				title = $(this).data("title");
 					
-					$(".movie_poster img").css("display","inline");
-					$(".movie_title").css("display","block");
-					$(".movie .placeholder").css("display","none");
+				$(".movie_poster img").css("display","inline");
+				$(".movie_title").css("display","block");
+				$(".movie .placeholder").css("display","none");
 				
 				//ajax
 				ajaxLoad();
@@ -44,8 +40,6 @@
 		$(".theater-area-list > ul > li").click(function(){
 			$(".theater-area-list > ul > li").removeClass("selected");
 			$(this).addClass("selected");
-			
-			console.log($(this).data("local"));
 		});
 		
 		
@@ -67,7 +61,6 @@
 				$(".row.screen").css("display","block");
 				$(".row.number").css("display","block");
 				$(".info.theater .placeholder").css("display","none");
-
 
 				//ajax
 				ajaxLoad();
@@ -94,7 +87,6 @@
 					cinemaNum : selected_cinema
 				},
 				success : function(result){
-					
 					for(i=0;i<result.length;i++){
 						var list = [];
 						
@@ -106,8 +98,6 @@
 						
 						timeLimitList.push(list);
 					}
-					console.log(timeLimitList);
-					
 				}
 			});
 		}
@@ -148,7 +138,6 @@
 				if(sDate.length == 1){
 					sDate = "0"+sDate;
 				}
-
 				date = sYear+"-"+sMonth+"-"+sDate;
 
 				$(".row.name").css("display","block");
@@ -159,7 +148,6 @@
 
 				//ajax
 				ajaxLoad();
-
 			}
 		});
 
@@ -179,8 +167,6 @@ function ajaxLoad(){
 			$("#movie-list-content li").addClass("dimmed");
 			
 			for(i=0;i<result.length;i++){
-				console.log(result[i].movieInfoVOs[0].title)// 영화제목 
-				
 				$("#movie-list-content li").each(function(){
 					if($(this).data("title") == result[i].movieInfoVOs[0].title){
 						$(this).removeClass("dimmed");
@@ -213,7 +199,6 @@ function ajaxLoad(){
 				$(this).find(".count").text("("+$(this).data("index")+")");
 			});
 			
-			
 			for(i=0;i<result.length;i++){
 				//극장
 				
@@ -221,30 +206,21 @@ function ajaxLoad(){
 					if($(this).data("theater") == result[i].cinemaVOs[0].name){
 						
 						if($(this).hasClass("dimmed")){
-							console.log($(this).data("theater"))
-							console.log(result[i].cinemaVOs[0].name)							
-							
 							$(this).removeClass("dimmed");
 							
 							$li = $(this);
 							$parent = $(this).parent();
-							console.log("aaaaa>>>");
-							console.log($(this));
 							$parent.prepend($li);
 							
 							
 							//dimmed가 아닌 극장의 수 계산
-							console.log($(this).parent().parent().parent().data("index"));
 							var prev = $(this).parent().parent().parent().data("index");
 							prev += 1;
 							$(this).parent().parent().parent().data("index",prev);
 							var next = $(this).parent().parent().parent().data("index");
 							$(this).parent().parent().parent().find(".count").text("("+next+")");
-							console.log($(this).parent().parent().parent().data("index"));
 							
 						}
-						
-						
 					}
 					
 				});
@@ -319,7 +295,6 @@ function selectedCheck(){
 				date:date
 			},
 			success:function(result){
-				
 				//상영시간 html 생성
 				timeMake(result);
 			}
@@ -388,8 +363,6 @@ function timeMake(result){
 			$(".time-list .content").append(query);
 		}
 		list.push(checkName+checkFloor);
-		
-		
 	}
 	
 	
@@ -413,9 +386,6 @@ function timeMake(result){
 	$(".time-list ul li").each(function(){
 		var timeList =  $(this).data("time").split(":");
 		var filmType = $(this).parent().parent().data("name");
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>t : "+timeList)
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>t : "+filmType)
-		
 		//filmType에 따라서 맞는 list의 값을 사용
 		//1, 2, 4 일대 구분 - timeLimitList(읽어온 조조/심야 시간값 존재)
 		
@@ -436,42 +406,24 @@ function timeMake(result){
 			night = timeLimitList[0][1];
 			break;
 		}
-		
-		console.log("morning"+morning)
-		console.log("night"+night)
 		morningList = morning.split(",");
 		nightList = night.split(",");
-		
 		
 		var t1 = new Date(0,0,0,morningList[0],morningList[1]); //조조
 		var t2 = new Date(0,0,0,nightList[0],nightList[1]); //심야
 		var t3 = new Date(0,0,0,timeList[0],timeList[1]); //비교시간
 		
-		console.log("조조 : "+t1);
-		console.log("심야 : "+t2)
-		console.log("비교 : "+t3)
-		
-		
-		
 		//비교시간이 10 > x || 23 < x
 		if(timeList[0] > 23){
 			//심야
-			console.log("심야=================");
 			var gap = t3.getTime() - t2.getTime();
 			var hh_gap = Math.floor(gap/1000/60/60);
-			
-			console.log("심야기준 : "+t2)
-			console.log("등록시간 : "+t3)
-			console.log("gap : "+hh_gap);
 			
 			if(hh_gap <= 0){
 				$(this).addClass("night");
 			}
-			
 		}else if(timeList[0] < 11){
 			//조조
-			
-			console.log("조조=================");
 			var gap = t1.getTime() - t3.getTime();
 			var hh_gap = Math.floor(gap/1000/60/60);
 			if(hh_gap > 0){
@@ -480,12 +432,6 @@ function timeMake(result){
 		}
 		
 	});
-	
-	
-	
-	
-	
-	
 	
 	// 초기화
 	//date - time
@@ -500,12 +446,10 @@ function timeMake(result){
 
 	$(".tnb.step1 .btn-right").removeClass("on");
 	
-	
 	//상영 20분 전 예매 불가능
 	timeDisabledCheck();
 }
 		
-
 //DateFormat
 Date.prototype.format = function (f) {
     if (!this.valueOf()) return " ";
@@ -544,9 +488,7 @@ Number.prototype.zf = function (len) { return this.toString().zf(len); };
 //현재시간을 지났거나 20분전에는 예매 불가 
 function timeDisabledCheck(){
 	var nowDate = new Date();
-
 	var nowTime = nowDate.format("yyyy-MM-dd");
-	console.log(nowDate)
 	//누른날짜랑 현재 지금 날짜랑 동일 할때
 	//시간이 지나있으면 disabled
 	//읽어온 시간 값이 현재시간 20분 뒤면 disabled
@@ -555,13 +497,9 @@ function timeDisabledCheck(){
 		$(".time-list ul li").each(function(){
 			var arr = $(this).data("time").split(":");
 			var readDate = new Date(nowDate.getFullYear(),nowDate.getMonth(),nowDate.getDate(),arr[0],arr[1]);
-			console.log(readDate)
 			var resultTime = readDate - nowDate;
 			var hh = Math.floor((resultTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			var mi = (Math.floor((resultTime % (1000 * 60 * 60)) / (1000 * 60)))+1;
-			
-			console.log("시차: "+hh)
-			console.log("분차: "+mi)
 			
 			if(mi < 20 && hh <= 0){
 				$(this).addClass("disabled");
@@ -595,12 +533,10 @@ $(".time-list").on("click",".theater ul li",function(){
 		//날짜 값 + 시간값
 		var select_time= $("#sDate").val() +" "+$(this).data("time");
 		$("#select_day").text(select_time);
-		console.log("선택한 시간 : "+$(this).data("time"))
 		time = $(this).data("time");
 
 		//seatCount
 		$("#seatCount").val($(this).parent().parent().data("seatcount"));
-
 
 		//theater
 		$("#select_theater").text($(this).parent().parent().data("floor"));
@@ -624,7 +560,6 @@ $(".time-list").on("click",".theater ul li",function(){
 //좌석예매페이지로 이동
 $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 	if($(this).hasClass("on") == true){
-
 		var timeType="normal";
 		$(".time-list ul li").each(function(){
 			if($(this).hasClass("selected")){
@@ -635,7 +570,6 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 		});
 		
 		if(memberId == '' && beMemberVO==''){
-			console.log("로그인 필요");
 			$(".ft_layer_popup.popup_login").css("display","block");
 			$(".blackscreen").css("display","block");
 		}else{
@@ -657,17 +591,14 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 				},
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success : function(result){
-//					console.log(result);
 					$(".step.step1").css("display","none");
 					$(".ticket_tnb .tnb_container .tnb").removeClass("step1");
 					$(".ticket_tnb .tnb_container .tnb").addClass("step2");
 					$(".ticket_tnb .tnb.step2 .btn-left").css("display","block");
 
-
 					$(".step.step2").css("display","block");
 					$(".step.step2").html(result);
 				}
-
 			});
 		}
 
@@ -678,11 +609,9 @@ $(".tnb_container").on("click",".tnb.step1 .btn-right",function(){
 });
 
 
-
 //결제하기 페이지로 이동
 $(".tnb_container").on("click",".tnb.step2 .btn-right",function(){
 	if($(this).hasClass("on")){
-		alert("payment");
 		//결제진행 - ajax()
 		$.ajax({
 			url : '../reservation/reservePayment',
@@ -692,7 +621,6 @@ $(".tnb_container").on("click",".tnb.step2 .btn-right",function(){
 			},
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 			success : function(result){
-//				console.log(result);
 				$(".step.step2").css("display","none");
 				$(".ticket_tnb .tnb_container .tnb").removeClass("step2");
 				$(".ticket_tnb .tnb_container .tnb").addClass("step3");
@@ -775,9 +703,7 @@ $(".ticket_tnb").on("click",".tnb.step3 .btn-left",function(){
 //스크롤 이동
 $("#movie-list-content").scroll(function () {
 	var height = $(this).scrollTop();
-
 	$(".movie-list .slider").css("top",height);
-	console.log(height);
 });
 
 		
@@ -792,7 +718,6 @@ $(".btn-rank").click(function(){
 
 $(".btn-abc").click(function(){
 	$.get("./movieListSort?kind=title",function(result){
-		console.log(result);
 		$("#movie-list-content").html(result);
 	});
 });

@@ -24,20 +24,19 @@
 							<table>
 								<tr>
 									<th>이름</th>
-									<td><input type="text" required="required" value=""></td>
+									<td><input type="text" required="required" value="${memberVO.name}"></td>
 								</tr>
 								<tr>
 									<th>아이디</th>
-									<td><input type="text" required="required" value=""></td>
+									<td><input type="text" required="required" value="${memberVO.username}"></td>
 								</tr>
 								<tr>
 									<th>비밀번호</th>
-									<td><input type="text" class="pwd" value=""
-										required="required"></td>
+									<td><input type="password" class="pwd" value="" required="required"></td>
 								</tr>
 								<tr>
 									<th>비밀번호 확인</th>
-									<td><input type="text" class="pwd_chk" required="required"></td>
+									<td><input type="password" class="pwd_chk" required="required"></td>
 								</tr>
 							</table>
 							<div class="btn_s">

@@ -32,8 +32,8 @@ function periodComparison(id){
 			return false;
 		}
 	});
-
 }
+
 
 
 

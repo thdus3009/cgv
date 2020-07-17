@@ -9,10 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="couponInfoSelectRecentBirth" parameterType="CouponInfoVO" resultType="CouponInfoVO">
       SELECT * FROM couponInfo WHERE name LIKE CONCAT('%',#{name},'%') ORDER BY sIssuance DESC LIMIT 1
    </select>
-   
+
    <select id="couponInfoSelectOne" parameterType="CouponInfoVO" resultType="CouponInfoVO">
-      select * from couponInfo where serialNum = #{serialNum} and pwd=#{pwd}
-   </select>
+		select * from couponInfo where serialNum = #{serialNum} and pwd=#{pwd} and sysdate() <![CDATA[<]]> eIssuance
+	</select>
    
    <select id="couponInfoSelect" parameterType="CouponInfoVO" resultType="CouponInfoVO">
       select * from couponInfo where num=#{num}
@@ -34,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       limit #{startRow},10
    </select>
       
+
    <select id="couponInfoListCount" parameterType="Pager" resultType="Long">
       select count(num) from couponInfo
       where name like concat('%',#{search},'%')
@@ -47,6 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          and #{endDate} <![CDATA[>=]]>  eIssuance
       </if>
    </select>
+
+   <update id="couponCount" parameterType="Integer">
+		update couponInfo set count = count-1 where num = #{num}
+	</update>
    
    <delete id="couponInfoDeleteExpired" parameterType="CouponInfoVO">
    	  DELETE FROM couponInfo WHERE eIssuance = #{eIssuance}

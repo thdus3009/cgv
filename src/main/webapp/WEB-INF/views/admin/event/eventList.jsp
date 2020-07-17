@@ -65,6 +65,7 @@
 				<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="container-fluid">
 					<h1>Event List</h1>
+					<p>-이벤트 목록 페이지-</p>
 					<ol class="cinema-ol">
 						<li class="breadcrumb-item active"><a href="./eventList">전체보기</a></li>
 						<li class="breadcrumb-item active"><a href="#" class="kind" id="special">SPECIAL</a></li>
@@ -115,27 +116,35 @@
 							</tbody>
 							
 						</table>
-						<div class="pager">
+						
+						<!-- 페이저 -->
+						<div class="pager" style="position: relative;">
 							<ul class="pagination">
+							
 								<c:if test="${pager.curBlock>1}">
-									<li><a href="#" class="custompager"
+									<li><a href="#" class="custompager page-link"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
-									<li><a href="./eventList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
+									<li><a href="./eventList?curPage=${p}" class="custompager page-link" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
+									<li><a href="#" class="custompager page-link"
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>
+							<div style="position: absolute; left: 0px;">
+								<a href="./eventInsert" id="up" class="btn btn-primary" style="font-size: 15px;">이벤트 추가</a>
+                    		</div>
 						</div>
 					</div>
+
 					<div class="">
 						<a href="./eventInsert" id="up" class="btn btn-mo">등록</a>
                     </div>
+
 				</div>
 			</main>
 			<c:import url="../template/footer.jsp"></c:import>

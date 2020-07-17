@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCouponVO {
-
 	private int num;
 	private String uid;
 	private int couponInfoNum;

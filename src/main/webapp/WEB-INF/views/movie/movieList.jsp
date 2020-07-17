@@ -99,7 +99,7 @@
 								</span> 
 								<span class="like"> 
 <%-- 									<a href="./movieReservation?mNum=${list.mNum}" class="link-reservation">예매</a> --%>
-									<a href="./movieReservation" class="link-reservation">예매</a>
+									<a href="./movieReservation?title=${list.title}" class="link-reservation">예매</a>
 								</span>
 							</div>
 						</li>

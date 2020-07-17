@@ -224,6 +224,17 @@ em {
 }
 
 
+/*--------------------cgv 할인 쿠폰 */
+
+.f_popup .bd .f_coupon{
+	color: #333;
+    font-weight: 600;
+    height: 29px;
+    line-height: 29px;
+    margin: 13px 0 20px;
+}
+}
+
 
 
 

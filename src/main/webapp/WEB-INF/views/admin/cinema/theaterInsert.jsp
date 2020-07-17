@@ -18,13 +18,14 @@
 			<main>
 				<div class="container-fluid">
 					<h1>Theater Insert</h1>
+					<p>-상영관 추가 페이지-</p>
 	                <form id="frm" action="./${board}${path}" method="post" enctype="multipart/form-data">
 						<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<c:if test="${path eq 'Update'}">
 							<input type="hidden" name="num" id="num" value="${vo.num}">
 						</c:if>
 						<div class="form-group">
-							<label class="theaterLebel" for="cinemaNum">CinemaNum:</label>
+							<label class="theaterLebel" for="cinemaNum">영화관:</label>
 							<select class="cinemaNum selectcinenum" id="cineNum" name="cinemaNum">
 								
 								<c:forEach items="${cine}" var="cnt">
@@ -33,27 +34,21 @@
 								
  							</select>
 							<br>
-							<label class="theaterLebel lebelname" for="name">Name:</label>
+							<label class="theaterLebel lebelname" for="name">이름:</label>
 							<input type="text" class="form-control selectcinenum" id="name" name="name" value="${vo.name}">
 							<br>
-							<label class="theaterLebel" for="filmType">FilmType:</label>
-							<label class="ckfm">
-								<input type="checkbox" name="filmType" value="1"> 2D
-								<span class="checkmark"></span>
-							</label>
-
-							<label class="ckfm">
-								<input type="checkbox" name="filmType" value="2"> 3D
-								<span class="checkmark"></span>
-							</label>
-
-							<label class="ckfm">
-								<input type="checkbox" name="filmType" value="4"> 4D
-								<span class="checkmark"></span>
-							</label>
-							<br>
-							<label class="theaterLebel" for="seat">seat:</label>
-							
+							<label class="theaterLebel" for="filmType">필름타입:</label>
+							<label class="ckfm"> <input type="checkbox" id="checkbox0"
+								name="filmType" value="1">  <span class="checkmark">2D</span>
+							</label> 
+							<label class="ckfm"> <input type="checkbox" id="checkbox1"
+								name="filmType" value="2">  <span class="checkmark">3D</span>
+							</label> 
+							<label class="ckfm"> <input type="checkbox" id="checkbox2"
+								name="filmType" value="4">  <span class="checkmark">4D</span>
+							</label> 
+							<br> 
+							<label class="theaterLebel" for="seat">좌석:</label>
 							<div class="seat_box">
 								<div class="seat_header">
 									<div class="header_btn">
@@ -103,27 +98,29 @@
 								</div><!-- end seat header -->
 								<div class="seat_section">
 									<div class="section_btn">
-										<button class="btn_del" type="button" onclick="changeGrade(0)">좌석 삭제</button>
-										<button class="btn_economy" type="button" onclick="changeGrade(1)">Economy</button>
-										<button class="btn_standard" type="button" onclick="changeGrade(2)">Standard</button>
-										<button class="btn_prime" type="button" onclick="changeGrade(3)">Prime</button>
-								 	</div><!-- end section_btn -->
-							 		<div class="contents">
-							 			<div class="seats" id="seats_list">
-								
-										</div>
-							 		</div>
-								</div><!-- end seat section -->
-							</div><!-- end seat box -->
-							<br>
-							<label for="seatCount">SeatCount:</label>
-	 						<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}">
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-						<input type="button" id="btn_insert" class="btn btn-default" value="submit">
+										<button class="btn_del" type="button" onclick="changeGrade(0)">좌석
+											삭제</button>
+										<button class="btn_economy" type="button"
+											onclick="changeGrade(1)">Economy</button>
+										<button class="btn_standard" type="button"
+											onclick="changeGrade(2)">Standard</button>
+										<button class="btn_prime" type="button"
+											onclick="changeGrade(3)">Prime</button>
+									</div>
+									<div class="contents">
+										<div class="seats" id="seats_list"></div>
+									</div>
+								</div>
+							</div>
+							<!-- end seat box -->
+							<br> <label for="seatCount" class="theaterLebel labelname">좌석
+								수:</label> <input type="text" class="form-control" id="seatCount"
+								name="seatCount" value="${vo.seatCount}" required="required" readonly="readonly">
+
+							<div class="btn_s">
+								<input type="button" id="btn_insert" class="btn btn-default"
+									value="생성" style="background-color: #eff2f8;">
+							</div>
 						</div>
 					</form>
 					<c:if test="${path eq 'Update'}">
@@ -144,7 +141,6 @@
 			var n = '${cineCheck.num}';
 			$("#cineNum option[value="+n+"]").prop("selected",true);
 		</c:if>
-
 
 	</script>
 </body>

@@ -4,61 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
 	<c:import url="../template/head.jsp"></c:import> 
-
+	<c:import url="../template/datepicker.jsp"></c:import>
+	
 	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 	<link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
 	<link rel="stylesheet" href="/css/admin/cinema/demo.css">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-	
 	<title>관리자 페이지</title>
-	
-	<link href="/css/styles.css" rel="stylesheet" />
-	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-	<c:import url="../template/datepicker.jsp"></c:import>
-
-
 </head>
-<body class="sb-nav-fixed">
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<!-- 로고 -->
-		<a href="/admin"><img src="/images/header/h1_cgv.png"
-			class="admin-logo" /></a>
-		<!-- 검색 바-->
-		<form
-			class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="검색어를 입력"
-					aria-label="Search" aria-describedby="basic-addon2" />
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</form>
-		<!-- 로그인-->
-		<ul class="navbar-nav ml-auto ml-md-0">
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" id="userDropdown" href="#"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="/">메인 페이지로</a> 
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a>
-				</div>
-			</li>
-		</ul>
-	</nav>
 
+<body class="sb-nav-fixed">
 	<c:import url="../template/header.jsp"></c:import>
 	
 	<!-- 사이드바 -->
@@ -69,11 +24,13 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<div id="cinemaNum" style="display: none;" data-num="${cine.num}"></div>
-					<h1 class="cine_title">${cine.name}</h1>
+					<div id="cinemaNum" style="display: none;" data-num="${cine.num}"></div>					
+					<h1 class="cine_title">${cine.name}CGV</h1>
 					<div class="btn_group">
 						<span id="de" class="btn btn-danger">삭제</span>
-                    	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-mo">수정</a>
+
+                  	<a href="./cinemaUpdate?num=${cine.num}" id="up" class="btn btn-mo">수정</a>
+
 					</div>
 				
 					<div class="card mb-4">
@@ -103,22 +60,22 @@
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<thead>
 								<tr>
-									<th>Num</th>
+									<th>번호</th>
 									<!-- <th>CinemaNum</th> -->
-									<th>Name</th>
-									<th>seatCount</th>
-									<th>FilmType</th>
-									<th>MovieTime</th>
+									<th>이름</th>
+									<th>총 좌석수</th>
+									<th>필름 타입</th>
+									<th>시간표</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
-									<th>Num</th>
+									<th>번호</th>
 									<!-- <th>CinemaNum</th> -->
-									<th>Name</th>
-									<th>seatCount</th>
-									<th>FilmType</th>
-									<th>MovieTime</th>
+									<th>이름</th>
+									<th>총 좌석수</th>
+									<th>필름 타입</th>
+									<th>시간표</th>
 								</tr>
 							</tfoot>
 							<tbody id="accordion">
@@ -177,7 +134,9 @@
 					</div>
 					<div class="">
 
+
 						<a href="./theaterInsert?cinemaNum=${cine.num}" id="up" class="btn btn-mo">상영관 등록</a>
+
 
                     	<c:if test="${empty timePriceList}">
                     		<a href="./admissionPrice/write?num=${cine.num}" id="admissionPrice" class="btn btn-info">관람가격 등록</a>

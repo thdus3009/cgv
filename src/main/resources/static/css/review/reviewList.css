@@ -88,6 +88,7 @@ body {
    float: right;
    width: 83%;
    height: 158px;
+   position: relative;
 }
 
 .list_p_photo11 {
@@ -127,17 +128,31 @@ body {
    height: 30px;
 }
 
-.hd {
+.a > .hd {
    float: right;
 }
+
 
 .hd_btn {
    border: 0;
    outline: 0;
 }
 
+.a >.hd{
+	position: absolute; 
+	right: 0px;
+	top: 0px;
+}
+
+.popupOnlyRead{
+	height: 20px;
+}
+
+.hd_btn{
+	height: 20px;
+}
+
 .td1 {
-   margin: 5px 0 0 0;
    font-family: 'CJ+ONLYONE+Medium';
    font-weight: 600;
 }

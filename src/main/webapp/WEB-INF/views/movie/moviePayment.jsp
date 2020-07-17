@@ -44,7 +44,7 @@
 					<div id="cgvCoupon" class="form" style="display: block">
 						<h5>CGV 할인쿠폰</h5>
 						<div class="form_button">
-							<a class="brown" href="#"><span>등록하기</span></a>
+							<a class="brown" href="#" onclick="return false;"><span>등록하기</span></a>
 							<a class="gray" href="#"><span>전체 쿠폰</span></a>
 						</div>
 						<div class="form_list">
@@ -55,6 +55,8 @@
 							</div>
 							<div class="list_body nano has-scrollbar">
 								<ul class="content" tabindex="-1" style="right: -17px; bottom: -17px;">
+									<!-- CGV 할인 쿠폰 목록 생성 -->
+<!-- 									<li class="row"><label><span class="col col1">[얼리버드 스피드 쿠폰] &lt;반도&gt;</span><span class="col col2">2286252</span><span class="col col3">2020.07.31</span><span class="col col4"><input type="checkbox"></span></label></li> -->
 									
 								</ul>
 								

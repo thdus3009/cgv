@@ -98,7 +98,7 @@
 						<strong>CJ ONE 회원이 아니신가요?</strong>
 						<span>회원가입하시고 다양한 혜택을 누리세요!</span>
 						<strong>
-							<a href="./memberjoin" class="round red">
+							<a href="./memberTerms" class="round red">
 								<span>CJ ONE 회원가입하기</span>
 							</a>
 						</strong>

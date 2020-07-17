@@ -6,30 +6,11 @@
 <head>
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<script type="text/javascript" src="/js/template/common.js"></script>
-
-<style type="text/css">
-
-td{
-	padding : 5px!important;
-	margin: 0 auto;
-	text-align: center;
-	line-height: 47px;	
-	font-size: 15px!important;
-}
-
-#btn-insert{
-	float: right;
-	font-size: 13px!important;
-	
-}
-
-</style>
+<link rel="stylesheet" href="/css/admin/coupon/couponList.css" />
 
 </head>
 
 <body class="sb-nav-fixed">
-	
 	<c:import url="../template/header.jsp"></c:import>
 
 	<!-- 사이드바 -->
@@ -41,17 +22,17 @@ td{
 			<%-- <input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
 			<main>
 				<div class="container-fluid">
-					<h1>Coupon ${path}</h1>
+					<h1>Coupon List</h1>
 					<p>쿠폰 목록</p>
 
 					<form action="./couponList" id="form-Data" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" style="float:right; padding-bottom: 20px;display:flex!important; " >
 						<input type="hidden" id="curPage" name="curPage" value="">
 						<div class="form-group">
-							<label>시작일</label>
-							<input class="" type="date" name="startDate">
-							&nbsp;&nbsp;&nbsp;&nbsp;~
-							<label>종료일</label>
-							<input class="" type="date" name="endDate">
+							<span>시작일 &nbsp;</span>
+							<input class="form-control" type="date" name="startDate">
+							&nbsp;&nbsp;~&nbsp;&nbsp;
+							<span>종료일 &nbsp;</span>
+							<input class="form-control" type="date" name="endDate">
 						</div>
 					
 						<div class="form-group" style="padding: 0 10px; text-align: right; ">
@@ -150,13 +131,8 @@ td{
 								
 							</ul>
 						</div>
-
 					</div>
-
 				</div>
-				
-				
-				
 				
 			</main>
 			<c:import url="../template/footer.jsp"></c:import>
@@ -164,70 +140,13 @@ td{
 	</div>
 	
 	<c:import url="../template/scripts.jsp"></c:import>
+	
+
+	<script type="text/javascript" src="/js/template/common.js"></script>
 	<script type="text/javascript">
-		//Page이동
-		$(".custompager").click(function(){
-			var curPage = $(this).attr("title");
-			console.log(curPage);
-			$("#form-Data #curPage").val(curPage);
-	
-			$("#form-Data").submit();
-		});
-
-	
-		var kind = '${pager.kind}';
-		switch(kind){
-		case '' :
-			$("#all").prop("selected", true);
-			break;
-		case '2' :
-			$("#cgvCoupon").prop("selected", true);
-			break;
-		case '1' :
-			$("#cgvGiftcon").prop("selected", true);
-			break;
-		}
-
-
-		//현재 날짜보다 시간이 빠르면 css 입힘(가독성용)
-		var nowDate = new Date();
-		console.log("now : "+nowDate) 
-		$(".eIssuance").each(function(){
-
-			var date = new Date($(this).text()+ "T23:59:59");
-			console.log(date)
-			if(nowDate >= date){
-				$(this).parent().css("backgroundColor","gray")
-			}
-
-		});
-
-		//가격에 콤마 적용
-		$(".price").each(function(){
-			$(this).text(addComma($(this).text()));
-
-		});
-
-		//등록버튼 클릭
-		$("#btn-insert").click(function(){
-			location.href="./couponInsert";
-		});
-
-
-		//삭제버튼 클릭
-		$(".btnDelete").click(function(){
-			var check = confirm("삭제하시겠습니까?");
-
-			if(check){
-				var num = $(this).parent().prevAll(".num").text();
-				location.href="./couponDelete?num="+num;
-			}
-		});
-		
-			
-		
-
+		var kind = `${pager.kind}`;
 	</script>
+	<script type="text/javascript" src="/js/admin/coupon/couponList.js"></script>
 </body>
 </html>
 

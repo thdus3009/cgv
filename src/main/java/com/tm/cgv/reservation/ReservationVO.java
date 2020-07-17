@@ -37,7 +37,6 @@ public class ReservationVO {
 
 	private String selectedSeatNums;
 
-	
 	private MovieInfoVO movieInfoVO;
 	private MovieTimeVO movieTimeVO;
 	private PaymentVO paymentVO;

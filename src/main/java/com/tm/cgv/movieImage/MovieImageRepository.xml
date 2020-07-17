@@ -14,7 +14,7 @@
 		insert into movieImage(num,movieNum,fileName,originName,type) values (0,#{movieNum},#{fileName},#{originName},#{type})
 	</insert>
 	
-	<select id="movieImageSelect" parameterType="MovieImageVO" resultType="MovieImageVO">
+	<select id="movieImageSelect" parameterType="Integer" resultType="MovieImageVO">
 		select * from movieImage where num=#{num}
 	</select>
 	
@@ -22,8 +22,13 @@
 		delete from movieImage where num=#{num}
 	</delete>
 	
-	<select id="movieGet"  resultType="Integer">
-		select max(num) from movieImage 
+	<update id="movieImageUpdate" parameterType="MovieImageVO">
+		update movieImage set fileName=#{fileName}, originName=#{originName}
+		where num=#{num}
+	</update>
+
+	<select id="select" parameterType="Integer" resultType="MovieImageVO">
+		select * from movieImage where movieNum=${movieNum} and type=3;
 	</select>
 
 </mapper>

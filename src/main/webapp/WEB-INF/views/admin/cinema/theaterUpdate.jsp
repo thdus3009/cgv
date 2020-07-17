@@ -18,99 +18,101 @@
 			<main>
 				<div class="container-fluid">
 					<h1>Theater Update</h1>
-	                <form id="frm" action="./${board}${path}" method="post" enctype="multipart/form-data">
-						<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<p>-영화관 정보 수정 페이지-</p>
+					<form id="frm" action="./${board}${path}" method="post"
+						enctype="multipart/form-data">
+						<input type="hidden" id="_csrf" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 						<c:if test="${path eq 'Update'}">
 							<input type="hidden" name="num" id="num" value="${theater.num}">
 						</c:if>
 						<div class="form-group">
-							<label class="theaterLebel" for="cinemaNum">CinemaNum:</label>
-							<input type="text" class="form-control selectcinenum" id="name" value="${cine.num} / ${cine.name}" readonly="readonly">
+							<label class="theaterLebel" for="cinemaNum">영화관:</label> <input
+								type="text" class="form-control selectcinenum" id="name"
+								value="${cine.num} / ${cine.name}" readonly="readonly">
 							<input type="hidden" name="cinemaNum" value="${cine.num}">
-							<br>
-							<label class="theaterLebel lebelname" for="name">Name:</label>
-							<input type="text" class="form-control selectcinenum" id="name" name="name" value="${theater.name}">
-							<br>
-							<label class="theaterLebel" for="filmType">FilmType:</label>
-							<label class="ckfm">
-								<input type="checkbox" class="filmType" name="filmType" value="1"> 2D
-								<span class="checkmark"></span>
+							<br> <label class="theaterLebel lebelname" for="name">이름:</label>
+							<input type="text" class="form-control selectcinenum" id="name"
+								name="name" value="${theater.name}"> <br> <label
+								class="theaterLebel" for="filmType">필름타입:</label> <label
+								class="ckfm"> <input type="checkbox" class="filmType"
+								name="filmType" value="1"> 2D <span class="checkmark"></span>
+							</label> <label class="ckfm"> <input type="checkbox"
+								class="filmType" name="filmType" value="2"> 3D <span
+								class="checkmark"></span>
+							</label> <label class="ckfm"> <input type="checkbox"
+								class="filmType" name="filmType" value="4"> 4D <span
+								class="checkmark"></span>
 							</label>
-
-							<label class="ckfm">
-								<input type="checkbox" class="filmType" name="filmType" value="2"> 3D
-								<span class="checkmark"></span>
-							</label>
-
-							<label class="ckfm">
-								<input type="checkbox" class="filmType" name="filmType" value="4"> 4D
-								<span class="checkmark"></span>
-							</label>
-							<c:forEach items="${filmType}" begin="${i.index}" end="${i.index}" var="f">
+							<c:forEach items="${filmType}" begin="${i.index}"
+								end="${i.index}" var="f">
 								<c:forEach items="${f}" var="m">
 									<c:if test="${m eq 1}">
-										<input type="hidden" class="ft" value="${m}"><!-- 2D -->
+										<input type="hidden" class="ft" value="${m}">
+										<!-- 2D -->
 									</c:if>
 									<c:if test="${m eq 2}">
-										<input type="hidden" class="ft" value="${m}"><!-- 3D -->
+										<input type="hidden" class="ft" value="${m}">
+										<!-- 3D -->
 									</c:if>
 									<c:if test="${m eq 4}">
-										<input type="hidden" class="ft" value="${m}"><!-- 4D -->
+										<input type="hidden" class="ft" value="${m}">
+										<!-- 4D -->
 									</c:if>
 								</c:forEach>
 							</c:forEach>
-							<br>
-							<label class="theaterLebel" for="seat">seat:</label>
-							
+							<br> <label class="theaterLebel" for="seat">좌석:</label>
+
 							<div class="seat_box">
 								<div class="seat_header">
 									<div class="header_btn">
-							   	 		<select class="seat_row" id="seat_row">
-									   	 	<option value="1">A</option>
-									   	 	<option value="2">B</option>
-									   	 	<option value="3">C</option>
-									   	 	<option value="4">D</option>
-									   	 	<option value="5">E</option>
-									   	 	<option value="6">F</option>
-									   	 	<option value="7">G</option>
-									   	 	<option value="8">H</option>
-									   	 	<option value="9">I</option>
-									   	 	<option value="10">J</option>
-									   	 	<option value="11">K</option>
-									   	 	<option value="12">L</option>
-									   	 	<option value="13">M</option>
-									   	 	<option value="14">N</option>
-									   	 </select>
-									   	 
-									   	 <select class="seat_col" id="seat_col" onchange="">
-									   	 	<option value="1">1</option>
-									   	 	<option value="2">2</option>
-									   	 	<option value="3">3</option>
-									   	 	<option value="4">4</option>
-									   	 	<option value="5">5</option>
-									   	 	<option value="6">6</option>
-									   	 	<option value="7">7</option>
-									   	 	<option value="8">8</option>
-									   	 	<option value="9">9</option>
-									   	 	<option value="10">10</option>
-									   	 	<option value="11">11</option>
-									   	 	<option value="12">12</option>
-									   	 	<option value="13">13</option>
-									   	 	<option value="14">14</option>
-									   	 	<option value="15">15</option>
-									   	 	<option value="16">16</option>
-									   	 	<option value="17">17</option>
-									   	 	<option value="18">18</option>
-									   	 	<option value="19">19</option>
-									   	 	<option value="20">20</option>
-									   	 </select>
-									   	 
-									   	 <!-- 아니면 select 할 때마다  script 처리 해서 바로 생성 -->
+										<select class="seat_row" id="seat_row">
+											<option value="1">A</option>
+											<option value="2">B</option>
+											<option value="3">C</option>
+											<option value="4">D</option>
+											<option value="5">E</option>
+											<option value="6">F</option>
+											<option value="7">G</option>
+											<option value="8">H</option>
+											<option value="9">I</option>
+											<option value="10">J</option>
+											<option value="11">K</option>
+											<option value="12">L</option>
+											<option value="13">M</option>
+											<option value="14">N</option>
+										</select> <select class="seat_col" id="seat_col" onchange="">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+										</select>
+
+										<!-- 아니면 select 할 때마다  script 처리 해서 바로 생성 -->
 										<button type="button" onclick="changeSelect()">좌석 생성</button>
-									</div><!-- end header_btn -->
-								</div><!-- end seat header -->
+									</div>
+									<!-- end header_btn -->
+								</div>
+								<!-- end seat header -->
 								<div class="seat_section">
 									<div class="section_btn">
+
 										
 										<button class="btn_stop" type="button" onclick="changeGrade(4)">예매 중단</button>
 										<button class="btn_economy" type="button" onclick="changeGrade(1)">Economy</button>
@@ -136,6 +138,7 @@
 							<span id="btn_insert2"  class="btn btn_mo">수정</span>
 						</div>
 					</form>
+
 				</div>
 			</main>
                 <c:import url="../template/footer.jsp"></c:import>

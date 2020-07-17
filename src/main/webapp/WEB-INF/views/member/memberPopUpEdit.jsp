@@ -16,7 +16,7 @@
 	</div>
 	<div class="popwrap-box">
 	<div class="profile">
-		<strong>이름</strong> <em>아이디</em>
+		<strong>닉네임 & 프로필사진 수정</strong>
 	</div>
 	<div class="profile-modify">
 		<dl>

@@ -134,26 +134,32 @@
 						<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
-									<li class="page-item"><a href="#" class="page-link"
+									<li class="page-item"><a href="#" class="custompager page-link"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 									var="p">
-									<li><a href="./cinemaList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
+									<li><a href="./cinemaList?curPage=${p}" class="custompager page-link" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li class="page-item"><a href="#" class="page-link"
+									<li class="page-item"><a href="#" class="custompager page-link"
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>
+							<div style="position: absolute; right: 40px;">
+								<a href="./cinemaInsert" id="up" class="btn btn-primary"
+								style="font-size: 15px;">영화관 등록</a>
+							</div>
 						</div>
 
 					</div>
+
 					<div class="">
 						<a href="./cinemaInsert" id="up" class="btn btn-mo">등록</a>
                     </div>
+
 				</div>
 
 			</main>

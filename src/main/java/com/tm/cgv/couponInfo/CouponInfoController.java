@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tm.cgv.member.MemberBasicVO;
+import com.tm.cgv.member.MemberVO;
+import com.tm.cgv.memberCoupon.MemberCouponService;
+import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.point.PointService;
 import com.tm.cgv.point.PointVO;
 
@@ -20,7 +23,42 @@ public class CouponInfoController {
 	private CouponInfoService couponInfoService;	
 	@Autowired
 	private PointService pointService;
+	@Autowired
+	private MemberCouponService memberCouponService;
 	
+	//CGV 할인 쿠폰 등록 - 해당 멤버쿠폰정보에 쿠폰 정보 등록
+	@ResponseBody
+	@PostMapping("cgvCouponEnrollment")
+	public int cgvCouponEnrollment(CouponInfoVO couponInfoVO,HttpSession session) throws Exception{
+		int result = 0;
+		
+		//1.쿠폰 조회 - 시리얼 번호, 날짜가유효한지 검사 
+		couponInfoVO.setPwd("");
+		couponInfoVO = couponInfoService.couponInfoSelectOne(couponInfoVO);
+		
+		//2. 조회한 쿠폰의 카운터가 0보다 큰지 검사
+		if(couponInfoVO != null && couponInfoVO.getCount() > 0) {
+			MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
+			MemberCouponVO memberCouponVO = MemberCouponVO.builder().build();
+			memberCouponVO.setUid(memberVO.getUsername());
+			memberCouponVO.setCouponInfoNum(couponInfoVO.getNum());
+			
+			//1-1. 해당 쿠폰이 내가 가지고 있는지 검사
+			MemberCouponVO couponExistCheck = memberCouponService.couponExistCheck(memberCouponVO);
+			if(couponExistCheck != null) {
+				result = -1;
+			}else {
+				//3. 위 조건 만족시 memberCoupon 테이블에 값 등록
+				result = memberCouponService.membercouponInsert(memberCouponVO);
+				
+				//4. 기존의 couponInfo테이블의 해당 쿠폰의 count값 1 감소	
+				result = couponInfoService.couponCount(couponInfoVO.getNum());
+			}
+			
+		}
+		
+		return result;
+	}
 	
 		
 	

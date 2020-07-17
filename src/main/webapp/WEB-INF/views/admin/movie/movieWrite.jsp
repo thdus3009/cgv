@@ -23,9 +23,6 @@
 				<div class="container-fluid">
 
 					<h1>Movie ${path}</h1>
-					
-
-
 
 					<div>
 
@@ -67,22 +64,20 @@
 																	class="form-control files check" id="files"
 																	placeholder="타이틀 이미지 선택" name="files">
 															</div>
-															
-															
-																<div class="form-group"  style="width: 650px;" id="d1">
-																	<label for="files">트레일러</label>
-																	<img alt="" src="../../images/theater/plus.png" 
-																	style="width: 20px; height: 20px;" id="addI"> 
-																<div id="tt" >
-																	<div class="form-group"  id="f" style="float: left;" >
-																	
+
+															<div class="form-group" id="d1" style="position: relative;">
+																<label for="files">트레일러</label> <img alt=""
+																	src="../../images/theater/plus.png"
+																	style="width: 20px; height: 20px; cursor:pointer;
+																	 top: 1px; left: 60px; position: absolute;"
+																	 id="addI">
+																<div id="tt">
+																	<div class="form-group" id="f" style="float: left;">
 																	</div>
-																	
 																</div>
-																 </div>
-															
-																
-																<!-- <div class="form-group" style="width: 650px; float: left; margin-left: 80px;margin-right: 50px;" id="d2">
+															</div>
+
+															<!-- <div class="form-group" style="width: 650px; float: left; margin-left: 80px;margin-right: 50px;" id="d2">
 																	<label for="files">트레일러</label> <br>
 																	<label for="videolink">video:</label>
 																	 <img alt="" src="../../images/theater/plus.png" 
@@ -90,9 +85,6 @@
 																	
 																</div> -->
 														
-															
-															
-															<br><br><br>
 															<div class="form-group"  style="clear: both;">
 																<label for="title" >제목:</label> <input type="text"
 																	class="form-control check" id="title" name="title"
@@ -134,10 +126,11 @@
 																	value="${vo.country }">
 															</div>
 															
-															<div class="form-group" style="width: 650px; " >
-																<label for="files">스틸컷</label> <br>
+															<div class="form-group" style="position: relative;" >
+																<label for="files">스틸컷</label>
 																<img alt="" src="../../images/theater/plus.png" 
-																style="width: 20px; height: 20px;" id="addS"> 
+																style="width: 20px; height: 20px; width: 20px; height: 20px; 
+																top: 2px; left: 50px; position: absolute; cursor: pointer;" id="addS"> 
 																<div class="form-group" id="st">
 																
 																</div>
@@ -242,7 +235,7 @@
 		if(num<3){
 			//이미지
 			$("#f").append(
-					'<div class="group1">'+
+					'<div class="group1" style="margin-bottom:5px;">'+
 					'<input type="file" multiple="multiple" style="width:45%!important; float:left;"'+
 					' class="form-control files check form-control2" id="files"placeholder="트레일러 이미지 선택" name="files">'+
 					'<input type="text" class="form-control videolink check form-control2" '+
@@ -273,9 +266,9 @@
 	// 스틸컷 이미지
 	$("#addS").click(function(){
 		if(numS<5){
-			$("#st").append('<div><input type="file" class="form-control videolink check form-control2" '+
+			$("#st").append('<div style="display:flex;"><input type="file" class="form-control videolink check form-control2" '+
 					'id="videolink" placeholder="스틸컷 이미지 " name="files"'+
-					'style=" width: 1500px;"> <span class="xS">X</span></div>');
+					'style="margin-bottom:5px;"> <span class="xS">X</span></div>');
 			numS++;
 			countS++;
 

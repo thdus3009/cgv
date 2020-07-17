@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -19,10 +19,13 @@
 			<main>
 				<div class="container-fluid">
 					<h1>movie List</h1>
+					<p>-영화 목록 페이지-</p>
 
+					<div style="display: flex; justify-content: space-between;">
 					<!-- 검색바 -->
 					<form
-						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+						class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+						style="margin: 0px!important;">
 						<div class="input-group">
 							<input class="form-control" type="text" placeholder="검색어를 입력"
 								aria-label="Search" aria-describedby="basic-addon2" id="searchM"/>
@@ -34,17 +37,19 @@
 						</div>
 					</form>
 					<!-- 정렬바 -->
-						<div class="sect-sorting">
-							<select id="selectA" name="kind">
+						<div class="sect-sorting" style="margin: 0; display: flex;">
+							<select id="selectA" name="kind" class="form-control">
 								<option title="1" value="rate" >예매율순</option>
 								<option title="2" value="date" selected="selected">최신순</option>
 								<option title="3" value="title">제목순</option>
 							</select>
 							<!-- <input type="button" id="admin_sort" value="go"> -->
-							<button id="admin_sort" type="button" class="round gray">
+							<button id="admin_sort" type="button" class="btn btn-success"
+							style="margin-left: 5px;">
 								<span>GO</span>
 							</button>
 						</div>
+					</div>
 
 					<div class="col_detail">
 						<!-- 목록 -->

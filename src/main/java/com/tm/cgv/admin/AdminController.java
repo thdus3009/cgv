@@ -251,8 +251,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
-		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount,String[] delNum) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount,delNum);
 		
 		mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		return mv;
@@ -882,14 +882,14 @@ public class AdminController {
 		return mv;
 	}
 	
-	@ResponseBody
-	@GetMapping("reservation/delete")
-	public int reservationDelete(ReservationVO reservationVO) throws Exception{
-		int result = 0;
-		result = reservationService.reservationDelete(reservationVO);
-		
-		return result;
-	}
+//	@ResponseBody
+//	@GetMapping("reservation/delete")
+//	public int reservationDelete(ReservationVO reservationVO) throws Exception{
+//		int result = 0;
+//		result = reservationService.reservationDelete(reservationVO);
+//		
+//		return result;
+//	}
 	
 	
 	
