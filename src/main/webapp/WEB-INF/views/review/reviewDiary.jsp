@@ -143,18 +143,36 @@
 					
 					<!-- Diary List -->						
 					<br><br><br>
-					
-					<div style="width: 798px; background-color: pink;">
-						<div style="padding: 30px;">
-							<div style="padding: 5px;">017.11.11 (토) 15:30 ~ 17:40 PM</div>
-							<div style="padding: 5px;">이미지</div>
-							<div style="padding: 5px;">토르-라그나로크</div>
-							<div style="padding: 5px;">Thor: Ragnarok</div>
-							<div style="padding: 5px;">CGV연수역 5관 10층  가족들</div>
-							<div style="padding: 5px;">재밌었다~~</div>
-							<div style="padding: 5px;">2020.07.17 (금) 10:29 작성</div>
+					<div style="width: 798px; border-bottom: 1px solid #cccccc;">&ensp;</div>
+					<div id="d_list"></div>
+					<c:forEach items="${list}" var="list">
+						<div style="width: 798px; border-bottom: 1px solid #cccccc;">
+							<div style="padding: 30px;">
+								<div style="padding: 5px; font-size: initial; font-weight: bold;">
+									${list.screenDate}&emsp;${list.screenTime}
+								</div>
+								<div style="padding: 5px;">
+									<img alt="다이어리 사진" src="/images/movie/movieList/filmCover/${list.fileName}" style="width: 110px; height: 161px;">
+								</div>
+								<div style="padding: 5px; font-size: x-large; font-weight: bold;">
+									${list.title}
+								</div>
+								<div style="padding: 5px; font-size: medium;color: #666666; font-weight: bold; font-family: 'CJ+ONLYONE+Medium';">
+									${list.titleEng}
+								</div>
+								<div style="padding: 5px; font-weight: bold;">
+									${list.cinemaName}&ensp;${list.theaterName}&ensp;
+									<img alt="icon" src="/images/review/d_with.JPG" class="d_image">${list.with1}
+								</div>
+								<div style="padding: 5px; font-size: 15px;">
+									<img alt="icon" src="/images/review/d_opinion.JPG" class="d_image">${list.opinion}
+								</div>
+								<div style="padding: 5px; color: #666666;">
+									${list.d_createAt} 작성
+								</div>
+							</div>
 						</div>
-					</div>
+					</c:forEach>
 					
 					</div>
 				</div>
@@ -252,6 +270,7 @@
 		location.reload();
 	});
 
+	
 	</script>
 
 </body>

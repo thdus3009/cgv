@@ -332,16 +332,22 @@ public class ReviewController {
 	   MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
 	   String uid = memberVO.getUsername(); 
 		
+	   //아직 작성안한 리스트
 	   List<ReviewVO> reviewDiary = reviewService.reviewDiary(uid);
+	   
+	   //작성해서 출력해야 하는 리스트
+	   List<ReviewVO> rd_List = reviewService.reviewDiary_List(uid); 
 	   
 	   int diary_count = reviewService.reviewDiary_Count(uid);
 	   
 	   mv.addObject("diary", reviewDiary);
+	   mv.addObject("list", rd_List);
 	   mv.addObject("d_count", diary_count);
 	   mv.setViewName("review/reviewDiary");
 	   
 	   return mv;
    }
+   
    
    @GetMapping("reviewDiary_Write")
    @ResponseBody
@@ -352,16 +358,24 @@ public class ReviewController {
 	   return result;
    }
    
+	
 	/*
 	 * @GetMapping("reviewDiary_List")
 	 * 
-	 * @ResponseBody public void reviewDiary_List(HttpSession session)throws
-	 * Exception{ MemberBasicVO memberVO =
+	 * @ResponseBody public List<ReviewVO> reviewDiary_List(HttpSession
+	 * session)throws Exception{ MemberBasicVO memberVO =
 	 * (MemberBasicVO)session.getAttribute("memberVO"); String uid =
 	 * memberVO.getUsername();
 	 * 
-	 * // List<ReviewVO> rd_List = reviewService.reviewDiary_List(uid); }
+	 * List<ReviewVO> rd_List = reviewService.reviewDiary_List(uid);
+	 * System.out.println("dddddddddddddddddddddddd");
+	 * System.out.println(rd_List.get(0).getWith1());
+	 * System.out.println(rd_List.get(0).getOpinion());
+	 * 
+	 * 
+	 * return rd_List; }
 	 */
+	 
 
    // ---------------------------------------------------------------------------------
    

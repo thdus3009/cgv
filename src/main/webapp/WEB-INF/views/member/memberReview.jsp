@@ -44,7 +44,7 @@
          <div class="contents">
             <div class="col_content">
                <!----------------- contents aside -->
-					<!----------------- contents aside -->
+               
 					<div class="col_aside">
 					
 						<div>
@@ -89,7 +89,7 @@
                         <h4>내가 본 영화</h4>
                         <div class="td1" id="total" title="${m_count}">
                            <c:out value="${m_count}" />
-                           건
+                            건
                         </div>
                         <!-- el태그 -->
                         <button id="look">내 평점 보기</button>
@@ -142,7 +142,12 @@
 
 
                      <!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
-                     <div id="result"></div>
+                     <!-- getList.jsp -->
+                     <div id="result">
+                     
+                     </div>
+                     
+                     <!-- 더보기 -->
                      <button id="more">
                         <img alt=""
                            src="${pageContext.request.contextPath}/images/more.JPG">

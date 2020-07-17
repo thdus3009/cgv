@@ -519,3 +519,8 @@ em {
 	font-size: 13px;
 	margin-top: 10px;
 }
+
+.d_image {
+	position: relative;
+	top: 7px;
+}

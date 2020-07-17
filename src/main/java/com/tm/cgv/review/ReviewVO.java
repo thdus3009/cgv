@@ -48,5 +48,6 @@ public class ReviewVO {
    //reviewDiary
    private String with1;
    private String opinion;
+   private String d_createAt;
 
 }

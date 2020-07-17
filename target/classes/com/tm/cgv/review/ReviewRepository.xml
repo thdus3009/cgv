@@ -296,14 +296,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		((select R.*,I.title,I.titleEng from
 		((select R.*, D.with1, D.opinion, D.d_createAt from
 		(select D.* from
-		((select * from reviewDiary where d_createAt is not null and d_deleteAt is null) D right join
+		((select num, reservationNum,with1,opinion, date_format(d_createAt,'%Y-%m-%d %H:%i') d_createAt from reviewDiary 
+        where d_createAt is not null and d_deleteAt is null) D right join
 		(select num from reservation where uid=#{uid}) R on(D.reservationNum = R.num)) where D.num is not null) D 
 		left join (select num, movieNum, theaterName, cinemaName, movieTimeNum, common, teenager, preference from reservation 
-		where uid='admin' and deleteAt is null) R on (D.reservationNum = R.num)) R 
+		where uid=#{uid} and deleteAt is null) R on (D.reservationNum = R.num)) R 
 		left join (select num, title, titleEng from movieInfo) I
 		on(R.movieNum = I.num)))M left join (select * from movieTime where deleteAt is null) T on(M.movieTimeNum = T.num))) M 
 		left join (select * from movieImage where type=1) I
-		on(M.movieNum = I.movieNum)) order by M.num desc
+		on(M.movieNum = I.movieNum)) order by M.d_createAt desc
    </select>
    
    <!-- ........................................................................................... -->
