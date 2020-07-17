@@ -69,7 +69,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					
+					<div id="cinemaNum" style="display: none;" data-num="${cine.num}"></div>
 					<h1 class="cine_title">${cine.name}</h1>
 					<div class="btn_group">
 						<span id="de" class="btn btn-danger">삭제</span>
@@ -163,7 +163,7 @@
 											</div>
 											
 											<div class="movieTime" style="float:right;">
-												<input type="button" value="상영 시간 등록" class="btn btn-primary">
+												<input type="button" value="상영 시간 등록" class="btn btn-primary movieTimeInsert" data-num="${vo.num}">
 											</div>
 														  	
 										  	<div class="timetable" id="timetable${i.index}" name="${i.index}">
@@ -419,10 +419,20 @@
 		
  
  	// submit 버튼 클릭시
-		
+	
+	// movieTimeInsert button 클릭시
+	$(".movieTimeInsert").each(function() {
 
+		$(this).click(function() {
 
-    
+			var theaterNum = $(this).data("num");
+			var cinemaNum = $("#cinemaNum").data("num");
+			console.log("movieTimeInsert : "+theaterNum);
+
+			location.href = "/admin/movieTime/insert?num="+theaterNum+"&cinemaNum="+cinemaNum;
+		});
+	})
+
     </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

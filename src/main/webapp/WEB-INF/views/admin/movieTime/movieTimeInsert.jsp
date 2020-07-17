@@ -23,7 +23,9 @@
 				<div class="container-fluid" style=" padding: 40px;">
 					<h1>Movie Time Insert</h1>
 					<p>영화 상영시간 등록</p>
-								
+					
+					
+					
 					<!-- Tab -->
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#selectMovie">영화 선택</a></li>
@@ -78,6 +80,7 @@
 									
 									<div id="movieTimeInsert">
 										<input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+										<input id="cinemaNum" type="hidden" value="${theaterVO.cinemaNum}" disabled/> 
 										<input id="movieNum" type="hidden" name="movieNum"/>
 										<input id="theaterNum" type="hidden" name="theaterNum" value="${theaterVO.num}"/>
 										<input id="remainSeat" type="hidden" name="remainSeat" value="${theaterVO.seatCount}"/>
@@ -116,7 +119,6 @@
 	<c:import url="../template/scripts.jsp"></c:import>
 	<script type="text/javascript">
 
-		console.log('aaaaaa');
 		//console.log(`${movieInfoList}`);
 	
 		// 영화리스트 값 가져오기
@@ -347,20 +349,17 @@
 					}, function(result) {
 						if(result > 0) {
 							alert("등록이 완료되었습니다");
-							location.href = "/admin";
+							location.href = "admin/cinema/cinemaSelect?num="+$("#cinemaNum").val();
 						} else {
 							alert("등록 실패, 재등록해주세요");
 						}
 					});
-				
 			});
 		}
 		
 		// main()
 		$(function() {
 
-			console.log("sssssss");
-			
 			// 영화 등록 단계 관련
 			var movieInfoList = getMovieInfoList();
 			var perRow = getPerRow();

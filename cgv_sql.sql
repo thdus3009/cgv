@@ -374,3 +374,23 @@ BEGIN
 END //
 
 CALL insertSeatBookingByMovieTimeInsert(1);
+
+
+delimiter //
+DROP PROCEDURE IF EXISTS sideBannerRandSelect; 
+CREATE PROCEDURE sideBannerRandSelect( 
+   -- 매개변수 선언
+   IN selectedIndex INT
+)
+BEGIN
+   -- 지역변수 선언
+    DECLARE count INT;
+    
+    SET count = (SELECT COUNT(num) FROM banner WHERE type=1 AND `index`=selectedIndex);
+    SET count = (SELECT FLOOR(0 + RAND() * count - 0));
+    
+    SELECT * FROM banner WHERE type=1 and `index`=selectedIndex limit count, 1;
+    
+END //
+
+CALL sideBannerRandSelect(0);

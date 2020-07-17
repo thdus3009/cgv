@@ -831,13 +831,12 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("movieTimeInsert");
+		System.out.println("theaterNum : "+theaterVO.getNum());
+		
 		pager.setPerPage(12);		// 12개씩 영화 보여주기 위함
 		mv.addObject("perRow", 6);	// 6개마다 줄바꿈을 위함
 
-		// for test
-		if(theaterVO.getNum() == 0)
-			theaterVO.setNum(31);
-		
 		List<MovieInfoVO> movieInfoList = movieInfoService.forMovieTimeInsertList(pager);
 		for (MovieInfoVO movieInfoVO : movieInfoList) {
 			
@@ -851,7 +850,6 @@ public class AdminController {
 		return mv;
 	}
 	
-	// ajax로 받는걸로 바꿔보자
 	@PostMapping("movieTime/insert")
 	@ResponseBody
 	public int movieTimeInsert(MovieTimeVO movieTimeVO) throws Exception {
