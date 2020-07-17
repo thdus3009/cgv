@@ -39,7 +39,7 @@ public class CouponInfoController {
 		//2. 조회한 쿠폰의 카운터가 0보다 큰지 검사
 		if(couponInfoVO != null && couponInfoVO.getCount() > 0) {
 			MemberBasicVO memberVO = (MemberBasicVO)session.getAttribute("memberVO");
-			MemberCouponVO memberCouponVO = new MemberCouponVO();
+			MemberCouponVO memberCouponVO = MemberCouponVO.builder().build();
 			memberCouponVO.setUid(memberVO.getUsername());
 			memberCouponVO.setCouponInfoNum(couponInfoVO.getNum());
 			

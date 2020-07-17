@@ -23,14 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result property="sIssuance" column="sIssuance"/>
 			<result property="eIssuance" column="eIssuance"/>
 		</association>	
-		
 	</resultMap>
 
-	<insert id="memberCouponInsert" parameterType="MemberCouponVO">
-		INSERT INTO memberCoupon VALUES(
-			0, #{uid}, #{couponInfoNum}, null
-		)
-	</insert>
 
 	<select id="memberCouponSelect" parameterType="MemberCouponVO" resultMap="memberCouponList">
 		select * from
@@ -44,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="couponExistCheck" parameterType="MemberCouponVO" resultType="MemberCouponVO">
 		select * from memberCoupon where uid=#{uid} and couponInfoNum =#{couponInfoNum}
+	</select>
 
 	<select id="memberCouponCount" parameterType="MemberCouponVO" resultType="Integer">
 		SELECT COUNT(num) FROM memberCoupon WHERE uid = #{uid} 
@@ -66,7 +61,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into memberCoupon values(0,#{uid},#{couponInfoNum},null)
 	</insert>
 	
-		
 	
 </mapper>
 
