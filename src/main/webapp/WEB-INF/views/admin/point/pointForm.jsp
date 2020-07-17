@@ -6,29 +6,7 @@
 <head>
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<script type="text/javascript" src="/js/template/common.js"></script>
-<style type="text/css">
-
-#selectBox{
-	float: right;
-}
-
-label{
-	display: block;
-}
-
-#discountRate{
-	width: 50%;
-	float: left;
-}
-
-#btnSubmit{
-	margin-bottom: 50px;
-	margin-left: 20px;
-}
-
-
-</style>
+<link rel="stylesheet" href="/css/admin/point/pointForm.css" />
 
 </head>
 <body class="sb-nav-fixed">
@@ -62,41 +40,8 @@ label{
 	<c:import url="../template/scripts.jsp"></c:import>
 	
 	
-<script type="text/javascript">
-	//숫자만 등록 가능
-	$("#price").keyup(function() {
-		reg = /[^0-9]/gi;
-		v = $(this).val();
-
-		if (reg.test(v)) {
-			$(this).val(v.replace(reg, ''));
-			$(this).focus();
-		}
-	});
-
-	$("#btnSubmit").click(function(){
-		var rate = $("#discountRate").val();
-
-		$.ajax({
-			url : './accumulateManagement',
-			type : 'post',
-			data : {
-				rate : rate,
-				_csrf : $("#_csrf").val()
-			},
-			success : function(result){
-				if(result>0){
-					$("#discountRate").val(result);
-					alert("변경되었습니다.");
-				}else{
-					alert("변경 실패");
-				}
-			}
-		});
-	});
-
-	
-</script>
+<script type="text/javascript" src="/js/template/common.js"></script>
+<script type="text/javascript" src="/js/admin/point/pointForm.js"></script>
 
 </body>
 </html>

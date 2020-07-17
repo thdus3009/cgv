@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+
+#selectBox{
+	float: right;
+}
+
+label{
+	display: block;
+}
+
+#discountRate{
+	width: 50%;
+	float: left;
+}
+
+#btnSubmit{
+	margin-bottom: 50px;
+	margin-left: 20px;
+}

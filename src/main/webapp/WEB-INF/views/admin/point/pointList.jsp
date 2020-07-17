@@ -6,25 +6,7 @@
 <head>
 <c:import url="../template/head.jsp"></c:import>
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-<script type="text/javascript" src="/js/template/common.js"></script>
-
-<style type="text/css">
-
-td{
-	padding : 5px!important;
-	margin: 0 auto;
-	text-align: center;
-	line-height: 47px;	
-	font-size: 15px!important;
-}
-
-#btn-insert{
-	float: right;
-	font-size: 13px!important;
-	
-}
-
-</style>
+<link rel="stylesheet" href="/css/admin/point/pointList.css" />
 
 </head>
 
@@ -148,18 +130,9 @@ td{
 	</div>
 	
 	<c:import url="../template/scripts.jsp"></c:import>
-	<script type="text/javascript">
-		//Page이동
-		$(".custompager").click(function(){
-			var curPage = $(this).attr("title");
-			console.log(curPage);
-			$("#form-Data #curPage").val(curPage);
 	
-			$("#form-Data").submit();
-		});
-
-		
-
+	<script type="text/javascript" src="/js/template/common.js"></script>
+	<script type="text/javascript">
 	
 		var kind = '${pager.kind}';
 		switch(kind){
@@ -174,44 +147,8 @@ td{
 			break;
 		}
 
-
-		//현재 날짜보다 시간이 빠르면 css 입힘(가독성용)
-		var nowDate = new Date();
-		console.log("now : "+nowDate) 
-		$(".eIssuance").each(function(){
-
-			var date = new Date($(this).text()+ "T23:59:59");
-			console.log(date)
-			if(nowDate >= date){
-				$(this).parent().css("backgroundColor","gray")
-			}
-
-		});
-
-		//가격에 콤마 적용
-		$(".price").each(function(){
-			if($(this).text() == 0){
-				$(this).text("-")
-			}else{
-				$(this).text(addComma($(this).text()));
-			}
-		});
-
-
-		//종료 글자로 변경
-		$(".type").each(function(){
-			if($(this).text() == 'cgvGiftPrePayipt'){
-				$(this).text("CGV 포인트");
-			}else if($(this).text() == 'cjOnePointipt'){
-				$(this).text("CJ 포인트");	
-			}
-
-		});
-		
-			
-		
-
 	</script>
+	<script type="text/javascript" src="/js/admin/point/pointList.js"></script>
 </body>
 </html>
 
