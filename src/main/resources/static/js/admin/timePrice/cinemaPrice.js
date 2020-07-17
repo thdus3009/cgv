@@ -99,22 +99,22 @@ if(timePrice == 'update'){
 $("#addUnderDataBtn").click(function(){
 	//var copyHTML = $(".underData:first").clone();
 	var html = '<div class="underData" style="display:flex!important;">'
-	+ '<div class="form-group" style="width: 45%;">'
-	+ '<div style="display:flex!important;">'
-	+ '<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
-	+ ' ~ ' 
-	+ '<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
-	+ '</div>'
-	+ '</div>'
-	+ '<div class="form-group" style="width: 25%;">'
-	+ '<input type="text" name="commonPrice" class="commonPrice form-control inputbox" required="required"'
-	+ 'style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
-	+ '</div>'
-	+ '<div class="form-group" style="width: 25%; margin-left: 10px;">'
-	+ '<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"'
-	+ 'style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
-	+ '</div>'
-	+ '<div class="button_del"><button class="btn delBtn" type="button" style="width: 5%;">&nbsp;X</button></div>';
+		+ '<div class="form-group">'
+		+ '<div style="display:flex!important;">'
+		+ '<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
+		+ ' ~ ' 
+		+ '<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
+		+ '</div>'
+		+ '</div>'
+		+ '<div class="form-group">'
+		+ '<input type="text" name="commonPrice" class="commonPrice form-control inputbox" required="required"'
+		+ 'style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
+		+ '</div>'
+		+ '<div class="form-group">'
+		+ '<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"'
+		+ 'style="IME-MODE:disabled; width:217px;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
+		+ '</div>'
+		+ '<div class="button_del"><button class="btn delBtn" type="button" style="position: absolute; right: 4px;">&nbsp;X</button></div>';
 	
 	if(count < 6){
 		count += 1;
