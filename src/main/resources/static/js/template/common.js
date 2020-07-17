@@ -34,7 +34,13 @@ function periodComparison(id){
 	});
 }
 
-
+//해당 날짜의 요일 구하기 (날짜형식 : yyyy-mm-dd)
+function weekFind(date){
+	var week = ['일', '월', '화', '수', '목', '금', '토'];
+	var dayOfWeek = week[new Date(date).getDay()];
+	
+	return dayOfWeek;
+}
 
 
 

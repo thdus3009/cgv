@@ -115,7 +115,6 @@ public class ReservationController {
 				
 				result = pointService.pointDiscountUpdate(pointVO);
 				System.out.println("포인트 : "+result);
-				
 			}
 			
 		}

@@ -176,43 +176,43 @@
 									<span>예매번호로만 티켓을 찾을 수 있으니 반드시 확인 부탁드립니다.</span>
 								</div>
 								<div class="my-movie-reserve">
-
-									<!-- 반복 -->
-
 									<div class="reserve-ticket">
-
+									<!-- 반복 -->
+									
+									<c:forEach var="reservationVO" items="${myReservationList}">
 										<div class="el-box">
-											<div class="rt-info1">
-												<em>예매번호</em><br> <strong>0150-<br>0617-4137-063
-												</strong> <br> <span>(날짜)</span><br>
-											</div>
-											<div class="rt-info2">
-												<div class="rt-info2-div1">
-													<img alt="영화 포스터" src="" class="poster">
-													<ul class="rt-ul">
-														<li style="padding-bottom: 10px;"><strong>제목</strong></li>
-														<li>관람극장 <strong></strong><a href="">[극장정보]</a></li>
-														<li>관람일시 <strong></strong></li>
-														<li>관람좌석 <strong></strong></li>
-													</ul>
+												<div class="rt-info1">
+													<em>예매번호</em><br> <strong>${reservationVO.num}
+													</strong> <br> <span class="date">(${reservationVO.createAt})</span><br>
 												</div>
-												<div class="rt-info2-div2">
-													<dl>
-														<dd>총 결제금액&nbsp</dd>
-														<dt>20,000원</dt>
-													</dl>
-													<div>
-														<button class="message-reserve" type="button">
-															<span>문자보내기</span>
-														</button>
-														<button class="cancle-reserve" type="submit">
-															<span>예매취소</span>
-														</button>
+												<div class="rt-info2">
+													<div class="rt-info2-div1">
+														<img alt="영화 포스터" src="/images/movie/movieList/filmCover/${reservationVO.movieImageVO.fileName}" class="poster">
+
+														<ul class="rt-ul">
+															<li style="padding-bottom: 10px;"><strong>${reservationVO.movieInfoVO.title}</strong></li>
+															<li>관람극장 <strong>CGV ${reservationVO.cinemaName}</strong><a href="">[극장정보]</a></li>
+															<li>관람일시 <strong class="date">${reservationVO.movieTimeVO.screenDate}</strong><strong> ${reservationVO.movieTimeVO.screenTime}</strong></li>
+															<li>관람좌석 <strong>${reservationVO.seats}</strong></li>
+														</ul>
+													</div>
+													<div class="rt-info2-div2">
+														<dl>
+															<dd>총 결제금액&nbsp</dd>
+															<dt>${reservationVO.totalPrice}</dt>
+														</dl>
+														<div>
+															<button class="message-reserve" type="button">
+																<span>문자보내기</span>
+															</button>
+															<button data-cancle="${reservationVO.num}" class="cancle-reserve" type="button">
+																<span>예매취소</span>
+															</button>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-
+									</c:forEach>
 									</div>
 
 								</div>
@@ -232,8 +232,24 @@
 		<!-- 사이드바 ---------------------------------------------------------------------------------------------->
 		<c:import url="../template/sidebar.jsp"></c:import>
 	</div>
-
+	<script type="text/javascript" src="/js/template/common.js"></script>
 	<script type="text/javascript">
+		//금액에 콤마 적용
+		$(".rt-info2-div2 dl dt").each(function(){
+			$(this).text(addComma($(this).text())+"원");
+		});
+
+		//해당 날짜 formData 변경 및 요일 추가 
+		$(".date").each(function(){
+			var str = $(this).text();
+			var week = weekFind(str);
+			
+			str = str.replace(/-/gi, ".");
+			$(this).text(str+"("+ week +")");
+		});
+
+
+	
 		//회원 탈퇴 알림창
 		$("#memberDelete").click(function() {
 			var check = confirm("회원 탈퇴하시겠습니까?");
@@ -267,16 +283,29 @@
 						}); */
 
 		//안됨빡친다
-		$(".cancle-reserve")
-				.click(
-						function(e) {
-							e.preventdefault();
-							alert("e.preventdefault()");
-							e.preventdefault();
-							if (confirm("예매를 취소하시겠습니까? \n\n※인터넷 예매 취소는 상영시간 20분 전까지 가능하며, \n예매 가능은 상영시간 30분 전까지 가능합니다.")) {
-
-							}
-						});
+		$(".cancle-reserve").click(function() {
+			if (confirm("예매를 취소하시겠습니까? \n\n※인터넷 예매 취소는 상영시간 20분 전까지 가능하며, \n예매 가능은 상영시간 30분 전까지 가능합니다.")) {
+				//console.log($(this).data("cancle"));
+				var reservationNum = $(this).data("cancle");
+				//reservationCancle
+				$.ajax({
+					url : '../reservation/reservationCancle',
+					type : 'get',
+					data : {
+						num : reservationNum
+					},
+					success :function(result){
+						console.log(result);
+						if(result>0){
+							alert("예매가 취소 되었습니다.");
+							location.reload();
+						}else{
+							alert("예매 취소 실패");
+						}
+					} 
+				});
+			}
+		});
 	</script>
 
 
