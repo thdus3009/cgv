@@ -70,7 +70,7 @@
 									
 									<c:if test="${vo.errRate ge 70 }">
 									<!-- 왕관있는 계란 -->
-									 <span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
+									 <span class="egg great" id="this" style="background:url('../../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
 									</c:if>
 								<span class="percent">${vo.errRate}</span>
 							</div>
@@ -100,19 +100,21 @@
 						</span>
 						
 						<div class="sect-story-movie" >
+						<p style="font-size: 13px; font-weight: 600; margin: 0;">줄거리:</p>
 						<strong>${vo.contents}</strong>
 					</div>
 							
 					</div>
 					</div>
-					<div class="bbs_btn">
-						
-									
-						
-								<a href="./movieDelete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
-								<a href="./movieUpdate?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
-							
-									
+					<div class="bbs_btn" style="top: 460px; left: 335px;">
+						<a href="./movieDelete?num=${vo.num}">
+						<button type="button" class="btn btn-warning" id="btn-delete"
+						style="font-size: 13px;">
+						<span>삭제하기</span></button></a>
+						<a href="./movieUpdate?num=${vo.num}">
+						<button type="button" class="btn btn-success" id="btn-update"
+						style="font-size: 13px;">
+						<span>수정하기</span></button></a>
 					</div>	
 				</div>
 			

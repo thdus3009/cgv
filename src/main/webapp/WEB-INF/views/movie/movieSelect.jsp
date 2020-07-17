@@ -47,7 +47,8 @@
    <%-- <input type="hidden" value="${sessionScope.memberBasicVO.username}" class="username"> --%>
    
    <input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
-   <div class="container" >
+  
+   <div class="container2" >
       <div class="c_nav">
          <div class="nav_linemap">
             <ul>
@@ -146,7 +147,7 @@
                   <span class="like">
                      <a class="link-count" href="" class="a">
                         <i class="sprite_preegg1 btn_md default"></i>
-                        프리에그
+                       		 프리에그
                      </a>
                      <a class="link-reservation a" href="" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
                   </span>
@@ -206,14 +207,12 @@
                </div>
                
                
-               <div class="movie-detail-ad">
-                  <iframe src="" width="100%" height="90px"> </iframe>
-               </div>
+            
                
                <div id="ctl00_PlaceHolderContent_Section_Trailer" class="sect-trailer" >
                   <div class="heading">
                      <span class="hh">&ensp; 트레일러</span>
-                     <span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">4건</span>
+                     <span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">${tco}건</span>
                   </div>
                   
                   <c:forEach var="ar" items="${ar}">
@@ -230,8 +229,7 @@
                         <a href="" class="a">
                            <span class="strong title">
                               <span class="ico-trailer hd">HD</span>
-
-                              예고편 영상
+                          		    예고편 영상
                            </strong>
 
                         </a>
@@ -249,32 +247,51 @@
                   <div class="heading">
                      <span class="hh">&ensp; 스틸컷</span>
                      <span class="count">
-                        <span class="strong" id="stillcut_current">1</span>
-                        21건
+                        <span class="strong" id="stillcut_current"></span>
+                       ${sco}건
                      </span>
                   </div>
-                  <c:forEach var="ar" items="${ar}">
-                  <c:if test="${ar.type eq 3 }">
-                  <ul>
-                     <li>
-                     <div class="box-image">
-                        <img alt="스틸컷" src="../images/movie/movieList/filmCover/${ar.fileName}" class="box-image">
-                     </div>
-                     <div class="box-contents">
-                        <a href="">
-                           
-                        </a>
-                        
-                     </div>
-                     </li>
-                  </ul>
-                  </c:if>
-                  </c:forEach>
                   
                   <div class="slider-wrap">
-                  
+                  	<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 350px;">
+					    <!-- Indicators -->
+					     <c:forEach var="ar" items="${ar}" varStatus="i">
+					      <c:if test="${ar.type eq 3 }">
+							    <ol class="carousel-indicators">
+							      <li data-target="#myCarousel" data-slide-to="${i.index}" ></li>
+							    </ol>
+							</c:if>
+					 	 </c:forEach>
+					    <!-- Wrapper for slides -->
+					    <div class="carousel-inner">
+					      <c:forEach var="ar" items="${ar}" varStatus="i">
+					      
+						      <c:if test="${ar.type eq 3 }">
+							      <div class="item" style="margin-left: 300px; margin-top: 35px;">
+							       	<img alt="스틸컷" src="../images/movie/movieList/filmCover/${ar.fileName}" class="box-image">
+							      </div>
+							       
+						       </c:if>
+					       </c:forEach>
+					    </div>
+							
+					 	
+					    <!-- Left and right controls -->
+					    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					      <span class="glyphicon glyphicon-chevron-left"></span>
+					      <span class="sr-only">Previous</span>
+					    </a>
+					    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+					      <span class="glyphicon glyphicon-chevron-right"></span>
+					      <span class="sr-only">Next</span>
+					    </a>
+					 
+					  </div>
+					   
                   </div>
-               </div> 
+                  
+                  
+               </div>
                <!-- 여기까지가 스틸컷 -->
                <div class="sect-grade" style="margin-top: 40px;">
                   <div class="movie_grade">
@@ -289,11 +306,11 @@
                            <!-- pre egg -->
                            <!-- <div class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png')no-repeat -25px -20px;" ></div> -->
                               
-                               <span class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -4px -35px;"></span> 
+                              <!--  <span class="sprite_preegg big default" style="background: url('../images/movie/movieList/sprite_preegg.png') no-repeat -4px -35px;"></span> 
                               
                               <span class="desc" >PreEgg</span>
                               <span class="percent">94%</span>
-                              <span class="tooltip">사전기대지수</span>
+                              <span class="tooltip">사전기대지수</span> -->
                               
                            </div>
                            <div class="box box_golden" style="position: absolute; right: 40px;">
@@ -379,7 +396,7 @@
          </div>
       </div>
    </div>
-   
+   </div>
       
    <!-- Modal ------------------------------------------------------------------------------------->
    <c:import url="../template/modal.jsp"></c:import>   
@@ -647,6 +664,13 @@ var myChart = new Chart(ctx, {
 });
 
 </script>
+
+<script type="text/javascript">
+	$(".item:nth-child(1)").addClass("active");
+
+</script>
+
+
 
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">

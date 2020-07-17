@@ -16,7 +16,11 @@ public class MemberCouponService {
 	}
 	
 	public int memberCuponUpdate(MemberCouponVO memberCouponVO) throws Exception{
-		return memberCouponRepository.memberCouponUpdate(memberCouponVO);
+		return memberCouponeRepository.memberCouponUpdate(memberCouponVO);
+	}
+	
+	public Integer memberCouponCount(MemberCouponVO memberCouponVO) throws Exception{
+		return memberCouponeRepository.memberCouponCount(memberCouponVO);
 	}
 	
 	public int membercouponInsert(MemberCouponVO memberCouponVO) throws Exception{

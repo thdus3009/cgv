@@ -30,10 +30,10 @@
 						<input type="hidden" id="curPage" name="curPage" value="${pager.curPage}">
 						<div class="form-group">
 							<label>시작일</label>
-							<input class="" type="date" name="startDate">
+							<input class="form-control" type="date" name="startDate">
 							&nbsp;&nbsp;&nbsp;&nbsp;~
 							<label>종료일</label>
-							<input class="" type="date" name="endDate">
+							<input class="form-control" type="date" name="endDate">
 						</div>
 					
 						<div class="form-group" style="padding: 0 10px; text-align: right; ">

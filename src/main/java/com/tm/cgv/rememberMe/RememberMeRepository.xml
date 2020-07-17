@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tm.cgv.rememberMe.RememberMeRepository">
+	
+	<insert id="createNewToken" parameterType="RememberMeVO">
+		INSERT INTO rememberMe VALUES(
+			#{series}, #{username}, #{token}, now()
+		)
+	</insert>
+	
+	<update id="updateToken" parameterType="RememberMeVO">
+		UPDATE rememberMe SET series = #{series}, token = #{token}, last_used = now()
+	</update>
+
+	<select id="findOne" parameterType="RememberMeVO" resultType="RememberMeVO">
+		SELECT * FROM rememberMe WHERE series = #{series}
+	</select>
+	
+	<delete id="deleteByUsername" parameterType="RememberMeVO">
+		DELETE FROM rememberMe WHERE username = #{username}
+	</delete>
+
+</mapper>

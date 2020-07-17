@@ -34,22 +34,22 @@
 		
 		//아이디 조건 체크
 		userID.addEventListener("keyup",function(){
-			if(userID.value.length < 6){
-				idc.innerText = '아이디는 6글자 이상입니다.';
-				idc.style.color = "red";
-				idcheck = false;
-			}else{
-				
-					idc.innerText = '사용가능한 아이디입니다. 아이디 중복체크를 해주세요';
-					idc.style.color = "green";
-					idcheck = true;
-			}
+//			if(userID.value.length < 6){
+//				idc.innerText = '아이디는 6글자 이상입니다.';
+//				idc.style.color = "red";
+//				idcheck = false;
+//			}else{
+//				
+//					idc.innerText = '사용가능한 아이디입니다. 아이디 중복체크를 해주세요';
+//					idc.style.color = "green";
+//					idcheck = true;
+//			}
 			
 		});
 		
 		//패스워드 조건 설명 출력
 		pwd1.addEventListener("focus",function(){
-			pwd1c.innerText = '패스워드는는 6글자 이상입니다.';
+			//pwd1c.innerText = '패스워드는는 6글자 이상입니다.';
 		});
 		
 		//패스워드 조건 체크
@@ -188,7 +188,7 @@
 						birthc.innerText = "year :태어난 월을 선택하세요."
 					}else{
 						if(!date_flag){
-							birthc.innerText = "year :태어난 일(날짜) 2자리를 정확하게 입력하세요."
+							//birthc.innerText = "year :태어난 일(날짜) 2자리를 정확하게 입력하세요."
 						}else{
 							birthc.innerText = "";
 						}
@@ -208,14 +208,6 @@
 						}
 					}
 				}
-				if(!date_flag){
-					birthc.innerText = "month: 태어난 일(날짜) 2자리를 정확하게 입력하세요.";
-				}else{
-					birthc.innerText = "";
-				}
-				
-			}else{
-				birthc.innerText = "month :태어난 년도 4자리를 정확히 입력하세요.";
 			}
 		});
 		
@@ -223,7 +215,6 @@
 			
 			console.log(year_flag);
 			console.log(month_flag);
-			
 			
 			if(ch_date.value.length != 2){
 				console.log("pont1");

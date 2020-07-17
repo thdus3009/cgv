@@ -28,6 +28,8 @@ public class MovieInfoVO {
 	private Date createAt;
 	private String kind;
 	
+	private String fileName;
+	
 	//이미지, 영상 주소 list로 받아오기
 	private List<MovieImageVO> movieImageVOs;//영화 이미지 파일
 	

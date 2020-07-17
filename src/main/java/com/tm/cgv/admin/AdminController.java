@@ -248,8 +248,8 @@ public class AdminController {
 	}
 	
 	@PostMapping("movie/movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount) throws Exception{
-		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount);
+	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,List<MultipartFile> files,String[] videolink,int trailerCount,int steelCutCount,String[] delNum) throws Exception{
+		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink,trailerCount,steelCutCount,delNum);
 		
 		mv.setViewName("redirect:./movieSelect?num="+movieInfoVO.getNum());
 		return mv;
@@ -651,6 +651,7 @@ public class AdminController {
 		CinemaVO cinemaVO = new CinemaVO();
 		cinemaVO.setNum(cinemaNum);
 		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
+		
 		//theaterSelect
 		//상영관 정보
 		//좌석배치도
@@ -817,13 +818,11 @@ public class AdminController {
 	}
 	
 	//==============================
-	// movieTime
+	// movieTime part
 	//==============================
 	
 	@GetMapping("movieTime/insert")
 	public ModelAndView movieTimeInsert(Pager pager, TheaterVO theaterVO) throws Exception {
-		
-		
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -832,12 +831,15 @@ public class AdminController {
 
 		// for test
 		if(theaterVO.getNum() == 0)
-			theaterVO.setNum(1);
+			theaterVO.setNum(31);
 		
-		
-		List<MovieInfoVO> movieInfoList = movieInfoService.movieList(pager);
+		List<MovieInfoVO> movieInfoList = movieInfoService.forMovieTimeInsertList(pager);
+		for (MovieInfoVO movieInfoVO : movieInfoList) {
+			
+			System.out.println("fileName : "+movieInfoVO.getFileName());
+		}
 		theaterVO = theaterService.theaterSelect(theaterVO.getNum());
-				
+		
 		mv.addObject("movieInfoList", movieInfoList);
 		mv.addObject("theaterVO", theaterVO);
 		mv.setViewName("admin/movieTime/movieTimeInsert");

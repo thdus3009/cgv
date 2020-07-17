@@ -23,7 +23,7 @@
 				<div class="container-fluid" style=" padding: 40px;">
 					<h1>Movie Time Insert</h1>
 					<p>영화 상영시간 등록</p>
-					
+								
 					<!-- Tab -->
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#selectMovie">영화 선택</a></li>
@@ -116,10 +116,14 @@
 	<c:import url="../template/scripts.jsp"></c:import>
 	<script type="text/javascript">
 
+		console.log('aaaaaa');
+		//console.log(`${movieInfoList}`);
+	
 		// 영화리스트 값 가져오기
 		function getMovieInfoList() {
 			var movieInfoList=[];
 			<c:forEach items="${movieInfoList}" var="vo">
+				
 				var movieInfoVO = {
 					num : `${vo.num}`,
 					title : `${vo.title}`,
@@ -355,6 +359,8 @@
 		// main()
 		$(function() {
 
+			console.log("sssssss");
+			
 			// 영화 등록 단계 관련
 			var movieInfoList = getMovieInfoList();
 			var perRow = getPerRow();

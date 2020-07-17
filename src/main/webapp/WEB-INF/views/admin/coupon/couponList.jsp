@@ -22,17 +22,17 @@
 			<%-- <input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
 			<main>
 				<div class="container-fluid">
-					<h1>Coupon ${path}</h1>
+					<h1>Coupon List</h1>
 					<p>쿠폰 목록</p>
 
 					<form action="./couponList" id="form-Data" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" style="float:right; padding-bottom: 20px;display:flex!important; " >
 						<input type="hidden" id="curPage" name="curPage" value="">
 						<div class="form-group">
-							<label>시작일</label>
-							<input class="" type="date" name="startDate">
-							&nbsp;&nbsp;&nbsp;&nbsp;~
-							<label>종료일</label>
-							<input class="" type="date" name="endDate">
+							<span>시작일 &nbsp;</span>
+							<input class="form-control" type="date" name="startDate">
+							&nbsp;&nbsp;~&nbsp;&nbsp;
+							<span>종료일 &nbsp;</span>
+							<input class="form-control" type="date" name="endDate">
 						</div>
 					
 						<div class="form-group" style="padding: 0 10px; text-align: right; ">
@@ -141,6 +141,7 @@
 	
 	<c:import url="../template/scripts.jsp"></c:import>
 	
+
 	<script type="text/javascript" src="/js/template/common.js"></script>
 	<script type="text/javascript">
 		var kind = `${pager.kind}`;

@@ -20,7 +20,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>Coupon ${path}</h1>
+					<h1>${path}</h1>
 					<p id="title">쿠폰  정보 수정</p>
 					
 					<form action="./${path}" method="post" id="coupon-form" style="width: 500px; margin: 0 auto;">
@@ -28,7 +28,7 @@
 						<c:if test="${path ne 'couponInsert'}">
 							<input type="hidden" name="num" value="${couponInfoVO.num}" />
 						</c:if>
-						<select id="selectBox" name="type">
+						<select id="selectBox" name="type" class="form-control" style="width: 145px!important;">
 							<option value="2" selected="selected">CGV 할인쿠폰</option>
 							<option value="1">CGV 기프티콘</option>
 						</select>

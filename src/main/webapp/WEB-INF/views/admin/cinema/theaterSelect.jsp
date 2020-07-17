@@ -15,9 +15,10 @@
             <c:import url="../template/sidenav.jsp"></c:import>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid">
+                    <div class="container-fluid" style="padding: 40px;">
                         <h1 class="mt-4">Theater Select</h1>
-                        <h3>${cine.name}</h3>
+                        <p>-영화관 정보 수정 페이지-</p>
+                        <h3>${cine.name} CGV</h3>
 						<div class="card mb-4">
                             <div class="card-body">
                                 <p class="mb-0">
@@ -89,8 +90,8 @@
                     </div>
                     
                     <div class="">
-                    	<span id="de" class="btn btn-danger">Delete</span>
-                    	<a href="./theaterUpdate?num=${theater.num}&cinemaNum=${cine.num}" id="up" class="btn btn-primary">Update</a>
+                    	<span id="de" class="btn btn-danger">삭제</span>
+                    	<a href="./theaterUpdate?num=${theater.num}&cinemaNum=${cine.num}" id="up" class="btn btn-primary">수정</a>
                     </div>
                     </div>
                 </main>
