@@ -64,14 +64,13 @@
 							</div>
 							<div class="snb_box snb_box2">
 								<a href="" class="snb_menu" style="background-color: #e60000; color: white;">
-									 <span class="snb_menu2"><c:out value="${m_count}" /></span>
-									 <!-- <em>2</em> -->
+									 <span class="snb_menu2">${m_count}</span>
 									<strong>내가 본 영화</strong>
 								</a>
 							</div>
 							<div class="snb_box snb_box3">
-								<a href="" class="snb_menu">
-									<em>3</em>
+								<a href="http://localhost/review/reviewDiary" class="snb_menu">
+									<span class="snb_menu2">${d_count}</span>
 									<strong>무비 다이어리</strong>
 								</a>
 							</div>						
@@ -171,5 +170,14 @@
    <script type="text/javascript" src="../js/review/checkByte.js"></script>
    <script type="text/javascript" src="../js/review/reviewSubmit.js"></script>
 
+	<script type="text/javascript">
+	$(".snb_box1").click(function(){
+		alert("준비 중 입니다.");
+	});
+
+/* 	$(".snb_box3").click(function(){
+		window.location.href = 'http://localhost/review/reviewDiary';
+	}); */
+	</script>
 </body>
 </html>

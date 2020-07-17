@@ -326,6 +326,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select * from test limit #{startRow},#{perPage}
    </select>
 
+	<update id="reviewDiary_Delete" parameterType="ReviewVO">
+		update reviewDiary set d_deleteAt=now() 
+		where reservationNum=#{reservationNum} and d_createAt is not null and d_deleteAt is null 
+	</update>
 
 
    

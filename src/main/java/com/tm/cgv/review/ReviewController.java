@@ -38,11 +38,14 @@ public class ReviewController {
       System.out.println("id1: "+uid);
       //String uid= "admin"; //>> 이거 나중에 session으로 id받아오기
       
-      /* 내가 본 영화 총 건 수 */
+      //내가 본 영화 총 건 수
       int movie_count=reviewService.search_Count(uid);
-      System.out.println("movie_count: "+movie_count);
+      
+      //다이어리 작성 수
+	  int diary_count = reviewService.reviewDiary_Count(uid);
       
       mv.addObject("m_count", movie_count);
+      mv.addObject("d_count", diary_count);
       mv.setViewName("member/memberReview");
 
       return mv;
@@ -338,11 +341,16 @@ public class ReviewController {
 	   //작성해서 출력해야 하는 리스트
 	   List<ReviewVO> rd_List = reviewService.reviewDiary_List(uid); 
 	   
+	   //다이어리 작성 수
 	   int diary_count = reviewService.reviewDiary_Count(uid);
+	   
+	   //내가 본 영화 총 건 수
+	   int movie_count=reviewService.search_Count(uid);
 	   
 	   mv.addObject("diary", reviewDiary);
 	   mv.addObject("list", rd_List);
 	   mv.addObject("d_count", diary_count);
+	   mv.addObject("m_count", movie_count);
 	   mv.setViewName("review/reviewDiary");
 	   
 	   return mv;
@@ -358,6 +366,15 @@ public class ReviewController {
 	   return result;
    }
    
+   @GetMapping("reviewDiary_Delete")
+   @ResponseBody
+   public int reviewDiary_Delete(ReviewVO reviewVO)throws Exception {
+	   System.out.println("dddddddd");
+	   System.out.println(reviewVO.getReservationNum());
+	   int result = reviewService.reviewDiary_Delete(reviewVO);
+	   
+	   return result;
+   }
 	
 	/*
 	 * @GetMapping("reviewDiary_List")

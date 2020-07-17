@@ -193,4 +193,7 @@ public class ReviewService {
 	   return reviewRepository.reviewDiary_List(uid);
    }
    
+   public int reviewDiary_Delete(ReviewVO reviewVO)throws Exception {
+	   return reviewRepository.reviewDiary_Delete(reviewVO);
+   }
 }

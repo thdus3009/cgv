@@ -9,7 +9,7 @@
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 <link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
 <link href="../css/template/modal.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>내가 쓴 평점 < 무비로그 | 무비 다이어리</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 

@@ -9,7 +9,7 @@
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 <link href="../css/review/reviewDiary.css" rel="stylesheet" type="text/css">
 <!-- review/reviewDiary -->
-<title>내가 본 영화 < 무비로그 | 무비 다이어리 </title>
+<title>무비 다이어리 < 무비로그 | 무비 다이어리 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -58,16 +58,14 @@
 								</a>
 							</div>
 							<div class="snb_box snb_box2">
-								<a href="" class="snb_menu">
-									 <%-- <span class="snb_menu2"><c:out value="${m_count}" /></span> --%>
-									 <em>2</em>
+								<a href="http://localhost/review/reviewList" class="snb_menu">
+									<span class="snb_menu2">${m_count}</span>
 									<strong>내가 본 영화</strong>
 								</a>
 							</div>
 							<div class="snb_box snb_box3">
 								<a href="" class="snb_menu" style="background-color: #e60000; color: white;">
 									<span class="snb_menu2">${d_count}</span>
-									<!-- <em>3</em> -->
 									<strong>무비 다이어리</strong>
 								</a>
 							</div>						
@@ -153,7 +151,13 @@
 								</div>
 								<div style="padding: 5px;">
 									<img alt="다이어리 사진" src="/images/movie/movieList/filmCover/${list.fileName}" style="width: 110px; height: 161px;">
+									<span >
+									<button class="hd_btn2" style="position: absolute; left: 753px; height: 27px;" data-num="${list.num}">
+			                        	<img alt="" src="${pageContext.request.contextPath}/images/btn_del.gif">
+			                     	</button>
+			                     	</span>
 								</div>
+								
 								<div style="padding: 5px; font-size: x-large; font-weight: bold;">
 									${list.title}
 								</div>
@@ -270,7 +274,34 @@
 		location.reload();
 	});
 
-	
+	/* Diary List 삭제 버튼 */
+	$(".hd_btn2").click(function(){
+		var reservationNum=$(this).data("num");
+		
+			$.ajax({
+				type:"GET",
+				url:"./reviewDiary_Delete",
+				data:{
+					reservationNum : reservationNum,
+				},
+				success:function(data){
+					if(data!=null){
+						alert("삭제 되었습니다.");
+						location.reload();
+					}
+				}
+			}) 
+
+	});
+
+	$(".snb_box1").click(function(){
+		alert("준비 중 입니다.");
+	});
+
+/* 	$(".snb_box2").click(function(){
+		window.location.href = 'http://localhost/review/reviewList';
+		
+	}); */
 	</script>
 
 </body>
