@@ -1,13 +1,7 @@
 //insert , update 공용
 
 
-function typeMatch(num){
-	$("#screenType option").each(function(){
-		if($(this).val() == num){
-			$(this).remove();
-		}
-	});
-}
+
 
 
 //HH:MM 형식 생성
