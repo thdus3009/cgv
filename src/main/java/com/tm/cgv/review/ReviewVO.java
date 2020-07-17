@@ -45,5 +45,8 @@ public class ReviewVO {
    private String screenDate; 
    private String screenTime;
 
+   //reviewDiary
+   private String with1;
+   private String opinion;
 
 }

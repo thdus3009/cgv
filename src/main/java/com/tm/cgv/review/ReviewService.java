@@ -181,4 +181,8 @@ public class ReviewService {
 	   return reviewRepository.reviewDiary(uid);
    }
    
+   public int reviewDiary_Write(ReviewVO reviewVO)throws Exception {
+	   return reviewRepository.reviewDiary_Write(reviewVO);
+   }
+   
 }

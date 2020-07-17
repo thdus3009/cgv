@@ -340,6 +340,15 @@ public class ReviewController {
 	   return mv;
    }
    
+   @GetMapping("reviewDiary_Write")
+   @ResponseBody
+   public int reviewDiary_Write(ReviewVO reviewVO)throws Exception {
+
+	   int result = reviewService.reviewDiary_Write(reviewVO);
+	   
+	   return result;
+   }
+   
 
    // ---------------------------------------------------------------------------------
    

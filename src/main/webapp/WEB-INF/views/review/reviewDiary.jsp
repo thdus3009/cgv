@@ -124,7 +124,7 @@
 								</div>
 								<div class="mv-div">
 									<img alt="icon" src="/images/review/ico_how_together.gif">
-									<input type="text" id="with" placeholder="누구와 함께 영화를 보셨나요?">
+									<input type="text" id="with1" placeholder="누구와 함께 영화를 보셨나요?">
 								</div>
 								<div class="mv-div" style="height: 130px;">
 									<img alt="icon" src="/images/review/ico_how_see.gif">
@@ -137,6 +137,10 @@
 							</form>
 
 						</div>
+					
+					<!-- Diary List -->						
+					dddddddddddddd
+					
 					</div>
 				</div>
 			</div>
@@ -193,7 +197,7 @@
 		
 	});
 	
-	//영화 선택 필수
+	// 등록 버튼 (영화 선택 필수)
 	$(".mv-sub").click(function(e){
 		console.log($("#mv-m").children('.mv-li').length);
 		if($("#mv-m").children('.mv-li').length==0){ //li가 없으면?
@@ -202,21 +206,32 @@
 		}else{
 			if(confirm("등록하시겠습니까?")){
 				console.log("num: "+num);
-				w = document.getElementById("with").value;
+				w = document.getElementById("with1").value;
 				o = document.getElementById("opinion").value;
 				console.log(w);
 				console.log(o);
 
-				$.ajax {
-					
-				}
+				$.ajax({
+                    type : "GET",
+                    url : "./reviewDiary_Write",
+                    data : {
+                       reservationNum : num,
+                       with1 : w,
+                       opinion : o,
+                    },
+                    success : function(data){
+						alert("등록되었습니다.");
+						location.reload();
+                    }
+				})
+				
 				//alert("등록되었습니다.");
 			}else{
 				e.preventDefault();
 			}
 		}
 	});
-
+	/* 취소 버튼 */
 	$(".mv-can").click(function(){
 		//alert($("#mv-m").children('.mv-li').length);
 		location.reload();

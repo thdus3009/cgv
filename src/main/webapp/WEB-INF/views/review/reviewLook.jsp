@@ -165,8 +165,7 @@
                      console.log(g_num);
 
                      if (confirm("작성한 관람평을 삭제하시겠습니까?") == true) {
-                        $
-                              .ajax({
+                        $.ajax({
                                  type : "GET",
                                  url : "./review_Delete",
                                  data : {

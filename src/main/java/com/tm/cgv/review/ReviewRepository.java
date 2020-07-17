@@ -77,4 +77,6 @@ public interface ReviewRepository {
    public long movieNumCount(Pager pager);
    
    public List<ReviewVO> reviewDiary(String uid);
+   
+   public int reviewDiary_Write(ReviewVO reviewVO);
 }
