@@ -44,103 +44,50 @@
 		
 		<div class="contents">
 			<div class="movie-chart">
-<!-- 			헤더 제목부분+ 차트종류(서브) -->
 				<div class="sect-movie-title">
 					<h3>EVENT</h3>
 				</div>
-				<div class="evt-nav-area">
-					<ul class="evt-tab-manu">
+				<h4>종료된 이벤트</h4>
+
+				<div class="sect-evt-entlist">
+					<ul>
+						<c:forEach items="${list}" var="vo">
 						<li>
-							<a href="#" title="" class="kind on" id="special">SPECIAL</a>
-						</li>
-						<li>
-							<a href="#" title="" class="kind" id="movie">영화/예매</a>
-						</li>
-						<li>
-							<a href="#" title="" class="kind" id="membership">멤버십/CLUB</a>
-						</li>
-						<li>
-							<a href="#" title="" class="kind" id="discount">제휴/할인</a>
-						</li>
-						<li>
-							<a href="#" title="" class="kind" id="pub">PUB이벤트</a>
-						</li>
-					</ul>
-					<div class="submenu">
-						<a href="" class="round red on"><i>당첨자 발표</i></a>
-						<a href="./endEventList" class="round red on"><i>종료된 이벤트</i></a>
-					</div>
-				</div>
-				<div class="evt-select-area"></div>
-				<div class="cols-content" style=" display: flex;">
-					<div class="cols-detail event">
-						<div class="sect-evt-item-list">
-							<ul class="cf"  id="tb">
-								<c:forEach items="${list}" var="vo" varStatus="i">
-									<input type="hidden" class="date" value="${vo.endDate}">
-									<li>
-										<a id="title_${i.index}" href="./eventSelect?num=${vo.num}">
-											<div class="evt-thumb">
-												
-												<c:forEach var="eventImageVO" items="${vo.eventImageVOs}">
-													
-													<img alt="" src="../images/event/eventList/eventImage/${eventImageVO.fileName}">
-													
-												</c:forEach>
-												
-											</div>
-											<div class="evt-desc">
-												<p class="txt1">${vo.title}</p>
-												<p class="txt2">
-													"${vo.startDate}~${vo.endDate}"
-													<span> . </span>
-													<em class="d-day">D-5</em>
-												</p>
-											</div>
-										</a>
-								</li>
-								</c:forEach>
-							</ul>
-						</div>
-						
-					<%-- 	<span id="totalPage" class="" name="${pager.totalPage}"></span>
-						<span id="curPage" class="" name="${pager.totalPage}"></span> --%>
-						<input type="hidden" id="totalPage" value="${pager.totalPage}">
-						<input type="hidden" id="curPage" value="${pager.curPage}">
-						
-						<button type="button" class="btn-item-more" id="btnMoreData" name="${list[0].kind}"><strong>더보기</strong></button>
-						
-						
-						
-					
-					</div>
-					<div class="cols-aside">
-						<div class="col-aside">
-							<div class="ad-evnet">
-								<div class="ad-partner01">
-									<div src="" width="160" height="300" frameborder="0" scrolling="no" margingeight="0" name="M_Rectangle" id="M_Rectangle">
-										<a href=""><img src="" width="160" height="300" alt="파리의 인어" border="0"></a>
-									</div>	
-								</div>
-								<div class="ad-partner01">
-									<div src="" width="160" height="300" frameborder="0" scrolling="no" margingeight="0" name="M_Rectangle" id="M_Rectangle">
-										<a href=""><img src="" width="160" height="300" alt="파리의 인어" border="0"></a>
-									</div>	
-								</div>
-								<div class="ad-partner02">
-									<div src="" width="160" height="35" frameborder="0" scrolling="no" margingeight="0" name="M_Rectangle" id="M_Rectangle">
-										<a href=""><img src="" width="160" height="35" alt="파리의 인어" border="0"></a>
-									</div>	
-								</div>
+							<div class="box-images">
+								<a href="">
+									<span class="thumb-img">
+										<c:forEach items="${vo.eventImageVOs}" var="eventImageVO">
+										<img src="../images/event/eventList/eventImage/${eventImageVO.fileName}">
+										</c:forEach>
+									</span>
+								</a>
 							</div>
-						</div>
-					</div>
+							<div class="box-content">
+								<a href="">
+									<em class="txt-lightblue">${vo.kind}</em>
+									<strong>${vo.title}</strong>
+								</a>
+								<em class="date">
+									<span>기간 : </span>
+									${vo.startDate} ~ ${vo.endDate}
+								</em>
+							</div>
+						</li>
+						</c:forEach>
+					</ul>
 				</div>
 
-			
 			</div><!-- 끝 chart -->
+			<div class="paging">
+				<ul>
+					<li>
+						<a href="#" title="">1</a>
+					</li>
+				</ul>
+			</div>
 			
 		</div>
+		
 	</div>
 	
 	
@@ -171,12 +118,18 @@
 		kind = $(this).attr("id");
 		$.post("./eventKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){
 			$("#tb").html(data);
+
 			totalPage = $("#totalPage2").val();
 			curPage = $("#curPage2").val();
 			kind = $("#kind").val();
+		/* 	alert(totalPage);
+			alert(curPage);
+			alert(kind); */
 			$("#totalPage").prop("value",totalPage);
 			$("#curPage").prop("value",curPage);
 			$(".btn-item-more").attr("name",kind);
+			
+
 
 		 	if($("#curPage").val()==$("#totalPage").val()){
 				$(".btn-item-more").hide();
@@ -187,6 +140,7 @@
 
 		
 	$(".btn-item-more").click(function(){
+		alert("test");
 		var kind = $(this).attr("name");
 		var curPage = $("#curPage").val();
 		$.post("./eventKind",{"kind":kind, "curPage":parseInt(curPage)+1, "_csrf": $("#_csrf").val()},function(data){

@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.banner.BannerService;
+import com.tm.cgv.banner.BannerVO;
 import com.tm.cgv.cinema.CinemaService;
 import com.tm.cgv.cinema.CinemaVO;
 import com.tm.cgv.couponInfo.CouponInfoService;
@@ -24,7 +25,6 @@ import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.event.EventService;
 import com.tm.cgv.event.EventVO;
 import com.tm.cgv.eventImage.EventImageService;
-import com.tm.cgv.eventImage.EventImageVO;
 import com.tm.cgv.member.MemberBasicVO;
 import com.tm.cgv.member.MemberService;
 import com.tm.cgv.movieImage.MovieImageVO;
@@ -99,6 +99,9 @@ public class AdminController {
 	
 	@Autowired
 	private EventImageService eventImageService;
+	
+	@Autowired
+	private BannerService bannerService;
 	
 	
 	@GetMapping("/")
@@ -623,11 +626,13 @@ public class AdminController {
 		return mv;
 	}
 	
+	
+	
 	@PostMapping("cinema/theaterInsert")
 	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, int cinemaNum) throws Exception{	
 		ModelAndView mv = new ModelAndView();
 		System.out.println("seat : " + theaterVO.getSeatCount());
-		System.out.println("length : " + filmType.length);
+		//System.out.println("length : " + filmType.length);
 		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
 		
 		
@@ -1146,8 +1151,8 @@ public class AdminController {
 	@GetMapping("event/eventList")
 	public ModelAndView eventList(Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		List<EventVO> list = eventService.eventList(pager);
+		pager.setkind("");
+		List<EventVO> list = eventService.adminEventList(pager);
 		System.out.println("----test----");
 		System.out.println(pager.getkind() + " - kind");
 		if(list !=null) {
@@ -1229,8 +1234,8 @@ public class AdminController {
 	@PostMapping("event/eventUpdate")
 	public ModelAndView eventUpdate(EventVO eventVO, List<MultipartFile> files, String [] delNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("fileSize : " + files.size());
-		System.out.println("delNum : " + delNum[0]);
+		//System.out.println("fileSize : " + files.size());
+		//System.out.println("delNum : " + delNum[0]);
 	
 		eventService.eventUpdate(eventVO, files, delNum);
 		
@@ -1262,6 +1267,80 @@ public class AdminController {
 //		System.out.println(result);
 //		return result;
 //	}
+	
+	
+	//==============================
+	// banner
+	//==============================
+	@GetMapping("banner/sideBannerList")
+	public ModelAndView bannerList(Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		List<BannerVO> movie = bannerService.sideMovieAdList();
+		List<BannerVO> event = bannerService.sideEventAdList();
+		
+		mv.addObject("movie", movie);
+		mv.addObject("event", event);
+		
+		mv.setViewName("admin/banner/sideBannerList");
+		return mv;
+	}
+	
+	@GetMapping("banner/bannerInsert")
+	public ModelAndView bannerInsert() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("path", "Insert");
+		mv.setViewName("admin/banner/bannerInsert");
+		return mv;
+	}
+	
+	@PostMapping("banner/bannerInsert")
+	public ModelAndView bannerInsert(BannerVO bannerVO, MultipartFile files) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("adminController");
+		int result = bannerService.bannerInsert(bannerVO, files);
+		if(result>0) {
+			System.out.println("성공");
+		}
+		mv.setViewName("redirect:admin/banner/sideBannerList");
+		return mv;
+	}
+	
+	@GetMapping("banner/sideBannerUpdate")
+	public ModelAndView sideBannerUpdate(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		BannerVO bannerVO = bannerService.selectBanner(num);
+		
+		mv.addObject("vo", bannerVO);
+		mv.addObject("path", "Update");
+		mv.setViewName("admin/banner/bannerInsert");
+		return mv;
+	}
+	
+	@PostMapping("banner/bannerUpdate")
+	public ModelAndView sideBannerUpdate(BannerVO bannerVO, MultipartFile files) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("type : " + bannerVO.getType());
+		
+		bannerService.updateBanner(bannerVO, files);
+		
+		mv.setViewName("redirect:admin/banner/sideBannerList");
+		return mv;
+	}
+	
+	@GetMapping("banner/bannerDelete")
+	public ModelAndView bennerDelete(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = bannerService.deleteBanner(num);
+		if(result>0) {
+			mv.setViewName("redirect:admin/banner/sideBannerList");
+		}
+		return mv;
+	}
+	
+	
+	
+	
 }
 
 

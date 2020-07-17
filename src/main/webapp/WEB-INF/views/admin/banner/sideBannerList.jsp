@@ -17,7 +17,9 @@
 	
 	<title>관리자 페이지</title>
 	<style type="text/css">
-
+		td	{
+			line-height:120px;
+		}
 	</style>
 </head>
 <body class="sb-nav-fixed">
@@ -58,56 +60,57 @@
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
-		
 		<div id="layoutSidenav_content">
 			<input id="_csrf" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="container-fluid">
-					<h1>Event List</h1>
-					<ol class="cinema-ol">
-						<li class="breadcrumb-item active"><a href="./eventList">전체보기</a></li>
-						<li class="breadcrumb-item active"><a href="#" class="kind" id="special">SPECIAL</a></li>
-						<li class="breadcrumb-item active"><a href="#" class="kind" id="movie">영화/예매</a></li>
-						<li class="breadcrumb-item active"><a href="#" class="kind" id="discount">제휴/할인</a></li>
-						<li class="breadcrumb-item active"><a href="#" class="kind" id="membership">멤버십/CLUB</a></li>
-						<li class="breadcrumb-item active"><a href="#" class="kind" id="pub">PUB이벤트</a></li>
-					</ol>
-
-
+					<h1>Banner</h1>
+					<p>사이드 배너 관리</p>
 					<!-- 목록 -->
 					<div class="table-responsive" id="tb">
+						<p style="font-weight:600;">영화 광고</p>
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<thead>
 								<tr class="admin-tr">
-									<th style="width:200px">No.</th>
-									<th style="width:200px">분류</th>
-									<th>제목</th>
-									<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
-									<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
+									<th style="width:50px">No.</th>
+									<th style="width:70px">미리보기</th>
+									<th style="width:270px">제목</th>
+									<th>이동링크</th>
+									<th style="width:120px">시작일</th>
+									<th style="width:120px">마감일</th>
+									<th style="width:170px"></th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr class="admin-tr">
-									<th style="width:200px">No.</th>
-									<th style="width:200px">분류</th>
-									<th>제목</th>
-									<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
-									<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
+									<th style="width:50px">No.</th>
+									<th style="width:70px">미리보기</th>
+									<th style="width:270px">제목</th>
+									<th>이동링크</th>
+									<th style="width:120px">시작일</th>
+									<th style="width:120px">마감일</th>
+									<th style="width:170px"></th>
 								</tr>
 							</tfoot>
 							
 							<tbody>
-								<c:forEach items="${list}" var="vo">
+								<c:forEach items="${movie}" var="vo">
 									<tr class="admin-tr-each">
 										<td class="ate-center">${vo.num}</td>
-										<td class="ate-center">${vo.kind}</td>
+										<td class="ate-center">
+											<img alt="" src="/images/banner/sideBanner/${vo.fileName}" style="height:120px;">
+										</td>
 										<td class="ate-center">
 											<a href="../event/eventSelect?num=${vo.num}">${vo.title}</a>
 										</td>
+										<td class="ate-center">${vo.link}</td>
 										<td class="ate-center">${vo.startDate}</td>
 										<td class="ate-center endDate">${vo.endDate}</td>
-							
+										<td>
+											<a href="./sideBannerUpdate?num=${vo.num}" class="btn btn-danger" style="width:70px;">수정</a>
+											<input type="button" class="btn btn-danger de" value="삭제" style="width:70px;" onclick="del(${vo.num})">
+										</td>
 									</tr>
 								</c:forEach>
 								<!-- 페이저 -->
@@ -115,7 +118,59 @@
 							</tbody>
 							
 						</table>
-						<div class="pager">
+						
+						
+						<p style="font-weight:600; margin-top:50px;">이벤트 광고</p>
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							<thead>
+								<tr class="admin-tr">
+									<th style="width:50px">No.</th>
+									<th style="width:70px">미리보기</th>
+									<th style="width:270px">제목</th>
+									<th>이동링크</th>
+									<th style="width:120px">시작일</th>
+									<th style="width:120px">마감일</th>
+									<th style="width:170px"></th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="admin-tr">
+									<th style="width:50px">No.</th>
+									<th style="width:70px">미리보기</th>
+									<th style="width:270px">제목</th>
+									<th>이동링크</th>
+									<th style="width:120px">시작일</th>
+									<th style="width:120px">마감일</th>
+									<th style="width:170px"></th>
+								</tr>
+							</tfoot>
+							
+							<tbody>
+								<c:forEach items="${event}" var="vo">
+									<tr class="admin-tr-each">
+										<td class="ate-center">${vo.num}</td>
+										<td class="ate-center">
+											<img alt="" src="/images/banner/sideBanner/${vo.fileName}" style="height:120px;">
+										</td>
+										<td class="ate-center">${vo.title}</td>
+										<td class="ate-center">
+											<a href="${vo.link}">${vo.link}</a>
+										</td>
+										<td class="ate-center">${vo.startDate}</td>
+										<td class="ate-center endDate">${vo.endDate}</td>
+										<td>
+											<a href="./sideBannerUpdate?num=${vo.num}" class="btn btn-danger" style="width:70px;">수정</a>
+											<input type="button" class="btn btn-danger de" value="삭제" style="width:70px;" onclick="del(${vo.num})">
+										</td>
+									</tr>
+								</c:forEach>
+								<!-- 페이저 -->
+								
+							</tbody>
+							
+						</table>
+						
+					<%-- 	<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
 									<li><a href="#" class="custompager"
@@ -131,10 +186,10 @@
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>
-						</div>
+						</div> --%>
 					</div>
 					<div class="">
-						<a href="./eventInsert" id="up" class="btn btn-mo">등록</a>
+						<a href="./bannerInsert" id="up" class="btn btn-mo">등록</a>
                     </div>
 				</div>
 			</main>
@@ -169,6 +224,13 @@
 
     		});
 
+
+	    	function del(num){
+	    		var check = confirm("삭제하시겠습니까?");
+	    		if(check){
+    				location.href="./bannerDelete?num="+num;
+    			}
+		    }
             
 		</script>
 		

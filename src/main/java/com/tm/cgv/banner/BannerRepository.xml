@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tm.cgv.banner.BannerRepository">
+	<insert id="bannerInsert" parameterType="BannerVO">
+		insert into banner values (0, #{title}, #{type}, #{index}, #{link},
+		#{startDate}, #{endDate}, #{fileName}, #{originName})
+	</insert>
+
+	<select id="selectMainBannerList" resultType="BannerVO">
+		select * from banner where type=0
+	</select>
+
+	<select id="selectSideBannerList" parameterType="Integer" resultType="BannerVO">
+		select * from banner where type=1 and `index`=#{index}
+	</select>
+	
+	<select id="selectBanner" parameterType="Integer" resultType="BannerVO">
+		select * from banner where num=#{num}
+	</select>
+	
+	<update id="updateBanner" parameterType="BannerVO">
+		update banner set title=#{title}, type=#{type}, `index`=#{index}, link=#{link}, 
+		startDate=#{startDate}, endDate=#{endDate}, fileName=#{fileName}, originName=#{originName}
+		where num=#{num}
+	</update>
+	
+	<delete id="deleteBanner" parameterType="Integer">
+		delete from banner where num=#{num}
+	</delete>
+</mapper>

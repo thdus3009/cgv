@@ -9,8 +9,8 @@
 			<th style="width:200px">No.</th>
 			<th style="width:200px">분류</th>
 			<th>제목</th>
-			<th style="width:200px">시작일</th>
-			<th style="width:200px">마감일</th>
+			<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
+			<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -18,8 +18,8 @@
 			<th style="width:200px">No.</th>
 			<th style="width:200px">분류</th>
 			<th>제목</th>
-			<th style="width:200px">시작일</th>
-			<th style="width:200px">마감일</th>
+			<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
+			<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
 		</tr>
 	</tfoot>
 	

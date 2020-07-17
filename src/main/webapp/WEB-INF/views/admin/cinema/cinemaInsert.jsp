@@ -88,12 +88,9 @@
 						  </div>
 			
 
-						  <button type="submit" class="round inred">등록</button>
+						  <button type="submit" class="btn-mo">등록</button>
 						</form>
 					
-						<c:if test="${path eq 'Update'}">
-							<button type="button" id="btn_delete" value="${vo.num}">Delete</button>
-						</c:if>
 
 					</div>
 				</main>
