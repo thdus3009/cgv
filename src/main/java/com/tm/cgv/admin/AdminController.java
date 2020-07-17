@@ -1301,7 +1301,7 @@ public class AdminController {
 		if(result>0) {
 			System.out.println("성공");
 		}
-		mv.setViewName("redirect:admin/banner/sideBannerList");
+		mv.setViewName("redirect:./sideBannerList");
 		return mv;
 	}
 	
@@ -1319,11 +1319,16 @@ public class AdminController {
 	@PostMapping("banner/bannerUpdate")
 	public ModelAndView sideBannerUpdate(BannerVO bannerVO, MultipartFile files) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("type : " + bannerVO.getType());
+		System.out.println("title : " + bannerVO.getTitle());
+		System.out.println("index : " + bannerVO.getIndex());
+		if(files != null) {
+			System.out.println(files.getSize());
+		}
+		System.out.println();
 		
 		bannerService.updateBanner(bannerVO, files);
 		
-		mv.setViewName("redirect:admin/banner/sideBannerList");
+		mv.setViewName("redirect:./sideBannerList");
 		return mv;
 	}
 	
@@ -1332,7 +1337,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		int result = bannerService.deleteBanner(num);
 		if(result>0) {
-			mv.setViewName("redirect:admin/banner/sideBannerList");
+			mv.setViewName("redirect:./sideBannerList");
 		}
 		return mv;
 	}

@@ -91,7 +91,7 @@ public class BannerService {
 			result = bannerRepository.updateBanner(bannerVO);
 		}
 		
-		
+		result = bannerRepository.updateBanner(bannerVO);
 		
 		return result;
 	}
@@ -105,6 +105,9 @@ public class BannerService {
 		return bannerRepository.deleteBanner(num);
 	}
 	
+	public BannerVO selectAdBanner(BannerVO bannerVO) throws Exception 	{
+		return bannerRepository.selectAdBanner(bannerVO);
+	}
 	
 	private int fileDelete(BannerVO bannerVO) throws Exception {
 
@@ -121,6 +124,9 @@ public class BannerService {
 		
 		return result;
 	}
+	
+	
+
 	
 	
 	
