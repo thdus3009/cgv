@@ -182,8 +182,9 @@
 									<c:forEach var="reservationVO" items="${myReservationList}">
 										<div class="el-box">
 												<div class="rt-info1">
-													<em>예매번호</em><br> <strong>${reservationVO.num}
-													</strong> <br> <span class="date">(${reservationVO.createAt})</span><br>
+													<em>예매번호</em><br>
+													<strong style="color:red; font-weight: blod;">${reservationVO.num}</strong><br> 
+													<span class="reservationDate">(${reservationVO.createAt})</span><br>
 												</div>
 												<div class="rt-info2">
 													<div class="rt-info2-div1">
@@ -192,7 +193,7 @@
 														<ul class="rt-ul">
 															<li style="padding-bottom: 10px;"><strong>${reservationVO.movieInfoVO.title}</strong></li>
 															<li>관람극장 <strong>CGV ${reservationVO.cinemaName}</strong><a href="">[극장정보]</a></li>
-															<li>관람일시 <strong class="date">${reservationVO.movieTimeVO.screenDate}</strong><strong> ${reservationVO.movieTimeVO.screenTime}</strong></li>
+															<li>관람일시 <strong class="runningDate">${reservationVO.movieTimeVO.screenDate}</strong><strong> ${reservationVO.movieTimeVO.screenTime}</strong></li>
 															<li>관람좌석 <strong>${reservationVO.seats}</strong></li>
 														</ul>
 													</div>
@@ -240,11 +241,18 @@
 		});
 
 		//해당 날짜 formData 변경 및 요일 추가 
-		$(".date").each(function(){
+		$(".reservationDate").each(function(){
+			var str = $(this).text();
+			str = str.replace(/-/gi, ".");
+
+			$(this).text(str);
+		});
+
+		$(".runningDate").each(function(){
 			var str = $(this).text();
 			var week = weekFind(str);
-			
 			str = str.replace(/-/gi, ".");
+
 			$(this).text(str+"("+ week +")");
 		});
 
@@ -253,34 +261,27 @@
 		//회원 탈퇴 알림창
 		$("#memberDelete").click(function() {
 			var check = confirm("회원 탈퇴하시겠습니까?");
-
 			if (check) {
 				location.href = "./memberDelete?username=${memberVO.username}";
 			}
 		});
 
 		//정보 수정 팝업창
-		$("#go_edit_page")
-				.click(
-						function() {
-							window
-									.open("./edit", "마이페이지 - 정보수정",
-											"width = 700, height = 565, top=100, left 200, locations = no");
-						});
+		$("#go_edit_page").click(function() {
+			window.open("./edit", "마이페이지 - 정보수정",	"width = 700, height = 565, top=100, left 200, locations = no");
+		});
 
 		//정보 수정 팝업창 callback (redirect 위함)
 		function editCallback(result) {
-
 			if (result > 0) {
 				location.href = "./myPage";
 			}
 		}
 
 		//자주가는 CGV 팝업창
-		/* $("#go_edit_page") .click(
-						function() {
-							window .open("memberPopUpEdit.jsp", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
-						}); */
+		/* $("#go_edit_page").click(function() {
+				window .open("memberPopUpEdit.jsp", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
+			}); */
 
 		//안됨빡친다
 		$(".cancle-reserve").click(function() {

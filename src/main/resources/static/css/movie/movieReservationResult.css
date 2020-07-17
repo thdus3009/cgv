@@ -76,7 +76,6 @@ table{
 }
 
 #ticket .section-complement .article.result .ticket_summary_wrap .ticket_summary .poster img{
-	visibility: hidden;
     width: 100%;
     vertical-align: middle;
 }

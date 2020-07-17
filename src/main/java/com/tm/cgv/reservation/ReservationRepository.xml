@@ -54,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<id column="movieNum" property="movieNum"/>
 			<result column="fileName" property="fileName"/>
 		</association>	
+		
 	</resultMap>
 	
 	<select id="reservationAllList" resultMap="reservationResult">
@@ -75,7 +76,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="reservationResultSelectOne" parameterType="Integer" resultMap="reservationResult">
-		select * from 
+		select * from
+		(select * from 
 		(select * from 
 		(select * from 
 		(select * from reservation where num = #{num}) R
@@ -87,7 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(A.movieTimeNum = MT.mtNum))B
 		join
 		(select num as pNum,pay_method from payment) P
-		on(B.paymentNum = P.pNum)
+		on(B.paymentNum = P.pNum))C
+		join
+		(select movieNum,fileName from movieImage) I
+		on(miNum = I.movieNum)
 	</select>
 	
 	<select id="myReservationList" parameterType="ReservationVO" resultMap="reservationResult">
