@@ -598,6 +598,8 @@
 
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
 <script type="text/javascript">
+
+
     var list = [];
     <c:forEach items="${cinemaList}" var="vo">
        var cinemaVO = {
@@ -615,13 +617,11 @@
 		$(".theater-area-list > ul > li").each(function(){
 			
 			if(list[i].local == $(this).data("local")){
-				console.log(list[i].name+" "+list[i].local);
+				//console.log(list[i].name+" "+list[i].local);
 				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'" data-num="'+ list[i].num+'">'
 						+ '<a href="#" onclick="return false;">'
 						+ list[i].name
 						+ '<span class="sreader"></span></a></li>');
-
-
 
 				//지역마다 극장 개수  출력
 				var pre = $(this).data("index");
@@ -635,7 +635,31 @@
 		});
 	}
 
-	console.log($(".theater-area-list > ul > li").length);
+	var selectedMovieTitle = `${selectedMovieTitle}`;
+	if(selectedMovieTitle != null){
+		title = selectedMovieTitle;
+		ajaxLoad();
+
+		$("#movie-list-content li").each(function(){
+			if($(this).find(".text").text() == selectedMovieTitle){
+				$(this).addClass("selected");
+				
+				$("#select_title").text($(this).data("title"));
+				$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+				$("#select_ageLimit").text($(this).data("age_limit"));
+				$("#movieNum").val($(this).data("index"));
+				title = $(this).data("title");
+				
+				$(".movie_poster img").css("display","inline");
+				$(".movie_title").css("display","block");
+				$(".movie .placeholder").css("display","none");
+			}
+
+		});
+	}
+
+	
+	//console.log($(".theater-area-list > ul > li").length);
 
 	var data;
 	var memberId = `${memberVO.username}`;
@@ -653,7 +677,7 @@
 		_csrf : $("#_csrf").val()
 	}
 
-	console.log(guestVO);
+	//console.log(guestVO);
 
 
 	//결제완료 페이지로 이동
@@ -680,10 +704,10 @@
 		
 		
 		//이니시스 실행
-		//payment_inicis(data);
+		payment_inicis(data);
 		
 		//test 결제 없이 바로 예매 - 좌석예매 진행
-		reservation_save(1);
+		//reservation_save(1);
 	});
 
 

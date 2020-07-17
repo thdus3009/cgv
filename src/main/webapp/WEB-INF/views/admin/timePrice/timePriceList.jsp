@@ -64,6 +64,7 @@ td, th{
 		</div>
 	</div>
 
+<script type="text/javascript" src="/js/template/common.js"></script>
 <script type="text/javascript">
 
 	var timePriceList = []; 
@@ -157,8 +158,8 @@ td, th{
 		}
 		var tdHTML = '<tr>'
 			+'<td>'+ list[i] +' ~ '+ timePriceList[i].eTime +'</td>'
-			+'<td>'+ timePriceList[i].commonPrice +'</td>'
-			+'<td>'+ timePriceList[i].teenagerPrice +'</td>'
+			+'<td>'+ addComma(timePriceList[i].commonPrice) +'</td>'
+			+'<td>'+ addComma(timePriceList[i].teenagerPrice) +'</td>'
 			+'</tr>'
 
 		var tableHTML = '<div class="filmTypeTable" data-filmType="'+ timePriceList[i].filmType +'">' 

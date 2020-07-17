@@ -46,5 +46,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deletesByMovieTimeNum" parameterType="SeatBookingVO">
 		DELETE FROM seatBooking WHERE movieTimeNum = #{movieTimeNum} 
 	</delete>
-	
 </mapper>

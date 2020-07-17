@@ -40,10 +40,13 @@ public interface CinemaRepository {
 	//지역별 극장 조회
 	public List<CinemaVO> cinemaList() throws Exception;
 	
+	//지역당 극장 조회
+	public List<CinemaVO> selectLocalCinemaNameList(String local) throws Exception;
+	
+	
+	
 	public int cinemaWrite() throws Exception;
 	
-	//
-	public List<CinemaVO> cineList(String local) throws Exception;
 	
 	public List<CinemaVO> adminCinemaList(Pager_cinemaList pager) throws Exception;
 	

@@ -34,7 +34,7 @@
 						<li><a href="../"> <img alt="go to Home"
 								src="../images/login/btn_home.png">
 						</a></li>
-						<li><a href="./login">회원 서비스</a></li>
+						<li><a href="../member/login">회원 서비스</a></li>
 						<li class="last">로그인</li>
 					</ul>
 				</div>
@@ -43,8 +43,8 @@
 			<div class="contents">
 				<div class="wrap_login">
 					<ul class="tab_menu_round">
-						<li><a class="lo" href="./login">로그인</a></li>
-						<li><a class="lo" href="./login">비회원 예매확인</a></li>
+						<li><a class="lo" href="../member/login">로그인</a></li>
+						<li><a class="lo" href="./reservationInfo">비회원 예매확인</a></li>
 					</ul>
 
 
