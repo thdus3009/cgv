@@ -35,7 +35,7 @@ $('.ch1').each(function() {
 /* 약관 동의 체크 */
 /* term1,2 체크되면 */
 $("#btn").click(function() {
-	if ($("#term1").is(':checked') && $("#term1").is(':checked')) {
+	if ($("#term1").is(':checked') && $("#term2").is(':checked')) {
 		location.href = "../member/join";
 	} else {
 		alert("필수 조건에 동의해야 가입이 가능합니다!");
