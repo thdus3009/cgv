@@ -34,7 +34,7 @@
 								
 						  <div class="form-group">
 						   	 <label for="name">이름:</label>
-						   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
+						   	 <input type="text" class="form-control" id="name" name="name" value="${vo.name}" required="required">
 						  </div>
 						  
 						  <div class="form-group">
@@ -54,12 +54,13 @@
 						  
 						  <div class="form-group">
 						   	 <label for="address">주소:</label>
-						   	 <input type="text" class="form-control" id="address" name="address" value="${vo.address}">
+						   	 <input type="text" class="form-control" id="address" name="address" value="${vo.address}" required="required">
 						  </div>
 						  
 						  <div class="form-group">
 						   	 <label for="tel">전화번호:</label>
-						   	 <input type="text" class="form-control" id="tel" name="tel" value="${vo.tel}">
+						   	 <input type="text" class="form-control" id="tel" name="tel" value="${vo.tel}" required="required"
+						   	  onKeyup="this.value=this.value.replace(/[^0-9][-]/g,'');">
 						  </div>
 						  
 						  <div class="form-group">
@@ -75,23 +76,23 @@
 						  
 						  <div class="form-group">
 						   		<label for="trafficInfo">교통정보:</label>
-						   	 <input type="text" class="form-control" id="trafficInfo" name="trafficInfo" value="${vo.trafficInfo}">
+						   	 <input type="text" class="form-control" id="trafficInfo" name="trafficInfo" value="${vo.trafficInfo}" required="required">
 						  </div>
 						  
 						  
 						  <div class="form-group">
 						   		<label for="parkingInfo">주차정보:</label>
-						   	 <input type="text" class="form-control" id="parkingInfo" name="parkingInfo" value="${vo.parkingInfo}">
+						   	 <input type="text" class="form-control" id="parkingInfo" name="parkingInfo" value="${vo.parkingInfo}" required="required">
 						  </div>
 						  
 						  <div class="form-group">
 						   		<label for="intro">영화관 소개:</label>
-						   	 <input type="text" class="form-control" id="intro" name="intro" value="${vo.intro}">
+						   	 <input type="text" class="form-control" id="intro" name="intro" value="${vo.intro}" required="required">
 						  </div>
 
 							<div class="btn_s">
 								<button type="submit" class="round inred btn-danger btn" 
-								style="margin-right: 10px;">등록</button>
+								style="margin-right: 10px;" id="sub-btn">등록</button>
 								<c:if test="${path eq 'Update'}">
 									<button type="button" class="btn-warning btn" id="btn_delete" value="${vo.num}">삭제</button>
 								</c:if>
@@ -106,6 +107,7 @@
             </div>
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
+		<script type="text/javascript" src="/js/admin/cinema/cinema.js"></script>
 
     </body>
 </html>
