@@ -1,5 +1,7 @@
 package com.tm.cgv.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import com.tm.cgv.memberCoupon.MemberCouponService;
 import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.point.PointService;
 import com.tm.cgv.point.PointVO;
+import com.tm.cgv.reservation.ReservationService;
+import com.tm.cgv.reservation.ReservationVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -30,6 +34,9 @@ class MemberController {
 	
 	@Autowired
 	private MemberCouponService memberCouponService;
+	
+	@Autowired
+	private ReservationService reservationService;
 	
 	// 약관 동의 페이지
     @GetMapping("memberTerms")
@@ -167,6 +174,13 @@ class MemberController {
     	MemberCouponVO memberCouponVO = MemberCouponVO.builder().build();
     	memberCouponVO.setUid(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
     	Integer couponNum = memberCouponService.memberCouponCount(memberCouponVO);
+    	
+    	//나의 예매 내역 조회
+    	ReservationVO reservationVO = new ReservationVO();
+    	reservationVO.setUid(((MemberBasicVO)session.getAttribute("memberVO")).getUsername());
+    	List<ReservationVO> myReservationList = reservationService.myReservationList(reservationVO);
+    	
+    	mv.addObject("myReservationList", myReservationList);
     	
     	mv.addObject("cjPoint", cjPoint);
     	mv.addObject("couponNum", couponNum);

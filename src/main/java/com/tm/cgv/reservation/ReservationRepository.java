@@ -26,4 +26,6 @@ public interface ReservationRepository {
 	public List<ReservationVO> guestReservationList() throws Exception;
  	
 	public List<ReservationVO> reservationAllList() throws Exception;
+	
+	public List<ReservationVO> myReservationList(ReservationVO reservationVO) throws Exception;
 }

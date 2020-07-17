@@ -170,29 +170,31 @@
 									</div>
 									<span>예매번호로만 티켓을 찾을 수 있으니 반드시 확인 부탁드립니다.</span>
 								</div>
-								<form action="" method="post" class="my-movie-reserve">
+								<div class="my-movie-reserve">
 
 									<!-- 반복 -->
-									<div class="reserve-ticket">
+									<div class="reserve-ticket" style="display: block">
+									<c:forEach var="reservationVO" items="${myReservationList}">
+										<div>
 										<div class="rt-info1">
 											<em>예매번호</em><br>
-											<strong>0150-<br>0617-4137-063 </strong> <br>
-											<span>(날짜)</span><br>
+											<strong>${reservationVO.num}</strong> <br>
+											<span>${reservationVO.createAt}</span><br>
 										</div>
 										<div class="rt-info2">
 										<div class="rt-info2-div1">
 												<img alt="영화 포스터" src="" class="poster">
 												<ul class="rt-ul">
-													<li style="padding-bottom: 10px;"><strong>제목</strong></li>
-													<li>관람극장 <strong></strong><a href="">[극장정보]</a></li>
-													<li>관람일시 <strong></strong></li>
-													<li>관람좌석 <strong></strong></li>
+													<li style="padding-bottom: 10px;"><strong>${reservationVO.movieInfoVO.title}</strong></li>
+													<li>${reservationVO.cinemaName}<strong></strong><a href="">[${reservationVO.theaterName}]</a></li>
+													<li>관람일시 : ${reservationVO.movieTimeVO.screenDate}<strong></strong></li>
+													<li>관람좌석 : ${reservationVO.seats}<strong></strong></li>
 												</ul>
 											</div>
 										<div class="rt-info2-div2">
 												<dl>
 													<dd>총 결제금액&nbsp</dd>
-													<dt>20,000원</dt>
+													<dt>${reservationVO.totalPrice}원</dt>
 												</dl>
 												<div>
 													<button class="message-reserve" type="button"><span>문자보내기</span></button>
@@ -200,8 +202,15 @@
 												</div>
 											</div>
 										</div>
+										</div>
+										
+									</c:forEach>
+										
+										
+										
 									</div>
-								</form>
+								</div>
+								
 							</div>
 						</div>
 
