@@ -149,7 +149,7 @@
                         <i class="sprite_preegg1 btn_md default"></i>
                        		 프리에그
                      </a>
-                     <a class="link-reservation a" href="" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
+                     <a class="link-reservation a" href="/movie/movieReservation" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
                   </span>
                   
                </div>
@@ -166,16 +166,16 @@
                   </li>
                   <li>
 
-                     <a href="javascript:window.scrollTo(0,1000);" >트레일러</a>
+                     <a href="javascript:window.scrollTo(0,500);" >트레일러</a>
                   </li>
                   <li>
-                     <a href="javascript:window.scrollTo(0,1400);">스틸컷</a>
+                     <a href="javascript:window.scrollTo(0,900);">스틸컷</a>
                   </li>
                   <li>
-                     <a href="javascript:window.scrollTo(0,2300);">평점/리뷰</a>
+                     <a href="javascript:window.scrollTo(0,1900);">평점/리뷰</a>
                   </li>
                   <li class="last">
-                     <a href="" class="a">상영시간표</a>
+                     <a href="/movie/movieReservation" class="a">상영시간표</a>
                   </li>
                </ul>
                
@@ -461,7 +461,7 @@
 
         // Set chart options
         var options = {'title':'',
-                       'width':450,
+                       'width':385,
                        'height':320,
                        backgroundColor : '#fdfcf0'};
 
@@ -472,7 +472,7 @@
       </script>
 <!-- 연령별 그래프 2번 -->
 
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   <script type="text/javascript">
    var ageTotal=${ageTotal};
    console.log(ageTotal+"agetotal");

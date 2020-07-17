@@ -27,4 +27,8 @@
 		where num=#{num}
 	</update>
 
+	<select id="select" parameterType="Integer" resultType="MovieImageVO">
+		select * from movieImage where movieNum=${movieNum} and type=3;
+	</select>
+
 </mapper>

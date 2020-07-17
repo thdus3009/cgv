@@ -22,4 +22,5 @@ public interface MovieImageRepository {
 	
 	public int movieImageUpdate(MovieImageVO movieImageVO) throws Exception;
 	
+	public List<MovieImageVO> select (int num) throws Exception;
 }

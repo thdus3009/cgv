@@ -361,19 +361,20 @@ public class MovieInfoService {
 			this.fileDelete(vo);
 			
 			tmp = files.remove(0);
-			fileManager.onResizeFunction(200);   // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
+			fileManager.onResizeFunction(200);  // 이미지 resize를 하려면 해당 함수를 사용하면 됨 (이미지 파일일때만 실행됨)
 			fileName = fileManager.saveTransfer(tmp, file);
 			movieImageVO.setNum(Integer.parseInt(delNum[0]));
 			movieImageVO.setType(1);
 			movieImageVO.setFileName(path+fileName);
 			movieImageVO.setOriginName(tmp.getOriginalFilename());
-			//result = movieImageRepository.movieImageInsert(movieImageVO);
+			
 			result = movieImageRepository.movieImageUpdate(movieImageVO);
 		}
 		
 		//트레일러
 		
 		System.out.println(trailerCount+"tcount");
+		
 		for(int i=0;i<trailerCount;i++) {
 			tmp = files.remove(0);
 			
@@ -393,17 +394,22 @@ public class MovieInfoService {
 		//스틸컷
 		
 		System.out.println(steelCutCount+"scount");
+		
+		System.out.println(files.size());
 		for(int  i=0;i<steelCutCount;i++) {
+				
 			tmp = files.remove(0);
-			
+		
 			fileName = fileManager.saveTransfer(tmp, file);
 			movieImageVO.setType(3);
 			movieImageVO.setFileName(path+fileName);
 			movieImageVO.setOriginName(tmp.getOriginalFilename());
 			result = movieImageRepository.movieImageInsert(movieImageVO);
-			
 		}
-		
+			
+			
+			
+			
 		return result;
 		
 	}
