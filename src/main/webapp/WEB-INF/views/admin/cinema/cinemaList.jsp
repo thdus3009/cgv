@@ -155,7 +155,11 @@
 						</div>
 
 					</div>
-					
+
+					<div class="">
+						<a href="./cinemaInsert" id="up" class="btn btn-mo">등록</a>
+                    </div>
+
 				</div>
 
 			</main>

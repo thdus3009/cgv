@@ -90,16 +90,13 @@
 						   	 <input type="text" class="form-control" id="intro" name="intro" value="${vo.intro}" required="required">
 						  </div>
 
-							<div class="btn_s">
-								<button type="submit" class="round inred btn-danger btn" 
-								style="margin-right: 10px;" id="sub-btn">등록</button>
-								<c:if test="${path eq 'Update'}">
-									<button type="button" class="btn-warning btn" id="btn_delete" value="${vo.num}">삭제</button>
-								</c:if>
-							</div>
 
+			
+
+						  <button type="submit" class="btn-mo">등록</button>
 						</form>
-						</div>
+					
+
 
 					</div>
 				</main>

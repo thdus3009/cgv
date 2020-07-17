@@ -18,9 +18,10 @@
 				<div class="container-fluid">
 					<h1>Event Info</h1>
 					<div class="" style="float:right; margin-top:-50px;">
-						<a href="./eventUpdate?num=${vo.num}" id="up" class="btn btn-primary"
-						style="font-size: 16px;">수정하기</a>
-                    	<span id="de" class="btn btn-danger">삭제하기</span>
+
+						<a href="./eventUpdate?num=${vo.num}" id="up" class="btn-mo">수정</a>
+                    	<span id="de" class="btn btn-danger">삭제</span>
+
                     </div>
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>

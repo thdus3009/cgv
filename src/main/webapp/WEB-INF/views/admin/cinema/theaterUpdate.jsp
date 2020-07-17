@@ -8,6 +8,7 @@
 <c:import url="../template/head.jsp"></c:import> 
 <link href="/css/admin/cinema/cinemaList.css" rel="stylesheet" />
 <link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
+<link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
 		<c:import url="../template/header.jsp"></c:import> 
@@ -112,39 +113,32 @@
 								<div class="seat_section">
 									<div class="section_btn">
 
-										<button class="btn_stop" type="button"
-											onclick="changeGrade(4)">예매 중단</button>
-										<button class="btn_economy" type="button"
-											onclick="changeGrade(1)">Economy</button>
-										<button class="btn_standard" type="button"
-											onclick="changeGrade(2)">Standard</button>
-										<button class="btn_prime" type="button"
-											onclick="changeGrade(3)">Prime</button>
-										<button class="btn_del" type="button" onclick="changeGrade(0)">좌석
-											삭제</button>
-									</div>
-									<!-- end section_btn -->
-									<div class="contents">
-										<div class="seats" id="seats_list"></div>
-									</div>
-								</div>
-								<!-- end seat section -->
-							</div>
-							<!-- end seat box -->
-							<br> <label for="seatCount">총 좌석수:</label> <input
-								readonly="readonly" type="text"
-								class="form-control selectcinenum" id="seatCount"
-								name="seatCount" value="${vo.seatCount}"> <br>
-							<div class="btn_s">
-								<!-- <span id="btn_insert2" class="">수정하기</span> -->
-								<!-- <input type="button" id="btn_insert" class="btn btn-default" value="submit"> -->
-								<input type="button" id="btn_test" class="btn btn-success" value="수정하기">
-								<c:if test="${path eq 'Update'}">
-									<button type="button" id="btn_delete" class="btn btn-danger" value="${vo.num}"
-									style="font-size: 17px; margin-left: 5px;">삭제하기</button>
-								</c:if>
-							</div></form>
-					
+										
+										<button class="btn_stop" type="button" onclick="changeGrade(4)">예매 중단</button>
+										<button class="btn_economy" type="button" onclick="changeGrade(1)">Economy</button>
+										<button class="btn_standard" type="button" onclick="changeGrade(2)">Standard</button>
+										<button class="btn_prime" type="button" onclick="changeGrade(3)">Prime</button>
+										<button class="btn_del" type="button" onclick="changeGrade(0)">좌석 삭제</button>
+								 	</div><!-- end section_btn -->
+							 		<div class="contents">
+							 			<div class="seats" id="seats_list">
+								
+										</div>
+							 		</div>
+								</div><!-- end seat section -->
+							</div><!-- end seat box -->
+							<br>
+							<label for="seatCount">SeatCount:</label>
+	 						<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}">
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<span id="btn_insert2"  class="btn btn_mo">수정</span>
+						</div>
+					</form>
+
 				</div>
 			</main>
                 <c:import url="../template/footer.jsp"></c:import>
