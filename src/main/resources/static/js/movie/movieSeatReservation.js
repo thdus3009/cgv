@@ -1,6 +1,5 @@
-/**
- * 
- */
+
+
 	var commonCount = 0;  //일반
 	var teenagerCount = 0;  //청소년 
 	var preferenceCount = 0;  //우대
@@ -38,7 +37,6 @@
 	
 	//일반 인원 수 선택
 	$(".group.adult.common ul li").click(function(){
-//		console.log($(this).data("index"));
 		
 		commonCount = $(this).data("index");
 		var check = countCheck();
@@ -64,8 +62,6 @@
 	
 	//청소년 인원 수 선택
 	$(".group.adult.teenager ul li").click(function(){
-//		console.log($(this).data("index"));
-		
 		teenagerCount = $(this).data("index");
 		var check = countCheck();
 		var check2 = selectedSeatAndCountCheck();
@@ -81,14 +77,11 @@
 		}else{
 			teenagerCount = preTeenager;
 		}
-		
 		personCheck();
 	});
 	
 	//우대 인원 수 선택
 	$(".group.adult.preference ul li").click(function(){
-//		console.log($(this).data("index"));
-		
 		preferenceCount = $(this).data("index");
 		
 		var check = countCheck();
@@ -105,7 +98,6 @@
 		}else{
 			preferenceCount = prePreference;
 		}
-		
 		personCheck();
 	});
 	
@@ -118,7 +110,6 @@
 			if(selectedCount == 0){
 				$("#ticket .section-seat").addClass("dimmed");
 			}
-			
 		}
 	}
 	
@@ -156,7 +147,6 @@
 		if(sNum > 0){
 			list.push("우대 "+sNum+"명")
 		}
-//		console.log(list.join(","));
 		$(".row.number .data").text(list.join(","));
 	}
 	
@@ -165,7 +155,6 @@
 	
 	function countCheck(){
 		totalCount = commonCount + teenagerCount + preferenceCount;
-//		console.log("totalCount : "+ totalCount);
 		if(totalCount > 8){
 			alert("8명까지만 예약 가능합니다.");
 			return false;
@@ -276,14 +265,12 @@
 				selectedSeatList.splice(selectedSeatList.indexOf($(this).parent().parent().prev().text()+""+$(this).find(".no").text()),1);
 				
 				//삭제후 화면 출력값 갱신
-				console.log(selectedSeatList);
 				$("#select_Seat").text(selectedSeatList.join(","));
 				
 				var gradeText = gradeTextMake(selectedSeatGrade);
 				$("#select_seat_grade").text(gradeText);
 				
 				//삭제시 결제값 변경
-//				console.log("선택값들 : "+commonCount+" "+teenagerCount+" "+preferenceCount);
 				amountCommon = commonCount;
 				amountTeenager = teenagerCount;
 				amountPreference = preferenceCount;
@@ -307,8 +294,6 @@
 			var gradeText = gradeTextMake(selectedSeatGrade);
 			$("#select_seat_grade").text(gradeText);
 			
-			console.log("한자리 지움")
-			
 			amountCommon = commonCount;
 			amountTeenager = teenagerCount;
 			amountPreference = preferenceCount;
@@ -323,112 +308,77 @@
 		}else{
 			//좌석 추가
 			if(!$(this).hasClass("reserved") && !$(this).hasClass("blocked") && !$(this).hasClass("selected")){
-//				console.log("total : "+ totalCount);
-//				console.log("select : "+ selectedCount);
-				
 				var preCheck = preSelectCountCheck();
 				var char = (totalCount-selectedCount)*1;
-				
-//				console.log("남은값 : "+char)
+
 				//preSelect가 2이상 존재 할때 실행
 				if(preCheck == 2){  
 					if(totalCount-selectedCount > 1){
 						
-							var check1 = true;
-							var check2 = false;
+						var check1 = true;
+						var check2 = false;
 							
-							//2개 출력
-							if((totalCount - selectedCount) != 1){
-								//오른쪽 검사
-								if(!$(this).next().hasClass("blocked") && !$(this).next().hasClass("reserved") && !$(this).next().hasClass("selected")){
-										//띄워져있는지 검사
-										for(i=0;i<seatSpaceList.length;i++){
-											if(seatSpaceList[i].type == 1){  //col
-												
-												if($(this).data("col") == seatSpaceList[i].index){
-													if($(this).prev().hasClass("blocked") || $(this).prev().hasClass("reserved") || $(this).prev().hasClass("selected")){
-														check1 = false;
-													}else{
-														selectedCount = selectedCount + 2;
-														var check = selectedCountCheck(2);
-														if(check){
-															$(this).prev().addClass("selected");
-															$(this).addClass("selected");
-															
-															console.log("prev()");
-															console.log($(this).parent().parent().prev().text()+""+$(this).prev().find(".no").text());
-															console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
-															
-															var gradeType = $(this).data("grade");
-															
-														}
-														check1 = false;
-													}
-												}
-												
-//												console.log($(this).data("col") + " / "+seatSpaceList[i].index)
-//												console.log(check1);
-											}
-										}
-
-										//마지막줄인지 검사
-										if($(this).data("col") == maxCol){
-											if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
+						//2개 출력
+						if((totalCount - selectedCount) != 1){
+							//오른쪽 검사
+							if(!$(this).next().hasClass("blocked") && !$(this).next().hasClass("reserved") && !$(this).next().hasClass("selected")){
+								//띄워져있는지 검사
+								for(i=0;i<seatSpaceList.length;i++){
+									if(seatSpaceList[i].type == 1){  //col
+										
+										if($(this).data("col") == seatSpaceList[i].index){
+											if($(this).prev().hasClass("blocked") || $(this).prev().hasClass("reserved") || $(this).prev().hasClass("selected")){
+												check1 = false;
+											}else{
 												selectedCount = selectedCount + 2;
 												var check = selectedCountCheck(2);
-												if(check){
+													if(check){
 													$(this).prev().addClass("selected");
 													$(this).addClass("selected");
 													
-													console.log("prev()");
-													console.log($(this).parent().parent().prev().text()+""+$(this).prev().find(".no").text());
-													console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
-													
 													var gradeType = $(this).data("grade");
-													
+														
 												}
-											}
-										}else{
-											check2 = true;
-										}
-										
-//										console.log(check1 + " "+check2);
-										if(check1 && check2){
-											selectedCount = selectedCount + 2;
-											var check = selectedCountCheck(2);
-											if(check){
-												$(this).next().addClass("selected");
-												$(this).addClass("selected");
-												
-												console.log("열 : "+$(this).find(".no").text());
-												console.log("열 : "+$(this).next().find(".no").text());
-												console.log("행 : "+ $(this).parent().parent().prev().text());
-												
-												console.log("next()");
-												console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
-												console.log($(this).parent().parent().prev().text()+""+$(this).next().find(".no").text());
-												
-												var gradeType = $(this).data("grade");
+												check1 = false;
 											}
 										}
-									
-									//hover가 2칸이 안잡히면 자동으로 1칸만 등록 되므로 여기서는 그냥 클릭되면 -> 클릭한 자신 + prev() 셀렉트 해주면 됨 (구별은 호버에서)
-									}else if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
-										selectedCount = selectedCount + 2;
-										$(this).addClass("selected");
-										$(this).prev().addClass("selected");
-										
+											
 									}
+								}
+
+								//마지막줄인지 검사
+								if($(this).data("col") == maxCol){
+									if(!$(this).prev().hasClass("blocked") && !$(this).prev().hasClass("reserved") && !$(this).prev().hasClass("selected")){
+										selectedCount = selectedCount + 2;
+										var check = selectedCountCheck(2);
+										if(check){
+											$(this).prev().addClass("selected");
+											$(this).addClass("selected");
+												
+											var gradeType = $(this).data("grade");
+										}
+									}
+								}else{
+									check2 = true;
+								}
+								if(check1 && check2){
+									selectedCount = selectedCount + 2;
+									var check = selectedCountCheck(2);
+									if(check){
+										$(this).next().addClass("selected");
+										$(this).addClass("selected");
+											
+										var gradeType = $(this).data("grade");
+									}
+								}
 								
-							//}
+							//hover가 2칸이 안잡히면 자동으로 1칸만 등록 되므로 여기서는 그냥 클릭되면 -> 클릭한 자신 + prev() 셀렉트 해주면 됨 (구별은 호버에서)
+							}else if($(this).next().hasClass("blocked") || $(this).next().hasClass("reserved") || $(this).next().hasClass("selected")){
+								selectedCount = selectedCount + 2;
+								$(this).addClass("selected");
+								$(this).prev().addClass("selected");
+							}
 						}
-						
-						console.log("select : "+ selectedCount);
-						console.log("cha : "+ (totalCount-selectedCount)*1);
-						console.log("-----------------------------")
-					
-						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ
-						//--------------------------------------------------------------------------------------------------------------------------------------------------------------------ㄴ						
 					}else if(char == 0){
 						alert("모든 좌석 선택했음111");
 					}
@@ -436,30 +386,19 @@
 					
 				}else{
 					//1명선택
-//					console.log("normal()")
 					selectedCount = selectedCount + 1;  
 					var check = selectedCountCheck(1);
 					if(check){
 						$(this).addClass("selected");
-//						console.log("열 : "+$(this).find(".no").text());
-//						console.log("행 : "+ $(this).parent().parent().prev().text());
-//						console.log($(this).data("grade"));
-						console.log("normal()");
-						console.log($(this).parent().parent().prev().text()+""+$(this).find(".no").text());
-						
+
 						//계산 - eachGradePayment(gradeType,num)
 						var gradeType = $(this).data("grade");
-//						console.log("gradeType : "+ gradeType);
 					}
-//					console.log("select : "+ selectedCount);
-//					console.log("cha : "+ (totalCount-selectedCount)*1);
-//					console.log("-----------------------------")
 				}
 				
 			}
 			//선택한 좌석 화면에 출력
 			textInput();
-			
 		}
 		//가격 계산
 		priceCount();
@@ -468,7 +407,6 @@
 		allSelectedCheck();
 		
 		//좌석 선택시 CSS display 변경
-		console.log(selectedCount);
 		if(selectedCount > 0){
 			$(".info.seat").css("display","block");
 			$(".info.payment-ticket").css("display","block");
@@ -517,13 +455,10 @@
 				selectedSeatNumList.push($(this).find(".sreader.seatNum").text());
 				selectedSeatGrade.push($(this).data("grade"));
 				//Economy Standard Prime
-				
-				console.log("seatNum : "+selectedSeatNumList);
 			}
 		});
 		
 		var gradeText = gradeTextMake(selectedSeatGrade);
-		console.log("seatGrade : "+selectedSeatGrade);
 		
 		$("#select_Seat").text(selectedSeatList.join(","));
 		$("#select_seat_grade").text(gradeText);
@@ -546,9 +481,6 @@
 		return gradeText;
 	}
 	
-	
-	//var common_standard = 9000;
-	//var teenager_standard = 7000;
 	
 	//eachGradePayment(grade구분/몇명인지 구분)
 	function eachGradePayment(gradeType,num){
@@ -636,11 +568,8 @@
 	
 	
 	function priceCount(){
-
 		console.log("aaaa")
 		for(i=0;i<selectedSeatGrade.length;i++){
-//			console.log(i + " : "+selectedSeatGrade[i]);
-			
 			if(selectedSeatGrade[i] == 1){ //Economy
 				eachGradePayment(1,1)
 				
@@ -652,15 +581,6 @@
 			}else if(selectedSeatGrade[i] == 0){ //normal
 				eachGradePayment(0,1)
 			}
-			
-			console.log("일반 : "+ amountCommon);
-			console.log("청소 : "+ amountTeenager);
-			console.log("우대 : "+ amountPreference);
-			
-			console.log("일반 : "+ totalCommonPay);
-			console.log("청소 : "+ totalTeenagerPay);
-			console.log("우대 : "+ totalPreferencePay);
-			console.log("---")
 			
 			//총 가격 출력
 			var totalPay = totalCommonPay + totalTeenagerPay + totalPreferencePay;

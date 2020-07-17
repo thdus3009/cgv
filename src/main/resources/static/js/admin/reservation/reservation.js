@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 //삭제
 $(".del-td").click(function(){
@@ -9,12 +6,9 @@ $(".del-td").click(function(){
 		var num = $(this).data("reservation_num");
 		
 		$.get("../../reservation/reservationCancle?num="+num,function(result){
-			console.log("result : "+result);
 			if(result > 0){
-				alert("삭제 성공");
-				
+				alert("삭제 되었습니다.");
 				location.reload();
-				
 			}else{
 				alert("삭제 실패");
 			}
@@ -24,16 +18,13 @@ $(".del-td").click(function(){
 });
 
 
-
 //Page이동
 $(".custompager").click(function(){
 	var curPage = $(this).attr("title");
-	console.log(curPage);
 	$("#form-Data #curPage").val(curPage);
 
 	$("#form-Data").submit();
 });
-
 
 //검색 분야 설정
 var type = "";
