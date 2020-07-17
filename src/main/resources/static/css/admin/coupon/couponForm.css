@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#selectBox{
+	float: right;
+}
+
+label{
+	display: block;
+}
+
+#serialNum{
+	clear: both;
+	width: 87%;
+	float: left;
+}
+
+#btnCreate{
+	float : right;
+	width: 11%;
+}
+
+.btn_s{
+	float: right;
+	margin-bottom: 50px;
+}

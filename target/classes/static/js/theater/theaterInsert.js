@@ -306,11 +306,18 @@ $("#btn_insert").click(function(){
 
 	if(name.value.length<1){
 		alert("상영관명을 입력해주세요!");
+		/*return false;*/
 	}else{
 		nameCheck = true;
 	}
 
-	if(seatCount<1){
+	/*if(seatCount<1){
+		alert("좌석을 선택해주세요!");
+	}else{
+		seatCheck = true;
+	}*/
+	
+	if($("#seatCount").val()==''){
 		alert("좌석을 선택해주세요!");
 	}else{
 		seatCheck = true;
@@ -318,7 +325,6 @@ $("#btn_insert").click(function(){
 	
 	//2D, 3D, 4D 체크
 	var chkbox = document.getElementsByName('filmType');
-	
 	var typeCheck = false;
 	
 	for(var i=0; i<chkbox.length; i++){
@@ -331,6 +337,8 @@ $("#btn_insert").click(function(){
 	//submit
 	if(nameCheck && seatCheck && typeCheck){
 		$("#frm").submit();
+	}else if(typeCheck == false){
+		alert("필름타입은 적어도 한개 체크해야합니다!");
 	}
 
 });

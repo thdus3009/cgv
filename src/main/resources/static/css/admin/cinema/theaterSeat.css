@@ -1,4 +1,23 @@
 
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium';
+  src: url('../../../font/CJ+ONLYONE+Medium.ttf');
+}
+@font-face {
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
+  src: url('../../../font/CJ+ONLYONE+NEW+BODY+LIGHT.TTF');
+}
+
+body{
+	
+  font-family: 'CJ+ONLYONE+Medium+LIGHT';
+}
+
+code, h3{
+  font-family: 'CJ+ONLYONE+Medium';
+	
+}
+
 .theater_minimap{
 	position: relative;
     width: auto;

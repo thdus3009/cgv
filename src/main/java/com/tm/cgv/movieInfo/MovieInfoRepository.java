@@ -54,4 +54,7 @@ public interface MovieInfoRepository {
 	
 	public Map<String, Object> visitor2(ReservationVO reservationVO) throws Exception;
 	public int visiUpdate(MovieInfoVO movieInfoVO) throws  Exception;
+	
+	public List<MovieInfoVO> forMovieTimeInsertList(Pager pager) throws Exception;
+	public int forMovieTimeInsertCount(Pager pager) throws Exception;
  }

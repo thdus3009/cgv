@@ -67,7 +67,7 @@
 															<div class="form-group">
 																<label for="files">타이틀 이미지:</label>
 																<c:if test="${path  eq 'Update'}">
-																	<p style="display: inline;">
+																	<p style="display: inline;" class="pp">
 																		<%-- <i id="${vo.num}" class=" fileDelete"></i> --%>
 																		<i class="fileDelete fdt" data-type="1" name="${vo.movieImageVOs[0].fileName}" id="${vo.movieImageVOs[0].num}">
 																		<img alt="" src="../../images/movie/movieList/x.png"
@@ -77,8 +77,11 @@
 																		<!-- 썸네일 num -->
 																	</p>
 																</c:if>
+
 																<input type="text" class="form-control files check stt"
 																	id="files" placeholder="타이틀 이미지 선택" name="files" value="${vo.movieImageVOs[0].originName}"  readonly="readonly">
+
+																
 															</div>
 															<!-- ============== -->
 															
@@ -239,10 +242,15 @@
 	</div>
 
 	<!-- 스크립트 -->
+
 	
 <c:import url="../template/scripts.jsp"></c:import>
 
 <script type="text/javascript" src="../../js/movie/movieWrite.js"></script>
 <script type="text/javascript" src="../../js/movie/movieUpdate.js"></script>	
+
+	<c:import url="../template/scripts.jsp"></c:import>
+	<script type="text/javascript" src="/js/admin/movie/movieUpdate.js"></script>
+
 </body>
 </html>

@@ -18,6 +18,7 @@
 			<main>
 				<div class="container-fluid">
 					<h1>Theater Insert</h1>
+					<p>-상영관 추가 페이지-</p>
 	                <form id="frm" action="./${board}${path}" method="post" enctype="multipart/form-data">
 						<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<c:if test="${path eq 'Update'}">
@@ -140,7 +141,6 @@
 			var n = '${cineCheck.num}';
 			$("#cineNum option[value="+n+"]").prop("selected",true);
 		</c:if>
-
 
 	</script>
 </body>

@@ -43,20 +43,20 @@
 						<div class="sect-person-info">
 							<div class="box-image">
 								<span class="thumb-image"> <img alt=""
-									src="../images/myPage/default_profile.gif"> <span
+									src="/images/member/${memberVO.fileName}"> <span
 									class="profile-mask"></span>
 								</span>
 							</div>
 							<div class="box-contents">
 								<div class="person-info1">
-									<strong>${memberVO.name }님</strong> <em>&nbsp${memberVO.id}&nbsp</em>
+									<strong>${memberVO.name}님</strong> <em>&nbsp${memberVO.username}&nbsp</em>
 									<span>&nbsp닉네임: ${memberVO.nick}&nbsp</span>
 									<button id="go_edit_page" type="button" title="새창열림">수정</button>
 								</div>
 								<div class="person-info2">
-									<p>전화번호 : ${memberVO.phone }</p>
-									<p>생년월일 : ${memberVO.birth }</p>
-									<p>E-mail : ${memberVO.email }</p>
+									<p>전화번호 : ${memberVO.phone}</p>
+									<p>생년월일 : ${memberVO.birth}</p>
+									<p>E-mail : ${memberVO.email}</p>
 								</div>
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 								<h3>MY COUPON</h3>
 								<ul>
 									<li><strong>CGV VIP에 도전하세요!</strong> <span></span></li>
-									<li><strong>CGV 할인쿠폰</strong> <span><em>4</em> 개</span></li>
+									<li><strong>CGV 할인쿠폰</strong> <span><em>${couponNum}</em> 개</span></li>
 									<li><strong>영화관람권</strong> <span><em>0</em> 개</span></li>
 								</ul>
 							</div>
@@ -76,11 +76,9 @@
 								<div class="col-my-coupon">
 									<h4>CJ ONE POINT</h4>
 									<ul>
-										<li><strong>CJ ONR 사용가능 포인트</strong> <span></span></li>
-										<li><strong>VIP 선정 포인트</strong> <span><em>4</em> 개</span>
-										</li>
-										<li><strong>VIP 선정 포인트</strong> <span><em>4</em> 개</span>
-										</li>
+										<li><strong>CJ ONR 사용가능 포인트</strong> <span><em>${cjPoint}</em> 점</span></li>
+										<li><strong>VIP 선정 포인트</strong> <span><em>0</em> 점</span></li>
+										<li><strong>VIP 까지</strong> <span><em>100</em> 점</span></li>
 									</ul>
 								</div>
 							</div>
@@ -107,11 +105,10 @@
 						<div class="col_aside">
 							<div class="snb">
 								<ul>
-									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
-									<li><a
-										href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보
-											수정<i></i>
-									</a></li>
+									<li class="on"><a href="#">MY CGV HOME<i></i></a></li>
+									<li>
+										<a href="./memberUpdate?username=${sessionScope.memberVO.username}">회원정보 수정<i></i></a>
+									</li>
 									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
 									<li><a href="">예매 영화 관리<i></i></a></li>
 									<li><a href="../review/reviewList"
@@ -227,21 +224,28 @@
 			var check = confirm("회원 탈퇴하시겠습니까?");
 
 			if (check) {
-				location.href = "./memberDelete?id=${memberVO.id}";
+				location.href = "./memberDelete?username=${memberVO.username}";
 			}
 		});
 
 		//정보 수정 팝업창
-		$("#go_edit_page") .click(
-						function() {
-							window .open("memberPopUpEdit.jsp", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
-						});
+		$("#go_edit_page").click(function() {
+			window.open("./edit", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
+		});
+
+		//정보 수정 팝업창 callback (redirect 위함)
+		function editCallback(result) {
+
+			if(result>0) {
+				location.href="./myPage";
+			}
+		}
 
 		//자주가는 CGV 팝업창
-		$("#go_edit_page") .click(
+		/* $("#go_edit_page") .click(
 						function() {
 							window .open("memberPopUpEdit.jsp", "마이페이지 - 정보수정", "width = 700, height = 565, top=100, left 200, locations = no");
-						});
+						}); */
 
 		//안됨빡친다
 		$(".cancle-reserve").click(function(e){

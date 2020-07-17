@@ -12,7 +12,6 @@ var usePrice = 0;
 var discountList;
 
 
-
 //비회원 로그인이면 폼 수정
 //최종 결제하기 부분만 출력되어야함
 if(beMemberVO != '' && memberId == ''){
@@ -20,8 +19,6 @@ if(beMemberVO != '' && memberId == ''){
 	$("#payPoints").css("display","none");
 	$(".ts3_titlebar.ts3_t1 .header").text("STEP .");
 }
-
-
 
 
 
@@ -73,9 +70,6 @@ var discount_type = 0; //1:쿠폰 , 2:포인트 , 0:없음
 function discountTypeCheck(type,step){
 	var check = true;
 
-	console.log("discountType : "+discount_type);
-	console.log("type : "+type);
-	
 	if(discount_type != type && discount_type != 0){
 		var check = confirm("할인수단 변경시, 이미 적용된 포인트 및 기타 결제 수단이 초기화 됩니다.\n "+ step +" 적용/변경하시겠습니까?") //초기화 시킴
 		if(check){
@@ -140,12 +134,9 @@ function discount_cupon_ajax(){
 		},
 		dataType : 'json',
 		success : function(result){
-
 			if(result != null){
 				$("#cgvCoupon .form_list .list_body .message").css("display","none");
 			}
-			
-			console.log(result);
 			
 			for(i=0;i<result.length;i++){
 				var name = result[i].couponInfoVO.name;
@@ -270,9 +261,6 @@ $(".textBox2.type-n.nohan").blur(function(){
 			removeDiscount(id);
 			checkboxValue(id);
 		}
-		console.log("인풋창에 0 넣어서 삭세한 뒤 의 값 =======================")
-		console.log("lastPrice : "+ lastPrice);
-		console.log("totalDiscount : "+ totalDiscount);
 		
 	}else if(chaPoint < 0){
 		alert("보유하신 금액인 "+hasPoint+"보다 크게 입력하셨습니다.");
@@ -296,14 +284,10 @@ $(".textBox2.type-n.nohan").blur(function(){
 function appendDiscount(id,type){
 	//생성하려는 아이디가 존재하면 삭제후 재생성
 	if($("#"+id+"_del").length > 0){
-        console.log("jquery : 해당 객체 존재함");
         removeDiscount(id)
-    }else{
-        console.log("jquery : 해당 객체 존재안함");
     }
 	//총 할인액 갱신
 	totalDiscount += (usePrice*1);
-	
 	discount_type = type;
 
 	var html = '<dl>'
@@ -361,12 +345,10 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 	arr = $(this).attr("id").split("_");
 	var id = arr[0];
 
-	
 	if(id != 'cgvCoupon'){
 		//포인트일때만 실행
 		$("#"+id).val(0)
 		checkboxValue(id);
-		
 	}else{
 		//쿠폰일때만 실행
 		$("#cgvCoupon ul li input").each(function(){
@@ -376,7 +358,6 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 		usePrice = 0;
 		checkedCoupon = false;
 		$("#cgvCoupon .form_result .price").text(0);
-		
 	}
 	
 	//할인 내역 삭제
@@ -384,7 +365,6 @@ $("#summary_discount_list").on("click",".discount_del",function(){
 	
 	//화면에 총 할인 내역 출력
 	$("#summary_discount_total").text(addComma(totalDiscount));
-
 	totalPriceSum(delPoint);
 });
 
@@ -409,9 +389,7 @@ $(".secondTit").click(function(){
 		//할인내역 추가
 		var id = $(this).parent().find("input").attr("id");
 		appendDiscount(id,2);
-		
 	}else{
-		
 		if(totalDiscount > 0){
 			var id = $(this).parent().find("input").attr("id");
 			removeDiscount(id);
@@ -423,11 +401,11 @@ $(".secondTit").click(function(){
 
 
 //X버튼이나 0으로 선택 기능중 input val값이 0면 모두사용(Checkbox) false로 변경
-function checkboxValue(id){
-	if($("#"+id).val() == 0){
-		console.log($("#"+id).parent().next().children().prop("checked",false));
-	}
-}
+//function checkboxValue(id){
+//	if($("#"+id).val() == 0){
+//		console.log($("#"+id).parent().next().children().prop("checked",false));
+//	}
+//}
 
 var selected_cuponNum = 0;
 //할인 내역 조회해 리스트 생성 : 타입 - 금액
@@ -447,9 +425,7 @@ function discount_detail_list(){
 		}
 		
 	});
-	
 	discountList = list.join(",");
-	console.log(discountList);
 }
 
 
@@ -491,13 +467,61 @@ function discount_form_change(selected){
 	});
 }
 
+//====================================
+// CGV 할인쿠폰 등록
+//====================================
+
+//CGV할인 쿠폰 등록창 열기
+$("#cgvCoupon .form_button a").click(function(){
+	$(".blackscreen").css("display","block");
+	$("#layer_popup_coupon").css("display","block");
+});
+
+//CGV 기프트카드 등록 창 닫기(CGV 기프트카드 창 닫기 함수 같이 이용)
+
+//CGV할인 쿠폰 등록
+function cgvCouponEnrollment(){
+	var serialNum = $(".input_txt.wht").val();
+	if(serialNum != ''){
+		$.ajax({
+			url : '../cuponInfo/cgvCouponEnrollment',
+			type : 'post',
+			data : {
+				serialNum: serialNum,
+				_csrf : $("#_csrf").val()
+			},
+			success : function(result){
+				if(result > 0){
+					alert("등록이 완료 되었습니다.");
+					
+					$("#cgvCoupon .form_list .list_body ul").empty();
+					discount_cupon_ajax();
+					
+					window_close();
+				}else if(result == -1){
+					alert("이미 등록한 쿠폰입니다.");
+				}else{
+					alert("유효하지 않은 쿠폰입니다.");
+				}
+			}			
+		});
+	}else{
+		alert("시리얼 번호를 입력해주세요.");
+	}
+}
 
 
+
+
+
+//====================================
+//CGV 기프티콘 등록
+//====================================
 
 //CGV 기프트카드 등록창 열기
 $("#cgvGiftPrePay .tpm_coupon_button").click(function(){
 	$(".blackscreen").css("display","block");
-	$(".ft_layer_popup.f_popup").css("display","block");
+	$("#layer_popup_giftcon").css("display","block");
 	
 });
 
@@ -516,9 +540,8 @@ function giftCardEnrollment(){
 	});
 	
 	var password = $(".inputCon.cardPw .input_txt").val();
-	
-	console.log(serialCode);
-	console.log(password);
+	//console.log(serialCode);
+	//console.log(password);
 	
 	$.ajax({
 		url : '../cuponInfo/cuponeEnrollment',
@@ -529,8 +552,6 @@ function giftCardEnrollment(){
 			_csrf : $("#_csrf").val()
 		},
 		success : function(price){
-			console.log("더해야될 가격 : "+price);
-			
 			if(price > 0){
 				alert("등록이 완료 되었습니다.");
 				window_close();
@@ -546,12 +567,15 @@ function giftCardEnrollment(){
 }
 
 
+//====================================
+//결제
+//====================================
+
 
 //간편 결제 클릭시 아래 수단 추가
 //last_pay_radio3
 $("#lastPayCon span").click(function(){
 	$("#summary_payment_list dl dt").text($(this).find("label").text());
-	
 	
 	if($(this).find("input").prop("checked") == true && $(this).val() == 3){
 		$("#smartPayCon").css("display","block");
@@ -596,7 +620,6 @@ function payment_inicis(data){
             	success : function(result){
             		if(result > 0){
             			alert(msg + "결제 번호 : "+result);
-            			
             			//결제 성공시 예매 테이블에 등록 
             			reservation_save(result);
             		}else{
@@ -615,6 +638,7 @@ function payment_inicis(data){
 	
 }
 
+
 //예매 정보 + 좌석예매 정보 DB저장
 function reservation_save(result){
 	//할인 내역 할인 리스트 생성
@@ -623,7 +647,6 @@ function reservation_save(result){
 	if(discountList == ""){
 		discount_type = 0;
 	}
-	
 	//회원 비회원 구분
 	var memberType = 1; //회원
 	if(beMemberVO != ''){
@@ -663,28 +686,26 @@ function reservation_save(result){
 				
 				if(beMemberVO != ''){
 					//비회원 테이블에  비회원 정보 저장
-					console.log("비회원 예매 정보 -----------------------저장~~~")
-					console.log(guestVO)
 					guestVO.reservationNum = result2;
-					console.log(guestVO)
-					
 					non_MemberInfoInsert(guestVO);
 				}
 				
 				//예매 결과 페이지
 				reservation_result(result2);
-			}else{
-				console.log(">>>예매 테이블 등록 실패");
 			}
 		}
 	});
 }
 
 
+
+//====================================
+//결제 완료
+//====================================
+
 //예매 결과
 function reservation_result(data){
 	$.get("../reservation/reservationResultSelectOne?num="+data,function(result){
-		
 		$(".step.step3").css("display","none");
 		$(".ticket_tnb .tnb_container .tnb").removeClass("step3");
 		$(".ticket_tnb .tnb_container .tnb").addClass("step4");
@@ -705,7 +726,7 @@ function non_MemberInfoInsert(guestVO2){
 		type : 'post',
 		data : guestVO2,
 		success : function(result3){
-			console.log("비회원 저장 결과 값 : "+result3);
+			
 		}
 	})
 }

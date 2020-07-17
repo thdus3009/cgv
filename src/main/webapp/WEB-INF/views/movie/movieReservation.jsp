@@ -11,7 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/movie/movieSeatReservation.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/moviePayment.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/movieReservationResult.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/css/movie/movieCGVgift.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieCGVcoupon.css" rel="stylesheet" type="text/css">
 
 <!-- payment -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -421,10 +421,33 @@
 			</div>
 		</div>
 				
-		
+		<!-- CGV 할인쿠폰 카드 등록 -->
+		<div id="layer_popup_coupon" class="ft_layer_popup f_popup" style="display: none;">
+			<div class="hd">
+				<div class="title_area"><h4>CGV 할인쿠폰 등록하기</h4></div>
+			</div>
+			<div class="bd">
+				<p class="notice">소지하고 계신 CGV 할인쿠폰 번호 6자리를 입력해 주세요.</p>
+				<div class="f_coupon" style="display: block;">
+					<label for="cgvCoupon_input">CGV 할인쿠폰 번호 : </label>
+					<input type="text" class="input_txt wht" maxlength="15" id="cgvCoupon_input" style="width: 250px;">
+				</div>
+				<div style="text-align: center; margin-bottom: 10px;">
+					<a href="#" onclick="cgvCouponEnrollment(); return false;" class="btn btn_regist btn_size2" title="등록하기">
+						<span>등록하기</span>
+					</a>
+					<a href="#none" onclick="window_close(); return false;" class="btn btn_white btn_close" title="닫기">
+						<span>닫기</span>
+					</a>
+				</div>
+			
+			</div>
+			<a href="#none" onclick="window_close(); return false;" class="pop_close" title="닫기"></a>
+		</div>
+		<!-- CGV 할인쿠폰 카드 등록 END -->
 		
 		<!-- CGV 기프트 카드 등록 -->
-		<div class="ft_layer_popup f_popup" style="display: none;">
+		<div id="layer_popup_giftcon" class="ft_layer_popup f_popup" style="display: none;">
 			<div class="hd">
 				<div class="title_area"><h4>CGV 기프트카드 등록하기</h4></div>
 			</div>
@@ -598,6 +621,8 @@
 
 <script type="text/javascript" src="../js/movie/movieReservation.js"></script>
 <script type="text/javascript">
+
+
     var list = [];
     <c:forEach items="${cinemaList}" var="vo">
        var cinemaVO = {
@@ -615,13 +640,11 @@
 		$(".theater-area-list > ul > li").each(function(){
 			
 			if(list[i].local == $(this).data("local")){
-				console.log(list[i].name+" "+list[i].local);
+				//console.log(list[i].name+" "+list[i].local);
 				$(this).find(".content").append('<li class="" data-theater="'+ list[i].name+'" data-num="'+ list[i].num+'">'
 						+ '<a href="#" onclick="return false;">'
 						+ list[i].name
 						+ '<span class="sreader"></span></a></li>');
-
-
 
 				//지역마다 극장 개수  출력
 				var pre = $(this).data("index");
@@ -635,7 +658,32 @@
 		});
 	}
 
-	console.log($(".theater-area-list > ul > li").length);
+	var selectedMovieTitle = `${selectedMovieTitle}`;
+	console.log("selectedMovieTitle : "+selectedMovieTitle);
+	if(selectedMovieTitle != null){
+		title = selectedMovieTitle;
+		ajaxLoad();
+
+		$("#movie-list-content li").each(function(){
+			if($(this).find(".text").text() == selectedMovieTitle){
+				$(this).addClass("selected");
+				
+				$("#select_title").text($(this).data("title"));
+				$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+				$("#select_ageLimit").text($(this).data("age_limit"));
+				$("#movieNum").val($(this).data("index"));
+				title = $(this).data("title");
+				
+				$(".movie_poster img").css("display","inline");
+				$(".movie_title").css("display","block");
+				$(".movie .placeholder").css("display","none");
+			}
+
+		});
+	}
+
+	
+	//console.log($(".theater-area-list > ul > li").length);
 
 	var data;
 	var memberId = `${memberVO.username}`;
@@ -653,7 +701,7 @@
 		_csrf : $("#_csrf").val()
 	}
 
-	console.log(guestVO);
+	//console.log(guestVO);
 
 
 	//결제완료 페이지로 이동
@@ -680,10 +728,10 @@
 		
 		
 		//이니시스 실행
-		//payment_inicis(data);
+		payment_inicis(data);
 		
 		//test 결제 없이 바로 예매 - 좌석예매 진행
-		reservation_save(1);
+		//reservation_save(1);
 	});
 
 
@@ -712,3 +760,4 @@
 
 
 
+ 

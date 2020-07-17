@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+td{
+	padding : 5px!important;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 47px;	
+	font-size: 15px!important;
+}
+
+#btn-insert{
+	float: right;
+	font-size: 13px!important;
+	
+}

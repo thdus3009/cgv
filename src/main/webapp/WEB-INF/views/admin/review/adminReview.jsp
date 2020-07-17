@@ -93,17 +93,17 @@
 						<div class="pager">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock gt 1}">
-									<li><a href="./adminReview?curPage=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}" class="custompager"
+									<li><a href="./adminReview?curPage=${pager.startNum - 1}&kind=${pager.kind}&search=${pager.search}" class="page-link custompager"
 										title="${pager.startNum-1}">이전</a></li>
 								</c:if>
 
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 									var="p">
-									<li><a href="./adminReview?curPage=${p}&kind=${pager.kind}&search=${pager.search}" class="custompager" title="${p}">${p}</a></li>
+									<li><a href="./adminReview?curPage=${p}&kind=${pager.kind}&search=${pager.search}" class="page-link custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock lt pager.totalBlock}">
-									<li><a href="./adminReview?curPage=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}" class="custompager"
+									<li><a href="./adminReview?curPage=${pager.lastNum + 1}&kind=${pager.kind}&search=${pager.search}" class="page-link custompager"
 										title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
 							</ul>

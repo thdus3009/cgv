@@ -106,9 +106,15 @@
 							
 					</div>
 					</div>
-					<div class="bbs_btn" style="top: 460px; left: 340px;">
-						<a href="./movieDelete?num=${vo.num}"><button type="button" class="round inred" id="btn-delete"><span>삭제하기</span></button></a>
-						<a href="./movieUpdate?num=${vo.num}"><button type="button" class="round inred" id="btn-update"><span>수정하기</span></button></a>
+					<div class="bbs_btn" style="top: 460px; left: 335px;">
+						<a href="./movieDelete?num=${vo.num}">
+						<button type="button" class="btn btn-warning" id="btn-delete"
+						style="font-size: 13px;">
+						<span>삭제하기</span></button></a>
+						<a href="./movieUpdate?num=${vo.num}">
+						<button type="button" class="btn btn-success" id="btn-update"
+						style="font-size: 13px;">
+						<span>수정하기</span></button></a>
 					</div>	
 				</div>
 			

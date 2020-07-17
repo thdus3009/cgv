@@ -44,7 +44,7 @@ import com.tm.cgv.util.TimeADD;
 
 @Controller
 @RequestMapping("/reservation")
-public class ResevationController {
+public class ReservationController {
 
 	@Autowired
 	private ReservationService reservationService;
@@ -107,7 +107,7 @@ public class ResevationController {
 		for (DiscountInfoVO vo : discountList) {
 			if(vo.getType().equals("cgvCoupon")) { //2.멤버 할인쿠폰 갱신
 				
-				MemberCouponVO memberCuponVO = new MemberCouponVO();
+				MemberCouponVO memberCuponVO = MemberCouponVO.builder().build();
 				memberCuponVO.setKind("reserveDel");
 				memberCuponVO.setUid(reservationVO.getUid());
 				memberCuponVO.setCouponInfoNum(vo.getDiscountPrice());
@@ -200,7 +200,7 @@ public class ResevationController {
 			
 			if(type == 1) {
 				//멤버쿠폰 deleteAt 업데이트
-				MemberCouponVO memberCuponVO = new MemberCouponVO();
+				MemberCouponVO memberCuponVO = MemberCouponVO.builder().build();
 				memberCuponVO.setUid(reservationVO.getUid());
 				memberCuponVO.setCouponInfoNum(couponNum);
 				

@@ -42,5 +42,9 @@ public class CouponInfoService {
 		return couponInfoRepository.couponInfoUpdate(couponInfoVO);
 	}
 	
+	public int couponCount(int num) throws Exception{
+		return couponInfoRepository.couponCount(num);
+	}
+	
 	
 }

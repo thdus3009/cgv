@@ -51,7 +51,7 @@
                         <h1 id="pwd">고객님의 비밀번호는 [${pwd}] 입니다.</h1>
                      </fieldset>
                      <div class="showId-button">
-                        <a href="${pageContext.request.contextPath}/member/memberLogin" class="move-login"> 
+                        <a href="./reservationInfo" class="move-login"> 
                         <span>로그인 화면으로 이동</span></a> 
                         <a href="${pageContext.request.contextPath}/" class="move-home"> 
                         <span>메인 화면으로 이동</span></a>

@@ -60,20 +60,22 @@
 								<!-- 2. csrf token input field-->
 								<!-- 3. id input field의 name 속성값이 'username' -->
 								<!-- 4. pw input field의 name 속성값이 'password' -->
+								<input type="hidden" id="location" name="loc" value="/"/>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-								<input type="text" name="username">
-								<input type="password" name="password">
+								<input type="text" name="username" value="user02">
+								<input type="password" name="password" value="user02">
 
 							</div>
 							<button type="submit"><span>로그인</span></button>
 							
 							<div class="save_id">
-								<c:if test="${cookie.cId.value eq ''}">
+								<%-- <c:if test="${cookie.cId.value eq ''}">
 									<input type="checkbox" name="remember">
 								</c:if>
 								<c:if test="${cookie.cId.value ne ''}">
 									<input type="checkbox" name="remember" checked="checked" >
-								</c:if>
+								</c:if> --%>
+								<input name="auto-login" type="checkbox" checked="checked"/>
 								<label>아이디 저장</label>
 							</div>
 							<div class="login_option">
@@ -96,7 +98,7 @@
 						<strong>CJ ONE 회원이 아니신가요?</strong>
 						<span>회원가입하시고 다양한 혜택을 누리세요!</span>
 						<strong>
-							<a href="./memberjoin" class="round red">
+							<a href="./memberTerms" class="round red">
 								<span>CJ ONE 회원가입하기</span>
 							</a>
 						</strong>

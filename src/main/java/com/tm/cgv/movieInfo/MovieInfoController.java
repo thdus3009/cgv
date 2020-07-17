@@ -85,23 +85,20 @@ public class MovieInfoController {
 	public ModelAndView movieReservation(MovieInfoVO movieVO,CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("movieTitle : "+movieVO.getTitle());
+		if(movieVO.getTitle() != null) {
+			mv.addObject("selectedMovieTitle", movieVO.getTitle());
+		}
+		
 		//초기 영화목록 호출
 		List<MovieInfoVO> list = movieInfoService.movieListAll(movieVO);
 		
 		//초기 극장리스트 호출 
 		List<CinemaVO> cinemaLocalList = cinemaService.cinemaLocalList();
 		List<CinemaVO> cinemaList = cinemaService.cinemaList();
+		
 		//초기 날짜 리스트 호출
 		List<MakeCalendarVO> calendarList = makeCalendar.makeCalendar();
-		
-//		for (MakeCalendarVO vo : calendarList) {
-//			System.out.println(vo.getMonth() +" "+ vo.getDate() + " " + vo.getWeek());
-//		}
-		
-		
-//		for (CinemaVO vo : cinemaList) {
-//			System.out.println(vo.getLocal());
-//		}
 		
 		mv.addObject("list", list);
 		mv.addObject("cinemaLocalList", cinemaLocalList);

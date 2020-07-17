@@ -57,6 +57,7 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
         System.out.println("username : "+username);
 		System.out.println("password : "+password);
 		System.out.println("errormsg : "+errormsg);
+		System.out.println(exception.getMessage());
 		
         // result.jsp 보내서 alert 띄우고 다시 login page로 보낼까?
         request.getRequestDispatcher("../WEB-INF/views/common/result.jsp").forward(request, response);
