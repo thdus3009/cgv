@@ -394,7 +394,23 @@ h3 {
 .reserve-ticket {
 	width: 746px;
 	padding: 26px;
-	display: flex;
+	/* display: flex; */
+	display: block;
+}
+
+.el-box{
+	display: flex; 
+	padding: 20px 0px;
+	border-bottom: 1px solid #666;
+}
+
+.el-box:first-child{
+	padding-top: 0px;
+}
+
+.el-box:last-child{
+	padding-bottom: 0px;
+	border-bottom: none;
 }
 
 .rt-info1 {
