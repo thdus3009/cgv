@@ -41,6 +41,7 @@ public class ReviewController {
       /* 내가 본 영화 총 건 수 */
       int movie_count=reviewService.search_Count(uid);
       System.out.println("movie_count: "+movie_count);
+      
       mv.addObject("m_count", movie_count);
       mv.setViewName("member/memberReview");
 
@@ -332,9 +333,11 @@ public class ReviewController {
 	   String uid = memberVO.getUsername(); 
 		
 	   List<ReviewVO> reviewDiary = reviewService.reviewDiary(uid);
-	  
+	   
+	   int diary_count = reviewService.reviewDiary_Count(uid);
+	   
 	   mv.addObject("diary", reviewDiary);
-		 
+	   mv.addObject("d_count", diary_count);
 	   mv.setViewName("review/reviewDiary");
 	   
 	   return mv;
@@ -349,6 +352,16 @@ public class ReviewController {
 	   return result;
    }
    
+	/*
+	 * @GetMapping("reviewDiary_List")
+	 * 
+	 * @ResponseBody public void reviewDiary_List(HttpSession session)throws
+	 * Exception{ MemberBasicVO memberVO =
+	 * (MemberBasicVO)session.getAttribute("memberVO"); String uid =
+	 * memberVO.getUsername();
+	 * 
+	 * // List<ReviewVO> rd_List = reviewService.reviewDiary_List(uid); }
+	 */
 
    // ---------------------------------------------------------------------------------
    

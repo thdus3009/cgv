@@ -79,4 +79,8 @@ public interface ReviewRepository {
    public List<ReviewVO> reviewDiary(String uid);
    
    public int reviewDiary_Write(ReviewVO reviewVO);
+   
+   public int reviewDiary_Count(String uid);
+   
+   public List<ReviewVO> reviewDiary_List(String uid);
 }

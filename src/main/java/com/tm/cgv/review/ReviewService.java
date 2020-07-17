@@ -185,4 +185,12 @@ public class ReviewService {
 	   return reviewRepository.reviewDiary_Write(reviewVO);
    }
    
+   public int reviewDiary_Count(String uid)throws Exception {
+	   return reviewRepository.reviewDiary_Count(uid);
+   }
+   
+   public List<ReviewVO> reviewDiary_List(String uid)throws Exception {
+	   return reviewRepository.reviewDiary_List(uid);
+   }
+   
 }
