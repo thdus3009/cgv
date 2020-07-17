@@ -19,7 +19,7 @@
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 
-			<main>
+			<main style="min-width: 1578px;">
 				<div class="container-fluid">
 					<h1>Reservation List</h1>
 					<p>예매 내역 목록</p>
@@ -50,7 +50,7 @@
 
 					<!-- 목록 -->
 					<div class="table-responsive" style="clear: both;">
-						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="table-layout: fixed;">
 							<thead>
 								<tr class="admin-tr">
 									<th style="width: 48px;">No.</th>
@@ -102,7 +102,7 @@
 										<td class="flimType ate-center">${vo.filmType}</td>
 										<td class="ate-center">${vo.cinemaName}</td>
 										<td class="ate-center">${vo.theaterName}</td>
-										<td class="ate-center" style="text-overflow: ellipsis; white-space: nowrap;overflow: hidden;">${vo.seats}</td>
+										<td class="ate-center">${vo.seats}</td>
 										<td class="ate-center">${vo.common}</td>
 										<td class="ate-center">${vo.teenager}</td>
 										<td class="ate-center">${vo.preference}</td>

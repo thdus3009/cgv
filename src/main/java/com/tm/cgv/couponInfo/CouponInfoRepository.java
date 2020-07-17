@@ -23,4 +23,6 @@ public interface CouponInfoRepository {
 	
 	public int couponInfoUpdate(CouponInfoVO couponInfoVO) throws Exception;
 	
+	public int couponCount(int num) throws Exception;
+	
 }

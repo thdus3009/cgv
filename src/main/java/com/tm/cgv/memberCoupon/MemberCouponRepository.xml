@@ -35,6 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where uid = #{uid}
 	</select>
 	
+	<select id="couponExistCheck" parameterType="MemberCouponVO" resultType="MemberCouponVO">
+		select * from memberCoupon where uid=#{uid} and couponInfoNum =#{couponInfoNum}
+	</select>
+	
 	<update id="memberCouponUpdate" parameterType="MemberCouponVO">
 		update memberCoupon set
 		<choose>
@@ -47,6 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose> 
 		where uid=#{uid} and couponInfoNum=#{couponInfoNum}
 	</update>
+	
+	<insert id="membercouponInsert" parameterType="MemberCouponVO">
+		insert into memberCoupon values(0,#{uid},#{couponInfoNum},null)
+	</insert>
 	
 		
 	

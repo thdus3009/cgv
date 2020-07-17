@@ -621,7 +621,7 @@ input[type="checkbox"], input[type="radio"]{
 }
 
 .tps_wrap .tps_body .summary_box .payment_footer .result .num{
-	ont-size: 20px;
+	font-size: 20px;
     font-weight: bold;
     letter-spacing: -1px;
 }

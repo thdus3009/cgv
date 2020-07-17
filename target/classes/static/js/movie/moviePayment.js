@@ -491,13 +491,63 @@ function discount_form_change(selected){
 	});
 }
 
+//====================================
+// CGV 할인쿠폰 등록
+//====================================
+
+//CGV할인 쿠폰 등록창 열기
+$("#cgvCoupon .form_button a").click(function(){
+	$(".blackscreen").css("display","block");
+	$("#layer_popup_coupon").css("display","block");
+	
+});
+
+//CGV 기프트카드 등록 창 닫기(CGV 기프트카드 창 닫기 함수 같이 이용)
+
+//CGV할인 쿠폰 등록
+function cgvCouponEnrollment(){
+	var serialNum = $(".input_txt.wht").val();
+	if(serialNum != ''){
+		$.ajax({
+			url : '../cuponInfo/cgvCouponEnrollment',
+			type : 'post',
+			data : {
+				serialNum: serialNum,
+				_csrf : $("#_csrf").val()
+			},
+			success : function(result){
+				console.log(result);
+				if(result > 0){
+					alert("등록이 완료 되었습니다.");
+					
+					$("#cgvCoupon .form_list .list_body ul").empty();
+					discount_cupon_ajax();
+					
+					window_close();
+				}else if(result == -1){
+					alert("이미 등록한 쿠폰입니다.");
+				}else{
+					alert("유효하지 않은 쿠폰입니다.");
+				}
+			}			
+		});
+	}else{
+		alert("시리얼 번호를 입력해주세요.");
+	}
+}
 
 
+
+
+
+//====================================
+//CGV 기프티콘 등록
+//====================================
 
 //CGV 기프트카드 등록창 열기
 $("#cgvGiftPrePay .tpm_coupon_button").click(function(){
 	$(".blackscreen").css("display","block");
-	$(".ft_layer_popup.f_popup").css("display","block");
+	$("#layer_popup_giftcon").css("display","block");
 	
 });
 
@@ -516,9 +566,8 @@ function giftCardEnrollment(){
 	});
 	
 	var password = $(".inputCon.cardPw .input_txt").val();
-	
-	console.log(serialCode);
-	console.log(password);
+	//console.log(serialCode);
+	//console.log(password);
 	
 	$.ajax({
 		url : '../cuponInfo/cuponeEnrollment',
@@ -545,6 +594,11 @@ function giftCardEnrollment(){
 	
 }
 
+
+
+//====================================
+//결제
+//====================================
 
 
 //간편 결제 클릭시 아래 수단 추가
@@ -615,6 +669,7 @@ function payment_inicis(data){
 	
 }
 
+
 //예매 정보 + 좌석예매 정보 DB저장
 function reservation_save(result){
 	//할인 내역 할인 리스트 생성
@@ -680,6 +735,11 @@ function reservation_save(result){
 	});
 }
 
+
+
+//====================================
+//결제 완료
+//====================================
 
 //예매 결과
 function reservation_result(data){

@@ -11,7 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/movie/movieSeatReservation.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/moviePayment.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/css/movie/movieReservationResult.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/css/movie/movieCGVgift.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/movie/movieCGVcoupon.css" rel="stylesheet" type="text/css">
 
 <!-- payment -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -421,10 +421,33 @@
 			</div>
 		</div>
 				
-		
+		<!-- CGV 할인쿠폰 카드 등록 -->
+		<div id="layer_popup_coupon" class="ft_layer_popup f_popup" style="display: none;">
+			<div class="hd">
+				<div class="title_area"><h4>CGV 할인쿠폰 등록하기</h4></div>
+			</div>
+			<div class="bd">
+				<p class="notice">소지하고 계신 CGV 할인쿠폰 번호 6자리를 입력해 주세요.</p>
+				<div class="f_coupon" style="display: block;">
+					<label for="cgvCoupon_input">CGV 할인쿠폰 번호 : </label>
+					<input type="text" class="input_txt wht" maxlength="15" id="cgvCoupon_input" style="width: 250px;">
+				</div>
+				<div style="text-align: center; margin-bottom: 10px;">
+					<a href="#" onclick="cgvCouponEnrollment(); return false;" class="btn btn_regist btn_size2" title="등록하기">
+						<span>등록하기</span>
+					</a>
+					<a href="#none" onclick="window_close(); return false;" class="btn btn_white btn_close" title="닫기">
+						<span>닫기</span>
+					</a>
+				</div>
+			
+			</div>
+			<a href="#none" onclick="window_close(); return false;" class="pop_close" title="닫기"></a>
+		</div>
+		<!-- CGV 할인쿠폰 카드 등록 END -->
 		
 		<!-- CGV 기프트 카드 등록 -->
-		<div class="ft_layer_popup f_popup" style="display: none;">
+		<div id="layer_popup_giftcon" class="ft_layer_popup f_popup" style="display: none;">
 			<div class="hd">
 				<div class="title_area"><h4>CGV 기프트카드 등록하기</h4></div>
 			</div>
@@ -636,6 +659,7 @@
 	}
 
 	var selectedMovieTitle = `${selectedMovieTitle}`;
+	console.log("selectedMovieTitle : "+selectedMovieTitle);
 	if(selectedMovieTitle != null){
 		title = selectedMovieTitle;
 		ajaxLoad();
@@ -736,3 +760,4 @@
 
 
 
+ 

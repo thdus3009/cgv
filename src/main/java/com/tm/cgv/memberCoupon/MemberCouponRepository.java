@@ -10,5 +10,9 @@ public interface MemberCouponRepository {
 	public List<MemberCouponVO> memberCouponSelect(MemberCouponVO memberCouponVO) throws Exception;
 	
 	public int memberCouponUpdate(MemberCouponVO memberCouponVO) throws Exception;
+	
+	public int membercouponInsert(MemberCouponVO memberCouponVO) throws Exception;
+	
+	public MemberCouponVO couponExistCheck(MemberCouponVO memberCouponVO) throws Exception;
 
 }

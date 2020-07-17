@@ -49,7 +49,7 @@
 							</div>
 							<div class="box-contents">
 								<div class="person-info1">
-									<strong>${memberVO.name }님</strong> <em>&nbsp${memberVO.id}&nbsp</em>
+									<strong>${memberVO.name }님</strong> <em>&nbsp${memberVO.username}&nbsp</em>
 									<span>&nbsp닉네임: ${memberVO.nick}&nbsp</span>
 									<button id="go_edit_page" type="button" title="새창열림">수정</button>
 								</div>
@@ -109,7 +109,7 @@
 								<ul>
 									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
 									<li><a
-										href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보
+										href="./memberUpdate?id=${sessionScope.memberVO.username}">회원정보
 											수정<i></i>
 									</a></li>
 									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
@@ -227,7 +227,7 @@
 			var check = confirm("회원 탈퇴하시겠습니까?");
 
 			if (check) {
-				location.href = "./memberDelete?id=${memberVO.id}";
+				location.href = "./memberDelete?id=${memberVO.username}";
 			}
 		});
 

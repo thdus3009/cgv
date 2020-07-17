@@ -76,7 +76,7 @@ public class ExeclUploadController {
 		      
 		    }
 
-		    mv.setViewName("redirect:../admin/reservation/selectList");
+		    mv.setViewName("redirect:../../admin/reservation/selectList");
 		    return mv;
 		  }
 	

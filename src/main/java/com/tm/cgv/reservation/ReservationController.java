@@ -44,7 +44,7 @@ import com.tm.cgv.util.TimeADD;
 
 @Controller
 @RequestMapping("/reservation")
-public class ResevationController {
+public class ReservationController {
 
 	@Autowired
 	private ReservationService reservationService;

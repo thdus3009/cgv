@@ -877,14 +877,14 @@ public class AdminController {
 		return mv;
 	}
 	
-	@ResponseBody
-	@GetMapping("reservation/delete")
-	public int reservationDelete(ReservationVO reservationVO) throws Exception{
-		int result = 0;
-		result = reservationService.reservationDelete(reservationVO);
-		
-		return result;
-	}
+//	@ResponseBody
+//	@GetMapping("reservation/delete")
+//	public int reservationDelete(ReservationVO reservationVO) throws Exception{
+//		int result = 0;
+//		result = reservationService.reservationDelete(reservationVO);
+//		
+//		return result;
+//	}
 	
 	
 	

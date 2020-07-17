@@ -7,12 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.couponInfo.CouponInfoRepository">
 
 	<select id="couponInfoSelectOne" parameterType="CouponInfoVO" resultType="CouponInfoVO">
-		select * from couponInfo where serialNum = #{serialNum} and pwd=#{pwd}
+		select * from couponInfo where serialNum = #{serialNum} and pwd=#{pwd} and sysdate() <![CDATA[<]]> eIssuance
 	</select>
 	
 	<select id="couponInfoSelect" parameterType="CouponInfoVO" resultType="CouponInfoVO">
-		select * from couponInfo where num=#{num}
+		select * from couponInfo where num=#{num} 
 	</select>
+	
 	
 	<select id="couponInfoList" parameterType="Pager" resultType = "CouponInfoVO">
 		select * from couponInfo
@@ -56,6 +57,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="couponInfoUpdate" parameterType="CouponInfoVO">
 		update couponInfo set name=#{name},serialNum=#{serialNum},pwd=#{pwd,jdbcType=VARCHAR},price=#{price},count = #{count,jdbcType=INTEGER},
 		sIssuance=#{sIssuance},eIssuance=#{eIssuance} where num=#{num}
+	</update>
+	
+	<update id="couponCount" parameterType="Integer">
+		update couponInfo set count = count-1 where num = #{num}
 	</update>
 	
 

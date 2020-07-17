@@ -8,7 +8,7 @@ $(".del-td").click(function(){
 	if(confirm("삭제하시겠습니까?")){
 		var num = $(this).data("reservation_num");
 		
-		$.get("./delete?num="+num,function(result){
+		$.get("../../reservation/reservationCancle?num="+num,function(result){
 			console.log("result : "+result);
 			if(result > 0){
 				alert("삭제 성공");
