@@ -818,13 +818,11 @@ public class AdminController {
 	}
 	
 	//==============================
-	// movieTime
+	// movieTime part
 	//==============================
 	
 	@GetMapping("movieTime/insert")
 	public ModelAndView movieTimeInsert(Pager pager, TheaterVO theaterVO) throws Exception {
-		
-		
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -833,12 +831,15 @@ public class AdminController {
 
 		// for test
 		if(theaterVO.getNum() == 0)
-			theaterVO.setNum(1);
+			theaterVO.setNum(31);
 		
-		
-		List<MovieInfoVO> movieInfoList = movieInfoService.movieList(pager);
+		List<MovieInfoVO> movieInfoList = movieInfoService.forMovieTimeInsertList(pager);
+		for (MovieInfoVO movieInfoVO : movieInfoList) {
+			
+			System.out.println("fileName : "+movieInfoVO.getFileName());
+		}
 		theaterVO = theaterService.theaterSelect(theaterVO.getNum());
-				
+		
 		mv.addObject("movieInfoList", movieInfoList);
 		mv.addObject("theaterVO", theaterVO);
 		mv.setViewName("admin/movieTime/movieTimeInsert");

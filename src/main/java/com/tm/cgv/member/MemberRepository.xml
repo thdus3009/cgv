@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="age" column="age"/>
 		<result property="nick" column="nick"/>
 		<result property="fileName" column="fileName"/>
-		<result property="enable" column="enable"/>
+		<result property="enabled" column="enabled"/>
 		
 		<collection property="authVOs" javaType="List" ofType="AuthVO">
 			<result column="username" property="username"/>
@@ -48,9 +48,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM member WHERE username = #{username} AND enabled=1
 	</select>
 	
+	<select id="memberNickCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
+		SELECT * FROM member WHERE nick = #{nick} AND enabled=1
+	</select>
+	
 	<select id="phoneCheck" parameterType="MemberBasicVO" resultType="MemberBasicVO">
 		SELECT * FROM member WHERE phone = #{phone} AND enabled=1
 	</select>
+ 
+ 	<select id="memberTotalCount" resultType="Long">
+ 		SELECT COUNT(username) FROM member
+ 	</select>
  
 	<select id="memberCount" resultType="Long">
 		SELECT COUNT(username) FROM member
@@ -90,4 +98,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
  
+ 	<update id="memberEdit" parameterType="MemberBasicVO">
+ 		UPDATE member SET username=#{username}, password=#{password}, name=#{name},
+ 			birth=#{birth}, phone=#{phone}, email=#{email}, gender=#{gender}, age=#{age},
+ 		    nick=#{nick, jdbcType=VARCHAR}, fileName=#{fileName, jdbcType=VARCHAR}, enabled=#{enabled}
+ 		WHERE username = #{username}
+ 	</update>
 </mapper>

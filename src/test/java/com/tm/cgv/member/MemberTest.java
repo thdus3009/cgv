@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.tm.cgv.util.GenerateAuthNumber;
+import com.tm.cgv.util.GenerateRandomNumber;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,7 +18,7 @@ public class MemberTest {
 	
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
-	private GenerateAuthNumber randomNum = new GenerateAuthNumber(); 
+	private GenerateRandomNumber randomNum = new GenerateRandomNumber(); 
 	
 	//@Test
 	public void makeAge() {

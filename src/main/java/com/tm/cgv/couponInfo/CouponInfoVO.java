@@ -16,6 +16,4 @@ public class CouponInfoVO {
 	private int count;
 	private String sIssuance;
 	private String eIssuance;
-
-	
 }

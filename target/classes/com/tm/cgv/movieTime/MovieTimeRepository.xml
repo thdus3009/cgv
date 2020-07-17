@@ -7,22 +7,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.movieTime.MovieTimeRepository">
  	
  	<select id="movieTimeSelectOne" parameterType="Integer" resultType="MovieTimeVO">
- 		select * from movieTime where num = #{num}
+ 		SELECT * FROM movieTime WHERE num = #{num} AND deleteAt IS NULL 
  	</select>
  	
- 	<update id="remainSeatUpdate" parameterType="MovieTimeVO">
- 		update movieTime set remainSeat=#{remainSeat} where num = #{num}
+ 	<select id="selectNumByScreenDate" parameterType="MovieTimeVO" resultType="Integer">
+ 		SELECT num FROM movieTime WHERE screenDate <![CDATA[<=]]> #{screenDate} AND deleteAt IS NULL
+ 	</select>
+
+	<select id="selectTheaterNumByNum" parameterType="MovieTimeVO" resultType="Integer">
+ 		SELECT theaterNum FROM movieTime WHERE num=#{num} AND deleteAt IS NULL
+ 	</select>
+ 	
+ 	<select id="selectOneRecently" resultType="MovieTimeVO">
+ 		SELECT * FROM movieTime ORDER BY num DESC LIMIT 1;
+ 	</select>
+	 	
+ 	<update id="updateDeleteAtByScreenDate" parameterType="MovieTimeVO">
+ 		UPDATE movieTime SET deleteAt=now() WHERE screenDate <![CDATA[<=]]> #{screenDate}
  	</update>
  	
+ 	<update id="remainSeatUpdate" parameterType="MovieTimeVO">
+ 		UPDATE movieTime SET remainSeat=#{remainSeat} WHERE num = #{num} AND deleteAt IS NULL
+ 	</update>
 
  	<insert id="insert" parameterType="MovieTimeVO">
  		INSERT INTO movieTime VALUES(
- 			0, #{movieNum}, #{theaterNum}, #{screenDate}, #{screenTime}, #{remainSeat}, #{selectedFilm}
+ 			0, #{movieNum}, #{theaterNum}, #{screenDate}, #{screenTime}, #{remainSeat}, #{selectedFilm}, null
  		)
  	</insert>
 
  	<update id="remainSeatSum" parameterType="MovieTimeVO">
- 		update movieTime set remainSeat = remainSeat + #{remainSeat} where num =#{num}
+ 		UPDATE movieTime SET remainSeat = remainSeat + #{remainSeat} WHERE num =#{num}
  	</update>
  
  	<select id="movieTimeList" parameterType="Integer" resultType="Integer">
