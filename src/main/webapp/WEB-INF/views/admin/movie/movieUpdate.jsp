@@ -249,8 +249,8 @@
 <script type="text/javascript" src="../../js/movie/movieWrite.js"></script>
 <script type="text/javascript" src="../../js/movie/movieUpdate.js"></script>	
 
-	<c:import url="../template/scripts.jsp"></c:import>
-	<script type="text/javascript" src="/js/admin/movie/movieUpdate.js"></script>
+<c:import url="../template/scripts.jsp"></c:import>
+<!-- <script type="text/javascript" src="/js/admin/movie/movieUpdate.js"></script> -->
 
 </body>
 </html>

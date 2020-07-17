@@ -138,8 +138,8 @@ body {
    outline: 0;
 }
 
-.hd{
-	position: absolute;
+.a >.hd{
+	position: absolute; 
 	right: 0px;
 	top: 0px;
 }
