@@ -115,7 +115,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1>Event ${path}</h1>
+					<h1>Banner ${path}</h1>
 					<div>
 
 						<div class="contents">
@@ -135,7 +135,7 @@
 										</div>
 
 										<!----------------------------------------------------------------------------------------------------- contents detail box_bbslist-->
-										<form action="./event${path}" method="post" enctype="multipart/form-data" id="fo">
+										<form action="./banner${path}" method="post" enctype="multipart/form-data" id="fo">
 										<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 										<c:if test="${path eq 'Update'}">
 											<input type="hidden" name="num" value="${vo.num}"> 
@@ -154,17 +154,17 @@
 														</colgroup>
 														<tbody>
 															<div class="form-group">
-														   	 <label for="local">분류:</label>
-														   	 <select class="" id="" name="kind">
-														   	 	<option value="side">사이드 배너</option>
+														   	 <label for="type">타입:</label>
+														   	 <select class="" id="" name="type">
+														   	 	<option value="1">사이드 배너</option>
 															 </select>
 														  	</div>
 														  	
 														  	<div class="form-group">
-														   	 <label for="local">인덱스:</label>
-														   	 <select class="" id="" name="kind">
-														   	 	<option value="movie">영화 광고</option>
-														   	 	<option value="event">이벤트 광고</option>
+														   	 <label for="index">분류:</label>
+														   	 <select class="" id="" name="index">
+														   	 	<option value="0">영화 광고</option>
+														   	 	<option value="1">이벤트 광고</option>
 															 </select>
 														  	</div>
 
@@ -180,28 +180,30 @@
 																	<c:if test="${path  eq 'Insert'}">
 																		<input type="file" class="form-control files" id="files" placeholder="배너 이미지 선택" name="files">
 																	</c:if>
-																	<c:if test="${path  eq 'Update' and vo.eventImageVOs[0].type eq 0}">
-																		<input type="text" class="form-control files" value="${vo.eventImageVOs[0].originName}" placeholder="배너 이미지 선택" name="files" readonly="readonly">
+																	<c:if test="${path  eq 'Update'}">
+																		<input type="text" class="form-control files" value="${vo.originName}" placeholder="배너 이미지 선택" name="files" readonly="readonly">
 																		
-																		<i id="${vo.eventImageVOs[0].num}" class="glyphicon glyphicon-remove remove fileDelete fd0"  data-type="0" name="${vo.eventImageVOs[0].fileName}">
+																		<i id="${vo.num}" class="glyphicon glyphicon-remove remove fileDelete fd0"  data-type="0" name="${vo.fileName}">
 																	    		<img alt="" class="minus" src="/images/theater/minus.png">
 																	    </i>
 																	</c:if>
 																</span>
 																</span>
 															</div>
-
+															
 															<div class="form-group">
-																<label for="startDate">시작일:</label>
-																<input type="date"
-																	class="form-control" id="startDate" name="startDate"
-																	value="${vo.startDate}">
+																<label for="link">이동 링크:</label>
+																<input type="text" class="form-control" id="title" name="link" value="${vo.link}">
 															</div>
 
 															<div class="form-group">
-																<label for="endDate">마감일:</label> <input type="date"
-																	class="form-control" id="endDate" name="endDate"
-																	value="${vo.endDate}">
+																<label for="startDate">시작일:</label>
+																<input type="date" class="form-control" id="startDate" name="startDate" value="${vo.startDate}">
+															</div>
+
+															<div class="form-group">
+																<label for="endDate">마감일:</label>
+																<input type="date" class="form-control" id="endDate" name="endDate" value="${vo.endDate}">
 															</div>
 														<%-- 	<c:set var="now" value="<%=new java.util.Date()%>" />
 															<c:set var="sysYear">
@@ -273,8 +275,6 @@
 		$(".fileDelete").each(function(index){
 			$(this).click(function(){
 
-				
-				
 				//var test = 
 			  	var check = confirm("파일을 삭제하시겠습니까?");
 
@@ -295,11 +295,7 @@
 			});
 		});
 
-		$("#test1").click(function(){
-			$("#fo").append('<input type="text" value=">.<">');
-		})
 
-		
 
 	</script>
 

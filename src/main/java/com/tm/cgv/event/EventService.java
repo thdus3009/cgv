@@ -72,6 +72,9 @@ public class EventService {
 		System.out.println("lastNum : " + pager.getLastNum());
 		List<EventVO> list = eventRepository.eventList(pager);
 		
+		
+		//
+		
 		return list;
 	}
 	

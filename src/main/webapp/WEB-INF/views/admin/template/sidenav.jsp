@@ -67,8 +67,8 @@
 						</a>
 						<div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/admin/coupon/couponList">메인 배너 관리</a>
-								<a class="nav-link" href="/admin/point/pointHistoryList">사이드 배너 관리</a>
+								<a class="nav-link" href="/admin/banner/mainBannerList">메인 배너 관리</a>
+								<a class="nav-link" href="/admin/banner/sideBannerList">사이드 배너 관리</a>
 							</nav>
 						</div>
 						<a class="nav-link" href="${pageContext.request.contextPath}/admin/event/eventList">
