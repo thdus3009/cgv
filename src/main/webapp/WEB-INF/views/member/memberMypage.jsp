@@ -78,6 +78,7 @@
 									<ul>
 										<li><strong>CJ ONR 사용가능 포인트</strong> <span><em>${cjPoint}</em> 점</span></li>
 										<li><strong>VIP 선정 포인트</strong> <span><em>0</em> 점</span></li>
+										<li><strong>VIP 까지</strong> <span><em>100</em> 점</span></li>
 									</ul>
 								</div>
 							</div>
@@ -104,10 +105,9 @@
 						<div class="col_aside">
 							<div class="snb">
 								<ul>
-									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
+									<li class="on"><a href="#">MY CGV HOME<i></i></a></li>
 									<li><a
-										href="./memberUpdate?username=${sessionScope.memberVO.username}">회원정보
-											수정<i></i>
+										href="./memberUpdate?username=${sessionScope.memberVO.username}">회원정보 수정<i></i>
 									</a></li>
 									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
 									<li><a href="">예매 영화 관리<i></i></a></li>

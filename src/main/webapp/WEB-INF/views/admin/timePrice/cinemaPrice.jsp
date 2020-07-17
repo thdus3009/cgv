@@ -28,19 +28,19 @@
 							<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />	
 						
 							<div class="container">
-								<div id="movieTimeInsert" style="width: 850px;">
+								<div id="movieTimeInsert">
 									<!-- 상단부 -->
 									<div style="display:flex!important;">
-										<div class="form-group" style="width: 40%;">
+										<div class="form-group">
 											<label for="local">지역</label> 
 											<input type="text" value="${cinemaVO.local}" class="form-control" readonly="readonly" >
 										</div>
-										<div class="form-group" style="width: 40%;margin-left: 10px;">
+										<div class="form-group">
 											<label for="cinema">영화관</label> 
 											<input type="text" value="${cinemaVO.name}" class="form-control" readonly="readonly">
 											<input type="hidden" name="cinemaNum" value="${cinemaVO.num}">
 										</div>
-										<div class="form-group" style="width: 20%;margin-left: 10px;">
+										<div class="form-group">
 											<label for="screenType">종류</label> 
 											
 											<c:if test="${timePrice eq 'update'}">
@@ -58,33 +58,32 @@
 									<hr>
 								
 									<!-- 하단부 -->
-									
-										<div><button id="addUnderDataBtn" type="button" class="btn" style="float: right;">+</button></div>
-										<div style="display:flex!important; clear: both;">
-											<label for="Time" style="width: 50%;">시간대</label>
-											<label for="adult-price" style="width: 25%;">일반가격</label>
-											<label for="youth-price" style="width: 25%;">청소년가격</label>
+										<button id="addUnderDataBtn" type="button" class="btn" style="padding: 0px 10px; position: absolute; right: 0px;">+</button>
+										<div>
+											<label for="Time" style="width: 210px!important; margin: 0 5px;">시간대</label>
+											<label for="adult-price" style="width: 210px!important; margin: 0 10px;">일반가격</label>
+											<label for="youth-price" style="width: 210px!important; margin:0;">청소년가격</label>
 										</div>
 										<div id="underData">
 										
 										<c:if test="${timePrice eq 'update'}">
 											<c:forEach var="timePriceVO" items="${timePriceList}" varStatus="i">
-												<div class="underData" style="display:flex!important;">
+												<div class="underData">
 													<input type="hidden" name="num" value="${timePriceVO.num}">										
-													<div class="form-group" style="width: 45%;">
+													<div class="form-group">
 														<div style="display:flex!important;">
-															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>
+															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5" required="required"/>
 															 ~ 
-															<input type="text" name="eTime" value="${timePriceVO.getETime()}" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>
+															<input type="text" name="eTime" value="${timePriceVO.getETime()}" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5" required="required"/>
 														</div>
 													</div>
 													
-													<div class="form-group" style="width: 25%;">
+													<div class="form-group">
 														<input type="text" name="commonPrice" value="${timePriceVO.commonPrice}" class="commonPrice form-control inputbox" required="required"
 															style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
 													</div>
 													
-													<div class="form-group" style="width: 25%; margin-left: 10px;">
+													<div class="form-group">
 														<input type="text" name="teenagerPrice" value="${timePriceVO.teenagerPrice}" class="teenagerPrice form-control inputbox" required="required"
 															style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
 													</div>
@@ -96,7 +95,7 @@
 										<c:if test="${timePrice ne 'update'}">
 											<c:forEach begin="1" end="4">
 												<div class="underData" id="default" style="display:flex!important;">
-													<div class="form-group" style="width: 45%;">
+													<div class="form-group">
 														<div style="display:flex!important;">
 															<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" style="width: 45%;  margin: 0 auto" required="required"/>
 															 ~ 
@@ -104,16 +103,16 @@
 														</div>
 													</div>
 													
-													<div class="form-group" style="width: 25%;">
+													<div class="form-group">
 														<input type="text" name="commonPrice" class="commonPrice form-control inputbox" required="required"
 															style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
 													</div>
 													
-													<div class="form-group" style="width: 25%; margin-left: 10px;">
+													<div class="form-group">
 														<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"
 															style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
 													</div>
-													<div style="width: 5%;">&nbsp;</div>
+													<!-- <div style="width: 5%;">&nbsp;</div> -->
 												</div>
 											</c:forEach>
 										
@@ -292,22 +291,22 @@
 		$("#addUnderDataBtn").click(function(){
 			//var copyHTML = $(".underData:first").clone();
 			var html = '<div class="underData" style="display:flex!important;">'
-			+ '<div class="form-group" style="width: 45%;">'
+			+ '<div class="form-group">'
 			+ '<div style="display:flex!important;">'
 			+ '<input type="text" class="sTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
 			+ ' ~ ' 
 			+ '<input type="text" name="eTime" class="eTime form-control timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM" maxlength="5"  style="width: 45%;  margin: 0 auto" required="required"/>'
 			+ '</div>'
 			+ '</div>'
-			+ '<div class="form-group" style="width: 25%;">'
+			+ '<div class="form-group">'
 			+ '<input type="text" name="commonPrice" class="commonPrice form-control inputbox" required="required"'
 			+ 'style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
 			+ '</div>'
-			+ '<div class="form-group" style="width: 25%; margin-left: 10px;">'
+			+ '<div class="form-group">'
 			+ '<input type="text" name="teenagerPrice" class="teenagerPrice form-control inputbox" required="required"'
-			+ 'style="IME-MODE:disabled;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
+			+ 'style="IME-MODE:disabled; width:217px;" onKeypress="if(event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">'
 			+ '</div>'
-			+ '<div class="button_del"><button class="btn delBtn" type="button" style="width: 5%;">&nbsp;X</button></div>';
+			+ '<div class="button_del"><button class="btn delBtn" type="button" style="position: absolute; right: 4px;">&nbsp;X</button></div>';
 			
 			
 			if(count < 6){
@@ -317,7 +316,7 @@
 				alert("최대 6개까지 가능합니다.")
 			}
 			
-		});
+		});/* 02-2077-6051 */
 
 
 
