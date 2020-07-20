@@ -89,9 +89,13 @@ public class BannerService {
 			
 			//vo의 내용 업데이트
 			result = bannerRepository.updateBanner(bannerVO);
+		}else {
+			bannerVO.setFileName(vo.getFileName());
+			bannerVO.setOriginName(vo.getOriginName());
+			result = bannerRepository.updateBanner(bannerVO);
 		}
 		
-		result = bannerRepository.updateBanner(bannerVO);
+		
 		
 		return result;
 	}

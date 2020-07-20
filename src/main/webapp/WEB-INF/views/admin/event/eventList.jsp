@@ -83,8 +83,8 @@
 									<th style="width:200px">No.</th>
 									<th style="width:200px">분류</th>
 									<th>제목</th>
-									<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
-									<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
+									<th style="width:200px">시작일</th>
+									<th style="width:200px">마감일</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -92,8 +92,8 @@
 									<th style="width:200px">No.</th>
 									<th style="width:200px">분류</th>
 									<th>제목</th>
-									<th style="width:200px">시작일 <span class="sort sDate">▼</span></th>
-									<th style="width:200px">마감일 <span class="sort eDate">▼</span></th>
+									<th style="width:200px">시작일</th>
+									<th style="width:200px">마감일</th>
 								</tr>
 							</tfoot>
 							
@@ -115,21 +115,21 @@
 							</tbody>
 							
 						</table>
-						<div class="pager">
+						<!-- 페이저 -->
+						<div class="pager" style="display: flex; justify-content: center;">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
-									<li><a href="#" class="custompager"
-										title="${pager.startNum-1}">이전</a></li>
+									<li class="page-item"><a href="${pager.startNum-1}" class="page-link custompager" title="${pager.startNum-1}">이전</a></li>
 								</c:if>
-
+								
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
-									<li><a href="./eventList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
+									<li class="page-item"><a href="./eventList?curPage=${p}" class="page-link custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li><a href="#" class="custompager"
-										title="${pager.lastNum+1}">다음</a></li>
+									<li class="page-item"><a href="${pager.lastNum+1}" class="page-link custompager" title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
+								
 							</ul>
 						</div>
 					</div>
@@ -152,6 +152,8 @@
 				$.post("./selectKind",{"kind":kind, "_csrf": $("#_csrf").val()},function(data){
 					console.log(data);
 					$("#tb").html(data);
+
+					
 				});
             }); 
 

@@ -6,15 +6,10 @@
 <head>
 	<meta charset="UTF-8">
 	<c:import url="../template/head.jsp"></c:import>
-	
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
+
 	<link rel="stylesheet" href="/css/styles.css" />
 	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
-	<link rel="stylesheet" crossorigin="anonymous" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
-	
+
 	<title>관리자 페이지</title>
 </head>
 <body class="sb-nav-fixed">
@@ -131,22 +126,20 @@
 
 
 						<!-- 페이저 -->
-						<div class="pager">
+						<div class="pager" style="display: flex; justify-content: center;">
 							<ul class="pagination">
 								<c:if test="${pager.curBlock>1}">
-									<li class="page-item"><a href="#" class="page-link"
-										title="${pager.startNum-1}">이전</a></li>
+									<li class="page-item"><a href="${pager.startNum-1}" class="page-link custompager" title="${pager.startNum-1}">이전</a></li>
 								</c:if>
-
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-									var="p">
-									<li><a href="./cinemaList?curPage=${p}" class="custompager" title="${p}">${p}</a></li>
+								
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
+									<li class="page-item"><a href="./eventList?curPage=${p}" class="page-link custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li class="page-item"><a href="#" class="page-link"
-										title="${pager.lastNum+1}">다음</a></li>
+									<li class="page-item"><a href="${pager.lastNum+1}" class="page-link custompager" title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
+								
 							</ul>
 						</div>
 
