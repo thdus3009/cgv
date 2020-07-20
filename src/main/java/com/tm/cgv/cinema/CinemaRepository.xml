@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<update id="cinemaUpdate" parameterType="CinemaVO">
-		update cinema set address=#{address}, tel=#{tel}, totalTheater=#{totalTheater}, totalSeat=#{totalSeat},
+		update cinema set name=#{name}, local=#{local}, address=#{address}, tel=#{tel}, totalTheater=#{totalTheater}, totalSeat=#{totalSeat},
 		trafficInfo=#{trafficInfo}, parkingInfo=#{parkingInfo}, intro=#{intro} where num=#{num}
 	</update>
 	

@@ -301,7 +301,6 @@
 
 	    //stop_list에 값 넣기
 	    <c:forEach items="${stopSeat}" var="vo">
-	    		//alert("testttt");
 	  		  var vo = {
 				"r":'${vo.rowIdx}',
 				"c":${vo.colIdx}
@@ -369,8 +368,7 @@
 			
 			//행띄우기
 			if(type == 0){
-				var c = '.r'+index;	//r1
-				//alert(c);
+				var c = '.r'+index;
 				$(c).after('<p class="row_space rs'+index+'"></p>');
 				rowList.push(index);
 	
@@ -576,10 +574,6 @@
 
 				
 				if(chClass!='rating_delete' && !$(name).hasClass('rating_stop')){
-					//alert(chClass)
-					console.log(chClass);
-					//$(name).find("span").css('border','2px solid #f71708');
-					//$(name).removeClass();
 					$(name).addClass("rating_stop");
 					/* 	for(i=0; i<listLength; i++){
 							if(list[i].row == rw && list[i].col == cl){
@@ -595,10 +589,7 @@
 					console.log(",,,")
 					console.log(stopList);
 				}else if($(name).hasClass('rating_stop')){
-					//alert("name : " + name)
-					//alert("yes")
 					$(name).removeClass("rating_stop");
-					//$(name).addClass("rating_economy");
 					for(i=0; i<stopList.length; i++){
 						if(stopList[i].r == rw && stopList[i].c == cl){
 							stopList[i].c=0;
@@ -617,9 +608,7 @@
 	
 	// space 조정 + - 버튼
 	function rowPlus(i){
-		alert(i);
-		var c = '.r'+(i+1);	//r1
-		alert(c);
+		var c = '.r'+(i+1);
 		$(c).after('<p class="row_space rs'+(i+1)+'"></p>');
 		rowList.push(i+1);
 		console.log(rowList);
@@ -758,17 +747,6 @@
 		var nameCheck = true;
 		var seatCheck = true;
 
-	/*	if(name.value.length<1){
-			alert("상영관명을 입력해주세요.")
-		}else{
-			nameCheck = true;
-		}
-
-		if(seatCheck<1){
-			alert("좌석을 선택해주세요.");
-		}else{
-			seatCheck = true;
-		}*/
 
 		if(nameCheck && seatCheck){
 			//$("#frm").submit();
@@ -871,8 +849,6 @@
 		}
 
 		for(n=0; n<stopList.length; n++){
-			alert(stopList[n]);
-			console.log(stopList[n])
 			var r = '<input type="hidden" name="stop_rc" value="'+stopList[n].r+'">';
 			r = r + '<input type="hidden" name="stop_idx" value="'+stopList[n].c+'">';
 			$("#frm").append(r);
@@ -884,23 +860,38 @@
 		var name = document.getElementById("name");
 		var seatCount = document.getElementById("seatCount");
 
-		var nameCheck = true;
-		var seatCheck = true;
+		var nameCheck = false;
+		var seatCheck = false;
 
-	/*	if(name.value.length<1){
-			alert("상영관명을 입력해주세요.")
+		if(name.value.length<1){
+			alert("상영관명을 입력해주세요!");
+			/*return false;*/
 		}else{
 			nameCheck = true;
 		}
-
-		if(seatCheck<1){
-			alert("좌석을 선택해주세요.");
+		
+		if($("#seatCount").val()==''){
+			alert("좌석을 선택해주세요!");
 		}else{
 			seatCheck = true;
-		}*/
-
-		if(nameCheck && seatCheck){
+		}
+		
+		//2D, 3D, 4D 체크
+		var chkbox = document.getElementsByName('filmType');
+		var typeCheck = false;
+		
+		for(var i=0; i<chkbox.length; i++){
+			if(chkbox[i].checked){
+				typeCheck = true;
+				break;
+			}
+		}
+		
+		//submit
+		if(nameCheck && seatCheck && typeCheck){
 			$("#frm").submit();
+		}else if(typeCheck == false){
+			alert("필름타입은 적어도 한개 체크해야합니다!");
 		}
 	});
 

@@ -39,9 +39,9 @@ function spaceVO(){
 // 선택한 행, 열 수만큼 seat 생성
 function changeSelect(){
 	$("#seats_list").empty();
-	list = [];
-	rowList = [];
-	colList = [];
+	list.length = 0;
+	rowList.length = 0;
+	colList.length = 0;
 	//list = [];
 
 	var row = $("#seat_row").val();
@@ -194,9 +194,7 @@ function checkSeat(name){
 
 // space 조정 + - 버튼
 function rowPlus(i){
-	alert(i);
 	var c = '.r'+(i+1);	//r1
-	alert(c);
 	$(c).after('<p class="row_space rs'+(i+1)+'"></p>');
 	rowList.push(i+1);
 	console.log(rowList);

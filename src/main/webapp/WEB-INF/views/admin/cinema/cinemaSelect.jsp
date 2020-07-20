@@ -130,6 +130,10 @@
 													<label for="screenDate">날짜 선택 :</label>
 													<input id="datepicker${i.index}" class="datepicker"  type="text" name="screenDate">
 													<span id="submitBtn${i.index}" name="${vo.num}" class="submitBtn btn btn-primary">검색</span>
+													<div class="tool" style="width:200px; height:60px; background:#fff; border:1px solid #c3c3c3; border-radius:2px;">
+														<span class="tool-title"></span>
+														
+													</div>
 												</div>
 											</div>
 											
@@ -204,23 +208,22 @@
 			  	      timetable.addLocations(['월', '화', '수', '목', '금', '토', '일']);
 					
 				  	    $(data).each(function(){
-					  	    //alert($(this)[12]);
-					  	    //alert(typeof($(this)[12]));
+				  	    	var date = $(this)[2] + '년 ' + $(this)[3] + '월 ' + $(this)[4] + '일 / ';
 						  	
 					  	    if($(this)[12]=='4'){
 					  	    	timetable.addEvent(
 							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event); } });
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event, date); } });
 								
 					  	    	
 					  	    }else if($(this)[12]=='2'){
 					  	    	timetable.addEvent(
 							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event); } });
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event, date); } });
 						  	}else if($(this)[12]=='1'){
 						  		timetable.addEvent(
 							  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event); }}    
+							  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event, date); }}    
 							  	);
 							}
 							
@@ -278,20 +281,22 @@
 							  	 
 							  		
 							  	    $(data).each(function(){
+							  	    	var date = $(this)[2] + '년 ' + $(this)[3] + '월 ' + $(this)[4] + '일 / ';
+							  	    	
 								  	    if($(this)[12]=='4'){
 								  	    	timetable.addEvent(
 										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event); }  });
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) ,  { class: 'only-4d', onClick: function(event) { timeAlert(event, date); }  });
 											
 								  	    	
 								  	    }else if($(this)[12]=='2'){
 								  	    	timetable.addEvent(
 										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event); }  });
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]) , { class: 'only-3d', onClick: function(event) { timeAlert(event, date); }  });
 									  	}else if($(this)[12]=='1'){
 									  		timetable.addEvent(
 										  	    	$(this)[0], $(this)[1], new Date($(this)[2],$(this)[3],$(this)[4],$(this)[5],$(this)[6]),
-										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event);
+										  	    	new Date($(this)[7],$(this)[8],$(this)[9],$(this)[10],$(this)[11]),  { onClick: function(event) { timeAlert(event, date);
 											  	    	
 											  	        
 											  	    }});
@@ -330,13 +335,12 @@
 
 
 	//movie tile click alert
-	function timeAlert(event){
-		//<a href="#" data-toggle="tooltip" data-placement="right" title="Hooray!">Hover</a>
+	function timeAlert(event, date){
 		var s = event.startDate.toString();
     	var startTime = s.substring(16,21);
     	var e = event.endDate.toString();
     	var endTime = e.substring(17,21);
-        window.alert(event.name + ' / ' + startTime  +' (' +event.location+ ')' + ' ~ ' + endTime +' (' +event.location+ ')');
+        window.alert(date + event.name + ' / ' + startTime  +' (' +event.location+ ')' + ' ~ ' + endTime +' (' +event.location+ ')');
 	}
     
 
@@ -405,6 +409,8 @@
 			location.href = "/admin/movieTime/insert?num="+theaterNum+"&cinemaNum="+cinemaNum;
 		});
 	})
+	
+	$(".time-entry").style("position","relative");
 
     </script>
 
@@ -419,7 +425,7 @@
 
       $(".room-timeline").css("width","100%");
 
-      
+  
       
     </script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>

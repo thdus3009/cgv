@@ -431,8 +431,9 @@ public class AdminController {
 	@PostMapping("cinema/cinemaUpdate")
 	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
 		System.out.println("ㅠ.ㅠ");
-		int result = cinemaService.cinemaUpdate(cinemaVO);
 		
+		System.out.println("controller : " + cinemaVO.getName());
+		int result = cinemaService.cinemaUpdate(cinemaVO);
 		if(result > 0) {
 			mv.setViewName("redirect:./cinemaList");
 		}else {
