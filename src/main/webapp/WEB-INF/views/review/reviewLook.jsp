@@ -9,7 +9,7 @@
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 <link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
 <link href="../css/template/modal.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>내가 쓴 평점 < 무비로그 | 무비 다이어리</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 
@@ -49,13 +49,14 @@
                <div class="col_aside">
                   <div class="snb">
                      <ul>
-                        <li class="on"><a href="../member/myPage">MY CGV HOME<i></i></a></li>
-                        <li><a href="./memberUpdate?id=${memberVO.username}">회원정보
-                              수정<i></i>
+
+                        <li class="on"><a href="">MY CGV HOME<i></i></a></li>
+                        <li><a href="../member/memberUpdate?id=${memberVO.username}">회원정보 수정<i></i>
                         </a></li>
                         <li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
                         <li><a href="">예매 영화 관리<i></i></a></li>
-                        <li><a href="../review/reviewList" style="background-color: #000; color: #fff;">내가 본 영화<i></i></a></li>
+                        <li><a href="../review/reviewList">내가 본 영화<i></i></a></li>
+
                      </ul>
 
                   </div>
@@ -85,7 +86,7 @@
                               <!-- 이미지 주소부분 나중에 수정해야함 -->
                               <div class="list_p_photo">
                                  <img alt=""
-                                    src="${pageContext.request.contextPath}/images/${vo.fileName}">
+                                    src="${pageContext.request.contextPath}/images/movie/movieList/filmCover/${vo.fileName}">
                               </div>
                               <div class="list_p_contents1">
                                  <!-- 타이틀(제목)/리뷰삭제 -->
@@ -166,8 +167,7 @@
                      console.log(g_num);
 
                      if (confirm("작성한 관람평을 삭제하시겠습니까?") == true) {
-                        $
-                              .ajax({
+                        $.ajax({
                                  type : "GET",
                                  url : "./review_Delete",
                                  data : {

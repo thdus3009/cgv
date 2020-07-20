@@ -38,11 +38,16 @@ public class ReviewVO {
 
    //movieInfo
    private String title;
+   private String titleEng;
 
    //movieTime
    private int movieTimeNum;
    private String screenDate; 
    private String screenTime;
 
+   //reviewDiary
+   private String with1;
+   private String opinion;
+   private String d_createAt;
 
 }

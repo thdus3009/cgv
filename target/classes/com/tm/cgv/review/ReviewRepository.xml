@@ -8,20 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <!-- 해당 조건의 num 받아오기 +egg-->
    <select id="reviewList" parameterType="java.util.Map" resultType="ReviewVO">
-      select L.num, L.movieNum, L.title, L.fileName, L.theaterName, L.cinemaName, L.movieTimeNum, L.screenDate, L.screenTime, L.common, L.teenager, L.preference, L.createAt, R.egg
-      from(SELECT R.num, R.movieNum, R.title, R.fileName, R.theaterName, R.cinemaName, R.movieTimeNum, R.screenDate, R.screenTime, R.common, R.teenager, R.preference, C.createAt
-      FROM (select MRI.num, MRI.movieNum, MRI.title, MRI.fileName, MRI.theaterName, MRI.cinemaName, MRI.movieTimeNum, T.screenDate, T.screenTime, MRI.common, MRI.teenager, MRI.preference
-      from movieTime T inner join (select RI.num, RI.movieNum, RI.title, M.fileName, RI.theaterName, RI.cinemaName, RI.movieTimeNum, RI.common, RI.teenager, RI.preference
-      from movieImage M inner join (select R.num, R.movieNum, R.cinemaName, R.theaterName, R.movieTimeNum, R.common, R.teenager, R.preference, I.title
-      from (select * from reservation 
-      where uid=#{uid} and deleteAt is null ) R inner join movieInfo I
-      on(R.movieNum = I.num)) RI
-      on(M.movieNum = RI.movieNum)) MRI
-      on(T.num = MRI.movieTimeNum)) R LEFT OUTER JOIN (select reservationNum, createAt from review where createAt is not null and deleteAt is null) C
-      ON R.num = C.reservationNum) L LEFT OUTER JOIN (select reservationNum, egg from review where createAt is not null and deleteAt is null) R 
-      on(L.num = R.reservationNum)
-      ORDER BY L.num desc
-      limit #{pager.startRow},#{pager.perPage}
+        select RE.*,RW.createAt, RW.egg  from 
+		((select M.*, I.fileName from
+		((select M.*, screenDate, screenTime from
+		((select R.*,I.title,I.titleEng from
+		((select num, movieNum, theaterName, cinemaName, movieTimeNum, common, teenager, preference 
+		from reservation where uid=#{uid} and deleteAt is null) R left join (select num, title, titleEng from movieInfo) I
+		on(R.movieNum = I.num)))M left join (select * from movieTime where deleteAt is null) T on(M.movieTimeNum = T.num))) M 
+		left join (select * from movieImage where type=1) I
+		on(M.movieNum = I.movieNum))) RE left join 
+		(select reservationNum, createAt, egg from review where createAt is not null and deleteAt is null) RW 
+		on(RE.num = RW.reservationNum)) order by RE.num desc
+        limit #{pager.startRow},#{pager.perPage}
    </select>
    
    <insert id="review_Write1" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
@@ -205,6 +203,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       where A.rownum = 1
    </select>
    
+   <!-- 관리자 페이지 : 리뷰 -->
    <select id="adminReview" parameterType="Pager" resultType="ReviewVO">
    select num, reservationNum, title, uid, contents, createAt, spoiler, swearword from 
       (select R.*, M.title from 
@@ -266,6 +265,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       and (spoiler<![CDATA[>]]>0 or swearword<![CDATA[>]]>0) and reservationNum=#{reservationNum}
    </update>
    
+   
+   <select id="reviewDiary" parameterType="String" resultType="ReviewVO">
+   		select M.*, I.fileName from
+		((select M.*, screenDate, screenTime from
+		((select R.*,I.title,I.titleEng from
+		((select num, movieNum, theaterName, cinemaName, movieTimeNum, common, teenager, preference from reservation 
+        where uid=#{uid} and deleteAt is null 
+        and not num in (select reservationNum from reviewDiary where d_createAt is not null and d_deleteAt is null)) R 
+        left join (select num, title, titleEng from movieInfo) I
+		on(R.movieNum = I.num)))M left join (select * from movieTime where deleteAt is null) T on(M.movieTimeNum = T.num))) M 
+		left join (select * from movieImage where type=1) I
+		on(M.movieNum = I.movieNum)) order by M.num desc
+   </select>
+   
+   <insert id="reviewDiary_Write" parameterType="ReviewVO">
+   		insert into reviewDiary (reservationNum, with1, opinion, d_createAt)
+   		values (#{reservationNum},#{with1},#{opinion},now())
+   </insert>
+   
+   <select id="reviewDiary_Count" parameterType="String" resultType="Integer">
+   		select count(D.num) from
+        ((select * from reviewDiary where d_createAt is not null and d_deleteAt is null) D right join
+        (select num from reservation where uid=#{uid}) R on(D.reservationNum = R.num))
+   </select>
+   
+   <select id="reviewDiary_List" parameterType="String" resultType="ReviewVO">
+   		select M.*, I.fileName from
+		((select M.*, screenDate, screenTime from
+		((select R.*,I.title,I.titleEng from
+		((select R.*, D.with1, D.opinion, D.d_createAt from
+		(select D.* from
+		((select num, reservationNum,with1,opinion, date_format(d_createAt,'%Y-%m-%d %H:%i') d_createAt from reviewDiary 
+        where d_createAt is not null and d_deleteAt is null) D right join
+		(select num from reservation where uid=#{uid}) R on(D.reservationNum = R.num)) where D.num is not null) D 
+		left join (select num, movieNum, theaterName, cinemaName, movieTimeNum, common, teenager, preference from reservation 
+		where uid=#{uid} and deleteAt is null) R on (D.reservationNum = R.num)) R 
+		left join (select num, title, titleEng from movieInfo) I
+		on(R.movieNum = I.num)))M left join (select * from movieTime where deleteAt is null) T on(M.movieTimeNum = T.num))) M 
+		left join (select * from movieImage where type=1) I
+		on(M.movieNum = I.movieNum)) order by M.d_createAt desc
+   </select>
+   
    <!-- ........................................................................................... -->
 
    <!-- 받아온 num으로 join하여 정보출력 -->
@@ -284,6 +325,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="getList" parameterType="Pager" resultType="TestVO">
       select * from test limit #{startRow},#{perPage}
    </select>
+
+	<update id="reviewDiary_Delete" parameterType="ReviewVO">
+		update reviewDiary set d_deleteAt=now() 
+		where reservationNum=#{reservationNum} and d_createAt is not null and d_deleteAt is null 
+	</update>
+
 
    
 </mapper>

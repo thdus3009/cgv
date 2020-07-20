@@ -24,8 +24,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
 
+<!-- <link href="../css/template/modal.css" rel="stylesheet" type="text/css"> -->
+
 <!-- BootStrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -37,7 +39,7 @@
 
 <div class="root">
    <!-- 헤더 -------------------------------------------------------------------------------------->
-   <c:import url="../template/header.jsp"></c:import>
+   <c:import url="../template/header2.jsp"></c:import>
    
    <!-- 컨테이너 -------------------------------------------------------------------------------------->
    <input type="hidden" id = "gTotal" value="${gTotal}">
@@ -399,8 +401,8 @@
    </div>
       
    <!-- Modal ------------------------------------------------------------------------------------->
-   <c:import url="../template/modal.jsp"></c:import>   
-   <c:import url="../template/modal2.jsp"></c:import>
+   <c:import url="../template/modal3.jsp"></c:import>   
+   <c:import url="../template/modal4.jsp"></c:import>
    
    <!-- 푸터 -------------------------------------------------------------------------------------->
    <c:import url="../template/footer.jsp"></c:import>
@@ -665,17 +667,17 @@ var myChart = new Chart(ctx, {
 
 </script>
 
+
 <script type="text/javascript">
 	$(".item:nth-child(1)").addClass("active");
 
 </script>
 
 
-
 <!-- 리뷰관련 script > 나중에 movieReview.js로 옮기기 -->
 <script type="text/javascript">
 
-var page1 = "";
+var page1 = 0;
 var num4 = $(".num4").val(); //영화번호
 var uid = $(".username").val(); //아이디 세션값
 
@@ -689,7 +691,6 @@ var g_contents = "";
 
 var g_emotionPoint = 0;
 var g_charmPoint = 0;
-
 
 //페이지 들어가면 바로 실행(리뷰리스트)
 window.onload = function () {
@@ -719,7 +720,7 @@ window.onload = function () {
 $("#ajax_ms").on("click",".page1",function(){
 
    page1 =$(this).attr("data-page1");
-   
+	
        $.ajax({
          type:"GET",
          url:select1,
@@ -734,7 +735,6 @@ $("#ajax_ms").on("click",".page1",function(){
       })
       
 }); 
- 
 
 /* ------------------------------------------------ */
 //최신순
@@ -911,7 +911,6 @@ $("#ajax_ms").on("click",".date",function(){
    
 });
 
-
 /* ------------------------------------------------ */
 
 
@@ -1017,7 +1016,7 @@ function review_Modal(){
 
        var mContents = document.getElementById("mContents2");
        g_contents = mContents.value;
-       console.log("??? "+g_contents);
+       console.log("???: "+g_contents);
       var eggList = document.getElementsByClassName("egg2");
       for(i=0; i<eggList.length; i++){
          
@@ -1316,6 +1315,7 @@ $(".Up_popupBtn2").click(function(){
 // 리뷰수정 끝===========================================================================
 
 </script>
+
 
 </body>
 </html>

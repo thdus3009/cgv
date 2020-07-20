@@ -9,6 +9,9 @@
 <link href="../css/myPage.css" rel="stylesheet" type="text/css">
 <link href="../css/review/reviewList.css" rel="stylesheet" type="text/css">
 <link href="../css/template/modal.css" rel="stylesheet" type="text/css">
+
+<link href="../css/review/reviewDiary.css" rel="stylesheet" type="text/css">
+
 <!-- member/memberReivew -->
 <title>내가 본 영화 < 무비로그 | 영화 목록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,33 +44,40 @@
          <div class="contents">
             <div class="col_content">
                <!----------------- contents aside -->
-               <div class="col_aside">
-                  <div class="snb">
-                     <ul>
-                        <li class="on"><a href="../member/myPage">MY CGV HOME<i></i></a></li>
-                        <li><a href="./memberUpdate?id=${memberVO.username}">회원정보
-                              수정<i></i>
-                        </a></li>
-                        <li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
-                        <li><a href="">예매 영화 관리<i></i></a></li>
-                        <li><a href="#"
-                           style="background-color: black; color: white;">내가 본 영화<i></i></a></li>
-                     </ul>
 
-                  </div>
-                  <div class="ad_area">
-                     <div class="ad_panner_1">
-                        <a href=""> <img alt=""
-                           src="../images/bbsList/200313_160x300.jpg">
-                        </a>
-                     </div>
-                     <div class="ad_panner_2">
-                        <a href=""> <img alt=""
-                           src="../images/bbsList/0325_160x35.png">
-                        </a>
-                     </div>
-                  </div>
-               </div>
+               
+					<div class="col_aside">
+					
+						<div>
+							<div class="snb_box">
+								<img alt="프로필 사진" src="/images/profile.gif">
+								<div class="myinfo">
+									<strong>${memberVO.username}</strong>
+									<a href="" alt="수정버튼"></a>
+									<em>아이디</em>
+								</div>
+							</div>
+							<div class="snb_box snb_box1">
+								<a href="" class="snb_menu">
+									<em>0</em>
+									<strong>기대되는 영화</strong>
+								</a>
+							</div>
+							<div class="snb_box snb_box2">
+								<a href="" class="snb_menu" style="background-color: #e60000; color: white;">
+									 <span class="snb_menu2">${m_count}</span>
+									<strong>내가 본 영화</strong>
+								</a>
+							</div>
+							<div class="snb_box snb_box3">
+								<a href="http://localhost/review/reviewDiary" class="snb_menu">
+									<span class="snb_menu2">${d_count}</span>
+									<strong>무비 다이어리</strong>
+								</a>
+							</div>						
+						</div>
+						
+					</div>
 
                <!------contents detail -->
                <div class="col_detail">
@@ -79,7 +89,7 @@
                         <h4>내가 본 영화</h4>
                         <div class="td1" id="total" title="${m_count}">
                            <c:out value="${m_count}" />
-                           건
+                            건
                         </div>
                         <!-- el태그 -->
                         <button id="look">내 평점 보기</button>
@@ -132,7 +142,12 @@
 
 
                      <!-- 더보기란 10개씩 노출-------------------------------------------------------------------------------------->
-                     <div id="result"></div>
+                     <!-- getList.jsp -->
+                     <div id="result">
+                     
+                     </div>
+                     
+                     <!-- 더보기 -->
                      <button id="more">
                         <img alt=""
                            src="${pageContext.request.contextPath}/images/more.JPG">
@@ -156,5 +171,14 @@
    <script type="text/javascript" src="../js/review/checkByte.js"></script>
    <script type="text/javascript" src="../js/review/reviewSubmit.js"></script>
 
+	<script type="text/javascript">
+	$(".snb_box1").click(function(){
+		alert("준비 중 입니다.");
+	});
+
+/* 	$(".snb_box3").click(function(){
+		window.location.href = 'http://localhost/review/reviewDiary';
+	}); */
+	</script>
 </body>
 </html>

@@ -75,4 +75,14 @@ public interface ReviewRepository {
    public int partDelete(int reservationNum);
    
    public long movieNumCount(Pager pager);
+   
+   public List<ReviewVO> reviewDiary(String uid);
+   
+   public int reviewDiary_Write(ReviewVO reviewVO);
+   
+   public int reviewDiary_Count(String uid);
+   
+   public List<ReviewVO> reviewDiary_List(String uid);
+   
+   public int reviewDiary_Delete(ReviewVO reviewVO);
 }

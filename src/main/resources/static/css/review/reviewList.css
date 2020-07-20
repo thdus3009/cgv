@@ -50,6 +50,7 @@ body {
    width: 800px;
    border-bottom: 1px solid #cccccc;
    padding: 20px 0 20px 0;
+   position: relative;
 }
 
 .list_p_name {
@@ -105,13 +106,38 @@ body {
    padding-top: 13px;
 }
 
-#title {
+ #title {
    padding-bottom: 10px;
    text-align: center;
    font-size: x-large;
    font-weight: bold;
    color: #333;
    border-bottom: 1px dashed #cccccc;
+}
+
+.modal4_title2 {
+   padding-bottom: 10px;
+   text-align: center;
+   font-size: x-large;
+   font-weight: bold;
+   color: #333;
+   border-bottom: 1px dashed #cccccc;
+}
+
+.modal4_exit {
+	position : absolute;
+	top: 25px;
+	right: 28px;
+	height: 18px;
+	width: 18px;
+}
+
+.modal3_exit {
+	position : absolute;
+	top: 25px;
+	right: 28px;
+	height: 18px;
+	width: 18px;
 }
 
 .sss {
@@ -136,6 +162,19 @@ body {
 .hd_btn {
    border: 0;
    outline: 0;
+   height: 27px;
+   position: absolute;
+   right: 10px;
+   top: 20px;
+}
+
+.hd_btn2 {
+   border: 0;
+   outline: 0;
+   height: 27px;
+   position: absolute;
+   right: 10px;
+   top: 20px;
 }
 
 .a >.hd{
@@ -162,6 +201,9 @@ body {
    border: 0;
    outline: 0 !important;
    background-color: transparent;
+   position: absolute;
+   right: 0;
+   top: 20px;
 }
 
 .td_image {
@@ -323,4 +365,34 @@ body {
    position: absolute;
    top: -5px;
    right: 0;
+}
+
+
+.round.inblack {
+	background: #222222;
+    border: 2px solid #222222;
+    color: #ffffff;
+    line-height: 27px;
+    border-radius: 5px;
+	
+	font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle; 
+}
+
+
+.diary {
+	border: 1px solid #5b5b58;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.titleEng {
+	 color: #666666; 
+	 font-weight: bold; 
+	 font-family: 'CJ+ONLYONE+Medium'; 
+	 src: url('../font/CJ+ONLYONE+Medium.ttf');
+	 position: relative;
+	 top: 4px;
 }

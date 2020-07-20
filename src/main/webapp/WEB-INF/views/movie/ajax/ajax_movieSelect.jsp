@@ -7,7 +7,7 @@
  <div class="container1" >
 <div class="row" style="width: 800px; height: 630px;">
    <c:forEach items="${review}" var="vo2">
-   <div class="col-sm-6" style="width:400px; height:210px; border-bottom: 1px solid #999999; ">
+   <div class="col-sm-6" style="width:400px; height:210px; border-bottom: 1px solid #999999;">
       <ul id="movie_point_list_container" class="point_col2">
          <li class="liCommentFirst" data-spoilercnt="0" data-reportcnt="0">
             <a href="" class="screen_spoiler">&nbsp;</a>
@@ -85,7 +85,7 @@
  <ul class="paging">
 
  <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-    <li class="page1" id="page1${i}" name="${i}" data-page1="${i}"><a href="javascript:void(0);">${i}</a></li>
+    <li class="page1" id="page1${i}" name="${i}" data-page1="${i}"><a href="javascript:void(0);" style="color: #333333;">${i}</a></li>
  </c:forEach>
 
  </ul>

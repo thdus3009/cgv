@@ -47,6 +47,7 @@
  		
  		<typeAlias type="com.tm.cgv.event.EventVO" alias="EventVO"/>
  		<typeAlias type="com.tm.cgv.eventImage.EventImageVO" alias="EventImageVO"/>
+
  		<typeAlias type="com.tm.cgv.banner.BannerVO" alias="BannerVO"/>
 
 

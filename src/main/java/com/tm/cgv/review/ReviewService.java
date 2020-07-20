@@ -177,4 +177,23 @@ public class ReviewService {
       return reviewRepository.partDelete(reservationNum);
    }
    
+   public List<ReviewVO> reviewDiary(String uid)throws Exception {
+	   return reviewRepository.reviewDiary(uid);
+   }
+   
+   public int reviewDiary_Write(ReviewVO reviewVO)throws Exception {
+	   return reviewRepository.reviewDiary_Write(reviewVO);
+   }
+   
+   public int reviewDiary_Count(String uid)throws Exception {
+	   return reviewRepository.reviewDiary_Count(uid);
+   }
+   
+   public List<ReviewVO> reviewDiary_List(String uid)throws Exception {
+	   return reviewRepository.reviewDiary_List(uid);
+   }
+   
+   public int reviewDiary_Delete(ReviewVO reviewVO)throws Exception {
+	   return reviewRepository.reviewDiary_Delete(reviewVO);
+   }
 }

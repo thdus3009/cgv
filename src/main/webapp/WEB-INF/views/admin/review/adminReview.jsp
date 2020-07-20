@@ -40,8 +40,11 @@
 							</button>
 						</div>
 						
-						<div style="position: absolute; right: 130px;"><button class="btn btn-danger" id="allDelete">전체삭제</button></div>
-						<div style="position: absolute; right: 40px;"><button class="btn btn-info" id="partDelete">부분삭제</button></div>
+
+
+						<div style="position: absolute; right: 129px;"><button class="btn btn-danger" id="allDelete">전체삭제</button></div>
+						<div style="position: absolute; right: 42px;"><button class="btn btn-info" id="partDelete">부분삭제</button></div>
+
 					</div>
 					
 					
