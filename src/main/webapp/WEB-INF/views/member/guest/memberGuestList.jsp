@@ -26,8 +26,7 @@
 			<div class="c_nav">
 				<div class="nav_linemap">
 					<ul>
-						<li><a href="../"> <img alt="go to Home"
-								src="../images/login/btn_home.png">
+						<li><a href="../"><img alt="go to Home" src="../images/login/btn_home.png">
 						</a></li>
 						<li><a href="">MY CGV</a></li>
 						<li class="last">MY CGV HOME</li>
@@ -43,15 +42,8 @@
 						<div class="col_aside">
 							<div class="snb">
 								<ul>
-									<li class="on"><a href="">MY CGV HOME<i></i></a></li>
-									<li><a
-										href="./memberUpdate?id=${sessionScope.memberVO.id}">회원정보
-											수정<i></i>
-									</a></li>
-									<li><a href="#" id="memberDelete">회원 탈퇴<i></i></a></li>
-									<li><a href="">예매 영화 관리<i></i></a></li>
-									<li><a href="../review/reviewList"
-										style="background-color: black; color: white;">내가 본 영화<i></i></a></li>
+									<li class="on"><a href="">비회원 예매 내역<i></i></a></li>
+									
 								</ul>
 
 							</div>
@@ -89,7 +81,7 @@
 
 									<!-- 영화 정보 -->
 									<div class="movie-info">
-										<img alt="영화 포스터" src="" onclick="location.href=''">
+										<img alt="영화 포스터" src="/images/movie/movieList/filmCover/${reservationVO.movieImageVO.fileName}" onclick="location.href=''">
 										<ul class="movie-info-ul">
 											<li><a href="">${reservationVO.movieInfoVO.title}</a></li>
 											<li><p>관람극장</p> <strong>CGV ${reservationVO.cinemaName}</strong></li>
@@ -139,11 +131,11 @@
 									<tbody>
 										<!-- 반복  -->
 										<tr class="member-td">
-											<td>어쩌고</td>
-											<td>어쩌고</td>
-											<td>어쩌고</td>
-											<td>어쩌고</td>
-											<td>어쩌고 원</td>
+											<td style="padding-left: 35px;">-</td>
+											<td style="padding-left: 38px;">-</td>
+											<td style="padding-left: 35px;">-</td>
+											<td style="padding-left: 35px;">-</td>
+											<td style="padding-left: 49px;">-</td>
 										</tr>
 									</tbody>
 								</table>

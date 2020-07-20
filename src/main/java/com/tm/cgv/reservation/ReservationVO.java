@@ -2,6 +2,7 @@ package com.tm.cgv.reservation;
 
 
 import com.tm.cgv.review.ReviewVO;
+import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.movieInfo.MovieInfoVO;
 import com.tm.cgv.movieTime.MovieTimeVO;
 import com.tm.cgv.payment.PaymentVO;
@@ -40,7 +41,8 @@ public class ReservationVO {
 	private MovieInfoVO movieInfoVO;
 	private MovieTimeVO movieTimeVO;
 	private PaymentVO paymentVO;
-
+	private MovieImageVO movieImageVO;
+	
 	
 //	movieInfo join해서 불러올값
 //	private String title;

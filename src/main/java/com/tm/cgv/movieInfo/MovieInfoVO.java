@@ -32,6 +32,7 @@ public class MovieInfoVO {
 	
 	//이미지, 영상 주소 list로 받아오기
 	private List<MovieImageVO> movieImageVOs;//영화 이미지 파일
+	private MovieImageVO movieImageVO;
 	
 	/*
 	 * private List<MovieVideoVO> movieVideoVOs;//영화 영상 링크 주소

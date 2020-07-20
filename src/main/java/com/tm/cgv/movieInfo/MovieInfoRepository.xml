@@ -23,15 +23,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="errRate" property="errRate"/>
  		<result column="createAt" property="createAt"/>
  		
- 		
  		<collection property="movieImageVOs" javaType="List" ofType="MovieImageVO">
  			<id column="imageNum" property="num"/>
  			<result column="movieNum" property="movieNum"/>
  			<result column="fileName" property="fileName"/>
  			<result column="originName" property="originName"/>
  			<result column="type" property="type"/>
- 			
  		</collection>
+ 	</resultMap>
+ 	
+ 	<resultMap type="MovieInfoVO" id="movieListAllResult">
+ 		<id column="num" property="num"/>
+ 		<result column="title" property="title"/>
+ 		<result column="titleEng" property="titleEng"/>
+ 		<result column="runtime" property="runtime"/>
+ 		<result column="director" property="director"/>
+ 		<result column="actor" property="actor"/>
+ 		<result column="ganre" property="ganre"/>
+ 		<result column="ageLimit" property="ageLimit"/>
+ 		<result column="country" property="country"/>
+ 		<result column="openDate" property="openDate"/>
+ 		<result column="contents" property="contents"/>
+ 		<result column="visitor" property="visitor"/>
+ 		<result column="rate" property="rate"/>
+ 		<result column="errRate" property="errRate"/>
+ 		<result column="createAt" property="createAt"/>
+ 	
+ 		<association property="movieImageVO" javaType="MovieImageVO">
+ 			<result property="fileName" column="fileName"/>
+ 		</association>
  	</resultMap>
  	
  	
@@ -80,40 +100,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<choose>
 			<when test="kind == 'date'">
 				createAt desc,openDate asc
-				
 			</when>
 			<when test="kind == 'title'">
 				title asc
-				
 			</when>
 			<otherwise>
 				rate desc
-				
 			</otherwise>
 		</choose>
 		limit #{startRow},#{perPage}) as PP ) as MM
 		left join movieImage as MK
 		on(MM.num = MK.movieNum)
-
  	</select>
  	
- 	<select id="movieListAll" parameterType="MovieInfoVO" resultType="MovieInfoVO">
- 		select * from movieInfo
+ 	<select id="movieListAll" parameterType="MovieInfoVO" resultMap="movieListAllResult">
+ 		select * from 
+ 		(select * from movieInfo
  		where deleteAt is null
  		ORDER by 
- 			<choose>
- 				<when test="kind == 'date'">
- 					createAt desc,openDate asc
- 				</when>
- 				<when test="kind == 'title'">
- 					title asc
- 				</when>
- 				<otherwise>
- 					rate
- 				</otherwise>
- 			</choose>
- 			
- 	 	</select>
+ 		<choose>
+ 			<when test="kind == 'date'">
+ 				createAt desc,openDate asc
+ 			</when>
+ 			<when test="kind == 'title'">
+ 				title asc
+ 			</when>
+ 			<otherwise>
+ 				rate
+ 			</otherwise>
+ 		</choose>
+ 		) M
+ 		join
+		(select movieNum,fileName from movieImage) I
+		on(M.num = I.movieNum)
+ 	 </select>
 
  	 <insert id="movieWrite" parameterType="MovieInfoVO" useGeneratedKeys="true" keyProperty="num"> 
  	 	insert into movieInfo (num,title,titleEng,runtime,director,actor,ganre,ageLimit,country,openDate,contents,visitor,rate,errRate,createAt)

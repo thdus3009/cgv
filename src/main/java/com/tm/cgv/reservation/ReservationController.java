@@ -1,14 +1,7 @@
 package com.tm.cgv.reservation;
 
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +15,6 @@ import com.tm.cgv.couponInfo.CouponInfoVO;
 import com.tm.cgv.discountInfo.DiscountInfoService;
 import com.tm.cgv.discountInfo.DiscountInfoVO;
 import com.tm.cgv.guest.GuestService;
-import com.tm.cgv.guest.GuestVO;
 import com.tm.cgv.memberCoupon.MemberCouponService;
 import com.tm.cgv.memberCoupon.MemberCouponVO;
 import com.tm.cgv.movieInfo.MovieInfoService;
@@ -123,7 +115,6 @@ public class ReservationController {
 				
 				result = pointService.pointDiscountUpdate(pointVO);
 				System.out.println("포인트 : "+result);
-				
 			}
 			
 		}
@@ -341,14 +332,11 @@ public class ReservationController {
 	}
 	
 	
-	
 	@PostMapping("reservePayment")
 	public ModelAndView reservePayment() throws Exception{
 		ModelAndView mv = new ModelAndView();
 
-		
 		mv.setViewName("movie/moviePayment");
-		
 		return mv;
 	}
 	

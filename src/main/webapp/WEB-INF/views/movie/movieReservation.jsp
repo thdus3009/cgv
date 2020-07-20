@@ -99,7 +99,7 @@
 									<div class="movie-list nano">
 										<ul id="movie-list-content" class="content scroll-y" style="right: -21px;">
 											<c:forEach var="list" items="${list}">
-												<li class="rating-${list.ageLimit}" data-index="${list.num}" data-age_limit="${list.ageLimit}" data-title="${list.title}">
+												<li class="rating-${list.ageLimit}" data-index="${list.num}" data-age_limit="${list.ageLimit}" data-title="${list.title}" data-image="${list.movieImageVO.fileName}">
 													<a title="제목" >
 														<span class="icon">&nbsp;</span>
 														<span class="text">${list.title}</span>
@@ -107,7 +107,6 @@
 													</a>
 												</li>
 											</c:forEach>
-											
 										</ul>
 										
 										<!-- <div class="pane pane-y" style="display: block; opacity: 1; visibility: visible;">
