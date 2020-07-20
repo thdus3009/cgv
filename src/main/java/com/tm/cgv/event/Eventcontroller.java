@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tm.cgv.banner.BannerService;
+import com.tm.cgv.banner.BannerVO;
 import com.tm.cgv.util.Pager_eventList;
 
 @Controller
@@ -17,6 +19,9 @@ public class Eventcontroller {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private BannerService bannerService;
 	
 	@GetMapping("eventList")
 	public ModelAndView eventList(Pager_eventList pager) throws Exception {
@@ -29,19 +34,19 @@ public class Eventcontroller {
 		
 		System.out.println("list=============");
 		for (EventVO eventVO : list) {
-			System.out.println(eventVO.getTitle());
-			
-			//System.out.println("aa : "+eventVO.getEventImageVOs().);
-//			for(int i = 0;i<eventVO.getEventImageVOs().size();i++) {
-//				System.out.println(eventVO.getEventImageVOs().get(i).getFileName());
-//			}
-//			
+			System.out.println(eventVO.getTitle());			
 		}
 		
+		BannerVO bannerVO = new BannerVO();
+		bannerVO.setType(1);
+		bannerVO.setIndex(0);
+		BannerVO movie = bannerService.selectAdBanner(bannerVO);
+		bannerVO.setIndex(1);
+		BannerVO event = bannerService.selectAdBanner(bannerVO);
 		
-		
+		mv.addObject("movie", movie);
+		mv.addObject("event", event);
 		mv.addObject("list", list);
-		//System.out.println(list.get(0).getEventImageVOs().get(0).getFileName());
 		mv.addObject("pager", pager);
 		mv.setViewName("event/eventList");
 		return mv;

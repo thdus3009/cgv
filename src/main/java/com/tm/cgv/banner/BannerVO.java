@@ -16,4 +16,5 @@ public class BannerVO {
 	private Date endDate;
 	private String fileName;
 	private String originName;
+	private int randId;
 }

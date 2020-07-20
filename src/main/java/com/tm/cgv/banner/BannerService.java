@@ -89,6 +89,10 @@ public class BannerService {
 			
 			//vo의 내용 업데이트
 			result = bannerRepository.updateBanner(bannerVO);
+		}else {
+			bannerVO.setFileName(vo.getFileName());
+			bannerVO.setOriginName(vo.getOriginName());
+			result = bannerRepository.updateBanner(bannerVO);
 		}
 		
 		
@@ -105,6 +109,9 @@ public class BannerService {
 		return bannerRepository.deleteBanner(num);
 	}
 	
+	public BannerVO selectAdBanner(BannerVO bannerVO) throws Exception 	{
+		return bannerRepository.selectAdBanner(bannerVO);
+	}
 	
 	private int fileDelete(BannerVO bannerVO) throws Exception {
 
@@ -121,6 +128,9 @@ public class BannerService {
 		
 		return result;
 	}
+	
+	
+
 	
 	
 	
