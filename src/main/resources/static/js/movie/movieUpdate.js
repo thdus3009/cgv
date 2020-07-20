@@ -25,29 +25,37 @@
 			
 	var count = $("#trailerCount").val();
 
-	$(".fileDeleteT").each(function(index){
+	$(".fileDeleteT").each(function(){
 		
 		$(this).click(function(){
 			var check = confirm("삭제하시겠습니까?");
 			if(check){
+				var index = $(this).data("index");
+				console.log("index : "+index);
 				var numt = $(this).data("imagenum");	
 				var fileNameT=$(this).data("imgpath");
+				console.log("numt : "+numt)
 				
 				var img = $(this).parent().prev().attr('id');
+				console.log("img : "+img);
 				
 				var vi=$("#videolink"+index);
+				console.log("vi : "+vi);
 				vi.remove();
 			
 				$("#trailerCount").val(count);
 				$("#trail2").val(count);
 
+				console.log("trailerCount : "+$("#trailerCount").val(count));
+				
 				var th = $(this);
 				
 			 	$.post("../../movieImage/movieImageDelete",{num:numt,fileName:fileNameT,_csrf : $("#_csrf").val()},function(data){
 					console.log(data+"dd");//null
 					
 					if(data>0){
-						th.parent().parent().remove();	
+						th.parent().parent().remove();
+						console.log(th.parent().parent().html());
 					}
 				}); 
 			}
