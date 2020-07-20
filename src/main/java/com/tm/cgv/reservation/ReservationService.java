@@ -51,4 +51,8 @@ public class ReservationService{
 		return reservationRepository.reservationAllList();
 	}
 	
+	public List<ReservationVO> myReservationList(ReservationVO reservationVO) throws Exception{
+		return reservationRepository.myReservationList(reservationVO);
+	}
+	
 }

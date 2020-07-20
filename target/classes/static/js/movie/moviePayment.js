@@ -401,11 +401,11 @@ $(".secondTit").click(function(){
 
 
 //X버튼이나 0으로 선택 기능중 input val값이 0면 모두사용(Checkbox) false로 변경
-//function checkboxValue(id){
-//	if($("#"+id).val() == 0){
-//		console.log($("#"+id).parent().next().children().prop("checked",false));
-//	}
-//}
+function checkboxValue(id){
+	if($("#"+id).val() == 0){
+		console.log($("#"+id).parent().next().children().prop("checked",false));
+	}
+}
 
 var selected_cuponNum = 0;
 //할인 내역 조회해 리스트 생성 : 타입 - 금액

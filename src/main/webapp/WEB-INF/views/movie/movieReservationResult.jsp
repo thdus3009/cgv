@@ -13,7 +13,7 @@
 			
             <div class="ticket_summary_wrap">
                 <div class="ticket_summary">
-                    <div class="poster"><img src="" alt=""></div>
+                    <div class="poster"><img src="/images/movie/movieList/filmCover/${reservationVO.movieImageVO.fileName}" alt=""></div>
                     <table>
                         <caption>예매정보</caption>
                         <thead></thead>
