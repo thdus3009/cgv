@@ -112,7 +112,7 @@ public class AdminController {
 	//==============================
 	// movieInfo
 	//==============================
-
+	
 
 	@GetMapping("movie/movieList")
 	public ModelAndView movieList(ModelAndView mv,Pager pager) throws Exception{
@@ -183,6 +183,17 @@ public class AdminController {
 		}
 		
 		return mv;
+	}
+	
+	@GetMapping("movie/titleCheck")
+	@ResponseBody
+	public int titleCheck(MovieInfoVO movieInfoVO) throws Exception{
+		movieInfoVO = movieInfoService.titleCheck(movieInfoVO);
+		int result=0;
+		if(movieInfoVO != null) {
+			result=1;
+		}
+		return result;
 	}
 	
 	@GetMapping("movie/movieSelect")
