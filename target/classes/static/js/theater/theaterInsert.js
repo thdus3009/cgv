@@ -310,12 +310,6 @@ $("#btn_insert").click(function(){
 	}else{
 		nameCheck = true;
 	}
-
-	/*if(seatCount<1){
-		alert("좌석을 선택해주세요!");
-	}else{
-		seatCheck = true;
-	}*/
 	
 	if($("#seatCount").val()==''){
 		alert("좌석을 선택해주세요!");
