@@ -34,7 +34,7 @@ public class MemberTest {
 		System.out.println(year+"-"+month+"-"+day);
  	}
 	
-	@Test
+	//@Test
 	public void join() throws Exception {
 		
 		int index = 4;

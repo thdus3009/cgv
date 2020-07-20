@@ -10,7 +10,7 @@ class InsertTest {
 	@Autowired
 	private EventRepository eventRepository;
 
-	@Test
+	//@Test
 	void test() {
 		
 	}

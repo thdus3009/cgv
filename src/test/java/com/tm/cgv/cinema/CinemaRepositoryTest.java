@@ -12,7 +12,7 @@ class CinemaRepositoryTest {
 	@Autowired
 	private CinemaRepository cinemaRepository;
 	
-	@Test
+	//@Test
 	void test() throws Exception{
 		int result = cinemaRepository.cinemaWrite();
 		assertEquals(1, result);

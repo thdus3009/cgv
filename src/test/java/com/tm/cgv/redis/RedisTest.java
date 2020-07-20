@@ -15,7 +15,7 @@ public class RedisTest {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
  
-    @Test
+    //@Test
     public void redisBasicFunction_guide() throws JSONException {
         //Given
         String key = "iamkey";
