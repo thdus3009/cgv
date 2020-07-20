@@ -37,7 +37,7 @@
 
 <div class="root">
    <!-- 헤더 -------------------------------------------------------------------------------------->
-   <c:import url="../template/header.jsp"></c:import>
+   <c:import url="../template/header2.jsp"></c:import>
    
    <!-- 컨테이너 -------------------------------------------------------------------------------------->
    <input type="hidden" id = "gTotal" value="${gTotal}">
