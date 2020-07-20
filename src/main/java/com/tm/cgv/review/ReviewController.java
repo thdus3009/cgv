@@ -123,6 +123,7 @@ public class ReviewController {
       
       ReviewVO reviewSelect = reviewService.reviewSelect(reviewVO);   
       
+      
       //*처리 해주기 (예시 : th**s3009)
       String id = reviewSelect.getUid();
       id = id.substring(0, 1)+"**"+id.substring(3);

@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       from(select M.num, M.movieNum, M.uid, M.title, I.fileName
       from (select R.num, R.movieNum, R.uid, I.title
       from (select num,movieNum,uid from reservation) R inner join (select num, title from movieInfo) I
-      on (R.movieNum = I.num)) M inner join (select * from movieImage) I
+      on (R.movieNum = I.num)) M inner join (select * from movieImage where type=1) I
       on(M.movieNum = I.movieNum)) M inner join (select * from review) R
       on(M.num = R.reservationNum)
       where R.createAt is not null and R.deleteAt is null 
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       from(select M.num, M.movieNum, M.uid, M.title, I.fileName
       from (select R.num, R.movieNum, R.uid, I.title
       from (select num,movieNum,uid from reservation) R inner join (select num, title from movieInfo) I
-      on (R.movieNum = I.num)) M inner join (select * from movieImage) I
+      on (R.movieNum = I.num)) M inner join (select * from movieImage where type=1) I
       on(M.movieNum = I.movieNum)) M inner join (select * from review) R
       on(M.num = R.reservationNum)
       where R.createAt is not null and R.deleteAt is null
