@@ -10,6 +10,7 @@
 <link href="../css/layout.css" rel="stylesheet" type="text/css">
 <link href="../css/member/memberMyPage.css" rel="stylesheet"
 	type="text/css">
+<script src="/js/template/common.js"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -77,8 +78,7 @@
 								<div class="col-my-coupon">
 									<h4>CJ ONE POINT</h4>
 									<ul>
-										<li><strong>CJ ONR 사용가능 포인트</strong> <span><em>${cjPoint}</em>
-												점</span></li>
+										<li><strong>CJ ONR 사용가능 포인트</strong> <span id="cjPoint"></span></li>
 										<li><strong>VIP 선정 포인트</strong> <span><em>0</em> 점</span></li>
 										<li><strong>VIP 까지</strong> <span><em>100</em> 점</span></li>
 									</ul>
@@ -235,6 +235,9 @@
 	</div>
 	<script type="text/javascript" src="/js/template/common.js"></script>
 	<script type="text/javascript">
+		
+		$("#cjPoint").html(addComma("<em>${cjPoint}</em> 점"));
+		
 		//금액에 콤마 적용
 		$(".rt-info2-div2 dl dt").each(function(){
 			$(this).text(addComma($(this).text())+"원");
