@@ -85,9 +85,9 @@ public class MovieInfoController {
 	public ModelAndView movieReservation(MovieInfoVO movieVO,CinemaVO cinemaVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("movieTitle : "+movieVO.getTitle());
-		if(movieVO.getTitle() != null) {
-			mv.addObject("selectedMovieTitle", movieVO.getTitle());
+		System.out.println("movieTitle : "+movieVO.getNum());
+		if(movieVO.getNum() != 0) {
+			mv.addObject("selectedMovieNum", movieVO.getNum());
 		}
 		
 		//초기 영화목록 호출

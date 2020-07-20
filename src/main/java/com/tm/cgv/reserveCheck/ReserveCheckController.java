@@ -20,7 +20,8 @@ public class ReserveCheckController {
 	@GetMapping("reserve")
 	public List<ReserveCheckVO> reservationCheckedSelect(ReserveCheckVO reserveCheckVO) throws Exception{
 		
-		System.out.println(reserveCheckVO.getTitle()+ "/ "+reserveCheckVO.getTheater()+"/ "+reserveCheckVO.getDate());
+		//System.out.println(reserveCheckVO.getTitle()+ "/ "+reserveCheckVO.getTheater()+"/ "+reserveCheckVO.getDate());
+		System.out.println(reserveCheckVO.getNum()+ "/ "+reserveCheckVO.getTheater()+"/ "+reserveCheckVO.getDate());
 		
 		List<ReserveCheckVO> reserveList = reserveCheckService.reservationCheckedSelect(reserveCheckVO);
 		

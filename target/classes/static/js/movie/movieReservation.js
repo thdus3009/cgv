@@ -4,6 +4,9 @@
 		var theater = "";
 		var date = "";
 		var time="";
+		var kind="";
+		var movieNum;
+		
 	
 		//class selected값 변경
 		$(".sortmenu a").click(function() {
@@ -15,8 +18,8 @@
 		$(".movie-list").on("click","#movie-list-content li",function() {
 			if($(this).hasClass("dimmed") === true){
 				alert("선택할수 없습니다.");
+				//다른것으로 변경할 것인지에 대한 알림창 출력해야 됨
 			}else{
-				
 				$("#movie-list-content li").removeClass("selected");
 				$(this).addClass("selected");
 					
@@ -25,6 +28,7 @@
 				$("#select_ageLimit").text($(this).data("age_limit"));
 				$("#movieNum").val($(this).data("index"));
 				title = $(this).data("title");
+				movieNum = $(this).data("index");
 					
 				$(".movie_poster img").css("display","inline");
 				$(".movie_title").css("display","block");
@@ -162,7 +166,8 @@ function ajaxLoad(){
 		url:'../reserveCheck/reserve',
 		data:{
 			theater:theater,
-			date:date
+			date:date,
+			kind:kind
 		},
 		success:function(result){
 			//영화
@@ -170,14 +175,18 @@ function ajaxLoad(){
 			
 			for(i=0;i<result.length;i++){
 				$("#movie-list-content li").each(function(){
-					if($(this).data("title") == result[i].movieInfoVOs[0].title){
+//					if($(this).data("title") == result[i].movieInfoVOs[0].title){
+//						$(this).removeClass("dimmed");
+//						$li = $(this);
+//						$("#movie-list-content").prepend($li);
+//					}
+					if($(this).data("index") == result[i].movieInfoVOs[0].num){
 						$(this).removeClass("dimmed");
-						
 						$li = $(this);
 						$("#movie-list-content").prepend($li);
 					}
-					
 				});
+				
 			}
 			
 		}
@@ -188,8 +197,10 @@ function ajaxLoad(){
 		type:'GET',
 		url:'../reserveCheck/reserve',
 		data:{
-			title:title,
-			date:date
+//			title:title,
+			num:movieNum,
+			date:date,
+			kind:kind
 		},
 		success:function(result){
 			//극장
@@ -235,8 +246,10 @@ function ajaxLoad(){
 		type:'GET',
 		url:'../reserveCheck/reserve',
 		data:{
-			title:title,
+//			title:title,
+			num : movieNum,
 			theater:theater,
+			kind:kind
 		},
 		success:function(result){
 			//날짜
@@ -292,7 +305,8 @@ function selectedCheck(){
 			type:'GET',
 			url:'../reserveCheck/reserve',
 			data:{
-				title:title,
+//				title:title,
+				num : movieNum,
 				theater:theater,
 				date:date
 			},
@@ -714,14 +728,46 @@ $("#movie-list-content").scroll(function () {
 $(".btn-rank").click(function(){
 	$.get("./movieListSort?kind=rate",function(result){
 		$("#movie-list-content").html(result);
+		
+		//정렬 결과로 선택한 값들 재로딩
+		kind = '';
+		
+		ajaxLoad();
+		movieSort(movieNum);
 	});
 });
 
 $(".btn-abc").click(function(){
 	$.get("./movieListSort?kind=title",function(result){
 		$("#movie-list-content").html(result);
+		
+		//정렬 결과로 선택한 값들 재로딩
+		kind = "sort";
+		ajaxLoad();
+		movieSort(moveiNum);
 	});
 });
+
+
+function movieSort(num){
+	$("#movie-list-content li").each(function(){
+		console.log("index : "+$(this).data("index"))
+		console.log("num : "+ num)
+		if($(this).data("index") == num){
+			$(this).addClass("selected");
+			$("#select_title").text($(this).data("title"));
+			$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+			$("#select_ageLimit").text($(this).data("age_limit"));
+			$("#movieNum").val($(this).data("index"));
+			title = $(this).data("title");
+			
+			$(".movie_poster img").css("display","inline");
+			$(".movie_title").css("display","block");
+			$(".movie .placeholder").css("display","none");
+		}
+
+	});
+}
 
 
 

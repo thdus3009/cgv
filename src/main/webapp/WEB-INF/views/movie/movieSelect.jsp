@@ -149,7 +149,7 @@
                         <i class="sprite_preegg1 btn_md default"></i>
                        		 프리에그
                      </a>
-                     <a class="link-reservation a" href="/movie/movieReservation" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
+                     <a class="link-reservation a" href="/movie/movieReservation?num=${vo.num}" style="background-image: url('../images/movie/movieList/sprite_btn.png')">예매</a>
                   </span>
                   
                </div>
