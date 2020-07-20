@@ -12,9 +12,12 @@ import lombok.Data;
 @Data
 public class ReserveCheckVO {
 
+	private int num;
 	private String title;
 	private String theater;
 	private String date;
+	
+	private String kind;
 	
 	private List<MovieInfoVO> movieInfoVOs;
 	private List<CinemaVO> cinemaVOs;
