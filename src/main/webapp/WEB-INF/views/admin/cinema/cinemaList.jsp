@@ -133,26 +133,19 @@
 								</c:if>
 								
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
-									<li class="page-item"><a href="./eventList?curPage=${p}" class="page-link custompager" title="${p}">${p}</a></li>
+									<li class="page-item"><a href="./cinemaList?curPage=${p}" class="page-link custompager" title="${p}">${p}</a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
 									<li class="page-item"><a href="${pager.lastNum+1}" class="page-link custompager" title="${pager.lastNum+1}">다음</a></li>
 								</c:if>
-								
 							</ul>
 							<div style="position: absolute; right: 40px;">
 								<a href="./cinemaInsert" id="up" class="btn btn-primary"
 								style="font-size: 15px;">영화관 등록</a>
 							</div>
 						</div>
-
 					</div>
-
-					<div class="">
-						<a href="./cinemaInsert" id="up" class="btn btn-mo">등록</a>
-                    </div>
-
 				</div>
 
 			</main>

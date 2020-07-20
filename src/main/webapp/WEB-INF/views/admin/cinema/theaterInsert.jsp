@@ -113,10 +113,8 @@
 								</div>
 							</div>
 							<!-- end seat box -->
-							<br> <label for="seatCount" class="theaterLebel labelname">좌석
-								수:</label> <input type="text" class="form-control" id="seatCount"
-								name="seatCount" value="${vo.seatCount}" required="required" readonly="readonly">
-
+							<br> <label for="seatCount" class="theaterLebel labelname">좌석 수:</label>
+							<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}" required="required" readonly="readonly">
 							<div class="btn_s">
 								<input type="button" id="btn_insert" class="btn btn-default"
 									value="생성" style="background-color: #eff2f8;">

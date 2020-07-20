@@ -133,16 +133,11 @@
 								</c:if>
 								
 							</ul>
-							<div style="position: absolute; left: 0px;">
+							<div style="position: absolute; left: 40px;">
 								<a href="./eventInsert" id="up" class="btn btn-primary" style="font-size: 15px;">이벤트 추가</a>
                     		</div>
 						</div>
 					</div>
-
-					<div class="">
-						<a href="./eventInsert" id="up" class="btn btn-mo">등록</a>
-                    </div>
-
 				</div>
 			</main>
 			<c:import url="../template/footer.jsp"></c:import>

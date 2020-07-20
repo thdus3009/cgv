@@ -11,6 +11,20 @@
 	<link rel="stylesheet" href="/css/admin/cinema/timetablejs.css">
 	<link rel="stylesheet" href="/css/admin/cinema/demo.css">
 	<title>관리자 페이지</title>
+	<style type="text/css">
+	.btn-mo {
+	    border: none;
+	    background-color: #e71a0f;
+	    color: #fff;
+	    font-weight: 500;
+	    font-size: 16px;
+	    line-height: 24px;
+	    text-align: center;
+	    border: 1px solid #e71a0f;
+	    padding: .375rem .75rem;
+	    border-radius: .25rem;
+	}
+	</style>
 </head>
 
 <body class="sb-nav-fixed">
