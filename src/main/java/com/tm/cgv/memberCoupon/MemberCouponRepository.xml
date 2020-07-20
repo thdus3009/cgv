@@ -41,7 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="memberCouponCount" parameterType="MemberCouponVO" resultType="Integer">
-		SELECT COUNT(num) FROM memberCoupon WHERE uid = #{uid} and deleteAt IS NULL
+
+		SELECT COUNT(num) FROM memberCoupon WHERE uid = #{uid} AND deleteAt IS NULL
+
 	</select>
 	
 	<update id="memberCouponUpdate" parameterType="MemberCouponVO">

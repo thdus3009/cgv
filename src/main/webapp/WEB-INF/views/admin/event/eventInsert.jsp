@@ -35,7 +35,7 @@
 					<div>
 
 						<div class="contents">
-							<div style="margin: 0 auto; width: 410px;">
+							<div style="width: 410px;">
 
 								<div class="col_content">
 
@@ -114,7 +114,7 @@
 																	</c:if>
 															</div> --%>
 															
-															<div class="form-group" style="margin: 0;">
+															<div class="form-group">
 																<label for="files">컨텐츠 이미지:</label>
 																<span style="position: relative;">
 																	<c:if test="${path  eq 'Insert'}">

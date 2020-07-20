@@ -16,4 +16,6 @@ public interface BannerRepository {
 	public int updateBanner(BannerVO bannerVO) throws Exception;
 	
 	public int deleteBanner(int num) throws Exception;
+	
+	public BannerVO selectAdBanner(BannerVO bannerVO) throws Exception;
 }

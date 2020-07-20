@@ -105,7 +105,8 @@
 																						src="../../images/movie/movieList/x.png"
 																						data-imgpath="${ar.fileName}"
 																						style="width: 20px; height: 20px;"
-																						data-imagenum="${ar.num}" class="fileDeleteT">
+																						data-imagenum="${ar.num}" 
+																						data-index="${i.index}"class="fileDeleteT"/>
 																					<!-- 트레일러  num -->
 																				</p>
 																			</div>
