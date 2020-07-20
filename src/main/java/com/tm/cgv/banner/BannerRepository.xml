@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tm.cgv.banner.BannerRepository">
 	<insert id="bannerInsert" parameterType="BannerVO">
 		insert into banner values (0, #{title}, #{type}, #{index}, #{link},
-		#{startDate}, #{endDate}, #{fileName}, #{originName})
+		#{startDate}, #{endDate}, #{fileName}, #{originName}, FLOOR(RAND() * 100000000))
 	</insert>
 
 	<select id="selectMainBannerList" resultType="BannerVO">
@@ -29,4 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteBanner" parameterType="Integer">
 		delete from banner where num=#{num}
 	</delete>
+	
+	<select id="selectAdBanner" parameterType="BannerVO" resultType="BannerVO">
+		CALL sideBannerRandSelect(#{index})
+	</select>
 </mapper>

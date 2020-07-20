@@ -162,7 +162,7 @@
 														  	
 														  	<div class="form-group">
 														   	 <label for="index">분류:</label>
-														   	 <select class="" id="" name="index">
+														   	 <select class="" id="idx" name="index">
 														   	 	<option value="0">영화 광고</option>
 														   	 	<option value="1">이벤트 광고</option>
 															 </select>
@@ -268,6 +268,13 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
+
+		//row, col 출력
+		var idx = '${vo.index}';
+		$("#idx option[value="+idx+"]").prop("selected",true);
+
+
+	
 
 		var deleteImage = [];
 
