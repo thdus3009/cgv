@@ -113,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         join
         (select movieNum,fileName from movieImage) I
         on(miNum = I.movieNum)
-        limit 0,10
+        order by num desc
 	</select>
 	
 	

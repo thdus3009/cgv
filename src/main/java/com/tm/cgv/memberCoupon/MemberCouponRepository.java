@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberCouponRepository {
 	
 	public int memberCouponInsert(MemberCouponVO memberCouponVO) throws Exception;
-	
+			   
 	public List<MemberCouponVO> memberCouponSelect(MemberCouponVO memberCouponVO) throws Exception;
 	
 	public int memberCouponUpdate(MemberCouponVO memberCouponVO) throws Exception;

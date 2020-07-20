@@ -49,7 +49,7 @@ public class CouponInfoController {
 				result = -1;
 			}else {
 				//3. 위 조건 만족시 memberCoupon 테이블에 값 등록
-				result = memberCouponService.membercouponInsert(memberCouponVO);
+				result = memberCouponService.memberCouponInsert(memberCouponVO);
 				
 				//4. 기존의 couponInfo테이블의 해당 쿠폰의 count값 1 감소	
 				result = couponInfoService.couponCount(couponInfoVO.getNum());

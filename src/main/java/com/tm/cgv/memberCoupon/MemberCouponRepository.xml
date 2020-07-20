@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where uid=#{uid} and couponInfoNum=#{couponInfoNum}
 	</update>
 	
-	<insert id="membercouponInsert" parameterType="MemberCouponVO">
+	<insert id="memberCouponInsert" parameterType="MemberCouponVO">
 		insert into memberCoupon values(0,#{uid},#{couponInfoNum},null)
 	</insert>
 	

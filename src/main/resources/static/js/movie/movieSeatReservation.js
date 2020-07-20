@@ -54,10 +54,10 @@
 		}else{
 			commonCount = preCommon;
 		}
-		
 		seatCountListMake();
-		
 		personCheck();
+		
+		priceCount();
 	});
 	
 	//청소년 인원 수 선택
@@ -78,6 +78,8 @@
 			teenagerCount = preTeenager;
 		}
 		personCheck();
+		
+		priceCount();
 	});
 	
 	//우대 인원 수 선택
@@ -99,6 +101,8 @@
 			preferenceCount = prePreference;
 		}
 		personCheck();
+		
+		priceCount();
 	});
 	
 	
@@ -148,6 +152,7 @@
 			list.push("우대 "+sNum+"명")
 		}
 		$(".row.number .data").text(list.join(","));
+		
 	}
 	
 	
@@ -487,6 +492,12 @@
 		common_standard *= 1;
 		teenager_standard *= 1;
 		
+		//극장별 관람가격이 등록 안되어있을시 
+		if(common_standard == 0 && teenager_standard == 0){
+			common_standard = 7000;
+			teenager_standard = 6000;
+		}
+		
 		//일반일때 계산
 		if(amountCommon > 0){
 			amountCommon = amountCommon - num;
@@ -568,7 +579,11 @@
 	
 	
 	function priceCount(){
-		console.log("aaaa")
+		$(".row.payment-adult").css("display","none");
+		$(".row.payment-youth").css("display","none"); 
+		$(".row.payment-special").css("display","none"); 
+		$(".row.payment-final").css("display","none"); 
+		
 		for(i=0;i<selectedSeatGrade.length;i++){
 			if(selectedSeatGrade[i] == 1){ //Economy
 				eachGradePayment(1,1)

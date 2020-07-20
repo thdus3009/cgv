@@ -92,12 +92,14 @@
 						
 						sTime = result[i].morning.replace(/:/gi,",");
 						eTime = result[i].night.replace(/:/gi,",");
-						
+
 						list.push(sTime);
 						list.push(eTime);
+						list.push(result[i].filmType);
 						
 						timeLimitList.push(list);
 					}
+					
 				}
 			});
 		}
@@ -376,36 +378,32 @@ function timeMake(result){
 	});
 	
 	
-	
-
 	//result[i].movieTimeVOs[0].screenTime 가  조조/심야 시간일때 CSS 부여 morning /night
 	var morningEndTime = ""; //조조 마무리 시간(10:00 or 11:00)
 	var nightStartTime = ""; //심야 시작 시간(23:01 or 00:01) => 00:01분은 비교를 위해 24:01분으로 변경해야됨(반대일수도..)
 	
 	//위 처럼 만드는 시간이 심야 또는 조조이면 addClass로 클래스 추가 해주면 끝 
 	$(".time-list ul li").each(function(){
+		//영화, 극장, 날짜의 조건에 해당하는 시간대 
 		var timeList =  $(this).data("time").split(":");
 		var filmType = $(this).parent().parent().data("name");
-		//filmType에 따라서 맞는 list의 값을 사용
+		
 		//1, 2, 4 일대 구분 - timeLimitList(읽어온 조조/심야 시간값 존재)
+		//하나의 시간대에 대하여서 filmType이 맞는 timLimitList의 조조/심야값 매칭해야됨
 		
 		var morning;
 		var night;
+		var index = 0;
 		
-		switch (filmType) {
-		case 1: 
-			morning = timeLimitList[0][0];
-			night = timeLimitList[0][1];
-			break;
-		case 2:	
-			morning = timeLimitList[0][0];
-			night = timeLimitList[0][1];
-			break;
-		case 4:
-			morning = timeLimitList[0][0];
-			night = timeLimitList[0][1];
-			break;
+		for(i=0;i<timeLimitList.length;i++){
+			if(timeLimitList[i][2] == filmType){
+				index = i;
+			}
 		}
+		
+		morning = timeLimitList[index][0];
+		night = timeLimitList[index][1];
+		
 		morningList = morning.split(",");
 		nightList = night.split(",");
 		
@@ -413,22 +411,25 @@ function timeMake(result){
 		var t2 = new Date(0,0,0,nightList[0],nightList[1]); //심야
 		var t3 = new Date(0,0,0,timeList[0],timeList[1]); //비교시간
 		
+		
 		//비교시간이 10 > x || 23 < x
-		if(timeList[0] > 23){
+		//if(timeList[0] > 23){
+		if(t3 > t2){
 			//심야
-			var gap = t3.getTime() - t2.getTime();
-			var hh_gap = Math.floor(gap/1000/60/60);
-			
-			if(hh_gap <= 0){
-				$(this).addClass("night");
-			}
-		}else if(timeList[0] < 11){
+//			var gap = t3.getTime() - t2.getTime();
+//			var hh_gap = Math.floor(gap/1000/60/60);
+//			if(hh_gap <= 0){
+//				$(this).addClass("night");
+//			}
+			$(this).addClass("night");
+		}else if(t3 < t1){
 			//조조
-			var gap = t1.getTime() - t3.getTime();
-			var hh_gap = Math.floor(gap/1000/60/60);
-			if(hh_gap > 0){
-				$(this).addClass("morning");
-			}
+//			var gap = t1.getTime() - t3.getTime();
+//			var hh_gap = Math.floor(gap/1000/60/60);
+//			if(hh_gap > 0){
+//				$(this).addClass("morning");
+//			}
+			$(this).addClass("morning");
 		}
 		
 	});
@@ -708,10 +709,10 @@ $("#movie-list-content").scroll(function () {
 
 		
 	
-//menu tab클리하여 ajax로 값 변경(정렬 방법 선택)
+
+//영화 정렬 방법 선택 
 $(".btn-rank").click(function(){
 	$.get("./movieListSort?kind=rate",function(result){
-		console.log(result);
 		$("#movie-list-content").html(result);
 	});
 });

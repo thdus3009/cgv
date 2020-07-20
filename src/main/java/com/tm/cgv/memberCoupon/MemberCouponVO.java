@@ -16,7 +16,7 @@ public class MemberCouponVO {
 	private String uid;
 	private int couponInfoNum;
 	private String deleteAt;
+	
 	private String kind;
-
 	private CouponInfoVO couponInfoVO;
 }

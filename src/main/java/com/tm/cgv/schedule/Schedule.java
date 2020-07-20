@@ -115,7 +115,7 @@ public class Schedule {
 		reservationVO.setCreateAt(nowDate);
 		List<ReservationVO> reservationList = reservationService.pointAccumlate(reservationVO);
 		
-		//할인율 읽어와야됨 - redies
+		//할인율 읽어와야됨 - redis
 		Integer rate = (Integer)redisTemplate.opsForValue().get("cjDiscountRate");
 		double changeRate = rate*0.01;
 		

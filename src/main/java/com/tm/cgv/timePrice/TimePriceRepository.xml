@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="searchLimit" parameterType="TimePriceVO" resultType="TimePriceVO">
-		select min(eTime) as morning,max(eTime) as night,filmType from timePrice where cinemaNum = #{cinemaNum} group by filmType order by filmType
+		select min(eTime) as morning,max(eTime) as night,filmType from timePrice where cinemaNum = #{cinemaNum} and eTime <![CDATA[<=]]> '24:01:00' group by filmType order by filmType
 	</select>
 	
 	<insert id="timePriceInsert" parameterType="TimePriceVO">
