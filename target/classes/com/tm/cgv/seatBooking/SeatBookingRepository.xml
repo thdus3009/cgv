@@ -22,7 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select seatNum from seatBooking where seatNum=#{seatNum}
  	</select>
 
-
 	<insert id="insertReservationNum" parameterType="SeatBookingVO">
 		insert into seatBooking (seatNum, movieTimeNum, reservationNum) values(#{seatNum}, #{movieTimeNum}, #{reservationNum}) 
 	</insert>
@@ -48,5 +47,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM seatBooking WHERE movieTimeNum = #{movieTimeNum} 
 	</delete>
 	
-
 </mapper>

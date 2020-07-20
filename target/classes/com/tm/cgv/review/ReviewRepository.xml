@@ -18,9 +18,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left join (select * from movieImage where type=1) I
 		on(M.movieNum = I.movieNum))) RE left join 
 		(select reservationNum, createAt, egg from review where createAt is not null and deleteAt is null) RW 
-		on(RE.num = RW.reservationNum)) order by RE.num desc
+		on(RE.num = RW.reservationNum)) where RE.screenDate<![CDATA[<=]]>now() order by RE.num desc
         limit #{pager.startRow},#{pager.perPage}
    </select>
+   
+   	<select id="search_Count" resultType="Integer">
+	    select count(T.screenDate) from 
+		(reservation R inner join movieTime T on (R.movieTimeNum = T.num)) 
+		where R.uid=#{uid} and T.screenDate<![CDATA[<=]]>now()
+    </select> 
+	<!--    
+	<select id="search_Count" resultType="Integer"> 총 영화예매건수 확인
+      select count(*) as count from reservation where uid=#{uid} and deleteAt is null
+    </select> -->
+   
    
    <insert id="review_Write1" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
       insert into review (reservationNum,contents,like1,egg,charmPoint,emotionPoint,createAt,spoiler,swearword) 
@@ -69,11 +80,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       where R.createAt is not null and R.deleteAt is null
       ORDER BY R.createAt desc, R.reservationNum desc) R where uid=#{uid}
    </select>
-   
-   <select id="search_Count" resultType="Integer"> <!-- 총 영화예매건수 확인 -->
-      select count(*) as count from reservation where uid=#{uid} and deleteAt is null
-   </select>
-   
    <update id="review_Update1" parameterType="ReviewVO" useGeneratedKeys="true" keyProperty="num">
       UPDATE review
       SET contents=#{contents},egg=#{egg}
@@ -264,7 +270,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       where createAt is not null and deleteAt is null 
       and (spoiler<![CDATA[>]]>0 or swearword<![CDATA[>]]>0) and reservationNum=#{reservationNum}
    </update>
-   
+
    
    <select id="reviewDiary" parameterType="String" resultType="ReviewVO">
    		select M.*, I.fileName from
@@ -276,7 +282,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join (select num, title, titleEng from movieInfo) I
 		on(R.movieNum = I.num)))M left join (select * from movieTime where deleteAt is null) T on(M.movieTimeNum = T.num))) M 
 		left join (select * from movieImage where type=1) I
-		on(M.movieNum = I.movieNum)) order by M.num desc
+		on(M.movieNum = I.movieNum)) where M.screenDate<![CDATA[<=]]>now() order by M.num desc
    </select>
    
    <insert id="reviewDiary_Write" parameterType="ReviewVO">

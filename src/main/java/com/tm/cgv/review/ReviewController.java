@@ -212,8 +212,9 @@ public class ReviewController {
 //   -------------------------------------------------------------------------------------movieSelect
    
    @GetMapping("movieSelect2")
-   public ModelAndView movieSelect2(int movieNum,Long curPage, Pager_movieSelect pager)throws Exception {
-      //reviewLook에서 파라미터 끌어다 쓰는거 찾아보기(movieList.jsp, MovieInfoController.java 참고)
+   public ModelAndView movieSelect2( int movieNum,Long curPage, Pager_movieSelect pager)throws Exception {
+	   
+	   //reviewLook에서 파라미터 끌어다 쓰는거 찾아보기(movieList.jsp, MovieInfoController.java 참고)
       System.out.println("movieNum?? "+movieNum);
       System.out.println("curPage?? "+curPage);
       pager.setCurPage(curPage);

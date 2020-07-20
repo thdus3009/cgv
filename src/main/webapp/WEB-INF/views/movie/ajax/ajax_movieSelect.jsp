@@ -30,25 +30,30 @@
                   <!-- 신고 -->
                   
                   <li style="position: absolute; left: 322px; top:-74px;">
-                     <a href="javascript:void(0);" class="ico btn_notify" data-reservation="${vo2.reservationNum}" style="background: url('../images/ico_btn_edit.png') no-repeat 50% 50%;">스포일러, 욕설/비방 신고</a>
-                     
-                     <div class="notify_wrap" id="btn${vo2.reservationNum}" style="background: url('../images/br_bg_l.png'); no-repeat -2px 0;">
-                        <ul>
-                           <li class="lii1" data-reservation="${vo2.reservationNum}">
-                              <a href="javascript:return false;" class="ico ico_spoiler" data-commentidx="30178866" data-ismyspoiler="false" data-spoilercnt="0" 
-                              style="background: url('../images/accusation/ico_spoiler.png') no-repeat 2px 0px;">
-                                 <span style="font-size: small; padding-left: 22px;">스포일러 신고</span>
-                              </a>
-                           </li>
-                           <li class="lii2" data-reservation="${vo2.reservationNum}">
-                              <a href="javascript:return false;" class="ico ico_swearword" data-commentidx="30178866" data-ismyspoiler="false" data-spoilercnt="0" 
-                              style="background: url('../images/accusation/ico_swearword.png') no-repeat 15px 1px;">
-                                 <span style="padding-left: 35px; font-size: small;">욕설/비방 신고</span>
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                     
+                 
+	                     <a href="javascript:void(0);" class="ico btn_notify" data-reservation="${vo2.reservationNum}" style="background: url('../images/ico_btn_edit.png') no-repeat 50% 50%;">스포일러, 욕설/비방 신고</a>
+	                     
+	                     <div class="notify_wrap" id="btn${vo2.reservationNum}" style="background: url('../images/br_bg_l.png'); no-repeat -2px 0;">
+	                        <ul>
+	                           <li class="lii1" data-reservation="${vo2.reservationNum}">
+	                              <a href="javascript:return false;" class="ico ico_spoiler" data-commentidx="30178866" data-ismyspoiler="false" data-spoilercnt="0" 
+	                              style="background: url('../images/accusation/ico_spoiler.png') no-repeat 2px 0px;">
+	                                 <span style="font-size: small; padding-left: 22px;">스포일러 신고</span>
+	                              </a>
+	                           </li>
+	                           <li class="lii2" data-reservation="${vo2.reservationNum}">
+	                              <a href="javascript:return false;" class="ico ico_swearword" data-commentidx="30178866" data-ismyspoiler="false" data-spoilercnt="0" 
+	                              style="background: url('../images/accusation/ico_swearword.png') no-repeat 15px 1px;">
+	                                 <span style="padding-left: 35px; font-size: small;">욕설/비방 신고</span>
+	                              </a>
+	                           </li>
+	                        </ul>
+	                     </div>
+         
+                  
+                  <c:if test="">
+                  		f
+                  </c:if>  
                   </li>
             </ul>
             
