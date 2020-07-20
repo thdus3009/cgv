@@ -101,10 +101,8 @@
 										<td class="ate-center">
 											<img alt="" src="/images/banner/sideBanner/${vo.fileName}" style="height:120px;">
 										</td>
-										<td class="ate-center">
-											<a href="../event/eventSelect?num=${vo.num}">${vo.title}</a>
-										</td>
-										<td class="ate-center">${vo.link}</td>
+										<td class="ate-center">${vo.title}</td>
+										<td class="ate-center"><a href="${vo.link}">${vo.link}</a></td>
 										<td class="ate-center">${vo.startDate}</td>
 										<td class="ate-center endDate">${vo.endDate}</td>
 										<td>
