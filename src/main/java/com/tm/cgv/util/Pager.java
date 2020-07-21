@@ -96,8 +96,6 @@ public class Pager {
 		return perPage;
 	}
 	public void setPerPage(Integer perPage) {
-		System.out.println("aaaa: "+perPage);
-		
 		this.perPage = perPage;
 	}
 	public long getCurBlock() {
