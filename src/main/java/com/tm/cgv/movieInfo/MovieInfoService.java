@@ -45,14 +45,10 @@ public class MovieInfoService {
 	
 	@Value("${board.movieInfo.filePath}")
 	private String filePath;
-	
-	
-	
-	
+		
 	public MovieInfoVO movieSelectOne(int num) throws Exception{
 		return movieInfoRepository.movieSelectOne(num);
-	}
-	
+	}	
 	
 	public List<MovieInfoVO> movieListAll(MovieInfoVO movieVO) throws Exception{
 		return movieInfoRepository.movieListAll(movieVO);
@@ -91,8 +87,7 @@ public class MovieInfoService {
 		String extendPath = FilePathGenerator.addTimePath(filePath);
 	    File file = filePathGenerator.getUseClassPathResource(extendPath);
 	    
-		//테이블에 넣어
-		
+
 		long result = movieInfoRepository.movieWrite(movieInfoVO);
 		// 포스터 이미지, 트레일러 영상 이미지들
 		System.out.println("======================================");
@@ -180,8 +175,8 @@ public class MovieInfoService {
 			
 		}
 		
-			double total2 = Double.valueOf(total);//==null?0.0:Double.valueOf(total)
-			double good2 = Double.valueOf(good);//==null?0.0:Double.valueOf(good);
+		double total2 = Double.valueOf(total);//==null?0.0:Double.valueOf(total)
+		double good2 = Double.valueOf(good);//==null?0.0:Double.valueOf(good);
 		
 		
 		if(total2>0) { //작성된 리뷰가 1개 이상일 경우 계산해서 errRate를 업데이트
@@ -268,8 +263,7 @@ public class MovieInfoService {
 		
 		BitFuction2 bb2 = new BitFuction2();
 		List<Integer> emotion = bb2.getState2(values2);
- 		
-		
+ 				
 		//===관객수======
 		 Map<String, Object> mapV=null;
 		 int visitor=0;
@@ -308,10 +302,9 @@ public class MovieInfoService {
 			long sco = (long)maps.get("cs");
 			System.out.println(sco +" : sco");	
 			
-		//=============
+		//=====================
 		Map<String, Object> g = new HashMap<>();
 		
-		/* movieInfoVO = movieInfoRepository.movieSelect(movieInfoVO); */
 		movieInfoVO=movieInfoRepository.mSelect(movieInfoVO);
 		List<MovieImageVO> ar = movieInfoRepository.mSelect2(movieImageVO);
 		
@@ -415,10 +408,7 @@ public class MovieInfoService {
 			movieImageVO.setOriginName(tmp.getOriginalFilename());
 			result = movieImageRepository.movieImageInsert(movieImageVO);
 		}
-			
-			
-			
-			
+				
 		return result;
 		
 	}
@@ -436,10 +426,11 @@ public class MovieInfoService {
 		int result = fileManager.deleteFile(movieImageVO.getFileName(), dest);
 		return result;
 	}
-	
+	//제목 중복 체크
 	public MovieInfoVO titleCheck(MovieInfoVO movieInfoVO) throws Exception{
 		return movieInfoRepository.titleCheck(movieInfoVO);
 	}
+	// 영문 제목 중복 체크
 	public MovieInfoVO titleEngCheck(MovieInfoVO movieInfoVO) throws Exception{
 		return movieInfoRepository.titleEngCheck(movieInfoVO);
 	}

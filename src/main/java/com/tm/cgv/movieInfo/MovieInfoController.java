@@ -57,10 +57,7 @@ public class MovieInfoController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<MovieInfoVO> list =  movieInfoService.movieList(pager);
-		
-		//System.out.println(list.get(2).getMovieImageVOs().getFileName()+"이거");
-		System.out.println();
-		
+				
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.setViewName("movie/movieList");
@@ -121,8 +118,7 @@ public class MovieInfoController {
 		return mv;
 	}
 	
-	
-	
+
 	
 	@GetMapping("movieWrite")
 	public ModelAndView movieWrite(ModelAndView mv)throws Exception{
@@ -153,17 +149,12 @@ public class MovieInfoController {
 	public ModelAndView movieSelect(MovieInfoVO movieInfoVO,ReservationVO reservationVO,int num,MovieImageVO movieImageVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 
-
 		reservationVO.setMovieNum(num);
 		System.out.println(reservationVO.getMovieNum()+"con");
 		
 		movieImageVO.setMovieNum(num);
 		System.out.println(movieImageVO.getMovieNum()+"이거도 나와야해...");
-		//reservationVO.setReviewVOs(reviewVOs);
-		//reservationVO.setTotal(total);
-		//System.out.println(reservationVO.getTotal());
-		
-		
+	
 		Map<String, Object> map = movieInfoService.movieSelect(movieInfoVO,reservationVO,movieImageVO);
 		if(map.get("vo")==null) {
 			mv.setViewName("redirect:../error/404");
@@ -198,27 +189,6 @@ public class MovieInfoController {
 		mv.setViewName("movie/movieSelect");
 		return mv;
 	}
-	/*
-	@GetMapping("movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MovieInfoVO movieInfoVO,ReservationVO reservationVO,MovieImageVO movieImageVO)throws Exception{
-		movieInfoVO = (MovieInfoVO)movieInfoService.movieSelect(movieInfoVO,reservationVO,movieImageVO);
-		
-		mv.addObject("vo",movieInfoVO);
-		mv.addObject("path","Update");
-		mv.setViewName("movie/movieWrite");
-		return mv;
-	}
-	
-	@PostMapping("movieUpdate")
-	public ModelAndView movieUpdate(ModelAndView mv,MultipartFile files,String videolink,MovieInfoVO movieInfoVO) throws Exception{
-		long result = movieInfoService.movieUpdate(movieInfoVO, files, videolink);
-		
-		System.out.println("5555"+movieInfoVO.getNum());
-		
-		mv.setViewName("redirect:./movieList");
-		
-		return mv;
-	}*/
 	
 	@GetMapping("movieDelete")
 	public ModelAndView movieDelete(ModelAndView mv,MovieInfoVO movieInfoVO) throws Exception{

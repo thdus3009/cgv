@@ -224,9 +224,7 @@ public class AdminController {
 			mv.setViewName("redirect:../error/404");
 		}
 		System.out.println(map.get("tco")+"tco 출력");
-		
-		//select 에서 예매율, 리뷰 없어도...
-		
+						
 		mv.addObject("vo",map.get("vo"));//정보+사진
 		mv.addObject("ar",map.get("ar"));//사진+영상링크
 		
