@@ -1,163 +1,226 @@
 
 	
-		var title ="";
-		var theater = "";
-		var date = "";
-		var time="";
-		var kind="";
-		var movieNum;
-		
+var title ="";
+var theater = "";
+var date = "";
+var time="";
+var kind="";
+var movieNum;
+
 	
-		//class selected값 변경
-		$(".sortmenu a").click(function() {
-			$(".sortmenu a").removeClass("selected");
-			$(this).addClass("selected");
-		});
+//class selected값 변경
+$(".sortmenu a").click(function() {
+	$(".sortmenu a").removeClass("selected");
+	$(this).addClass("selected");
+});
 		
-		//영화제목 선택  =영화 이미지, 제목, 연령제한
-		$(".movie-list").on("click","#movie-list-content li",function() {
-			if($(this).hasClass("dimmed") === true){
-				alert("선택할수 없습니다.");
-				//다른것으로 변경할 것인지에 대한 알림창 출력해야 됨
-			}else{
-				$("#movie-list-content li").removeClass("selected");
-				$(this).addClass("selected");
-					
-				$("#select_title").text($(this).data("title"));
-				$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
-				$("#select_ageLimit").text($(this).data("age_limit"));
-				$("#movieNum").val($(this).data("index"));
-				title = $(this).data("title");
-				movieNum = $(this).data("index");
-					
-				$(".movie_poster img").css("display","inline");
-				$(".movie_title").css("display","block");
-				$(".movie .placeholder").css("display","none");
-				
-				//ajax
-				ajaxLoad();
-			}
-		});
-		
-		
-		//지역선택
-		$(".theater-area-list > ul > li").click(function(){
-			$(".theater-area-list > ul > li").removeClass("selected");
-			$(this).addClass("selected");
-		});
-		
-		
-		
-		//극장 선택
-		$(".theater-list").on("click",".area_theater_list > ul > li",function(){
+//영화제목 선택  =영화 이미지, 제목, 연령제한
+$(".movie-list").on("click","#movie-list-content li",function() {
+	var titleChecked = false;
 
-			if($(this).hasClass("dimmed") === true){
-				alert("선택할수 없습니다.");
-			}else{
-				$(".area_theater_list li").removeClass("selected");
-				$(this).addClass("selected");
-				theater = $(this).data("theater");
-				$("#cinemaName").val(theater);
-
-				$("#select_cinema").text($(this).data("theater"));
-				$(".row.name").css("display","block");
-				$(".row.date").css("display","block");
-				$(".row.screen").css("display","block");
-				$(".row.number").css("display","block");
-				$(".info.theater .placeholder").css("display","none");
-
-				//ajax
-				ajaxLoad();
-				
-				var selected_cinema = $(this).data("num");
-				$("#cinemaNum").val(selected_cinema);
-				
-				//해당 극장의 조조,심야 시간 조회 - ajax
-				search_time_limit(selected_cinema);
-
-			}
-		});
-		var sTimeList;
-		var eTimeList;
-		var timeLimitList = [];
-		
-		//해당극장의 조조,심야시간 구해오기
-		function search_time_limit(selected_cinema){
+	if($(this).hasClass("dimmed") === true){
+		//alert("선택할수 없습니다.");
+		//다른것으로 변경할 것인지에 대한 알림창 출력해야 됨
+		if(confirm('선택한 영화에 원하는 상영스케줄이 없습니다.\n계속하시겠습니까?(선택한 날짜 및 극장이 해제 됩니다.)')){
+			titleChecked = true;
 			
-			$.ajax({
-				url : '../timePrice/searchLimit',
-				type : 'get',
-				data : {
-					cinemaNum : selected_cinema
-				},
-				success : function(result){
-					for(i=0;i<result.length;i++){
-						var list = [];
-						
-						sTime = result[i].morning.replace(/:/gi,",");
-						eTime = result[i].night.replace(/:/gi,",");
-
-						list.push(sTime);
-						list.push(eTime);
-						list.push(result[i].filmType);
-						
-						timeLimitList.push(list);
-					}
-					
-				}
-			});
+			theaterReset();
+			dateReset();
 		}
-		
-		
-		
+	}else{
+		titleChecked = true;
+	}
 
-		// 날짜 토,일 CSS 적용
-		$(".date-list ul li.day").each(function(){
-			if($(this).data("week") == '토'){
-				$(this).addClass("day-sat");
-				
-			}else if($(this).data("week") == '일'){
-				$(this).addClass("day-sun");
+	if(titleChecked){
+		$("#movie-list-content li").removeClass("selected");
+		$(this).addClass("selected");
+
+		$("#select_title").text($(this).data("title"));
+		$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
+		$("#select_ageLimit").text($(this).data("age_limit"));
+		$("#movieNum").val($(this).data("index"));
+		title = $(this).data("title");
+		movieNum = $(this).data("index");
+
+		$(".movie_poster img").css("display","inline");
+		$(".movie_title").css("display","block");
+		$(".movie .placeholder").css("display","none");
+
+		console.log("title: "+title);
+		console.log("theater: "+theater);
+		console.log("date: "+date);
+		//ajax
+		ajaxLoad();
+	}
+});
+		
+		
+//지역선택
+$(".theater-area-list > ul > li").click(function(){
+	$(".theater-area-list > ul > li").removeClass("selected");
+	$(this).addClass("selected");
+});
+		
+		
+		
+//극장 선택
+$(".theater-list").on("click",".area_theater_list > ul > li",function(){
+	var theaterChecked = false;
+	if($(this).hasClass("dimmed") === true){
+		//alert("선택할수 없습니다.");
+		if(confirm('선택한 극장에 원하는 상영스케줄이 없습니다.\n계속하시겠습니까?(선택한 영화 및 날짜가 해제 됩니다.)')){
+			theaterChecked = true;
+			movieReset();
+			dateReset();
+		}
+	}else{
+		theaterChecked = true;
+	}
+	
+	if(theaterChecked){
+		$(".area_theater_list li").removeClass("selected");
+		$(this).addClass("selected");
+		theater = $(this).data("theater");
+		$("#cinemaName").val(theater);
+
+		$("#select_cinema").text($(this).data("theater"));
+		$(".row.name").css("display","block");
+		$(".row.date").css("display","block");
+		$(".row.screen").css("display","block");
+		$(".row.number").css("display","block");
+		$(".info.theater .placeholder").css("display","none");
+		
+		console.log("title: "+title);
+		console.log("theater: "+theater);
+		console.log("date: "+date);
+		//ajax
+		ajaxLoad();
+
+		var selected_cinema = $(this).data("num");
+		$("#cinemaNum").val(selected_cinema);
+
+		//해당 극장의 조조,심야 시간 조회 - ajax
+		//search_time_limit(selected_cinema);
+	}
+});
+		
+var sTimeList;
+var eTimeList;
+var timeLimitList = [];
+
+//해당극장의 조조,심야시간 구해오기
+function search_time_limit(selected_cinema){
+	$.ajax({
+		url : '../timePrice/searchLimit',
+		type : 'get',
+		data : {
+			cinemaNum : selected_cinema
+		},
+		success : function(result){
+			for(i=0;i<result.length;i++){
+				var list = [];
+
+				sTime = result[i].morning.replace(/:/gi,",");
+				eTime = result[i].night.replace(/:/gi,",");
+
+				list.push(sTime);
+				list.push(eTime);
+				list.push(result[i].filmType);
+
+				timeLimitList.push(list);
 			}
-		});
 
-
-
-		//날짜 선택
-		$(".date-list ul li.day").click(function(){
-			if($(this).hasClass("dimmed") === true){
-				alert("선택할수 없습니다.");
-			}else{
-				$(".date-list ul li.day").removeClass("selected");
-				$(this).addClass("selected");
-				var str = $(this).data("year")+"."+$(this).data("month")+"."+$(this).data("date")+"("+$(this).data("week")+")";
-
-				$("#sDate").val(str)
-				$("#select_day").text(str);
-				var sYear = $(this).data("year");
-				var sMonth = $(this).data("month")+"";
-				var sDate = $(this).data("date")+"";
-
-				if(sMonth.length == 1){
-					sMonth = "0"+sMonth;
-				}
-				if(sDate.length == 1){
-					sDate = "0"+sDate;
-				}
-				date = sYear+"-"+sMonth+"-"+sDate;
-
-				$(".row.name").css("display","block");
-				$(".row.date").css("display","block");
-				$(".row.screen").css("display","block");
-				$(".row.number").css("display","block");
-				$(".info.theater .placeholder").css("display","none");
-
-				//ajax
-				ajaxLoad();
-			}
-		});
-
+		}
+	});
+}
 		
+		
+		
+
+// 날짜 토,일 CSS 적용
+$(".date-list ul li.day").each(function(){
+	if($(this).data("week") == '토'){
+		$(this).addClass("day-sat");
+
+	}else if($(this).data("week") == '일'){
+		$(this).addClass("day-sun");
+	}
+});
+
+
+
+//날짜 선택
+$(".date-list ul li.day").click(function(){
+	var dateChecked = false;
+	if($(this).hasClass("dimmed") === true){
+		//alert("선택할수 없습니다.");
+		if(confirm('선택한 날짜에 원하는 상영스케줄이 없습니다.\n계속하시겠습니까?(선택한 영화 및 극장이 해제 됩니다.)')){
+			dateChecked = true;
+
+			movieReset();
+			theaterReset();
+		}
+	}else{
+		dateChecked = true;
+	}
+	if(dateChecked){
+		$(".date-list ul li.day").removeClass("selected");
+		$(this).addClass("selected");
+		var str = $(this).data("year")+"."+$(this).data("month")+"."+$(this).data("date")+"("+$(this).data("week")+")";
+
+		$("#sDate").val(str)
+		$("#select_day").text(str);
+		var sYear = $(this).data("year");
+		var sMonth = $(this).data("month")+"";
+		var sDate = $(this).data("date")+"";
+
+		if(sMonth.length == 1){
+			sMonth = "0"+sMonth;
+		}
+		if(sDate.length == 1){
+			sDate = "0"+sDate;
+		}
+		date = sYear+"-"+sMonth+"-"+sDate;
+
+		$(".row.name").css("display","block");
+		$(".row.date").css("display","block");
+		$(".row.screen").css("display","block");
+		$(".row.number").css("display","block");
+		$(".info.theater .placeholder").css("display","none");
+
+		//ajax
+		ajaxLoad();
+	}
+});
+		
+//영화 선택 초기화
+function movieReset(){
+	movieNum = 0;
+	$("#movie-list-content li").removeClass("selected");
+	$(".movie_poster img").css("display","none");
+	$(".movie_title").css("display","none");
+}
+
+//극장 선택 초기화
+function theaterReset(){
+	theater = "";
+	$(".area_theater_list li").removeClass("selected");
+	$(".row.name").css("display","none");
+	$(".row.date").css("display","none");
+	$(".row.screen").css("display","none");
+	$(".row.number").css("display","none");
+}
+
+//날짜 선택 초기화
+function dateReset(){
+	date = "";
+	$(".date-list ul li.day").removeClass("selected");
+	$(".row.name").css("display","none");
+	$(".row.date").css("display","none");
+	$(".row.screen").css("display","none");
+	$(".row.number").css("display","none");
+}
+
 		
 function ajaxLoad(){
 	//영화관 값 출력
@@ -766,15 +829,6 @@ function movieSort(num){
 
 	});
 }
-
-
-
-function removeComma(str)
-{
-	n = parseInt(str.replace(/,/g,""));
-	return n;
-}
-
 
 
 
