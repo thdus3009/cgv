@@ -140,8 +140,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	values(#{num},#{title},#{titleEng},#{runtime},#{director},#{actor},#{ganre},#{ageLimit},#{country},#{openDate},#{contents},0,0.0,100.0,#{createAt})
  	 </insert>
  	 <!-- =========================================================================== -->
- 	 
-
  	 <!-- 정보랑 사진 -->
  	 <select id="mSelect" parameterType="MovieInfoVO" resultMap="listResult">
  	 	select MM.*,MK.* from
@@ -160,10 +158,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on(MI.num=MV.movieImageNum)
 		where MI.movieNum=#{movieNum} and type != 1
  	 </select>
- 	  
+ 	 <!-- 트레일러 카운트 갯수 -->
  	<select id="tco"  parameterType="MovieImageVO" resultType="java.util.Map">
  		SELECT COUNT(num)as cc FROM movieImage WHERE movieNum=#{movieNum} and type = 2;
  	</select>
+ 	 <!-- 스틸컷 카운트 갯수 -->
  	<select id="sco"  parameterType="MovieImageVO" resultType="java.util.Map">
  		SELECT COUNT(num)as cs FROM movieImage WHERE movieNum=#{movieNum} and type = 3;
  	</select>
@@ -282,11 +281,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose> 
 		LIMIT #{startRow},#{perPage}
  	</select>
- 	
+ 	<!-- 제목 중복체크 -->
  	<select id="titleCheck" parameterType="MovieInfoVO" resultType="MovieInfoVO">
  		select * from movieInfo where title=#{title} and deleteAt is null;
  	</select>
- 	
+ 	<!-- 영문 제목 중복체크 -->
  	<select id="titleEngCheck" parameterType="MovieInfoVO" resultType="MovieInfoVO">
  		select * from movieInfo where titleEng=#{titleEng} and deleteAt is null;
  	</select>
