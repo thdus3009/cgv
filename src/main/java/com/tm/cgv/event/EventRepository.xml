@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		) as E
 		left join eventImage I
 		on E.num = I.eventNum
-		where I.type=0 and endDate>=now()
+		where I.type=0 and now()>=startDate and endDate>=now()
 		order by E.num desc limit #{startRow},#{perPage}
 	</select>
 	

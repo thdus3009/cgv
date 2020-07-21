@@ -121,9 +121,6 @@
 							</div>
 						</div>
 					</form>
-					<c:if test="${path eq 'Update'}">
-						<button type="button" id="btn_delete" value="${vo.num}">Delete</button>
-					</c:if>	 
 				</div>
 			</main>
 

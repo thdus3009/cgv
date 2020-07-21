@@ -13,8 +13,6 @@ public interface SeatRepository {
 	
 	public int theaterSelect() throws Exception;
 	
-
-	
 	public List<SeatVO> seatSelectList(SeatVO seatVO) throws Exception;
 	
 	public List<SeatVO> rowCount(SeatVO seatVO) throws Exception;

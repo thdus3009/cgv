@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<c:import url="../template/head.jsp"></c:import> 
-<link href="/css/admin/cinema/cinemaList.css" rel="stylesheet" />
-<link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
-<link href="/css/styles.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<c:import url="../template/head.jsp"></c:import> 
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
-		<c:import url="../template/header.jsp"></c:import> 
-        <div id="layoutSidenav">
-            <c:import url="../template/sidenav.jsp"></c:import>
-            <div id="layoutSidenav_content">
+	<c:import url="../template/header.jsp"></c:import> 
+    <div id="layoutSidenav">
+	<c:import url="../template/sidenav.jsp"></c:import>
+		<div id="layoutSidenav_content">
+		<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<div class="container-fluid">
 					<h1>Theater Update</h1>
@@ -130,12 +130,11 @@
 							<br>
 							<label for="seatCount">SeatCount:</label>
 	 						<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}">
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<span id="btn_insert2"  class="btn btn_mo">수정</span>
+							
+							<div class="btn_s">
+								<input type="button" id="btn_insert2" class="btn btn-default"
+									value="수정" style="background-color: #eff2f8;">
+							</div>
 						</div>
 					</form>
 
