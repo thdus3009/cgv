@@ -105,7 +105,7 @@
 						</c:forEach>
 					
 					</ol>
-					<!--  
+					  
 					<div class="sect-movie-chart" id="list-more"></div>
 					
 					
@@ -124,39 +124,20 @@
 								</dd>
 							</dl>
 						</div>
-					</div>-->
+					</div>
 				</div>
 			
 				<!----------------------------------------------------------------------------------------------------- contents detail paging-->
-						<div class="paging" style="position: relative;">
-							
-							<%-- <c:if test="${pager.curBlock gt 1}">
-								<button id="btn-first" type="button" class="btn_page first"></button>
-								<button id="btn-pre" type="button" class="btn_page pre">이전</button>
-							</c:if>
-						
-							<ul>
-<!-- 							<li class="on"><a href="#">1</a></li> -->
-								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				
-									<li><a href="./movieSearch?curPage=${i}&search=${pager.search}">${i}</a></li>
-				
-								</c:forEach>
-				
-							</ul>
-							<c:if test="${pager.curBlock lt pager.totalBlock}">
-								<button id="btn-next" type="button" class="btn_page next">다음</button>
-								<button id="btn-end" type="button" class="btn_page end">끝</button>
-							</c:if> --%>
+						<div class="paging" style="position: relative; margin-left: 450px;">
 							
 							<ul class="pagination">
 
 								<c:if test="${pager.curBlock gt 1}">
 									<li><a href="./movieSearch?curPage=${pager.startNum-1}&search=${pager.search}" class="custompager page-link" title="${pager.startNum-1}">이전</a></li>
 								</c:if>
-
+								
 								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="p">
-									<li class="page-item"><a href="./movieSearch?curPage=${p}&search=${pager.search}" class="page-link" title="${p}">${p}</a></li>
+									<li class="page-item"><a href="./movieSearch?curPage=${p}&search=${pager.search}" class="page-link" title="${p}"><strong>${p}</strong></a></li>
 								</c:forEach>
 
 								<c:if test="${pager.curBlock<pager.totalBlock}">
