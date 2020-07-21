@@ -14,7 +14,7 @@
 			
 			deleteImage.push(s.attr('id'));
 			
-			$("#fo").append('<input type="text" name="delNum" value="'+ deleteImage[deleteImage.length-1] +'">');
+			$("#fo").append('<input type="hidden" name="delNum" value="'+ deleteImage[deleteImage.length-1] +'">');
 			
 			
 			}
