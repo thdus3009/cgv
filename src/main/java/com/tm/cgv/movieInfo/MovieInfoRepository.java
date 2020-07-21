@@ -59,4 +59,5 @@ public interface MovieInfoRepository {
 	public int forMovieTimeInsertCount(Pager pager) throws Exception;
 	
 	public MovieInfoVO titleCheck(MovieInfoVO movieInfoVO) throws Exception;
+	public MovieInfoVO titleEngCheck(MovieInfoVO movieInfoVO) throws Exception;
  }

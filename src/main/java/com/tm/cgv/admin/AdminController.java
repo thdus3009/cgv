@@ -184,17 +184,33 @@ public class AdminController {
 		
 		return mv;
 	}
-	
+	//영화 제목 중복 체크
 	@GetMapping("movie/titleCheck")
 	@ResponseBody
 	public int titleCheck(MovieInfoVO movieInfoVO) throws Exception{
 		movieInfoVO = movieInfoService.titleCheck(movieInfoVO);
+		
 		int result=0;
 		if(movieInfoVO != null) {
+			
 			result=1;
 		}
 		return result;
 	}
+	//영문 제목 중복 체크
+	@GetMapping("movie/titleEngCheck")
+	@ResponseBody
+	public int titleEngCheck(MovieInfoVO movieInfoVO) throws Exception{
+		movieInfoVO = movieInfoService.titleEngCheck(movieInfoVO);
+		
+		int result=0;
+		if(movieInfoVO != null) {
+			
+			result=1;
+		}
+		return result;
+	}
+	
 	
 	@GetMapping("movie/movieSelect")
 	public ModelAndView movieSelect(ModelAndView mv,ReservationVO reservationVO,MovieInfoVO movieInfoVO,MovieImageVO movieImageVO,int num) throws Exception{
