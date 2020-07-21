@@ -394,11 +394,9 @@
 		/////////////////////////////////////////////////////////////////////////////
 		function changeSelect(){
 			$("#seats_list").empty();
-			list = [];
-			rowList = [];
-			colList = [];
-			//list = [];
-
+			list.length = 0;
+			rowList.length = 0;
+			colList.length = 0;
 				
 			var row = $("#seat_row").val();
 			var col = $("#seat_col").val();
