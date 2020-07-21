@@ -18,7 +18,7 @@ public class PointHistoryService {
 	}
 	
 	public List<PointHistoryVO> pointHistoryList(Pager pager) throws Exception{
-		
+//		pager.setPerPage(10);
 		pager.makeRow();
 		long totalCount = pointHistoryRepository.pointHistoryListCount(pager);
 		pager.makeBlock(totalCount);
