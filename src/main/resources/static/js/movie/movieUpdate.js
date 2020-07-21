@@ -165,3 +165,49 @@
 		$("#steel2").val(counts);
 		
 		});
+	
+	//titleCheck
+	$("#title").blur(function() {
+
+		var tit = $("#title").val();
+
+		$.get("./titleCheck",{
+				title:tit
+			},function(result){
+			if(result == 1){
+				$("#tdc").html('<p style="color:red;"> - 중복되는 영화 제목입니다 - </p>');
+				/* alert("이미 존재하는 제목 입니다."); */
+				$("#title").val("");
+			}else{
+				$("#tdc").html('<p style="color:blue;"> - 등록 가능합니다 - </p>');
+			}
+			
+			if(tit==""){
+				$("#tdc").remove();
+			}
+		});
+	});
+
+
+	//titleEngCheck
+	$("#titleEng").blur(function() {
+
+		var titE = $("#titleEng").val();
+
+		$.get("./titleEngCheck",{
+			titleEng:titE
+			},function(result){
+			if(result == 1){
+				$("#tEdc").html('<p style="color:red;"> - 중복되는 영화 영문 제목입니다 - </p>');
+				/* alert("이미 존재하는 제목 입니다."); */
+				$("#titleEng").val("");
+			}else{
+				$("#tEdc").html('<p style="color:blue;"> - 등록 가능합니다 - </p>');
+			}
+
+			if(titE==""){
+				$("#tEdc").remove();
+			}
+		});
+	});
+	

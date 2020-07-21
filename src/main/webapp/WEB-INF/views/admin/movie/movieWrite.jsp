@@ -11,13 +11,13 @@
 <link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
 </head>
 <body class="sb-nav-fixed">
-\
+
 	<c:import url="../template/header.jsp"></c:import>
 	<!-- 사이드바 -->
 	<div id="layoutSidenav">
 		<c:import url="../template/sidenav.jsp"></c:import>
 
-\
+
 		<!-- 내용 -->
 		<div id="layoutSidenav_content">
 			<main>
@@ -142,7 +142,7 @@
 															
 															<div class="form-group">
 																<label for="openDate">개봉일:</label> 
-																<input type="date"
+																<input type="text"
 																	class="form-control check" id="openDate" name="openDate"
 																	value="${vo.openDate}">
 																<!-- 	<input id="openDate" class="datepicker"  type="text" name="openDate"> -->
