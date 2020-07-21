@@ -199,6 +199,7 @@ function movieReset(){
 	$("#movie-list-content li").removeClass("selected");
 	$(".movie_poster img").css("display","none");
 	$(".movie_title").css("display","none");
+	$(".section.section-time .placeholder").css("display","block");
 }
 
 //극장 선택 초기화
@@ -209,6 +210,7 @@ function theaterReset(){
 	$(".row.date").css("display","none");
 	$(".row.screen").css("display","none");
 	$(".row.number").css("display","none");
+	$(".section.section-time .placeholder").css("display","block");
 }
 
 //날짜 선택 초기화
@@ -219,6 +221,7 @@ function dateReset(){
 	$(".row.date").css("display","none");
 	$(".row.screen").css("display","none");
 	$(".row.number").css("display","none");
+	$(".section.section-time .placeholder").css("display","block");
 }
 
 		
