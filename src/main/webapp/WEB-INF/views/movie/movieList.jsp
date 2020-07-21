@@ -91,7 +91,23 @@
 								<div class="score">
 									<strong class="percent">예매율<span>${list.rate}%</span></strong>
 									<div class="egg-gage small">
-										<span class="egg great"></span> <span class="percent">${list.errRate}%</span>
+									
+									<c:if test="${list.errRate lt 50 }">
+									<!-- 터진  계란  -->
+									<span class="egg great" id="this" style="background:url('../../images/movie/movieList/sprite_egg.png') no-repeat -0px -47px"></span>
+									</c:if>
+									<c:if test="${list.errRate lt 70 && list.errRate ge 50 }">
+		                            <!-- 왕관없는 계란  -->
+		                            <span class="egg great" id="this" style="background:url('../../images/movie/movieList/sprite_egg.png') no-repeat -18px -47px"></span>
+		                            </c:if>
+		                           
+		                            <c:if test="${list.errRate ge 70 }">
+		                            <!-- 왕관있는 계란 -->
+		                             <span class="egg great" id="this" style="background:url('../../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
+		                           </c:if>
+									
+									 <span class="percent">${list.errRate}%</span>
+									
 									</div>
 								</div>
 								<span class="text-info"> 

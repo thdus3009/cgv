@@ -505,3 +505,12 @@ dl:after, ul:after, li:after {
 	font: 0/0 a;
 	zoom: 1;
 }
+#this {
+    display: inline-block;
+    margin-right: 2px;
+    width: 18px;
+    height: 26px;
+    background-color:red;
+     background: url(../images/movie/movieList/sprite_egg.png) no-repeat 0 -67px; 
+    vertical-align: middle;
+}
