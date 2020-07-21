@@ -282,4 +282,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose> 
 		LIMIT #{startRow},#{perPage}
  	</select>
+ 	
+ 	<select id="titleCheck" parameterType="MovieInfoVO" resultType="MovieInfoVO">
+ 		select * from movieInfo where title=#{title} and deleteAt is null;
+ 	</select>
+ 	
+ 	<select id="titleEngCheck" parameterType="MovieInfoVO" resultType="MovieInfoVO">
+ 		select * from movieInfo where titleEng=#{titleEng} and deleteAt is null;
+ 	</select>
  </mapper>
