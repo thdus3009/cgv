@@ -744,15 +744,13 @@ $(".btn-abc").click(function(){
 		//정렬 결과로 선택한 값들 재로딩
 		kind = "sort";
 		ajaxLoad();
-		movieSort(moveiNum);
+		movieSort(movieNum);
 	});
 });
 
 
 function movieSort(num){
 	$("#movie-list-content li").each(function(){
-		console.log("index : "+$(this).data("index"))
-		console.log("num : "+ num)
 		if($(this).data("index") == num){
 			$(this).addClass("selected");
 			$("#select_title").text($(this).data("title"));
