@@ -657,28 +657,16 @@
 		});
 	}
 
-	var selectedMovieTitle = `${selectedMovieTitle}`;
-	console.log("selectedMovieTitle : "+selectedMovieTitle);
-	if(selectedMovieTitle != null){
-		title = selectedMovieTitle;
+	var selectedMovieNum = `${selectedMovieNum}`;
+	console.log("selectedMovieNum : "+selectedMovieNum);
+	if(selectedMovieNum != 0){
+		movieNum = selectedMovieNum;
+		
+		//선택한 영화에 대한 나머지 정보값들 조회
 		ajaxLoad();
 
-		$("#movie-list-content li").each(function(){
-			if($(this).find(".text").text() == selectedMovieTitle){
-				$(this).addClass("selected");
-				
-				$("#select_title").text($(this).data("title"));
-				$("#select_image").attr("src","../images/movie/movieList/filmCover/"+$(this).data("image"));
-				$("#select_ageLimit").text($(this).data("age_limit"));
-				$("#movieNum").val($(this).data("index"));
-				title = $(this).data("title");
-				
-				$(".movie_poster img").css("display","inline");
-				$(".movie_title").css("display","block");
-				$(".movie .placeholder").css("display","none");
-			}
-
-		});
+		//선택한 영화에 대해 css적용
+		movieSort(movieNum);
 	}
 
 	

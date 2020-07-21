@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.tm.cgv.movieImage.MovieImageVO;
 import com.tm.cgv.reservation.ReservationVO;
-import com.tm.cgv.review.ReviewVO;
 import com.tm.cgv.util.Pager;
 
 @Mapper

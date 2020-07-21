@@ -57,9 +57,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join
 		(select num as cNum,name as cName from cinema) I
 		on(I.cNum = B.cinemaNum)) F
-		where F.title Like concat('%',#{title},'%') and F.cName Like concat('%',#{theater},'%') and F.screenDate Like concat('%',#{date},'%')
+<!-- 		where F.title Like concat('%',#{title},'%') and F.cName Like concat('%',#{theater},'%') and F.screenDate Like concat('%',#{date},'%') -->
+		where F.cName Like concat('%',#{theater},'%') and F.screenDate Like concat('%',#{date},'%')
+		<if test="num != 0">
+			and F.mNum = #{num}
+		</if>
         and screenDate > date_add(now(),interval -1 day)
-        order by rate ,cname
+        <choose>
+        	<when test="kind =='sort'">
+				order by title desc,cname        	
+        	</when>
+        	<otherwise>
+        		order by rate,cname
+        	</otherwise>
+        </choose>
+        
 	</select>
  	
  
