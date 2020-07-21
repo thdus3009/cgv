@@ -34,6 +34,9 @@ public class CinemaService {
 		return cinemaRepository.cinemaInsert(cinemaVO);
 	}
 	
+	public CinemaVO cinemaNameCheck(String name) throws Exception {
+		return cinemaRepository.cinemaNameCheck(name);
+	}
 	
 	//Update
 	public int cinemaUpdate(CinemaVO cinemaVO) throws Exception {

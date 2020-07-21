@@ -413,6 +413,17 @@ public class AdminController {
 		return mv;
 	}
 	
+	@GetMapping("cinema/cinemaNameCheck")
+	@ResponseBody
+	public int cinemaNameCheck(String name) throws Exception 	{
+		System.out.println("입력한 name : " + name);
+		int result = 0;
+		CinemaVO cinemaVO = cinemaService.cinemaNameCheck(name);
+		if(cinemaVO != null) {
+			result = 1;
+		}
+		return result;
+	}
 	
 	@GetMapping("cinema/cinemaUpdate")
 	public ModelAndView adminCinemaUpdate(int num) throws Exception {

@@ -130,21 +130,14 @@
 													<label for="screenDate">날짜 선택 :</label>
 													<input id="datepicker${i.index}" class="datepicker"  type="text" name="screenDate">
 													<span id="submitBtn${i.index}" name="${vo.num}" class="submitBtn btn btn-primary">검색</span>
-													<div class="tool" style="width:200px; height:60px; background:#fff; border:1px solid #c3c3c3; border-radius:2px;">
-														<span class="tool-title"></span>
-														
-													</div>
 												</div>
 											</div>
 											
-											<div class="movieTime" style="float:right;">
+											<div class="movieTime" style="margin-left:1275px;">
 												<input type="button" value="상영 시간 등록" class="btn btn-primary movieTimeInsert" data-num="${vo.num}">
 											</div>
 														  	
-										  	<div class="timetable" id="timetable${i.index}" name="${i.index}">
-										  	
-										  	</div>
-											<div class="test123"></div>
+										  	<div class="timetable" id="timetable${i.index}" name="${i.index}"></div>
 										</td>
 									</tr>
 								</c:forEach>

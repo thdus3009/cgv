@@ -14,6 +14,8 @@ public interface CinemaRepository {
 	//Insert
 	public int cinemaInsert(CinemaVO cinemaVO) throws Exception;
 	
+	public CinemaVO cinemaNameCheck(String name) throws Exception;
+	
 	//Select
 	public CinemaVO cinemaSelect(CinemaVO cinemaVO) throws Exception;
 	
