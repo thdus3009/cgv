@@ -118,7 +118,7 @@
                            <!-- 왕관있는 계란 -->
                             <span class="egg great" id="this" style="background:url('../images/movie/movieList/sprite_egg.png') no-repeat -38px -47px"></span> 
                            </c:if>
-                        <span class="percent">${vo.errRate}</span>
+                        <span class="percent">${vo.errRate}%</span>
                      </div>
                   </div>
                   
