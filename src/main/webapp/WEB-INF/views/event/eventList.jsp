@@ -119,12 +119,12 @@
 							<div class="ad-evnet">
 								<div class="ad-partner01">
 									<div src="" width="160" height="300" frameborder="0" scrolling="no" margingeight="0" name="M_Rectangle" id="M_Rectangle">
-										<a href=""><img src="/images/banner/sideBanner/${movie.fileName}" width="160" height="300" alt="파리의 인어" border="0"></a>
+										<a href="${movie.link}"><img src="/images/banner/sideBanner/${movie.fileName}" width="160" height="300" alt="파리의 인어" border="0"></a>
 									</div>	
 								</div>
 								<div class="ad-partner01">
 									<div src="" width="160" height="300" frameborder="0" scrolling="no" margingeight="0" name="M_Rectangle" id="M_Rectangle">
-										<a href=""><img src="/images/banner/sideBanner/${event.fileName}" width="160" height="300" alt="파리의 인어" border="0"></a>
+										<a href="${event.link}"><img src="/images/banner/sideBanner/${event.fileName}" width="160" height="300" alt="파리의 인어" border="0"></a>
 									</div>	
 								</div>
 							</div>

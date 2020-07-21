@@ -111,8 +111,6 @@
 							
 									</tr>
 								</c:forEach>
-								<!-- 페이저 -->
-								
 							</tbody>
 							
 						</table>

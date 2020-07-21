@@ -7,8 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="seatSpaceInsert" parameterType="SeatSpaceVO">
 		insert into seatSpace values (0, #{theaterNum}, #{rowOrCol}, #{index})
 	</insert>
-
-
 	<select id="seatSpaceSelect" parameterType="SeatSpaceVO" resultType="SeatSpaceVO">
 		select * from seatSpace where theaterNum = #{theaterNum};
 	</select>
@@ -17,6 +15,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from seatSpace where theaterNum=#{num}
 	</delete>
 	
- 
-
 </mapper>

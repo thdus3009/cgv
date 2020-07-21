@@ -298,7 +298,6 @@ public class AdminController {
 	@GetMapping("cinema/cinemaList")
 	public ModelAndView adminCinemaList(ModelAndView mv, Pager_cinemaList pager) throws Exception {
 		List<CinemaVO> list = cinemaService.adminCinemaList(pager);
-		System.out.println("test : " + pager.getTotalCount());
 		mv.addObject("list", list);
 		mv.addObject("pager", pager);
 		mv.setViewName("admin/cinema/cinemaList");
@@ -308,10 +307,8 @@ public class AdminController {
 	@PostMapping("cinema/cinemaList")
 	@ResponseBody
 	public ModelAndView adminCinemaList(ModelAndView mv, String local, Pager_cinemaList pager) throws Exception {
-		System.out.println(local);
 		pager.setlocal(local);
 		List<CinemaVO> list = cinemaService.adminCinemaList(pager);
-		System.out.println(list.size());
 		mv.addObject("pager", pager);
 		mv.addObject("list", list);
 		mv.setViewName("admin/cinema/ajax/cineList");
@@ -325,9 +322,6 @@ public class AdminController {
 		cinemaVO.setNum(num);
 		cinemaVO = cinemaService.cinemaSelect(cinemaVO);
 		List<TheaterVO> list = cinemaService.selectTheaterList(num);
-		
-		//List<MovieTimeVO> m = theaterService.theaterMovieTime(list.get(0).getNum()); /*나중에는 list로 뽑아와야됨!*/
-	
 	
 		//가져온 theater list에 들어있는 filmType을 가져와서 리스트 생성
 		List<Integer> values = new ArrayList<Integer>();
@@ -356,11 +350,7 @@ public class AdminController {
 	@GetMapping("cinema/theaterTime")
 	@ResponseBody
 	public List<String[]> theaterTime(int theaterNum, String checkDate) throws Exception {
-		System.out.println("들어왓나?");
 		ModelAndView mv = new ModelAndView();
-		
-		
-		
 		String [] day = theaterService.searchTime(checkDate);
 
 		Map<String, Object> d = new HashMap();
@@ -368,26 +358,16 @@ public class AdminController {
 		d.put("lastDay", day[1]);
 		d.put("theaterNum", theaterNum);
 		
-		System.out.println("mon : " + day[0]);
-		System.out.println("sun : " + day[1]);
 		
 		
+		List<MovieTimeVO> m = theaterService.theaterMovieTime(d);
 		
-		
-		
-		List<MovieTimeVO> m = theaterService.theaterMovieTime(d); /*나중에는 list로 뽑아와야됨!*/
-		//System.out.println(m.get(0));
-		//System.out.println(m.get(1));
 		//쪼개는 서비스 만들기..theaterService에
 		List<String[]> totalInfo = theaterService.movieTime(m);
 
-		
-		//정보를 list로 만들어서 잘 가져왔고..............
-		//
 		mv.addObject("totalInfo", totalInfo);
 		mv.setViewName("admin/cinema/ajax/theaterTime");
-		
-		//return mv;
+
 		return totalInfo;
 	}
 	
@@ -402,12 +382,6 @@ public class AdminController {
 		
 		System.out.println("mon : " + day[0]);
 		System.out.println("sun : " + day[1]);
-		
-		//쿼리문 보내기
-		//
-//		select * from movieTime where screenDate 
-//		between date('2020-07-02') and date('2020-07-05')+1;
-		
 	}
 	
 	
@@ -438,6 +412,17 @@ public class AdminController {
 		return mv;
 	}
 	
+	@GetMapping("cinema/cinemaNameCheck")
+	@ResponseBody
+	public int cinemaNameCheck(String name) throws Exception 	{
+		System.out.println("입력한 name : " + name);
+		int result = 0;
+		CinemaVO cinemaVO = cinemaService.cinemaNameCheck(name);
+		if(cinemaVO != null) {
+			result = 1;
+		}
+		return result;
+	}
 	
 	@GetMapping("cinema/cinemaUpdate")
 	public ModelAndView adminCinemaUpdate(int num) throws Exception {
@@ -455,9 +440,7 @@ public class AdminController {
 	
 	@PostMapping("cinema/cinemaUpdate")
 	public ModelAndView cinemaUpdate(ModelAndView mv, CinemaVO cinemaVO) throws Exception{
-		System.out.println("ㅠ.ㅠ");
 		int result = cinemaService.cinemaUpdate(cinemaVO);
-		
 		if(result > 0) {
 			mv.setViewName("redirect:./cinemaList");
 		}else {
@@ -472,8 +455,6 @@ public class AdminController {
 	@GetMapping("cinema/cinemaDelete")
 	public ModelAndView adminCinemaDelete(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("num : " + num);
-		System.out.println("-------------------");
 		int result = cinemaService.cinemaDelete(num);
 		
 		mv.setViewName("redirect:./cinemaList");
@@ -632,10 +613,8 @@ public class AdminController {
 	//==============================
 	@GetMapping("cinema/theaterInsert")
 	public ModelAndView adminTheaterInsert(int cinemaNum) throws Exception {
-		//System.out.println("cinemaNum : " + cinemaNum);
 		ModelAndView mv = new ModelAndView();
 		if(cinemaNum>0) {
-			//cinemaNum이 존재한다면
 			CinemaVO vo = new CinemaVO();
 			vo.setNum(cinemaNum);
 			vo = cinemaService.cinemaSelect(vo);
@@ -656,16 +635,11 @@ public class AdminController {
 	@PostMapping("cinema/theaterInsert")
 	public ModelAndView theaterInsert(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, int cinemaNum) throws Exception{	
 		ModelAndView mv = new ModelAndView();
-		System.out.println("seat : " + theaterVO.getSeatCount());
-		//System.out.println("length : " + filmType.length);
-		System.out.println(theaterVO.getFilmType());//첫번째 거만 옴
-		
-		
 		
 		int result = theaterService.theaterInsert(theaterVO, filmType, row, col, grade, row_space, col_space);
 		
 		if(result>0) {
-			mv.setViewName("redirect:../admin/cinema/cinemaSelect?num="+cinemaNum);
+			mv.setViewName("redirect:./cinemaSelect?num="+cinemaNum);
 		}else {
 			System.out.println("등록 실패");
 		}
@@ -719,16 +693,12 @@ public class AdminController {
 		System.out.println("test : " + stopSeat.size());
 		
 		mv.addObject("stopSeat", stopSeat);
-		
 		mv.addObject("filmType", filmType);
-	
 		mv.addObject("rowList", rowList);
 		mv.addObject("maxCol", maxCol);
 		mv.addObject("seatSpaceList", seatSpaceList);
 		mv.addObject("seatList", seatList);
-
-		
-		mv.addObject("theater", theaterVO); //상영과정보
+		mv.addObject("theater", theaterVO);
 		mv.addObject("cine", cinemaVO);
 		mv.setViewName("admin/cinema/theaterSelect");
 		return mv;
@@ -781,8 +751,6 @@ public class AdminController {
 		System.out.println("test : " + stopSeat.size());
 		
 		mv.addObject("stopSeat", stopSeat);
-		
-		
 		mv.addObject("filmType", filmType);
 		mv.addObject("cine", cinemaVO);
 		mv.addObject("rowList", rowList);
@@ -802,12 +770,6 @@ public class AdminController {
 	@PostMapping("cinema/theaterUpdate")
 	public ModelAndView adminTheaterUpdate(TheaterVO theaterVO, int [] filmType, String [] row, String [] col, String [] grade, String [] row_space, String [] col_space, String [] stop_rc, String [] stop_idx, int cinemaNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("-------update-------");
-		//System.out.println("cinemaNum : " + cinemaNum);
-		//System.out.println(stop_rc[0]);
-		//System.out.println(stop_idx[0]);
-		//System.out.println(stop_col[0]);
-		System.out.println(theaterVO.getName());
 		theaterService.theaterUpdate(theaterVO, filmType, row, col, grade, row_space, col_space, stop_rc, stop_idx);
 		
 		mv.setViewName("redirect:./theaterSelect?num="+theaterVO.getNum()+"&cinemaNum="+cinemaNum);
@@ -818,8 +780,6 @@ public class AdminController {
 	@GetMapping("cinema/theaterDelete")
 	public ModelAndView adminTheaterDelete(int num, int cinemaNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("num : " + num);
-		System.out.println("-------------------");
 		int result = theaterService.theaterDelete(num);
 		
 		mv.setViewName("redirect:./cinemaSelect?num="+cinemaNum);
@@ -1176,13 +1136,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		pager.setkind("");
 		List<EventVO> list = eventService.adminEventList(pager);
-		System.out.println("----test----");
-		System.out.println(pager.getkind() + " - kind");
 		if(list !=null) {
-			
-			System.out.println("---controller---");
-			System.out.println(pager.getStartNum());
-			System.out.println(pager.getLastNum());
 			mv.addObject("pager", pager);
 			mv.addObject("list", list);
 			mv.setViewName("admin/event/eventList");
@@ -1195,7 +1149,6 @@ public class AdminController {
 	@ResponseBody
 	public ModelAndView selectKind(String kind, Pager_eventList pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
 		List<EventVO> list = eventService.eventList(pager);
 		System.out.println(list.size() + " :: size");
 		
@@ -1206,13 +1159,10 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	
 
 	@GetMapping("event/eventUpdate")
 	public ModelAndView eventUpdate(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("tttttttest");
 		EventVO eventVO = eventService.eventSelect(num);
 		
 		mv.addObject("vo", eventVO);
@@ -1231,20 +1181,17 @@ public class AdminController {
 	
 	@PostMapping("event/eventInsert")
 	public ModelAndView eventInsert(EventVO eventVO, List<MultipartFile> files) throws Exception{
-		System.out.println(">.<");
-		System.out.println(eventVO.getKind());
 		ModelAndView mv = new ModelAndView();
 		
 		int result = eventService.eventInsert(eventVO, files);
 		
-		mv.setViewName("redirect:admin/event/eventList");
+		mv.setViewName("redirect:./eventList");
 		return mv;
 	}
 	
 	@GetMapping("event/eventSelect")
 	public ModelAndView eventSelect(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
 		EventVO eventVO = eventService.eventSelect(num);
 		
 		mv.addObject("vo", eventVO);
@@ -1257,13 +1204,9 @@ public class AdminController {
 	@PostMapping("event/eventUpdate")
 	public ModelAndView eventUpdate(EventVO eventVO, List<MultipartFile> files, String [] delNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		//System.out.println("fileSize : " + files.size());
-		//System.out.println("delNum : " + delNum[0]);
-	
 		eventService.eventUpdate(eventVO, files, delNum);
 		
-		
-		mv.setViewName("redirect:admin/event/eventList");
+		mv.setViewName("redirect:./eventList");
 		return mv;
 	}
 	
@@ -1273,23 +1216,10 @@ public class AdminController {
 		System.out.println("num : " + num);
 		int result = eventService.eventDelete(num);
 		if(result>0) {
-			mv.setViewName("redirect:admin/event/eventList");
+			mv.setViewName("redirect:./eventList");
 		}
 		return mv;
 	}
-	
-	
-//	@GetMapping("event/fileDelete")
-//	@ResponseBody
-//	public int fileDelete(EventImageVO eventImageVO) throws Exception {
-//		ModelAndView mv = new ModelAndView();
-//		System.out.println("ㅠ.ㅠ");
-//		System.out.println(eventImageVO.getNum());
-//		System.out.println(eventImageVO.getFileName());
-//		int result = eventImageService.fileDelete(eventImageVO);
-//		System.out.println(result);
-//		return result;
-//	}
 	
 	
 	//==============================

@@ -38,11 +38,11 @@
 						  
 						  <div class="form-group">
 						   	 <label for="local">지역:</label>
-						   	 <%-- <input type="text" class="form-control" id="local" name="local" value="${vo.local}"> --%>
-						   	 <select class="form-control" id="" name="local">
+						   	 <select class="form-control" id="local" name="local">
 						   	 	<option value="서울">서울</option>
 						   	 	<option value="경기">경기</option>
 						   	 	<option value="인천">인천</option>
+						   	 	<option value="강원">강원</option>
 						   	 	<option value="대전/충청">대전/충청</option>
 						   	 	<option value="대구">대구</option>
 						   	 	<option value="부산/울산">부산/울산</option>
@@ -104,6 +104,29 @@
         </div>
         <c:import url="../template/scripts.jsp"></c:import>
 		<script type="text/javascript" src="/js/admin/cinema/cinema.js"></script>
+		<script type="text/javascript">
+
+
+	    
+		var c = '${vo.local}';
+		$('#local option[value="'+c+'"]').prop("selected",true);
+	
+
+		$("#name").blur(function(){
+
+			var cinemaName = $("#name").val();
+			$.get("./cinemaNameCheck",{
+					name:cinemaName
+				},function(result){
+					if(result == 1){
+						alert("이미 존재하는 극장 이름입니다.")
+						$("#name").val("");
+					}else{
+						alert("사용 가능한 이름입니다.")
+					}
+			});
+		});
+		</script>
 
     </body>
 </html>

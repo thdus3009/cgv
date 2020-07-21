@@ -10,6 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into cinema (name, local, address, tel, totalTheater, totalSeat, trafficInfo, parkingInfo, intro)
 		values (#{name}, #{local}, #{address}, #{tel}, 0, 0, #{trafficInfo}, #{parkingInfo}, #{intro})
 	</insert>
+	
+	<select id="cinemaNameCheck" parameterType="String" resultType="CinemaVO">
+		select * from cinema where name=#{name}
+	</select>
 
 	<select id="cinemaSelect" parameterType="CinemaVO" resultType="CinemaVO">
 		select * from cinema where num=#{num}
@@ -25,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<update id="cinemaUpdate" parameterType="CinemaVO">
-		update cinema set address=#{address}, tel=#{tel}, totalTheater=#{totalTheater}, totalSeat=#{totalSeat},
+		update cinema set name=#{name}, local=#{local}, address=#{address}, tel=#{tel}, totalTheater=#{totalTheater}, totalSeat=#{totalSeat},
 		trafficInfo=#{trafficInfo}, parkingInfo=#{parkingInfo}, intro=#{intro} where num=#{num}
 	</update>
 	

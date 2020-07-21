@@ -4,19 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tm.cgv.seat.SeatRepository">
-
- 	<insert id="seatInsert" parameterType="SeatVO">
-		insert into seat (theaterNum, rowIdx, colIdx, grade)
-		values(#{theaterNum},#{rowIdx},#{colIdx},#{grade})
-	</insert>
-	
-	<select id="theaterSelect" resultType="Integer">
-		select max(num) from theater;
-	</select>
-
-
 	<resultMap type="SeatVO" id="SeatList">
-
 		<id column="num" property="num"/>
 		<result column="theaterNum" property="theaterNum"/>
 		<result column="rowIdx" property="rowIdx"/>
@@ -29,11 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="movieTimeNum" property="movieTimeNum"/>
 			<result column="reservationNum" property="reservationNum"/>	
 		</association>		
-	
 	</resultMap>
-
-
-
+	
+ 	<insert id="seatInsert" parameterType="SeatVO">
+		insert into seat (theaterNum, rowIdx, colIdx, grade)
+		values(#{theaterNum},#{rowIdx},#{colIdx},#{grade})
+	</insert>
+	
+	<select id="theaterSelect" resultType="Integer">
+		select max(num) from theater;
+	</select>
 
  	<select id="seatSelectList" parameterType="SeatVO" resultMap="SeatList">
 		<!-- select * from seat where theaterNum = #{theaterNum} order by 3, col -->

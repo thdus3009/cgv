@@ -30,10 +30,12 @@ public class CinemaService {
 	
 	//Insert
 	public int cinemaInsert(CinemaVO cinemaVO) throws Exception{
-		System.out.println("insert");
 		return cinemaRepository.cinemaInsert(cinemaVO);
 	}
 	
+	public CinemaVO cinemaNameCheck(String name) throws Exception {
+		return cinemaRepository.cinemaNameCheck(name);
+	}
 	
 	//Update
 	public int cinemaUpdate(CinemaVO cinemaVO) throws Exception {

@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<c:import url="../template/head.jsp"></c:import> 
-<link href="/css/admin/cinema/cinemaList.css" rel="stylesheet" />
-<link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
-<link href="/css/styles.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<c:import url="../template/head.jsp"></c:import> 
+	<link rel="stylesheet" href="/css/admin/cinema/cinemaList.css" />
+	<link href="/css/admin/cinema/theaterInsert.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
-		<c:import url="../template/header.jsp"></c:import> 
-        <div id="layoutSidenav">
-            <c:import url="../template/sidenav.jsp"></c:import>
-            <div id="layoutSidenav_content">
+	<c:import url="../template/header.jsp"></c:import> 
+    <div id="layoutSidenav">
+	<c:import url="../template/sidenav.jsp"></c:import>
+		<div id="layoutSidenav_content">
+		<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<main>
 				<div class="container-fluid">
 					<h1>Theater Update</h1>
@@ -130,12 +130,11 @@
 							<br>
 							<label for="seatCount">SeatCount:</label>
 	 						<input type="text" class="form-control selectcinenum" id="seatCount" name="seatCount" value="${vo.seatCount}">
-							<br>
-							<br>
-							<br>
-							<br>
-							<br>
-							<span id="btn_insert2"  class="btn btn_mo">수정</span>
+							
+							<div class="btn_s">
+								<input type="button" id="btn_insert2" class="btn btn-default"
+									value="수정" style="background-color: #eff2f8;">
+							</div>
 						</div>
 					</form>
 
@@ -301,7 +300,6 @@
 
 	    //stop_list에 값 넣기
 	    <c:forEach items="${stopSeat}" var="vo">
-	    		//alert("testttt");
 	  		  var vo = {
 				"r":'${vo.rowIdx}',
 				"c":${vo.colIdx}
@@ -369,8 +367,7 @@
 			
 			//행띄우기
 			if(type == 0){
-				var c = '.r'+index;	//r1
-				//alert(c);
+				var c = '.r'+index;
 				$(c).after('<p class="row_space rs'+index+'"></p>');
 				rowList.push(index);
 	
@@ -576,10 +573,6 @@
 
 				
 				if(chClass!='rating_delete' && !$(name).hasClass('rating_stop')){
-					//alert(chClass)
-					console.log(chClass);
-					//$(name).find("span").css('border','2px solid #f71708');
-					//$(name).removeClass();
 					$(name).addClass("rating_stop");
 					/* 	for(i=0; i<listLength; i++){
 							if(list[i].row == rw && list[i].col == cl){
@@ -595,10 +588,7 @@
 					console.log(",,,")
 					console.log(stopList);
 				}else if($(name).hasClass('rating_stop')){
-					//alert("name : " + name)
-					//alert("yes")
 					$(name).removeClass("rating_stop");
-					//$(name).addClass("rating_economy");
 					for(i=0; i<stopList.length; i++){
 						if(stopList[i].r == rw && stopList[i].c == cl){
 							stopList[i].c=0;
@@ -617,9 +607,7 @@
 	
 	// space 조정 + - 버튼
 	function rowPlus(i){
-		alert(i);
-		var c = '.r'+(i+1);	//r1
-		alert(c);
+		var c = '.r'+(i+1);
 		$(c).after('<p class="row_space rs'+(i+1)+'"></p>');
 		rowList.push(i+1);
 		console.log(rowList);
@@ -758,17 +746,6 @@
 		var nameCheck = true;
 		var seatCheck = true;
 
-	/*	if(name.value.length<1){
-			alert("상영관명을 입력해주세요.")
-		}else{
-			nameCheck = true;
-		}
-
-		if(seatCheck<1){
-			alert("좌석을 선택해주세요.");
-		}else{
-			seatCheck = true;
-		}*/
 
 		if(nameCheck && seatCheck){
 			//$("#frm").submit();
@@ -871,8 +848,6 @@
 		}
 
 		for(n=0; n<stopList.length; n++){
-			alert(stopList[n]);
-			console.log(stopList[n])
 			var r = '<input type="hidden" name="stop_rc" value="'+stopList[n].r+'">';
 			r = r + '<input type="hidden" name="stop_idx" value="'+stopList[n].c+'">';
 			$("#frm").append(r);
@@ -884,23 +859,38 @@
 		var name = document.getElementById("name");
 		var seatCount = document.getElementById("seatCount");
 
-		var nameCheck = true;
-		var seatCheck = true;
+		var nameCheck = false;
+		var seatCheck = false;
 
-	/*	if(name.value.length<1){
-			alert("상영관명을 입력해주세요.")
+		if(name.value.length<1){
+			alert("상영관명을 입력해주세요!");
+			/*return false;*/
 		}else{
 			nameCheck = true;
 		}
-
-		if(seatCheck<1){
-			alert("좌석을 선택해주세요.");
+		
+		if($("#seatCount").val()==''){
+			alert("좌석을 선택해주세요!");
 		}else{
 			seatCheck = true;
-		}*/
-
-		if(nameCheck && seatCheck){
+		}
+		
+		//2D, 3D, 4D 체크
+		var chkbox = document.getElementsByName('filmType');
+		var typeCheck = false;
+		
+		for(var i=0; i<chkbox.length; i++){
+			if(chkbox[i].checked){
+				typeCheck = true;
+				break;
+			}
+		}
+		
+		//submit
+		if(nameCheck && seatCheck && typeCheck){
 			$("#frm").submit();
+		}else if(typeCheck == false){
+			alert("필름타입은 적어도 한개 체크해야합니다!");
 		}
 	});
 

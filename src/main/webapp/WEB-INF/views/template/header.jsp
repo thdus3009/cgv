@@ -40,7 +40,7 @@
 						<li class="menu_movie"><a href="${pageContext.request.contextPath}/movie/movieList">영화</a></li>
 						<li class="menu_reserve"><a href="${pageContext.request.contextPath}/movie/movieReservation">예매</a></li>
 						<li class="menu_theater"><a href="${pageContext.request.contextPath}/cinema/cinemaList">극장</a></li>
-						<li class="menu_event"><a href="">이벤트&컬처</a></li>
+						<li class="menu_event"><a href="${pageContext.request.contextPath}/event/eventList">이벤트&컬처</a></li>
 					</ul>
 				</div>
 				<div class="search">

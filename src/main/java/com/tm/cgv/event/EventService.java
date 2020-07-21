@@ -42,15 +42,8 @@ public class EventService {
 		ModelAndView mv = new ModelAndView();
 		
 		pager.makeRow();
-		System.out.println("----service----");
-		System.out.println(pager.getkind());
 		long totalCount = eventRepository.adminEventCount(pager);
 		pager.makeBlock(totalCount);
-		System.out.println("totalCount : " + totalCount);
-		System.out.println("block");
-		System.out.println(pager.getTotalBlock());
-		System.out.println("startNum : " + pager.getStartNum());
-		System.out.println("lastNum : " + pager.getLastNum());
 		List<EventVO> list = eventRepository.adminEventList(pager);
 		
 		return list;
@@ -61,20 +54,10 @@ public class EventService {
 		ModelAndView mv = new ModelAndView();
 		
 		pager.makeRow();
-		System.out.println("----service----");
-		System.out.println(pager.getkind());
 		long totalCount = eventRepository.eventCount(pager);
 		pager.makeBlock(totalCount);
-		System.out.println("totalCount : " + totalCount);
-		System.out.println("block");
-		System.out.println(pager.getTotalBlock());
-		System.out.println("startNum : " + pager.getStartNum());
-		System.out.println("lastNum : " + pager.getLastNum());
 		List<EventVO> list = eventRepository.eventList(pager);
-		
-		
-		//
-		
+
 		return list;
 	}
 	
@@ -82,15 +65,8 @@ public class EventService {
 		ModelAndView mv = new ModelAndView();
 		
 		pager.makeRow();
-		System.out.println("----service----");
-		System.out.println(pager.getkind());
 		long totalCount = eventRepository.endEventCount(pager);
 		pager.makeBlock(totalCount);
-		System.out.println("totalCount : " + totalCount);
-		System.out.println("block");
-		System.out.println(pager.getTotalBlock());
-		System.out.println("startNum : " + pager.getStartNum());
-		System.out.println("lastNum : " + pager.getLastNum());
 		List<EventVO> list = eventRepository.endEventList(pager);
 		
 		return list;
@@ -99,11 +75,8 @@ public class EventService {
 
 	@Transactional
 	public int eventInsert(EventVO eventVO, List<MultipartFile> files) throws Exception {
-		System.out.println("filePath : " + filePath);
-		
 		//받아온 EventVO Event table에 삽입
 		int result = eventRepository.eventInsert(eventVO);
-		//System.out.println(result);
 		
 		//EventImage에 들어갈 정보 만들기
 		FilePathGenerator filePathGenerator = new FilePathGenerator();
@@ -183,7 +156,6 @@ public class EventService {
 		//두 개 다 삭제 후 다시 삽입 > 그대로 
 		//하나만 삭제 후 다시 삽입 > 받아온 delNum으로 그거만 삭제 후 넣기
 		
-		//
 		FilePathGenerator filePathGenerator = new FilePathGenerator();
 		String path = FilePathGenerator.addTimePath("")+"\\";
 	    System.out.println(path+"path!!!!");

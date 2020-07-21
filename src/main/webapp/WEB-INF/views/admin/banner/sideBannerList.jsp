@@ -229,6 +229,8 @@
     				location.href="./bannerDelete?num="+num;
     			}
 		    }
+
+		    
             
 		</script>
 		
