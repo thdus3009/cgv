@@ -437,4 +437,11 @@ public class MovieInfoService {
 		return result;
 	}
 	
+	public MovieInfoVO titleCheck(MovieInfoVO movieInfoVO) throws Exception{
+		return movieInfoRepository.titleCheck(movieInfoVO);
+	}
+	public MovieInfoVO titleEngCheck(MovieInfoVO movieInfoVO) throws Exception{
+		return movieInfoRepository.titleEngCheck(movieInfoVO);
+	}
+	
 }
